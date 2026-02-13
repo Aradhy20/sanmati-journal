@@ -5,10 +5,32 @@ import React from 'react';
 const BoardMember = ({ name, title, affiliation, image }) => {
     const [imgError, setImgError] = React.useState(false);
 
+    // Generate a consistent color based on name
+    const getGradient = (name) => {
+        const gradients = [
+            'from-blue-500 to-indigo-600',
+            'from-purple-500 to-pink-600',
+            'from-green-500 to-teal-600',
+            'from-orange-500 to-red-600',
+            'from-cyan-500 to-blue-600',
+            'from-violet-500 to-purple-600',
+        ];
+        const index = name.charCodeAt(0) % gradients.length;
+        return gradients[index];
+    };
+
+    const getInitials = (name) => {
+        const parts = name.split(' ');
+        if (parts.length >= 2) {
+            return parts[0].charAt(0) + parts[parts.length - 1].charAt(0);
+        }
+        return name.charAt(0);
+    };
+
     return (
-        <div className="flex flex-col p-6 bg-white rounded-xl shadow-sm border border-slate-100 hover:border-blue-200 transition-all h-full group">
+        <div className="flex flex-col p-6 bg-white rounded-2xl shadow-md border border-slate-100 hover:shadow-xl hover:border-blue-300 transition-all duration-300 h-full group">
             <div className="flex items-center gap-4 mb-4">
-                <div className="w-16 h-16 rounded-full bg-slate-100 overflow-hidden flex-shrink-0 border border-slate-200 flex items-center justify-center">
+                <div className="w-20 h-20 rounded-full overflow-hidden flex-shrink-0 border-4 border-white shadow-lg">
                     {image && !imgError ? (
                         <img
                             src={image}
@@ -17,17 +39,17 @@ const BoardMember = ({ name, title, affiliation, image }) => {
                             onError={() => setImgError(true)}
                         />
                     ) : (
-                        <div className="w-full h-full flex items-center justify-center text-slate-400 font-bold text-xl bg-slate-100">
-                            {name.charAt(0)}
+                        <div className={`w-full h-full flex items-center justify-center text-white font-bold text-2xl bg-gradient-to-br ${getGradient(name)}`}>
+                            {getInitials(name)}
                         </div>
                     )}
                 </div>
-                <div>
-                    <h3 className="text-lg font-bold text-slate-900 leading-tight">{name}</h3>
-                    <p className="text-blue-600 text-sm font-medium">{title}</p>
+                <div className="flex-1">
+                    <h3 className="text-lg font-bold text-slate-900 leading-tight mb-1 group-hover:text-blue-600 transition-colors">{name}</h3>
+                    <p className="text-blue-600 text-sm font-semibold">{title}</p>
                 </div>
             </div>
-            <p className="text-slate-500 text-sm mt-auto pt-4 border-t border-slate-50">{affiliation}</p>
+            <p className="text-slate-600 text-sm mt-auto pt-4 border-t border-slate-100 leading-relaxed">{affiliation}</p>
         </div>
     );
 };
