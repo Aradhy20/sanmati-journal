@@ -1,0 +1,37 @@
+
+/vendor
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/env
+.env
+.env.backup
+.env.production
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+auth.json
+npm-debug.log
+yarn-error.log
+/.idea
+/.vscode
+
+# MySQL data directory
+/mysql_data
+
+# PHP configuration
+php.ini
+
+# Test and diagnostic files
+*_diagnostic.php
+*_test.php
+db_test.php
+test_*.php
+
+# Database dumps
+*.sql
+
+# Deployment files
+deploy*.zip
