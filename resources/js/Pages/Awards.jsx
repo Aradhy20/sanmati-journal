@@ -1,3 +1,4 @@
+import { Link } from '@inertiajs/react';
 import PageHeader from '../Components/PageHeader';
 import MainLayout from '../Layouts/MainLayout';
 import { Trophy, Star, Award, Medal, Mail, ArrowRight } from 'lucide-react';
@@ -71,9 +72,14 @@ export default function Awards() {
                                             <p className="text-blue-100 mb-10 leading-relaxed italic border-l-2 border-amber-400 pl-6">
                                                 Nominations for the 2026 Academic Cycle are now being accepted. Self-nominations and institutional recommendations are welcome.
                                             </p>
-                                            <a href="mailto:sanmatijournal@gmail.com" className="group inline-flex items-center gap-3 px-8 py-4 bg-white text-blue-900 font-bold rounded-full hover:bg-blue-50 transition-all">
-                                                Submit Nomination <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                                            </a>
+                                            <div className="flex flex-col gap-4">
+                                                <Link href="/contact" className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-blue-900 font-bold rounded-full hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl">
+                                                    Submit Nomination <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                                </Link>
+                                                <p className="text-blue-200 text-xs italic text-center">
+                                                    Or email directly: <a href="mailto:sanmatijournal@gmail.com" className="underline hover:text-white">sanmatijournal@gmail.com</a>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="w-full md:w-80 p-8 border-2 border-slate-100 rounded-[48px] flex flex-col justify-center items-center text-center">
