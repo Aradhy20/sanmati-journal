@@ -1,13 +1,29 @@
-import { useState } from 'react';
-import { Link } from '@inertiajs/react';
+import { useState, useRef, useEffect } from 'react';
+import { Link, usePage } from '@inertiajs/react';
 import { Menu, X, ChevronDown, ArrowUpRight } from 'lucide-react';
-
 import { motion, AnimatePresence } from 'framer-motion';
-
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState(null);
+    const [scrolled, setScrolled] = useState(false);
+    const timeoutRef = useRef(null);
+    const { url } = usePage();
+
+    useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 20);
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const handleMouseEnter = (name) => {
+        clearTimeout(timeoutRef.current);
+        setActiveDropdown(name);
+    };
+
+    const handleMouseLeave = () => {
+        timeoutRef.current = setTimeout(() => setActiveDropdown(null), 150);
+    };
 
     const navItems = [
         { name: 'Home', href: '/' },
@@ -67,84 +83,100 @@ const Navbar = () => {
         { name: 'Contact', href: '/contact' },
     ];
 
+    const isActive = (href) => {
+        if (href === '/') return url === '/';
+        return url.startsWith(href);
+    };
+
     return (
-        <nav className="fixed w-full z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100 transition-colors duration-300">
+        <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md border-b border-slate-200' : 'bg-white/95 backdrop-blur-md border-b border-slate-100'}`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between h-20">
-                    <div className="flex-shrink-0 flex items-center -ml-2 md:-ml-4">
-                        <Link href="/" className="flex items-center gap-3 group">
-                            <div className="relative w-12 h-12 md:w-14 md:h-14 rounded-xl overflow-hidden shadow-lg group-hover:scale-105 transition-transform">
-                                <img
-                                    src="/logo.jpg"
-                                    alt="Sanmati Journal Logo"
-                                    className="object-contain w-full h-full bg-white"
-                                />
-                            </div>
-                            <span className="text-2xl font-serif font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900">
+                <div className="flex items-center justify-between h-[72px]">
+                    {/* Logo */}
+                    <Link href="/" className="flex items-center gap-3 flex-shrink-0">
+                        <div className="w-11 h-11 rounded-lg overflow-hidden shadow-sm border border-slate-100 flex-shrink-0">
+                            <img
+                                src="/logo.jpg"
+                                alt="Sanmati Journal Logo"
+                                className="object-contain w-full h-full bg-white"
+                            />
+                        </div>
+                        <div className="hidden sm:block">
+                            <span className="text-lg font-serif font-bold text-slate-900 leading-tight block">
                                 Sanmati Journal
                             </span>
-                        </Link>
-                    </div>
+                            <span className="text-[10px] text-slate-500 font-medium tracking-wider uppercase leading-none">
+                                ISSN: 3108-1819
+                            </span>
+                        </div>
+                    </Link>
 
                     {/* Desktop Menu */}
-                    <div className="hidden lg:flex items-center gap-6">
+                    <div className="hidden xl:flex items-center gap-1">
                         {navItems.map((item) => (
                             <div
                                 key={item.name}
-                                className="relative group"
-                                onMouseEnter={() => setActiveDropdown(item.name)}
-                                onMouseLeave={() => setActiveDropdown(null)}
+                                className="relative"
+                                onMouseEnter={() => handleMouseEnter(item.name)}
+                                onMouseLeave={handleMouseLeave}
                             >
                                 <Link
                                     href={item.href}
-                                    className="flex items-center text-sm font-medium text-slate-700 hover:text-blue-900 transition-colors py-2"
+                                    className={`flex items-center text-[13px] font-semibold px-3 py-2 rounded-lg transition-colors whitespace-nowrap ${isActive(item.href)
+                                            ? 'text-blue-900 bg-blue-50'
+                                            : 'text-slate-600 hover:text-blue-900 hover:bg-slate-50'
+                                        }`}
                                 >
                                     {item.name}
-                                    {item.dropdown && <ChevronDown className="w-4 h-4 ml-1" />}
+                                    {item.dropdown && (
+                                        <ChevronDown className={`w-3.5 h-3.5 ml-1 transition-transform ${activeDropdown === item.name ? 'rotate-180' : ''}`} />
+                                    )}
                                 </Link>
 
                                 {item.dropdown && (
                                     <AnimatePresence>
                                         {activeDropdown === item.name && (
                                             <motion.div
-                                                initial={{ opacity: 0, y: 15, scale: 0.95 }}
-                                                animate={{ opacity: 1, y: 0, scale: 1 }}
-                                                exit={{ opacity: 0, y: 15, scale: 0.95 }}
-                                                transition={{ duration: 0.2, ease: "easeOut" }}
-                                                className="absolute top-full left-0 w-64 bg-white/90 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] rounded-[20px] border border-white/20 p-2 mt-2 z-50 overflow-hidden"
+                                                initial={{ opacity: 0, y: 8 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                exit={{ opacity: 0, y: 8 }}
+                                                transition={{ duration: 0.15, ease: 'easeOut' }}
+                                                className="absolute top-full left-0 w-60 bg-white shadow-xl rounded-xl border border-slate-100 p-1.5 mt-1 z-50"
                                             >
-                                                <div className="relative">
-                                                    {item.dropdown.map((subItem) => (
-                                                        <Link
-                                                            key={subItem.name}
-                                                            href={subItem.href}
-                                                            className="flex items-center justify-between px-4 py-3 text-sm text-slate-600 hover:bg-blue-600 hover:text-white rounded-[12px] transition-all group/sub"
-                                                        >
-                                                            {subItem.name}
-                                                            <ArrowUpRight className="w-4 h-4 opacity-0 group-hover/sub:opacity-100 -translate-x-2 group-hover/sub:translate-x-0 transition-all" />
-                                                        </Link>
-                                                    ))}
-                                                </div>
+                                                {item.dropdown.map((subItem) => (
+                                                    <Link
+                                                        key={subItem.name}
+                                                        href={subItem.href}
+                                                        className={`flex items-center justify-between px-3.5 py-2.5 text-[13px] rounded-lg transition-colors group/sub ${isActive(subItem.href)
+                                                                ? 'bg-blue-50 text-blue-900 font-semibold'
+                                                                : 'text-slate-600 hover:bg-blue-600 hover:text-white font-medium'
+                                                            }`}
+                                                    >
+                                                        {subItem.name}
+                                                        <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover/sub:opacity-100 transition-opacity" />
+                                                    </Link>
+                                                ))}
                                             </motion.div>
                                         )}
                                     </AnimatePresence>
                                 )}
                             </div>
                         ))}
+                    </div>
 
+                    {/* CTA + Mobile Toggle */}
+                    <div className="flex items-center gap-3">
                         <Link
                             href="/submission-guidelines/call-for-papers"
-                            className="ml-4 px-6 py-2.5 bg-blue-900 text-white text-sm font-bold rounded-full hover:bg-blue-800 hover:shadow-lg hover:shadow-blue-900/30 transition-all flex items-center gap-2"
+                            className="hidden xl:inline-flex px-5 py-2 bg-blue-900 text-white text-[13px] font-bold rounded-lg hover:bg-blue-800 transition-colors items-center gap-1.5 shadow-sm"
                         >
                             Submit Paper
                         </Link>
-                    </div>
 
-                    {/* Mobile Menu Button */}
-                    <div className="flex items-center gap-4 lg:hidden">
                         <button
                             onClick={() => setIsOpen(!isOpen)}
-                            className="text-slate-600 hover:text-blue-900 p-2"
+                            className="xl:hidden text-slate-600 hover:text-blue-900 p-2 rounded-lg hover:bg-slate-50 transition-colors"
+                            aria-label="Toggle menu"
                         >
                             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                         </button>
@@ -159,46 +191,48 @@ const Navbar = () => {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="lg:hidden bg-white border-t border-slate-100 overflow-hidden"
+                        transition={{ duration: 0.2 }}
+                        className="xl:hidden bg-white border-t border-slate-100 overflow-hidden"
                     >
-                        <div className="px-4 py-8 space-y-2 relative">
+                        <div className="px-4 py-6 space-y-1 max-h-[70vh] overflow-y-auto">
                             {navItems.map((item, i) => (
-                                <motion.div
-                                    key={item.name}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: i * 0.05 }}
-                                >
+                                <div key={item.name}>
                                     {item.dropdown ? (
-                                        <div className="space-y-1">
-                                            <div className="font-bold text-slate-900 px-3 pt-4 pb-2 text-xs uppercase tracking-widest opacity-50">{item.name}</div>
-                                            <div className="space-y-1">
-                                                {item.dropdown.map((subItem) => (
-                                                    <Link
-                                                        key={subItem.name}
-                                                        href={subItem.href}
-                                                        className="block px-6 py-3 text-base font-semibold text-slate-700 hover:text-blue-900 hover:bg-blue-50/50 rounded-2xl transition-all"
-                                                        onClick={() => setIsOpen(false)}
-                                                    >
-                                                        {subItem.name}
-                                                    </Link>
-                                                ))}
+                                        <div className="space-y-0.5">
+                                            <div className="font-bold text-slate-400 px-3 pt-4 pb-1 text-[11px] uppercase tracking-widest">
+                                                {item.name}
                                             </div>
+                                            {item.dropdown.map((subItem) => (
+                                                <Link
+                                                    key={subItem.name}
+                                                    href={subItem.href}
+                                                    className={`block px-5 py-2.5 text-sm font-medium rounded-lg transition-colors ${isActive(subItem.href)
+                                                            ? 'bg-blue-50 text-blue-900 font-semibold'
+                                                            : 'text-slate-600 hover:text-blue-900 hover:bg-slate-50'
+                                                        }`}
+                                                    onClick={() => setIsOpen(false)}
+                                                >
+                                                    {subItem.name}
+                                                </Link>
+                                            ))}
                                         </div>
                                     ) : (
                                         <Link
                                             href={item.href}
-                                            className="block px-3 py-4 text-xl font-bold text-slate-900 border-b border-slate-50 hover:text-blue-900 transition-colors"
+                                            className={`block px-3 py-3 text-base font-bold rounded-lg transition-colors ${isActive(item.href)
+                                                    ? 'text-blue-900 bg-blue-50'
+                                                    : 'text-slate-800 hover:text-blue-900 hover:bg-slate-50'
+                                                }`}
                                             onClick={() => setIsOpen(false)}
                                         >
                                             {item.name}
                                         </Link>
                                     )}
-                                </motion.div>
+                                </div>
                             ))}
                             <Link
                                 href="/submission-guidelines/call-for-papers"
-                                className="block px-6 py-5 mt-8 text-center text-lg font-bold text-white bg-blue-900 rounded-[24px] shadow-2xl shadow-blue-900/20"
+                                className="block px-5 py-3.5 mt-4 text-center text-sm font-bold text-white bg-blue-900 rounded-xl shadow-lg"
                                 onClick={() => setIsOpen(false)}
                             >
                                 Submit Your Paper
@@ -207,7 +241,7 @@ const Navbar = () => {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </nav >
+        </nav>
     );
 };
 

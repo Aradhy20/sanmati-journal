@@ -21,7 +21,7 @@ export default function Editors() {
                         phone="+91 9870713912, +91 8979782949"
                         email="sanmatijournal@gmail.com"
                         image="/mam.jpg"
-                        scholar={true}
+                        scholar="https://scholar.google.com/scholar?q=author:%22Namrata+Jain%22+Teerthanker+Mahaveer+University"
                         variant="large"
                     />
 

@@ -7,9 +7,12 @@ use App\Models\News;
 use App\Models\Paper;
 use App\Models\Issue;
 use App\Models\TeamMember;
+use App\Mail\EnquiryReceived;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Log;
 
 class JournalController extends Controller
 {
@@ -225,6 +228,13 @@ class JournalController extends Controller
             'subject' => $validated['subject'],
             'message' => $validated['message'],
         ]);
+
+        // Send email notification
+        try {
+            Mail::to('sanmatijournal@gmail.com')->send(new EnquiryReceived($validated));
+        } catch (\Exception $e) {
+            Log::error('Failed to send enquiry email: ' . $e->getMessage());
+        }
 
         return Redirect::back()->with('success', 'Your inquiry has been submitted successfully.');
     }

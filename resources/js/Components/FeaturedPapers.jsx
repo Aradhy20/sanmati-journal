@@ -20,14 +20,14 @@ const FeaturedPapers = ({ papers = [] }) => {
     if (!papers || papers.length === 0) return null;
 
     return (
-        <section className="py-24 bg-slate-50 dark:bg-slate-900 overflow-hidden transition-colors duration-300">
+        <section className="py-24 bg-slate-50 overflow-hidden transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
                     <ScrollReveal>
                         <div className="max-w-2xl">
-                            <span className="text-indigo-600 dark:text-indigo-400 font-bold tracking-widest text-xs uppercase mb-3 block">High Impact Research</span>
-                            <h2 className="text-4xl md:text-5xl font-serif font-bold text-slate-900 dark:text-white mb-4">Featured Publications</h2>
-                            <p className="text-slate-600 dark:text-slate-400 text-lg">Exploring groundbreaking findings across our latest issues.</p>
+                            <span className="text-indigo-600 font-bold tracking-widest text-xs uppercase mb-3 block">High Impact Research</span>
+                            <h2 className="text-4xl md:text-5xl font-serif font-bold text-slate-900 mb-4">Featured Publications</h2>
+                            <p className="text-slate-600 text-lg">Exploring groundbreaking findings across our latest issues.</p>
                         </div>
                     </ScrollReveal>
                     <ScrollReveal delay={0.2}>
@@ -47,7 +47,7 @@ const FeaturedPapers = ({ papers = [] }) => {
                             <ScrollReveal key={paper.id} delay={index * 0.1}>
                                 <motion.div
                                     whileHover={{ y: -10 }}
-                                    className="group relative bg-white dark:bg-slate-800 rounded-[2rem] p-8 border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden h-full flex flex-col"
+                                    className="group relative bg-white rounded-[2rem] p-8 border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden h-full flex flex-col"
                                 >
                                     {/* Paper Glow Background */}
                                     <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${style.color} opacity-[0.03] group-hover:opacity-10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl transition-opacity animate-pulse`} />
@@ -56,31 +56,31 @@ const FeaturedPapers = ({ papers = [] }) => {
                                         <span className={`px-4 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r ${style.bg} text-white shadow-lg shadow-blue-500/20`}>
                                             {paper.category || 'General'}
                                         </span>
-                                        <div className="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-2xl group-hover:bg-indigo-50 dark:group-hover:bg-indigo-900/30 transition-colors">
-                                            <FileText className="w-6 h-6 text-slate-400 dark:text-slate-300 group-hover:text-indigo-600 dark:group-hover:text-indigo-400" />
+                                        <div className="p-3 bg-slate-50 rounded-2xl group-hover:bg-indigo-50 transition-colors">
+                                            <FileText className="w-6 h-6 text-slate-400 group-hover:text-indigo-600" />
                                         </div>
                                     </div>
 
-                                    <h3 className="text-2xl font-serif font-bold text-slate-900 dark:text-white mb-4 leading-tight group-hover:text-indigo-900 dark:group-hover:text-indigo-300 transition-colors line-clamp-3">
+                                    <h3 className="text-2xl font-serif font-bold text-slate-900 mb-4 leading-tight group-hover:text-indigo-900 transition-colors line-clamp-3">
                                         {paper.title}
                                     </h3>
 
                                     <div className="flex items-center gap-3 mb-8">
-                                        <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center">
-                                            <Users className="w-5 h-5 text-slate-400 dark:text-slate-300" />
+                                        <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center">
+                                            <Users className="w-5 h-5 text-slate-400" />
                                         </div>
                                         <div>
-                                            <p className="text-sm font-bold text-slate-900 dark:text-white line-clamp-1">{paper.authors}</p>
-                                            <p className="text-xs text-slate-500 dark:text-slate-400">Author(s)</p>
+                                            <p className="text-sm font-bold text-slate-900 line-clamp-1">{paper.authors}</p>
+                                            <p className="text-xs text-slate-500">Author(s)</p>
                                         </div>
                                     </div>
 
                                     <div className="mt-auto grid grid-cols-2 gap-4 pt-6 border-t border-slate-50">
-                                        <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm">
+                                        <div className="flex items-center gap-2 text-slate-500 text-sm">
                                             <Clock className="w-4 h-4" />
                                             <span>{new Date(paper.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
                                         </div>
-                                        <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm justify-end">
+                                        <div className="flex items-center gap-2 text-slate-500 text-sm justify-end">
                                             <Star className="w-4 h-4 text-amber-500" />
                                             <span>{paper.citations || 0} Citations</span>
                                         </div>

@@ -5,11 +5,6 @@ import { ScrollReveal, revealVariants } from '../Components/ScrollReveal';
 import { DynamicCard } from '../Components/DynamicCard';
 import { GlassyBlob } from '../Components/Graphics';
 
-import PageHeader from '../Components/PageHeader';
-import TeamMember from '../Components/TeamMember';
-import MainLayout from '../Layouts/MainLayout';
-import { ScrollReveal, revealVariants } from '../Components/ScrollReveal';
-import { DynamicCard } from '../Components/DynamicCard';
 
 export default function EditorialTeam({ teamMembers = [] }) {
     // Filter members by role

@@ -21,7 +21,7 @@ export default function Login({ status, canResetPassword }) {
     };
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden transition-colors duration-300">
+        <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden transition-colors duration-300">
             <Head title="Admin Login" />
 
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -31,7 +31,7 @@ export default function Login({ status, canResetPassword }) {
 
             <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
                 <div className="flex justify-center mb-6">
-                    <div className="w-20 h-20 rounded-xl overflow-hidden shadow-lg bg-white dark:bg-slate-800 p-2 border border-slate-100 dark:border-slate-700">
+                    <div className="w-20 h-20 rounded-xl overflow-hidden shadow-lg bg-white p-2 border border-slate-100">
                         <img
                             src="/logo.jpg"
                             alt="Sanmati Journal Logo"
@@ -39,16 +39,16 @@ export default function Login({ status, canResetPassword }) {
                         />
                     </div>
                 </div>
-                <h2 className="text-center text-3xl font-serif font-bold text-slate-900 dark:text-white">
+                <h2 className="text-center text-3xl font-serif font-bold text-slate-900">
                     Admin Portal
                 </h2>
-                <p className="mt-2 text-center text-sm text-slate-600 dark:text-slate-400">
+                <p className="mt-2 text-center text-sm text-slate-600">
                     Sign in to manage the journal
                 </p>
             </div>
 
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md relative z-10">
-                <div className="bg-white dark:bg-slate-800 py-8 px-4 shadow-xl sm:rounded-2xl sm:px-10 border border-slate-100 dark:border-slate-700">
+                <div className="bg-white py-8 px-4 shadow-xl sm:rounded-2xl sm:px-10 border border-slate-100">
                     {status && (
                         <div className="mb-4 font-medium text-sm text-green-600">
                             {status}
@@ -57,7 +57,7 @@ export default function Login({ status, canResetPassword }) {
 
                     <form className="space-y-6" onSubmit={submit}>
                         <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                            <label htmlFor="email" className="block text-sm font-medium text-slate-700">
                                 Email address
                             </label>
                             <div className="mt-1">
@@ -69,7 +69,7 @@ export default function Login({ status, canResetPassword }) {
                                     onChange={(e) => setData('email', e.target.value)}
                                     autoComplete="email"
                                     required
-                                    className="appearance-none block w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg shadow-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-slate-900 text-slate-900 dark:text-white sm:text-sm"
+                                    className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white text-slate-900 sm:text-sm"
                                 />
                                 {errors.email && (
                                     <p className="mt-2 text-sm text-red-600">{errors.email}</p>
@@ -78,7 +78,7 @@ export default function Login({ status, canResetPassword }) {
                         </div>
 
                         <div>
-                            <label htmlFor="password" className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                            <label htmlFor="password" className="block text-sm font-medium text-slate-700">
                                 Password
                             </label>
                             <div className="mt-1">
@@ -90,7 +90,7 @@ export default function Login({ status, canResetPassword }) {
                                     onChange={(e) => setData('password', e.target.value)}
                                     autoComplete="current-password"
                                     required
-                                    className="appearance-none block w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg shadow-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-slate-900 text-slate-900 dark:text-white sm:text-sm"
+                                    className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white text-slate-900 sm:text-sm"
                                 />
                                 {errors.password && (
                                     <p className="mt-2 text-sm text-red-600">{errors.password}</p>
@@ -108,13 +108,13 @@ export default function Login({ status, canResetPassword }) {
                                     onChange={(e) => setData('remember', e.target.checked)}
                                     className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-slate-300 rounded"
                                 />
-                                <label htmlFor="remember-me" className="ml-2 block text-sm text-slate-900 dark:text-slate-300">
+                                <label htmlFor="remember-me" className="ml-2 block text-sm text-slate-900">
                                     Remember me
                                 </label>
                             </div>
 
                             <div className="text-sm">
-                                <a href="#" className="font-medium text-blue-600 dark:text-blue-400 hover:text-blue-500">
+                                <a href="#" className="font-medium text-blue-600 hover:text-blue-500">
                                     Forgot your password?
                                 </a>
                             </div>
@@ -133,7 +133,7 @@ export default function Login({ status, canResetPassword }) {
                 </div>
 
                 <div className="mt-6 text-center">
-                    <Link href="/" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white text-sm font-medium transition-colors">
+                    <Link href="/" className="text-slate-500 hover:text-slate-900 text-sm font-medium transition-colors">
                         ← Back to Website
                     </Link>
                 </div>

@@ -1,6 +1,7 @@
 import PageHeader from '../Components/PageHeader';
 import MainLayout from '../Layouts/MainLayout';
 import { BookOpen, PenTool, Globe, ShieldCheck, Mail, ArrowRight } from 'lucide-react';
+import { Link } from '@inertiajs/react';
 
 export default function BookPublication() {
     return (
@@ -53,9 +54,15 @@ export default function BookPublication() {
                                     <p className="text-blue-100 mb-8 max-w-xl mx-auto">
                                         We are currently accepting book proposals for the upcoming calendar year. Submit your abstract or full proposal today.
                                     </p>
-                                    <a href="mailto:sanmatijournal@gmail.com" className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-900 font-bold rounded-full hover:bg-blue-50 transition-all">
+                                    <Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-900 font-bold rounded-full hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl">
                                         <Mail className="w-5 h-5" /> Inquire About Publication
-                                    </a>
+                                    </Link>
+                                    <p className="mt-4 text-blue-200 text-sm">
+                                        Or email us directly at{' '}
+                                        <a href="mailto:sanmatijournal@gmail.com" className="underline text-white hover:text-blue-100">
+                                            sanmatijournal@gmail.com
+                                        </a>
+                                    </p>
                                 </div>
                             </div>
                         </div>

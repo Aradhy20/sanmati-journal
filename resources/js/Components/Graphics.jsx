@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 export const GridPattern = ({ className = "" }) => (
-    <svg className={`absolute inset-0 h-full w-full stroke-slate-200 dark:stroke-slate-800/50 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)] ${className}`.trim()} aria-hidden="true">
+    <svg className={`absolute inset-0 h-full w-full stroke-slate-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)] ${className}`.trim()} aria-hidden="true">
         <defs>
             <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
                 <path d="M.5 40V.5H40" fill="none" />
@@ -13,7 +13,7 @@ export const GridPattern = ({ className = "" }) => (
 );
 
 export const DotPattern = ({ className = "" }) => (
-    <svg className={`absolute inset-0 h-full w-full fill-slate-300 dark:fill-slate-700/50 [mask-image:radial-gradient(100%_100%_at_top_left,white,transparent)] ${className}`.trim()} aria-hidden="true">
+    <svg className={`absolute inset-0 h-full w-full fill-slate-300 [mask-image:radial-gradient(100%_100%_at_top_left,white,transparent)] ${className}`.trim()} aria-hidden="true">
         <defs>
             <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse" x="0" y="0">
                 <circle cx="1" cy="1" r="1" />

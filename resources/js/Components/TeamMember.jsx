@@ -32,7 +32,7 @@ export default function TeamMember({ name, role, title, phone, email, scholar, i
                     )}
                     {scholar && (
                         <p className="mt-2">
-                            <a href="#" className="inline-flex items-center gap-1 text-blue-700 font-bold hover:underline">
+                            <a href={scholar} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-700 font-bold hover:underline">
                                 <ExternalLink className="w-4 h-4" /> Google Scholar Profile
                             </a>
                         </p>
@@ -69,7 +69,7 @@ export default function TeamMember({ name, role, title, phone, email, scholar, i
                     </a>
                 )}
                 {scholar && (
-                    <a href="#" className="p-2 text-slate-400 hover:text-blue-600 transition-colors" title="Google Scholar">
+                    <a href={scholar} target="_blank" rel="noopener noreferrer" className="p-2 text-slate-400 hover:text-blue-600 transition-colors" title="Google Scholar">
                         <ExternalLink className="w-5 h-5" />
                     </a>
                 )}

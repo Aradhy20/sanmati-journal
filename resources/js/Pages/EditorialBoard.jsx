@@ -1,11 +1,11 @@
 import PageHeader from '../Components/PageHeader';
 import MainLayout from '../Layouts/MainLayout';
 import React from 'react';
+import { ExternalLink } from 'lucide-react';
 
-const BoardMember = ({ name, title, affiliation, image }) => {
+const BoardMember = ({ name, title, affiliation, image, scholarUrl }) => {
     const [imgError, setImgError] = React.useState(false);
 
-    // Generate a consistent color based on name
     const getGradient = (name) => {
         const gradients = [
             'from-blue-500 to-indigo-600',
@@ -28,28 +28,51 @@ const BoardMember = ({ name, title, affiliation, image }) => {
     };
 
     return (
-        <div className="flex flex-col p-6 bg-white rounded-2xl shadow-md border border-slate-100 hover:shadow-xl hover:border-blue-300 transition-all duration-300 h-full group">
-            <div className="flex items-center gap-4 mb-4">
-                <div className="w-20 h-20 rounded-full overflow-hidden flex-shrink-0 border-4 border-white shadow-lg">
-                    {image && !imgError ? (
-                        <img
-                            src={image}
-                            alt={name}
-                            className="w-full h-full object-cover"
-                            onError={() => setImgError(true)}
-                        />
-                    ) : (
-                        <div className={`w-full h-full flex items-center justify-center text-white font-bold text-2xl bg-gradient-to-br ${getGradient(name)}`}>
-                            {getInitials(name)}
-                        </div>
-                    )}
-                </div>
-                <div className="flex-1">
-                    <h3 className="text-lg font-bold text-slate-900 leading-tight mb-1 group-hover:text-blue-600 transition-colors">{name}</h3>
-                    <p className="text-blue-600 text-sm font-semibold">{title}</p>
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg hover:border-blue-200 transition-all duration-300 overflow-hidden group">
+            {/* Photo Area */}
+            <div className="relative w-full aspect-[4/3] bg-slate-100 overflow-hidden">
+                {image && !imgError ? (
+                    <img
+                        src={image}
+                        alt={name}
+                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                        onError={() => setImgError(true)}
+                    />
+                ) : (
+                    <div className={`w-full h-full flex items-center justify-center text-white font-bold text-5xl bg-gradient-to-br ${getGradient(name)}`}>
+                        {getInitials(name)}
+                    </div>
+                )}
+                {/* Role badge overlay */}
+                <div className="absolute bottom-3 left-3">
+                    <span className="inline-block px-3 py-1 bg-white/90 backdrop-blur-sm text-blue-700 text-xs font-bold rounded-full shadow-sm">
+                        {title}
+                    </span>
                 </div>
             </div>
-            <p className="text-slate-600 text-sm mt-auto pt-4 border-t border-slate-100 leading-relaxed">{affiliation}</p>
+
+            {/* Info */}
+            <div className="p-5">
+                <h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-blue-700 transition-colors leading-snug">
+                    {name}
+                </h3>
+                <p className="text-slate-500 text-sm leading-relaxed">{affiliation}</p>
+
+                {scholarUrl && (
+                    <a
+                        href={scholarUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 mt-3 px-3 py-1.5 bg-blue-50 text-blue-700 text-xs font-semibold rounded-full hover:bg-blue-100 transition-colors"
+                    >
+                        <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.978 0-5.548 1.749-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z" />
+                        </svg>
+                        Google Scholar
+                        <ExternalLink className="w-3 h-3" />
+                    </a>
+                )}
+            </div>
         </div>
     );
 };
@@ -64,7 +87,7 @@ export default function EditorialBoard() {
             />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     <BoardMember
                         name="Prof. Pralhad Joshi"
                         title="Vice-Chancellor"

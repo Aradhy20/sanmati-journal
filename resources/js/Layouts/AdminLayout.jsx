@@ -12,7 +12,6 @@ import {
     Settings
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import ThemeToggle from '../Components/ThemeToggle';
 
 export default function AdminLayout({ children }) {
     const { url } = usePage();
@@ -32,9 +31,9 @@ export default function AdminLayout({ children }) {
     };
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex transition-colors duration-300">
+        <div className="min-h-screen bg-slate-50 flex transition-colors duration-300">
             {/* Enhanced Sidebar with Glassmorphism */}
-            <aside className="w-72 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-r border-slate-200/50 dark:border-slate-800/50 fixed h-screen overflow-y-auto shadow-2xl shadow-slate-900/5 transition-all">
+            <aside className="w-72 bg-white/80 backdrop-blur-xl border-r border-slate-200/50 fixed h-screen overflow-y-auto shadow-2xl shadow-slate-900/5 transition-all">
                 {/* Header with Gradient */}
                 <div className="p-8 border-b border-slate-100/50 bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 relative overflow-hidden">
                     <div className="absolute inset-0 bg-grid-white/5 opacity-10"></div>
@@ -67,7 +66,7 @@ export default function AdminLayout({ children }) {
                                     href={link.href}
                                     className={`group flex items-center gap-3 px-4 py-3.5 rounded-2xl font-bold transition-all relative overflow-hidden ${active
                                         ? 'text-white shadow-xl'
-                                        : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white hover:shadow-md'
+                                        : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900 hover:shadow-md'
                                         }`}
                                 >
                                     {active && (
@@ -93,8 +92,8 @@ export default function AdminLayout({ children }) {
                 </nav>
 
                 {/* Enhanced Sign Out Button */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-slate-100/50 dark:border-slate-800/50 bg-white/50 dark:bg-slate-900/50 backdrop-blur">
-                    <button className="flex items-center gap-3 px-4 py-3.5 rounded-2xl font-bold text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-900/20 hover:shadow-lg transition-all w-full group">
+                <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-slate-100/50 bg-white/50 backdrop-blur">
+                    <button className="flex items-center gap-3 px-4 py-3.5 rounded-2xl font-bold text-rose-600 hover:bg-rose-50 hover:shadow-lg transition-all w-full group">
                         <LogOut className="w-5 h-5 group-hover:rotate-12 transition-transform" />
                         Sign Out
                     </button>
@@ -103,20 +102,19 @@ export default function AdminLayout({ children }) {
 
             {/* Main Content with Enhanced Header */}
             <main className="flex-grow pl-72">
-                <header className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-200/50 dark:border-slate-800/50 px-10 py-6 shadow-sm">
+                <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-slate-200/50 px-10 py-6 shadow-sm">
                     <div className="flex justify-between items-center">
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                         >
-                            <h2 className="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                            <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
                                 {links.find(l => isActive(l.href))?.label || 'Dashboard'}
-                                <span className="text-xs px-2 py-1 bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300 rounded-full font-black uppercase tracking-wider">Live</span>
+                                <span className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded-full font-black uppercase tracking-wider">Live</span>
                             </h2>
-                            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Manage your content with ease</p>
+                            <p className="text-xs text-slate-500 mt-1">Manage your content with ease</p>
                         </motion.div>
                         <div className="flex items-center gap-4">
-                            <ThemeToggle />
                             {/* Notification Bell */}
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
@@ -139,8 +137,8 @@ export default function AdminLayout({ children }) {
                             {/* User Profile */}
                             <div className="flex items-center gap-3 pl-4 border-l border-slate-200">
                                 <div className="text-right">
-                                    <p className="text-sm font-bold text-slate-900 dark:text-white">Admin User</p>
-                                    <p className="text-xs text-slate-500 dark:text-slate-400">sanmatijournal@gmail.com</p>
+                                    <p className="text-sm font-bold text-slate-900">Admin User</p>
+                                    <p className="text-xs text-slate-500">sanmatijournal@gmail.com</p>
                                 </div>
                                 <motion.div
                                     whileHover={{ scale: 1.1 }}
