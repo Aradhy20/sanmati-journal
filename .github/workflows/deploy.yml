@@ -16,10 +16,10 @@ jobs:
       - name: 🟢 Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: '8.3'
       
       - name: 📦 Install PHP Dependencies
-        run: composer update --no-dev --optimize-autoloader --no-interaction
+        run: composer install --no-dev --optimize-autoloader --no-interaction
 
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@v4
