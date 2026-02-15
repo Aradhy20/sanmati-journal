@@ -14,7 +14,7 @@ jobs:
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '8.4.15'
+        php-version: '8.3'
         extensions: mbstring, intl, pdo_mysql
         coverage: none
 
@@ -33,8 +33,7 @@ jobs:
       run: npm run build
 
     - name: Prepare Deployment Artifact
-      run: |
-        tar -czf release.tar.gz .
+      run: tar -czf release.tar.gz .
 
     - name: Copy Files to Server
       uses: appleboy/scp-action@master
@@ -42,7 +41,7 @@ jobs:
         host: ${{ secrets.HOSTINGER_HOST }}
         username: ${{ secrets.HOSTINGER_USERNAME }}
         password: ${{ secrets.HOSTINGER_PASSWORD }}
-        port: ${{ secrets.HOSTINGER_PORT || 65002 }}
+        port: ${{ secrets.HOSTINGER_PORT }}
         source: "release.tar.gz"
         target: "~/domains/sanmatijournal.com/public_html"
 
@@ -52,28 +51,19 @@ jobs:
         host: ${{ secrets.HOSTINGER_HOST }}
         username: ${{ secrets.HOSTINGER_USERNAME }}
         password: ${{ secrets.HOSTINGER_PASSWORD }}
-        port: ${{ secrets.HOSTINGER_PORT || 65002 }}
+        port: ${{ secrets.HOSTINGER_PORT }}
         script: |
           cd ~/domains/sanmatijournal.com/public_html
-          
-          # Check if we are in the right directory
-          if [ ! -f "artisan" ]; then
-              echo "Error: artisan not found. Please check the target directory."
-              exit 1
-          fi
 
-          # Extract Files
           tar -xzf release.tar.gz
           rm release.tar.gz
 
-          # Set Permissions
           chmod -R 755 storage bootstrap/cache
-          
-          # Optimize
+
           php artisan migrate --force
           php artisan config:cache
           php artisan route:cache
           php artisan view:cache
           php artisan queue:restart
-          
+
           echo "Deployment Complete!"
