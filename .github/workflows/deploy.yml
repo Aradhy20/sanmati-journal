@@ -29,7 +29,7 @@ jobs:
     - name: Install NPM Dependencies
       run: npm ci
 
-    - name: Create .env file
+    - name: Create .env file for Build
       run: |
         echo "${{ secrets.ENV_FILE }}" > .env
 
@@ -37,7 +37,20 @@ jobs:
       run: npm run build
 
     - name: Prepare Deployment Artifact
-      run: tar --exclude='.git' --exclude='node_modules' -czf release.tar.gz .
+      run: tar --exclude='.git' --exclude='node_modules' --exclude='.github' -czf release.tar.gz .
+
+    - name: Setup Server Directories
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOSTINGER_HOST }}
+        username: ${{ secrets.HOSTINGER_USERNAME }}
+        password: ${{ secrets.HOSTINGER_PASSWORD }}
+        port: ${{ secrets.HOSTINGER_PORT }}
+        script: |
+          mkdir -p ~/domains/sanmatijournal.com/laravel_app
+          mkdir -p ~/domains/sanmatijournal.com/laravel_app/public
+          mkdir -p ~/domains/sanmatijournal.com/laravel_app/storage
+          mkdir -p ~/domains/sanmatijournal.com/laravel_app/bootstrap/cache
 
     - name: Copy Files to Server
       uses: appleboy/scp-action@master
@@ -47,7 +60,7 @@ jobs:
         password: ${{ secrets.HOSTINGER_PASSWORD }}
         port: ${{ secrets.HOSTINGER_PORT }}
         source: "release.tar.gz"
-        target: "~/domains/sanmatijournal.com/public_html"
+        target: "~/domains/sanmatijournal.com/laravel_app"
 
     - name: Extract and Deploy
       uses: appleboy/ssh-action@master
@@ -57,26 +70,29 @@ jobs:
         password: ${{ secrets.HOSTINGER_PASSWORD }}
         port: ${{ secrets.HOSTINGER_PORT }}
         script: |
-          cd ~/domains/sanmatijournal.com/public_html
-          
-          # Check if we are in the right directory
-          if [ ! -f "artisan" ]; then
-              echo "Error: artisan not found. Please check the target directory."
-              exit 1
-          fi
+          # 1. Go to Project Directory
+          cd ~/domains/sanmatijournal.com/laravel_app
 
-          # Extract Files
+          # 2. Extract Files
           tar -xzf release.tar.gz
           rm release.tar.gz
 
-          # Set Permissions
+          # 3. Create Symlink if not exists (Web Root Separation)
+          # Use -h to check if public_html is a symlink, if not backup and link
+          if [ ! -h ~/domains/sanmatijournal.com/public_html ]; then
+             echo "Setting up Web Root Separation..."
+             mv ~/domains/sanmatijournal.com/public_html ~/domains/sanmatijournal.com/public_html_backup_$(date +%F)
+             ln -s ~/domains/sanmatijournal.com/laravel_app/public ~/domains/sanmatijournal.com/public_html
+             echo "Symlink created. Old public_html backed up."
+          fi
+
+          # 4. Set Permissions
           chmod -R 755 storage bootstrap/cache
           
-          # Optimize
+          # 5. Optimize
           php artisan migrate --force
           php artisan config:cache
           php artisan route:cache
           php artisan view:cache
-          php artisan queue:restart
           
-          echo "Deployment Complete!"
+          echo "Deployment Complete with Web Root Separation!"
