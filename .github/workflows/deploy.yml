@@ -30,15 +30,13 @@ jobs:
       run: npm ci
 
     - name: Create .env file
-      run: |
-        echo "${{ secrets.ENV_FILE }}" > .env
+      run: echo "${{ secrets.ENV_FILE }}" > .env
 
     - name: Build Assets
       run: npm run build
 
     - name: Prepare Deployment Artifact
-      run: |
-        tar -czf release.tar.gz .
+      run: tar --exclude='.git' --exclude='node_modules' -czf release.tar.gz .
 
     - name: Copy Files to Server
       uses: appleboy/scp-action@master
@@ -46,38 +44,34 @@ jobs:
         host: ${{ secrets.HOSTINGER_HOST }}
         username: ${{ secrets.HOSTINGER_USERNAME }}
         password: ${{ secrets.HOSTINGER_PASSWORD }}
-        port: ${{ secrets.HOSTINGER_PORT || 65002 }}
+        port: ${{ secrets.HOSTINGER_PORT }}
         source: "release.tar.gz"
         target: "~/domains/sanmatijournal.com/public_html"
 
     - name: Extract and Deploy
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.HOSTINGER_HOST }}
-        username: ${{ secrets.HOSTINGER_USERNAME }}
-        password: ${{ secrets.HOSTINGER_PASSWORD }}
-        port: ${{ secrets.HOSTINGER_PORT || 65002 }}
+        host: 153.92.11.156
+        username: u858459662
+        password: Njain@1984
+        port: 65002
         script: |
           cd ~/domains/sanmatijournal.com/public_html
-          
-          # Check if we are in the right directory
-          if [ ! -f "artisan" ]; then
-              echo "Error: artisan not found. Please check the target directory."
-              exit 1
-          fi
 
-          # Extract Files
           tar -xzf release.tar.gz
           rm release.tar.gz
 
-          # Set Permissions
+          if [ ! -f "artisan" ]; then
+            echo "Laravel not found in this directory!"
+            exit 1
+          fi
+
           chmod -R 755 storage bootstrap/cache
-          
-          # Optimize
+
           php artisan migrate --force
           php artisan config:cache
           php artisan route:cache
           php artisan view:cache
           php artisan queue:restart
-          
+
           echo "Deployment Complete!"
