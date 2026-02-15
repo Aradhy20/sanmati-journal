@@ -2,46 +2,78 @@ name: Deploy to Hostinger
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: 🚚 Get latest code
-        uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-      - name: 🟢 Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.3'
-      
-      - name: 📦 Install PHP Dependencies
-        run: composer install --no-dev --optimize-autoloader --no-interaction
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: mbstring, intl, pdo_mysql
+        coverage: none
 
-      - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
 
-      - name: 📦 Install Node Dependencies & Build
-        run: |
-          npm ci
-          npm run build
+    - name: Install Composer Dependencies
+      run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
 
-      - name: 🧹 Clean up before deploy
-        run: |
-          rm -rf node_modules
-          rm -rf tests
-          rm -rf storage/logs/*.log
+    - name: Install NPM Dependencies
+      run: npm ci
 
-      - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          port: ${{ secrets.FTP_PORT }}
-          server-dir: ./public_html/
+    - name: Build Assets
+      run: npm run build
+
+    - name: Prepare Deployment Artifact
+      run: |
+        tar -czf release.tar.gz .
+
+    - name: Copy Files to Server
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HOSTINGER_HOST }}
+        username: ${{ secrets.HOSTINGER_USERNAME }}
+        password: ${{ secrets.HOSTINGER_PASSWORD }}
+        port: ${{ secrets.HOSTINGER_PORT || 65002 }}
+        source: "release.tar.gz"
+        target: "~/domains/sanmatijournal.com/public_html"
+
+    - name: Extract and Deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOSTINGER_HOST }}
+        username: ${{ secrets.HOSTINGER_USERNAME }}
+        password: ${{ secrets.HOSTINGER_PASSWORD }}
+        port: ${{ secrets.HOSTINGER_PORT || 65002 }}
+        script: |
+          cd ~/domains/sanmatijournal.com/public_html
+          
+          # Check if we are in the right directory
+          if [ ! -f "artisan" ]; then
+              echo "Error: artisan not found. Please check the target directory."
+              exit 1
+          fi
+
+          # Extract Files
+          tar -xzf release.tar.gz
+          rm release.tar.gz
+
+          # Set Permissions
+          chmod -R 755 storage bootstrap/cache
+          
+          # Optimize
+          php artisan migrate --force
+          php artisan config:cache
+          php artisan route:cache
+          php artisan view:cache
+          php artisan queue:restart
+          
+          echo "Deployment Complete!"

@@ -11,32 +11,78 @@
   --animate-waveSlow: waveSlow 10s ease-in-out infinite;
 
   @keyframes blob {
-    0% { transform: translate(0px, 0px) scale(1); }
-    33% { transform: translate(30px, -50px) scale(1.1); }
-    66% { transform: translate(-20px, 20px) scale(0.9); }
-    100% { transform: translate(0px, 0px) scale(1); }
+    0% {
+      transform: translate(0px, 0px) scale(1);
+    }
+
+    33% {
+      transform: translate(30px, -50px) scale(1.1);
+    }
+
+    66% {
+      transform: translate(-20px, 20px) scale(0.9);
+    }
+
+    100% {
+      transform: translate(0px, 0px) scale(1);
+    }
   }
 
   @keyframes slow-zoom {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.1); }
+    0% {
+      transform: scale(1);
+    }
+
+    100% {
+      transform: scale(1.1);
+    }
   }
 
   @keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
   }
 
   @keyframes waveSlow {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(-25px); }
+
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+
+    50% {
+      transform: translateX(-25px);
+    }
   }
 }
 
 @layer base {
+  html {
+    font-size: 16px;
+  }
+
   body {
     @apply bg-slate-50 text-slate-900;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    letter-spacing: -0.01em;
   }
 }
 
@@ -44,11 +90,11 @@
   .container-custom {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
-  
+
   .fade-r {
     mask-image: linear-gradient(to right, black, transparent);
   }
-  
+
   .fade-l {
     mask-image: linear-gradient(to left, black, transparent);
   }

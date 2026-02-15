@@ -7,9 +7,16 @@ import { ScrollReveal, revealVariants } from '../Components/ScrollReveal';
 import { DynamicCard, GradientText } from '../Components/DynamicCard';
 import { GlassyBlob } from '../Components/Graphics';
 
+import Seo from '../Components/Seo';
+
 export default function Contact() {
     return (
         <MainLayout>
+            <Seo
+                title="Contact Us"
+                description="Get in touch with the Sanmati Journal Editorial Office for submissions and queries."
+            />
+
             <div className="min-h-screen relative">
                 <PageHeader
                     title="Contact Us"
@@ -53,24 +60,32 @@ export default function Contact() {
                                     desc: "sanmatijournal@gmail.com",
                                     color: "purple"
                                 }
-                            ].map((item, i) => (
-                                <ScrollReveal key={i} delay={i * 0.1} variants={revealVariants.left}>
-                                    <DynamicCard className="p-8" gradient={`from-${item.color}-500 to-${item.color}-700`}>
-                                        <div className="flex items-start gap-6">
-                                            <div className={`p-4 bg-${item.color}-50 rounded-2xl text-${item.color}-600`}>
-                                                <item.icon className="w-6 h-6" />
+                            ].map((item, i) => {
+                                const colorStyles = {
+                                    blue: { bg: 'bg-blue-50', text: 'text-blue-600', textDark: 'text-blue-900', gradient: 'from-blue-500 to-blue-700' },
+                                    indigo: { bg: 'bg-indigo-50', text: 'text-indigo-600', textDark: 'text-indigo-900', gradient: 'from-indigo-500 to-indigo-700' },
+                                    purple: { bg: 'bg-purple-50', text: 'text-purple-600', textDark: 'text-purple-900', gradient: 'from-purple-500 to-purple-700' },
+                                };
+                                const colors = colorStyles[item.color];
+                                return (
+                                    <ScrollReveal key={i} delay={i * 0.1} variants={revealVariants.left}>
+                                        <DynamicCard className="p-8" gradient={colors.gradient}>
+                                            <div className="flex items-start gap-6">
+                                                <div className={`p-4 ${colors.bg} rounded-2xl ${colors.text}`}>
+                                                    <item.icon className="w-6 h-6" />
+                                                </div>
+                                                <div>
+                                                    <h3 className="text-xl font-bold text-slate-900 mb-1">{item.title}</h3>
+                                                    {item.name && <p className={`${colors.textDark} font-bold mb-3`}>{item.name}</p>}
+                                                    <p className="text-slate-600 leading-relaxed text-sm max-w-sm font-medium">
+                                                        {item.desc}
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <h3 className="text-xl font-bold text-slate-900 mb-1">{item.title}</h3>
-                                                {item.name && <p className={`text-${item.color}-900 font-bold mb-3`}>{item.name}</p>}
-                                                <p className="text-slate-600 leading-relaxed text-sm max-w-sm font-medium">
-                                                    {item.desc}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </DynamicCard>
-                                </ScrollReveal>
-                            ))}
+                                        </DynamicCard>
+                                    </ScrollReveal>
+                                );
+                            })}
                         </div>
 
                         {/* Form */}

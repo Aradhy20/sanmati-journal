@@ -29,7 +29,6 @@ const Footer = () => {
                             <li><Link href="/basic-info/about-journal" className="hover:text-blue-400 transition-colors text-sm">About Journal</Link></li>
                             <li><Link href="/editorial-team" className="hover:text-blue-400 transition-colors text-sm">Editorial Team</Link></li>
                             <li><Link href="/submission-guidelines/call-for-papers" className="hover:text-blue-400 transition-colors text-sm">Call for Papers</Link></li>
-                            <li><Link href="/login" className="hover:text-blue-400 transition-colors text-sm text-slate-500">Admin Login</Link></li>
                         </ul>
                     </div>
 
@@ -54,7 +53,7 @@ const Footer = () => {
                             </li>
                             <li className="flex items-center gap-3">
                                 <Phone className="w-5 h-5 text-blue-500" />
-                                <span className="text-sm">+91 9870713912</span>
+                                <span className="text-sm">+91 8979782949, +91 7999525735</span>
                             </li>
                             <li className="flex items-center gap-3">
                                 <Mail className="w-5 h-5 text-blue-500" />

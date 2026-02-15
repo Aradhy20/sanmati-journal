@@ -3,12 +3,12 @@ import Footer from '../Components/Footer';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { GlassyBlob } from '../Components/Graphics';
-import SeoHead from '../Components/SeoHead';
+import Seo from '../Components/Seo';
 
 export default function MainLayout({ children, title, description, keywords }) {
     return (
         <div className="min-h-screen flex flex-col bg-slate-50 font-sans antialiased relative overflow-x-hidden transition-colors duration-300">
-            <SeoHead title={title} description={description} keywords={keywords} />
+            <Seo title={title} description={description} keywords={keywords} />
             {/* Ambient Background Elements */}
             <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-50">
                 <GlassyBlob className="top-[-10%] left-[-10%] w-[500px] h-[500px]" color="bg-blue-200" />

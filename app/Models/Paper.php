@@ -22,6 +22,7 @@ class Paper extends Model
         'doi',
         'citations',
         'category',
+        'is_featured',
         'meta_title',
         'meta_description',
     ];

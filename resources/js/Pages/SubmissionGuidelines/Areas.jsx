@@ -1,92 +1,374 @@
 import PageHeader from '../../Components/PageHeader';
 import MainLayout from '../../Layouts/MainLayout';
 import {
-    Search, Globe, Radio, Cpu, GraduationCap,
+    Palette, Globe, Radio, Cpu, GraduationCap,
     TrendingUp, Scale, HeartPulse, Leaf, BookOpen,
-    Mail
+    Mail, ArrowRight, Sparkles, FileText, Users, CheckCircle2
 } from 'lucide-react';
 import { Link } from '@inertiajs/react';
 import { GridPattern, DotPattern } from '../../Components/Graphics';
-import { ScrollReveal, revealVariants, ScaleOnHover } from '../../Components/ScrollReveal';
+import { ScrollReveal, revealVariants } from '../../Components/ScrollReveal';
+import { motion } from 'framer-motion';
+import Seo from '../../Components/Seo';
+
+// Unique SVG graphic per area
+const AreaGraphic = ({ type, color }) => {
+    const graphics = {
+        arts: (
+            <svg viewBox="0 0 120 120" fill="none" className="w-full h-full">
+                <circle cx="60" cy="60" r="50" stroke={color} strokeWidth="1" opacity="0.2" />
+                <circle cx="60" cy="60" r="35" stroke={color} strokeWidth="1" opacity="0.15" />
+                <circle cx="60" cy="60" r="20" stroke={color} strokeWidth="1.5" opacity="0.3" />
+                <path d="M30 90 Q60 20 90 90" stroke={color} strokeWidth="2" opacity="0.3" fill="none" />
+                <path d="M20 70 Q60 10 100 70" stroke={color} strokeWidth="1" opacity="0.15" fill="none" />
+            </svg>
+        ),
+        social: (
+            <svg viewBox="0 0 120 120" fill="none" className="w-full h-full">
+                <circle cx="40" cy="50" r="12" stroke={color} strokeWidth="1.5" opacity="0.25" />
+                <circle cx="80" cy="50" r="12" stroke={color} strokeWidth="1.5" opacity="0.25" />
+                <circle cx="60" cy="80" r="12" stroke={color} strokeWidth="1.5" opacity="0.25" />
+                <line x1="48" y1="55" x2="72" y2="55" stroke={color} strokeWidth="1" opacity="0.2" />
+                <line x1="45" y1="60" x2="55" y2="72" stroke={color} strokeWidth="1" opacity="0.2" />
+                <line x1="75" y1="60" x2="65" y2="72" stroke={color} strokeWidth="1" opacity="0.2" />
+            </svg>
+        ),
+        media: (
+            <svg viewBox="0 0 120 120" fill="none" className="w-full h-full">
+                <rect x="25" y="30" width="70" height="50" rx="8" stroke={color} strokeWidth="1.5" opacity="0.2" />
+                <circle cx="60" cy="55" r="15" stroke={color} strokeWidth="1.5" opacity="0.25" />
+                <path d="M55 48 L68 55 L55 62 Z" fill={color} opacity="0.2" />
+                <line x1="30" y1="90" x2="90" y2="90" stroke={color} strokeWidth="1" opacity="0.15" />
+            </svg>
+        ),
+        tech: (
+            <svg viewBox="0 0 120 120" fill="none" className="w-full h-full">
+                <rect x="35" y="35" width="50" height="50" rx="4" stroke={color} strokeWidth="1.5" opacity="0.2" />
+                <rect x="45" y="45" width="30" height="30" rx="2" stroke={color} strokeWidth="1" opacity="0.15" />
+                <line x1="60" y1="20" x2="60" y2="35" stroke={color} strokeWidth="1" opacity="0.2" />
+                <line x1="60" y1="85" x2="60" y2="100" stroke={color} strokeWidth="1" opacity="0.2" />
+                <line x1="20" y1="60" x2="35" y2="60" stroke={color} strokeWidth="1" opacity="0.2" />
+                <line x1="85" y1="60" x2="100" y2="60" stroke={color} strokeWidth="1" opacity="0.2" />
+                <circle cx="60" cy="60" r="8" fill={color} opacity="0.1" />
+            </svg>
+        ),
+        education: (
+            <svg viewBox="0 0 120 120" fill="none" className="w-full h-full">
+                <path d="M60 25 L100 45 L60 65 L20 45 Z" stroke={color} strokeWidth="1.5" opacity="0.25" fill={color} fillOpacity="0.05" />
+                <line x1="60" y1="65" x2="60" y2="95" stroke={color} strokeWidth="1" opacity="0.2" />
+                <path d="M35 55 L35 80 Q60 95 85 80 L85 55" stroke={color} strokeWidth="1" opacity="0.15" fill="none" />
+            </svg>
+        ),
+        business: (
+            <svg viewBox="0 0 120 120" fill="none" className="w-full h-full">
+                <rect x="20" y="70" width="15" height="30" rx="2" fill={color} opacity="0.1" />
+                <rect x="40" y="50" width="15" height="50" rx="2" fill={color} opacity="0.15" />
+                <rect x="60" y="35" width="15" height="65" rx="2" fill={color} opacity="0.2" />
+                <rect x="80" y="20" width="15" height="80" rx="2" fill={color} opacity="0.25" />
+                <path d="M27 68 L47 48 L67 33 L87 18" stroke={color} strokeWidth="1.5" opacity="0.3" fill="none" />
+            </svg>
+        ),
+        law: (
+            <svg viewBox="0 0 120 120" fill="none" className="w-full h-full">
+                <line x1="60" y1="20" x2="60" y2="95" stroke={color} strokeWidth="1.5" opacity="0.2" />
+                <line x1="30" y1="45" x2="90" y2="45" stroke={color} strokeWidth="1.5" opacity="0.2" />
+                <circle cx="30" cy="55" r="8" stroke={color} strokeWidth="1" opacity="0.2" />
+                <circle cx="90" cy="55" r="8" stroke={color} strokeWidth="1" opacity="0.2" />
+                <rect x="45" y="90" width="30" height="8" rx="2" fill={color} opacity="0.15" />
+            </svg>
+        ),
+        health: (
+            <svg viewBox="0 0 120 120" fill="none" className="w-full h-full">
+                <path d="M20 60 L35 60 L45 30 L55 80 L65 45 L75 65 L85 60 L100 60" stroke={color} strokeWidth="2" opacity="0.25" fill="none" />
+                <circle cx="60" cy="60" r="40" stroke={color} strokeWidth="1" opacity="0.1" />
+            </svg>
+        ),
+        environment: (
+            <svg viewBox="0 0 120 120" fill="none" className="w-full h-full">
+                <circle cx="60" cy="60" r="40" stroke={color} strokeWidth="1" opacity="0.15" />
+                <ellipse cx="60" cy="60" rx="40" ry="15" stroke={color} strokeWidth="1" opacity="0.15" />
+                <ellipse cx="60" cy="60" rx="15" ry="40" stroke={color} strokeWidth="1" opacity="0.15" />
+                <path d="M50 40 Q60 25 70 40 Q60 50 50 40 Z" fill={color} opacity="0.15" />
+            </svg>
+        ),
+        indian: (
+            <svg viewBox="0 0 120 120" fill="none" className="w-full h-full">
+                <circle cx="60" cy="50" r="30" stroke={color} strokeWidth="1" opacity="0.15" />
+                <path d="M60 20 L65 35 L80 35 L68 45 L72 60 L60 50 L48 60 L52 45 L40 35 L55 35 Z" stroke={color} strokeWidth="1" opacity="0.2" fill={color} fillOpacity="0.05" />
+                <line x1="40" y1="85" x2="80" y2="85" stroke={color} strokeWidth="1" opacity="0.15" />
+                <line x1="45" y1="90" x2="75" y2="90" stroke={color} strokeWidth="1" opacity="0.1" />
+            </svg>
+        ),
+    };
+    return <div className="absolute top-4 right-4 w-24 h-24 md:w-28 md:h-28 opacity-60 group-hover:opacity-100 transition-opacity duration-500">{graphics[type]}</div>;
+};
+
+const areas = [
+    {
+        title: "Arts & Humanities",
+        slug: "arts-humanities",
+        icon: <Palette className="w-6 h-6" />,
+        color: "#e11d48",
+        colorClass: "text-rose-500",
+        bg: "bg-rose-50",
+        borderHover: "hover:border-rose-200",
+        graphic: "arts",
+        desc: "Exploring human expression, cultural heritage, and creative thought across civilizations.",
+        topics: ["Literature & Comparative Studies", "Philosophy & Ethics", "History & Archaeology", "Performing & Visual Arts", "Cultural & Media Studies", "Linguistics & Translation"],
+        papers: "120+",
+    },
+    {
+        title: "Social Sciences",
+        slug: "social-sciences",
+        icon: <Globe className="w-6 h-6" />,
+        color: "#3b82f6",
+        colorClass: "text-blue-500",
+        bg: "bg-blue-50",
+        borderHover: "hover:border-blue-200",
+        graphic: "social",
+        desc: "Understanding human behavior, societal structures, and governance mechanisms.",
+        topics: ["Sociology & Social Work", "Psychology & Behavioral Science", "Political Science & IR", "Anthropology & Ethnography", "Economics & Public Policy", "Gender & Development Studies"],
+        papers: "200+",
+    },
+    {
+        title: "Journalism & Mass Communication",
+        slug: "journalism-media",
+        icon: <Radio className="w-6 h-6" />,
+        color: "#f97316",
+        colorClass: "text-orange-500",
+        bg: "bg-orange-50",
+        borderHover: "hover:border-orange-200",
+        graphic: "media",
+        desc: "Analyzing modern media ecosystems, digital narratives, and communication ethics.",
+        topics: ["Print & Broadcast Journalism", "Digital & Social Media", "Public Relations & Advertising", "Media Law & Ethics", "Film & Documentary Studies", "Communication Theory"],
+        papers: "85+",
+    },
+    {
+        title: "Science & Technology",
+        slug: "science-technology",
+        icon: <Cpu className="w-6 h-6" />,
+        color: "#06b6d4",
+        colorClass: "text-cyan-500",
+        bg: "bg-cyan-50",
+        borderHover: "hover:border-cyan-200",
+        graphic: "tech",
+        desc: "Advancing frontiers in computing, engineering, and applied sciences.",
+        topics: ["Computer Science & AI", "Data Science & Analytics", "Biotechnology & Genetics", "Mechanical & Civil Engineering", "Nanotechnology", "Information Systems & Cybersecurity"],
+        papers: "180+",
+    },
+    {
+        title: "Education",
+        slug: "education",
+        icon: <GraduationCap className="w-6 h-6" />,
+        color: "#eab308",
+        colorClass: "text-yellow-600",
+        bg: "bg-yellow-50",
+        borderHover: "hover:border-yellow-200",
+        graphic: "education",
+        desc: "Shaping the future of learning through pedagogy, policy, and technology.",
+        topics: ["Curriculum & Instruction Design", "Educational Psychology", "EdTech & Digital Learning", "Higher Education Policy", "Special & Inclusive Education", "Teacher Training & Development"],
+        papers: "150+",
+    },
+    {
+        title: "Management & Commerce",
+        slug: "management-commerce",
+        icon: <TrendingUp className="w-6 h-6" />,
+        color: "#10b981",
+        colorClass: "text-emerald-500",
+        bg: "bg-emerald-50",
+        borderHover: "hover:border-emerald-200",
+        graphic: "business",
+        desc: "Driving innovation in business strategy, finance, and the global economy.",
+        topics: ["Strategic Management", "Financial Markets & Banking", "Marketing & Consumer Behavior", "Human Resource Management", "Entrepreneurship & Startups", "Accounting & Taxation"],
+        papers: "170+",
+    },
+    {
+        title: "Law & Public Administration",
+        slug: "law-governance",
+        icon: <Scale className="w-6 h-6" />,
+        color: "#64748b",
+        colorClass: "text-slate-500",
+        bg: "bg-slate-100",
+        borderHover: "hover:border-slate-300",
+        graphic: "law",
+        desc: "Examining legal frameworks, justice systems, and public governance.",
+        topics: ["Constitutional & Criminal Law", "International Law & Human Rights", "Cyber Law & IP Rights", "Administrative & Corporate Law", "Public Policy & Governance", "Environmental Law"],
+        papers: "90+",
+    },
+    {
+        title: "Health & Medical Sciences",
+        slug: "health-medicine",
+        icon: <HeartPulse className="w-6 h-6" />,
+        color: "#ef4444",
+        colorClass: "text-red-500",
+        bg: "bg-red-50",
+        borderHover: "hover:border-red-200",
+        graphic: "health",
+        desc: "Improving global health outcomes through research in medicine and wellness.",
+        topics: ["Public Health & Epidemiology", "Clinical Medicine & Surgery", "Nursing & Allied Health", "Pharmacy & Drug Research", "Mental Health & Wellness", "Nutrition & Dietetics"],
+        papers: "130+",
+    },
+    {
+        title: "Environment & Development",
+        slug: "environment-sustainability",
+        icon: <Leaf className="w-6 h-6" />,
+        color: "#22c55e",
+        colorClass: "text-green-500",
+        bg: "bg-green-50",
+        borderHover: "hover:border-green-200",
+        graphic: "environment",
+        desc: "Tackling global challenges in sustainability, ecology, and urban systems.",
+        topics: ["Climate Change & Mitigation", "Sustainable Development Goals", "Ecology & Biodiversity", "Urban Planning & Smart Cities", "Renewable Energy Systems", "Water & Waste Management"],
+        papers: "95+",
+    },
+    {
+        title: "Indian Knowledge Systems",
+        slug: "indian-knowledge-systems",
+        icon: <BookOpen className="w-6 h-6" />,
+        color: "#8b5cf6",
+        colorClass: "text-violet-500",
+        bg: "bg-violet-50",
+        borderHover: "hover:border-violet-200",
+        graphic: "indian",
+        desc: "Reviving and researching India's ancient wisdom and traditional sciences.",
+        topics: ["Vedic & Sanskrit Studies", "Ayurveda & Traditional Medicine", "Yoga & Meditation Science", "Indian Mathematics & Astronomy", "Jain, Buddhist & Hindu Philosophy", "Ancient Architecture & Art"],
+        papers: "75+",
+    },
+];
 
 export default function AreasOfSubmission() {
-    const areas = [
-        { title: "Arts & Humanities", icon: <Palette className="w-6 h-6" /> },
-        { title: "Social Sciences", icon: <Globe className="w-6 h-6" /> },
-        { title: "Journalism & Mass Communication", icon: <Radio className="w-6 h-6" /> },
-        { title: "Science & Technology", icon: <Cpu className="w-6 h-6" /> },
-        { title: "Education", icon: <GraduationCap className="w-6 h-6" /> },
-        { title: "Management & Commerce", icon: <TrendingUp className="w-6 h-6" /> },
-        { title: "Law & Public Administration", icon: <Scale className="w-6 h-6" /> },
-        { title: "Health & Medical Sciences", icon: <HeartPulse className="w-6 h-6" /> },
-        { title: "Environment & Sustainable Development", icon: <Leaf className="w-6 h-6" /> },
-        { title: "Indian Knowledge Systems", icon: <BookOpen className="w-6 h-6" /> },
-    ];
-
     return (
         <MainLayout>
-            <div className="bg-slate-50 min-h-screen">
+            <Seo
+                title="Areas of Submission"
+                description="Explore 10+ multidisciplinary research areas at Sanmati Journal covering Arts, Science, Law, Health, Education, and more."
+                keywords="research areas, submission topics, multidisciplinary journal, academic publishing"
+            />
+
+            <div className="bg-slate-50 min-h-screen font-sans">
                 <PageHeader
                     title="Areas of Submission"
                     breadcrumb="Submission"
-                    subtitle="Multidisciplinary Scope & Coverage"
+                    subtitle="Exploring the Frontiers of Knowledge"
                 />
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 relative overflow-hidden">
-                    <DotPattern className="opacity-10" />
-                    <div className="max-w-5xl mx-auto mt-12 relative z-10">
-                        <ScrollReveal variants={revealVariants.zoom}>
-                            <div className="bg-white p-8 md:p-12 rounded-3xl border border-slate-200 shadow-sm relative overflow-hidden group">
-                                <GridPattern className="opacity-5" />
-                                <div className="absolute top-0 right-0 p-8 opacity-5">
-                                    <Search className="w-32 h-32" />
-                                </div>
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative overflow-hidden">
+                    {/* Ambient Background */}
+                    <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
+                        <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+                        <div className="absolute top-[-10%] right-[-10%] w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+                        <div className="absolute bottom-[-20%] left-[20%] w-96 h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+                    </div>
 
-                                <div className="relative z-10">
-                                    <h2 className="text-3xl font-serif font-bold text-slate-900 mb-6">Scope of the Journal</h2>
-                                    <p className="text-slate-700 text-lg leading-relaxed mb-12 max-w-3xl">
-                                        Sanmati Spectrum of Knowledge & Emerging Discourse welcomes original research submissions across a wide range of disciplines. Authors are encouraged to submit papers in the following key sectors:
-                                    </p>
+                    <div className="max-w-6xl mx-auto relative z-10">
+                        {/* Header */}
+                        <div className="text-center mb-14">
+                            <ScrollReveal variants={revealVariants.fadeUp}>
+                                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-widest mb-4">
+                                    <Sparkles className="w-3.5 h-3.5" /> Multidisciplinary Scope
+                                </span>
+                                <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4 tracking-tight">
+                                    Scope of the <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600">Journal</span>
+                                </h2>
+                                <p className="text-slate-500 text-sm max-w-xl mx-auto leading-relaxed">
+                                    We welcome original research across 10 major disciplines. Click any area to explore detailed topics and submission guidelines.
+                                </p>
+                            </ScrollReveal>
+                        </div>
 
-                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-                                        {areas.map((area, i) => (
-                                            <ScrollReveal key={i} variants={revealVariants.zoom} delay={i * 0.05}>
-                                                <ScaleOnHover>
-                                                    <div className="group flex items-center gap-5 p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:bg-blue-900 hover:border-blue-900 transition-all duration-300 relative overflow-hidden">
-                                                        <GridPattern className="opacity-0 group-hover:opacity-5 transition-opacity" />
-                                                        <div className="relative z-10 w-12 h-12 bg-white rounded-xl flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform duration-300">
-                                                            {area.icon}
-                                                        </div>
-                                                        <span className="relative z-10 font-bold text-slate-800 group-hover:text-white transition-colors text-lg">
-                                                            {area.title}
-                                                        </span>
-                                                    </div>
-                                                </ScaleOnHover>
-                                            </ScrollReveal>
-                                        ))}
+                        {/* Stats Bar */}
+                        <ScrollReveal variants={revealVariants.fadeUp} delay={0.1}>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-14">
+                                {[
+                                    { label: "Disciplines", value: "10+", icon: <BookOpen className="w-4 h-4" /> },
+                                    { label: "Sub-Topics", value: "60+", icon: <FileText className="w-4 h-4" /> },
+                                    { label: "Published Papers", value: "1,295+", icon: <CheckCircle2 className="w-4 h-4" /> },
+                                    { label: "Global Authors", value: "500+", icon: <Users className="w-4 h-4" /> },
+                                ].map((stat, i) => (
+                                    <div key={i} className="bg-white rounded-2xl p-4 border border-slate-100 shadow-sm text-center">
+                                        <div className="flex items-center justify-center gap-2 text-blue-600 mb-1">{stat.icon}<span className="text-xs font-bold uppercase tracking-wider text-slate-400">{stat.label}</span></div>
+                                        <div className="text-2xl font-bold text-slate-900">{stat.value}</div>
                                     </div>
+                                ))}
+                            </div>
+                        </ScrollReveal>
 
-                                    <ScrollReveal variants={revealVariants.zoom} delay={0.3}>
-                                        <div className="mt-16 p-8 bg-blue-50 rounded-3xl border border-blue-100 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
-                                            <GridPattern className="opacity-10" />
-                                            <div className="max-w-xl relative z-10">
-                                                <h4 className="text-xl font-bold text-blue-900 mb-2">Ready to Contribute?</h4>
-                                                <p className="text-slate-600">Ensure your manuscript aligns with one of our focus areas and follows the formatting guidelines.</p>
+                        {/* Area Cards - Now Linked */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            {areas.map((area, i) => (
+                                <ScrollReveal key={i} variants={revealVariants.fadeUp} delay={i * 0.04} className="h-full">
+                                    <Link href={`/submission-guidelines/areas/${area.slug}`} className="block h-full">
+                                        <motion.div
+                                            whileHover={{ y: -4 }}
+                                            transition={{ type: "spring", stiffness: 300 }}
+                                            className={`group relative h-full bg-white rounded-2xl p-6 border border-slate-100 shadow-sm ${area.borderHover} hover:shadow-lg transition-all duration-300 overflow-hidden`}
+                                        >
+                                            {/* Background graphic */}
+                                            <AreaGraphic type={area.graphic} color={area.color} />
+
+                                            {/* Bottom gradient line */}
+                                            <div className="absolute bottom-0 left-0 w-full h-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `linear-gradient(to right, transparent, ${area.color}40, transparent)` }} />
+
+                                            {/* "View Details" badge on hover */}
+                                            <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-slate-900 text-white text-[10px] font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1 group-hover:translate-y-0 z-20 flex items-center gap-1">
+                                                Explore <ArrowRight className="w-3 h-3" />
                                             </div>
-                                            <div className="flex gap-4 shrink-0 relative z-10">
-                                                <ScaleOnHover>
-                                                    <Link href="/submission-guidelines/important-info" className="px-6 py-3 bg-white border border-slate-200 rounded-full font-bold text-slate-900 hover:bg-slate-50 transition-colors block">
-                                                        Formatting Rules
-                                                    </Link>
-                                                </ScaleOnHover>
-                                                <ScaleOnHover>
-                                                    <a href="mailto:sanmatijournal@gmail.com" className="px-6 py-3 bg-blue-900 text-white rounded-full font-bold hover:bg-blue-800 transition-colors flex items-center gap-2">
-                                                        <Mail className="w-4 h-4" /> Submit Paper
-                                                    </a>
-                                                </ScaleOnHover>
+
+                                            <div className="relative z-10">
+                                                {/* Header row */}
+                                                <div className="flex items-start gap-4 mb-4">
+                                                    <div className={`w-11 h-11 rounded-xl ${area.bg} ${area.colorClass} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+                                                        {area.icon}
+                                                    </div>
+                                                    <div className="flex-1 min-w-0">
+                                                        <h3 className="text-base font-bold text-slate-900 mb-1 group-hover:text-blue-700 transition-colors">{area.title}</h3>
+                                                        <p className="text-xs text-slate-500 leading-relaxed">{area.desc}</p>
+                                                    </div>
+                                                    <div className="text-right shrink-0 hidden sm:block">
+                                                        <span className="text-lg font-bold text-slate-900">{area.papers}</span>
+                                                        <p className="text-[10px] text-slate-400 uppercase tracking-wider font-bold">Papers</p>
+                                                    </div>
+                                                </div>
+
+                                                {/* Topic Tags */}
+                                                <div className="flex flex-wrap gap-1.5 mt-3">
+                                                    {area.topics.map((topic, j) => (
+                                                        <span key={j} className={`inline-flex items-center px-2.5 py-1 rounded-lg text-[11px] font-medium ${area.bg} ${area.colorClass} opacity-80 group-hover:opacity-100 transition-opacity`}>
+                                                            {topic}
+                                                        </span>
+                                                    ))}
+                                                </div>
                                             </div>
-                                        </div>
-                                    </ScrollReveal>
+                                        </motion.div>
+                                    </Link>
+                                </ScrollReveal>
+                            ))}
+                        </div>
+
+                        {/* CTA Section */}
+                        <ScrollReveal variants={revealVariants.fadeUp} delay={0.3}>
+                            <div className="mt-16 relative rounded-2xl overflow-hidden bg-slate-900 text-white shadow-2xl">
+                                <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-indigo-900 to-slate-900 z-0"></div>
+                                <GridPattern className="opacity-20 text-white z-0" />
+
+                                <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-500 rounded-full blur-[100px] opacity-30 animate-pulse"></div>
+                                <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-violet-500 rounded-full blur-[100px] opacity-30 animate-pulse animation-delay-2000"></div>
+
+                                <div className="relative z-10 px-8 py-14 flex flex-col md:flex-row items-center justify-between gap-8 max-w-5xl mx-auto">
+                                    <div className="text-center md:text-left">
+                                        <h3 className="text-2xl md:text-3xl font-bold mb-3 font-serif">Ready to Contribute?</h3>
+                                        <p className="text-blue-200 text-sm max-w-lg">
+                                            Ensure your manuscript aligns with our focus areas and adheres to our rigorous publication standards.
+                                        </p>
+                                    </div>
+                                    <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+                                        <Link href="/submission-guidelines/important-info" className="px-6 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full font-bold text-sm text-white hover:bg-white hover:text-blue-900 transition-all duration-300">
+                                            Guidelines
+                                        </Link>
+                                        <a href="mailto:sanmatijournal@gmail.com" className="px-6 py-3 bg-white text-blue-900 rounded-full font-bold text-sm shadow-lg hover:shadow-blue-500/25 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+                                            <Mail className="w-4 h-4" /> Submit Now
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </ScrollReveal>
@@ -94,17 +376,5 @@ export default function AreasOfSubmission() {
                 </div>
             </div>
         </MainLayout>
-    );
-}
-
-function Palette({ className }) {
-    return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-            <circle cx="13.5" cy="6.5" r=".5" fill="currentColor" />
-            <circle cx="17.5" cy="10.5" r=".5" fill="currentColor" />
-            <circle cx="8.5" cy="7.5" r=".5" fill="currentColor" />
-            <circle cx="6.5" cy="12.5" r=".5" fill="currentColor" />
-            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.9 0 1.6-.7 1.6-1.6 0-.4-.2-.8-.5-1.1s-.4-.7-.4-1.2c0-.9.7-1.6 1.6-1.6h5.8c.8 0 1.5-.7 1.5-1.5 0-3.9-3.9-7-8-7z" />
-        </svg>
     );
 }

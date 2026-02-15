@@ -1,12 +1,20 @@
 import { useState, useEffect } from 'react';
 import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
-import { ArrowRight, BookOpen } from 'lucide-react';
+import { ArrowRight, BookOpen, CheckCircle, Clock } from 'lucide-react';
 
 const Hero = () => {
     const [particles, setParticles] = useState([]);
+    const [daysLeft, setDaysLeft] = useState(0);
 
     useEffect(() => {
+        // Calculate days left for "Next Issue" (Dummy logic: end of current month)
+        const now = new Date();
+        const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+        const diffTime = Math.abs(endOfMonth - now);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        setDaysLeft(diffDays);
+
         const generateParticles = () => {
             setParticles(
                 [...Array(20)].map(() => ({
@@ -28,16 +36,16 @@ const Hero = () => {
     }, []);
 
     return (
-        <section className="relative h-[90vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-slate-900">
+        <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-slate-900 pt-20 pb-16">
             {/* Background with Overlay */}
             <div className="absolute inset-0 z-0 overflow-hidden">
                 <img
                     src="https://images.unsplash.com/photo-1568667256549-094345857637?q=80&w=2515&auto=format&fit=crop"
                     alt="Sanmati Library"
-                    className="object-cover object-center w-full h-full opacity-60 mix-blend-overlay scale-110 animate-slow-zoom"
+                    className="object-cover object-center w-full h-full opacity-40 mix-blend-overlay scale-110 animate-slow-zoom"
                 />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/60 to-slate-900/90 z-10" />
+            <div className="absolute inset-0 bg-gradient-to-b from-slate-900/95 via-slate-900/80 to-slate-900/95 z-10" />
 
             {/* Animated Particles */}
             <div className="absolute inset-0 z-10 overflow-hidden pointer-events-none">
@@ -79,33 +87,46 @@ const Hero = () => {
                         {/* Glowing Ring behind Logo */}
                         <div className="absolute inset-0 bg-blue-500 blur-3xl opacity-20 rounded-full scale-150 animate-pulse" />
 
-                        <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white/20 shadow-2xl overflow-hidden bg-white relative z-10">
+                        <div className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-white/20 shadow-2xl overflow-hidden bg-white relative z-10">
                             <img src="/logo.jpg" alt="Sanmati Journal Logo" className="w-full h-full object-contain p-2" />
                         </div>
                     </div>
 
-                    <motion.span
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.3 }}
-                        className="inline-block py-1.5 px-4 rounded-full bg-white/10 backdrop-blur-md text-blue-200 text-sm font-medium mb-8 border border-white/20 shadow-lg"
-                    >
-                        ISSN: 3108-1819 | Peer Reviewed & Refereed
-                    </motion.span>
+                    {/* Trust/Credibility Badge */}
+                    <div className="flex flex-wrap justify-center gap-3 mb-8">
+                        <motion.span
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: 0.2 }}
+                            className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-blue-500/10 backdrop-blur-md text-blue-200 text-sm font-bold border border-blue-400/20 shadow-lg"
+                        >
+                            <CheckCircle className="w-4 h-4 text-blue-400" /> ISSN: 3108-1819
+                        </motion.span>
+                        <motion.span
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: 0.3 }}
+                            className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-emerald-500/10 backdrop-blur-md text-emerald-200 text-sm font-bold border border-emerald-400/20 shadow-lg"
+                        >
+                            <CheckCircle className="w-4 h-4 text-emerald-400" /> Peer Reviewed
+                        </motion.span>
+                    </div>
 
-                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6 leading-tight tracking-tight">
-                        Sanmati <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-600">Spectrum</span> <br />
-                        <span className="text-3xl md:text-5xl lg:text-6xl font-light text-slate-300">of Knowledge & Emerging Discourse</span>
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-white mb-5 leading-tight tracking-tight">
+                        Sanmati <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-600">Spectrum</span>
                     </h1>
-
-                    <p className="text-lg md:text-xl text-slate-300 mb-10 max-w-3xl mx-auto leading-relaxed border-t border-white/10 pt-8 mt-8">
-                        A National Multidisciplinary Peer Reviewed Refereed Journal
+                    <p className="text-lg md:text-xl lg:text-2xl font-light text-slate-300 mb-6">
+                        Accelerating Global Research & Discovery
                     </p>
 
-                    <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                    <p className="text-sm md:text-base text-slate-400 mb-8 max-w-2xl mx-auto leading-relaxed">
+                        Join a premier multidisciplinary platform ensuring <span className="text-white font-semibold">fast-track review</span>, <span className="text-white font-semibold">global indexing</span>, and <span className="text-white font-semibold">academic excellence</span>.
+                    </p>
+
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10">
                         <Link
                             href="/submission-guidelines/call-for-papers"
-                            className="group relative px-8 py-4 bg-yellow-500 text-slate-900 rounded-full font-bold text-lg hover:bg-yellow-400 transition-all overflow-hidden"
+                            className="group relative px-7 py-3.5 bg-gradient-to-r from-yellow-500 to-amber-600 text-white rounded-full font-bold text-sm hover:shadow-2xl hover:shadow-yellow-500/20 transition-all overflow-hidden"
                         >
                             <span className="relative z-10 flex items-center gap-2">
                                 Submit Manuscript <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -115,11 +136,25 @@ const Hero = () => {
 
                         <Link
                             href="/basic-info/about-journal"
-                            className="px-8 py-4 bg-white/5 backdrop-blur-sm border border-white/20 text-white rounded-full font-medium text-lg hover:bg-white/10 hover:border-white/40 transition-all flex items-center gap-2"
+                            className="px-7 py-3.5 bg-white/5 backdrop-blur-sm border border-white/20 text-white rounded-full font-medium text-sm hover:bg-white/10 hover:border-white/40 transition-all flex items-center gap-2"
                         >
                             Read Journal <BookOpen className="w-5 h-5" />
                         </Link>
                     </div>
+
+                    {/* Urgency / Status Bar */}
+                    <div className="inline-flex items-center gap-6 px-6 py-3 rounded-2xl bg-slate-800/50 backdrop-blur border border-white/10 text-sm text-slate-300">
+                        <div className="flex items-center gap-2">
+                            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                            <span className="font-semibold text-emerald-400">Submissions Open</span>
+                        </div>
+                        <div className="w-px h-4 bg-white/10"></div>
+                        <div className="flex items-center gap-2">
+                            <Clock className="w-4 h-4 text-orange-400" />
+                            <span>Next Issue closes in <span className="text-white font-bold">{daysLeft} days</span></span>
+                        </div>
+                    </div>
+
                 </motion.div>
             </div>
         </section>

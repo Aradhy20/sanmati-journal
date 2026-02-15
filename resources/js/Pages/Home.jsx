@@ -1,6 +1,6 @@
 import Hero from '../Components/Hero';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Clock, Globe, ShieldCheck, ArrowRight, FileText } from 'lucide-react';
+import { BookOpen, Clock, Globe, ShieldCheck, ArrowRight, FileText, Users, Award, Zap, Brain } from 'lucide-react';
 import { ScrollReveal, ScaleOnHover, revealVariants } from '../Components/ScrollReveal';
 import NewsTicker from '../Components/NewsTicker';
 import StatsCounter from '../Components/StatsCounter';
@@ -10,6 +10,9 @@ import FeaturedPapers from '../Components/FeaturedPapers';
 import Testimonials from '../Components/Testimonials';
 import { DynamicCard, GradientText } from '../Components/DynamicCard';
 import { GridPattern, GlassyBlob, DotPattern, FloatingGraphic } from '../Components/DecorativeElements';
+import HomeFeatures from '../Components/HomeFeatures'; // New Feature Section
+import HomeFAQ from '../Components/HomeFAQ'; // New FAQ Section
+
 
 const DecorativeShapes = () => (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
@@ -20,87 +23,120 @@ const DecorativeShapes = () => (
     </div>
 );
 
+// Social Proof Component
+const TrustedBy = () => (
+    <div className="py-10 border-b border-slate-100 bg-white relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">Trusted by Scholars from Top Institutions</p>
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                {/* Placeholders for University Logos - Using Text for now */}
+                <span className="text-base font-serif font-bold text-slate-800 hover:text-blue-800 transition-colors cursor-default">IIT Delhi</span>
+                <span className="text-base font-serif font-bold text-slate-800 hover:text-blue-800 transition-colors cursor-default">JNU</span>
+                <span className="text-base font-serif font-bold text-slate-800 hover:text-blue-800 transition-colors cursor-default">BHU</span>
+                <span className="text-base font-serif font-bold text-slate-800 hover:text-blue-800 transition-colors cursor-default">Teerthanker Mahaveer University</span>
+                <span className="text-base font-serif font-bold text-slate-800 hover:text-blue-800 transition-colors cursor-default">DU</span>
+            </div>
+        </div>
+    </div>
+);
+
 export default function Home({ newsItems, featuredPapers }) {
     return (
         <MainLayout>
             <Hero />
             <NewsTicker items={newsItems} />
+            <TrustedBy />
 
             <div className="relative">
                 <DecorativeShapes />
                 <StatsCounter />
 
-                {/* Why Publish With Us? - Interactive Grid */}
+                {/* Why Publish With Us? - Bento Grid Style */}
                 <section className="py-24 relative z-10">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <ScrollReveal>
                             <div className="text-center mb-16">
-                                <span className="text-blue-600 font-bold tracking-widest text-sm uppercase px-4 py-1 bg-blue-50 rounded-full inline-block">Why Choose Sanmati</span>
-                                <h2 className="text-4xl md:text-5xl font-serif font-bold text-slate-900 mt-4 mb-4">
-                                    <GradientText>Excellence</GradientText> in Publishing
+                                <span className="text-blue-600 font-bold tracking-widest text-sm uppercase px-4 py-1 bg-blue-50 rounded-full inline-block mb-4">Why Choose Sanmati</span>
+                                <h2 className="text-2xl md:text-3xl font-serif font-bold text-slate-900 mb-4">
+                                    <GradientText>Excellence</GradientText> in Every Aspect
                                 </h2>
-                                <p className="text-slate-600 max-w-2xl mx-auto text-lg leading-relaxed">
-                                    We prioritize academic integrity, rigorous peer review, and global accessibility for your research.
+                                <p className="text-slate-600 max-w-2xl mx-auto text-sm leading-relaxed">
+                                    We combine academic rigor with modern publishing speed.
                                 </p>
                             </div>
                         </ScrollReveal>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                            {[
-                                {
-                                    icon: Clock,
-                                    title: "Fast Peer Review",
-                                    desc: "Rigorous yet efficient double-blind peer review process completed within 4-6 weeks.",
-                                    gradient: "from-blue-500 to-indigo-600",
-                                    iconColor: "text-blue-600",
-                                    bg: "bg-blue-50"
-                                },
-                                {
-                                    icon: Globe,
-                                    title: "Global Reach",
-                                    desc: "Open access formatting ensures your research reaches scholars worldwide instantly.",
-                                    gradient: "from-green-500 to-emerald-600",
-                                    iconColor: "text-green-600",
-                                    bg: "bg-green-50"
-                                },
-                                {
-                                    icon: ShieldCheck,
-                                    title: "Academic Integrity",
-                                    desc: "Zero tolerance for plagiarism with strict adherence to COPE guidelines.",
-                                    gradient: "from-purple-500 to-fuchsia-600",
-                                    iconColor: "text-purple-600",
-                                    bg: "bg-purple-50"
-                                },
-                                {
-                                    icon: BookOpen,
-                                    title: "Multidisciplinary",
-                                    desc: "Welcoming diverse research across Arts, Humanities, Science, and Social Sciences.",
-                                    gradient: "from-amber-500 to-orange-600",
-                                    iconColor: "text-amber-600",
-                                    bg: "bg-amber-50"
-                                }
-                            ].map((item, i) => {
-                                const Icon = item.icon;
-                                return (
-                                    <ScrollReveal key={i} delay={i * 0.1} variants={revealVariants.zoom}>
-                                        <DynamicCard gradient={item.gradient} className="h-full p-8">
-                                            <div className={`relative z-10 mb-6 p-4 rounded-2xl w-fit ${item.bg} group-hover:scale-110 transition-transform duration-300`}>
-                                                <Icon className={`w-10 h-10 ${item.iconColor}`} />
-                                            </div>
-                                            <h3 className="relative z-10 text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-800 transition-colors">{item.title}</h3>
-                                            <p className="relative z-10 text-slate-600 leading-relaxed text-sm">{item.desc}</p>
-                                        </DynamicCard>
-                                    </ScrollReveal>
-                                )
-                            })}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(200px,auto)]">
+                            {/* Large Card 1 */}
+                            <ScrollReveal className="md:col-span-2 row-span-2">
+                                <div className="group h-full bg-white rounded-3xl p-8 border border-slate-100 shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden flex flex-col justify-end">
+                                    <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-bl-full -mr-16 -mt-16 transition-transform group-hover:scale-110" />
+                                    <div className="relative z-10">
+                                        <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 mb-6">
+                                            <Clock className="w-8 h-8" />
+                                        </div>
+                                        <h3 className="text-xl font-bold text-slate-900 mb-2">Rapid Peer Review</h3>
+                                        <p className="text-slate-600 text-sm">Our streamlined process ensures a first decision within 4-6 weeks, helping you publish faster without compromising quality.</p>
+                                    </div>
+                                </div>
+                            </ScrollReveal>
+
+                            {/* Card 2 */}
+                            <ScrollReveal className="md:col-span-1">
+                                <div className="group h-full bg-white rounded-3xl p-8 border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-green-50 rounded-bl-full -mr-8 -mt-8" />
+                                    <div className="relative z-10">
+                                        <Globe className="w-10 h-10 text-green-600 mb-4" />
+                                        <h3 className="text-xl font-bold text-slate-900 mb-2">Global Reach</h3>
+                                        <p className="text-slate-500 text-sm">Open access ensures instant global visibility.</p>
+                                    </div>
+                                </div>
+                            </ScrollReveal>
+
+                            {/* Card 3 */}
+                            <ScrollReveal className="md:col-span-1">
+                                <div className="group h-full bg-white rounded-3xl p-8 border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-purple-50 rounded-bl-full -mr-8 -mt-8" />
+                                    <div className="relative z-10">
+                                        <ShieldCheck className="w-10 h-10 text-purple-600 mb-4" />
+                                        <h3 className="text-xl font-bold text-slate-900 mb-2">Integrity</h3>
+                                        <p className="text-slate-500 text-sm">Strict adherence to COPE ethical guidelines.</p>
+                                    </div>
+                                </div>
+                            </ScrollReveal>
+
+                            {/* Large Card 4 - AI Powered */}
+                            <ScrollReveal className="md:col-span-3">
+                                <div className="group h-full bg-slate-900 text-white rounded-3xl p-8 shadow-xl relative overflow-hidden flex items-center justify-between">
+                                    <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-indigo-900 z-0" />
+                                    <GridPattern className="opacity-20 text-white z-0" />
+
+                                    <div className="relative z-10 max-w-2xl">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <Brain className="w-8 h-8 text-yellow-400" />
+                                            <span className="font-bold text-yellow-400 uppercase tracking-widest text-sm">AI-Enhanced Discovery</span>
+                                        </div>
+                                        <h3 className="text-xl md:text-2xl font-bold mb-3">Smart Indexing for Better Citations</h3>
+                                        <p className="text-blue-100 text-sm">We utilize advanced AI algorithms to ensure your paper is correctly categorized and easily discoverable by researchers in your field.</p>
+                                    </div>
+                                    <div className="hidden md:block relative z-10">
+                                        <Link href="/basic-info/indexing" className="px-6 py-3 bg-white text-slate-900 rounded-full font-bold hover:bg-yellow-400 transition-colors">
+                                            Learn about Indexing
+                                        </Link>
+                                    </div>
+                                </div>
+                            </ScrollReveal>
                         </div>
                     </div>
                 </section>
 
+                {/* NEW: Zig Zag Feature Section */}
+                <HomeFeatures />
+
                 <ProcessTimeline />
 
                 {/* Editorial Leadership - Animated Cards */}
-                <section className="py-24 bg-slate-50 relative overflow-hidden transition-colors duration-300">
+                <section className="py-24 bg-white relative overflow-hidden transition-colors duration-300">
                     <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                         <DotPattern className="opacity-20" />
                         <div className="absolute top-10 left-10 w-64 h-64 bg-blue-200 rounded-full blur-3xl opacity-30 animate-blob" />
@@ -143,8 +179,8 @@ export default function Home({ newsItems, featuredPapers }) {
                                             <span className="inline-block px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-widest rounded-full mb-3">
                                                 Editor-in-Chief
                                             </span>
-                                            <h3 className="text-3xl font-serif font-bold text-slate-900 mb-3">Dr. Namrta Jain</h3>
-                                            <p className="text-slate-600 leading-relaxed mb-6">Spearheading the journal’s mission to foster multidisciplinary research and academic excellence.</p>
+                                            <h3 className="text-2xl font-serif font-bold text-slate-900 mb-2">Dr. Namrta Jain</h3>
+                                            <p className="text-slate-600 text-sm leading-relaxed mb-4">"Our mission is to foster a global dialogue through rigorous, multidisciplinary research that addresses the challenges of tomorrow."</p>
                                         </div>
                                     </div>
                                 </div>
@@ -165,8 +201,8 @@ export default function Home({ newsItems, featuredPapers }) {
                                             <span className="inline-block px-3 py-1 bg-yellow-50 text-yellow-700 text-xs font-bold uppercase tracking-widest rounded-full mb-3">
                                                 Co-Editor-in-Chief
                                             </span>
-                                            <h3 className="text-3xl font-serif font-bold text-slate-900 mb-3">Dr. Ratnesh K. Jain</h3>
-                                            <p className="text-slate-600 leading-relaxed mb-6">Ensuring the highest standards of peer review, ethical publishing, and editorial integrity.</p>
+                                            <h3 className="text-2xl font-serif font-bold text-slate-900 mb-2">Dr. Ratnesh K. Jain</h3>
+                                            <p className="text-slate-600 text-sm leading-relaxed mb-4">"We are committed to maintaining the highest ethical standards while ensuring that quality research reaches a global audience instantly."</p>
                                         </div>
                                     </div>
                                 </div>
@@ -174,54 +210,11 @@ export default function Home({ newsItems, featuredPapers }) {
                         </div>
                     </div>
                 </section>
-
-                {/* About Journal */}
-                <section className="py-24 bg-white relative overflow-hidden transition-colors duration-300">
-                    <div className="absolute top-0 right-0 w-1/3 h-full bg-blue-50/50 skew-x-12 translate-x-32" />
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                            <ScrollReveal variants={revealVariants.left}>
-                                <FloatingGraphic>
-                                    <div className="relative">
-                                        <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl opacity-20 blur-xl animate-pulse" />
-                                        <div className="relative bg-slate-900 text-white p-10 rounded-2xl shadow-2xl">
-                                            <h3 className="text-2xl font-serif font-bold mb-6">Current Issue</h3>
-                                            <div className="flex items-center gap-4 mb-8">
-                                                <div className="p-4 bg-white/10 rounded-lg backdrop-blur">
-                                                    <FileText className="w-12 h-12 text-yellow-400" />
-                                                </div>
-                                                <div>
-                                                    <p className="text-blue-300 text-sm font-bold uppercase tracking-wider">Volume 1, Issue 1</p>
-                                                    <p className="text-xl font-bold">Jan - Mar 2026</p>
-                                                </div>
-                                            </div>
-                                            <Link href="/submission-guidelines/call-for-papers" className="block w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold text-center rounded-xl transition-colors">
-                                                Submit Manuscript Now
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </FloatingGraphic>
-                            </ScrollReveal>
-
-                            <ScrollReveal delay={0.2} variants={revealVariants.right}>
-                                <div>
-                                    <h2 className="text-4xl font-serif font-bold text-slate-900 mb-6">About the Journal</h2>
-                                    <p className="text-lg text-slate-700 leading-relaxed mb-6 text-justify">
-                                        <strong className="text-blue-900">Sanmati Spectrum of Knowledge & Emerging Discourse</strong> (ISSN: 3108-1819) is a premier national, multidisciplinary, peer-reviewed journal.
-                                    </p>
-                                    <div className="flex flex-wrap gap-4">
-                                        <Link href="/basic-info/about-journal" className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-lg font-bold hover:bg-slate-800 transition-colors">
-                                            Read More <ArrowRight className="w-4 h-4" />
-                                        </Link>
-                                    </div>
-                                </div>
-                            </ScrollReveal>
-                        </div>
-                    </div>
-                </section>
-
 
                 <FeaturedPapers papers={featuredPapers} />
+
+                {/* NEW: FAQ Section */}
+                <HomeFAQ />
             </div>
 
             {/* Final CTA Section */}
@@ -230,11 +223,17 @@ export default function Home({ newsItems, featuredPapers }) {
                 <div className="absolute inset-0 z-10 bg-gradient-to-br from-blue-600 via-indigo-900 to-slate-900 opacity-90" />
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-30">
                     <ScrollReveal>
-                        <h2 className="text-4xl md:text-6xl font-serif font-bold mb-8 leading-tight">Ready to Contribute?</h2>
-                        <p className="text-xl text-blue-100 mb-12">Join our community of scholars and researchers.</p>
-                        <Link href="/submission-guidelines/call-for-papers" className="px-10 py-5 bg-white text-blue-900 rounded-full font-bold text-lg hover:bg-yellow-400 hover:text-slate-900 transition-all shadow-xl inline-block">
-                            Submit Your Paper
-                        </Link>
+                        <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6 leading-tight">Ready to Contribute?</h2>
+                        <p className="text-base text-blue-100 mb-10">Join our community of scholars and researchers today.</p>
+
+                        <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+                            <Link href="/submission-guidelines/call-for-papers" className="px-8 py-4 bg-white text-blue-900 rounded-full font-bold text-sm hover:bg-yellow-400 hover:text-slate-900 transition-all shadow-xl inline-block">
+                                Submit Your Paper
+                            </Link>
+                            <Link href="/contact" className="px-8 py-4 bg-transparent border-2 border-white/30 text-white rounded-full font-bold text-sm hover:bg-white/10 transition-all inline-block hover:border-white">
+                                Contact Us
+                            </Link>
+                        </div>
                     </ScrollReveal>
                 </div>
             </section>

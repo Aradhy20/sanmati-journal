@@ -12,17 +12,14 @@ class User extends Authenticatable
 
     protected $fillable = [
         'email',
-        'password_hash',
+        'password',
         'full_name',
         'role',
     ];
 
     protected $hidden = [
-        'password_hash',
+        'password',
+        'remember_token',
     ];
-
-    public function getAuthPassword()
-    {
-        return $this->password_hash;
-    }
 }
+

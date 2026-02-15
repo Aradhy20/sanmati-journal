@@ -1,39 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
-        <loc>http://localhost/</loc>
-        <lastmod>2026-02-10</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-    <url>
-        <loc>http://localhost/editorial-team</loc>
-        <lastmod>2026-02-10</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>http://localhost/gallery</loc>
-        <lastmod>2026-02-10</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>http://localhost/contact</loc>
-        <lastmod>2026-02-10</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>http://localhost/submission-guidelines</loc>
-        <lastmod>2026-02-10</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>http://localhost/archive</loc>
-        <lastmod>2026-02-10</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
+    <!-- Core Pages -->
+    <url><loc>https://sanmatijournal.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+    <url><loc>https://sanmatijournal.com/contact</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+    <url><loc>https://sanmatijournal.com/archive</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+
+    <!-- About / Basic Info -->
+    <url><loc>https://sanmatijournal.com/basic-info/about-journal</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+    <url><loc>https://sanmatijournal.com/basic-info/vision-mission</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+    <url><loc>https://sanmatijournal.com/basic-info/objective-scope</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+    <url><loc>https://sanmatijournal.com/basic-info/journal-info</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+    <url><loc>https://sanmatijournal.com/basic-info/indexing</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+    <!-- Editorial Team -->
+    <url><loc>https://sanmatijournal.com/editorial-team</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+    <url><loc>https://sanmatijournal.com/editorial-team/editors</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+    <url><loc>https://sanmatijournal.com/editorial-team/editorial-board</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+    <url><loc>https://sanmatijournal.com/editorial-team/advisory-board</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+    <!-- Submission Guidelines -->
+    <url><loc>https://sanmatijournal.com/submission-guidelines</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+    <url><loc>https://sanmatijournal.com/submission-guidelines/call-for-papers</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+    <url><loc>https://sanmatijournal.com/submission-guidelines/areas</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+    <url><loc>https://sanmatijournal.com/submission-guidelines/important-info</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+    <url><loc>https://sanmatijournal.com/submission-guidelines/publication-charges</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+    <url><loc>https://sanmatijournal.com/submission-guidelines/review-process</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+    <!-- Academic Events -->
+    <url><loc>https://sanmatijournal.com/academic-events/seminar</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+    <url><loc>https://sanmatijournal.com/academic-events/conferences</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+    <url><loc>https://sanmatijournal.com/academic-events/workshop</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+    <!-- Publication Policy -->
+    <url><loc>https://sanmatijournal.com/publication-policy/ethics</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+    <url><loc>https://sanmatijournal.com/publication-policy/plagiarism</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+    <url><loc>https://sanmatijournal.com/publication-policy/peer-review</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+
+    <!-- Other Pages -->
+    <url><loc>https://sanmatijournal.com/awards</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+    <url><loc>https://sanmatijournal.com/book-publication</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+    <url><loc>https://sanmatijournal.com/compliance</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+    <url><loc>https://sanmatijournal.com/gallery-view</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+    <url><loc>https://sanmatijournal.com/gallery/photo</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+    <url><loc>https://sanmatijournal.com/gallery/news</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
 </urlset>

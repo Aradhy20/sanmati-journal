@@ -8,7 +8,8 @@ use App\Models\Paper;
 use App\Models\Issue;
 use App\Models\TeamMember;
 use App\Mail\EnquiryReceived;
-use Illuminate\Http\Request;
+use App\Http\Requests\ContactRequest;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Redirect;
@@ -18,16 +19,18 @@ class JournalController extends Controller
 {
     public function index()
     {
-        $newsItems = News::where('is_active', true)
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $newsItems = Cache::remember('active_news', 3600, function () {
+            return News::where('is_active', true)
+                ->orderBy('created_at', 'desc')
+                ->take(10)
+                ->get();
+        });
 
-        $featuredPapers = Paper::where('is_featured', true) // Assuming you have an is_featured column or similar logic
+        $featuredPapers = Paper::where('is_featured', true)
             ->orderBy('created_at', 'desc')
             ->take(3)
             ->get();
 
-        // If no featured papers are marked, just get the latest 3
         if ($featuredPapers->isEmpty()) {
             $featuredPapers = Paper::orderBy('created_at', 'desc')->take(3)->get();
         }
@@ -40,7 +43,9 @@ class JournalController extends Controller
 
     public function editorialTeam()
     {
-        $teamMembers = TeamMember::orderBy('display_order', 'asc')->get();
+        $teamMembers = Cache::remember('team_members', 3600, function () {
+            return TeamMember::orderBy('display_order', 'asc')->get();
+        });
         return Inertia::render('EditorialTeam', [
             'teamMembers' => $teamMembers
         ]);
@@ -48,7 +53,6 @@ class JournalController extends Controller
 
     public function editors()
     {
-        // Filter if you have specific roles for editors page
         $editors = TeamMember::whereIn('role', ['Editor-in-Chief', 'Co-Editor-in-Chief', 'Editor'])->get();
         return Inertia::render('Editors', [
             'editors' => $editors
@@ -57,12 +61,12 @@ class JournalController extends Controller
 
     public function editorialBoard()
     {
-         $board = TeamMember::where('role', 'Member')->get();
+        $board = TeamMember::where('role', 'Member')->get();
         return Inertia::render('EditorialBoard', [
             'board' => $board
         ]);
     }
-    
+
     // --- Basic Info ---
     public function aboutJournal()
     {
@@ -84,6 +88,11 @@ class JournalController extends Controller
         return Inertia::render('BasicInfo/JournalInfo');
     }
 
+    public function indexing()
+    {
+        return Inertia::render('BasicInfo/Indexing');
+    }
+
     // --- Submission Guidelines ---
     public function submissionGuidelines()
     {
@@ -98,6 +107,11 @@ class JournalController extends Controller
     public function submissionAreas()
     {
         return Inertia::render('SubmissionGuidelines/Areas');
+    }
+
+    public function areaDetail(string $slug)
+    {
+        return Inertia::render('SubmissionGuidelines/AreaDetail', ['slug' => $slug]);
     }
 
     public function importantInfo()
@@ -165,26 +179,22 @@ class JournalController extends Controller
 
     public function advisoryBoard()
     {
-        // Assuming this might be static or dynamic, let's render the component found
         return Inertia::render('AdvisoryBoard');
     }
 
     public function archive()
     {
-        // Dynamic archive logic usually needed, but for now render the page
         return Inertia::render('Archive', [
-            'issues' => Issue::orderBy('year', 'desc')->orderBy('number', 'desc')->get()
+            'issues' => Issue::with('papers')
+                ->orderBy('year', 'desc')
+                ->orderBy('number', 'desc')
+                ->paginate(12)
         ]);
     }
 
     public function gallery()
     {
-        // Assuming you have a Gallery model, if not I will use the folder logic dynamically later or create model
-        // For now, let's assume specific Gallery Item model or just pass distinct events if structured
-        // If Model doesn't exist, we might need to verify.
-        // Based on routes, AdminController has `gallery` methods, so Model exists.
-        
-        $galleryItems = \App\Models\Gallery::orderBy('created_at', 'desc')->get();
+        $galleryItems = \App\Models\Gallery::orderBy('created_at', 'desc')->paginate(24);
         return Inertia::render('Gallery', [
             'galleryItems' => $galleryItems
         ]);
@@ -192,17 +202,17 @@ class JournalController extends Controller
 
     public function galleryPhoto()
     {
-         $photos = \App\Models\Gallery::where('category', 'photo')->get();
+        $photos = \App\Models\Gallery::where('category', 'photo')->paginate(24);
         return Inertia::render('Gallery/Photo', [
-             'photos' => $photos
+            'photos' => $photos
         ]);
     }
 
     public function galleryNews()
     {
-         $news = \App\Models\Gallery::where('category', 'news')->get();
+        $news = \App\Models\Gallery::where('category', 'news')->paginate(24);
         return Inertia::render('Gallery/News', [
-             'news' => $news
+            'news' => $news
         ]);
     }
 
@@ -211,15 +221,9 @@ class JournalController extends Controller
         return Inertia::render('Contact');
     }
 
-    public function contactStore(Request $request)
+    public function contactStore(ContactRequest $request)
     {
-        $validated = $request->validate([
-            'firstName' => 'required|string|max:100',
-            'lastName' => 'required|string|max:100',
-            'email' => 'required|email|max:255',
-            'subject' => 'required|string|max:255',
-            'message' => 'required|string',
-        ]);
+        $validated = $request->validated();
 
         Enquiry::create([
             'first_name' => $validated['firstName'],
@@ -229,11 +233,11 @@ class JournalController extends Controller
             'message' => $validated['message'],
         ]);
 
-        // Send email notification
+        // Queue email notification (async with database queue)
         try {
-            Mail::to('sanmatijournal@gmail.com')->send(new EnquiryReceived($validated));
+            Mail::to('sanmatijournal@gmail.com')->queue(new EnquiryReceived($validated));
         } catch (\Exception $e) {
-            Log::error('Failed to send enquiry email: ' . $e->getMessage());
+            Log::error('Failed to queue enquiry email: ' . $e->getMessage());
         }
 
         return Redirect::back()->with('success', 'Your inquiry has been submitted successfully.');
