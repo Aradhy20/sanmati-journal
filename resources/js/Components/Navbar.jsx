@@ -77,7 +77,7 @@ const Navbar = () => {
             href: '/gallery-view',
             dropdown: [
                 { name: 'Photos', href: '/gallery/photo' },
-                { name: 'News', href: '/gallery/journal-news' },
+                { name: 'News', href: '/gallery/news' },
             ],
         },
         { name: 'Contact', href: '/contact' },
@@ -123,8 +123,8 @@ const Navbar = () => {
                                 <Link
                                     href={item.href}
                                     className={`flex items-center text-[13px] font-semibold px-3 py-2 rounded-lg transition-colors whitespace-nowrap ${isActive(item.href)
-                                            ? 'text-blue-900 bg-blue-50'
-                                            : 'text-slate-600 hover:text-blue-900 hover:bg-slate-50'
+                                        ? 'text-blue-900 bg-blue-50'
+                                        : 'text-slate-600 hover:text-blue-900 hover:bg-slate-50'
                                         }`}
                                 >
                                     {item.name}
@@ -148,8 +148,8 @@ const Navbar = () => {
                                                         key={subItem.name}
                                                         href={subItem.href}
                                                         className={`flex items-center justify-between px-3.5 py-2.5 text-[13px] rounded-lg transition-colors group/sub ${isActive(subItem.href)
-                                                                ? 'bg-blue-50 text-blue-900 font-semibold'
-                                                                : 'text-slate-600 hover:bg-blue-600 hover:text-white font-medium'
+                                                            ? 'bg-blue-50 text-blue-900 font-semibold'
+                                                            : 'text-slate-600 hover:bg-blue-600 hover:text-white font-medium'
                                                             }`}
                                                     >
                                                         {subItem.name}
@@ -207,8 +207,8 @@ const Navbar = () => {
                                                     key={subItem.name}
                                                     href={subItem.href}
                                                     className={`block px-5 py-2.5 text-sm font-medium rounded-lg transition-colors ${isActive(subItem.href)
-                                                            ? 'bg-blue-50 text-blue-900 font-semibold'
-                                                            : 'text-slate-600 hover:text-blue-900 hover:bg-slate-50'
+                                                        ? 'bg-blue-50 text-blue-900 font-semibold'
+                                                        : 'text-slate-600 hover:text-blue-900 hover:bg-slate-50'
                                                         }`}
                                                     onClick={() => setIsOpen(false)}
                                                 >
@@ -220,8 +220,8 @@ const Navbar = () => {
                                         <Link
                                             href={item.href}
                                             className={`block px-3 py-3 text-base font-bold rounded-lg transition-colors ${isActive(item.href)
-                                                    ? 'text-blue-900 bg-blue-50'
-                                                    : 'text-slate-800 hover:text-blue-900 hover:bg-slate-50'
+                                                ? 'text-blue-900 bg-blue-50'
+                                                : 'text-slate-800 hover:text-blue-900 hover:bg-slate-50'
                                                 }`}
                                             onClick={() => setIsOpen(false)}
                                         >

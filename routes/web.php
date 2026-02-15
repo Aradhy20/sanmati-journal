@@ -14,7 +14,7 @@ Route::get('/gallery/photo', [JournalController::class, 'galleryPhoto'])->name('
 Route::get('/gallery/news', [JournalController::class, 'galleryNews'])->name('gallery.news');
 Route::get('/archive', [JournalController::class, 'archive'])->name('archive');
 Route::get('/contact', [JournalController::class, 'contact'])->name('contact');
-Route::post('/contact', [JournalController::class, 'contactStore'])->name('contact.store')->middleware('throttle:3,1');
+Route::post('/contact', [JournalController::class, 'contactStore'])->name('contact.store')->middleware('throttle:60,1');
 
 // Basic info routes
 Route::get('/basic-info/vision-mission', [JournalController::class, 'visionMission'])->name('vision-mission');
@@ -49,7 +49,7 @@ Route::get('/compliance', [JournalController::class, 'compliance'])->name('compl
 
 // Authentication Routes
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'create'])->name('login');
-Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'store'])->middleware('throttle:5,1');
+Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'store'])->middleware('throttle:60,1');
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'destroy'])->name('logout');
 
 // Admin Routes (Protected with auth + admin role check)
