@@ -89,30 +89,30 @@ const Navbar = () => {
     };
 
     return (
-        <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md border-b border-slate-200' : 'bg-white/95 backdrop-blur-md border-b border-slate-100'}`}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-xl shadow-sm border-b border-slate-200 py-1' : 'bg-transparent py-3'}`}>
+            <div className="w-full px-6 lg:px-12">
                 <div className="flex items-center justify-between h-[72px]">
-                    {/* Logo */}
-                    <Link href="/" className="flex items-center gap-3 flex-shrink-0">
-                        <div className="w-11 h-11 rounded-lg overflow-hidden shadow-sm border border-slate-100 flex-shrink-0">
+                    {/* Logo - Top Left Corner */}
+                    <Link href="/" className="flex items-center gap-4 flex-shrink-0 group">
+                        <div className="w-12 h-12 rounded-xl overflow-hidden shadow-sm border border-slate-200 flex-shrink-0 bg-white group-hover:shadow-md transition-shadow">
                             <img
                                 src="/logo.jpg"
                                 alt="Sanmati Journal Logo"
-                                className="object-contain w-full h-full bg-white"
+                                className="object-contain w-full h-full p-1"
                             />
                         </div>
                         <div className="hidden sm:block">
-                            <span className="text-lg font-serif font-bold text-slate-900 leading-tight block">
-                                Sanmati Journal
+                            <span className="text-xl font-serif font-bold text-slate-900 leading-tight block group-hover:text-blue-800 transition-colors">
+                                Sanmati Spectrum
                             </span>
-                            <span className="text-[10px] text-slate-500 font-medium tracking-wider uppercase leading-none">
+                            <span className="text-[10px] text-slate-500 font-bold tracking-[0.15em] uppercase leading-none">
                                 ISSN: 3108-1819
                             </span>
                         </div>
                     </Link>
 
                     {/* Desktop Menu */}
-                    <div className="hidden xl:flex items-center gap-1">
+                    <div className="hidden xl:flex items-center gap-2">
                         {navItems.map((item) => (
                             <div
                                 key={item.name}
@@ -122,14 +122,14 @@ const Navbar = () => {
                             >
                                 <Link
                                     href={item.href}
-                                    className={`flex items-center text-[13px] font-semibold px-3 py-2 rounded-lg transition-colors whitespace-nowrap ${isActive(item.href)
-                                        ? 'text-blue-900 bg-blue-50'
-                                        : 'text-slate-600 hover:text-blue-900 hover:bg-slate-50'
+                                    className={`flex items-center text-[14px] font-semibold px-4 py-2.5 rounded-full transition-all whitespace-nowrap ${isActive(item.href)
+                                        ? 'text-blue-900 bg-blue-50/80 shadow-sm'
+                                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/80'
                                         }`}
                                 >
                                     {item.name}
                                     {item.dropdown && (
-                                        <ChevronDown className={`w-3.5 h-3.5 ml-1 transition-transform ${activeDropdown === item.name ? 'rotate-180' : ''}`} />
+                                        <ChevronDown className={`w-4 h-4 ml-1.5 transition-transform ${activeDropdown === item.name ? 'rotate-180 text-blue-600' : 'text-slate-400'}`} />
                                     )}
                                 </Link>
 
@@ -137,23 +137,23 @@ const Navbar = () => {
                                     <AnimatePresence>
                                         {activeDropdown === item.name && (
                                             <motion.div
-                                                initial={{ opacity: 0, y: 8 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                exit={{ opacity: 0, y: 8 }}
-                                                transition={{ duration: 0.15, ease: 'easeOut' }}
-                                                className="absolute top-full left-0 w-60 bg-white shadow-xl rounded-xl border border-slate-100 p-1.5 mt-1 z-50"
+                                                initial={{ opacity: 0, y: 12, scale: 0.98 }}
+                                                animate={{ opacity: 1, y: 0, scale: 1 }}
+                                                exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                                                transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                                                className="absolute top-full left-0 w-64 bg-white/95 backdrop-blur-xl shadow-2xl rounded-2xl border border-slate-100 p-2 mt-2 z-50 origin-top-left"
                                             >
                                                 {item.dropdown.map((subItem) => (
                                                     <Link
                                                         key={subItem.name}
                                                         href={subItem.href}
-                                                        className={`flex items-center justify-between px-3.5 py-2.5 text-[13px] rounded-lg transition-colors group/sub ${isActive(subItem.href)
-                                                            ? 'bg-blue-50 text-blue-900 font-semibold'
-                                                            : 'text-slate-600 hover:bg-blue-600 hover:text-white font-medium'
+                                                        className={`flex items-center justify-between px-4 py-3 text-[14px] rounded-xl transition-all group/sub ${isActive(subItem.href)
+                                                            ? 'bg-blue-50/80 text-blue-900 font-bold'
+                                                            : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-medium'
                                                             }`}
                                                     >
                                                         {subItem.name}
-                                                        <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover/sub:opacity-100 transition-opacity" />
+                                                        <ArrowUpRight className={`w-4 h-4 transition-all ${isActive(subItem.href) ? 'opacity-100 text-blue-600' : 'opacity-0 -translate-x-2 group-hover/sub:opacity-100 group-hover/sub:translate-x-0'}`} />
                                                     </Link>
                                                 ))}
                                             </motion.div>
@@ -165,20 +165,20 @@ const Navbar = () => {
                     </div>
 
                     {/* CTA + Mobile Toggle */}
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-4">
                         <Link
                             href="/submission-guidelines/call-for-papers"
-                            className="hidden xl:inline-flex px-5 py-2 bg-blue-900 text-white text-[13px] font-bold rounded-lg hover:bg-blue-800 transition-colors items-center gap-1.5 shadow-sm"
+                            className="hidden xl:inline-flex px-6 py-2.5 bg-slate-900 text-white text-[13px] font-bold tracking-wide uppercase rounded-full hover:bg-slate-800 transition-colors shadow-lg shadow-slate-900/10 hover:shadow-xl hover:-translate-y-0.5"
                         >
                             Submit Paper
                         </Link>
 
                         <button
                             onClick={() => setIsOpen(!isOpen)}
-                            className="xl:hidden text-slate-600 hover:text-blue-900 p-2 rounded-lg hover:bg-slate-50 transition-colors"
+                            className="xl:hidden bg-white text-slate-800 p-2.5 rounded-full shadow-sm border border-slate-200 hover:bg-slate-50 transition-colors"
                             aria-label="Toggle menu"
                         >
-                            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
                         </button>
                     </div>
                 </div>
@@ -191,24 +191,24 @@ const Navbar = () => {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="xl:hidden bg-white border-t border-slate-100 overflow-hidden"
+                        transition={{ duration: 0.3, ease: 'easeInOut' }}
+                        className="xl:hidden bg-white/95 backdrop-blur-xl border-t border-slate-100 overflow-hidden shadow-2xl"
                     >
-                        <div className="px-4 py-6 space-y-1 max-h-[70vh] overflow-y-auto">
+                        <div className="px-6 py-6 space-y-2 max-h-[80vh] overflow-y-auto">
                             {navItems.map((item, i) => (
-                                <div key={item.name}>
+                                <div key={item.name} className="border-b border-slate-50 last:border-0 pb-2 last:pb-0">
                                     {item.dropdown ? (
-                                        <div className="space-y-0.5">
-                                            <div className="font-bold text-slate-400 px-3 pt-4 pb-1 text-[11px] uppercase tracking-widest">
+                                        <div className="space-y-1">
+                                            <div className="font-bold text-slate-400 px-4 pt-4 pb-2 text-[10px] uppercase tracking-[0.2em]">
                                                 {item.name}
                                             </div>
                                             {item.dropdown.map((subItem) => (
                                                 <Link
                                                     key={subItem.name}
                                                     href={subItem.href}
-                                                    className={`block px-5 py-2.5 text-sm font-medium rounded-lg transition-colors ${isActive(subItem.href)
-                                                        ? 'bg-blue-50 text-blue-900 font-semibold'
-                                                        : 'text-slate-600 hover:text-blue-900 hover:bg-slate-50'
+                                                    className={`block px-5 py-3 text-sm rounded-xl transition-colors ${isActive(subItem.href)
+                                                        ? 'bg-blue-50 text-blue-900 font-bold'
+                                                        : 'text-slate-600 font-medium hover:text-slate-900 hover:bg-slate-50'
                                                         }`}
                                                     onClick={() => setIsOpen(false)}
                                                 >
@@ -219,9 +219,9 @@ const Navbar = () => {
                                     ) : (
                                         <Link
                                             href={item.href}
-                                            className={`block px-3 py-3 text-base font-bold rounded-lg transition-colors ${isActive(item.href)
+                                            className={`block px-4 py-3 text-base font-bold rounded-xl transition-colors ${isActive(item.href)
                                                 ? 'text-blue-900 bg-blue-50'
-                                                : 'text-slate-800 hover:text-blue-900 hover:bg-slate-50'
+                                                : 'text-slate-800 hover:text-slate-900 hover:bg-slate-50'
                                                 }`}
                                             onClick={() => setIsOpen(false)}
                                         >
@@ -230,13 +230,15 @@ const Navbar = () => {
                                     )}
                                 </div>
                             ))}
-                            <Link
-                                href="/submission-guidelines/call-for-papers"
-                                className="block px-5 py-3.5 mt-4 text-center text-sm font-bold text-white bg-blue-900 rounded-xl shadow-lg"
-                                onClick={() => setIsOpen(false)}
-                            >
-                                Submit Your Paper
-                            </Link>
+                            <div className="pt-6 pb-4">
+                                <Link
+                                    href="/submission-guidelines/call-for-papers"
+                                    className="block w-full py-4 text-center text-sm font-bold tracking-widest uppercase text-white bg-slate-900 rounded-full shadow-xl"
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    Submit Your Paper
+                                </Link>
+                            </div>
                         </div>
                     </motion.div>
                 )}

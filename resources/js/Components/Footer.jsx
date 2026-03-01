@@ -4,69 +4,76 @@ import { AcademicCrest } from './Graphics';
 
 const Footer = () => {
     return (
-        <footer className="bg-slate-900 text-slate-300 pt-16 pb-8 relative overflow-hidden transition-colors duration-300">
-            <AcademicCrest className="absolute -bottom-10 -right-10 w-64 h-64 text-slate-800" />
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <footer className="bg-white border-t border-slate-200 text-slate-600 pt-20 pb-10 relative overflow-hidden transition-colors duration-300">
+            <AcademicCrest className="absolute -bottom-10 -right-10 w-96 h-96 text-slate-50 opacity-50 pointer-events-none" />
+            <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-16">
                     {/* Brand Column */}
-                    <div className="space-y-4">
-                        <h3 className="text-2xl font-serif font-bold text-white">Sanmati Journal</h3>
-                        <p className="text-sm leading-relaxed text-slate-400">
+                    <div className="space-y-6">
+                        <Link href="/" className="inline-block group">
+                            <h3 className="text-2xl font-serif font-bold text-slate-900 group-hover:text-blue-800 transition-colors">Sanmati Spectrum</h3>
+                            <span className="block text-[10px] text-slate-400 font-bold tracking-[0.2em] uppercase mt-1">ISSN: 3108-1819</span>
+                        </Link>
+                        <p className="text-sm leading-relaxed text-slate-500 font-light">
                             National Multidisciplinary Peer Reviewed Refereed Journal promoting high-quality research across diverse academic disciplines.
                         </p>
                         <div className="flex gap-4 pt-2">
-                            <a href="#" aria-label="Twitter" className="hover:text-white transition-colors"><Twitter className="w-5 h-5" /></a>
-                            <a href="#" aria-label="Facebook" className="hover:text-white transition-colors"><Facebook className="w-5 h-5" /></a>
-                            <a href="#" aria-label="LinkedIn" className="hover:text-white transition-colors"><Linkedin className="w-5 h-5" /></a>
+                            <a href="#" aria-label="Twitter" className="size-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-200 hover:bg-blue-50 transition-all"><Twitter className="w-4 h-4" /></a>
+                            <a href="#" aria-label="Facebook" className="size-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-200 hover:bg-blue-50 transition-all"><Facebook className="w-4 h-4" /></a>
+                            <a href="#" aria-label="LinkedIn" className="size-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-blue-700 hover:border-blue-200 hover:bg-blue-50 transition-all"><Linkedin className="w-4 h-4" /></a>
                         </div>
                     </div>
 
                     {/* Quick Links */}
                     <div>
-                        <h4 className="text-lg font-semibold text-white mb-6">Quick Links</h4>
-                        <ul className="space-y-3">
-                            <li><Link href="/" className="hover:text-blue-400 transition-colors text-sm">Home</Link></li>
-                            <li><Link href="/basic-info/about-journal" className="hover:text-blue-400 transition-colors text-sm">About Journal</Link></li>
-                            <li><Link href="/editorial-team" className="hover:text-blue-400 transition-colors text-sm">Editorial Team</Link></li>
-                            <li><Link href="/submission-guidelines/call-for-papers" className="hover:text-blue-400 transition-colors text-sm">Call for Papers</Link></li>
+                        <h4 className="text-sm font-bold tracking-widest uppercase text-slate-900 mb-6">Explore</h4>
+                        <ul className="space-y-4">
+                            <li><Link href="/" className="text-sm text-slate-500 hover:text-blue-600 transition-colors">Home</Link></li>
+                            <li><Link href="/basic-info/about-journal" className="text-sm text-slate-500 hover:text-blue-600 transition-colors">About Journal</Link></li>
+                            <li><Link href="/editorial-team" className="text-sm text-slate-500 hover:text-blue-600 transition-colors">Editorial Team</Link></li>
+                            <li><Link href="/submission-guidelines/call-for-papers" className="text-sm text-slate-500 hover:text-blue-600 transition-colors">Call for Papers</Link></li>
                         </ul>
                     </div>
 
                     {/* Policies */}
                     <div>
-                        <h4 className="text-lg font-semibold text-white mb-6">Policies</h4>
-                        <ul className="space-y-3">
-                            <li><Link href="/publication-policy/ethics" className="hover:text-blue-400 transition-colors text-sm">Publication Ethics</Link></li>
-                            <li><Link href="/publication-policy/plagiarism" className="hover:text-blue-400 transition-colors text-sm">Plagiarism Policy</Link></li>
-                            <li><Link href="/publication-policy/peer-review" className="hover:text-blue-400 transition-colors text-sm">Peer Review Process</Link></li>
-                            <li><Link href="/compliance" className="hover:text-blue-400 transition-colors text-sm">Open Access Policy</Link></li>
+                        <h4 className="text-sm font-bold tracking-widest uppercase text-slate-900 mb-6">Legal & Policy</h4>
+                        <ul className="space-y-4">
+                            <li><Link href="/publication-policy/ethics" className="text-sm text-slate-500 hover:text-blue-600 transition-colors">Publication Ethics</Link></li>
+                            <li><Link href="/publication-policy/plagiarism" className="text-sm text-slate-500 hover:text-blue-600 transition-colors">Plagiarism Policy</Link></li>
+                            <li><Link href="/publication-policy/peer-review" className="text-sm text-slate-500 hover:text-blue-600 transition-colors">Peer Review Process</Link></li>
+                            <li><Link href="/compliance" className="text-sm text-slate-500 hover:text-blue-600 transition-colors">Open Access Policy</Link></li>
                         </ul>
                     </div>
 
                     {/* Contact */}
                     <div>
-                        <h4 className="text-lg font-semibold text-white mb-6">Contact Us</h4>
-                        <ul className="space-y-4">
-                            <li className="flex items-start gap-3">
-                                <MapPin className="w-5 h-5 text-blue-500 mt-0.5" />
-                                <span className="text-sm">B-002 Faculty Block TMU Campus, Delhi Road Moradabad (U.P) 244001</span>
+                        <h4 className="text-sm font-bold tracking-widest uppercase text-slate-900 mb-6">Contact Us</h4>
+                        <ul className="space-y-5">
+                            <li className="flex items-start gap-4">
+                                <div className="mt-1 size-8 rounded-full bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100"><MapPin className="w-3.5 h-3.5 text-blue-600" /></div>
+                                <span className="text-sm leading-relaxed text-slate-500">B-002 Faculty Block TMU Campus, Delhi Road Moradabad (U.P) 244001</span>
                             </li>
-                            <li className="flex items-center gap-3">
-                                <Phone className="w-5 h-5 text-blue-500" />
-                                <span className="text-sm">+91 8979782949, +91 7999525735</span>
+                            <li className="flex items-center gap-4">
+                                <div className="size-8 rounded-full bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100"><Phone className="w-3.5 h-3.5 text-blue-600" /></div>
+                                <span className="text-sm text-slate-500">+91 8979782949, +91 7999525735</span>
                             </li>
-                            <li className="flex items-center gap-3">
-                                <Mail className="w-5 h-5 text-blue-500" />
-                                <span className="text-sm">sanmatijournal@gmail.com</span>
+                            <li className="flex items-center gap-4">
+                                <div className="size-8 rounded-full bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100"><Mail className="w-3.5 h-3.5 text-blue-600" /></div>
+                                <span className="text-sm text-slate-500">sanmatijournal@gmail.com</span>
                             </li>
                         </ul>
                     </div>
                 </div>
 
-                <div className="border-t border-slate-800 pt-8 text-center">
-                    <p className="text-sm text-slate-500">
+                <div className="border-t border-slate-100 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                    <p className="text-[13px] text-slate-400 font-medium">
                         © {new Date().getFullYear()} Sanmati Spectrum of Knowledge. All rights reserved.
                     </p>
+                    <div className="flex items-center gap-6 text-[13px] text-slate-400 font-medium">
+                        <Link href="/privacy" className="hover:text-slate-900 transition-colors">Privacy Policy</Link>
+                        <Link href="/terms" className="hover:text-slate-900 transition-colors">Terms of Service</Link>
+                    </div>
                 </div>
             </div>
         </footer>
