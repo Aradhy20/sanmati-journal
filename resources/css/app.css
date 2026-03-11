@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-serif: "Roboto Serif", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
+  /* Academic Premium Color Palette */
+  --color-primary: #5776f1;
+  --color-primary-dark: #4460d9;
+  --color-primary-light: #7b93f5;
+  --color-secondary: #ff782d;
+  --color-secondary-dark: #e56820;
+  --color-secondary-light: #ff9e5e;
+  --color-dark: #000b4d;
+  --color-dark-light: #1a1f5e;
+  --color-accent: #4ecdc4;
+  --color-warm-bg: #f8f9fa;
+  --color-warm-100: #fff1e6;
+  --color-warm-200: #ffe0cc;
+
+  --animate-blob: blob 7s infinite;
+  --animate-float-bob-y: float-bob-y 3s ease-in-out infinite;
+  --animate-float-bob-x: float-bob-x 3s ease-in-out infinite;
+  --animate-img-bounce: img-bounce 3s ease-in-out infinite;
+  --animate-rotate-me: rotate-me 10s linear infinite;
+  --animate-marquee: marquee 25s linear infinite;
+  --animate-fade-in-up: fade-in-up 0.6s ease-out both;
+  --animate-counter-pulse: counter-pulse 2s ease-in-out infinite;
+
+  @keyframes blob {
+    0% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0px, 0px) scale(1); }
+  }
+
+  @keyframes float-bob-y {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+  }
+
+  @keyframes float-bob-x {
+    0% { transform: translateX(0px); }
+    50% { transform: translateX(-20px); }
+    100% { transform: translateX(0px); }
+  }
+
+  @keyframes img-bounce {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+  }
+
+  @keyframes rotate-me {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes counter-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+}
+
+@layer base {
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-warm-bg text-dark;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .thm-btn {
+    @apply inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-full
+           hover:bg-primary-dark transition-all duration-300 shadow-lg hover:shadow-xl
+           hover:-translate-y-0.5 text-sm uppercase tracking-wider;
+  }
+
+  .thm-btn-secondary {
+    @apply inline-flex items-center gap-2 px-8 py-4 bg-secondary text-white font-bold rounded-full
+           hover:bg-secondary-dark transition-all duration-300 shadow-lg hover:shadow-xl
+           hover:-translate-y-0.5 text-sm uppercase tracking-wider;
+  }
+
+  .thm-btn-dark {
+    @apply inline-flex items-center gap-2 px-8 py-4 bg-dark text-white font-bold rounded-full
+           hover:bg-dark-light transition-all duration-300 shadow-lg hover:shadow-xl
+           hover:-translate-y-0.5 text-sm uppercase tracking-wider;
+  }
+
+  .section-tagline {
+    @apply inline-flex items-center gap-2 px-5 py-2 bg-primary/10 text-primary
+           rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4;
+  }
+
+  .section-title {
+    @apply text-4xl md:text-5xl font-serif font-bold text-dark leading-[1.1] tracking-tight;
+  }
+
+  .card-modern {
+    @apply bg-white rounded-3xl border border-gray-100 shadow-[0_10px_30px_rgba(0,0,0,0.05)]
+           hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] hover:-translate-y-1
+           transition-all duration-300;
+  }
+
+  .fade-r {
+    mask-image: linear-gradient(to right, black, transparent);
+  }
+
+  .fade-l {
+    mask-image: linear-gradient(to left, black, transparent);
+  }
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
