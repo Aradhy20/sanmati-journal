@@ -37,7 +37,7 @@ jobs:
       run: npm run build
 
     - name: Prepare Deployment Artifact
-      run: tar --exclude='.git' --exclude='node_modules' --exclude='.github' -czf release.tar.gz .
+      run: tar --exclude='.git' --exclude='node_modules' --exclude='.github' --exclude='release.tar.gz' -czf release.tar.gz .
 
     - name: Setup Server Directories
       uses: appleboy/ssh-action@master
