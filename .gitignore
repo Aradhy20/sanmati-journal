@@ -19,5 +19,5 @@ yarn-error.log
 deploy*.zip
 # Large binary template assets (referenced via public dir at runtime)
 /public/fistudy-assets
-# Compiled build (regenerated on deploy)
-/public/build
+# Compiled build (regenerated on deploy, but tracked for Hostinger direct pull)
+# /public/build
