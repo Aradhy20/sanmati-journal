@@ -1,209 +1,186 @@
+import { motion } from 'framer-motion';
+import { Award, GraduationCap, ChevronRight, BookOpen, Quote, Sparkles } from 'lucide-react';
 import PageHeader from '../Components/PageHeader';
 import MainLayout from '../Layouts/MainLayout';
-import React from 'react';
-import { ExternalLink, Award, BookOpen, GraduationCap } from 'lucide-react';
-import { ScrollReveal, revealVariants } from '../Components/ScrollReveal';
-import { GridPattern, DotPattern } from '../Components/Graphics';
 import Seo from '../Components/Seo';
 
-const BoardMember = ({ name, title, affiliation, image, scholarUrl, role, index }) => {
-    const [imgError, setImgError] = React.useState(false);
+const fadeInUp = {
+    initial: { opacity: 0, y: 30 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+};
 
-    const getGradient = (name) => {
-        const gradients = [
-            'from-blue-500 to-indigo-600',
-            'from-purple-500 to-pink-600',
-            'from-emerald-500 to-teal-600',
-            'from-orange-500 to-red-600',
-            'from-cyan-500 to-blue-600',
-            'from-violet-500 to-purple-600',
-        ];
-        // Use a consistent hash for color stability
-        const charCodeSum = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-        return gradients[charCodeSum % gradients.length];
-    };
-
-    const getInitials = (name) => {
-        const parts = name.trim().split(' ');
-        if (parts.length >= 2) {
-            return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
-        }
-        return name[0]?.toUpperCase() || 'SJ';
-    };
-
+const BoardMember = ({ name, title, affiliation, image, role, index }) => {
+    const isChief = role === 'Chief';
+    
     return (
-        <ScrollReveal variants={revealVariants.fadeUp} delay={index * 0.1} className="h-full">
-            <div className="group relative h-full bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col">
-                {/* Hover Gradient Border Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none -z-10 blur-xl" />
-
-                {/* Photo Area with Overlay */}
-                <div className="relative w-full aspect-[4/3] bg-gray-50 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 z-10" />
-
-                    {image && !imgError ? (
-                        <img
-                            src={image}
-                            alt={name}
-                            className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700"
-                            onError={() => setImgError(true)}
-                            loading="lazy"
-                        />
-                    ) : (
-                        <div className={`w-full h-full flex items-center justify-center text-white font-bold text-5xl bg-gradient-to-br ${getGradient(name)} group-hover:scale-110 transition-transform duration-700`}>
-                            {getInitials(name)}
-                        </div>
-                    )}
-
+        <motion.div 
+            {...fadeInUp} 
+            transition={{ delay: index * 0.1 }}
+            className="group relative h-full"
+        >
+            <div className="absolute -inset-4 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 rounded-[3rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+            <div className="relative h-full bg-white border border-gray-100 rounded-[2.5rem] overflow-hidden flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
+                {/* Visual Area */}
+                <div className="relative aspect-[4/5] overflow-hidden bg-dark">
+                    <img 
+                        src={image || `/fistudy-assets/team/team-1-${(index % 8) + 1}.jpg`} 
+                        alt={name}
+                        className="w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+                        loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/20 to-transparent" />
+                    
                     {/* Role Badge */}
-                    <div className="absolute bottom-4 left-4 z-20">
-                        <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold shadow-lg backdrop-blur-md ${role === 'Chief'
-                                ? 'bg-primary text-white'
-                                : 'bg-white/90 text-dark'
-                            }`}>
-                            {role === 'Chief' ? <Award className="w-3 h-3" /> : <GraduationCap className="w-3 h-3" />}
+                    <div className="absolute top-6 left-6 flex flex-col gap-2">
+                        <span className={`px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-[0.2em] shadow-xl backdrop-blur-md ${isChief ? 'bg-secondary text-white' : 'bg-white/10 text-white/70 border border-white/10'}`}>
+                            {isChief ? <Award className="w-3 h-3 inline mr-2 align-middle" /> : <GraduationCap className="w-3 h-3 inline mr-2 align-middle" />}
                             {title}
                         </span>
                     </div>
 
-                    {/* Social/Scholar Overlay on Hover */}
-                    {scholarUrl && (
-                        <div className="absolute top-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-                            <a
-                                href={scholarUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-10 h-10 bg-white/20 backdrop-blur-md border border-white/30 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-primary transition-colors shadow-xl"
-                                title="Google Scholar Profile"
-                            >
-                                <BookOpen className="w-5 h-5" />
-                            </a>
+                    {/* Meta Label */}
+                    <div className="absolute bottom-6 left-6 right-6">
+                        <div className="flex items-center gap-3 mb-2">
+                            <span className="h-px w-6 bg-secondary" />
+                            <span className="text-secondary font-black text-[9px] uppercase tracking-[0.3em]">Board Member</span>
                         </div>
-                    )}
+                        <h3 className="text-2xl font-serif font-bold text-white leading-tight">
+                            {name}
+                        </h3>
+                    </div>
                 </div>
 
-                {/* Info Content */}
-                <div className="p-6 flex-1 flex flex-col relative bg-white">
-                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-slate-200 to-transparent group-hover:via-blue-400 transition-all duration-500" />
-
-                    <h3 className="text-xl font-bold text-dark mb-2 group-hover:text-primary-dark transition-colors leading-tight">
-                        {name}
-                    </h3>
-
-                    <p className="text-gray-500 text-sm leading-relaxed mb-4 flex-1">
+                {/* Content Area */}
+                <div className="p-8 flex-1 flex flex-col bg-white">
+                    <p className="text-muted text-sm font-bold uppercase tracking-widest mb-4">Affiliation</p>
+                    <p className="text-dark/70 text-sm leading-relaxed mb-8 flex-1">
                         {affiliation}
                     </p>
-
-                    {scholarUrl && (
-                        <div className="pt-4 border-t border-slate-50 mt-auto">
-                            <a
-                                href={scholarUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:text-blue-800 transition-colors group/link"
-                            >
-                                View Publications
-                                <ExternalLink className="w-3 h-3 group-hover/link:translate-x-0.5 transition-transform" />
-                            </a>
+                    <div className="flex items-center justify-between pt-6 border-t border-gray-50">
+                        <span className="text-[9px] font-black uppercase tracking-widest text-dark/30">Sanmati Affiliate</span>
+                        <div className="w-8 h-8 rounded-full bg-surface border border-gray-50 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-500">
+                            <ChevronRight className="w-4 h-4" />
                         </div>
-                    )}
+                    </div>
                 </div>
             </div>
-        </ScrollReveal>
+        </motion.div>
     );
 };
 
 export default function EditorialBoard() {
     return (
         <MainLayout>
-            <Seo
-                title="Editorial Board"
-                description="Meet the distinguished scholars and researchers guiding the Sanmati Journal."
+            <Seo 
+                title="Board of Governors" 
+                description="Our distinguished board members are the guardians of scholarly excellence at Sanmati Journal."
+            />
+            
+            <PageHeader 
+                title="Board of Governors"
+                breadcrumb="Leadership"
+                subtitle="The intellectual architects guiding our multidisciplinary peer-review framework."
             />
 
-            <div className="min-h-screen bg-warm-bg font-sans">
-                <PageHeader
-                    title="Editorial Board"
-                    breadcrumb="Editorial Team"
-                    subtitle="Distinguished scholars contributing to our review process"
-                />
+            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-24 relative">
+                {/* ─── INTRO SECTION (The Strategic Vision) ─── */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center mb-32">
+                    <motion.div {...fadeInUp} className="lg:col-span-12 xl:col-span-7">
+                        <div className="flex items-center gap-4 mb-8">
+                            <span className="h-px w-10 bg-secondary" />
+                            <span className="text-secondary font-black text-[11px] uppercase tracking-[0.4em]">Governance</span>
+                        </div>
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-dark mb-8 leading-[1.05]">
+                            The Vanguard of <br />
+                            <span className="text-primary italic">Academic Rigor</span>
+                        </h2>
+                        <p className="text-xl text-dark/70 font-medium leading-relaxed mb-10 border-l-4 border-primary/20 pl-8">
+                            Our editorial governance model is built on transparency, diversity, and an unwavering commitment to empirical excellence.
+                        </p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            {[
+                                { title: "Intellectual Integrity", text: "Upholding the highest standards of peer-review precision." },
+                                { title: "Global Perspective", text: "Bridging international discourse across multidisciplinary nodes." }
+                            ].map((feat, i) => (
+                                <div key={i} className="flex gap-4 p-6 bg-surface rounded-3xl border border-gray-50 hover:shadow-xl transition-all duration-500">
+                                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                                        <Sparkles className="w-5 h-5 text-primary" />
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold text-dark text-sm mb-1">{feat.title}</h4>
+                                        <p className="text-muted text-xs leading-relaxed">{feat.text}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative overflow-hidden">
-                    {/* Background Graphics */}
-                    <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-                        <DotPattern className="opacity-30 text-slate-300" />
-                        <div className="absolute top-20 right-[-10%] w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob" />
-                        <div className="absolute bottom-20 left-[-10%] w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000" />
+                    <motion.div {...fadeInUp} transition={{ delay: 0.2 }} className="lg:col-span-12 xl:col-span-5 relative group">
+                        <div className="absolute -inset-4 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 rounded-[3rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+                        <div className="relative aspect-square rounded-[3rem] overflow-hidden shadow-2xl bg-dark">
+                            <img src="/fistudy-assets/resources/about-2.jpg" alt="Board" className="w-full h-full object-cover opacity-60" />
+                            <div className="absolute inset-0 bg-gradient-to-tr from-primary/40 to-transparent" />
+                            <div className="absolute inset-x-0 bottom-0 p-12 text-center">
+                                <Quote className="w-12 h-12 text-secondary mx-auto mb-6 opacity-50" />
+                                <p className="text-white text-lg font-serif italic font-medium leading-relaxed">
+                                    "Scholarship is most transformative when guided by the collective wisdom of diverse academic leaders."
+                                </p>
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
+
+                {/* ─── THE GRID (Distinguished Members) ─── */}
+                <div className="relative">
+                    <div className="flex flex-col items-center text-center mb-20">
+                        <span className="text-secondary font-black text-[10px] uppercase tracking-[0.4em] mb-4">Registry</span>
+                        <h2 className="text-4xl font-serif font-bold text-dark mb-4">Esteemed Board</h2>
+                        <div className="h-1 w-12 bg-primary rounded-full" />
                     </div>
 
-                    <div className="relative z-10">
-                        {/* Section Header */}
-                        <div className="text-center mb-16">
-                            <ScrollReveal>
-                                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 text-primary-dark text-xs font-bold uppercase tracking-widest mb-4 border border-blue-100">
-                                    <Award className="w-3.5 h-3.5" /> Leadership
-                                </span>
-                                <h2 className="text-3xl md:text-4xl font-bold text-dark mb-6">
-                                    Our Esteemed <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Editors</span>
-                                </h2>
-                                <p className="text-gray-600 max-w-2xl mx-auto text-base leading-relaxed">
-                                    The editorial board comprises leading academics from diverse fields who ensure the
-                                    quality, integrity, and relevance of published research.
-                                </p>
-                            </ScrollReveal>
-                        </div>
-
-                        {/* Grid */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                            <BoardMember
-                                index={0}
-                                name="Prof. Pralhad Joshi"
-                                title="Vice-Chancellor"
-                                role="Chief"
-                                affiliation="Kumar Bhaskar Varma Sanskrit & Ancient Studies University, Assam"
-                                image="/Prof. Prahlad joshi.jpeg"
-                            />
-                            <BoardMember
-                                index={1}
-                                name="Dr. Kalpna Jain"
-                                title="Principal / Associate Professor"
-                                affiliation="Teerthanker Mahaveer University, Moradabad"
-                            />
-                            <BoardMember
-                                index={2}
-                                name="Prof. S. P. Subashini"
-                                title="Dean, Faculty of Nursing"
-                                affiliation="Teerthanker Mahaveer University, Moradabad"
-                                image="/Dr. S. P. Subashini.jpeg"
-                            />
-                            <BoardMember
-                                index={3}
-                                name="Dr. Harishchandra Verma"
-                                title="Principal/Director"
-                                affiliation="Shri Vishwanath College of Pharmacy, Sultanpur"
-                            />
-                            <BoardMember
-                                index={4}
-                                name="Dr. Amita Kumari"
-                                title="Assistant Professor"
-                                affiliation="Vinoba Bhave University, Hazaribagh, Jharkhand"
-                                image="/Amita kumari.jpeg"
-                            />
-                            <BoardMember
-                                index={5}
-                                name="Mr. Parikshit Layek"
-                                title="Assistant Professor"
-                                affiliation="Teerthanker Mahaveer University, Moradabad"
-                                image="/Parikshit Layek.jpeg"
-                            />
-                            <BoardMember
-                                index={6}
-                                name="Ms. Vaishali Ranjeet Vichare"
-                                title="Assistant Professor"
-                                affiliation="Teerthanker Mahaveer University, Moradabad"
-                                image="/Vaishali Ranjeet vichare.jpeg"
-                            />
-                        </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                        {[
+                            {
+                                name: "Prof. Pralhad Joshi",
+                                title: "Chief Governor",
+                                role: "Chief",
+                                affiliation: "Vice-Chancellor, Kumar Bhaskar Varma Sanskrit & Ancient Studies University, Assam",
+                            },
+                            {
+                                name: "Dr. Kalpna Jain",
+                                title: "Senior Governor",
+                                affiliation: "Principal / Associate Professor, Teerthanker Mahaveer University, Moradabad",
+                            },
+                            {
+                                name: "Prof. S. P. Subashini",
+                                title: "Governor of Health Sciences",
+                                affiliation: "Dean, Faculty of Nursing, Teerthanker Mahaveer University, Moradabad",
+                            },
+                            {
+                                name: "Dr. Harishchandra Verma",
+                                title: "Governor of Pharmaceutical Sciences",
+                                affiliation: "Principal/Director, Shri Vishwanath College of Pharmacy, Sultanpur",
+                            },
+                            {
+                                name: "Dr. Amita Kumari",
+                                title: "Research Governor",
+                                affiliation: "Assistant Professor, Vinoba Bhave University, Hazaribagh, Jharkhand",
+                            },
+                            {
+                                name: "Mr. Parikshit Layek",
+                                title: "Technical Governor",
+                                affiliation: "Assistant Professor, Teerthanker Mahaveer University, Moradabad",
+                            },
+                            {
+                                name: "Ms. Vaishali Ranjeet Vichare",
+                                title: "Governor of Nursing Excellence",
+                                affiliation: "Assistant Professor, Teerthanker Mahaveer University, Moradabad",
+                            },
+                        ].map((m, i) => (
+                            <BoardMember key={i} {...m} index={i} />
+                        ))}
                     </div>
                 </div>
             </div>

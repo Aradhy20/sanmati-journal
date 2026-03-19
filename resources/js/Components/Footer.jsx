@@ -3,125 +3,128 @@ import { Mail, Phone, MapPin, Linkedin, Facebook, Twitter, ArrowRight, Send } fr
 
 const Footer = () => {
     return (
-        <footer className="relative overflow-hidden">
-            {/* Newsletter Bar */}
-            <div className="bg-secondary relative">
-                <div className="max-w-7xl mx-auto px-6 lg:px-8 py-10">
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                        <div className="text-white">
-                            <h3 className="text-2xl font-bold mb-1">Subscribe to Our Newsletter</h3>
-                            <p className="text-white/70 text-sm">Stay updated with latest publications and academic events</p>
+        <footer className="relative overflow-hidden bg-dark text-white/70">
+            {/* Newsletter Bar - Sophisticated & Integrated */}
+            <div className="bg-primary/5 border-b border-white/5 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/5 rounded-full -mr-32 -mt-32 blur-3xl animate-blob" />
+                <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12 relative z-10">
+                    <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+                        <div className="text-center lg:text-left">
+                            <h3 className="text-2xl font-serif font-bold text-white mb-2 tracking-tight">Stay Informed</h3>
+                            <p className="text-white/50 text-sm max-w-md">Receive latest research updates, call for papers, and academic news directly in your inbox.</p>
                         </div>
-                        <div className="flex w-full md:w-auto gap-3">
-                            <input
-                                type="email"
-                                placeholder="Enter your email"
-                                className="w-full md:w-80 px-6 py-3 rounded-full text-sm bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30"
-                            />
-                            <button className="px-6 py-3 bg-white text-secondary font-bold text-sm rounded-full hover:bg-gray-100 transition-colors flex items-center gap-2 whitespace-nowrap">
-                                Subscribe <Send className="w-4 h-4" />
+                        <div className="flex w-full lg:w-auto gap-3">
+                            <div className="relative w-full lg:w-96 group">
+                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30 group-focus-within:text-secondary transition-colors" />
+                                <input
+                                    type="email"
+                                    placeholder="your-email@academic.edu"
+                                    className="w-full pl-12 pr-6 py-4 rounded-2xl text-sm bg-white/5 border border-white/10 text-white placeholder-white/20 focus:outline-none focus:ring-2 focus:ring-secondary/30 focus:border-secondary/30 transition-all"
+                                />
+                            </div>
+                            <button className="px-8 py-4 bg-secondary text-white font-bold text-sm rounded-2xl hover:bg-secondary-dark transition-all flex items-center gap-2 whitespace-nowrap shadow-lg shadow-secondary/10 hover:shadow-secondary/20 hover:-translate-y-0.5">
+                                Join <Send className="w-4 h-4" />
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* Main Footer */}
-            <div className="bg-dark text-white/70 pt-16 pb-8">
+            {/* Main Footer - Luxury Academic Feel */}
+            <div className="pt-20 pb-10">
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-12">
-                        {/* Brand */}
-                        <div className="space-y-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-20">
+                        {/* Brand Container */}
+                        <div className="space-y-6">
                             <Link href="/" className="inline-block group">
-                                <h3 className="text-2xl font-bold text-white group-hover:text-secondary transition-colors">Sanmati Spectrum</h3>
-                                <span className="block text-[10px] text-white/40 font-bold tracking-[0.2em] uppercase mt-1">ISSN: 3108-1819</span>
+                                <div className="flex items-center gap-3 mb-4">
+                                    <div className="w-10 h-10 rounded-xl bg-white p-1 shadow-sm">
+                                        <img src="/logo.jpg" alt="Logo" className="w-full h-full object-contain" />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-white group-hover:text-secondary transition-colors tracking-tight">Sanmati Spectrum</h3>
+                                </div>
+                                <span className="inline-block px-3 py-1 bg-secondary/10 border border-secondary/20 rounded-full text-[9px] text-secondary font-black tracking-[0.2em] uppercase">ISSN: 3108-1819</span>
                             </Link>
-                            <p className="text-sm leading-relaxed">
-                                National Multidisciplinary Peer Reviewed Refereed Journal promoting high-quality research across diverse academic disciplines.
+                            <p className="text-sm leading-relaxed text-white/40 font-medium">
+                                A premier national platform for multidisciplinary research, fostering academic discourse and innovation across sciences and humanities.
                             </p>
-                            <div className="flex gap-3 pt-2">
-                                <a href="#" aria-label="Twitter" className="size-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-secondary hover:border-secondary hover:text-white transition-all"><Twitter className="w-4 h-4" /></a>
-                                <a href="#" aria-label="Facebook" className="size-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-secondary hover:border-secondary hover:text-white transition-all"><Facebook className="w-4 h-4" /></a>
-                                <a href="#" aria-label="LinkedIn" className="size-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-secondary hover:border-secondary hover:text-white transition-all"><Linkedin className="w-4 h-4" /></a>
+                            <div className="flex gap-4 pt-2">
+                                {[Linkedin, Facebook, Twitter].map((Icon, idx) => (
+                                    <a key={idx} href="#" className="size-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-secondary hover:border-secondary hover:text-white transition-all duration-300 group">
+                                        <Icon className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                                    </a>
+                                ))}
                             </div>
                         </div>
 
-                        {/* Quick Links */}
-                        <div>
-                            <h4 className="text-sm font-bold tracking-widest uppercase text-white mb-6">Explore</h4>
-                            <ul className="space-y-3">
-                                {[
-                                    { name: 'Home', href: '/' },
-                                    { name: 'About Journal', href: '/basic-info/about-journal' },
-                                    { name: 'Editorial Team', href: '/editorial-team' },
+                        {/* Navigation Columns */}
+                        {[
+                            {
+                                title: 'Publication',
+                                links: [
+                                    { name: 'Latest Issues', href: '/archive' },
                                     { name: 'Call for Papers', href: '/submission-guidelines/call-for-papers' },
-                                    { name: 'Archives', href: '/archive' },
-                                    { name: 'Gallery', href: '/gallery-view' },
-                                ].map((item, i) => (
-                                    <li key={i}>
-                                        <Link href={item.href} className="text-sm hover:text-secondary transition-colors flex items-center gap-2 group">
-                                            <ArrowRight className="w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-secondary" />
-                                            {item.name}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                                    { name: 'Submission Guide', href: '/submission-guidelines' },
+                                    { name: 'Editorial Team', href: '/editorial-team' },
+                                    { name: 'Gallery & News', href: '/gallery-view' },
+                                ]
+                            },
+                            {
+                                title: 'Trust & Safety',
+                                links: [
+                                    { name: 'Ethics Policy', href: '/publication-policy/ethics' },
+                                    { name: 'Peer Review', href: '/publication-policy/peer-review' },
+                                    { name: 'Open Access', href: '/compliance' },
+                                    { name: 'Privacy Policy', href: '/privacy' },
+                                    { name: 'Terms of Use', href: '/terms' },
+                                ]
+                            }
+                        ].map((col, idx) => (
+                            <div key={idx}>
+                                <h4 className="text-[11px] font-black tracking-[0.2em] uppercase text-white mb-8 border-l-2 border-secondary pl-4">{col.title}</h4>
+                                <ul className="space-y-4">
+                                    {col.links.map((link, i) => (
+                                        <li key={i}>
+                                            <Link href={link.href} className="text-sm font-medium hover:text-secondary transition-colors flex items-center gap-3 group">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-white/10 group-hover:bg-secondary group-hover:scale-125 transition-all" />
+                                                {link.name}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
 
-                        {/* Policies */}
+                        {/* Contact Info */}
                         <div>
-                            <h4 className="text-sm font-bold tracking-widest uppercase text-white mb-6">Legal & Policy</h4>
-                            <ul className="space-y-3">
-                                {[
-                                    { name: 'Publication Ethics', href: '/publication-policy/ethics' },
-                                    { name: 'Plagiarism Policy', href: '/publication-policy/plagiarism' },
-                                    { name: 'Peer Review Process', href: '/publication-policy/peer-review' },
-                                    { name: 'Open Access Policy', href: '/compliance' },
-                                    { name: 'Submission Guidelines', href: '/submission-guidelines' },
-                                ].map((item, i) => (
-                                    <li key={i}>
-                                        <Link href={item.href} className="text-sm hover:text-secondary transition-colors flex items-center gap-2 group">
-                                            <ArrowRight className="w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-secondary" />
-                                            {item.name}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Contact */}
-                        <div>
-                            <h4 className="text-sm font-bold tracking-widest uppercase text-white mb-6">Contact Us</h4>
-                            <ul className="space-y-4">
-                                <li className="flex items-start gap-3">
-                                    <div className="mt-0.5 size-8 rounded-xl bg-white/5 flex items-center justify-center shrink-0 border border-white/10">
-                                        <MapPin className="w-3.5 h-3.5 text-secondary" />
-                                    </div>
-                                    <span className="text-sm leading-relaxed">B-002 Faculty Block TMU Campus, Delhi Road Moradabad (U.P) 244001</span>
-                                </li>
-                                <li className="flex items-center gap-3">
-                                    <div className="size-8 rounded-xl bg-white/5 flex items-center justify-center shrink-0 border border-white/10">
-                                        <Phone className="w-3.5 h-3.5 text-secondary" />
-                                    </div>
-                                    <span className="text-sm">+91 8979782949, +91 7999525735</span>
-                                </li>
-                                <li className="flex items-center gap-3">
-                                    <div className="size-8 rounded-xl bg-white/5 flex items-center justify-center shrink-0 border border-white/10">
-                                        <Mail className="w-3.5 h-3.5 text-secondary" />
-                                    </div>
-                                    <span className="text-sm">sanmatijournal@gmail.com</span>
-                                </li>
-                            </ul>
+                            <h4 className="text-[11px] font-black tracking-[0.2em] uppercase text-white mb-8 border-l-2 border-secondary pl-4">Inquiries</h4>
+                            <div className="space-y-5">
+                                <div className="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-white/10 transition-colors">
+                                    <MapPin className="w-5 h-5 text-secondary shrink-0 mt-0.5" />
+                                    <p className="text-[13px] leading-relaxed font-medium">TMU Campus, Delhi Road<br />Moradabad (U.P) 244001</p>
+                                </div>
+                                <div className="space-y-3 pl-2">
+                                    <a href="tel:+918979782949" className="flex items-center gap-4 text-[13px] font-bold hover:text-secondary transition-colors">
+                                        <Phone className="w-4 h-4 text-secondary/70" /> +91 8979782949
+                                    </a>
+                                    <a href="mailto:sanmatijournal@gmail.com" className="flex items-center gap-4 text-[13px] font-bold hover:text-secondary transition-colors">
+                                        <Mail className="w-4 h-4 text-secondary/70" /> contact@sanmati.com
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-                        <p className="text-[13px] text-white/40 font-medium">
-                            © {new Date().getFullYear()} Sanmati Spectrum of Knowledge. All rights reserved.
-                        </p>
-                        <div className="flex items-center gap-6 text-[13px] text-white/40 font-medium">
-                            <Link href="/privacy" className="hover:text-secondary transition-colors">Privacy Policy</Link>
-                            <Link href="/terms" className="hover:text-secondary transition-colors">Terms of Service</Link>
+                    {/* Bottom Bar */}
+                    <div className="border-t border-white/5 pt-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div className="text-[12px] font-medium text-white/30 flex items-center gap-2">
+                            <span>© {new Date().getFullYear()}</span>
+                            <span className="w-1 h-1 rounded-full bg-white/10" />
+                            <span>Sanmati Spectrum of Knowledge</span>
+                        </div>
+                        <div className="flex items-center gap-8">
+                            <Link href="/terms" className="text-[12px] font-bold text-white/30 hover:text-secondary transition-colors uppercase tracking-widest">Legal</Link>
+                            <Link href="/privacy" className="text-[12px] font-bold text-white/30 hover:text-secondary transition-colors uppercase tracking-widest">Sitemap</Link>
                         </div>
                     </div>
                 </div>

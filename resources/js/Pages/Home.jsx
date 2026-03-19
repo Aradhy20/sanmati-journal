@@ -3,227 +3,217 @@ import Hero from '../Components/Hero';
 import { motion } from 'framer-motion';
 import { Link } from '@inertiajs/react';
 import {
-    ArrowRight, BookOpen, Users, Globe, Award, FileText, Send, Star,
+    ArrowRight, BookOpen, Users, Globe, Award, FileText, Send, Star, Trophy,
     Lightbulb, GraduationCap, Microscope, Scale, Palette, Calculator, Cpu,
-    CheckCircle, Zap, Shield, Search, Clock, ChevronRight
+    CheckCircle, Zap, Shield, Search, Clock, ChevronRight, ArrowUpRight,
+    Quote, UploadCloud, FileCheck, RefreshCw, BookMarked, Package, Truck, Heart, Feather
 } from 'lucide-react';
 
 const fadeInUp = {
-    initial: { opacity: 0, y: 30 },
+    initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-80px" },
-    transition: { duration: 0.6 }
+    viewport: { once: true, margin: "-100px" },
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
 };
 
 export default function Home() {
     return (
-        <MainLayout title="Home" description="Sanmati Spectrum: A National Multidisciplinary Research Journal">
+        <MainLayout title="Home" description="Sanmati Spectrum: A National Multidisciplinary Research Journal & Book Publication">
             <Hero />
 
-            {/* ─── ABOUT SECTION (Fistudy about-one layout) ─── */}
-            <section className="py-24 bg-white relative overflow-hidden">
-                {/* Background shapes */}
-                <div className="absolute top-0 left-0 w-64 h-64 bg-primary/3 rounded-full -ml-32 -mt-32 blur-3xl" />
-                <div className="absolute bottom-0 right-0 w-64 h-64 bg-secondary/5 rounded-full -mr-32 -mb-32 blur-3xl" />
-
-                <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                        {/* Left — dual image layout from Fistudy about-one */}
-                        <motion.div
-                            initial={{ opacity: 0, x: -40 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8 }}
-                            className="relative"
-                        >
-                            <div className="grid grid-cols-2 gap-4">
-                                {/* Main tall image */}
-                                <div className="relative">
-                                    <div className="rounded-3xl overflow-hidden shadow-2xl h-80">
-                                        <img src="/fistudy-assets/resources/abou-one-img-1.jpg" alt="Research" className="w-full h-full object-cover" />
-                                    </div>
-                                    {/* Awards badge */}
-                                    <div className="absolute -bottom-6 left-4 bg-white rounded-2xl shadow-xl p-5 text-center border border-gray-100">
-                                        <div className="flex items-baseline gap-1 justify-center">
-                                            <span className="text-4xl font-black text-dark">25</span>
-                                            <span className="text-secondary text-2xl font-black">+</span>
-                                        </div>
-                                        <p className="text-gray-500 text-xs font-semibold uppercase tracking-wider mt-1">Research Fields</p>
-                                    </div>
-                                </div>
-                                {/* Right column */}
-                                <div className="flex flex-col gap-4 pt-10">
-                                    {/* Experience box */}
-                                    <div className="bg-gradient-to-br from-primary to-dark rounded-3xl p-6 text-white relative overflow-hidden shadow-xl">
-                                        <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -mr-6 -mt-6" />
-                                        <img src="/fistudy-assets/icon/about-one-experience-icon.png" alt="" className="w-10 h-10 mb-3 relative z-10" />
-                                        <div className="flex items-baseline gap-1 relative z-10">
-                                            <span className="text-4xl font-black">2</span>
-                                            <span className="text-secondary text-2xl font-black">+</span>
-                                        </div>
-                                        <p className="text-white/70 text-sm">Years of Excellence</p>
-                                    </div>
-                                    {/* Second image */}
-                                    <div className="rounded-3xl overflow-hidden shadow-xl h-44">
-                                        <img src="/fistudy-assets/resources/abou-one-img-2.jpg" alt="Academic" className="w-full h-full object-cover" />
-                                    </div>
-                                </div>
-                            </div>
-                            {/* Floating shape */}
-                            <img
-                                src="/fistudy-assets/shapes/about-one-img-shape-1.png"
-                                alt=""
-                                className="absolute -bottom-4 -right-4 w-20 animate-float opacity-80"
-                            />
-                        </motion.div>
-
-                        {/* Right — content */}
-                        <motion.div {...fadeInUp} className="relative z-10">
-                            <div className="flex items-center gap-3 mb-4">
-                                <div className="w-8 h-0.5 bg-secondary" />
-                                <span className="text-secondary font-bold text-sm uppercase tracking-[0.2em]">About Us</span>
-                            </div>
-                            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-dark leading-tight mb-6">
-                                Advancing Knowledge Through
-                                <span className="text-primary"> Rigorous Inquiry</span>
-                            </h2>
-                            <p className="text-gray-500 leading-relaxed text-lg mb-8">
-                                Sanmati Spectrum of Knowledge &amp; Emerging Discourse is a national, peer-reviewed quarterly journal dedicated to promoting multidisciplinary academic dialogue and advancing knowledge through original research.
-                            </p>
-
-                            {/* Mission & Vision */}
-                            <div className="space-y-5 mb-10">
-                                {[
-                                    { icon: '/fistudy-assets/icon/mission-icon.png', title: 'Our Mission', desc: 'To foster a global ecosystem of knowledge sharing where academic rigor meets innovative thinking, empowering researchers to solve tomorrow\'s challenges.' },
-                                    { icon: '/fistudy-assets/icon/vision-icon.png', title: 'Our Vision', desc: 'To become India\'s most trusted multidisciplinary citation index, bridging the gap between traditional wisdom and modern scientific inquiry.' },
-                                ].map((item, i) => (
-                                    <div key={i} className="flex gap-4 p-5 rounded-2xl bg-gray-50 border border-gray-100 hover:border-primary/20 hover:bg-primary/3 transition-all">
-                                        <img src={item.icon} alt={item.title} className="w-10 h-10 shrink-0 mt-0.5 object-contain" />
-                                        <div>
-                                            <h3 className="font-bold text-dark mb-1">{item.title}</h3>
-                                            <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div className="flex items-center gap-4">
-                                <Link href="/basic-info/about-journal"
-                                    className="group px-8 py-3.5 bg-secondary text-white rounded-full font-bold text-sm hover:bg-secondary-dark transition-all flex items-center gap-2 shadow-lg shadow-secondary/20 hover:-translate-y-0.5 uppercase tracking-wider">
-                                    <ChevronRight className="w-4 h-4" /> Know More
-                                </Link>
-                                <span className="text-gray-400 text-sm font-semibold italic">ISSN: 3108-1819</span>
-                            </div>
-                        </motion.div>
-                    </div>
-                </div>
-            </section>
-
-            {/* ─── JOURNAL CATEGORIES (Fistudy category-two style) ─── */}
-            <section className="py-24 bg-warm-bg">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="text-center mb-14">
-                        <motion.div {...fadeInUp} className="flex items-center justify-center gap-3 mb-4">
-                            <div className="w-8 h-0.5 bg-secondary" />
-                            <span className="text-secondary font-bold text-sm uppercase tracking-[0.2em]">Research Areas</span>
-                            <div className="w-8 h-0.5 bg-secondary" />
-                        </motion.div>
-                        <motion.h2 {...fadeInUp} transition={{ delay: 0.1 }} className="section-title">
-                            Explore Our <span className="text-primary">Disciplines</span>
-                        </motion.h2>
-                        <motion.p {...fadeInUp} transition={{ delay: 0.2 }} className="text-gray-500 mt-4 max-w-xl mx-auto">
-                            We publish cutting-edge research across diverse academic fields
-                        </motion.p>
-                    </div>
-
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+            {/* ─── FEATURES BAR (Publication Highlights) ─── */}
+            <section className="py-8 bg-primary relative overflow-hidden">
+                <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.2) 1px, transparent 0)', backgroundSize: '32px 32px' }} />
+                <div className="container-custom relative z-10">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-0 divide-x divide-white/10">
                         {[
-                            { name: "Science & Technology", icon: Microscope, color: "from-blue-500 to-indigo-600", count: "15+" },
-                            { name: "Social Sciences", icon: Users, color: "from-emerald-500 to-teal-600", count: "12+" },
-                            { name: "Arts & Humanities", icon: Palette, color: "from-purple-500 to-violet-600", count: "10+" },
-                            { name: "Commerce & Management", icon: Calculator, color: "from-orange-500 to-amber-600", count: "8+" },
-                            { name: "Law & Governance", icon: Scale, color: "from-red-500 to-rose-600", count: "6+" },
-                            { name: "Education", icon: GraduationCap, color: "from-cyan-500 to-blue-600", count: "9+" },
-                            { name: "Computer Science", icon: Cpu, color: "from-indigo-500 to-purple-600", count: "11+" },
-                            { name: "Innovation Research", icon: Lightbulb, color: "from-yellow-500 to-orange-600", count: "7+" },
-                        ].map((cat, idx) => (
-                            <motion.div
-                                key={idx}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: idx * 0.07 }}
-                                className="card-modern p-6 text-center group cursor-pointer"
-                            >
-                                <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br ${cat.color} flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
-                                    <cat.icon className="w-8 h-8 text-white" />
+                            { icon: BookMarked, stat: '500+', label: 'Exclusive Titles' },
+                            { icon: Truck, stat: 'Global', label: 'Shipping Available' },
+                            { icon: Heart, stat: 'Signed', label: 'Author Editions' },
+                            { icon: Zap, stat: 'Early', label: 'Access Programs' },
+                        ].map((item, i) => (
+                            <div key={i} className="flex items-center gap-4 px-8 py-4">
+                                <item.icon className="w-8 h-8 text-white/70 shrink-0" />
+                                <div>
+                                    <p className="text-white font-black text-xl leading-none">{item.stat}</p>
+                                    <p className="text-white/60 text-[11px] font-bold uppercase tracking-widest">{item.label}</p>
                                 </div>
-                                <h3 className="font-bold text-dark text-sm mb-1 leading-tight">{cat.name}</h3>
-                                <p className="text-primary text-xs font-semibold">{cat.count} Papers</p>
-                            </motion.div>
+                            </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* ─── LATEST PUBLICATIONS (Fistudy courses-two style) ─── */}
-            <section className="py-24 bg-white">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="flex justify-between items-end mb-14 flex-wrap gap-4">
-                        <div>
-                            <div className="flex items-center gap-3 mb-4">
-                                <div className="w-8 h-0.5 bg-secondary" />
-                                <span className="text-secondary font-bold text-sm uppercase tracking-[0.2em]">Select Publications</span>
+            {/* ─── ABOUT SECTION ─── */}
+            <section className="py-32 bg-surface relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-96 h-96 bg-primary/4 rounded-full -ml-48 -mt-48 blur-[100px]" />
+                <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full -mr-48 -mb-48 blur-[100px]" />
+
+                <div className="container-custom">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                        {/* Left — Dual Image Layout */}
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                            className="relative"
+                        >
+                            <div className="grid grid-cols-12 gap-4">
+                                <div className="col-span-7 relative z-10">
+                                    <div className="rounded-[2.5rem] overflow-hidden shadow-2xl h-[450px] border-4 border-white">
+                                        <img src="/fistudy-assets/resources/about-journal-1.png" alt="Book Publication" className="w-full h-full object-cover" loading="lazy" />
+                                    </div>
+                                    <div className="absolute -bottom-8 -left-6 bg-white rounded-3xl shadow-[0_20px_40px_rgba(79,119,255,0.12)] p-6 border border-gray-100 animate-float">
+                                        <div className="flex items-baseline gap-1">
+                                            <span className="text-4xl font-serif font-black text-primary">25</span>
+                                            <span className="text-secondary text-2xl font-black">+</span>
+                                        </div>
+                                        <p className="text-dark-light text-[10px] font-black uppercase tracking-[0.2em] mt-1">Research Fields</p>
+                                    </div>
+                                </div>
+                                <div className="col-span-5 pt-16">
+                                    <div className="rounded-[2rem] overflow-hidden shadow-xl h-64 mb-6 border-4 border-white">
+                                        <img src="/fistudy-assets/resources/about-journal-2.png" alt="Book Editions" className="w-full h-full object-cover" loading="lazy" />
+                                    </div>
+                                    <div className="bg-gradient-to-br from-primary to-primary-dark rounded-[2rem] p-8 text-white relative overflow-hidden shadow-xl">
+                                        <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full -mr-12 -mt-12" />
+                                        <div className="flex items-baseline gap-1 mb-2">
+                                            <span className="text-3xl font-serif font-bold">02</span>
+                                            <span className="text-secondary text-xl font-black">+</span>
+                                        </div>
+                                        <p className="text-white/50 text-[10px] font-black uppercase tracking-widest leading-tight">Years of Academic Leadership</p>
+                                    </div>
+                                </div>
                             </div>
-                            <h2 className="section-title !mb-0">
-                                Featured <span className="text-primary">Research</span>
+                        </motion.div>
+
+                        {/* Right — Narrative */}
+                        <motion.div {...fadeInUp} className="relative z-10">
+                            <div className="flex items-center gap-4 mb-6">
+                                <span className="h-px w-10 bg-secondary" />
+                                <span className="text-secondary font-black text-[11px] uppercase tracking-[0.3em]">Our Philosophical Core</span>
+                            </div>
+                            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-dark leading-[1.1] mb-8">
+                                Cultivating a Global <span className="text-primary italic">Spectrum of Knowledge</span>
                             </h2>
-                        </div>
-                        <Link href="/archives" className="group px-6 py-3 border-2 border-gray-200 text-dark rounded-full text-sm font-bold hover:border-primary hover:text-primary transition-all flex items-center gap-2">
-                            Browse Archive <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </Link>
+                            <p className="text-muted leading-relaxed text-lg mb-10 border-l-2 border-primary/15 pl-8">
+                                Sanmati Spectrum is India's rising multidisciplinary beacon, dedicating to bridging the gap between traditional intellectual rigor and modern scientific discourse. We celebrate original research and book publications alike.
+                            </p>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
+                                {[
+                                    { title: 'The Mission', desc: 'To empower researchers by providing a high-impact, peer-reviewed ecosystem for global visibility.', icon: 'M' },
+                                    { title: 'The Vision', desc: 'To become the gold standard in multidisciplinary publishing and academic integrity.', icon: 'V' },
+                                ].map((item, i) => (
+                                    <div key={i} className="group p-6 rounded-2xl bg-warm-bg border border-gray-100 hover:border-primary/20 hover:shadow-lg transition-all duration-300">
+                                        <div className="w-10 h-10 rounded-xl bg-primary/8 flex items-center justify-center text-primary font-black text-sm mb-4 group-hover:bg-primary group-hover:text-white transition-colors uppercase">{item.icon}</div>
+                                        <h3 className="font-bold text-dark mb-2 tracking-tight">{item.title}</h3>
+                                        <p className="text-muted text-[13px] leading-relaxed font-medium">{item.desc}</p>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="flex items-center gap-8">
+                                <Link href="/basic-info/about-journal"
+                                    className="group px-8 py-4 bg-primary text-white rounded-2xl font-bold text-xs hover:bg-primary-dark transition-all flex items-center gap-3 shadow-xl shadow-primary/20 hover:-translate-y-1 uppercase tracking-widest">
+                                    <ChevronRight className="w-4 h-4" /> Explore Our Ethos
+                                </Link>
+                                <div className="hidden sm:block">
+                                    <p className="text-gray-300 text-[10px] font-black uppercase tracking-[0.2em] mb-1">Authenticated</p>
+                                    <p className="text-dark font-black text-sm">ISSN: 3108-1819</p>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ─── LATEST BOOK RELEASES ─── */}
+            <section className="py-32 bg-warm-bg">
+                <div className="container-custom">
+                    <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+                        <motion.div {...fadeInUp} className="max-w-2xl">
+                            <div className="flex items-center gap-4 mb-6">
+                                <span className="h-px w-10 bg-secondary" />
+                                <span className="text-secondary font-black text-[11px] uppercase tracking-[0.3em]">New Arrivals</span>
+                            </div>
+                            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-dark leading-tight">
+                                Latest <span className="text-primary italic">Book Releases</span> & Publications
+                            </h2>
+                        </motion.div>
+                        <motion.div {...fadeInUp}>
+                            <Link href="/book-publication" className="group px-10 py-5 bg-white border border-gray-200 text-dark rounded-2xl font-bold text-xs hover:bg-primary hover:text-white hover:border-primary transition-all flex items-center gap-3 shadow-sm hover:shadow-xl hover:-translate-y-1 uppercase tracking-widest">
+                                All Publications <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+                            </Link>
+                        </motion.div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {[
-                            { field: "Physics", doi: "DOI: 10.1234/SJ.2024.01", title: "Quantum Refraction in Modern Low-Energy Physics", excerpt: "Exploring the boundaries of refractive indices in quantum states using high-frequency oscillators...", img: "/fistudy-assets/resources/courses-2-1.jpg", badge: "Editor's Pick" },
-                            { field: "Neuroscience", doi: "DOI: 10.1234/SJ.2024.02", title: "Neuro-Acoustics: Brain Response to Synthetic Frequency", excerpt: "A study on how synthetic soundscapes affect cognitive load and neural pathways in controlled environments.", img: "/fistudy-assets/resources/courses-2-2.jpg" },
-                            { field: "Social Science", doi: "DOI: 10.1234/SJ.2024.03", title: "Socio-Economic Impacts of Artificial Intelligence", excerpt: "Analyzing the shift in labor markets and wealth distribution following the rapid adoption of large language models.", img: "/fistudy-assets/resources/courses-2-3.jpg" },
-                        ].map((paper, i) => (
+                            {
+                                genre: 'Quantum Physics',
+                                format: 'Hardcover · 320 Pages',
+                                title: 'Non-Linear Dynamics in Sub-Atomic Particles',
+                                excerpt: 'Investigating quantum fields under high-stress gravitational simulations — a groundbreaking multi-disciplinary synthesis.',
+                                img: '/fistudy-assets/resources/paper-physics.png',
+                                badge: "Editor's Choice",
+                                price: 'Order Now',
+                                stars: 5,
+                            },
+                            {
+                                genre: 'Behavioral Economics',
+                                format: 'E-book · 280 Pages',
+                                title: 'The Cognitive Architecture of Market Shifts',
+                                excerpt: 'A multidisciplinary study on human heuristic biases in rapid digital-first economic environments.',
+                                img: '/fistudy-assets/resources/paper-neuro.png',
+                                badge: 'Bestseller',
+                                price: 'Pre-Order',
+                                stars: 5,
+                            },
+                            {
+                                genre: 'Sustainability',
+                                format: 'Hardcover · 350 Pages',
+                                title: 'Urban Resilience in the Anthropocene Era',
+                                excerpt: 'Analyzing the intersection of sociological patterns and environmental engineering in future megacities.',
+                                img: '/fistudy-assets/resources/paper-social.png',
+                                badge: 'New Release',
+                                price: 'Order Now',
+                                stars: 4,
+                            },
+                        ].map((book, i) => (
                             <motion.div
                                 key={i}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: i * 0.15 }}
-                                className="card-modern overflow-hidden group"
+                                transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                                className="group relative flex flex-col h-full bg-white rounded-[2rem] overflow-hidden border border-gray-100 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(79,119,255,0.12)] hover:-translate-y-2 transition-all duration-500"
                             >
-                                <div className="relative overflow-hidden aspect-video">
-                                    <img src={paper.img} alt={paper.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                                    {paper.badge && (
-                                        <span className="absolute top-3 left-3 bg-secondary text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full shadow">
-                                            {paper.badge}
+                                <div className="h-56 overflow-hidden relative">
+                                    <img src={book.img} alt={book.title} className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" loading="lazy" />
+                                    {book.badge && (
+                                        <span className="absolute top-4 left-4 bg-secondary text-white text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg">
+                                            {book.badge}
                                         </span>
                                     )}
                                 </div>
-                                <div className="p-6">
-                                    <div className="flex items-center gap-2 mb-3">
-                                        <span className="text-primary text-xs font-black uppercase tracking-widest">{paper.field}</span>
-                                        <span className="text-gray-300">•</span>
-                                        <span className="text-gray-400 text-xs">{paper.doi}</span>
+                                <div className="p-8 flex flex-col flex-grow">
+                                    {/* Stars */}
+                                    <div className="flex gap-1 mb-3">
+                                        {[...Array(book.stars)].map((_, k) => (
+                                            <Star key={k} className="w-3.5 h-3.5 fill-secondary text-secondary" />
+                                        ))}
                                     </div>
-                                    <h3 className="font-bold text-dark text-lg leading-snug mb-3 group-hover:text-primary transition-colors">{paper.title}</h3>
-                                    <p className="text-gray-500 text-sm leading-relaxed mb-5 line-clamp-2">{paper.excerpt}</p>
-                                    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                                        <div className="flex -space-x-2">
-                                            {['DR', 'SJ'].map((init, j) => (
-                                                <div key={j} className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-dark flex items-center justify-center text-white text-[9px] font-bold border-2 border-white">{init}</div>
-                                            ))}
-                                        </div>
-                                        <button className="text-primary text-xs font-bold uppercase tracking-widest hover:underline flex items-center gap-1">
-                                            Read Paper <ArrowRight className="w-3 h-3" />
-                                        </button>
-                                    </div>
+                                    <p className="text-primary font-black text-[10px] tracking-[0.2em] uppercase mb-1">{book.genre}</p>
+                                    <p className="text-muted text-[11px] font-bold mb-4">{book.format}</p>
+                                    <h3 className="text-xl font-serif font-bold text-dark mb-4 group-hover:text-primary transition-colors leading-tight">
+                                        {book.title}
+                                    </h3>
+                                    <p className="text-muted text-sm leading-relaxed mb-6 flex-grow">{book.excerpt}</p>
+                                    <Link href="/book-publication" className="inline-flex items-center justify-center gap-2 w-full py-3.5 bg-primary/8 text-primary rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-primary hover:text-white transition-all group/btn">
+                                        {book.price} <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                                    </Link>
                                 </div>
                             </motion.div>
                         ))}
@@ -231,192 +221,400 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* ─── COUNTER (Fistudy counter style) ─── */}
-            <section className="py-20 bg-gradient-to-br from-dark via-primary-dark to-primary relative overflow-hidden">
-                <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0)', backgroundSize: '30px 30px' }} />
-                <div className="max-w-7xl mx-auto px-6 relative z-10">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-10 text-center text-white">
+            {/* ─── EDITORIAL LEADERSHIP ─── */}
+            <section className="py-32 bg-white relative">
+                <div className="container-custom">
+                    <div className="flex flex-col lg:flex-row items-end justify-between gap-10 mb-20">
+                        <motion.div {...fadeInUp} className="max-w-2xl">
+                            <div className="flex items-center gap-4 mb-6">
+                                <span className="h-px w-10 bg-secondary" />
+                                <span className="text-secondary font-black text-[11px] uppercase tracking-[0.3em]">Guardians of Integrity</span>
+                            </div>
+                            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-dark leading-tight">
+                                Distinguished <span className="text-primary italic">Editorial Leadership</span>
+                            </h2>
+                        </motion.div>
+                        <motion.div {...fadeInUp} className="hidden lg:block pb-2">
+                            <Link href="/editorial-team" className="text-xs font-black uppercase tracking-[0.2em] text-dark-light hover:text-primary transition-colors flex items-center gap-3 group">
+                                View Full Board <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
+                            </Link>
+                        </motion.div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {/* Editor-in-Chief */}
+                        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="group">
+                            <div className="h-full rounded-[3rem] overflow-hidden bg-gradient-to-br from-primary to-primary-dark text-white p-10 flex flex-col items-center text-center shadow-2xl hover:-translate-y-2 transition-all duration-700 relative">
+                                <div className="absolute top-0 right-0 p-8 opacity-5"><Trophy className="w-24 h-24 text-secondary scale-150 rotate-12" /></div>
+                                <div className="w-44 h-44 rounded-full overflow-hidden mb-8 border-4 border-white/30 shadow-2xl relative z-10">
+                                    <img src="/mam.jpeg" alt="Dr. Namrata" className="w-full h-full object-cover object-top group-hover:scale-110 transition-all duration-700" />
+                                </div>
+                                <span className="inline-block px-4 py-1.5 bg-secondary/25 border border-secondary/40 rounded-full text-[10px] text-secondary font-black tracking-widest uppercase mb-6 w-fit">Editor-in-Chief</span>
+                                <h3 className="text-3xl font-serif font-bold mb-4 tracking-tight group-hover:text-secondary-light transition-colors duration-300">Dr. Namrata</h3>
+                                <p className="text-white/40 text-[12px] font-bold uppercase tracking-[0.1em] mb-8">Supreme Academic Guardian</p>
+                                <div className="mt-auto w-full pt-8 border-t border-white/10">
+                                    <p className="text-white/60 text-sm leading-relaxed italic">"Directing the global scholarly narrative through impeccable academic rigor and integrity."</p>
+                                </div>
+                            </div>
+                        </motion.div>
+
+                        {/* Managing Editor */}
+                        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.15 }} className="group">
+                            <div className="h-full rounded-[3rem] overflow-hidden bg-surface border border-gray-100 p-10 flex flex-col items-center text-center shadow-lg hover:shadow-2xl hover:border-primary/20 hover:-translate-y-2 transition-all duration-700 relative">
+                                <div className="absolute top-0 right-0 p-8 opacity-5"><Users className="w-24 h-24 text-primary scale-150 -rotate-12" /></div>
+                                <div className="w-44 h-44 rounded-[2.5rem] overflow-hidden mb-8 border-4 border-white shadow-xl relative z-10 rotate-3 group-hover:rotate-0 transition-transform duration-500">
+                                    <img src="/sir.jpeg" alt="Ratnesh Jain" className="w-full h-full object-cover object-top group-hover:scale-110 transition-all duration-700" />
+                                </div>
+                                <span className="inline-block px-4 py-1.5 bg-primary/8 rounded-full text-[10px] text-primary font-black tracking-widest uppercase mb-4">Managing Editor</span>
+                                <h3 className="text-3xl font-serif font-bold text-dark mb-2 group-hover:text-primary transition-colors duration-300">Ratnesh Jain</h3>
+                                <p className="text-muted text-[12px] font-bold uppercase tracking-wider mb-6">Operational Excellence Strategist</p>
+                                <div className="mt-auto w-full pt-8 border-t border-gray-50 text-center">
+                                    <p className="text-muted text-sm leading-relaxed italic">Directing the foundational systems and operational brilliance of the journal.</p>
+                                </div>
+                            </div>
+                        </motion.div>
+
+                        {/* Executive Editor */}
+                        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="group">
+                            <div className="h-full rounded-[3rem] overflow-hidden bg-surface border border-gray-100 p-10 flex flex-col items-center text-center shadow-lg hover:shadow-2xl hover:border-secondary/20 hover:-translate-y-2 transition-all duration-700 relative">
+                                <div className="absolute top-0 right-0 p-8 opacity-5"><Award className="w-24 h-24 text-secondary scale-150" /></div>
+                                <div className="w-44 h-44 rounded-[2.5rem] overflow-hidden mb-8 border-4 border-white shadow-xl relative z-10 -rotate-3 group-hover:rotate-0 transition-transform duration-500">
+                                    <img src="/dr kalpana jian.jpeg" alt="Dr. Kalpana Jain" className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" />
+                                </div>
+                                <span className="inline-block px-4 py-1.5 bg-secondary/10 rounded-full text-[10px] text-secondary font-black tracking-widest uppercase mb-4">Executive Editor</span>
+                                <h3 className="text-3xl font-serif font-bold text-dark mb-2 group-hover:text-primary transition-colors duration-300">Dr. Kalpana Jain</h3>
+                                <p className="text-muted text-[12px] font-bold uppercase tracking-wider mb-6">Editorial Strategy Leader</p>
+                                <div className="mt-auto w-full pt-8 border-t border-gray-50">
+                                    <p className="text-muted text-sm leading-relaxed italic">Pioneering the strategic evolution and content excellence of our scholarly registry.</p>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ─── FEATURED AUTHORS ─── */}
+            <section className="py-24 bg-warm-bg relative overflow-hidden">
+                <div className="container-custom">
+                    <div className="text-center max-w-2xl mx-auto mb-16">
+                        <motion.div {...fadeInUp} className="flex items-center justify-center gap-4 mb-6">
+                            <span className="h-px w-10 bg-secondary" />
+                            <span className="text-secondary font-black text-[11px] uppercase tracking-[0.4em]">Author Corner</span>
+                            <span className="h-px w-10 bg-secondary" />
+                        </motion.div>
+                        <motion.h2 {...fadeInUp} transition={{ delay: 0.1 }} className="text-4xl lg:text-5xl font-serif font-bold text-dark mb-6">
+                            Our <span className="text-primary italic">Featured Authors</span>
+                        </motion.h2>
+                        <motion.p {...fadeInUp} transition={{ delay: 0.2 }} className="text-muted font-medium text-lg leading-relaxed">
+                            Brilliant minds whose published works have shaped academic discourse across disciplines.
+                        </motion.p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {[
-                            { icon: FileText, num: "500+", label: "Research Papers" },
-                            { icon: Users, num: "200+", label: "Global Authors" },
+                            { name: 'Dr. Amit Sharma', field: 'Quantum Physics', books: '3 Published', img: '/fistudy-assets/team/team-1-2.jpg' },
+                            { name: 'Prof. Ritu Verma', field: 'Behavioral Science', books: '5 Published', img: '/fistudy-assets/team/team-2-1.jpg' },
+                            { name: 'Dr. Pradeep Kumar', field: 'Urban Studies', books: '2 Published', img: '/fistudy-assets/team/team-2-2.jpg' },
+                            { name: 'Dr. Sunita Rao', field: 'Sustainability', books: '4 Published', img: '/fistudy-assets/team/team-1-1.jpg' },
+                        ].map((author, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1, duration: 0.7 }}
+                                className="group p-8 bg-white rounded-[2rem] border border-gray-100 hover:border-primary/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-500 text-center"
+                            >
+                                <div className="w-24 h-24 rounded-2xl overflow-hidden mx-auto mb-6 border-2 border-white shadow-lg rotate-3 group-hover:rotate-0 transition-transform duration-500">
+                                    <img src={author.img} alt={author.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+                                </div>
+                                <div className="flex items-center justify-center gap-2 mb-2">
+                                    <span className="h-px w-4 bg-secondary" />
+                                    <span className="text-secondary font-black text-[9px] uppercase tracking-[0.3em]">{author.field}</span>
+                                </div>
+                                <h3 className="text-lg font-serif font-bold text-dark mb-2 group-hover:text-primary transition-colors">{author.name}</h3>
+                                <div className="flex items-center justify-center gap-2">
+                                    <BookOpen className="w-3.5 h-3.5 text-primary/50" />
+                                    <span className="text-muted text-[11px] font-bold uppercase tracking-widest">{author.books}</span>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ─── ACADEMIC DOMAINS ─── */}
+            <section className="py-32 bg-white relative overflow-hidden">
+                <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[800px] h-[800px] bg-primary/2 rounded-full blur-[120px] -ml-96" />
+                <div className="container-custom relative z-10">
+                    <div className="text-center max-w-3xl mx-auto mb-20">
+                        <motion.div {...fadeInUp} className="flex items-center justify-center gap-4 mb-6">
+                            <span className="h-px w-10 bg-secondary" />
+                            <span className="text-secondary font-black text-[11px] uppercase tracking-[0.4em]">Our Academic Scope</span>
+                            <span className="h-px w-10 bg-secondary" />
+                        </motion.div>
+                        <motion.h2 {...fadeInUp} transition={{ delay: 0.1 }} className="text-4xl lg:text-5xl font-serif font-bold text-dark mb-6">
+                            Explore <span className="text-primary italic">Intellectual Domains</span>
+                        </motion.h2>
+                        <motion.p {...fadeInUp} transition={{ delay: 0.2 }} className="text-muted font-medium text-lg leading-relaxed">
+                            We publish books and papers across the full spectrum of modern and traditional scholarly inquiry.
+                        </motion.p>
+                    </div>
+
+                    <motion.div
+                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+                        initial="initial" whileInView="whileInView" viewport={{ once: true }}
+                        variants={{ whileInView: { transition: { staggerChildren: 0.05 } } }}
+                    >
+                        {[
+                            { name: "Science & Technology", icon: Microscope, color: "bg-blue-50 text-blue-600", count: "15+" },
+                            { name: "Social Sciences", icon: Users, color: "bg-emerald-50 text-emerald-600", count: "12+" },
+                            { name: "Arts & Humanities", icon: Palette, color: "bg-purple-50 text-purple-600", count: "10+" },
+                            { name: "Commerce & Management", icon: Calculator, color: "bg-orange-50 text-orange-600", count: "8+" },
+                            { name: "Law & Governance", icon: Scale, color: "bg-red-50 text-red-600", count: "6+" },
+                            { name: "Education", icon: GraduationCap, color: "bg-cyan-50 text-cyan-600", count: "9+" },
+                            { name: "Computer Science", icon: Cpu, color: "bg-indigo-50 text-indigo-600", count: "11+" },
+                            { name: "Innovation Research", icon: Lightbulb, color: "bg-yellow-50 text-yellow-600", count: "7+" },
+                        ].map((cat, idx) => (
+                            <motion.div
+                                key={idx}
+                                variants={{ initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 } }}
+                                className="group p-8 rounded-[2.5rem] bg-warm-bg border border-gray-100 hover:border-primary/20 hover:shadow-[0_20px_40px_rgba(79,119,255,0.08)] transition-all duration-500 flex flex-col items-center text-center"
+                            >
+                                <div className={`w-20 h-20 rounded-[1.75rem] ${cat.color} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-sm`}>
+                                    <cat.icon className="w-9 h-9" />
+                                </div>
+                                <h3 className="font-bold text-dark text-base mb-2 px-2 group-hover:text-primary transition-colors tracking-tight leading-tight">{cat.name}</h3>
+                                <div className="mt-auto pt-4 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-muted">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
+                                    {cat.count} Publications
+                                </div>
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* ─── ACADEMIC IMPACT (Counters) ─── */}
+            <section className="py-24 bg-gradient-to-br from-primary to-primary-dark relative overflow-hidden">
+                <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.08) 1px, transparent 0)', backgroundSize: '40px 40px' }} />
+                <div className="container-custom relative z-10">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+                        {[
+                            { icon: FileText, num: "500+", label: "Artifacts Published" },
+                            { icon: Users, num: "200+", label: "Global Scholars" },
                             { icon: Award, num: "50+", label: "Expert Reviewers" },
-                            { icon: Globe, num: "25+", label: "Research Fields" },
+                            { icon: Globe, num: "25+", label: "Domain Disciplines" },
                         ].map((stat, i) => (
                             <motion.div
                                 key={i}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                            >
-                                <div className="w-14 h-14 mx-auto mb-5 rounded-2xl bg-white/10 flex items-center justify-center">
-                                    <stat.icon className="w-7 h-7 text-secondary" />
-                                </div>
-                                <div className="text-5xl font-black mb-2">{stat.num}</div>
-                                <p className="text-white/60 text-sm uppercase tracking-widest font-semibold">{stat.label}</p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* ─── PUBLICATION PROCESS (Fistudy process style) ─── */}
-            <section className="py-24 bg-warm-bg">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="text-center mb-14">
-                        <div className="flex items-center justify-center gap-3 mb-4">
-                            <div className="w-8 h-0.5 bg-secondary" />
-                            <span className="text-secondary font-bold text-sm uppercase tracking-[0.2em]">How It Works</span>
-                            <div className="w-8 h-0.5 bg-secondary" />
-                        </div>
-                        <h2 className="section-title">Publication <span className="text-primary">Process</span></h2>
-                        <p className="text-gray-500 max-w-xl mx-auto mt-3">From submission to publication — a transparent, peer-reviewed journey</p>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
-                        {/* Connecting line */}
-                        <div className="hidden lg:block absolute top-14 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-primary/20 via-primary/40 to-primary/20 z-0" />
-
-                        {[
-                            { step: "01", title: "Submit Paper", desc: "Upload your research manuscript through our secure online portal with all required documents.", icon: Send, color: "from-blue-500 to-indigo-600" },
-                            { step: "02", title: "Peer Review", desc: "Expert reviewers from relevant fields conduct rigorous double-blind evaluation of your work.", icon: Users, color: "from-emerald-500 to-teal-600" },
-                            { step: "03", title: "Revisions", desc: "Incorporate reviewer feedback and submit your revised manuscript for final evaluation.", icon: FileText, color: "from-orange-500 to-amber-600" },
-                            { step: "04", title: "Publication", desc: "Accepted papers are published in our journal with DOI assignment and global indexing.", icon: Award, color: "from-purple-500 to-violet-600" },
-                        ].map((step, i) => (
-                            <motion.div
-                                key={i}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: i * 0.15 }}
-                                className="card-modern p-8 text-center relative z-10"
+                                transition={{ delay: i * 0.1, duration: 0.8 }}
+                                className="group"
                             >
-                                <div className={`w-16 h-16 mx-auto mb-5 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-lg`}>
-                                    <step.icon className="w-8 h-8 text-white" />
+                                <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center group-hover:bg-white/20 transition-all duration-500">
+                                    <stat.icon className="w-8 h-8 text-white/80 group-hover:scale-110 transition-transform" />
                                 </div>
-                                <span className="text-primary/40 text-xs font-black uppercase tracking-widest">Step {step.step}</span>
-                                <h3 className="font-bold text-dark text-lg mt-1 mb-3">{step.title}</h3>
-                                <p className="text-gray-500 text-sm leading-relaxed">{step.desc}</p>
+                                <div className="text-4xl lg:text-5xl font-black text-white mb-2 tracking-tighter">{stat.num}</div>
+                                <p className="text-white/50 text-[10px] font-black uppercase tracking-[0.2em]">{stat.label}</p>
                             </motion.div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* ─── WHY CHOOSE US (Fistudy why-choose style) ─── */}
-            <section className="py-24 bg-white">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                        {/* Left image with overlay card */}
+            {/* ─── WHY CHOOSE OUR BOOKS ─── */}
+            <section className="py-32 bg-white relative overflow-hidden">
+                <div className="container-custom">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                         <motion.div
-                            initial={{ opacity: 0, x: -30 }}
+                            initial={{ opacity: 0, x: -50 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            className="relative"
+                            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                            className="relative group"
                         >
-                            <div className="rounded-3xl overflow-hidden shadow-2xl aspect-[4/3]">
-                                <img src="/fistudy-assets/resources/about-three-img-1.jpg" alt="Research" className="w-full h-full object-cover" />
+                            <div className="rounded-[3rem] overflow-hidden shadow-2xl aspect-[4/5] relative">
+                                <img src="/fistudy-assets/resources/research_library.png" alt="Premium Books" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent" />
                             </div>
+
                             <motion.div
-                                initial={{ opacity: 0, y: 30 }}
+                                initial={{ opacity: 0, y: 40 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: 0.3 }}
-                                className="absolute -bottom-8 right-6 bg-white rounded-2xl shadow-2xl p-6 border border-gray-100"
+                                transition={{ delay: 0.5, duration: 0.8 }}
+                                className="absolute -bottom-10 -right-10 bg-white p-10 rounded-[2.5rem] shadow-[0_30px_60px_rgba(79,119,255,0.12)] border border-gray-100"
                             >
-                                <div className="flex items-baseline gap-1 mb-1">
-                                    <span className="text-4xl font-black text-dark">50</span>
-                                    <span className="text-secondary text-2xl font-black">+</span>
+                                <div className="flex items-center gap-6">
+                                    <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center">
+                                        <Award className="w-8 h-8 text-primary" />
+                                    </div>
+                                    <div>
+                                        <div className="text-3xl font-black text-dark tracking-tighter">Gold Standard</div>
+                                        <p className="text-muted text-xs font-bold uppercase tracking-widest mt-1">Peer Review Quality</p>
+                                    </div>
                                 </div>
-                                <p className="text-gray-500 text-sm font-semibold">Years of Peer-Reviewed<br />Excellence</p>
                             </motion.div>
                         </motion.div>
 
-                        {/* Right content */}
-                        <motion.div {...fadeInUp} className="lg:pl-4">
-                            <div className="flex items-center gap-3 mb-4">
-                                <div className="w-8 h-0.5 bg-secondary" />
-                                <span className="text-secondary font-bold text-sm uppercase tracking-[0.2em]">Our Mission</span>
+                        <motion.div {...fadeInUp}>
+                            <div className="flex items-center gap-4 mb-8">
+                                <span className="h-px w-10 bg-secondary" />
+                                <span className="text-secondary font-black text-[11px] uppercase tracking-[0.4em]">Why Choose Us</span>
                             </div>
-                            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-dark leading-tight mb-6">
-                                Bridging the Gap Between <span className="text-primary">Innovation &amp; Implementation</span>
+                            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-dark leading-[1.15] mb-8">
+                                Premium <span className="text-primary italic">Publishing Excellence</span> for Every Author
                             </h2>
-                            <p className="text-gray-500 leading-relaxed mb-8">
-                                Sanmati Journal is a national, peer-reviewed open-access journal dedicated to publishing high-quality research that pushes the boundaries of human understanding. We focus on interdisciplinary approaches that combine hard sciences with social perspectives.
+                            <p className="text-muted font-medium text-lg leading-relaxed mb-12">
+                                We deliver world-class book publishing services — from manuscript review and design to global distribution. Every title we publish carries the stamp of academic integrity and premium production quality.
                             </p>
-                            <div className="grid grid-cols-2 gap-4 mb-10">
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
                                 {[
-                                    { icon: Zap, label: "Fast Publication", desc: "Decisions within 4–6 weeks" },
-                                    { icon: Globe, label: "Global Indexing", desc: "Wider academic visibility" },
-                                    { icon: Shield, label: "DOI Support", desc: "Permanent paper identity" },
-                                    { icon: Search, label: "Peer Review", desc: "Double-blind evaluation" },
-                                ].map((item, i) => (
-                                    <div key={i} className="flex items-start gap-3 p-4 rounded-xl bg-warm-bg hover:bg-primary/5 transition-colors group">
-                                        <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
-                                            <item.icon className="w-4 h-4 text-primary" />
+                                    { icon: Globe, label: "Global Shipping", desc: "Delivered to 50+ countries worldwide." },
+                                    { icon: Feather, label: "Signed Editions", desc: "Exclusive author-signed collector copies." },
+                                    { icon: Zap, label: "Early Access", desc: "Pre-order before official launch dates." },
+                                    { icon: Package, label: "Premium Hardcover", desc: "High-quality binding and print production." },
+                                ].map((feature, i) => (
+                                    <div key={i} className="flex gap-4 p-6 rounded-3xl bg-warm-bg border border-gray-50 hover:border-primary/20 transition-all group">
+                                        <div className="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-all text-primary">
+                                            <feature.icon className="w-5 h-5" />
                                         </div>
                                         <div>
-                                            <p className="font-bold text-dark text-sm">{item.label}</p>
-                                            <p className="text-gray-400 text-xs">{item.desc}</p>
+                                            <h4 className="text-sm font-black text-dark mb-1">{feature.label}</h4>
+                                            <p className="text-muted text-[11px] font-bold uppercase tracking-wide opacity-60">{feature.desc}</p>
                                         </div>
                                     </div>
                                 ))}
                             </div>
-                            <div className="flex gap-4">
-                                <Link href="/submission-guidelines/call-for-papers"
-                                    className="group px-8 py-3.5 bg-secondary text-white rounded-full font-bold text-sm hover:bg-secondary-dark transition-all flex items-center gap-2 shadow-lg shadow-secondary/20 uppercase tracking-wider">
-                                    <ChevronRight className="w-4 h-4" /> Submit Manuscript
-                                </Link>
-                                <Link href="/basic-info/about-journal"
-                                    className="px-8 py-3.5 border-2 border-gray-200 hover:border-primary text-dark hover:text-primary rounded-full font-bold text-sm transition-all uppercase tracking-wider">
-                                    Learn More
-                                </Link>
-                            </div>
+
+                            <Link href="/book-publication" className="inline-flex items-center gap-4 text-dark font-black text-xs uppercase tracking-[0.2em] group">
+                                <span className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center text-white group-hover:bg-primary transition-all">
+                                    <ArrowRight className="w-6 h-6" />
+                                </span>
+                                Browse All Books
+                            </Link>
                         </motion.div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ─── PUBLICATION PROCESS ─── */}
+            <section className="py-32 bg-warm-bg relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[140px] -mr-96 -mt-96" />
+                <div className="container-custom relative z-10">
+                    <div className="text-center max-w-3xl mx-auto mb-24">
+                        <motion.div {...fadeInUp} className="flex items-center justify-center gap-4 mb-6">
+                            <span className="h-px w-10 bg-secondary" />
+                            <span className="text-secondary font-black text-[11px] uppercase tracking-[0.4em]">Publication Pipeline</span>
+                            <span className="h-px w-10 bg-secondary" />
+                        </motion.div>
+                        <motion.h2 {...fadeInUp} transition={{ delay: 0.1 }} className="text-4xl lg:text-5xl font-serif font-bold text-dark mb-6">
+                            The <span className="text-primary italic">Scholarly Journey</span>
+                        </motion.h2>
+                        <motion.p {...fadeInUp} transition={{ delay: 0.2 }} className="text-muted font-medium text-lg">
+                            From your manuscript to a published masterpiece — a transparent, rigorous process.
+                        </motion.p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
+                        <div className="hidden md:block absolute top-[60px] left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent" />
+                        {[
+                            { step: "01", title: "Manuscript Submission", desc: "Digital intake with initial ethics and originality validation.", icon: UploadCloud },
+                            { step: "02", title: "Peer Review", desc: "Double-blind evaluation by distinguished domain experts.", icon: FileCheck },
+                            { step: "03", title: "Refinement", desc: "Collaborative revision based on empirical rigor and expert feedback.", icon: RefreshCw },
+                            { step: "04", title: "Publication & Archival", desc: "Final curation, DOI registration, global indexing, and shipping.", icon: Globe },
+                        ].map((item, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.15, duration: 0.8 }}
+                                className="relative group p-10 flex flex-col items-center text-center"
+                            >
+                                <div className="z-10 w-28 h-28 rounded-full bg-white border border-gray-100 flex items-center justify-center mb-8 group-hover:bg-primary group-hover:border-primary transition-all duration-500 shadow-xl">
+                                    <div className="absolute -top-2 left-1/2 -translate-x-1/2 bg-secondary text-white text-[10px] font-black px-3 py-1 rounded-full">{item.step}</div>
+                                    <item.icon className="w-10 h-10 text-secondary group-hover:text-white transition-colors" />
+                                </div>
+                                <h3 className="text-lg font-serif font-bold text-dark mb-4 group-hover:text-primary transition-colors">{item.title}</h3>
+                                <p className="text-muted text-[13px] leading-relaxed font-medium">{item.desc}</p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ─── NEWSLETTER (Coral Red Banner) ─── */}
+            <section className="py-16 bg-coral relative overflow-hidden">
+                <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.2) 1px, transparent 0)', backgroundSize: '32px 32px' }} />
+                <div className="container-custom relative z-10">
+                    <div className="flex flex-col lg:flex-row items-center gap-10 justify-between">
+                        <div className="text-white text-center lg:text-left">
+                            <p className="text-white/70 font-black text-[11px] uppercase tracking-[0.35em] mb-2 flex items-center gap-2 justify-center lg:justify-start">
+                                <Send className="w-3.5 h-3.5" /> Stay Updated
+                            </p>
+                            <h3 className="text-3xl lg:text-4xl font-serif font-bold">Subscribe for New Releases & Launch Events</h3>
+                        </div>
+                        <div className="flex gap-3 flex-shrink-0 w-full lg:w-auto">
+                            <input
+                                type="email"
+                                placeholder="Enter your email address..."
+                                className="flex-1 lg:w-72 px-6 py-4 rounded-2xl bg-white/15 border border-white/25 text-white placeholder-white/50 focus:outline-none focus:border-white/50 focus:bg-white/20 transition-all font-medium text-sm"
+                            />
+                            <button className="px-8 py-4 bg-white text-coral font-black rounded-2xl text-sm uppercase tracking-widest hover:shadow-2xl hover:-translate-y-0.5 transition-all shrink-0">
+                                Subscribe
+                            </button>
+                        </div>
                     </div>
                 </div>
             </section>
 
             {/* ─── TESTIMONIALS ─── */}
-            <section className="py-24 bg-warm-bg">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="text-center mb-14">
-                        <div className="flex items-center justify-center gap-3 mb-4">
-                            <div className="w-8 h-0.5 bg-secondary" />
-                            <span className="text-secondary font-bold text-sm uppercase tracking-[0.2em]">Testimonials</span>
-                            <div className="w-8 h-0.5 bg-secondary" />
-                        </div>
-                        <h2 className="section-title">What <span className="text-primary">Researchers Say</span></h2>
+            <section className="py-32 bg-white">
+                <div className="container-custom">
+                    <div className="text-center max-w-2xl mx-auto mb-20">
+                        <motion.div {...fadeInUp} className="flex items-center justify-center gap-4 mb-6">
+                            <span className="h-px w-10 bg-secondary" />
+                            <span className="text-secondary font-black text-[11px] uppercase tracking-[0.4em]">Voice of Scholars</span>
+                            <span className="h-px w-10 bg-secondary" />
+                        </motion.div>
+                        <h2 className="text-4xl lg:text-5xl font-serif font-bold text-dark">
+                            What Our <span className="text-primary italic">Readers Say</span>
+                        </h2>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                         {[
-                            { name: "Dr. Amit Sharma", role: "Professor, IIT Delhi", text: "Sanmati Spectrum provides a rigorous and transparent peer-review process. The editorial team is highly responsive and supportive throughout the publication journey.", rating: 5 },
-                            { name: "Prof. Ritu Verma", role: "Researcher, JNU", text: "Publishing with Sanmati Journal was seamless. The multidisciplinary focus allowed me to present my interdisciplinary research to a wider academic audience.", rating: 5 },
-                            { name: "Dr. Pradeep Kumar", role: "Associate Professor, BHU", text: "The quality standards maintained by Sanmati Spectrum are commendable. Their commitment to promoting genuine academic research is truly inspiring.", rating: 5 },
+                            { name: "Dr. Amit Sharma", role: "Professor, IIT Delhi", text: "Sanmati's book publications are of exceptional quality. The peer-review process is rigorous and the editorial team is highly responsive.", img: "/fistudy-assets/team/team-1-2.jpg", stars: 5 },
+                            { name: "Prof. Ritu Verma", role: "Researcher, JNU", text: "The multidisciplinary focus and premium hardcover quality make their publications stand out. I'd recommend to every academic author.", img: "/fistudy-assets/team/team-2-1.jpg", stars: 5 },
+                            { name: "Dr. Pradeep Kumar", role: "Associate Professor, BHU", text: "From manuscript to final book, the journey was smooth and professional. The global distribution is a huge plus for visibility.", img: "/fistudy-assets/team/team-2-2.jpg", stars: 5 },
                         ].map((t, i) => (
                             <motion.div
                                 key={i}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: i * 0.15 }}
-                                className="card-modern p-8 relative group"
+                                transition={{ delay: i * 0.1 }}
+                                className="group p-10 rounded-[2.5rem] bg-warm-bg border border-gray-100 hover:shadow-2xl hover:border-primary/15 hover:-translate-y-1 transition-all duration-500 relative"
                             >
-                                {/* Quote mark */}
-                                <div className="absolute top-6 right-6 text-5xl text-primary/8 font-serif select-none group-hover:text-primary/15 transition-colors">"</div>
-                                <div className="flex gap-1 mb-4">
-                                    {Array(t.rating).fill(0).map((_, j) => (
-                                        <Star key={j} className="w-4 h-4 text-secondary fill-secondary" />
+                                <Quote className="absolute top-10 right-10 w-16 h-16 text-primary/5 group-hover:text-primary/10 transition-colors" />
+                                <div className="flex gap-1 mb-6">
+                                    {[...Array(t.stars)].map((_, k) => (
+                                        <Star key={k} className="w-4 h-4 fill-secondary text-secondary" />
                                     ))}
                                 </div>
-                                <p className="text-gray-600 text-sm leading-relaxed mb-6 italic">"{t.text}"</p>
-                                <div className="flex items-center gap-3">
-                                    <div className="w-11 h-11 rounded-full bg-gradient-to-br from-primary to-dark flex items-center justify-center text-white text-xs font-bold shrink-0">
-                                        {t.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                                <p className="text-muted font-medium text-lg italic leading-relaxed mb-10 relative z-10">"{t.text}"</p>
+                                <div className="flex items-center gap-5">
+                                    <div className="w-14 h-14 rounded-2xl overflow-hidden bg-primary/10">
+                                        <img src={t.img} alt={t.name} className="w-full h-full object-cover group-hover:scale-110 transition-all" />
                                     </div>
                                     <div>
-                                        <p className="font-bold text-dark text-sm">{t.name}</p>
-                                        <p className="text-gray-400 text-xs">{t.role}</p>
+                                        <h4 className="font-bold text-dark text-base">{t.name}</h4>
+                                        <p className="text-muted text-[10px] font-black uppercase tracking-widest">{t.role}</p>
                                     </div>
                                 </div>
                             </motion.div>
@@ -425,37 +623,34 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* ─── CTA BANNER (Fistudy newsletter style) ─── */}
-            <section className="py-20 px-6">
-                <div className="max-w-5xl mx-auto bg-gradient-to-br from-dark via-primary-dark to-primary rounded-4xl p-14 relative overflow-hidden text-center shadow-2xl">
-                    <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0)', backgroundSize: '30px 30px' }} />
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-16 -mt-16 blur-2xl" />
-                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary/10 rounded-full -ml-16 -mb-16 blur-2xl" />
-                    <div className="relative z-10">
-                        <div className="flex items-center justify-center gap-3 mb-5">
-                            <div className="w-8 h-0.5 bg-secondary" />
-                            <span className="text-secondary font-bold text-sm uppercase tracking-[0.2em]">Call For Papers</span>
-                            <div className="w-8 h-0.5 bg-secondary" />
-                        </div>
-                        <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-5 leading-tight">
-                            Ready to Contribute?
-                        </h2>
-                        <p className="text-white/60 mb-10 max-w-xl mx-auto text-lg leading-relaxed">
-                            Join our community of scholars. We are currently accepting original research papers for Volume 1, Issue 1.
-                        </p>
-                        <div className="flex flex-col sm:flex-row gap-5 justify-center">
-                            <Link href="/submission-guidelines/call-for-papers"
-                                className="group px-10 py-4 bg-secondary text-white rounded-full font-bold uppercase tracking-widest text-sm shadow-xl hover:bg-secondary-dark transition-all flex items-center justify-center gap-2 hover:-translate-y-0.5">
-                                Submit Manuscript <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </Link>
-                            <Link href="/publication/book-publication"
-                                className="px-10 py-4 bg-white/10 border border-white/20 text-white rounded-full font-bold uppercase tracking-widest text-sm hover:bg-white/20 transition-all flex items-center justify-center gap-2 hover:-translate-y-0.5">
-                                <BookOpen className="w-4 h-4" /> Publish Book
-                            </Link>
+            {/* ─── INVITATION (CTA) ─── */}
+            <section className="py-24">
+                <div className="container-custom">
+                    <div className="relative rounded-[3.5rem] bg-gradient-to-br from-primary via-primary-dark to-[#0a0f2e] p-14 lg:p-24 overflow-hidden text-center shadow-[0_50px_100px_rgba(79,119,255,0.25)]">
+                        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0)', backgroundSize: '40px 40px' }} />
+                        <div className="absolute -top-20 -right-20 w-80 h-80 bg-secondary/15 rounded-full blur-[100px]" />
+                        <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-coral/10 rounded-full blur-[100px]" />
+
+                        <div className="relative z-10 max-w-4xl mx-auto">
+                            <span className="inline-block px-5 py-2 bg-white/8 border border-white/15 rounded-full text-[10px] text-secondary font-black tracking-[0.3em] uppercase mb-8">Ready for Publication</span>
+                            <h2 className="text-5xl lg:text-7xl font-serif font-bold text-white mb-10 leading-[1.1] tracking-tight">
+                                Shaping the Future of <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-secondary-light">Global Research</span>
+                            </h2>
+                            <p className="text-white/45 text-xl font-medium mb-12 max-w-2xl mx-auto leading-relaxed">
+                                Join our community of scholars and authors. Submit your manuscript or explore our latest book releases.
+                            </p>
+                            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                                <Link href="/submission-guidelines/call-for-papers" className="group px-12 py-6 bg-secondary text-white rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-white hover:text-dark transition-all flex items-center gap-3 shadow-2xl">
+                                    Submit Manuscript <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                </Link>
+                                <Link href="/book-publication" className="px-12 py-6 border border-white/15 text-white rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-white/8 transition-all flex items-center gap-3">
+                                    <BookOpen className="w-4 h-4" /> Browse Publications
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
         </MainLayout>
     );
-}
+};

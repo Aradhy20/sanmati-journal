@@ -2,25 +2,32 @@ import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import { motion, AnimatePresence } from 'framer-motion';
 import Seo from '../Components/Seo';
+import CustomCursor from '../Components/CustomCursor';
+import Preloader from '../Components/Preloader';
 
 export default function MainLayout({ children, title, description, keywords }) {
     return (
-        <div className="min-h-screen flex flex-col bg-warm-bg font-sans antialiased relative overflow-x-hidden transition-colors duration-300">
+        <div className="min-h-screen flex flex-col bg-warm-bg font-sans antialiased relative overflow-x-hidden selection:bg-primary/10 selection:text-primary">
             <Seo title={title} description={description} keywords={keywords} />
-            {/* Warm Decorative Background */}
-            <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-30">
-                <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] animate-blob" />
-                <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-accent/10 rounded-full blur-[120px] animate-blob animation-delay-2000" />
+            
+            {/* Elegant Background Accents */}
+            <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+                <div className="absolute top-[-10%] left-[-5%] w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] animate-blob" />
+                <div className="absolute bottom-[-10%] right-[-5%] w-[700px] h-[700px] bg-secondary/5 rounded-full blur-[140px] animate-blob animation-delay-4000" />
+                <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-accent/3 rounded-full blur-[100px] animate-blob animation-delay-2000" />
             </div>
 
+            <CustomCursor />
+            <Preloader />
             <Navbar />
             <main className="flex-grow relative z-10">
                 <AnimatePresence mode="wait">
                     <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.3 }}
+                        key={title}
+                        initial={{ opacity: 0, scale: 0.99, y: 5 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 1.01, y: -5 }}
+                        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                     >
                         {children}
                     </motion.div>

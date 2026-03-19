@@ -1,118 +1,159 @@
+import { motion } from 'framer-motion';
+import { Lock, FileCheck, Copyright, Shield, AlertCircle, Share2, ChevronRight, Scale, Info } from 'lucide-react';
 import PageHeader from '../Components/PageHeader';
 import MainLayout from '../Layouts/MainLayout';
-import { Lock, FileCheck, Copyright, Shield, AlertCircle, Share2 } from 'lucide-react';
-import { ScrollReveal, revealVariants } from '../Components/ScrollReveal';
 import Seo from '../Components/Seo';
 
-const PolicyCard = ({ icon: Icon, title, desc, color, delay }) => (
-    <ScrollReveal variants={revealVariants.fadeUp} delay={delay} className="h-full">
-        <div className={`h-full bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 hover:shadow-2xl transition-all duration-300 group overflow-hidden relative`}>
-            {/* Hover Gradient */}
-            <div className={`absolute inset-0 bg-gradient-to-br from-${color}-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+const fadeInUp = {
+    initial: { opacity: 0, y: 30 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+};
 
-            <div className="relative z-10">
-                <div className={`w-14 h-14 rounded-2xl bg-${color}-50 text-${color}-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm`}>
-                    <Icon className="w-7 h-7" />
-                </div>
+const PolicyCard = ({ icon: Icon, title, desc, colorClass, delay }) => (
+    <motion.div 
+        {...fadeInUp}
+        transition={{ delay }}
+        className="group relative h-full bg-white p-10 rounded-[3rem] border border-gray-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-700 overflow-hidden"
+    >
+        {/* Abstract Background Detail */}
+        <div className={`absolute -top-10 -right-10 w-32 h-32 bg-primary/5 rounded-full group-hover:scale-150 transition-transform duration-1000`} />
+        
+        <div className="relative z-10 flex flex-col h-full">
+            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-lg mb-8 ${colorClass}`}>
+                <Icon className="w-6 h-6 text-white" />
+            </div>
 
-                <h3 className="text-xl font-bold text-dark mb-4 group-hover:text-primary-dark transition-colors">
-                    {title}
-                </h3>
+            <h3 className="text-xl font-serif font-bold text-dark mb-4 group-hover:text-primary transition-colors duration-300">
+                {title}
+            </h3>
 
-                <p className="text-gray-600 leading-relaxed text-sm">
-                    {desc}
-                </p>
+            <p className="text-muted text-sm leading-relaxed mb-10 flex-1 font-medium italic opacity-80">
+                {desc}
+            </p>
+
+            <div className="flex items-center gap-3 text-[9px] font-black uppercase tracking-[0.2em] text-dark/30 group-hover:text-primary transition-colors">
+                <Scale className="w-3.5 h-3.5" /> Compliance Node {delay * 10}
             </div>
         </div>
-    </ScrollReveal>
+    </motion.div>
 );
 
 export default function Compliance() {
     return (
         <MainLayout>
-            <Seo
-                title="Compliance & Copyright"
-                description="Our Open Access policy, Copyright terms, and Author Declaration guidelines."
+            <Seo 
+                title="Legal & Compliance Registry" 
+                description="Our commitment to ethical scholarly dissemination, including Open Access, Copyright, and Plagiarism policies."
+            />
+            
+            <PageHeader
+                title="Legal Registry"
+                breadcrumb="Compliance"
+                subtitle="The ethical framework ensuring transparency & integrity across our multidisciplinary publications."
             />
 
-            <div className="bg-warm-bg min-h-screen">
-                <PageHeader
-                    title="Compliance & Copyright"
-                    breadcrumb="Legal"
-                    subtitle="Our Commitment to Open and Ethical Publishing"
-                />
-
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-                        <PolicyCard
-                            icon={Copyright}
-                            color="blue"
-                            title="Copyright Policy"
-                            desc="Authors retain full copyright of their work under the Creative Commons Attribution License. By submitting, they grant the journal the right of first publication, ensuring their work is legally protected while allowing broad dissemination."
-                            delay={0.1}
-                        />
-
-                        <PolicyCard
-                            icon={Lock}
-                            color="green"
-                            title="Open Access"
-                            desc="We believe knowledge should be free. All articles are available immediately upon publication to read, download, and share. This increases the visibility and citation impact of your research."
-                            delay={0.2}
-                        />
-
-                        <PolicyCard
-                            icon={FileCheck}
-                            color="purple"
-                            title="Author Declaration"
-                            desc="Transparency is key. All authors must sign a formal declaration confirming the work's originality, absence of conflict of interest, and adherence to our ethical standards before publication."
-                            delay={0.3}
-                        />
-
-                        <PolicyCard
-                            icon={Shield}
-                            color="red"
-                            title="Plagiarism Policy"
-                            desc="We adhere to a zero-tolerance policy against plagiarism. All submissions are screened using Turnitin. Similarity index must be below 20% (excluding references) to proceed to peer review."
-                            delay={0.4}
-                        />
-
-                        <PolicyCard
-                            icon={AlertCircle}
-                            color="orange"
-                            title="Conflict of Interest"
-                            desc="Authors must disclose any financial or personal relationships that could influence the work. Reviewers and editors are also required to declare potential conflicts to ensure unbiased evaluation."
-                            delay={0.5}
-                        />
-
-                        <PolicyCard
-                            icon={Share2}
-                            color="cyan"
-                            title="Licensing & Sharing"
-                            desc="Articles are licensed under CC BY-NC 4.0. You are free to share and adapt the material for non-commercial purposes, provided appropriate credit is given to the original author and source."
-                            delay={0.6}
-                        />
-
-                    </div>
-
-                    {/* Bottom CTA */}
-                    <ScrollReveal variants={revealVariants.fadeUp} delay={0.7}>
-                        <div className="mt-16 bg-blue-900 rounded-3xl p-8 md:p-12 text-center text-white relative overflow-hidden shadow-2xl">
-                            <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px]" />
-                            <div className="absolute -top-24 -left-24 w-64 h-64 bg-primary rounded-full blur-[100px] opacity-50" />
-
-                            <div className="relative z-10 max-w-2xl mx-auto">
-                                <h3 className="text-2xl md:text-3xl font-bold mb-4 font-serif">Have Legal Questions?</h3>
-                                <p className="text-blue-100 mb-8">
-                                    Our editorial office is available to clarify any doubts regarding copyright, licensing, or compliance.
-                                </p>
-                                <a href="/contact-us" className="inline-block px-8 py-3 bg-white text-dark rounded-full font-bold hover:bg-primary/5 transition-colors">
-                                    Contact Support
-                                </a>
-                            </div>
+            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-24 relative">
+                {/* ─── INTRO SECTION ─── */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center mb-24">
+                    <motion.div {...fadeInUp} className="lg:col-span-12 xl:col-span-7">
+                        <div className="flex items-center gap-4 mb-8">
+                            <span className="h-px w-10 bg-primary" />
+                            <span className="text-primary font-black text-[11px] uppercase tracking-[0.4em]">Policy Protocol</span>
                         </div>
-                    </ScrollReveal>
+                        <h2 className="text-4xl md:text-5xl font-serif font-bold text-dark mb-8 leading-tight">
+                            Publishing with <br />
+                            <span className="text-secondary italic">Ethical Precision</span>
+                        </h2>
+                        <p className="text-lg text-muted font-medium leading-relaxed max-w-xl">
+                            Sanmati Journal adheres to international standards of scholarly publishing. Our goal is to protect intellectual property while maximizing global accessibility.
+                        </p>
+                    </motion.div>
+                    
+                    <motion.div {...fadeInUp} className="lg:col-span-12 xl:col-span-5 bg-surface p-8 rounded-[3rem] border border-gray-100 flex items-start gap-6">
+                        <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
+                            <Info className="w-6 h-6 text-primary" />
+                        </div>
+                        <div>
+                            <h4 className="font-bold text-dark text-sm mb-2">Notice for Authors</h4>
+                            <p className="text-muted text-xs leading-relaxed">
+                                All submissions are strictly peer-reviewed. Adherence to these guidelines is mandatory for initial screening.
+                            </p>
+                        </div>
+                    </motion.div>
                 </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <PolicyCard
+                        icon={Copyright}
+                        colorClass="bg-primary"
+                        title="Intellectual Property"
+                        desc="Authors retain full copyright under the CC BY-NC 4.0 license. We protect the right of first publication while ensuring authorship remains the cornerstone of the work."
+                        delay={0.1}
+                    />
+                    <PolicyCard
+                        icon={Lock}
+                        colorClass="bg-secondary"
+                        title="Open Access Protocol"
+                        desc="Empowering the global community with immediate, unrestricted access to scholarly research without financial barriers or subscription delays."
+                        delay={0.2}
+                    />
+                    <PolicyCard
+                        icon={Shield}
+                        colorClass="bg-dark"
+                        title="Integrity & Screening"
+                        desc="Zero-tolerance for plagiarism. All manuscripts undergo high-rigidity screening via Turnitin. A similarity index below 20% is non-negotiable."
+                        delay={0.3}
+                    />
+                    <PolicyCard
+                        icon={FileCheck}
+                        colorClass="bg-emerald-600"
+                        title="Author Declaration"
+                        desc="A formal verification of originality. Authors must affirm the absence of conflict and the uniqueness of their empirical findings prior to review."
+                        delay={0.4}
+                    />
+                    <PolicyCard
+                        icon={AlertCircle}
+                        colorClass="bg-orange-600"
+                        title="Discourse Transparency"
+                        desc="Full disclosure of funding and personal relationships is required to ensure the neutrality and credibility of published academic discourse."
+                        delay={0.5}
+                    />
+                    <PolicyCard
+                        icon={Share2}
+                        colorClass="bg-blue-600"
+                        title="Global Dissemination"
+                        desc="Materials can be shared and adapted for non-commercial use, provided the original academic lineage is properly attributed to the authors."
+                        delay={0.6}
+                    />
+                </div>
+
+                {/* ─── BOTTOM CTA ─── */}
+                <motion.div {...fadeInUp} className="mt-24">
+                    <div className="relative rounded-[4rem] overflow-hidden bg-dark p-12 lg:p-20 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-12">
+                        {/* Background Texture */}
+                        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:24px_24px]" />
+                        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/20 to-transparent" />
+                        
+                        <div className="relative z-10 lg:max-w-xl text-center lg:text-left">
+                            <span className="text-secondary font-black text-[10px] uppercase tracking-[0.4em] mb-6 block">Expert Guidance</span>
+                            <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6">Clarifications on <span className="text-secondary italic">Compliance?</span></h3>
+                            <p className="text-white/60 text-lg leading-relaxed font-light">
+                                Our legal and ethics desk is available to assist authors with complex queries regarding licensing and intellectual property.
+                            </p>
+                        </div>
+
+                        <div className="relative z-10 shrink-0">
+                            <a 
+                                href="/contact-us" 
+                                className="inline-flex items-center gap-4 px-10 py-5 bg-white text-dark rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-secondary hover:text-white transition-all shadow-xl hover:-translate-y-1"
+                            >
+                                Contact Secretariat <ChevronRight className="w-4 h-4" />
+                            </a>
+                        </div>
+                    </div>
+                </motion.div>
             </div>
         </MainLayout>
     );

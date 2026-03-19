@@ -2,30 +2,52 @@
 
 @theme {
   --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  --font-serif: "Roboto Serif", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-serif: "Playfair Display", "Roboto Serif", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 
-  /* Academic Premium Color Palette */
-  --color-primary: #5776f1;
-  --color-primary-dark: #4460d9;
-  --color-primary-light: #7b93f5;
-  --color-secondary: #ff782d;
-  --color-secondary-dark: #e56820;
-  --color-secondary-light: #ff9e5e;
-  --color-dark: #000b4d;
-  --color-dark-light: #1a1f5e;
-  --color-accent: #4ecdc4;
-  --color-warm-bg: #f8f9fa;
-  --color-warm-100: #fff1e6;
-  --color-warm-200: #ffe0cc;
+  /* ── Fistudy Color Palette ── */
+  --color-primary: #687EFF;        /* Fistudy Periwinkle Blue */
+  --color-primary-dark: #4F65E0;   /* Deeper Blue */
+  --color-primary-light: #8FA0FF;  /* Light Blue */
 
-  --animate-blob: blob 7s infinite;
-  --animate-float-bob-y: float-bob-y 3s ease-in-out infinite;
-  --animate-float-bob-x: float-bob-x 3s ease-in-out infinite;
-  --animate-img-bounce: img-bounce 3s ease-in-out infinite;
-  --animate-rotate-me: rotate-me 10s linear infinite;
-  --animate-marquee: marquee 25s linear infinite;
-  --animate-fade-in-up: fade-in-up 0.6s ease-out both;
-  --animate-counter-pulse: counter-pulse 2s ease-in-out infinite;
+  --color-secondary: #F87A53;      /* Fistudy Orange */
+  --color-secondary-dark: #e06940; /* Deeper Orange */
+  --color-secondary-light: #FFAA88;/* Light Orange */
+
+  --color-coral: #F87A53;          /* Same orange used as accent */
+  --color-coral-dark: #e06940;
+
+  --color-success: #059669;
+  --color-info: #0284c7;
+
+  --color-dark: #052143;           /* Fistudy Navy Black */
+  --color-dark-light: #1a3a60;     /* Lighter Navy */
+
+  --color-accent: #FFC224;         /* Fistudy Gold accent */
+  --color-accent-light: #FFD96E;
+
+  --color-warm-bg: #eef1ff;        /* Fistudy Light Lavender BG */
+  --color-surface: #ffffff;
+  --color-muted: #6B778B;          /* Fistudy Gray */
+
+  --animate-blob: blob 10s infinite;
+  --animate-float: float 4s ease-in-out infinite;
+  --animate-fade-in: fade-in 0.8s ease-out both;
+  --animate-slide-up: slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
   @keyframes blob {
     0% { transform: translate(0px, 0px) scale(1); }
@@ -134,6 +156,29 @@
 
   .fade-l {
     mask-image: linear-gradient(to left, black, transparent);
+  }
+
+  /* Book Publication Theme Utilities */
+  .bg-coral {
+    background-color: var(--color-coral);
+  }
+
+  .text-coral {
+    color: var(--color-coral);
+  }
+
+  .bg-coral-dark {
+    background-color: var(--color-coral-dark);
+  }
+
+  .book-card {
+    @apply bg-white rounded-[2rem] border border-gray-100 shadow-[0_8px_30px_rgba(79,119,255,0.06)]
+           hover:shadow-[0_20px_50px_rgba(79,119,255,0.14)] hover:-translate-y-2 hover:border-primary/20
+           transition-all duration-500;
+  }
+
+  .book-card-img {
+    @apply w-full h-full object-cover group-hover:scale-105 transition-transform duration-700;
   }
 }
 

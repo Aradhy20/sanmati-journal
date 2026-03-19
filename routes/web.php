@@ -49,7 +49,7 @@ Route::get('/compliance', [JournalController::class, 'compliance'])->name('compl
 
 // Authentication Routes
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'create'])->name('login');
-Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'store'])->middleware('throttle:60,1');
+Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'store'])->middleware('throttle:5,1');
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'destroy'])->name('logout');
 
 // Admin Routes (Protected with auth + admin role check)

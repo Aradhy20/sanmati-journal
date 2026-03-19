@@ -25,105 +25,148 @@ export default function AboutJournal() {
                 subtitle="Sanmati Spectrum of Knowledge & Emerging Discourse"
             />
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative">
-                {/* Intro */}
-                <motion.div {...fadeInUp} className="card-modern p-8 md:p-12 mb-16 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-white to-secondary/5" />
-                    <div className="relative z-10">
-                        <h2 className="text-3xl font-serif font-bold text-dark mb-6 flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                                <BookOpen className="text-primary w-5 h-5" />
+            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-24 relative">
+                {/* ─── INTRODUCTION (The Scholarly Mandate) ─── */}
+                <motion.div {...fadeInUp} className="relative group mb-24">
+                    <div className="absolute -inset-4 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 rounded-[3rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+                    <div className="relative bg-white border border-gray-100 rounded-[2.5rem] p-10 md:p-16 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden">
+                        <div className="absolute top-0 right-0 p-12 opacity-[0.03] rotate-12">
+                            <BookOpen className="w-64 h-64 text-dark" />
+                        </div>
+                        
+                        <div className="relative z-10">
+                            <div className="flex items-center gap-4 mb-10">
+                                <span className="h-px w-10 bg-secondary" />
+                                <span className="text-secondary font-black text-[11px] uppercase tracking-[0.4em]">The Mandate</span>
                             </div>
-                            Introduction
-                        </h2>
-                        <div className="prose prose-lg text-gray-600 max-w-none">
-                            <p className="leading-relaxed mb-6">
-                                <strong className="text-dark font-bold">Sanmati Spectrum of Knowledge & Emerging Discourse</strong> is dedicated to promoting multidisciplinary academic dialogue and advancing knowledge through rigorous research. The journal encourages innovative perspectives that integrate arts, sciences, society, culture, and technology.
-                            </p>
-                            <p className="leading-relaxed">
-                                As a national, peer-reviewed, and refereed quarterly journal, we provide a scholarly platform for original research, case studies, thematic articles, book reviews, and conference papers.
-                            </p>
+                            
+                            <h2 className="text-4xl md:text-5xl font-serif font-bold text-dark mb-10 leading-[1.1]">
+                                Engineering a <span className="text-primary italic">Paradigm for Research</span>
+                            </h2>
+                            
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                                <div className="lg:col-span-12 prose prose-lg prose-slate max-w-none">
+                                    <p className="text-xl text-dark/70 font-medium leading-relaxed mb-8">
+                                        <strong className="text-dark font-black">Sanmati Spectrum of Knowledge & Emerging Discourse</strong> serves as an elite national platform designed to catalyze the cross-pollination of complex ideas across diverse academic landscapes.
+                                    </p>
+                                    <p className="text-muted leading-relaxed mb-8">
+                                        We operate at the intersection of traditional academic rigor and contemporary innovative inquiry. As a peer-reviewed, refereed quarterly journal, we provide a structured environment for the publication of transformative research that addresses both fundamental theoretical questions and urgent practical implementations.
+                                    </p>
+                                    <div className="flex flex-wrap gap-4 mt-10">
+                                        {['Multidisciplinary', 'Peer-Reviewed', 'Refereed', 'Quarterly'].map((tag) => (
+                                            <span key={tag} className="px-5 py-2 bg-surface border border-gray-100 rounded-full text-[10px] font-black uppercase tracking-widest text-secondary">
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </motion.div>
 
-                {/* Mission & Vision */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-                    <motion.div {...fadeInUp} transition={{ delay: 0.1 }}
-                        className="h-full p-8 bg-gradient-to-br from-primary to-primary-dark text-white rounded-3xl shadow-xl relative overflow-hidden group">
-                        <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl group-hover:scale-110 transition-transform duration-700" />
-                        <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center mb-6">
-                            <Target className="w-6 h-6 text-white" />
+                {/* ─── MISSION & VISION (Strategic Core) ─── */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-24">
+                    <motion.div 
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="relative p-12 lg:p-16 bg-dark rounded-[3rem] overflow-hidden group shadow-2xl"
+                    >
+                        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0)', backgroundSize: '40px 40px' }} />
+                        <div className="absolute -top-20 -right-20 w-80 h-80 bg-primary/20 rounded-full blur-[100px] group-hover:scale-110 transition-transform duration-1000" />
+                        
+                        <div className="relative z-10">
+                            <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-10 group-hover:bg-primary transition-colors duration-500">
+                                <Target className="w-8 h-8 text-secondary group-hover:text-white" />
+                            </div>
+                            <h3 className="text-3xl font-serif font-bold text-white mb-6">Our Mission</h3>
+                            <p className="text-white/40 text-lg leading-relaxed font-medium">
+                                To architect a global knowledge substrate where rigorous scholarly inquiry meets accessibility, empowering the next generation of researchers to solve multidimensional societal challenges.
+                            </p>
                         </div>
-                        <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
-                        <p className="text-white/80 leading-relaxed text-lg">
-                            To foster a global ecosystem of knowledge sharing where academic rigor meets innovative thinking, empowering researchers to solve tomorrow's challenges.
-                        </p>
                     </motion.div>
 
-                    <motion.div {...fadeInUp} transition={{ delay: 0.2 }}
-                        className="h-full p-8 bg-gradient-to-br from-dark to-dark-light text-white rounded-3xl shadow-xl relative overflow-hidden group">
-                        <div className="absolute bottom-0 left-0 w-48 h-48 bg-secondary/20 rounded-full -ml-16 -mb-16 blur-2xl group-hover:scale-110 transition-transform duration-700" />
-                        <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center mb-6">
-                            <Globe className="w-6 h-6 text-secondary" />
+                    <motion.div 
+                        initial={{ opacity: 0, x: 30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="relative p-12 lg:p-16 bg-surface border border-gray-100 rounded-[3rem] overflow-hidden group hover:shadow-2xl transition-all duration-700"
+                    >
+                        <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-secondary/10 rounded-full blur-[100px] group-hover:scale-110 transition-transform duration-1000" />
+                        
+                        <div className="relative z-10">
+                            <div className="w-16 h-16 rounded-2xl bg-white shadow-sm border border-gray-50 flex items-center justify-center mb-10 group-hover:bg-secondary transition-colors duration-500">
+                                <Globe className="w-8 h-8 text-primary group-hover:text-white" />
+                            </div>
+                            <h3 className="text-3xl font-serif font-bold text-dark mb-6">Our Vision</h3>
+                            <p className="text-muted text-lg leading-relaxed font-medium">
+                                To establish Sanmati Spectrum as the premier citation index for multidisciplinary excellence, bridging the historical wisdom of ivory towers with the agile advancements of the modern digital era.
+                            </p>
                         </div>
-                        <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
-                        <p className="text-white/70 leading-relaxed text-lg">
-                            To become the world's most trusted multidisciplinary citation index, bridging the gap between traditional wisdom and modern scientific inquiry.
-                        </p>
                     </motion.div>
                 </div>
 
-                {/* Key Details */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <motion.div {...fadeInUp} transition={{ delay: 0.3 }}
-                        className="card-modern p-8">
-                        <div className="flex items-center gap-4 mb-8">
-                            <div className="p-3 bg-primary/10 rounded-xl text-primary">
-                                <Award className="w-6 h-6" />
+                {/* ─── JOURNAL ESSENTIALS (Structural Data) ─── */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    <motion.div {...fadeInUp} className="bg-white border border-gray-100 rounded-[2.5rem] p-10 lg:p-14 shadow-sm">
+                        <div className="flex items-center gap-6 mb-12">
+                            <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
+                                <Award className="w-7 h-7 text-primary" />
                             </div>
-                            <h3 className="text-xl font-bold text-dark">Journal Essentials</h3>
+                            <h3 className="text-2xl font-serif font-bold text-dark">Identity & Protocol</h3>
                         </div>
-                        <ul className="space-y-4">
+                        
+                        <div className="space-y-4">
                             {[
                                 { label: "ISSN (Print)", value: "3108-1819" },
-                                { label: "Frequency", value: "Quarterly" },
-                                { label: "Format", value: "Print (Offline)" },
-                                { label: "Language", value: "Bilingual (Hindi & English)" }
+                                { label: "Cycle Frequency", value: "Quarterly (4 Issues/Year)" },
+                                { label: "Dissemination", value: "Print / Physical Archives" },
+                                { label: "Linguistic Scope", value: "Bilingual (Hindi & English)" }
                             ].map((item, i) => (
-                                <li key={i} className="flex justify-between items-center p-4 bg-gray-50 rounded-xl hover:bg-primary/5 transition-colors">
-                                    <span className="text-gray-500 font-medium text-sm uppercase tracking-wide">{item.label}</span>
-                                    <span className="font-bold text-dark">{item.value}</span>
-                                </li>
+                                <div key={i} className="flex justify-between items-center p-6 bg-surface rounded-2xl border border-gray-50 hover:border-primary/20 transition-all group">
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-muted group-hover:text-secondary transition-colors">{item.label}</span>
+                                    <span className="font-bold text-dark group-hover:text-primary transition-colors">{item.value}</span>
+                                </div>
                             ))}
-                        </ul>
+                        </div>
                     </motion.div>
 
-                    <motion.div {...fadeInUp} transition={{ delay: 0.4 }}
-                        className="card-modern p-8 flex flex-col">
-                        <div className="flex items-center gap-4 mb-8">
-                            <div className="p-3 bg-secondary/10 rounded-xl text-secondary">
-                                <Users className="w-6 h-6" />
+                    <motion.div {...fadeInUp} transition={{ delay: 0.2 }} className="bg-dark rounded-[2.5rem] p-10 lg:p-14 shadow-2xl relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/10 rounded-full blur-[80px]" />
+                        
+                        <div className="relative z-10">
+                            <div className="flex items-center gap-6 mb-12">
+                                <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
+                                    <Users className="w-7 h-7 text-secondary" />
+                                </div>
+                                <h3 className="text-2xl font-serif font-bold text-white">Institutional Origin</h3>
                             </div>
-                            <h3 className="text-xl font-bold text-dark">Publication Info</h3>
+                            
+                            <div className="space-y-6">
+                                <div className="flex justify-between items-center p-6 bg-white/5 rounded-2xl border border-white/5">
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-white/30">Inauguration</span>
+                                    <span className="font-bold text-white">Academic Cycle 2026</span>
+                                </div>
+                                
+                                <div className="p-8 bg-gradient-to-br from-primary/20 to-transparent rounded-3xl border border-white/5 mt-6">
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-secondary block mb-4">Official Publisher Address</span>
+                                    <h4 className="text-xl font-bold text-white mb-2">JTS Publications</h4>
+                                    <p className="text-white/40 text-sm leading-relaxed">
+                                        V-508 Gali No. 17, Vijay Park,<br />
+                                        Delhi – 110053, Bharat (India)
+                                    </p>
+                                </div>
+                                
+                                <div className="flex items-center gap-4 text-white/20 text-[10px] font-black uppercase tracking-[0.4em] justify-center mt-10">
+                                    <span className="h-px w-8 bg-white/10" />
+                                    National Research Register
+                                    <span className="h-px w-8 bg-white/10" />
+                                </div>
+                            </div>
                         </div>
-                        <ul className="space-y-4 flex-1">
-                            {[
-                                { label: "Commencement", value: "2026" },
-                                { label: "Nature", value: "National" }
-                            ].map((item, i) => (
-                                <li key={i} className="flex justify-between items-center p-4 bg-gray-50 rounded-xl hover:bg-secondary/5 transition-colors">
-                                    <span className="text-gray-500 font-medium text-sm uppercase tracking-wide">{item.label}</span>
-                                    <span className="font-bold text-dark">{item.value}</span>
-                                </li>
-                            ))}
-                            <li className="bg-gradient-to-br from-dark to-dark-light text-white p-6 rounded-2xl mt-2 shadow-lg relative overflow-hidden">
-                                <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-8 -mt-8" />
-                                <span className="text-white/50 font-medium text-xs uppercase tracking-widest block mb-2">Publisher Address</span>
-                                <span className="font-bold text-lg block mb-1">JTS Publications</span>
-                                <span className="text-white/60 text-sm leading-relaxed block">V-508 Gali No. 17, Vijay Park, Delhi – 110053</span>
-                            </li>
-                        </ul>
                     </motion.div>
                 </div>
             </div>

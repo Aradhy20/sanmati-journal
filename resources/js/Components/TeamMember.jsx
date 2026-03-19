@@ -1,78 +1,68 @@
-import { Mail, Phone, ExternalLink } from 'lucide-react';
+import { Mail, Phone, ExternalLink, GraduationCap, Award } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function TeamMember({ name, role, title, phone, email, scholar, image, variant = 'grid' }) {
-    if (variant === 'large') {
-        return (
-            <div className="flex flex-col items-center p-8 bg-white rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow max-w-lg mx-auto w-full group">
-                <div className="w-48 h-48 rounded-full bg-slate-200 mb-6 overflow-hidden border-4 border-slate-50 shadow-inner relative">
-                    {image ? (
-                        <img src={image} alt={name} className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500" />
-                    ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center text-4xl font-serif font-bold text-blue-800">
-                            {name.charAt(0)}
-                        </div>
-                    )}
-                </div>
-                <span className="text-primary font-bold text-sm tracking-wide uppercase mb-2">{role}</span>
-                <h3 className="text-2xl font-serif font-bold text-dark text-center mb-2">{name}</h3>
-                {title && <p className="text-gray-500 text-sm text-center mb-4">{title}</p>}
+    const isLarge = variant === 'large';
+    
+    const containerClasses = isLarge 
+        ? "flex flex-col items-center p-10 bg-white rounded-[3rem] border border-gray-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-700 max-w-xl mx-auto w-full group relative overflow-hidden"
+        : "flex flex-col items-center p-8 bg-white rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 group relative overflow-hidden h-full";
 
-                <div className="flex flex-col gap-2 mt-4 text-center text-gray-600 text-sm">
-                    {email && (
-                        <p className="flex items-center justify-center gap-2">
-                            <Mail className="w-4 h-4 text-primary" />
-                            <a href={`mailto:${email}`} className="hover:text-primary transition-colors font-medium">{email}</a>
-                        </p>
-                    )}
-                    {phone && (
-                        <p className="flex items-center justify-center gap-2">
-                            <Phone className="w-4 h-4 text-primary" />
-                            <a href={`tel:${phone.split(',')[0].trim()}`} className="hover:text-primary transition-colors font-medium">{phone}</a>
-                        </p>
-                    )}
-                    {scholar && (
-                        <p className="mt-2">
-                            <a href={scholar} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary-dark font-bold hover:underline">
-                                <ExternalLink className="w-4 h-4" /> Google Scholar Profile
-                            </a>
-                        </p>
-                    )}
-                </div>
-            </div>
-        );
-    }
+    const photoContainerClasses = isLarge
+        ? "w-48 h-48 rounded-full bg-dark mb-8 overflow-hidden border-4 border-white shadow-2xl relative z-10"
+        : "w-28 h-28 rounded-3xl bg-dark mb-6 overflow-hidden border-2 border-white shadow-lg relative z-10 rotate-3 group-hover:rotate-0 transition-transform duration-500";
 
     return (
-        <div className="flex flex-col items-center p-6 bg-white rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow group">
-            <div className="w-24 h-24 rounded-full bg-slate-200 mb-4 overflow-hidden border-2 border-slate-100 relative">
+        <div className={containerClasses}>
+            {/* Background Decorative Element */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 group-hover:bg-secondary/10 transition-colors duration-700" />
+            
+            <div className={photoContainerClasses}>
                 {image ? (
-                    <img src={image} alt={name} className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500" />
+                    <img src={image} alt={name} className="object-cover w-full h-full grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" />
                 ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center text-2xl font-serif font-bold text-blue-800">
+                    <div className="w-full h-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-3xl font-serif font-black text-white">
                         {name.charAt(0)}
                     </div>
                 )}
             </div>
-            <span className="text-primary font-bold text-sm tracking-wide uppercase mb-1">{role}</span>
-            <h3 className="text-xl font-serif font-bold text-dark text-center mb-2">{name}</h3>
-            {title && <p className="text-gray-500 text-xs text-center mb-4 line-clamp-3">{title}</p>}
 
-            <div className="flex gap-2 mt-auto">
-                {email && (
-                    <a href={`mailto:${email}`} className="p-2 text-gray-400 hover:text-primary transition-colors" title={email}>
-                        <Mail className="w-5 h-5" />
-                    </a>
+            <div className="relative z-10 text-center flex flex-col items-center h-full">
+                <div className="flex items-center gap-2 mb-3">
+                    <span className="h-px w-4 bg-secondary" />
+                    <span className="text-secondary font-black text-[9px] uppercase tracking-[0.3em]">{role}</span>
+                </div>
+                
+                <h3 className={`${isLarge ? 'text-3xl' : 'text-xl'} font-serif font-bold text-dark mb-3 group-hover:text-primary transition-colors duration-300`}>
+                    {name}
+                </h3>
+                
+                {title && (
+                    <p className="text-muted text-xs font-semibold leading-relaxed mb-6 max-w-[200px]">
+                        {title}
+                    </p>
                 )}
-                {phone && (
-                    <a href={`tel:${phone.split(',')[0].trim()}`} className="p-2 text-gray-400 hover:text-primary transition-colors" title={phone}>
-                        <Phone className="w-5 h-5" />
-                    </a>
-                )}
-                {scholar && (
-                    <a href={scholar} target="_blank" rel="noopener noreferrer" className="p-2 text-gray-400 hover:text-primary transition-colors" title="Google Scholar">
-                        <ExternalLink className="w-5 h-5" />
-                    </a>
-                )}
+
+                <div className="mt-auto flex flex-col items-center gap-4 w-full">
+                    {/* Social/Contact Strip */}
+                    <div className="flex gap-4 p-2 bg-surface rounded-full border border-gray-50">
+                        {email && (
+                            <a href={`mailto:${email}`} className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-dark/40 hover:text-primary hover:shadow-md transition-all" title={email}>
+                                <Mail className="w-3.5 h-3.5" />
+                            </a>
+                        )}
+                        {phone && (
+                            <a href={`tel:${phone.split(',')[0].trim()}`} className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-dark/40 hover:text-secondary hover:shadow-md transition-all" title={phone}>
+                                <Phone className="w-3.5 h-3.5" />
+                            </a>
+                        )}
+                        {scholar && (
+                            <a href={typeof scholar === 'string' ? scholar : '#'} target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-dark/40 hover:text-emerald-600 hover:shadow-md transition-all" title="Google Scholar">
+                                <ExternalLink className="w-3.5 h-3.5" />
+                            </a>
+                        )}
+                    </div>
+                </div>
             </div>
         </div>
     );

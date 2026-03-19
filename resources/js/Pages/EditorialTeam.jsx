@@ -1,7 +1,16 @@
+import { motion } from 'framer-motion';
+import { Award, GraduationCap, Users, ShieldAlert, Sparkles, ChevronRight } from 'lucide-react';
 import PageHeader from '../Components/PageHeader';
 import TeamMember from '../Components/TeamMember';
 import MainLayout from '../Layouts/MainLayout';
-import { motion } from 'framer-motion';
+import Seo from '../Components/Seo';
+
+const fadeInUp = {
+    initial: { opacity: 0, y: 30 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+};
 
 export default function EditorialTeam({ teamMembers = [] }) {
     const editorsInChief = teamMembers.filter(m =>
@@ -14,48 +23,77 @@ export default function EditorialTeam({ teamMembers = [] }) {
 
     const advisoryBoard = teamMembers.filter(m => m.role === 'Advisor');
 
-    const sectionHeader = (title, color) => (
-        <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl font-serif font-bold text-dark mb-12 flex items-center gap-4"
-        >
-            <div className={`w-12 h-1 ${color} rounded-full`} />
-            {title}
-        </motion.h2>
+    const SectionTitle = ({ title, subtitle, icon: Icon, colorClass }) => (
+        <motion.div {...fadeInUp} className="mb-16">
+            <div className="flex items-center gap-4 mb-4">
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${colorClass}`}>
+                    <Icon className="w-5 h-5 text-white" />
+                </div>
+                <span className="h-px flex-1 bg-gray-100" />
+            </div>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-dark mb-4">{title}</h2>
+            <p className="text-muted text-sm font-medium uppercase tracking-widest">{subtitle}</p>
+        </motion.div>
     );
 
     return (
         <MainLayout>
-            <PageHeader
-                title="Editorial Team"
-                breadcrumb="Board Members"
-                subtitle="Meet the distinguished scholars guiding our publication"
+            <Seo 
+                title="Editorial Council" 
+                description="The distinguished council of scholars overseeing the intellectual direction of Sanmati Journal."
             />
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative">
-                {/* Editors in Chief */}
+            <PageHeader
+                title="Editorial Council"
+                breadcrumb="Registry"
+                subtitle="The collaborative intelligence driving our quarterly multidisciplinary discourse."
+            />
+
+            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-24 relative">
+                {/* ─── EMPTY STATE ─── */}
+                {editorsInChief.length === 0 && editorialBoard.length === 0 && advisoryBoard.length === 0 && (
+                    <motion.div 
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="max-w-2xl mx-auto text-center py-24 px-10 bg-surface rounded-[3rem] border border-dashed border-gray-200"
+                    >
+                        <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-xl border border-gray-50">
+                            <ShieldAlert className="w-10 h-10 text-secondary animate-pulse" />
+                        </div>
+                        <h3 className="text-3xl font-serif font-bold text-dark mb-4">Council in Formation</h3>
+                        <p className="text-muted text-lg leading-relaxed mb-10 font-medium">
+                            We are currently finalizing the appointments for the 2026 scholarship cycle. The updated council registry will be published shortly.
+                        </p>
+                        <div className="inline-flex items-center gap-4 px-8 py-3 bg-dark text-white rounded-full text-[10px] font-black uppercase tracking-[0.3em]">
+                            Update Pending
+                        </div>
+                    </motion.div>
+                )}
+
+                {/* ─── EDITORS-IN-CHIEF (Executive Leadership) ─── */}
                 {editorsInChief.length > 0 && (
-                    <div className="mb-20">
-                        {sectionHeader("Editors-in-Chief", "bg-primary")}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                    <div className="mb-32">
+                        <SectionTitle 
+                            title="Executive Leadership" 
+                            subtitle="Strategic oversight & policy curation" 
+                            icon={Award} 
+                            colorClass="bg-primary"
+                        />
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
                             {editorsInChief.map((member, index) => (
-                                <motion.div
-                                    key={member.id}
-                                    initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
+                                <motion.div 
+                                    key={member.id} 
+                                    {...fadeInUp} 
                                     transition={{ delay: index * 0.2 }}
-                                    className="card-modern p-2 overflow-hidden"
                                 >
                                     <TeamMember
                                         name={member.name}
                                         role={member.role}
-                                        phone={member.phone || ''}
-                                        email={member.email || ''}
-                                        scholar={member.role === 'Editor-in-Chief'}
-                                        image={member.photo_url || '/default-avatar.png'}
+                                        phone={member.phone}
+                                        email={member.email}
+                                        scholar={member.role === 'Editor-in-Chief' ? '#' : null}
+                                        image={member.photo_url}
+                                        variant="large"
                                     />
                                 </motion.div>
                             ))}
@@ -63,25 +101,27 @@ export default function EditorialTeam({ teamMembers = [] }) {
                     </div>
                 )}
 
-                {/* Editorial Board */}
+                {/* ─── EDITORIAL BOARD (Execution) ─── */}
                 {editorialBoard.length > 0 && (
-                    <div className="mb-20">
-                        {sectionHeader("Editorial Board Members", "bg-secondary")}
+                    <div className="mb-32">
+                        <SectionTitle 
+                            title="The Editorial Board" 
+                            subtitle="Peer-review coordination & quality assurance" 
+                            icon={Sparkles} 
+                            colorClass="bg-secondary"
+                        />
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {editorialBoard.map((member, i) => (
-                                <motion.div
-                                    key={member.id}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
+                                <motion.div 
+                                    key={member.id} 
+                                    {...fadeInUp} 
                                     transition={{ delay: i * 0.1 }}
-                                    className="card-modern p-6 h-full"
                                 >
                                     <TeamMember
                                         name={member.name}
-                                        role="Member"
+                                        role="Board Member"
                                         title={member.qualifications || member.role}
-                                        image={member.photo_url || '/default-avatar.png'}
+                                        image={member.photo_url}
                                     />
                                 </motion.div>
                             ))}
@@ -89,23 +129,25 @@ export default function EditorialTeam({ teamMembers = [] }) {
                     </div>
                 )}
 
-                {/* Advisory Board */}
+                {/* ─── ADVISORY COUNCIL (Strategy) ─── */}
                 {advisoryBoard.length > 0 && (
-                    <div>
-                        {sectionHeader("Advisory Board", "bg-accent")}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <div className="mb-20">
+                        <SectionTitle 
+                            title="Advisory Council" 
+                            subtitle="Distinguished domain consultants" 
+                            icon={Users} 
+                            colorClass="bg-dark"
+                        />
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                             {advisoryBoard.map((member, i) => (
-                                <motion.div
-                                    key={member.id}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
+                                <motion.div 
+                                    key={member.id} 
+                                    {...fadeInUp} 
                                     transition={{ delay: i * 0.1 }}
-                                    className="card-modern p-6 h-full"
                                 >
                                     <TeamMember
                                         name={member.name}
-                                        role="Advisor"
+                                        role="Strategic Advisor"
                                         title={member.qualifications || member.role}
                                     />
                                 </motion.div>
