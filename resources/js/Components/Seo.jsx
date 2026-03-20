@@ -1,13 +1,25 @@
 import { Head, usePage } from '@inertiajs/react';
 
-export default function Seo({ title, description, keywords, image, type = 'website', author, publishedTime, jsonLd }) {
+export default function Seo({
+    title,
+    description = 'Sanmati Spectrum is a premier multidisciplinary platform dedicated to advancing global discourse. We publish high-impact qualitative and quantitative research, as well as premium academic books.',
+    keywords = 'Sanmati Spectrum, Academic Journal, Research Papers, Book Publication',
+    image = '/meta-image.jpg',
+    type = 'website',
+    author,
+    publishedTime,
+    jsonLd = null,
+    url
+}) {
     const siteName = "Sanmati Journal";
     const defaultDescription = "Sanmati Spectrum of Knowledge & Emerging Discourse - A national, peer-reviewed, multidisciplinary research journal.";
     const defaultKeywords = "research journal, peer-reviewed, multidisciplinary, sanmati, academic publishing, open access";
     const defaultImage = "/logo.jpg";
     const siteUrl = "https://sanmatijournal.com";
 
-    const { url } = usePage();
+    const { url: pageUrl } = usePage();
+    const finalUrl = url || pageUrl;
+
     const fullTitle = title ? `${title} | ${siteName}` : siteName;
     const finalDescription = description || defaultDescription;
     const finalKeywords = keywords || defaultKeywords;

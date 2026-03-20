@@ -19,10 +19,9 @@ const staggerContainer = {
     transition: { staggerChildren: 0.1 }
 };
 
-export default function BookPublication({ bookImages }) {
-    // Basic sorting to make the layout predictable or random based on preferences
-    // We'll reverse it so the newest images (if sorted alphabetically) might show up creatively
-    const displayBooks = bookImages ? [...bookImages].reverse() : [];
+export default function BookPublication({ books }) {
+    // We reverse it to show newest if sort is linear
+    const displayBooks = books ? [...books].reverse() : [];
 
     return (
         <MainLayout>
@@ -93,25 +92,23 @@ export default function BookPublication({ bookImages }) {
                         viewport={{ once: true, margin: "-100px" }}
                         className="grid grid-cols-2 ml:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 xl:gap-8"
                     >
-                        {displayBooks.map((imgSrc, index) => (
+                        {displayBooks.map((book, index) => (
                             <motion.div 
-                                key={index} 
+                                key={book.id || index} 
                                 variants={fadeInUp}
                                 className="group relative bg-white rounded-2xl p-3 border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col"
                             >
                                 <div className="relative aspect-[2/3] w-full rounded-xl overflow-hidden bg-surface mb-4">
-                                    {/* Glass reflection effect */}
                                     <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
                                     <div className="absolute top-0 right-0 w-24 h-full bg-white blur-[50px] opacity-0 group-hover:opacity-20 transform translate-x-full group-hover:-translate-x-full transition-all duration-1000 z-10" />
                                     
                                     <img 
-                                        src={imgSrc} 
-                                        alt={`Published Book ${index + 1}`} 
+                                        src={book.image_url} 
+                                        alt={book.title} 
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                                         loading="lazy"
                                     />
                                     
-                                    {/* Hover Overlay */}
                                     <div className="absolute inset-0 bg-dark/60 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex flex-col items-center justify-center p-4">
                                         <button className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 shadow-xl mb-3">
                                             <BookOpen className="w-5 h-5" />
@@ -124,11 +121,11 @@ export default function BookPublication({ bookImages }) {
                                 
                                 <div className="mt-auto px-2 pb-2">
                                     <h4 className="font-bold text-dark text-sm line-clamp-2 leading-snug group-hover:text-primary transition-colors">
-                                        Academic Volume {index + 1}
+                                        {book.title}
                                     </h4>
                                     <p className="text-muted text-[10px] uppercase font-black tracking-widest mt-2 flex items-center gap-1">
                                         <span className="w-1.5 h-1.5 rounded-full bg-secondary inline-block" />
-                                        JTS Publications
+                                        {book.author}
                                     </p>
                                 </div>
                             </motion.div>

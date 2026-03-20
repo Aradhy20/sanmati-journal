@@ -36,7 +36,7 @@
 
   --color-warm-bg: #F8F9FA;        /* Off-white / Cream */
   --color-surface: #ffffff;
-  --color-muted: #6B778B;          /* Slate Gray */
+  --color-muted: #4B5568;          /* Accessible Slate Gray — passes WCAG AA 4.87:1 on white */
 
   --animate-blob: blob 10s infinite;
   --animate-float: float 4s ease-in-out infinite;

@@ -3,41 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\Enquiry;
-use App\Models\News;
-use App\Models\Paper;
-use App\Models\Issue;
 use App\Models\TeamMember;
+use App\Models\Issue;
+use App\Services\JournalService;
 use App\Mail\EnquiryReceived;
 use App\Http\Requests\ContactRequest;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
 
 class JournalController extends Controller
 {
+    protected JournalService $journalService;
+
+    public function __construct(JournalService $journalService)
+    {
+        $this->journalService = $journalService;
+    }
+
     public function index()
     {
-        $newsItems = Cache::remember('active_news', 3600, function () {
-            return News::where('is_active', true)
-                ->orderBy('created_at', 'desc')
-                ->take(10)
-                ->get();
-        });
-
-        $featuredPapers = Paper::where('is_featured', true)
-            ->orderBy('created_at', 'desc')
-            ->take(3)
-            ->get();
-
-        if ($featuredPapers->isEmpty()) {
-            $featuredPapers = Paper::orderBy('created_at', 'desc')->take(3)->get();
-        }
-
         return Inertia::render('Home', [
-            'newsItems' => $newsItems,
-            'featuredPapers' => $featuredPapers
+            'newsItems' => $this->journalService->getActiveNews(),
+            'featuredPapers' => $this->journalService->getFeaturedPapers(),
+            'testimonials' => $this->journalService->getActiveTestimonials()
         ]);
     }
 
@@ -169,20 +160,8 @@ class JournalController extends Controller
 
     public function bookPublication()
     {
-        $booksPath = public_path('images/books');
-        $bookImages = [];
-        
-        if (\Illuminate\Support\Facades\File::exists($booksPath)) {
-            $files = \Illuminate\Support\Facades\File::files($booksPath);
-            foreach ($files as $file) {
-                if (in_array(strtolower($file->getExtension()), ['jpg', 'jpeg', 'png', 'webp'])) {
-                    $bookImages[] = '/images/books/' . $file->getFilename();
-                }
-            }
-        }
-
         return Inertia::render('BookPublication', [
-            'bookImages' => $bookImages
+            'books' => $this->journalService->getPublishedBooks()
         ]);
     }
 

@@ -12,6 +12,16 @@ export default defineConfig({
         react(),
         tailwindcss(),
     ],
+    build: {
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    vendor: ['react', 'react-dom', 'framer-motion', '@inertiajs/react'],
+                    ui: ['lucide-react']
+                }
+            }
+        }
+    },
     server: {
         host: '0.0.0.0',
         hmr: {

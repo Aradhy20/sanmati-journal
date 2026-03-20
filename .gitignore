@@ -17,7 +17,6 @@ yarn-error.log
 /.vscode
 *.sql
 deploy*.zip
-# Large binary template assets (referenced via public dir at runtime)
-/public/fistudy-assets
+
 # Compiled build (regenerated on deploy, but tracked for Hostinger direct pull)
 # /public/build
