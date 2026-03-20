@@ -4,12 +4,12 @@ import { ChevronRight } from 'lucide-react';
 
 const PageHeader = ({ title, breadcrumb, subtitle }) => {
     return (
-        <section className="relative py-24 md:py-32 overflow-hidden bg-dark">
+        <section className="relative py-24 md:py-32 overflow-hidden bg-warm-bg">
             {/* Sophisticated Background Layers */}
             <div className="absolute inset-0 z-0">
-                <div className="absolute inset-0 bg-gradient-to-br from-dark via-dark/95 to-primary/20" />
-                <div className="absolute inset-0 opacity-[0.03]"
-                     style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 2px, transparent 0)', backgroundSize: '48px 48px' }} />
+                <div className="absolute inset-0 bg-gradient-to-br from-warm-bg via-surface/80 to-primary/5" />
+                <div className="absolute inset-0 opacity-[0.8]"
+                     style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(10,37,64,0.03) 2px, transparent 0)', backgroundSize: '48px 48px' }} />
             </div>
 
             {/* Decorative Intellectual Aura */}
@@ -43,26 +43,26 @@ const PageHeader = ({ title, breadcrumb, subtitle }) => {
                 >
                     {/* Refined Breadcrumb */}
                     <nav className="flex items-center justify-center gap-3 text-[10px] font-black uppercase tracking-[0.3em] mb-10">
-                        <Link href="/" className="text-white/40 hover:text-secondary transition-colors">Portal</Link>
-                        <span className="w-1 h-1 rounded-full bg-white/20" />
+                        <Link href="/" className="text-muted hover:text-secondary transition-colors">Portal</Link>
+                        <span className="w-1 h-1 rounded-full bg-primary/20" />
                         {breadcrumb && (
                             <>
-                                <span className="text-white/40">{breadcrumb}</span>
-                                <span className="w-1 h-1 rounded-full bg-white/20" />
+                                <span className="text-muted">{breadcrumb}</span>
+                                <span className="w-1 h-1 rounded-full bg-primary/20" />
                             </>
                         )}
                         <span className="text-secondary">{title}</span>
                     </nav>
 
                     {/* Monumental Title */}
-                    <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6 tracking-tight">
+                    <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-dark mb-6 tracking-tight">
                         {title}
                     </h1>
 
                     {subtitle && (
                         <div className="flex flex-col items-center gap-6">
                             <span className="h-px w-12 bg-secondary/40" />
-                            <p className="text-lg md:text-xl text-white/40 font-medium max-w-2xl italic leading-relaxed">
+                            <p className="text-lg md:text-xl text-muted font-medium max-w-2xl italic leading-relaxed">
                                 {subtitle}
                             </p>
                         </div>

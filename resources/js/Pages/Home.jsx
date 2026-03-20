@@ -1,5 +1,6 @@
+import React, { Suspense } from 'react';
 import MainLayout from '../Layouts/MainLayout';
-import Hero from '../Components/Hero';
+const Hero = React.lazy(() => import('../Components/Hero'));
 import { motion } from 'framer-motion';
 import { Link } from '@inertiajs/react';
 import {
@@ -19,7 +20,9 @@ const fadeInUp = {
 export default function Home() {
     return (
         <MainLayout title="Home" description="Sanmati Spectrum: A National Multidisciplinary Research Journal & Book Publication">
-            <Hero />
+            <Suspense fallback={<div className="min-h-[95vh] flex items-center justify-center text-primary font-bold">Loading Hero...</div>}>
+                <Hero />
+            </Suspense>
 
             {/* ─── FEATURES BAR (Publication Highlights) ─── */}
             <section className="py-8 bg-primary relative overflow-hidden">
@@ -132,7 +135,7 @@ export default function Home() {
             {/* ─── LATEST BOOK RELEASES ─── */}
             <section className="py-32 bg-warm-bg">
                 <div className="container-custom">
-                    <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+                    <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-8">
                         <motion.div {...fadeInUp} className="max-w-2xl">
                             <div className="flex items-center gap-4 mb-6">
                                 <span className="h-px w-10 bg-secondary" />
@@ -147,6 +150,28 @@ export default function Home() {
                                 All Publications <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
                             </Link>
                         </motion.div>
+                    </div>
+                    
+                    {/* Search and Filters UI */}
+                    <div className="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100 flex flex-col md:flex-row gap-4 mb-12">
+                        <div className="flex-grow flex items-center bg-warm-bg rounded-xl px-4 py-3 border border-transparent focus-within:bg-white focus-within:border-primary/30 transition-all">
+                            <Search className="w-5 h-5 text-muted mr-3" />
+                            <input type="text" placeholder="Search by title, author, or keyword..." className="w-full bg-transparent border-none outline-none text-sm font-medium text-dark placeholder:text-muted/60" />
+                        </div>
+                        <div className="flex gap-4">
+                            <select className="bg-warm-bg text-dark font-bold text-xs uppercase tracking-wider rounded-xl px-6 py-3 border-none outline-none focus:ring-2 focus:ring-primary/20 appearance-none min-w-[140px] text-center">
+                                <option>Any Year</option>
+                                <option>2024</option>
+                                <option>2023</option>
+                                <option>2022</option>
+                            </select>
+                            <select className="bg-warm-bg text-dark font-bold text-xs uppercase tracking-wider rounded-xl px-6 py-3 border-none outline-none focus:ring-2 focus:ring-primary/20 appearance-none min-w-[140px] text-center">
+                                <option>Subject</option>
+                                <option>Physics</option>
+                                <option>Economics</option>
+                                <option>Sociology</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -235,57 +260,84 @@ export default function Home() {
                             </h2>
                         </motion.div>
                         <motion.div {...fadeInUp} className="hidden lg:block pb-2">
-                            <Link href="/editorial-team" className="text-xs font-black uppercase tracking-[0.2em] text-dark-light hover:text-primary transition-colors flex items-center gap-3 group">
+                            <Link href="/editorial-team/editorial-board" className="text-xs font-black uppercase tracking-[0.2em] text-dark-light hover:text-primary transition-colors flex items-center gap-3 group">
                                 View Full Board <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
                             </Link>
                         </motion.div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {/* Editor-in-Chief */}
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        {/* Editor-in-Chief : Dr. Namrta Jain */}
                         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="group">
                             <div className="h-full rounded-[3rem] overflow-hidden bg-gradient-to-br from-primary to-primary-dark text-white p-10 flex flex-col items-center text-center shadow-2xl hover:-translate-y-2 transition-all duration-700 relative">
                                 <div className="absolute top-0 right-0 p-8 opacity-5"><Trophy className="w-24 h-24 text-secondary scale-150 rotate-12" /></div>
-                                <div className="w-44 h-44 rounded-full overflow-hidden mb-8 border-4 border-white/30 shadow-2xl relative z-10">
-                                    <img src="/mam.jpeg" alt="Dr. Namrata" className="w-full h-full object-cover object-top group-hover:scale-110 transition-all duration-700" />
+                                <div className="w-44 h-44 rounded-[2.5rem] overflow-hidden mb-8 border-4 border-white/30 shadow-2xl relative z-10">
+                                    <img src="/mam.jpeg" alt="Dr. Namrta Jain" className="w-full h-full object-cover object-top group-hover:scale-110 transition-all duration-700" />
                                 </div>
-                                <span className="inline-block px-4 py-1.5 bg-secondary/25 border border-secondary/40 rounded-full text-[10px] text-secondary font-black tracking-widest uppercase mb-6 w-fit">Editor-in-Chief</span>
-                                <h3 className="text-3xl font-serif font-bold mb-4 tracking-tight group-hover:text-secondary-light transition-colors duration-300">Dr. Namrata</h3>
-                                <p className="text-white/40 text-[12px] font-bold uppercase tracking-[0.1em] mb-8">Supreme Academic Guardian</p>
-                                <div className="mt-auto w-full pt-8 border-t border-white/10">
-                                    <p className="text-white/60 text-sm leading-relaxed italic">"Directing the global scholarly narrative through impeccable academic rigor and integrity."</p>
+                                <span className="inline-block px-4 py-1.5 bg-secondary/25 border border-secondary/40 rounded-full text-[10px] text-secondary font-black tracking-widest uppercase mb-4 w-fit">Editor-in-Chief</span>
+                                <h3 className="text-3xl font-serif font-bold mb-2 tracking-tight group-hover:text-secondary-light transition-colors duration-300">Dr. Namrta Jain</h3>
+                                <p className="text-white/70 text-[12px] font-bold uppercase tracking-[0.1em] mb-2">Assistant Professor</p>
+                                <p className="text-white/40 text-[10px] uppercase font-black tracking-widest mb-6">Teerthanker Mahaveer University, Moradabad</p>
+                                
+                                <div className="w-full bg-white/10 rounded-2xl p-4 mb-6 border border-white/10 text-xs">
+                                    <p className="flex justify-between border-b border-white/5 pb-2 mb-2"><span className="text-white/40 uppercase tracking-widest font-black text-[9px]">Email</span> <a href="mailto:sanmatijournal@gmail.com" className="font-bold hover:text-secondary transition-colors">sanmatijournal@gmail.com</a></p>
+                                    <p className="flex justify-between"><span className="text-white/40 uppercase tracking-widest font-black text-[9px]">Mob</span> <span className="font-bold">+91 9870713912 / 8979782949</span></p>
+                                </div>
+
+                                <div className="mt-auto w-full pt-4">
+                                    <a href="https://scholar.google.com/citations?user=YzXafxwAAAAJ&hl=en" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-[11px] font-black tracking-widest uppercase text-white hover:text-secondary transition-colors">
+                                        <ArrowUpRight className="w-3.5 h-3.5" /> Google Scholar Profile
+                                    </a>
                                 </div>
                             </div>
                         </motion.div>
 
-                        {/* Managing Editor */}
+                        {/* Managing Editor : Dr. Ratnesh Kumar Jain */}
                         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.15 }} className="group">
                             <div className="h-full rounded-[3rem] overflow-hidden bg-surface border border-gray-100 p-10 flex flex-col items-center text-center shadow-lg hover:shadow-2xl hover:border-primary/20 hover:-translate-y-2 transition-all duration-700 relative">
                                 <div className="absolute top-0 right-0 p-8 opacity-5"><Users className="w-24 h-24 text-primary scale-150 -rotate-12" /></div>
                                 <div className="w-44 h-44 rounded-[2.5rem] overflow-hidden mb-8 border-4 border-white shadow-xl relative z-10 rotate-3 group-hover:rotate-0 transition-transform duration-500">
-                                    <img src="/sir.jpeg" alt="Ratnesh Jain" className="w-full h-full object-cover object-top group-hover:scale-110 transition-all duration-700" />
+                                    <img src="/sir.jpeg" alt="Dr. Ratnesh Kumar Jain" className="w-full h-full object-cover object-top group-hover:scale-110 transition-all duration-700" />
                                 </div>
                                 <span className="inline-block px-4 py-1.5 bg-primary/8 rounded-full text-[10px] text-primary font-black tracking-widest uppercase mb-4">Managing Editor</span>
-                                <h3 className="text-3xl font-serif font-bold text-dark mb-2 group-hover:text-primary transition-colors duration-300">Ratnesh Jain</h3>
-                                <p className="text-muted text-[12px] font-bold uppercase tracking-wider mb-6">Operational Excellence Strategist</p>
-                                <div className="mt-auto w-full pt-8 border-t border-gray-50 text-center">
-                                    <p className="text-muted text-sm leading-relaxed italic">Directing the foundational systems and operational brilliance of the journal.</p>
+                                <h3 className="text-3xl font-serif font-bold text-dark mb-2 group-hover:text-primary transition-colors duration-300">Dr. Ratnesh Kr. Jain</h3>
+                                <p className="text-muted text-[12px] font-bold uppercase tracking-wider mb-2">Asst. Dean / Assoc. Professor</p>
+                                <p className="text-dark/40 text-[10px] uppercase font-black tracking-widest mb-6">Teerthanker Mahaveer University, Moradabad</p>
+                                
+                                <div className="w-full bg-warm-bg rounded-2xl p-4 mb-6 border border-gray-50 text-xs">
+                                    <p className="flex justify-between border-b border-gray-200 pb-2 mb-2"><span className="text-muted uppercase tracking-widest font-black text-[9px]">Email</span> <a href="mailto:Jainratnesh79@gmail.com" className="font-bold text-dark hover:text-primary transition-colors">Jainratnesh79@gmail.com</a></p>
+                                    <p className="flex justify-between"><span className="text-muted uppercase tracking-widest font-black text-[9px]">Mob</span> <span className="font-bold text-dark">+91 7999525735</span></p>
+                                </div>
+
+                                <div className="mt-auto w-full pt-4">
+                                    <a href="https://www.tmu.ac.in/nss-coordinator-desk" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-[11px] font-black tracking-widest uppercase text-dark hover:text-primary transition-colors">
+                                        <ArrowUpRight className="w-3.5 h-3.5" /> TMU Official Profile
+                                    </a>
                                 </div>
                             </div>
                         </motion.div>
 
-                        {/* Executive Editor */}
+                        {/* Executive Editor : Dr. Kalpna Jain */}
                         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="group">
                             <div className="h-full rounded-[3rem] overflow-hidden bg-surface border border-gray-100 p-10 flex flex-col items-center text-center shadow-lg hover:shadow-2xl hover:border-secondary/20 hover:-translate-y-2 transition-all duration-700 relative">
                                 <div className="absolute top-0 right-0 p-8 opacity-5"><Award className="w-24 h-24 text-secondary scale-150" /></div>
                                 <div className="w-44 h-44 rounded-[2.5rem] overflow-hidden mb-8 border-4 border-white shadow-xl relative z-10 -rotate-3 group-hover:rotate-0 transition-transform duration-500">
-                                    <img src="/dr kalpana jian.jpeg" alt="Dr. Kalpana Jain" className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" />
+                                    <img src="/dr kalpana jian.jpeg" alt="Dr. Kalpna Jain" className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" />
                                 </div>
                                 <span className="inline-block px-4 py-1.5 bg-secondary/10 rounded-full text-[10px] text-secondary font-black tracking-widest uppercase mb-4">Executive Editor</span>
-                                <h3 className="text-3xl font-serif font-bold text-dark mb-2 group-hover:text-primary transition-colors duration-300">Dr. Kalpana Jain</h3>
-                                <p className="text-muted text-[12px] font-bold uppercase tracking-wider mb-6">Editorial Strategy Leader</p>
-                                <div className="mt-auto w-full pt-8 border-t border-gray-50">
-                                    <p className="text-muted text-sm leading-relaxed italic">Pioneering the strategic evolution and content excellence of our scholarly registry.</p>
+                                <h3 className="text-3xl font-serif font-bold text-dark mb-2 group-hover:text-primary transition-colors duration-300">Dr. Kalpna Jain</h3>
+                                <p className="text-muted text-[12px] font-bold uppercase tracking-wider mb-2">Principal / Assoc. Professor</p>
+                                <p className="text-dark/40 text-[10px] uppercase font-black tracking-widest mb-6">Teerthanker Mahaveer University, Moradabad</p>
+                                
+                                <div className="w-full bg-warm-bg rounded-2xl p-4 mb-6 border border-gray-50 text-xs text-left">
+                                    <p className="flex justify-between border-b border-gray-200 pb-2 mb-2"><span className="text-muted uppercase tracking-widest font-black text-[9px]">Email</span> <a href="mailto:Kalpnajain69@gmail.com" className="font-bold text-dark hover:text-primary transition-colors">Kalpnajain69@gmail.com</a></p>
+                                    <p className="flex justify-between"><span className="text-muted uppercase tracking-widest font-black text-[9px]">Mob</span> <span className="font-bold text-dark">+91 9259283830</span></p>
+                                </div>
+
+                                <div className="mt-auto w-full pt-4">
+                                    <a href="https://www.researchgate.net/profile/Dr-Jain-23" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-[11px] font-black tracking-widest uppercase text-dark hover:text-primary transition-colors">
+                                        <ArrowUpRight className="w-3.5 h-3.5" /> ResearchGate Profile
+                                    </a>
                                 </div>
                             </div>
                         </motion.div>

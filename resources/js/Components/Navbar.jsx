@@ -40,7 +40,7 @@ const Navbar = () => {
         },
         {
             name: 'Editorial Team',
-            href: '/editorial-team',
+            href: '#',
             dropdown: [
                 { name: 'Editor', href: '/editorial-team/editors' },
                 { name: 'Editorial Board', href: '/editorial-team/editorial-board' },
@@ -148,18 +148,32 @@ const Navbar = () => {
                                     onMouseEnter={() => handleMouseEnter(item.name)}
                                     onMouseLeave={handleMouseLeave}
                                 >
-                                    <Link
-                                        href={item.href}
-                                        className={`flex items-center text-[13px] font-bold px-5 py-2 rounded-full transition-all whitespace-nowrap tracking-wide ${isActive(item.href)
-                                            ? 'text-primary bg-primary/5'
-                                            : 'text-dark/80 hover:text-primary hover:bg-primary/5'
-                                            }`}
-                                    >
-                                        {item.name}
-                                        {item.dropdown && (
-                                            <ChevronDown className={`w-3.5 h-3.5 ml-1.5 transition-transform duration-300 ${activeDropdown === item.name ? 'rotate-180 text-secondary' : 'text-gray-400'}`} />
-                                        )}
-                                    </Link>
+                                    {item.href === '#' ? (
+                                        <button
+                                            className={`flex items-center text-[13px] font-bold px-5 py-2 rounded-full transition-all whitespace-nowrap tracking-wide ${isActive(item.href)
+                                                ? 'text-primary bg-primary/5'
+                                                : 'text-dark/80 hover:text-primary hover:bg-primary/5'
+                                                }`}
+                                        >
+                                            {item.name}
+                                            {item.dropdown && (
+                                                <ChevronDown className={`w-3.5 h-3.5 ml-1.5 transition-transform duration-300 ${activeDropdown === item.name ? 'rotate-180 text-secondary' : 'text-gray-400'}`} />
+                                            )}
+                                        </button>
+                                    ) : (
+                                        <Link
+                                            href={item.href}
+                                            className={`flex items-center text-[13px] font-bold px-5 py-2 rounded-full transition-all whitespace-nowrap tracking-wide ${isActive(item.href)
+                                                ? 'text-primary bg-primary/5'
+                                                : 'text-dark/80 hover:text-primary hover:bg-primary/5'
+                                                }`}
+                                        >
+                                            {item.name}
+                                            {item.dropdown && (
+                                                <ChevronDown className={`w-3.5 h-3.5 ml-1.5 transition-transform duration-300 ${activeDropdown === item.name ? 'rotate-180 text-secondary' : 'text-gray-400'}`} />
+                                            )}
+                                        </Link>
+                                    )}
 
                                     {item.dropdown && (
                                         <AnimatePresence>

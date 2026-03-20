@@ -169,7 +169,21 @@ class JournalController extends Controller
 
     public function bookPublication()
     {
-        return Inertia::render('BookPublication');
+        $booksPath = public_path('images/books');
+        $bookImages = [];
+        
+        if (\Illuminate\Support\Facades\File::exists($booksPath)) {
+            $files = \Illuminate\Support\Facades\File::files($booksPath);
+            foreach ($files as $file) {
+                if (in_array(strtolower($file->getExtension()), ['jpg', 'jpeg', 'png', 'webp'])) {
+                    $bookImages[] = '/images/books/' . $file->getFilename();
+                }
+            }
+        }
+
+        return Inertia::render('BookPublication', [
+            'bookImages' => $bookImages
+        ]);
     }
 
     public function compliance()

@@ -4,7 +4,7 @@ use App\Http\Controllers\JournalController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [JournalController::class, 'index'])->name('home');
-Route::get('/editorial-team', [JournalController::class, 'editorialTeam'])->name('editorial-team');
+// Route removed: Route::get('/editorial-team', [JournalController::class, 'editorialTeam'])->name('editorial-team');
 Route::get('/editorial-team/editors', [JournalController::class, 'editors'])->name('editorial-team.editors');
 Route::get('/editorial-team/editorial-board', [JournalController::class, 'editorialBoard'])->name('editorial-team.board');
 Route::get('/editorial-team/advisory-board', [JournalController::class, 'advisoryBoard'])->name('editorial-team.advisory');
@@ -26,6 +26,7 @@ Route::get('/basic-info/indexing', [JournalController::class, 'indexing'])->name
 // Submission guidelines
 Route::get('/submission-guidelines', [JournalController::class, 'submissionGuidelines'])->name('submission-guidelines');
 Route::get('/submission-guidelines/call-for-papers', [JournalController::class, 'callForPapers'])->name('submission-guidelines.call');
+Route::post('/submission-guidelines/call-for-papers', [\App\Http\Controllers\SubmissionController::class, 'store'])->name('submission-guidelines.call.store')->middleware('throttle:5,1');
 Route::get('/submission-guidelines/areas', [JournalController::class, 'submissionAreas'])->name('submission-guidelines.areas');
 Route::get('/submission-guidelines/areas/{slug}', [JournalController::class, 'areaDetail'])->name('submission-guidelines.area-detail');
 Route::get('/submission-guidelines/important-info', [JournalController::class, 'importantInfo'])->name('submission-guidelines.info');

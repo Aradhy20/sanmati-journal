@@ -72,17 +72,17 @@ export default function AboutJournal() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="relative p-12 lg:p-16 bg-dark rounded-[3rem] overflow-hidden group shadow-2xl"
+                        className="relative p-12 lg:p-16 bg-white border border-gray-100 rounded-[3rem] overflow-hidden group shadow-sm hover:shadow-2xl transition-all duration-700"
                     >
-                        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0)', backgroundSize: '40px 40px' }} />
-                        <div className="absolute -top-20 -right-20 w-80 h-80 bg-primary/20 rounded-full blur-[100px] group-hover:scale-110 transition-transform duration-1000" />
+                        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(10,37,64,0.05) 1px, transparent 0)', backgroundSize: '40px 40px' }} />
+                        <div className="absolute -top-20 -right-20 w-80 h-80 bg-primary/5 rounded-full blur-[100px] group-hover:scale-110 transition-transform duration-1000" />
                         
                         <div className="relative z-10">
-                            <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-10 group-hover:bg-primary transition-colors duration-500">
+                            <div className="w-16 h-16 rounded-2xl bg-warm-bg shadow-sm border border-gray-50 flex items-center justify-center mb-10 group-hover:bg-primary transition-colors duration-500">
                                 <Target className="w-8 h-8 text-secondary group-hover:text-white" />
                             </div>
-                            <h3 className="text-3xl font-serif font-bold text-white mb-6">Our Mission</h3>
-                            <p className="text-white/40 text-lg leading-relaxed font-medium">
+                            <h3 className="text-3xl font-serif font-bold text-dark mb-6">Our Mission</h3>
+                            <p className="text-muted text-lg leading-relaxed font-medium">
                                 To architect a global knowledge substrate where rigorous scholarly inquiry meets accessibility, empowering the next generation of researchers to solve multidimensional societal challenges.
                             </p>
                         </div>
@@ -134,36 +134,36 @@ export default function AboutJournal() {
                         </div>
                     </motion.div>
 
-                    <motion.div {...fadeInUp} transition={{ delay: 0.2 }} className="bg-dark rounded-[2.5rem] p-10 lg:p-14 shadow-2xl relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/10 rounded-full blur-[80px]" />
+                    <motion.div {...fadeInUp} transition={{ delay: 0.2 }} className="bg-white border border-gray-100 rounded-[2.5rem] p-10 lg:p-14 shadow-sm relative overflow-hidden group hover:shadow-2xl transition-all duration-700">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/5 rounded-full blur-[80px]" />
                         
                         <div className="relative z-10">
                             <div className="flex items-center gap-6 mb-12">
-                                <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
+                                <div className="w-14 h-14 rounded-2xl bg-surface border border-gray-50 flex items-center justify-center shadow-sm">
                                     <Users className="w-7 h-7 text-secondary" />
                                 </div>
-                                <h3 className="text-2xl font-serif font-bold text-white">Institutional Origin</h3>
+                                <h3 className="text-2xl font-serif font-bold text-dark">Institutional Origin</h3>
                             </div>
                             
                             <div className="space-y-6">
-                                <div className="flex justify-between items-center p-6 bg-white/5 rounded-2xl border border-white/5">
-                                    <span className="text-[10px] font-black uppercase tracking-widest text-white/30">Inauguration</span>
-                                    <span className="font-bold text-white">Academic Cycle 2026</span>
+                                <div className="flex justify-between items-center p-6 bg-warm-bg rounded-2xl border border-gray-50">
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-muted">Inauguration</span>
+                                    <span className="font-bold text-dark">Academic Cycle 2026</span>
                                 </div>
                                 
-                                <div className="p-8 bg-gradient-to-br from-primary/20 to-transparent rounded-3xl border border-white/5 mt-6">
+                                <div className="p-8 bg-gradient-to-br from-primary/5 to-transparent rounded-3xl border border-primary/10 mt-6">
                                     <span className="text-[10px] font-black uppercase tracking-widest text-secondary block mb-4">Official Publisher Address</span>
-                                    <h4 className="text-xl font-bold text-white mb-2">JTS Publications</h4>
-                                    <p className="text-white/40 text-sm leading-relaxed">
+                                    <h4 className="text-xl font-bold text-dark mb-2">JTS Publications</h4>
+                                    <p className="text-muted text-sm leading-relaxed">
                                         V-508 Gali No. 17, Vijay Park,<br />
                                         Delhi – 110053, Bharat (India)
                                     </p>
                                 </div>
                                 
-                                <div className="flex items-center gap-4 text-white/20 text-[10px] font-black uppercase tracking-[0.4em] justify-center mt-10">
-                                    <span className="h-px w-8 bg-white/10" />
+                                <div className="flex items-center gap-4 text-primary/40 text-[10px] font-black uppercase tracking-[0.4em] justify-center mt-10">
+                                    <span className="h-px w-8 bg-primary/20" />
                                     National Research Register
-                                    <span className="h-px w-8 bg-white/10" />
+                                    <span className="h-px w-8 bg-primary/20" />
                                 </div>
                             </div>
                         </div>

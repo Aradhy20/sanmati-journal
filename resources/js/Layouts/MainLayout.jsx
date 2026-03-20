@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Seo from '../Components/Seo';
 import CustomCursor from '../Components/CustomCursor';
 import Preloader from '../Components/Preloader';
+import { MessageCircle } from 'lucide-react';
 
 export default function MainLayout({ children, title, description, keywords }) {
     return (
@@ -34,6 +35,18 @@ export default function MainLayout({ children, title, description, keywords }) {
                 </AnimatePresence>
             </main>
             <Footer />
+
+            {/* Floating Conversion WhatsApp / Support CTA */}
+            <motion.a
+                href="https://wa.me/918979782949"
+                target="_blank"
+                rel="noreferrer"
+                whileHover={{ scale: 1.1, translateY: -5 }}
+                whileTap={{ scale: 0.95 }}
+                className="fixed bottom-6 lg:bottom-10 right-6 lg:right-10 w-14 h-14 bg-[#25D366] text-white rounded-full shadow-[0_10px_30px_rgba(37,211,102,0.3)] flex items-center justify-center z-50 border-2 border-white"
+            >
+                <MessageCircle className="w-7 h-7" />
+            </motion.a>
         </div>
     );
 }

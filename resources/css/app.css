@@ -1,33 +1,42 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  --font-serif: "Playfair Display", "Roboto Serif", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-serif: "Poppins", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 
-  /* ── Fistudy Color Palette ── */
-  --color-primary: #687EFF;        /* Fistudy Periwinkle Blue */
-  --color-primary-dark: #4F65E0;   /* Deeper Blue */
-  --color-primary-light: #8FA0FF;  /* Light Blue */
+  /* ── Production Graded Variables ── */
+  --container-width: 1200px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --radius: 12px;
+  --shadow: 0 4px 20px rgba(0,0,0,0.08);
 
-  --color-secondary: #F87A53;      /* Fistudy Orange */
-  --color-secondary-dark: #e06940; /* Deeper Orange */
-  --color-secondary-light: #FFAA88;/* Light Orange */
 
-  --color-coral: #F87A53;          /* Same orange used as accent */
-  --color-coral-dark: #e06940;
+  /* ── Sanmati Premium Palette (2026 Redesign) ── */
+  --color-primary: #0A2540;        /* Deep Navy */
+  --color-primary-dark: #051A2E;   /* Darker Navy */
+  --color-primary-light: #183C64;  /* Lighter Navy */
+
+  --color-secondary: #00C4B4;      /* Accent Teal */
+  --color-secondary-dark: #00A396; /* Dark Teal */
+  --color-secondary-light: #30E3D5;/* Light Teal */
+
+  --color-coral: #00C4B4;          /* Remapped to Teal */
+  --color-coral-dark: #00A396;
 
   --color-success: #059669;
   --color-info: #0284c7;
 
-  --color-dark: #052143;           /* Fistudy Navy Black */
-  --color-dark-light: #1a3a60;     /* Lighter Navy */
+  --color-dark: #071523;           /* Ultra Dark Navy */
+  --color-dark-light: #142E46;     /* Slate Navy */
 
-  --color-accent: #FFC224;         /* Fistudy Gold accent */
+  --color-accent: #FFC224;         /* Gold accent */
   --color-accent-light: #FFD96E;
 
-  --color-warm-bg: #eef1ff;        /* Fistudy Light Lavender BG */
+  --color-warm-bg: #F8F9FA;        /* Off-white / Cream */
   --color-surface: #ffffff;
-  --color-muted: #6B778B;          /* Fistudy Gray */
+  --color-muted: #6B778B;          /* Slate Gray */
 
   --animate-blob: blob 10s infinite;
   --animate-float: float 4s ease-in-out infinite;
