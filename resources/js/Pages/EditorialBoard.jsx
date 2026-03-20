@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Award, GraduationCap, ChevronRight, BookOpen, Quote, Sparkles } from 'lucide-react';
+import { Award, GraduationCap, ChevronRight, BookOpen, Quote, Sparkles, Mail, Phone, ExternalLink } from 'lucide-react';
 import PageHeader from '../Components/PageHeader';
 import MainLayout from '../Layouts/MainLayout';
 import Seo from '../Components/Seo';
@@ -12,77 +12,60 @@ const fadeInUp = {
 };
 
 const BoardMember = ({ name, title, affiliation, email, phone, profileUrl, image, role, index }) => {
-    const isChief = role === 'Chief';
-    
     return (
         <motion.div 
             {...fadeInUp} 
             transition={{ delay: index * 0.1 }}
-            className="group relative h-full"
+            className="bg-white rounded-[2rem] border border-gray-100 p-6 sm:p-8 flex flex-col hover:shadow-2xl hover:shadow-primary/5 hover:border-primary/20 hover:-translate-y-1.5 transition-all duration-500 group relative overflow-hidden"
         >
-            <div className="absolute -inset-4 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 rounded-[3rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-            <div className="relative h-full bg-white border border-gray-100 rounded-[2.5rem] overflow-hidden flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
-                {/* Visual Area */}
-                <div className="relative aspect-[4/5] overflow-hidden bg-dark">
+            <div className="absolute top-0 right-0 p-6 opacity-5 pointer-events-none transition-opacity duration-500 group-hover:opacity-10">
+                <Award className="w-24 h-24 text-primary rotate-12" />
+            </div>
+
+            <div className="flex items-center gap-5 mb-6 relative z-10">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-[1.5rem] overflow-hidden shadow-md border-2 border-white ring-1 ring-gray-50 relative">
                     <img 
-                        src={image || `/fistudy-assets/team/team-1-${(index % 8) + 1}.jpg`} 
+                        src={image || `/images/team/placeholder.jpg`} 
                         alt={name}
-                        className="w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+                        className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700"
                         loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/20 to-transparent" />
-                    
-                    {/* Role Badge */}
-                    <div className="absolute top-6 left-6 flex flex-col gap-2">
-                        <span className={`px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-[0.2em] shadow-xl backdrop-blur-md ${isChief ? 'bg-secondary text-white' : 'bg-white/10 text-white/70 border border-white/10'}`}>
-                            {isChief ? <Award className="w-3 h-3 inline mr-2 align-middle" /> : <GraduationCap className="w-3 h-3 inline mr-2 align-middle" />}
-                            {title}
-                        </span>
-                    </div>
-
-                    {/* Meta Label */}
-                    <div className="absolute bottom-6 left-6 right-6">
-                        <div className="flex items-center gap-3 mb-2">
-                            <span className="h-px w-6 bg-secondary" />
-                            <span className="text-secondary font-black text-[9px] uppercase tracking-[0.3em]">Board Member</span>
-                        </div>
-                        <h3 className="text-2xl font-serif font-bold text-white leading-tight">
-                            {name}
-                        </h3>
-                    </div>
                 </div>
-
-                {/* Content Area */}
-                <div className="p-8 flex-1 flex flex-col bg-white">
-                    <p className="text-muted text-sm font-bold uppercase tracking-widest mb-4">Affiliation</p>
-                    <p className="text-dark/70 text-sm leading-relaxed mb-6 flex-1">
-                        {affiliation}
-                    </p>
-
-                    <div className="w-full bg-warm-bg rounded-2xl p-4 mb-6 border border-gray-50 text-xs">
-                        {email && <p className="flex justify-between border-b border-gray-200 pb-2 mb-2"><span className="text-muted uppercase tracking-widest font-black text-[9px]">Email</span> <a href={`mailto:${email}`} className="font-bold text-dark hover:text-primary transition-colors truncate ml-2">{email}</a></p>}
-                        {phone && <p className="flex justify-between"><span className="text-muted uppercase tracking-widest font-black text-[9px]">Mob</span> <span className="font-bold text-dark">{phone}</span></p>}
-                    </div>
-
-                    <div className="flex items-center justify-between pt-6 border-t border-gray-50">
-                        {profileUrl ? (
-                            <a href={profileUrl} target="_blank" rel="noreferrer" className="flex items-center justify-between w-full group/link">
-                                <span className="text-[9px] font-black uppercase tracking-widest text-dark group-hover/link:text-primary transition-colors">View Academic Profile</span>
-                                <div className="w-8 h-8 rounded-full bg-surface border border-gray-50 flex items-center justify-center text-primary group-hover/link:bg-primary group-hover/link:text-white transition-colors duration-500">
-                                    <ChevronRight className="w-4 h-4" />
-                                </div>
-                            </a>
-                        ) : (
-                            <>
-                                <span className="text-[9px] font-black uppercase tracking-widest text-dark/30">Sanmati Affiliate</span>
-                                <div className="w-8 h-8 rounded-full bg-surface border border-gray-50 flex items-center justify-center text-primary transition-colors duration-500">
-                                    <ChevronRight className="w-4 h-4 opacity-50" />
-                                </div>
-                            </>
-                        )}
-                    </div>
+                <div>
+                    <span className="inline-block px-3 py-1 bg-gradient-to-r from-primary/10 to-secondary/10 text-primary text-[9px] font-black uppercase tracking-widest rounded-full mb-2 border border-primary/10">
+                        {title}
+                    </span>
+                    <h3 className="text-xl font-serif font-bold text-dark leading-tight group-hover:text-primary transition-colors">
+                        {name}
+                    </h3>
                 </div>
             </div>
+            
+            {affiliation && (
+                <p className="text-muted text-xs sm:text-sm leading-relaxed mb-6 flex-1 relative z-10 font-medium">
+                    {affiliation}
+                </p>
+            )}
+
+            {(email || phone || profileUrl) && (
+                <div className="mt-auto pt-5 border-t border-gray-50 flex flex-col gap-3 relative z-10">
+                    {email && (
+                        <a href={`mailto:${email}`} className="text-[11px] sm:text-xs font-medium text-dark/70 hover:text-primary transition-colors flex items-center gap-2 truncate">
+                            <Mail className="w-4 h-4 text-primary/50 shrink-0" /> <span className="truncate">{email}</span>
+                        </a>
+                    )}
+                    {phone && (
+                        <span className="text-[11px] sm:text-xs font-medium text-dark/70 flex items-center gap-2">
+                            <Phone className="w-4 h-4 text-primary/50 shrink-0" /> {phone}
+                        </span>
+                    )}
+                    {profileUrl && (
+                        <a href={profileUrl} target="_blank" rel="noreferrer" className="mt-3 inline-flex items-center justify-center w-full py-2.5 bg-surface hover:bg-primary/5 text-primary text-[10px] sm:text-[11px] font-black tracking-widest uppercase rounded-xl transition-colors border border-gray-100 hover:border-primary/20 group/btn gap-2 shadow-sm">
+                             View Academic Profile <ExternalLink className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                        </a>
+                    )}
+                </div>
+            )}
         </motion.div>
     );
 };
@@ -167,23 +150,29 @@ export default function EditorialBoard() {
                                 image: "/images/team/Prof. Prahlad joshi.jpeg"
                             },
                             {
+                                name: "Dr. Kalpna Jain",
+                                title: "Executive Editor",
+                                affiliation: "",
+                                email: "Kalpnajain69@gmail.com",
+                                profileUrl: "https://www.researchgate.net/profile/Dr-Jain-23",
+                                image: "/dr kalpana jian.jpeg"
+                            },
+                            {
                                 name: "Dr. Smriti Kumari Singh",
                                 title: "Board Member",
-                                affiliation: "Assistant Professor (Department of Hindi), Sophia College for Women (Empowered Autonomous) Mumbai (Maharashtra)"
+                                affiliation: "Assistant Professor (Department of Hindi) Sophia College for Women (Empowered Autonomous) Mumbai (Maharashtra)",
+                                image: "/images/team/Dr_Smriti_kumari.jpeg"
                             },
                             {
                                 name: "Dr. Amita Kumari",
                                 title: "Board Member",
                                 affiliation: "Assistant Professor, University Department of Education, Vinoba Bhave University, Hazaribagh (Jharkhand)",
-                                email: "masterofeducationvbu@gmail.com",
-                                phone: "+91 9470159260",
-                                profileUrl: "https://www.vbu.ac.in/directory",
                                 image: "/images/team/Amita kumari.jpeg"
                             },
                             {
                                 name: "Dr. Parikshit Layek",
                                 title: "Board Member",
-                                affiliation: "Vice Principal, Shri Ramakrishna Sarada Ashrama, T.T.College Hazaribagh. (Jharkhand)",
+                                affiliation: "Vice Principal Shri Ramakrishna Sarada Ashrama, T.T.College Hazaribagh. (Jharkhand)",
                                 image: "/images/team/Parikshit Layek.jpeg"
                             },
                             {
@@ -195,7 +184,8 @@ export default function EditorialBoard() {
                             {
                                 name: "Dr. A. Shashank. Rao",
                                 title: "Board Member",
-                                affiliation: "Assistant Professor, Naveen Govt. College Nagpura, Durg (Chhattisgarh)"
+                                affiliation: "Assistant Professor Naveen Govt. College Nagpura, Durg (Chhattisgarh)",
+                                image: "/images/team/Dr_Shashank_Rao.jpeg"
                             }
                         ].map((m, i) => (
                             <BoardMember key={i} {...m} index={i} />

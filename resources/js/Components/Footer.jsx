@@ -101,14 +101,19 @@ const Footer = () => {
                             <div className="space-y-5">
                                 <div className="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-white/10 transition-colors">
                                     <MapPin className="w-5 h-5 text-secondary shrink-0 mt-0.5" />
-                                    <p className="text-[13px] leading-relaxed font-medium">TMU Campus, Delhi Road<br />Moradabad (U.P) 244001</p>
+                                    <p className="text-[13px] leading-relaxed font-medium">JTS Publications<br />V-508 Gali No. 17, Vijay Park<br/>Delhi – 110053, Bharat (India)</p>
                                 </div>
                                 <div className="space-y-3 pl-2">
-                                    <a href="tel:+918979782949" className="flex items-center gap-4 text-[13px] font-bold hover:text-secondary transition-colors">
-                                        <Phone className="w-4 h-4 text-secondary/70" /> +91 8979782949
-                                    </a>
-                                    <a href="mailto:sanmatijournal@gmail.com" className="flex items-center gap-4 text-[13px] font-bold hover:text-secondary transition-colors">
-                                        <Mail className="w-4 h-4 text-secondary/70" /> contact@sanmati.com
+                                    <div className="flex items-start gap-4 text-[13px] font-bold hover:text-secondary transition-colors">
+                                        <Phone className="w-4 h-4 text-secondary/70 mt-0.5 shrink-0" /> 
+                                        <div className="flex flex-col space-y-2">
+                                            <a href="tel:+919870713912" className="hover:text-primary transition-colors hover:underline">+91 9870713912</a>
+                                            <a href="tel:+918979782949" className="hover:text-primary transition-colors hover:underline">+91 8979782949</a>
+                                            <a href="tel:+917999525735" className="hover:text-primary transition-colors hover:underline">+91 7999525735</a>
+                                        </div>
+                                    </div>
+                                    <a href="mailto:sanmatijournal@gmail.com" className="flex items-center gap-4 text-[13px] font-bold hover:text-secondary transition-colors mt-2">
+                                        <Mail className="w-4 h-4 text-secondary/70 shrink-0" /> <span className="hover:underline hover:text-primary">sanmatijournal@gmail.com</span>
                                     </a>
                                 </div>
                             </div>

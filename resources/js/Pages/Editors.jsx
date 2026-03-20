@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Award, GraduationCap, ChevronRight, Trophy, Users, Shield, BookOpen, X, BookMarked, Medal, Building2, ExternalLink } from 'lucide-react';
+import { Award, GraduationCap, ChevronRight, BookOpen, Quote, Sparkles, X, Medal, BookMarked, Building2, ExternalLink, Mail, Phone, Trophy, Users, Shield } from 'lucide-react';
 import PageHeader from '../Components/PageHeader';
 import MainLayout from '../Layouts/MainLayout';
 import Seo from '../Components/Seo';
@@ -187,89 +187,74 @@ const ExecutiveMember = ({ member, index }) => {
             <motion.div 
                 {...fadeInUp} 
                 transition={{ delay: index * 0.1 }}
-                className={`group relative h-full flex flex-col`}
+                className={`group flex flex-col h-full bg-white rounded-[2rem] border ${index === 0 ? 'border-primary/20 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_40px_rgba(var(--primary),0.12)]' : 'border-gray-100 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:border-gray-200'} transition-all duration-500 overflow-hidden relative`}
             >
-                <div className="absolute -inset-4 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 rounded-[3rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-                <div className={`relative h-full bg-white border ${index === 0 ? 'border-secondary/30 shadow-[0_20px_40px_rgba(0,196,180,0.1)]' : 'border-gray-100'} rounded-[2.5rem] overflow-hidden flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-500`}>
-                    
-                    {/* Visual Area */}
-                    <div className="relative aspect-[4/5] overflow-hidden bg-dark shrink-0">
+                <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none transition-opacity duration-500 group-hover:opacity-10">
+                    <Icon className="w-32 h-32 text-primary rotate-12" />
+                </div>
+
+                {/* Top Area: Image & Name */}
+                <div className="p-8 pb-6 flex flex-col sm:flex-row gap-6 items-start relative z-10 border-b border-gray-50 bg-gradient-to-b from-surface/50 to-white">
+                    <div className="w-28 h-28 sm:w-32 sm:h-32 shrink-0 rounded-[1.5rem] overflow-hidden shadow-md border-2 border-white ring-1 ring-gray-100 relative">
                         <img 
                             src={member.image} 
                             alt={member.name}
-                            className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+                            className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700"
                             loading="lazy"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/20 to-transparent" />
-                        
-                        {/* Role Badge */}
-                        <div className="absolute top-6 left-6 flex flex-col gap-2 relative z-20">
-                            <span className={`px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.2em] shadow-xl backdrop-blur-md ${member.colorClass}`}>
-                                <Icon className="w-3.5 h-3.5 inline mr-2 align-middle" />
-                                {member.role}
-                            </span>
-                        </div>
+                    </div>
+                    <div className="flex-1 pt-2">
+                        <span className={`inline-flex items-center gap-2 px-3 py-1 bg-gradient-to-r ${member.colorClass.includes('gold') ? 'from-amber-500/10 to-amber-600/10 text-amber-600 border-amber-500/10' : 'from-primary/10 to-secondary/10 text-primary border-primary/10'} text-[10px] font-black uppercase tracking-widest rounded-full mb-3 border`}>
+                            <Icon className="w-3.5 h-3.5" />
+                            {member.role}
+                        </span>
+                        <h3 className="text-2xl sm:text-3xl font-serif font-bold text-dark leading-tight group-hover:text-primary transition-colors">
+                            {member.name}
+                        </h3>
+                    </div>
+                </div>
 
-                        {/* Meta Label */}
-                        <div className="absolute bottom-8 left-8 right-8 z-10">
-                            <div className="flex items-center gap-3 mb-2">
-                                <span className="h-px w-8 bg-secondary" />
-                                <span className="text-secondary font-black text-[10px] uppercase tracking-[0.3em]">Executive Registry</span>
-                            </div>
-                            <h3 className="text-3xl font-serif font-bold text-white leading-tight">
-                                {member.name}
-                            </h3>
-                        </div>
+                {/* Content Area */}
+                <div className="p-8 pt-6 flex-1 flex flex-col bg-white relative z-10">
+                    <p className="text-muted text-[10px] font-black uppercase tracking-widest mb-3">Official Designation</p>
+                    <div className="text-dark/80 font-bold text-sm leading-relaxed mb-8 flex-1">
+                        {member.title}
                     </div>
 
-                    {/* Content Area */}
-                    <div className="p-8 flex-1 flex flex-col bg-white">
-                        <p className="text-muted text-[11px] font-black uppercase tracking-widest mb-4">Official Designation</p>
-                        <p className="text-dark font-bold text-sm leading-relaxed mb-8 flex-1">
-                            {member.title}
-                        </p>
+                    <div className="w-full rounded-2xl p-5 mb-8 border border-gray-100 bg-surface/50 text-xs">
+                        {member.email && (
+                            <p className="flex justify-between items-center border-b border-gray-200/50 pb-3 mb-3">
+                                <span className="text-muted uppercase tracking-widest font-black text-[9px] flex items-center gap-2"><Mail className="w-3.5 h-3.5" /> Email</span> 
+                                <a href={`mailto:${member.email}`} className="font-bold text-dark hover:text-primary transition-colors truncate ml-4">{member.email}</a>
+                            </p>
+                        )}
+                        {member.phone && (
+                            <p className="flex justify-between items-center">
+                                <span className="text-muted uppercase tracking-widest font-black text-[9px] flex items-center gap-2"><Phone className="w-3.5 h-3.5" /> Mob</span> 
+                                <span className="font-bold text-dark text-right">{member.phone}</span>
+                            </p>
+                        )}
+                    </div>
 
-                        <div className="w-full bg-warm-bg rounded-2xl p-5 mb-6 border border-gray-50 text-xs">
-                            {member.email && (
-                                <p className="flex justify-between items-center border-b border-gray-200 pb-3 mb-3">
-                                    <span className="text-muted uppercase tracking-widest font-black text-[9px]">Email</span> 
-                                    <a href={`mailto:${member.email}`} className="font-bold text-dark hover:text-primary transition-colors truncate ml-4">{member.email}</a>
-                                </p>
-                            )}
-                            {member.phone && (
-                                <p className="flex justify-between items-center">
-                                    <span className="text-muted uppercase tracking-widest font-black text-[9px]">Mob</span> 
-                                    <span className="font-bold text-dark text-right">{member.phone}</span>
-                                </p>
-                            )}
-                        </div>
+                    <div className="flex flex-col gap-3 mt-auto">
+                        {member.bio && (
+                            <button 
+                                onClick={() => setIsBioOpen(true)}
+                                className="w-full py-3.5 bg-dark text-white rounded-xl text-[11px] font-black uppercase tracking-widest shadow-lg shadow-dark/10 hover:bg-primary transition-all duration-300 flex items-center justify-center gap-2 group/btn"
+                            >
+                                Read Full Biography <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                            </button>
+                        )}
 
-                        <div className="flex flex-col gap-3 mt-auto">
-                            {member.bio && (
-                                <button 
-                                    onClick={() => setIsBioOpen(true)}
-                                    className="w-full py-3.5 bg-primary text-white rounded-xl text-[11px] font-black uppercase tracking-widest shadow-lg shadow-primary/20 hover:bg-primary-dark transition-colors"
-                                >
-                                    Read Full Biography
-                                </button>
-                            )}
-
-                            {member.profileUrl ? (
-                                <a href={member.profileUrl} target="_blank" rel="noreferrer" className="flex items-center justify-between w-full group/link p-2">
-                                    <span className="text-[10px] font-black uppercase tracking-widest text-dark group-hover/link:text-primary transition-colors">Official Profile</span>
-                                    <div className="w-8 h-8 rounded-full bg-surface border border-gray-100 flex items-center justify-center text-primary group-hover/link:bg-primary group-hover/link:text-white transition-colors duration-500 shadow-sm group-hover/link:shadow-md">
-                                        <ChevronRight className="w-3 h-3" />
-                                    </div>
-                                </a>
-                            ) : (
-                                <div className="flex items-center justify-between w-full p-2">
-                                    <span className="text-[10px] font-black uppercase tracking-widest text-dark/30">Sanmati Affiliate</span>
-                                    <div className="w-8 h-8 rounded-full bg-surface border border-gray-50 flex items-center justify-center text-primary transition-colors duration-500">
-                                        <ChevronRight className="w-3 h-3 opacity-50" />
-                                    </div>
-                                </div>
-                            )}
-                        </div>
+                        {member.profileUrl ? (
+                            <a href={member.profileUrl} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 w-full py-3.5 bg-white text-dark rounded-xl text-[11px] font-black uppercase tracking-widest border border-gray-200 hover:border-primary/30 hover:bg-primary/5 transition-all duration-300 group/link">
+                                Official Profile <ExternalLink className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform text-muted group-hover/link:text-primary" />
+                            </a>
+                        ) : (
+                            <div className="flex items-center justify-center gap-2 w-full py-3.5 bg-surface text-dark/30 rounded-xl text-[11px] font-black uppercase tracking-widest border border-gray-100">
+                                Sanmati Affiliate <ChevronRight className="w-3.5 h-3.5 opacity-50" />
+                            </div>
+                        )}
                     </div>
                 </div>
             </motion.div>
@@ -324,17 +309,6 @@ export default function Editors() {
                 awards: "Best Keynote Speaker Award (2024), Environmental Conservation Ratna Award (2024), Research Guru Award (2024).",
                 memberships: "Member, Bahuvachan (UGC-CARE listed journal), published by Mahatma Gandhi Antarrashtriya Hindi Vishwavidyalaya, Wardha; Editorial Board Member, Universe Journal of Education and Humanities; Author Member, CKNKH Foundation (2023)."
             }
-        },
-        {
-            name: "Dr. Kalpna Jain",
-            role: "Executive Editor",
-            title: "Teerthanker Mahaveer University, Moradabad",
-            email: "Kalpnajain69@gmail.com",
-            phone: "+91 9259283830",
-            profileUrl: "https://www.researchgate.net/profile/Dr-Jain-23",
-            image: "/dr kalpana jian.jpeg",
-            icon: Shield,
-            colorClass: "bg-white/90 text-dark border border-white/20"
         }
     ];
 
@@ -367,7 +341,7 @@ export default function Editors() {
                     </motion.p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-8 xl:gap-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
                     {executiveMembers.map((m, i) => (
                         <ExecutiveMember key={i} member={m} index={i} />
                     ))}

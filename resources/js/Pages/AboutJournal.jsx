@@ -2,7 +2,7 @@ import PageHeader from '../Components/PageHeader';
 import MainLayout from '../Layouts/MainLayout';
 import { motion } from 'framer-motion';
 import Seo from '../Components/Seo';
-import { Target, BookOpen, Globe, Award, Users, CheckCircle } from 'lucide-react';
+import { Target, BookOpen, Globe, Award, Users, ShieldCheck, Microscope } from 'lucide-react';
 
 const fadeInUp = {
     initial: { opacity: 0, y: 30 },
@@ -26,7 +26,7 @@ export default function AboutJournal() {
             />
 
             <div className="max-w-7xl mx-auto px-6 lg:px-8 py-24 relative">
-                {/* ─── INTRODUCTION (The Scholarly Mandate) ─── */}
+                {/* ─── INTRODUCTION ─── */}
                 <motion.div {...fadeInUp} className="relative group mb-24">
                     <div className="absolute -inset-4 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 rounded-[3rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
                     <div className="relative bg-white border border-gray-100 rounded-[2.5rem] p-10 md:p-16 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden">
@@ -41,19 +41,22 @@ export default function AboutJournal() {
                             </div>
                             
                             <h2 className="text-4xl md:text-5xl font-serif font-bold text-dark mb-10 leading-[1.1]">
-                                Engineering a <span className="text-primary italic">Paradigm for Research</span>
+                                Promoting <span className="text-primary italic">High-Quality</span> Academic Research
                             </h2>
                             
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
                                 <div className="lg:col-span-12 prose prose-lg prose-slate max-w-none">
                                     <p className="text-xl text-dark/70 font-medium leading-relaxed mb-8">
-                                        <strong className="text-dark font-black">Sanmati Spectrum of Knowledge & Emerging Discourse</strong> serves as an elite national platform designed to catalyze the cross-pollination of complex ideas across diverse academic landscapes.
+                                        <strong className="text-dark font-black">“Sanmati Spectrum of Knowledge & Emerging Discourse”</strong> is a national-level multidisciplinary quarterly research journal established in 2026 with the objective of promoting high-quality academic research, intellectual dialogue, and innovative scholarship across diverse disciplines.
                                     </p>
-                                    <p className="text-muted leading-relaxed mb-8">
-                                        We operate at the intersection of traditional academic rigor and contemporary innovative inquiry. As a peer-reviewed, refereed quarterly journal, we provide a structured environment for the publication of transformative research that addresses both fundamental theoretical questions and urgent practical implementations.
+                                    <p className="text-muted leading-relaxed mb-4">
+                                        Published in print (offline) format with ISSN (Print): <strong className="text-dark">3108-1819</strong>, the journal serves as a credible and structured platform for scholars, academicians, researchers, and practitioners to disseminate original research. It is bilingual in nature, accepting submissions in both English and Hindi, thereby ensuring inclusivity and accessibility for a wide academic audience.
+                                    </p>
+                                    <p className="text-muted leading-relaxed">
+                                        In the contemporary global knowledge ecosystem, where disciplinary boundaries are increasingly fluid, the journal emphasizes multidisciplinary and interdisciplinary approaches that integrate insights from arts, humanities, social sciences, media studies, and scientific domains.
                                     </p>
                                     <div className="flex flex-wrap gap-4 mt-10">
-                                        {['Multidisciplinary', 'Peer-Reviewed', 'Refereed', 'Quarterly'].map((tag) => (
+                                        {['Multidisciplinary', 'Bilingual', 'Peer-Reviewed', 'Quarterly'].map((tag) => (
                                             <span key={tag} className="px-5 py-2 bg-surface border border-gray-100 rounded-full text-[10px] font-black uppercase tracking-widest text-secondary">
                                                 {tag}
                                             </span>
@@ -65,7 +68,7 @@ export default function AboutJournal() {
                     </div>
                 </motion.div>
 
-                {/* ─── MISSION & VISION (Strategic Core) ─── */}
+                {/* ─── MISSION & VISION ─── */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-24">
                     <motion.div 
                         initial={{ opacity: 0, x: -30 }}
@@ -83,7 +86,7 @@ export default function AboutJournal() {
                             </div>
                             <h3 className="text-3xl font-serif font-bold text-dark mb-6">Our Mission</h3>
                             <p className="text-muted text-lg leading-relaxed font-medium">
-                                To architect a global knowledge substrate where rigorous scholarly inquiry meets accessibility, empowering the next generation of researchers to solve multidimensional societal challenges.
+                                To encourage original and impactful research, provide opportunities for early-career researchers and young scholars, and promote collaborative and interdisciplinary academic engagement, contributing to the broader goal of societal development and intellectual progress.
                             </p>
                         </div>
                     </motion.div>
@@ -103,13 +106,50 @@ export default function AboutJournal() {
                             </div>
                             <h3 className="text-3xl font-serif font-bold text-dark mb-6">Our Vision</h3>
                             <p className="text-muted text-lg leading-relaxed font-medium">
-                                To establish Sanmati Spectrum as the premier citation index for multidisciplinary excellence, bridging the historical wisdom of ivory towers with the agile advancements of the modern digital era.
+                                To emerge as a leading academic platform at both national and international levels, recognized for its scholarly rigor, ethical standards, and meaningful contributions to knowledge advancement.
                             </p>
                         </div>
                     </motion.div>
                 </div>
 
-                {/* ─── JOURNAL ESSENTIALS (Structural Data) ─── */}
+                {/* ─── SCOPE & ETHICS ─── */}
+                <div className="mb-24">
+                    <motion.div {...fadeInUp} className="bg-warm-bg border border-gray-100 rounded-[3rem] p-10 lg:p-16 shadow-inner relative overflow-hidden">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 relative z-10">
+                            <div>
+                                <div className="flex items-center gap-4 mb-8">
+                                    <div className="w-12 h-12 rounded-xl bg-white border border-gray-50 flex items-center justify-center">
+                                        <Microscope className="w-6 h-6 text-primary" />
+                                    </div>
+                                    <h3 className="text-2xl font-serif font-bold text-dark">Scope & Focus</h3>
+                                </div>
+                                <p className="text-muted leading-relaxed mb-6">
+                                    The scope of the journal is broad and inclusive, covering a wide range of disciplines including arts and humanities, social sciences, media and communication studies, natural and applied sciences, and emerging interdisciplinary fields. It welcomes a variety of scholarly contributions such as research articles, review papers, case studies, thematic essays, book reviews, and papers presented at conferences and seminars.
+                                </p>
+                                <p className="text-muted leading-relaxed">
+                                    A key strength lies in its focus on emerging research areas of contemporary academic and societal importance. These include fields such as artificial intelligence and society, digital humanities, climate change and sustainability, media and democracy, gender studies, social justice, globalization, and Indian knowledge systems.
+                                </p>
+                            </div>
+                            
+                            <div>
+                                <div className="flex items-center gap-4 mb-8">
+                                    <div className="w-12 h-12 rounded-xl bg-white border border-gray-50 flex items-center justify-center">
+                                        <ShieldCheck className="w-6 h-6 text-secondary" />
+                                    </div>
+                                    <h3 className="text-2xl font-serif font-bold text-dark">Editorial Philosophy & Ethics</h3>
+                                </div>
+                                <p className="text-muted leading-relaxed mb-6">
+                                    To ensure the integrity and quality of published research, the journal follows a strict <strong>double-blind peer review system</strong>, in which the identities of both authors and reviewers are kept confidential. Submissions are assessed by subject experts based on originality, relevance, methodological rigor, clarity of presentation, and contribution to existing knowledge.
+                                </p>
+                                <p className="text-muted leading-relaxed">
+                                    The journal also upholds a stringent policy against plagiarism. All manuscripts are screened using plagiarism detection tools, and only those that comply with the indexing guidelines prescribed by regulatory authorities such as UGC are considered for publication.
+                                </p>
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
+
+                {/* ─── JOURNAL ESSENTIALS ─── */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                     <motion.div {...fadeInUp} className="bg-white border border-gray-100 rounded-[2.5rem] p-10 lg:p-14 shadow-sm">
                         <div className="flex items-center gap-6 mb-12">
@@ -158,12 +198,6 @@ export default function AboutJournal() {
                                         V-508 Gali No. 17, Vijay Park,<br />
                                         Delhi – 110053, Bharat (India)
                                     </p>
-                                </div>
-                                
-                                <div className="flex items-center gap-4 text-primary/40 text-[10px] font-black uppercase tracking-[0.4em] justify-center mt-10">
-                                    <span className="h-px w-8 bg-primary/20" />
-                                    National Research Register
-                                    <span className="h-px w-8 bg-primary/20" />
                                 </div>
                             </div>
                         </div>

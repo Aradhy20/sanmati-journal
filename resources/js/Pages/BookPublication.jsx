@@ -3,7 +3,7 @@ import MainLayout from '../Layouts/MainLayout';
 import PageHeader from '../Components/PageHeader';
 import { motion } from 'framer-motion';
 import Seo from '../Components/Seo';
-import { BookOpen, Library, ArrowRight, Download, Star } from 'lucide-react';
+import { BookOpen, Library, ArrowRight, Star } from 'lucide-react';
 
 const fadeInUp = {
     initial: { opacity: 0, y: 30 },
@@ -19,10 +19,8 @@ const staggerContainer = {
     transition: { staggerChildren: 0.1 }
 };
 
-export default function BookPublication({ bookImages }) {
-    // Basic sorting to make the layout predictable or random based on preferences
-    // We'll reverse it so the newest images (if sorted alphabetically) might show up creatively
-    const displayBooks = bookImages ? [...bookImages].reverse() : [];
+export default function BookPublication({ books }) {
+    const displayBooks = books || [];
 
     return (
         <MainLayout>
@@ -62,7 +60,7 @@ export default function BookPublication({ bookImages }) {
                                     Beyond our quarterly journals, JTS Publications curates and publishes highly specialized monographs and books focusing on multifaceted disciplines. 
                                 </p>
                                 <p className="text-muted leading-relaxed">
-                                    Browse our extensive repository of over {displayBooks.length} beautifully bound academic books. Each publication undergoes rigorous peer-review and editorial formatting to meet global university press standards.
+                                    Browse our extensive repository of beautifully bound academic books. Each publication undergoes rigorous peer-review and editorial formatting to meet global university press standards.
                                 </p>
                             </div>
                             
@@ -93,9 +91,9 @@ export default function BookPublication({ bookImages }) {
                         viewport={{ once: true, margin: "-100px" }}
                         className="grid grid-cols-2 ml:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 xl:gap-8"
                     >
-                        {displayBooks.map((imgSrc, index) => (
+                        {displayBooks.map((book, index) => (
                             <motion.div 
-                                key={index} 
+                                key={book.id || index} 
                                 variants={fadeInUp}
                                 className="group relative bg-white rounded-2xl p-3 border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col"
                             >
@@ -105,8 +103,8 @@ export default function BookPublication({ bookImages }) {
                                     <div className="absolute top-0 right-0 w-24 h-full bg-white blur-[50px] opacity-0 group-hover:opacity-20 transform translate-x-full group-hover:-translate-x-full transition-all duration-1000 z-10" />
                                     
                                     <img 
-                                        src={imgSrc} 
-                                        alt={`Published Book ${index + 1}`} 
+                                        src={book.image_url} 
+                                        alt={book.title} 
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                                         loading="lazy"
                                     />
@@ -124,11 +122,11 @@ export default function BookPublication({ bookImages }) {
                                 
                                 <div className="mt-auto px-2 pb-2">
                                     <h4 className="font-bold text-dark text-sm line-clamp-2 leading-snug group-hover:text-primary transition-colors">
-                                        Academic Volume {index + 1}
+                                        {book.title}
                                     </h4>
                                     <p className="text-muted text-[10px] uppercase font-black tracking-widest mt-2 flex items-center gap-1">
                                         <span className="w-1.5 h-1.5 rounded-full bg-secondary inline-block" />
-                                        JTS Publications
+                                        {book.author || 'JTS Publications'}
                                     </p>
                                 </div>
                             </motion.div>
