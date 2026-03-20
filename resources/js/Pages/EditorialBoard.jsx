@@ -91,12 +91,12 @@ export default function EditorialBoard() {
     return (
         <MainLayout>
             <Seo 
-                title="Board of Governors" 
+                title="Editorial Board" 
                 description="Our distinguished board members are the guardians of scholarly excellence at Sanmati Journal."
             />
             
             <PageHeader 
-                title="Board of Governors"
+                title="Editorial Board"
                 breadcrumb="Leadership"
                 subtitle="The intellectual architects guiding our multidisciplinary peer-review framework."
             />
@@ -161,7 +161,7 @@ export default function EditorialBoard() {
                         {[
                             {
                                 name: "Prof. Pralhad Joshi",
-                                title: "Chief Governor",
+                                title: "Chief Board Member",
                                 role: "Chief",
                                 affiliation: "Vice-Chancellor, Kumar Bhaskar Varma Sanskrit and Ancient Studies University Nalbari, (Assam)",
                                 image: "/images/team/Prof. Prahlad joshi.jpeg"

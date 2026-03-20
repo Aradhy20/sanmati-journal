@@ -160,7 +160,8 @@ export default function AdvisoryBoard() {
                             {
                                 name: "Dr. Sarita Devi",
                                 title: "Advisory Member",
-                                affiliation: "Assistant Professor, shri umiya girls college Maheshwar Road, Mandleshwar, Khargone, (MP)"
+                                affiliation: "Assistant Professor, shri umiya girls college Maheshwar Road, Mandleshwar, Khargone, (MP)",
+                                image: "/images/team/Dr. Sarita.jpeg"
                             },
                             {
                                 name: "Prof. S. P. Subashini",
@@ -199,7 +200,8 @@ export default function AdvisoryBoard() {
                             {
                                 name: "Dr. Vipin Kumar",
                                 title: "Advisory Member",
-                                affiliation: "Associate Professor, Teerthanker Mahaveer University Moradabad"
+                                affiliation: "Associate Professor, Teerthanker Mahaveer University Moradabad",
+                                image: "/images/team/Dr. Vipin.jpeg"
                             }
                         ].map((m, i) => (
                             <AdvisoryMember key={i} {...m} index={i} />
