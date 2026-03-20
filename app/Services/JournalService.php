@@ -46,14 +46,19 @@ class JournalService
      */
     public function getPublishedBooks()
     {
-        $books = Book::where('is_published', true)->orderBy('created_at', 'desc')->get();
-
-        if ($books->isEmpty()) {
-            $this->seedBooksFromFilesystem();
+        try {
             $books = Book::where('is_published', true)->orderBy('created_at', 'desc')->get();
-        }
 
-        return $books;
+            if ($books->isEmpty()) {
+                $this->seedBooksFromFilesystem();
+                $books = Book::where('is_published', true)->orderBy('created_at', 'desc')->get();
+            }
+
+            return $books;
+        } catch (\Exception $e) {
+            // Table may not exist yet (pre-migration deploy). Return empty gracefully.
+            return collect([]);
+        }
     }
 
     /**
@@ -61,16 +66,21 @@ class JournalService
      */
     public function getActiveTestimonials()
     {
-        return Cache::remember('active_testimonials', 3600, function () {
-            $records = Testimonial::where('is_active', true)->get();
-            
-            if ($records->isEmpty()) {
-                $this->seedDefaultTestimonials();
+        try {
+            return Cache::remember('active_testimonials', 3600, function () {
                 $records = Testimonial::where('is_active', true)->get();
-            }
 
-            return $records;
-        });
+                if ($records->isEmpty()) {
+                    $this->seedDefaultTestimonials();
+                    $records = Testimonial::where('is_active', true)->get();
+                }
+
+                return $records;
+            });
+        } catch (\Exception $e) {
+            // Table may not exist yet (pre-migration deploy). Return empty gracefully.
+            return collect([]);
+        }
     }
 
     /* ==========================================================
