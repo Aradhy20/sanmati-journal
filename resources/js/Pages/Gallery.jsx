@@ -65,15 +65,15 @@ export default function Gallery({ galleryItems = [] }) {
                 subtitle="Documenting the collaborative intelligence and scholarly assembly of the research community."
             />
 
-            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-24 relative">
+            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-24 relative">
                 {/* ─── HEADER SECTION ─── */}
-                <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-20 px-4">
+                <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-10 lg:mb-20 px-4">
                     <motion.div {...fadeInUp}>
                         <div className="flex items-center gap-4 mb-6">
                             <span className="h-px w-10 bg-primary" />
                             <span className="text-primary font-black text-[10px] uppercase tracking-[0.4em]">Archival records</span>
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-serif font-bold text-dark leading-tight">
+                        <h2 className="text-2xl md:text-3xl lg:text-4xl md:text-5xl font-serif font-bold text-dark leading-tight">
                             Captured <span className="text-secondary italic">Scholarly Moments</span>
                         </h2>
                     </motion.div>
@@ -133,7 +133,7 @@ export default function Gallery({ galleryItems = [] }) {
                         <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mx-auto mb-10 shadow-xl border border-gray-50">
                             <Image className="w-8 h-8 text-gray-200" />
                         </div>
-                        <h3 className="text-3xl font-serif font-bold text-dark mb-4">Registry In Progress</h3>
+                        <h3 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-4">Registry In Progress</h3>
                         <p className="text-muted text-lg font-medium leading-relaxed italic">
                             Our team is currently documenting recent academic gatherings. The visual registry will be updated momentarily.
                         </p>

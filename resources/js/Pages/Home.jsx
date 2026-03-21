@@ -19,33 +19,17 @@ const fadeInUp = {
 
 export default function Home() {
     return (
-        <MainLayout title="Home" description="Sanmati Spectrum: A National Multidisciplinary Research Journal & Book Publication">
-            <Suspense fallback={<div className="min-h-[95vh] flex items-center justify-center text-primary font-bold">Loading Hero...</div>}>
+        <MainLayout 
+            title="Sanmati Spectrum of Knowledge | National Multidisciplinary Research Journal" 
+            description="Sanmati Spectrum is India's leading multidisciplinary peer-reviewed academic journal. Publishing high-quality research papers, thesis, and hardcover books across science, arts, commerce, and law."
+            keywords="multidisciplinary journal india, peer-reviewed research, academic book publication, sanmati spectrum of knowledge, ugc care listed journal, publish book from thesis, national research journal"
+        >
+            <Suspense fallback={<div className="min-h-[95vh] flex flex-col gap-4 items-center justify-center text-primary font-bold">
+                <Globe className="w-12 h-12 animate-spin-slow opacity-20" />
+                <span className="animate-pulse tracking-widest text-sm uppercase">Loading Core Engine...</span>
+            </div>}>
                 <Hero />
             </Suspense>
-
-            {/* ─── FEATURES BAR (Publication Highlights) ─── */}
-            <section className="py-8 bg-primary relative overflow-hidden">
-                <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.2) 1px, transparent 0)', backgroundSize: '32px 32px' }} />
-                <div className="container-custom relative z-10">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-0 divide-x divide-white/10">
-                        {[
-                            { icon: BookMarked, stat: '500+', label: 'Exclusive Titles' },
-                            { icon: Truck, stat: 'Global', label: 'Shipping Available' },
-                            { icon: Heart, stat: 'Signed', label: 'Author Editions' },
-                            { icon: Zap, stat: 'Early', label: 'Access Programs' },
-                        ].map((item, i) => (
-                            <div key={i} className="flex items-center gap-4 px-8 py-4">
-                                <item.icon className="w-8 h-8 text-white/70 shrink-0" />
-                                <div>
-                                    <p className="text-white font-black text-xl leading-none">{item.stat}</p>
-                                    <p className="text-white/60 text-[11px] font-bold uppercase tracking-widest">{item.label}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
             {/* ─── ABOUT SECTION ─── */}
             <section className="py-32 bg-surface relative overflow-hidden">
@@ -54,40 +38,39 @@ export default function Home() {
 
                 <div className="container-custom">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-                        {/* Left — Dual Image Layout */}
+                        {/* Left — Visual Info Grid */}
                         <motion.div
                             initial={{ opacity: 0, scale: 0.95 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                            className="relative"
+                            className="relative grid grid-cols-2 gap-6"
                         >
-                            <div className="grid grid-cols-12 gap-4">
-                                <div className="col-span-7 relative z-10">
-                                    <div className="rounded-[2.5rem] overflow-hidden shadow-2xl h-[450px] border-4 border-white">
-                                        <img src="/fistudy-assets/resources/about-journal-1.png" alt="Book Publication" className="w-full h-full object-cover" loading="lazy" />
-                                    </div>
-                                    <div className="absolute -bottom-8 -left-6 bg-white rounded-3xl shadow-[0_20px_40px_rgba(79,119,255,0.12)] p-6 border border-gray-100 animate-float">
-                                        <div className="flex items-baseline gap-1">
-                                            <span className="text-4xl font-serif font-black text-primary">25</span>
-                                            <span className="text-secondary text-2xl font-black">+</span>
-                                        </div>
-                                        <p className="text-dark-light text-[10px] font-black uppercase tracking-[0.2em] mt-1">Research Fields</p>
-                                    </div>
+                            <div className="col-span-2 bg-white rounded-3xl p-8 2xl:p-12 shadow-sm border border-gray-100 hover:shadow-2xl hover:border-primary/20 transition-all duration-700 overflow-hidden relative group lg:block">
+                                <div className="absolute right-0 top-0 w-64 h-64 bg-primary/4 rounded-bl-[100px] -mr-8 -mt-8 transition-transform group-hover:scale-110 duration-1000" />
+                                <Quote className="w-12 h-12 text-primary/10 mb-6 group-hover:text-primary/20 transition-colors" />
+                                <h3 className="text-2xl lg:text-3xl font-serif font-bold text-dark leading-tight relative z-10">
+                                    "A thriving academic ecosystem where groundbreaking <span className="text-primary italic">research meets global publishing</span>."
+                                </h3>
+                            </div>
+                            
+                            <div className="col-span-2 sm:col-span-1 bg-gradient-to-br from-primary to-primary-dark rounded-3xl p-8 lg:p-10 text-white relative overflow-hidden shadow-xl group cursor-default">
+                                <div className="absolute right-0 top-0 w-32 h-32 bg-white/5 rounded-full blur-xl group-hover:bg-white/10 transition-colors duration-700" />
+                                <BookOpen className="w-10 h-10 text-secondary mb-8 group-hover:scale-110 transition-transform duration-500" />
+                                <div className="flex items-baseline gap-1 mb-2">
+                                    <span className="text-5xl lg:text-6xl font-serif font-black">25</span>
+                                    <span className="text-secondary text-4xl font-black">+</span>
                                 </div>
-                                <div className="col-span-5 pt-16">
-                                    <div className="rounded-[2rem] overflow-hidden shadow-xl h-64 mb-6 border-4 border-white">
-                                        <img src="/fistudy-assets/resources/about-journal-2.png" alt="Book Editions" className="w-full h-full object-cover" loading="lazy" />
-                                    </div>
-                                    <div className="bg-gradient-to-br from-primary to-primary-dark rounded-[2rem] p-8 text-white relative overflow-hidden shadow-xl">
-                                        <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full -mr-12 -mt-12" />
-                                        <div className="flex items-baseline gap-1 mb-2">
-                                            <span className="text-3xl font-serif font-bold">02</span>
-                                            <span className="text-secondary text-xl font-black">+</span>
-                                        </div>
-                                        <p className="text-white/50 text-[10px] font-black uppercase tracking-widest leading-tight">Years of Academic Leadership</p>
-                                    </div>
+                                <p className="text-white/80 text-xs font-black uppercase tracking-widest leading-tight">Research Fields</p>
+                            </div>
+
+                            <div className="col-span-2 sm:col-span-1 bg-white rounded-3xl p-8 lg:p-10 shadow-[0_10px_40px_rgba(79,119,255,0.08)] border border-primary/10 relative overflow-hidden group hover:border-secondary/30 transition-all duration-500 cursor-default text-center flex flex-col items-center justify-center">
+                                <Award className="w-10 h-10 text-secondary mb-8 group-hover:scale-110 transition-transform duration-500" />
+                                <div className="flex items-baseline gap-1 mb-2">
+                                    <span className="text-5xl lg:text-6xl font-serif font-black text-dark">02</span>
+                                    <span className="text-primary text-4xl font-black">+</span>
                                 </div>
+                                <p className="text-primary/60 text-xs font-black uppercase tracking-widest leading-tight">Years Excellence</p>
                             </div>
                         </motion.div>
 
@@ -97,7 +80,7 @@ export default function Home() {
                                 <span className="h-px w-10 bg-secondary" />
                                 <span className="text-secondary font-black text-[11px] uppercase tracking-[0.3em]">Our Philosophical Core</span>
                             </div>
-                            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-dark leading-[1.1] mb-8">
+                            <h2 className="text-2xl md:text-3xl lg:text-4xl lg:text-5xl font-serif font-bold text-dark leading-[1.1] mb-8">
                                 Cultivating a Global <span className="text-primary italic">Spectrum of Knowledge</span>
                             </h2>
                             <p className="text-muted leading-relaxed text-lg mb-10 border-l-2 border-primary/15 pl-8">
@@ -141,7 +124,7 @@ export default function Home() {
                                 <span className="h-px w-10 bg-secondary" />
                                 <span className="text-secondary font-black text-[11px] uppercase tracking-[0.3em]">New Arrivals</span>
                             </div>
-                            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-dark leading-tight">
+                            <h2 className="text-2xl md:text-3xl lg:text-4xl lg:text-5xl font-serif font-bold text-dark leading-tight">
                                 Latest <span className="text-primary italic">Book Releases</span> & Publications
                             </h2>
                         </motion.div>
@@ -249,13 +232,13 @@ export default function Home() {
             {/* ─── EDITORIAL LEADERSHIP ─── */}
             <section className="py-32 bg-white relative">
                 <div className="container-custom">
-                    <div className="flex flex-col lg:flex-row items-end justify-between gap-10 mb-20">
+                    <div className="flex flex-col lg:flex-row items-end justify-between gap-10 mb-10 lg:mb-20">
                         <motion.div {...fadeInUp} className="max-w-2xl">
                             <div className="flex items-center gap-4 mb-6">
                                 <span className="h-px w-10 bg-secondary" />
                                 <span className="text-secondary font-black text-[11px] uppercase tracking-[0.3em]">Guardians of Integrity</span>
                             </div>
-                            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-dark leading-tight">
+                            <h2 className="text-2xl md:text-3xl lg:text-4xl lg:text-5xl font-serif font-bold text-dark leading-tight">
                                 Distinguished <span className="text-primary italic">Editorial Leadership</span>
                             </h2>
                         </motion.div>
@@ -267,7 +250,7 @@ export default function Home() {
 
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12 max-w-5xl mx-auto">
                         {/* Editor-in-Chief : Dr. Namrta Jain */}
                         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="group">
                             <div className="h-full rounded-[3rem] overflow-hidden bg-gradient-to-br from-primary to-primary-dark text-white p-10 flex flex-col items-center text-center shadow-2xl hover:-translate-y-2 transition-all duration-700 relative">
@@ -276,7 +259,7 @@ export default function Home() {
                                     <img src="/mam.jpeg" alt="Dr. Namrta Jain" className="w-full h-full object-cover object-top group-hover:scale-110 transition-all duration-700" />
                                 </div>
                                 <span className="inline-block px-4 py-1.5 bg-secondary/25 border border-secondary/40 rounded-full text-[10px] text-secondary font-black tracking-widest uppercase mb-4 w-fit">Editor-in-Chief</span>
-                                <h3 className="text-3xl font-serif font-bold mb-2 tracking-tight group-hover:text-secondary-light transition-colors duration-300">Dr. Namrta Jain</h3>
+                                <h3 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold mb-2 tracking-tight group-hover:text-secondary-light transition-colors duration-300">Dr. Namrta Jain</h3>
                                 <p className="text-white/70 text-[12px] font-bold uppercase tracking-[0.05em] mb-2">Sanmati Spectrum of Knowledge & Emerging Discourse</p>
                                 <p className="text-white/40 text-[10px] uppercase font-black tracking-widest mb-6 min-h-[15px]"></p>
                                 
@@ -303,7 +286,7 @@ export default function Home() {
                                     <img src="/sir.jpeg" alt="Dr. Ratnesh Kumar Jain" className="w-full h-full object-cover object-top group-hover:scale-110 transition-all duration-700" />
                                 </div>
                                 <span className="inline-block px-4 py-1.5 bg-primary/8 rounded-full text-[10px] text-primary font-black tracking-widest uppercase mb-4">Managing Editor</span>
-                                <h3 className="text-3xl font-serif font-bold text-dark mb-2 group-hover:text-primary transition-colors duration-300">Dr. Ratnesh Kumar Jain</h3>
+                                <h3 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-2 group-hover:text-primary transition-colors duration-300">Dr. Ratnesh Kumar Jain</h3>
                                 <p className="text-muted text-[12px] font-bold uppercase tracking-wider mb-2 min-h-[18px]"></p>
                                 <p className="text-dark/40 text-[10px] uppercase font-black tracking-widest mb-6 min-h-[15px]"></p>
                                 
@@ -323,67 +306,17 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* ─── FEATURED AUTHORS ─── */}
-            <section className="py-24 bg-warm-bg relative overflow-hidden">
-                <div className="container-custom">
-                    <div className="text-center max-w-2xl mx-auto mb-16">
-                        <motion.div {...fadeInUp} className="flex items-center justify-center gap-4 mb-6">
-                            <span className="h-px w-10 bg-secondary" />
-                            <span className="text-secondary font-black text-[11px] uppercase tracking-[0.4em]">Author Corner</span>
-                            <span className="h-px w-10 bg-secondary" />
-                        </motion.div>
-                        <motion.h2 {...fadeInUp} transition={{ delay: 0.1 }} className="text-4xl lg:text-5xl font-serif font-bold text-dark mb-6">
-                            Our <span className="text-primary italic">Featured Authors</span>
-                        </motion.h2>
-                        <motion.p {...fadeInUp} transition={{ delay: 0.2 }} className="text-muted font-medium text-lg leading-relaxed">
-                            Brilliant minds whose published works have shaped academic discourse across disciplines.
-                        </motion.p>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {[
-                            { name: 'Dr. Amit Sharma', field: 'Quantum Physics', books: '3 Published', img: '/fistudy-assets/team/team-1-2.jpg' },
-                            { name: 'Prof. Ritu Verma', field: 'Behavioral Science', books: '5 Published', img: '/fistudy-assets/team/team-2-1.jpg' },
-                            { name: 'Dr. Pradeep Kumar', field: 'Urban Studies', books: '2 Published', img: '/fistudy-assets/team/team-2-2.jpg' },
-                            { name: 'Dr. Sunita Rao', field: 'Sustainability', books: '4 Published', img: '/fistudy-assets/team/team-1-1.jpg' },
-                        ].map((author, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.1, duration: 0.7 }}
-                                className="group p-8 bg-white rounded-[2rem] border border-gray-100 hover:border-primary/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-500 text-center"
-                            >
-                                <div className="w-24 h-24 rounded-2xl overflow-hidden mx-auto mb-6 border-2 border-white shadow-lg rotate-3 group-hover:rotate-0 transition-transform duration-500">
-                                    <img src={author.img} alt={author.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
-                                </div>
-                                <div className="flex items-center justify-center gap-2 mb-2">
-                                    <span className="h-px w-4 bg-secondary" />
-                                    <span className="text-secondary font-black text-[9px] uppercase tracking-[0.3em]">{author.field}</span>
-                                </div>
-                                <h3 className="text-lg font-serif font-bold text-dark mb-2 group-hover:text-primary transition-colors">{author.name}</h3>
-                                <div className="flex items-center justify-center gap-2">
-                                    <BookOpen className="w-3.5 h-3.5 text-primary/50" />
-                                    <span className="text-muted text-[11px] font-bold uppercase tracking-widest">{author.books}</span>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
             {/* ─── ACADEMIC DOMAINS ─── */}
             <section className="py-32 bg-white relative overflow-hidden">
                 <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[800px] h-[800px] bg-primary/2 rounded-full blur-[120px] -ml-96" />
                 <div className="container-custom relative z-10">
-                    <div className="text-center max-w-3xl mx-auto mb-20">
+                    <div className="text-center max-w-3xl mx-auto mb-10 lg:mb-20">
                         <motion.div {...fadeInUp} className="flex items-center justify-center gap-4 mb-6">
                             <span className="h-px w-10 bg-secondary" />
                             <span className="text-secondary font-black text-[11px] uppercase tracking-[0.4em]">Our Academic Scope</span>
                             <span className="h-px w-10 bg-secondary" />
                         </motion.div>
-                        <motion.h2 {...fadeInUp} transition={{ delay: 0.1 }} className="text-4xl lg:text-5xl font-serif font-bold text-dark mb-6">
+                        <motion.h2 {...fadeInUp} transition={{ delay: 0.1 }} className="text-2xl md:text-3xl lg:text-4xl lg:text-5xl font-serif font-bold text-dark mb-6">
                             Explore <span className="text-primary italic">Intellectual Domains</span>
                         </motion.h2>
                         <motion.p {...fadeInUp} transition={{ delay: 0.2 }} className="text-muted font-medium text-lg leading-relaxed">
@@ -426,10 +359,10 @@ export default function Home() {
             </section>
 
             {/* ─── ACADEMIC IMPACT (Counters) ─── */}
-            <section className="py-24 bg-gradient-to-br from-primary to-primary-dark relative overflow-hidden">
+            <section className="py-12 lg:py-24 bg-gradient-to-br from-primary to-primary-dark relative overflow-hidden">
                 <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.08) 1px, transparent 0)', backgroundSize: '40px 40px' }} />
                 <div className="container-custom relative z-10">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-12 text-center">
                         {[
                             { icon: FileText, num: "500+", label: "Artifacts Published" },
                             { icon: Users, num: "200+", label: "Global Scholars" },
@@ -447,7 +380,7 @@ export default function Home() {
                                 <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center group-hover:bg-white/20 transition-all duration-500">
                                     <stat.icon className="w-8 h-8 text-white/80 group-hover:scale-110 transition-transform" />
                                 </div>
-                                <div className="text-4xl lg:text-5xl font-black text-white mb-2 tracking-tighter">{stat.num}</div>
+                                <div className="text-2xl md:text-3xl lg:text-4xl lg:text-5xl font-black text-white mb-2 tracking-tighter">{stat.num}</div>
                                 <p className="text-white/50 text-[10px] font-black uppercase tracking-[0.2em]">{stat.label}</p>
                             </motion.div>
                         ))}
@@ -483,7 +416,7 @@ export default function Home() {
                                         <Award className="w-8 h-8 text-primary" />
                                     </div>
                                     <div>
-                                        <div className="text-3xl font-black text-dark tracking-tighter">Gold Standard</div>
+                                        <div className="text-xl md:text-2xl lg:text-3xl font-black text-dark tracking-tighter">Gold Standard</div>
                                         <p className="text-muted text-xs font-bold uppercase tracking-widest mt-1">Peer Review Quality</p>
                                     </div>
                                 </div>
@@ -495,7 +428,7 @@ export default function Home() {
                                 <span className="h-px w-10 bg-secondary" />
                                 <span className="text-secondary font-black text-[11px] uppercase tracking-[0.4em]">Why Choose Us</span>
                             </div>
-                            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-dark leading-[1.15] mb-8">
+                            <h2 className="text-2xl md:text-3xl lg:text-4xl lg:text-5xl font-serif font-bold text-dark leading-[1.15] mb-8">
                                 Premium <span className="text-primary italic">Publishing Excellence</span> for Every Author
                             </h2>
                             <p className="text-muted font-medium text-lg leading-relaxed mb-12">
@@ -536,13 +469,13 @@ export default function Home() {
             <section className="py-32 bg-warm-bg relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[140px] -mr-96 -mt-96" />
                 <div className="container-custom relative z-10">
-                    <div className="text-center max-w-3xl mx-auto mb-24">
+                    <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-24">
                         <motion.div {...fadeInUp} className="flex items-center justify-center gap-4 mb-6">
                             <span className="h-px w-10 bg-secondary" />
                             <span className="text-secondary font-black text-[11px] uppercase tracking-[0.4em]">Publication Pipeline</span>
                             <span className="h-px w-10 bg-secondary" />
                         </motion.div>
-                        <motion.h2 {...fadeInUp} transition={{ delay: 0.1 }} className="text-4xl lg:text-5xl font-serif font-bold text-dark mb-6">
+                        <motion.h2 {...fadeInUp} transition={{ delay: 0.1 }} className="text-2xl md:text-3xl lg:text-4xl lg:text-5xl font-serif font-bold text-dark mb-6">
                             The <span className="text-primary italic">Scholarly Journey</span>
                         </motion.h2>
                         <motion.p {...fadeInUp} transition={{ delay: 0.2 }} className="text-muted font-medium text-lg">
@@ -587,7 +520,7 @@ export default function Home() {
                             <p className="text-white/70 font-black text-[11px] uppercase tracking-[0.35em] mb-2 flex items-center gap-2 justify-center lg:justify-start">
                                 <Send className="w-3.5 h-3.5" /> Stay Updated
                             </p>
-                            <h3 className="text-3xl lg:text-4xl font-serif font-bold">Subscribe for New Releases & Launch Events</h3>
+                            <h3 className="text-xl md:text-2xl lg:text-3xl lg:text-4xl font-serif font-bold">Subscribe for New Releases & Launch Events</h3>
                         </div>
                         <div className="flex gap-3 flex-shrink-0 w-full lg:w-auto">
                             <input
@@ -603,58 +536,8 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* ─── TESTIMONIALS ─── */}
-            <section className="py-32 bg-white">
-                <div className="container-custom">
-                    <div className="text-center max-w-2xl mx-auto mb-20">
-                        <motion.div {...fadeInUp} className="flex items-center justify-center gap-4 mb-6">
-                            <span className="h-px w-10 bg-secondary" />
-                            <span className="text-secondary font-black text-[11px] uppercase tracking-[0.4em]">Voice of Scholars</span>
-                            <span className="h-px w-10 bg-secondary" />
-                        </motion.div>
-                        <h2 className="text-4xl lg:text-5xl font-serif font-bold text-dark">
-                            What Our <span className="text-primary italic">Readers Say</span>
-                        </h2>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-                        {[
-                            { name: "Dr. Amit Sharma", role: "Professor, IIT Delhi", text: "Sanmati's book publications are of exceptional quality. The peer-review process is rigorous and the editorial team is highly responsive.", img: "/fistudy-assets/team/team-1-2.jpg", stars: 5 },
-                            { name: "Prof. Ritu Verma", role: "Researcher, JNU", text: "The multidisciplinary focus and premium hardcover quality make their publications stand out. I'd recommend to every academic author.", img: "/fistudy-assets/team/team-2-1.jpg", stars: 5 },
-                            { name: "Dr. Pradeep Kumar", role: "Associate Professor, BHU", text: "From manuscript to final book, the journey was smooth and professional. The global distribution is a huge plus for visibility.", img: "/fistudy-assets/team/team-2-2.jpg", stars: 5 },
-                        ].map((t, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                                className="group p-10 rounded-[2.5rem] bg-warm-bg border border-gray-100 hover:shadow-2xl hover:border-primary/15 hover:-translate-y-1 transition-all duration-500 relative"
-                            >
-                                <Quote className="absolute top-10 right-10 w-16 h-16 text-primary/5 group-hover:text-primary/10 transition-colors" />
-                                <div className="flex gap-1 mb-6">
-                                    {[...Array(t.stars)].map((_, k) => (
-                                        <Star key={k} className="w-4 h-4 fill-secondary text-secondary" />
-                                    ))}
-                                </div>
-                                <p className="text-muted font-medium text-lg italic leading-relaxed mb-10 relative z-10">"{t.text}"</p>
-                                <div className="flex items-center gap-5">
-                                    <div className="w-14 h-14 rounded-2xl overflow-hidden bg-primary/10">
-                                        <img src={t.img} alt={t.name} className="w-full h-full object-cover group-hover:scale-110 transition-all" />
-                                    </div>
-                                    <div>
-                                        <h4 className="font-bold text-dark text-base">{t.name}</h4>
-                                        <p className="text-muted text-[10px] font-black uppercase tracking-widest">{t.role}</p>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
             {/* ─── INVITATION (CTA) ─── */}
-            <section className="py-24">
+            <section className="py-12 lg:py-24">
                 <div className="container-custom">
                     <div className="relative rounded-[3.5rem] bg-gradient-to-br from-primary via-primary-dark to-[#0a0f2e] p-14 lg:p-24 overflow-hidden text-center shadow-[0_50px_100px_rgba(79,119,255,0.25)]">
                         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0)', backgroundSize: '40px 40px' }} />
@@ -663,7 +546,7 @@ export default function Home() {
 
                         <div className="relative z-10 max-w-4xl mx-auto">
                             <span className="inline-block px-5 py-2 bg-white/8 border border-white/15 rounded-full text-[10px] text-secondary font-black tracking-[0.3em] uppercase mb-8">Ready for Publication</span>
-                            <h2 className="text-5xl lg:text-7xl font-serif font-bold text-white mb-10 leading-[1.1] tracking-tight">
+                            <h2 className="text-3xl md:text-4xl lg:text-5xl lg:text-7xl font-serif font-bold text-white mb-10 leading-[1.1] tracking-tight">
                                 Shaping the Future of <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-secondary-light">Global Research</span>
                             </h2>
                             <p className="text-white/45 text-xl font-medium mb-12 max-w-2xl mx-auto leading-relaxed">

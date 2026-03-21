@@ -32,7 +32,7 @@ export default function Gallery({ gallery = [] }) {
             <div className="space-y-8">
                 <div className="flex justify-between items-center">
                     <div>
-                        <h1 className="text-3xl font-serif font-bold text-dark mb-2">Media Library</h1>
+                        <h1 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-2">Media Library</h1>
                         <p className="text-gray-500 text-sm">Manage and categorize photos for the gallery and news sections.</p>
                     </div>
                 </div>

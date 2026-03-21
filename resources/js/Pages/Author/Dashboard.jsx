@@ -54,7 +54,7 @@ export default function AuthorDashboard({ submissions = [] }) {
                                 <div className={`absolute top-0 right-0 w-24 h-24 rounded-full blur-3xl opacity-20 ${stat.color} group-hover:opacity-40 transition-opacity`}></div>
                                 <div>
                                     <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-1">{stat.label}</p>
-                                    <p className="text-4xl font-serif font-bold text-slate-800">{stat.val}</p>
+                                    <p className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-slate-800">{stat.val}</p>
                                 </div>
                             </motion.div>
                         ))}

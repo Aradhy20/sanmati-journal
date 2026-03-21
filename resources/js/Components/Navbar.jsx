@@ -77,7 +77,7 @@ const Navbar = () => {
             href: '/gallery-view',
             dropdown: [
                 { name: 'Photos', href: '/gallery/photo' },
-                { name: 'News', href: '/gallery/news' },
+                { name: 'News', href: '/media-news' },
             ],
         },
         { name: 'Contact', href: '/contact' },

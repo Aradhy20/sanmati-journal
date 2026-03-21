@@ -54,15 +54,15 @@ export default function Compliance() {
                 subtitle="The ethical framework ensuring transparency & integrity across our multidisciplinary publications."
             />
 
-            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-24 relative">
+            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-24 relative">
                 {/* ─── INTRO SECTION ─── */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center mb-24">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center mb-12 lg:mb-24">
                     <motion.div {...fadeInUp} className="lg:col-span-12 xl:col-span-7">
                         <div className="flex items-center gap-4 mb-8">
                             <span className="h-px w-10 bg-primary" />
                             <span className="text-primary font-black text-[11px] uppercase tracking-[0.4em]">Policy Protocol</span>
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-serif font-bold text-dark mb-8 leading-tight">
+                        <h2 className="text-2xl md:text-3xl lg:text-4xl md:text-5xl font-serif font-bold text-dark mb-8 leading-tight">
                             Publishing with <br />
                             <span className="text-secondary italic">Ethical Precision</span>
                         </h2>
@@ -130,15 +130,15 @@ export default function Compliance() {
                 </div>
 
                 {/* ─── BOTTOM CTA ─── */}
-                <motion.div {...fadeInUp} className="mt-24">
-                    <div className="relative rounded-[4rem] overflow-hidden bg-dark p-12 lg:p-20 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-12">
+                <motion.div {...fadeInUp} className="mt-12 lg:mt-24">
+                    <div className="relative rounded-[4rem] overflow-hidden bg-dark p-6 lg:p-12 lg:p-20 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-12">
                         {/* Background Texture */}
                         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:24px_24px]" />
                         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/20 to-transparent" />
                         
                         <div className="relative z-10 lg:max-w-xl text-center lg:text-left">
                             <span className="text-secondary font-black text-[10px] uppercase tracking-[0.4em] mb-6 block">Expert Guidance</span>
-                            <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6">Clarifications on <span className="text-secondary italic">Compliance?</span></h3>
+                            <h3 className="text-xl md:text-2xl lg:text-3xl md:text-4xl font-serif font-bold text-white mb-6">Clarifications on <span className="text-secondary italic">Compliance?</span></h3>
                             <p className="text-white/60 text-lg leading-relaxed font-light">
                                 Our legal and ethics desk is available to assist authors with complex queries regarding licensing and intellectual property.
                             </p>

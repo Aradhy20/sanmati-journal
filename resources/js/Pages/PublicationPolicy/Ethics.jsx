@@ -18,7 +18,7 @@ export default function Ethics() {
                     subtitle="Commitment to integrity, fairness, and academic standards"
                 />
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 relative z-10">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-24 relative z-10">
                     <ScrollReveal variants={revealVariants.up}>
                         <div className="max-w-4xl mx-auto space-y-12 mt-12">
 

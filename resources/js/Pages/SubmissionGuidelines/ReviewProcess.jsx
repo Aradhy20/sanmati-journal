@@ -50,7 +50,7 @@ export default function ReviewProcess() {
                     subtitle="Transparent, systematic, and rigorous standard"
                 />
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-24">
                     <div className="max-w-4xl mx-auto mt-12">
 
                         <div className="bg-white p-8 md:p-12 rounded-3xl border border-gray-200 shadow-sm relative overflow-hidden">
@@ -59,7 +59,7 @@ export default function ReviewProcess() {
                             </div>
 
                             <div className="relative z-10">
-                                <h2 className="text-3xl font-serif font-bold text-dark mb-6">Our Review Standards</h2>
+                                <h2 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-6">Our Review Standards</h2>
                                 <p className="text-dark/80 text-lg leading-relaxed mb-16 max-w-2xl">
                                     Sanmati Spectrum of Knowledge & Emerging Discourse follows a transparent, systematic, and rigorous editorial and peer review process to maintain high academic standards.
                                 </p>

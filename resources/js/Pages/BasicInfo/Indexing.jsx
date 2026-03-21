@@ -59,7 +59,7 @@ const Indexing = () => {
                         transition={{ duration: 0.6 }}
                         className="text-center mb-16"
                     >
-                        <h1 className="text-4xl lg:text-5xl font-bold text-dark font-serif mb-4">
+                        <h1 className="text-2xl md:text-3xl lg:text-4xl lg:text-5xl font-bold text-dark font-serif mb-4">
                             Indexing & Abstracting
                         </h1>
                         <p className="text-lg text-gray-600 max-w-3xl mx-auto">

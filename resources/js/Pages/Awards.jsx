@@ -50,15 +50,15 @@ export default function Awards() {
                 subtitle="Celebrating the intellectual vanguards who redefine the boundaries of multidisciplinary research."
             />
 
-            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-24 relative">
+            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-24 relative">
                 {/* ─── INTRO SECTION ─── */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-32">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center mb-16 lg:mb-32">
                     <motion.div {...fadeInUp}>
                         <div className="flex items-center gap-4 mb-8">
                             <span className="h-px w-10 bg-primary" />
                             <span className="text-primary font-black text-[11px] uppercase tracking-[0.4em]">Honorarium Registry</span>
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-serif font-bold text-dark mb-8 leading-tight">
+                        <h2 className="text-2xl md:text-3xl lg:text-4xl md:text-5xl font-serif font-bold text-dark mb-8 leading-tight">
                             Celebrating the <br />
                             <span className="text-secondary italic">Scholarly Legacy</span>
                         </h2>
@@ -75,13 +75,13 @@ export default function Awards() {
                 </div>
 
                 {/* ─── AWARDS GRID ─── */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 lg:mb-32">
                     {awards.map((award, i) => (
                         <motion.div 
                             key={i} 
                             {...fadeInUp}
                             transition={{ delay: i * 0.2 }}
-                            className="group relative h-full bg-white p-12 rounded-[3.5rem] border border-gray-50 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-700 overflow-hidden"
+                            className="group relative h-full bg-white p-6 lg:p-12 rounded-[3.5rem] border border-gray-50 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-700 overflow-hidden"
                         >
                             <div className={`absolute top-0 left-0 w-2 h-full ${award.colorClass}`} />
                             <div className="absolute top-0 right-0 p-8 opacity-5">
@@ -107,7 +107,7 @@ export default function Awards() {
 
                 {/* ─── NOMINATION SECTION ─── */}
                 <motion.div {...fadeInUp}>
-                    <div className="relative rounded-[4rem] overflow-hidden bg-dark p-12 lg:p-24 shadow-2xl flex flex-col lg:flex-row items-center gap-16">
+                    <div className="relative rounded-[4rem] overflow-hidden bg-dark p-6 lg:p-12 lg:p-24 shadow-2xl flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
                         {/* Background Decoration */}
                         <div className="absolute inset-0 opacity-5 bg-[size:40px_40px] bg-grid-white/[0.2]" />
                         <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-secondary/10 to-transparent" />
@@ -117,7 +117,7 @@ export default function Awards() {
                                 <Medal className="w-10 h-10 text-secondary" />
                                 <span className="text-secondary font-black text-[11px] uppercase tracking-[0.4em]">Submission Cycle 2026</span>
                             </div>
-                            <h3 className="text-3xl md:text-5xl font-serif font-bold text-white mb-8">Nominations are <span className="text-secondary italic">Open</span></h3>
+                            <h3 className="text-xl md:text-2xl lg:text-3xl md:text-5xl font-serif font-bold text-white mb-8">Nominations are <span className="text-secondary italic">Open</span></h3>
                             <p className="text-white/60 text-xl leading-relaxed font-light max-w-2xl">
                                 We invite recommendations for scholars who have demonstrated exceptional empirical rigor. Self-nominations for the 'Best Paper' category are also welcome.
                             </p>

@@ -46,7 +46,7 @@ export default function CallForPapers() {
                     subtitle="Secure End-to-End Peer Review Processing"
                 />
 
-                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative">
+                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-24 relative">
                     
                     {/* Stepper Wizard Header */}
                     {step < 4 && (
@@ -78,7 +78,7 @@ export default function CallForPapers() {
                                     <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8">
                                         <CheckCircle className="w-12 h-12 text-green-600" />
                                     </div>
-                                    <h2 className="text-4xl font-serif font-bold text-slate-900 mb-4">Submission Successful!</h2>
+                                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-slate-900 mb-4">Submission Successful!</h2>
                                     <p className="text-slate-600 text-lg max-w-lg mx-auto mb-10">
                                         Your manuscript has been securely encrypted and routed to our editorial board. You will receive an email confirmation shortly.
                                     </p>
@@ -158,7 +158,7 @@ export default function CallForPapers() {
                                                     <p className="text-slate-500">Upload your blinded manuscript (PDF format only, max 10MB).</p>
                                                 </div>
 
-                                                <div className="relative border-2 border-dashed border-gray-300 rounded-3xl p-12 text-center hover:bg-slate-50 hover:border-blue-400 transition-colors group cursor-pointer">
+                                                <div className="relative border-2 border-dashed border-gray-300 rounded-3xl p-6 lg:p-12 text-center hover:bg-slate-50 hover:border-blue-400 transition-colors group cursor-pointer">
                                                     <input 
                                                         type="file" 
                                                         accept=".pdf"

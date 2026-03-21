@@ -11,15 +11,15 @@ export default function ObjectiveScope() {
                 subtitle="Defining our academic boundaries and goals"
             />
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-24">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
                     {/* Objective */}
                     <div className="space-y-6">
                         <div className="flex items-center gap-4 mb-4">
                             <div className="p-3 bg-primary/10 rounded-lg text-primary-dark">
                                 <Microscope className="w-8 h-8" />
                             </div>
-                            <h2 className="text-3xl font-serif font-bold text-dark">Objectives</h2>
+                            <h2 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark">Objectives</h2>
                         </div>
                         <p className="text-dark/80 text-lg leading-relaxed">
                             The objective of the journal is to provide a national multidisciplinary platform for scholars, researchers, and the academic community. We encourage:
@@ -45,7 +45,7 @@ export default function ObjectiveScope() {
                             <div className="p-3 bg-yellow-100 rounded-lg text-yellow-700">
                                 <Globe2 className="w-8 h-8" />
                             </div>
-                            <h2 className="text-3xl font-serif font-bold text-dark">Scope</h2>
+                            <h2 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark">Scope</h2>
                         </div>
                         <p className="text-dark/80 text-lg leading-relaxed">
                             The journal publishes research papers, case studies, theme-based articles, and book reviews across a wide spectrum of disciplines, offering scholars an opportunity to share ideas and foster multidimensional discourse.

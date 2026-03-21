@@ -4,7 +4,7 @@ import { ChevronRight } from 'lucide-react';
 
 const PageHeader = ({ title, breadcrumb, subtitle }) => {
     return (
-        <section className="relative py-24 md:py-32 overflow-hidden bg-warm-bg">
+        <section className="relative py-12 lg:py-24 md:py-32 overflow-hidden bg-warm-bg">
             {/* Sophisticated Background Layers */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-gradient-to-br from-warm-bg via-surface/80 to-primary/5" />
@@ -55,7 +55,7 @@ const PageHeader = ({ title, breadcrumb, subtitle }) => {
                     </nav>
 
                     {/* Monumental Title */}
-                    <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-dark mb-6 tracking-tight">
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-dark mb-6 tracking-tight">
                         {title}
                     </h1>
 

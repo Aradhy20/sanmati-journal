@@ -15,7 +15,7 @@ export default function PublicationCharges() {
                     subtitle="Processing Fee & Payment Details"
                 />
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 relative overflow-hidden">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-24 relative overflow-hidden">
                     <DotPattern className="opacity-10" />
                     <div className="max-w-4xl mx-auto mt-12 relative z-10">
                         <ScrollReveal variants={revealVariants.zoom}>
@@ -26,9 +26,9 @@ export default function PublicationCharges() {
                                 </div>
 
                                 <div className="relative z-10">
-                                    <h2 className="text-3xl font-serif font-bold text-dark mb-8">Publication Fees</h2>
+                                    <h2 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-8">Publication Fees</h2>
 
-                                    <div className="flex flex-col md:flex-row gap-12 items-stretch">
+                                    <div className="flex flex-col md:flex-row gap-6 lg:gap-12 items-stretch">
                                         {/* Pricing Card */}
                                         <ScrollReveal variants={revealVariants.left} className="w-full md:w-1/2">
                                             <div className="h-full p-10 bg-blue-900 text-white rounded-3xl shadow-xl shadow-blue-900/20 flex flex-col justify-between relative overflow-hidden group">
@@ -36,7 +36,7 @@ export default function PublicationCharges() {
                                                 <div className="relative z-10">
                                                     <p className="text-blue-300 text-sm font-bold uppercase tracking-widest mb-4">Registration Fee</p>
                                                     <div className="flex items-baseline gap-2 mb-8">
-                                                        <span className="text-6xl font-black italic">₹1200</span>
+                                                        <span className="text-4xl lg:text-6xl font-black italic">₹1200</span>
                                                         <span className="text-primary-light text-lg font-medium">/ Per Issue</span>
                                                     </div>
                                                     <div className="space-y-4">
@@ -93,7 +93,7 @@ export default function PublicationCharges() {
                                                     In the name of
                                                 </h4>
                                                 <div className="pl-14">
-                                                    <p className="text-3xl font-black italic text-dark leading-none">NAMRTA</p>
+                                                    <p className="text-xl md:text-2xl lg:text-3xl font-black italic text-dark leading-none">NAMRTA</p>
                                                     <div className="mt-6 p-4 bg-amber-50 rounded-2xl border border-amber-100 flex items-start gap-3 relative overflow-hidden">
                                                         <GridPattern className="opacity-5" />
                                                         <Mail className="w-5 h-5 text-amber-600 shrink-0 mt-0.5 relative z-10" />

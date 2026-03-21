@@ -3,7 +3,8 @@ import MainLayout from '../Layouts/MainLayout';
 import PageHeader from '../Components/PageHeader';
 import { motion } from 'framer-motion';
 import Seo from '../Components/Seo';
-import { BookOpen, Library, ArrowRight, Star } from 'lucide-react';
+import { BookOpen, Library, ArrowRight, Star, ShoppingCart } from 'lucide-react';
+import { Link } from '@inertiajs/react';
 
 const fadeInUp = {
     initial: { opacity: 0, y: 30 },
@@ -35,24 +36,24 @@ export default function BookPublication({ books }) {
                 subtitle="Exclusive scholarly volumes, extensive research compilations, and foundational textbooks by leading international authors."
             />
 
-            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-24 relative">
+            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-24 relative">
                 
                 {/* ─── INTRODUCTION / CALLOUT ─── */}
-                <motion.div {...fadeInUp} className="relative group mb-20">
+                <motion.div {...fadeInUp} className="relative group mb-10 lg:mb-20">
                     <div className="absolute -inset-4 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 rounded-[3rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
                     <div className="relative bg-white border border-gray-100 rounded-[2.5rem] p-10 md:p-14 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden">
-                        <div className="absolute top-0 right-0 p-12 opacity-[0.03] rotate-12 pointer-events-none">
-                            <Library className="w-64 h-64 text-dark" />
+                        <div className="absolute top-0 right-0 p-6 lg:p-12 opacity-[0.03] rotate-12 pointer-events-none">
+                            <Library className="w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 text-dark" />
                         </div>
                         
-                        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
                             <div className="lg:col-span-8 prose prose-lg prose-slate max-w-none">
                                 <div className="flex items-center gap-4 mb-8">
                                     <span className="h-px w-10 bg-secondary" />
                                     <span className="text-secondary font-black text-[11px] uppercase tracking-[0.4em]">The Digital Library</span>
                                 </div>
                                 
-                                <h2 className="text-3xl md:text-5xl font-serif font-bold text-dark mb-6 leading-[1.1]">
+                                <h2 className="text-xl md:text-2xl lg:text-3xl md:text-5xl font-serif font-bold text-dark mb-6 leading-[1.1]">
                                     A Legacy of <span className="text-primary italic">Published Excellence</span>
                                 </h2>
                                 
@@ -69,7 +70,7 @@ export default function BookPublication({ books }) {
                                     <div className="w-16 h-16 mx-auto bg-white rounded-2xl shadow-sm flex items-center justify-center mb-6 text-primary">
                                         <Star className="w-8 h-8" />
                                     </div>
-                                    <h4 className="text-4xl font-black text-dark mb-2">{displayBooks.length}+</h4>
+                                    <h4 className="text-2xl md:text-3xl lg:text-4xl font-black text-dark mb-2">{displayBooks.length}+</h4>
                                     <p className="text-[11px] font-black uppercase tracking-widest text-muted">Volumes Published</p>
                                 </div>
                             </div>
@@ -110,13 +111,27 @@ export default function BookPublication({ books }) {
                                     />
                                     
                                     {/* Hover Overlay */}
-                                    <div className="absolute inset-0 bg-dark/60 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex flex-col items-center justify-center p-4">
-                                        <button className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 shadow-xl mb-3">
-                                            <BookOpen className="w-5 h-5" />
-                                        </button>
-                                        <span className="text-white text-xs font-bold tracking-wider uppercase transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
-                                            View Details
-                                        </span>
+                                    <div className="absolute inset-0 bg-dark/80 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex flex-col items-center justify-center p-4 gap-3">
+                                        {book.amazon_link && (
+                                            <a href={book.amazon_link} target="_blank" rel="noreferrer" className="w-full py-2.5 bg-[#FF9900] hover:bg-[#FF9900]/90 text-white rounded-xl flex items-center justify-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 shadow-md">
+                                                <ShoppingCart className="w-4 h-4" /> <span className="text-xs font-black tracking-wide">AMAZON</span>
+                                            </a>
+                                        )}
+                                        {book.flipkart_link && (
+                                            <a href={book.flipkart_link} target="_blank" rel="noreferrer" className="w-full py-2.5 bg-[#2874F0] hover:bg-[#2874F0]/90 text-white rounded-xl flex items-center justify-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-75 shadow-md">
+                                                <ShoppingCart className="w-4 h-4" /> <span className="text-xs font-black tracking-wide">FLIPKART</span>
+                                            </a>
+                                        )}
+                                        {(!book.amazon_link && !book.flipkart_link) && (
+                                            <>
+                                                <button className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 shadow-xl mb-3">
+                                                    <BookOpen className="w-5 h-5" />
+                                                </button>
+                                                <span className="text-white text-xs font-bold tracking-wider uppercase transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
+                                                    View Details
+                                                </span>
+                                            </>
+                                        )}
                                     </div>
                                 </div>
                                 
@@ -141,19 +156,19 @@ export default function BookPublication({ books }) {
                 )}
                 
                 {/* ─── BOTTOM CTA ─── */}
-                <div className="mt-24">
-                    <div className="bg-dark rounded-[2.5rem] p-12 relative overflow-hidden text-center group">
+                <div className="mt-12 lg:mt-24">
+                    <div className="bg-dark rounded-[2.5rem] p-6 lg:p-12 relative overflow-hidden text-center group">
                         <div className="absolute inset-0 bg-gradient-to-br from-dark to-primary/40" />
                         <div className="absolute inset-0 opacity-[0.4]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 2px, transparent 0)', backgroundSize: '32px 32px' }} />
                         
                         <div className="relative z-10 max-w-2xl mx-auto">
-                            <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6">Want to Publish Your Manuscript?</h3>
+                            <h3 className="text-xl md:text-2xl lg:text-3xl md:text-4xl font-serif font-bold text-white mb-6">Want to Publish Your Manuscript?</h3>
                             <p className="text-white/60 text-lg mb-10">
                                 JTS Publications offers comprehensive editorial, peer-review, and physical printing services for academic authors. Turn your thesis into a globally distributed book.
                             </p>
-                            <a href="/contact" className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-dark font-black tracking-widest text-xs uppercase rounded-full hover:bg-secondary hover:text-white transition-all duration-300 shadow-[0_0_40px_rgba(255,255,255,0.1)] hover:shadow-[0_0_40px_rgba(0,196,180,0.3)] hover:-translate-y-1">
+                            <Link href="/contact" className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-dark font-black tracking-widest text-xs uppercase rounded-full hover:bg-secondary hover:text-white transition-all duration-300 shadow-[0_0_40px_rgba(255,255,255,0.1)] hover:shadow-[0_0_40px_rgba(0,196,180,0.3)] hover:-translate-y-1">
                                 Contact Editorial Board <ArrowRight className="w-4 h-4" />
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>

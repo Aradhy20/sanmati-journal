@@ -42,8 +42,8 @@ export default function GalleryNews() {
                     subtitle="Latest updates and coverage from the academic world"
                 />
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
-                    <div className="max-w-6xl mx-auto mt-12 grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-24">
+                    <div className="max-w-6xl mx-auto mt-12 grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-12">
 
                         {/* Left Column: News Items */}
                         <div className="lg:col-span-2 space-y-8">
@@ -53,7 +53,7 @@ export default function GalleryNews() {
                                 </div>
 
                                 <div className="relative z-10">
-                                    <h2 className="text-3xl font-serif font-bold text-dark mb-8 font-serif">Journal in the Media</h2>
+                                    <h2 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-8 font-serif">Journal in the Media</h2>
 
                                     <div className="space-y-8">
                                         {newsItems.map((item, i) => (

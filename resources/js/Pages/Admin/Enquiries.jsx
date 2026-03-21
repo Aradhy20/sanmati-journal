@@ -22,7 +22,7 @@ export default function Enquiries({ enquiries = [] }) {
             <div className="space-y-8">
                 <div className="flex justify-between items-center">
                     <div>
-                        <h1 className="text-3xl font-serif font-bold text-dark mb-2">Message Center</h1>
+                        <h1 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-2">Message Center</h1>
                         <p className="text-gray-500 text-sm">Manage and respond to all editorial enquiries.</p>
                     </div>
                     <div className="flex items-center gap-4">

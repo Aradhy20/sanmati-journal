@@ -35,7 +35,7 @@ export default function ImportantInformation() {
                     subtitle="Formatting Rules & Submission Guidelines"
                 />
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 relative overflow-hidden">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-24 relative overflow-hidden">
                     <DotPattern className="opacity-10" />
                     <div className="max-w-4xl mx-auto mt-12 relative z-10">
                         <ScrollReveal variants={revealVariants.zoom}>
@@ -46,7 +46,7 @@ export default function ImportantInformation() {
                                 </div>
 
                                 <div className="relative z-10">
-                                    <h2 className="text-3xl font-serif font-bold text-dark mb-8">Author Checklist</h2>
+                                    <h2 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-8">Author Checklist</h2>
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
                                         {guidelines.map((item, i) => (

@@ -37,7 +37,7 @@ export default function GalleryPhoto() {
                     subtitle="Visual documentation of our academic community"
                 />
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-24">
                     <div className="max-w-7xl mx-auto mt-12">
                         <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
                             {photos.map((src, idx) => (
@@ -69,10 +69,10 @@ export default function GalleryPhoto() {
                             ))}
                         </div>
 
-                        <div className="mt-20 p-12 bg-white rounded-[48px] border border-gray-200 text-center relative overflow-hidden shadow-sm">
+                        <div className="mt-20 p-6 lg:p-12 bg-white rounded-[48px] border border-gray-200 text-center relative overflow-hidden shadow-sm">
                             <div className="absolute top-0 left-0 w-64 h-64 bg-primary/5 rounded-full -ml-32 -mt-32 opacity-50 blur-3xl"></div>
                             <div className="relative z-10 max-w-2xl mx-auto">
-                                <h3 className="text-3xl font-serif font-bold text-dark mb-4 font-serif">Capturing Academic Moments</h3>
+                                <h3 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-4 font-serif">Capturing Academic Moments</h3>
                                 <p className="text-gray-500 mb-10 leading-relaxed italic">
                                     &quot;Our gallery documents the seminars, conferences, and collaborative sessions that define the Sanmati Journal spirit.&quot;
                                 </p>

@@ -188,7 +188,7 @@ export default function AreaDetail({ slug }) {
                         <div className={`inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-white/10 text-white backdrop-blur-md border border-white/20 text-sm font-bold uppercase tracking-wider mb-6`}>
                             <Icon className="w-4 h-4" /> {area.title}
                         </div>
-                        <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight max-w-3xl">
+                        <h1 className="text-2xl md:text-3xl lg:text-4xl md:text-6xl font-bold text-white mb-6 leading-tight max-w-3xl">
                             {area.desc}
                         </h1>
                     </ScrollReveal>
@@ -198,7 +198,7 @@ export default function AreaDetail({ slug }) {
             {/* Content Section */}
             <div className="bg-warm-bg py-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-12">
 
                         {/* Left: Scope & checklist */}
                         <div className="lg:col-span-2 space-y-12">

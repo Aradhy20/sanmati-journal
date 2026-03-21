@@ -10,7 +10,7 @@ export default function JournalInfo() {
                 subtitle="Key details and metadata"
             />
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-24">
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
                     <table className="w-full text-left border-collapse">
                         <tbody className="divide-y divide-slate-100">

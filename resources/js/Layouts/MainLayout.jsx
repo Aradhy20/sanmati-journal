@@ -43,9 +43,9 @@ export default function MainLayout({ children, title, description, keywords }) {
                 rel="noreferrer"
                 whileHover={{ scale: 1.1, translateY: -5 }}
                 whileTap={{ scale: 0.95 }}
-                className="fixed bottom-6 lg:bottom-10 right-6 lg:right-10 w-14 h-14 bg-[#25D366] text-white rounded-full shadow-[0_10px_30px_rgba(37,211,102,0.3)] flex items-center justify-center z-50 border-2 border-white"
+                className="fixed bottom-4 sm:bottom-6 lg:bottom-10 right-4 sm:right-6 lg:right-10 w-12 h-12 sm:w-14 sm:h-14 bg-[#25D366] text-white rounded-full shadow-[0_10px_30px_rgba(37,211,102,0.3)] flex items-center justify-center z-[60] border-2 border-white"
             >
-                <MessageCircle className="w-7 h-7" />
+                <MessageCircle className="w-5 h-5 sm:w-7 sm:h-7" />
             </motion.a>
         </div>
     );

@@ -19,7 +19,7 @@ export default function EditorialTeam({ teamMembers = [] }) {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl font-serif font-bold text-dark mb-12 flex items-center gap-4"
+            className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-12 flex items-center gap-4"
         >
             <div className={`w-12 h-1 ${color} rounded-full`} />
             {title}
@@ -37,9 +37,9 @@ export default function EditorialTeam({ teamMembers = [] }) {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative">
                 {/* Editors in Chief */}
                 {editorsInChief.length > 0 && (
-                    <div className="mb-20">
+                    <div className="mb-10 lg:mb-20">
                         {sectionHeader("Editors-in-Chief", "bg-primary")}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12 max-w-4xl mx-auto">
                             {editorsInChief.map((member, index) => (
                                 <motion.div
                                     key={member.id}
@@ -65,7 +65,7 @@ export default function EditorialTeam({ teamMembers = [] }) {
 
                 {/* Editorial Board */}
                 {editorialBoard.length > 0 && (
-                    <div className="mb-20">
+                    <div className="mb-10 lg:mb-20">
                         {sectionHeader("Editorial Board Members", "bg-secondary")}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {editorialBoard.map((member, i) => (

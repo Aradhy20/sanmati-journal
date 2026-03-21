@@ -18,7 +18,7 @@ export default function PeerReview() {
                     subtitle="Transparent, systematic, and rigorous standard"
                 />
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 relative z-10">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-24 relative z-10">
                     <div className="max-w-4xl mx-auto space-y-12 mt-12">
 
                         {/* Introduction */}
@@ -81,7 +81,7 @@ export default function PeerReview() {
                                                 )}
 
                                                 {/* Step Number for Mobile */}
-                                                <div className="absolute top-4 right-4 text-4xl font-black text-slate-100 md:hidden">0{index + 1}</div>
+                                                <div className="absolute top-4 right-4 text-2xl md:text-3xl lg:text-4xl font-black text-slate-100 md:hidden">0{index + 1}</div>
                                             </div>
                                         </div>
                                     </ScrollReveal>

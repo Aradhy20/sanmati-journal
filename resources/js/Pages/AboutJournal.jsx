@@ -25,13 +25,13 @@ export default function AboutJournal() {
                 subtitle="Sanmati Spectrum of Knowledge & Emerging Discourse"
             />
 
-            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-24 relative">
+            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-24 relative">
                 {/* ─── INTRODUCTION ─── */}
-                <motion.div {...fadeInUp} className="relative group mb-24">
+                <motion.div {...fadeInUp} className="relative group mb-12 lg:mb-24">
                     <div className="absolute -inset-4 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 rounded-[3rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
                     <div className="relative bg-white border border-gray-100 rounded-[2.5rem] p-10 md:p-16 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden">
-                        <div className="absolute top-0 right-0 p-12 opacity-[0.03] rotate-12">
-                            <BookOpen className="w-64 h-64 text-dark" />
+                        <div className="absolute top-0 right-0 p-6 lg:p-12 opacity-[0.03] rotate-12">
+                            <BookOpen className="w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 text-dark" />
                         </div>
                         
                         <div className="relative z-10">
@@ -40,11 +40,11 @@ export default function AboutJournal() {
                                 <span className="text-secondary font-black text-[11px] uppercase tracking-[0.4em]">The Mandate</span>
                             </div>
                             
-                            <h2 className="text-4xl md:text-5xl font-serif font-bold text-dark mb-10 leading-[1.1]">
+                            <h2 className="text-2xl md:text-3xl lg:text-4xl md:text-5xl font-serif font-bold text-dark mb-10 leading-[1.1]">
                                 Promoting <span className="text-primary italic">High-Quality</span> Academic Research
                             </h2>
                             
-                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start">
                                 <div className="lg:col-span-12 prose prose-lg prose-slate max-w-none">
                                     <p className="text-xl text-dark/70 font-medium leading-relaxed mb-8">
                                         <strong className="text-dark font-black">“Sanmati Spectrum of Knowledge & Emerging Discourse”</strong> is a national-level multidisciplinary quarterly research journal established in 2026 with the objective of promoting high-quality academic research, intellectual dialogue, and innovative scholarship across diverse disciplines.
@@ -69,13 +69,13 @@ export default function AboutJournal() {
                 </motion.div>
 
                 {/* ─── MISSION & VISION ─── */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-24">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-12 lg:mb-24">
                     <motion.div 
                         initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="relative p-12 lg:p-16 bg-white border border-gray-100 rounded-[3rem] overflow-hidden group shadow-sm hover:shadow-2xl transition-all duration-700"
+                        className="relative p-6 lg:p-12 lg:p-16 bg-white border border-gray-100 rounded-[3rem] overflow-hidden group shadow-sm hover:shadow-2xl transition-all duration-700"
                     >
                         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(10,37,64,0.05) 1px, transparent 0)', backgroundSize: '40px 40px' }} />
                         <div className="absolute -top-20 -right-20 w-80 h-80 bg-primary/5 rounded-full blur-[100px] group-hover:scale-110 transition-transform duration-1000" />
@@ -84,7 +84,7 @@ export default function AboutJournal() {
                             <div className="w-16 h-16 rounded-2xl bg-warm-bg shadow-sm border border-gray-50 flex items-center justify-center mb-10 group-hover:bg-primary transition-colors duration-500">
                                 <Target className="w-8 h-8 text-secondary group-hover:text-white" />
                             </div>
-                            <h3 className="text-3xl font-serif font-bold text-dark mb-6">Our Mission</h3>
+                            <h3 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-6">Our Mission</h3>
                             <p className="text-muted text-lg leading-relaxed font-medium">
                                 To encourage original and impactful research, provide opportunities for early-career researchers and young scholars, and promote collaborative and interdisciplinary academic engagement, contributing to the broader goal of societal development and intellectual progress.
                             </p>
@@ -96,7 +96,7 @@ export default function AboutJournal() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="relative p-12 lg:p-16 bg-surface border border-gray-100 rounded-[3rem] overflow-hidden group hover:shadow-2xl transition-all duration-700"
+                        className="relative p-6 lg:p-12 lg:p-16 bg-surface border border-gray-100 rounded-[3rem] overflow-hidden group hover:shadow-2xl transition-all duration-700"
                     >
                         <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-secondary/10 rounded-full blur-[100px] group-hover:scale-110 transition-transform duration-1000" />
                         
@@ -104,7 +104,7 @@ export default function AboutJournal() {
                             <div className="w-16 h-16 rounded-2xl bg-white shadow-sm border border-gray-50 flex items-center justify-center mb-10 group-hover:bg-secondary transition-colors duration-500">
                                 <Globe className="w-8 h-8 text-primary group-hover:text-white" />
                             </div>
-                            <h3 className="text-3xl font-serif font-bold text-dark mb-6">Our Vision</h3>
+                            <h3 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-6">Our Vision</h3>
                             <p className="text-muted text-lg leading-relaxed font-medium">
                                 To emerge as a leading academic platform at both national and international levels, recognized for its scholarly rigor, ethical standards, and meaningful contributions to knowledge advancement.
                             </p>
@@ -113,9 +113,9 @@ export default function AboutJournal() {
                 </div>
 
                 {/* ─── SCOPE & ETHICS ─── */}
-                <div className="mb-24">
+                <div className="mb-12 lg:mb-24">
                     <motion.div {...fadeInUp} className="bg-warm-bg border border-gray-100 rounded-[3rem] p-10 lg:p-16 shadow-inner relative overflow-hidden">
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 relative z-10">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 relative z-10">
                             <div>
                                 <div className="flex items-center gap-4 mb-8">
                                     <div className="w-12 h-12 rounded-xl bg-white border border-gray-50 flex items-center justify-center">
@@ -143,6 +143,42 @@ export default function AboutJournal() {
                                 </p>
                                 <p className="text-muted leading-relaxed">
                                     The journal also upholds a stringent policy against plagiarism. All manuscripts are screened using plagiarism detection tools, and only those that comply with the indexing guidelines prescribed by regulatory authorities such as UGC are considered for publication.
+                                </p>
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
+
+                
+                {/* ─── EXPANDED ACADEMIC MANIFESTO ─── */}
+                <div className="mb-12 lg:mb-24">
+                    <motion.div {...fadeInUp} className="bg-white p-10 lg:p-16 rounded-[3rem] border border-gray-100 shadow-sm relative overflow-hidden group hover:shadow-xl transition-all duration-700">
+                        <div className="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-[100px] group-hover:scale-110 transition-transform duration-1000" />
+                        
+                        <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
+                            <div>
+                                <h3 className="text-2xl font-serif font-bold text-dark mb-8 flex items-center gap-4">
+                                    <span className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20 shadow-sm"><BookOpen className="w-6 h-6"/></span>
+                                    Submission Blueprint
+                                </h3>
+                                <p className="text-muted leading-relaxed mb-6">
+                                    The submission process is designed to be systematic and user-friendly. Authors are required to submit their manuscripts in <strong className="text-dark">MS Word format (.doc/.docx)</strong>, using <strong>Times New Roman</strong> font for English and <strong>Mangal Unicode</strong> for Hindi. The formatting guidelines specify a 14-point bold title, 12-point regular text, and 1.5-line spacing.
+                                </p>
+                                <p className="text-muted leading-relaxed">
+                                    Each manuscript must include an abstract of 150–250 words along with 4–6 keywords. The number of co-authors is limited to a maximum of two, and references must be formatted according to <strong>APA style</strong>. Submissions are accepted via email at <strong className="text-primary hover:underline"><a href="mailto:sanmatijournal@gmail.com">sanmatijournal@gmail.com</a></strong>, along with complete author details, institutional affiliation, and contact information.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h3 className="text-2xl font-serif font-bold text-dark mb-8 flex items-center gap-4">
+                                    <span className="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary border border-secondary/20 shadow-sm"><Globe className="w-6 h-6"/></span>
+                                    Global Relevance & Future
+                                </h3>
+                                <p className="text-muted leading-relaxed mb-6">
+                                    A key strength of "Sanmati Spectrum" lies in its focus on emerging research areas of contemporary societal importance, including <strong className="text-dark">artificial intelligence, digital humanities, climate change, media and democracy, and Indian knowledge systems</strong>. It explores the rich diversity of Indian intellectual traditions while simultaneously engaging with global theories.
+                                </p>
+                                <p className="text-muted leading-relaxed">
+                                    Looking toward the future, the journal aspires to achieve international recognition by being indexed into reputed databases such as <strong>Scopus, Web of Science, and ABDC</strong>. Plans are underway to expand into digital platforms, establish collaborations with international institutions, and adopt advanced publishing standards such as <strong>DOI and Crossref</strong> integration.
                                 </p>
                             </div>
                         </div>

@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Award, GraduationCap, ChevronRight, Sparkles, Quote, LibraryBig, Mail, Phone, ExternalLink } from 'lucide-react';
+import { Award, GraduationCap, ChevronRight, Sparkles, Quote, LibraryBig, Mail, Phone, ExternalLink, UserCircle2 } from 'lucide-react';
 import PageHeader from '../Components/PageHeader';
 import MainLayout from '../Layouts/MainLayout';
 import Seo from '../Components/Seo';
@@ -12,6 +13,7 @@ const fadeInUp = {
 };
 
 const AdvisoryMember = ({ name, title, affiliation, email, phone, profileUrl, image, index }) => {
+    const [imgError, setImgError] = useState(false);
     return (
         <motion.div 
             {...fadeInUp} 
@@ -23,13 +25,18 @@ const AdvisoryMember = ({ name, title, affiliation, email, phone, profileUrl, im
             </div>
 
             <div className="flex items-center gap-5 mb-6 relative z-10">
-                <div className="w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-[1.5rem] overflow-hidden shadow-md border-2 border-white ring-1 ring-gray-50 relative">
-                    <img 
-                        src={image || `/images/team/placeholder.jpg`} 
-                        alt={name}
-                        className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700"
-                        loading="lazy"
-                    />
+                <div className="w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-[1.5rem] overflow-hidden shadow-md border-2 border-white ring-1 ring-gray-50 relative bg-surface flex items-center justify-center">
+                    {image && !imgError ? (
+                        <img 
+                            src={image} 
+                            alt={name}
+                            className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700"
+                            loading="lazy"
+                            onError={() => setImgError(true)}
+                        />
+                    ) : (
+                        <UserCircle2 className="w-12 h-12 text-primary/30" />
+                    )}
                 </div>
                 <div>
                     <span className="inline-block px-3 py-1 bg-gradient-to-r from-primary/10 to-secondary/10 text-primary text-[9px] font-black uppercase tracking-widest rounded-full mb-2 border border-primary/10">
@@ -84,15 +91,15 @@ export default function AdvisoryBoard() {
                 subtitle="Cross-disciplinary luminaries ensuring global operational and research excellence."
             />
 
-            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-24 relative">
+            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-24 relative">
                 {/* ─── INTRO SECTION ─── */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center mb-32">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center mb-16 lg:mb-32">
                     <motion.div {...fadeInUp} className="lg:col-span-12 xl:col-span-7">
                         <div className="flex items-center gap-4 mb-8">
                             <span className="h-px w-10 bg-secondary" />
                             <span className="text-secondary font-black text-[11px] uppercase tracking-[0.4em]">Advisory Vision</span>
                         </div>
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-dark mb-8 leading-[1.05]">
+                        <h2 className="text-2xl md:text-3xl lg:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-dark mb-8 leading-[1.05]">
                             Guiding the Path to <br />
                             <span className="text-primary italic">Global Prominence</span>
                         </h2>
@@ -122,7 +129,7 @@ export default function AdvisoryBoard() {
                         <div className="relative aspect-square rounded-[3rem] overflow-hidden shadow-2xl bg-dark">
                             <img src="/fistudy-assets/resources/about-journal-1.png" alt="Board" className="w-full h-full object-cover opacity-60 grayscale-[30%]" />
                             <div className="absolute inset-0 bg-gradient-to-tr from-primary/40 to-transparent" />
-                            <div className="absolute inset-x-0 bottom-0 p-12 text-center">
+                            <div className="absolute inset-x-0 bottom-0 p-6 lg:p-12 text-center">
                                 <Quote className="w-12 h-12 text-secondary mx-auto mb-6 opacity-50" />
                                 <p className="text-white text-lg font-serif italic font-medium leading-relaxed">
                                     "Excellence is not an act, but a habit cultivated through the guidance of master practitioners."
@@ -134,9 +141,9 @@ export default function AdvisoryBoard() {
 
                 {/* ─── THE GRID ─── */}
                 <div className="relative">
-                    <div className="flex flex-col items-center text-center mb-20">
+                    <div className="flex flex-col items-center text-center mb-10 lg:mb-20">
                         <span className="text-secondary font-black text-[10px] uppercase tracking-[0.4em] mb-4">Advisory Registry</span>
-                        <h2 className="text-4xl font-serif font-bold text-dark mb-4">Distinguished Advisors</h2>
+                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-dark mb-4">Distinguished Advisors</h2>
                         <div className="h-1 w-12 bg-primary rounded-full" />
                     </div>
 

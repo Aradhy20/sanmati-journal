@@ -28,7 +28,7 @@ export default function Contact() {
             />
 
             {/* ─── CONTACT INFO CARDS (Direct Access) ─── */}
-            <section className="max-w-7xl mx-auto px-6 -mt-16 relative z-20 mb-20">
+            <section className="max-w-7xl mx-auto px-6 -mt-16 relative z-20 mb-10 lg:mb-20">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {[
                         { icon: MapPin, title: "Registry Office", desc: "B-002 Faculty Block TMU Campus, Delhi Road Moradabad (U.P) 244001", color: "from-dark to-dark/90", iconColor: "text-secondary" },
@@ -59,7 +59,7 @@ export default function Contact() {
 
             {/* ─── CONTACT FORM & VISUALS (The Dialogue) ─── */}
             <div className="max-w-7xl mx-auto px-6 lg:px-8 pb-32">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
                     {/* Visual Section */}
                     <motion.div {...fadeInUp} className="lg:col-span-12 xl:col-span-5 relative group">
                         <div className="absolute -inset-4 bg-gradient-to-br from-secondary/10 via-transparent to-primary/10 rounded-[3rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
@@ -74,7 +74,7 @@ export default function Contact() {
                                     <span className="h-px w-8 bg-secondary" />
                                     <span className="text-secondary font-black text-[10px] uppercase tracking-[0.4em]">Administration</span>
                                 </div>
-                                <h3 className="text-3xl font-serif font-bold text-white mb-4">The Editorial Office</h3>
+                                <h3 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-white mb-4">The Editorial Office</h3>
                                 <p className="text-white/40 text-sm leading-relaxed mb-6 font-medium italic">
                                     "Transparent communication is the cornerstone of scholarly integrity. Our team is dedicated to supporting authors at every stage of the peer-review journey."
                                 </p>
@@ -99,7 +99,7 @@ export default function Contact() {
                                 <span className="text-primary font-black text-[11px] uppercase tracking-[0.4em]">Inquiry Protocol</span>
                             </div>
                             
-                            <h2 className="text-4xl md:text-5xl font-serif font-bold text-dark mb-4 leading-tight">
+                            <h2 className="text-2xl md:text-3xl lg:text-4xl md:text-5xl font-serif font-bold text-dark mb-4 leading-tight">
                                 Start a <span className="text-secondary italic">Scholarly Dialogue</span>
                             </h2>
                             <p className="text-muted text-lg mb-12 max-w-xl">

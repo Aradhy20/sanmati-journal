@@ -11,7 +11,7 @@ Route::get('/editorial-team/advisory-board', [JournalController::class, 'advisor
 Route::get('/about-journal', [JournalController::class, 'aboutJournal'])->name('about-journal');
 Route::get('/gallery-view', [JournalController::class, 'gallery'])->name('gallery');
 Route::get('/gallery/photo', [JournalController::class, 'galleryPhoto'])->name('gallery.photo');
-Route::get('/gallery/news', [JournalController::class, 'galleryNews'])->name('gallery.news');
+Route::get('/media-news', [JournalController::class, 'galleryNews'])->name('gallery.news');
 Route::get('/archive', [JournalController::class, 'archive'])->name('archive');
 Route::get('/contact', [JournalController::class, 'contact'])->name('contact');
 Route::post('/contact', [JournalController::class, 'contactStore'])->name('contact.store')->middleware('throttle:60,1');

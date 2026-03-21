@@ -61,7 +61,7 @@ const BioModal = ({ member, isOpen, onClose }) => {
                                             <span className="inline-block px-4 py-1.5 bg-secondary/90 backdrop-blur-md rounded-full text-[10px] text-white font-black tracking-widest uppercase mb-4 shadow-xl">
                                                 {member.role}
                                             </span>
-                                            <h2 className="text-3xl font-serif font-bold text-white leading-tight mb-2">
+                                            <h2 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-white leading-tight mb-2">
                                                 {member.name}
                                             </h2>
                                             <a 
@@ -325,15 +325,15 @@ export default function Editors() {
                 subtitle="The architects of our empirical standards and global scholarly narrative."
             />
 
-            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-24 relative">
+            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-24 relative">
                 
-                <div className="flex flex-col items-center text-center mb-24">
+                <div className="flex flex-col items-center text-center mb-12 lg:mb-24">
                     <motion.div {...fadeInUp} className="flex items-center gap-4 mb-6">
                         <span className="h-px w-10 bg-secondary" />
                         <span className="text-secondary font-black text-[11px] uppercase tracking-[0.4em]">Supreme Leadership</span>
                         <span className="h-px w-10 bg-secondary" />
                     </motion.div>
-                    <motion.h2 {...fadeInUp} transition={{ delay: 0.1 }} className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-dark mb-6 leading-tight">
+                    <motion.h2 {...fadeInUp} transition={{ delay: 0.1 }} className="text-2xl md:text-3xl lg:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-dark mb-6 leading-tight">
                         The Founding <span className="text-primary italic">Visionaries</span>
                     </motion.h2>
                     <motion.p {...fadeInUp} transition={{ delay: 0.2 }} className="text-xl text-muted font-medium max-w-2xl leading-relaxed">
@@ -341,7 +341,7 @@ export default function Editors() {
                     </motion.p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12 max-w-5xl mx-auto">
                     {executiveMembers.map((m, i) => (
                         <ExecutiveMember key={i} member={m} index={i} />
                     ))}

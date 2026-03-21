@@ -44,7 +44,7 @@ const Hero = () => {
                         </div>
 
                         {/* Main Headline */}
-                        <h1 className="text-4xl md:text-6xl font-serif font-black mb-8 leading-[1.15] tracking-tight text-[#052143]">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-black mb-8 leading-[1.15] tracking-tight text-[#052143]">
                             Sanmati Spectrum of{' '}
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#687EFF] to-[#F87A53]">
                                 Knowledge
@@ -84,7 +84,7 @@ const Hero = () => {
                         </div>
 
                         {/* Credibility Badges */}
-                        <div className="flex flex-wrap items-center gap-4 pt-8 border-t border-[#687EFF]/15">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pt-8 border-t border-[#687EFF]/15">
                             {[
                                 { icon: CheckCircle, label: 'Authenticated', value: 'ISSN: 3108-1819', color: 'text-[#687EFF]' },
                                 { icon: Clock, label: 'Open Call', value: `Closes in ${daysLeft} days`, color: 'text-[#F87A53]' },

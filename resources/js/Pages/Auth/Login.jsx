@@ -39,7 +39,7 @@ export default function Login({ status, canResetPassword }) {
                         />
                     </div>
                 </div>
-                <h2 className="text-center text-3xl font-serif font-bold text-dark">
+                <h2 className="text-center text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark">
                     Admin Portal
                 </h2>
                 <p className="mt-2 text-center text-sm text-gray-600">

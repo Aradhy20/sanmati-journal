@@ -18,7 +18,7 @@ export default function Plagiarism() {
                     subtitle="Zero-tolerance policy towards academic dishonesty"
                 />
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 relative z-10">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-24 relative z-10">
                     <ScrollReveal variants={revealVariants.up}>
                         <div className="bg-white p-10 rounded-2xl shadow-xl border border-slate-100 max-w-4xl mx-auto text-center mt-12 relative overflow-hidden">
                             <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-red-500 to-orange-500" />
@@ -26,13 +26,13 @@ export default function Plagiarism() {
                             <div className="inline-block p-4 bg-red-50 rounded-full text-red-600 mb-6 ring-4 ring-red-50/50">
                                 <AlertTriangle className="w-12 h-12" />
                             </div>
-                            <h2 className="text-3xl font-serif font-bold text-dark mb-6">Strict Screening Process</h2>
+                            <h2 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-6">Strict Screening Process</h2>
                             <p className="text-dark/80 text-lg leading-relaxed mb-8">
                                 The journal follows a strict zero-tolerance policy. All submissions are screened using industry-standard plagiarism detection software before the review process begins.
                             </p>
 
                             <div className="inline-block bg-warm-bg p-8 rounded-2xl border-2 border-dashed border-gray-200 mb-8">
-                                <div className="text-6xl font-black text-dark mb-2 tracking-tighter">20%</div>
+                                <div className="text-4xl lg:text-6xl font-black text-dark mb-2 tracking-tighter">20%</div>
                                 <div className="text-primary font-bold uppercase tracking-widest text-xs">Maximum Similarity Index</div>
                                 <p className="text-sm text-gray-400 mt-2 font-medium">(Excluding References)</p>
                             </div>

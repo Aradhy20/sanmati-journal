@@ -25,9 +25,9 @@ export default function Archive({ issues = [] }) {
                 subtitle="Curated collection of multidisciplinary scholarly discourse across previous volumes."
             />
 
-            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-24 relative">
+            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-24 relative">
                 {/* ─── ARCHIVE FILTER/SEARCH (Mock UI for premium feel) ─── */}
-                <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-20">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-10 lg:mb-20">
                     <div className="flex items-center gap-4">
                         <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
                             <ArchiveIcon className="w-6 h-6 text-primary" />
@@ -73,7 +73,7 @@ export default function Archive({ issues = [] }) {
                                     <div className="lg:col-span-4">
                                         <div className="bg-surface border border-gray-100 p-8 rounded-[2.5rem] sticky top-32 shadow-sm">
                                             <span className="text-[10px] font-black uppercase tracking-widest text-secondary block mb-4">Current Issue</span>
-                                            <h3 className="text-3xl font-serif font-bold text-dark mb-6">Issue No. {issue.number}</h3>
+                                            <h3 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-6">Issue No. {issue.number}</h3>
                                             <p className="text-muted text-sm leading-relaxed mb-8">
                                                 This issue features a compilation of peer-reviewed research and analytical discourse focusing on emergent multidisciplinary themes.
                                             </p>
@@ -125,7 +125,7 @@ export default function Archive({ issues = [] }) {
                         <div className="w-24 h-24 bg-white rounded-3xl flex items-center justify-center mx-auto mb-10 shadow-xl border border-gray-50">
                             <Search className="w-10 h-10 text-secondary animate-pulse" />
                         </div>
-                        <h3 className="text-3xl font-serif font-bold text-dark mb-4">The Vault is Preparing</h3>
+                        <h3 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-4">The Vault is Preparing</h3>
                         <p className="text-muted text-lg leading-relaxed mb-10">
                             Our inaugural scholarship cycle is currently under review. The digital archives will be available shortly after the first quarterly publication.
                         </p>

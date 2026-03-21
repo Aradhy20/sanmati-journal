@@ -14,7 +14,7 @@ export default function Seminars() {
                     subtitle="Fostering academic dialogue through specialized seminars"
                 />
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 relative overflow-hidden">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-24 relative overflow-hidden">
                     <DotPattern className="opacity-10" />
                     <div className="max-w-4xl mx-auto mt-12 relative z-10">
                         <ScrollReveal variants={revealVariants.zoom}>
@@ -25,7 +25,7 @@ export default function Seminars() {
                                 </div>
 
                                 <div className="relative z-10">
-                                    <h2 className="text-3xl font-serif font-bold text-dark mb-6">Upcoming Seminars</h2>
+                                    <h2 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-6">Upcoming Seminars</h2>
                                     <p className="text-dark/80 text-lg leading-relaxed mb-12">
                                         Sanmati Journal regularly organizes seminars focusing on emerging trends in multidisciplinary research, providing a platform for scholars to present their work-in-progress and receive expert feedback.
                                     </p>

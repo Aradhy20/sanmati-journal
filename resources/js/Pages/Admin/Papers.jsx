@@ -65,7 +65,7 @@ export default function Papers({ papers = [], issues = [] }) {
             <div className="space-y-10">
                 <div className="flex justify-between items-center">
                     <div>
-                        <h1 className="text-3xl font-serif font-bold text-dark mb-2">Issues & Papers</h1>
+                        <h1 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-2">Issues & Papers</h1>
                         <p className="text-gray-500 text-sm">Manage journal volumes, issues, and research paper uploads.</p>
                     </div>
                 </div>

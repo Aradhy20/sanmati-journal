@@ -39,7 +39,7 @@ export default function News({ news = [] }) {
             <div className="space-y-8">
                 <div className="flex justify-between items-center">
                     <div>
-                        <h1 className="text-3xl font-serif font-bold text-dark mb-2">News & Announcements</h1>
+                        <h1 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-2">News & Announcements</h1>
                         <p className="text-gray-500 text-sm">Manage the news ticker and site-wide alerts.</p>
                     </div>
                 </div>

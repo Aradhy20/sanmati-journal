@@ -63,7 +63,7 @@ export default function SubmissionGuidelines() {
                     subtitle="Complete framework for authors and researchers"
                 />
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-24">
                     <div className="max-w-6xl mx-auto mt-12">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             <DotPattern className="opacity-10" />
@@ -105,7 +105,7 @@ export default function SubmissionGuidelines() {
                             <div className="absolute top-0 right-0 w-64 h-64 bg-primary rounded-full -mr-32 -mt-32 opacity-20"></div>
                             <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
                                 <div className="max-w-2xl text-center md:text-left">
-                                    <h2 className="text-3xl font-serif font-bold mb-4">Ready to Submit Your Research?</h2>
+                                    <h2 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold mb-4">Ready to Submit Your Research?</h2>
                                     <p className="text-gray-400 leading-relaxed italic">
                                         &ldquo;Researchers, academicians, and scholars are encouraged to contribute and be part of this multidisciplinary academic discourse.&rdquo;
                                     </p>
