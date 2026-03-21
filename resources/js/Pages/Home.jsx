@@ -9,6 +9,8 @@ import {
     CheckCircle, Zap, Shield, Search, Clock, ChevronRight, ArrowUpRight,
     Quote, UploadCloud, FileCheck, RefreshCw, BookMarked, Package, Truck, Heart, Feather
 } from 'lucide-react';
+import NewsletterSection from '../Components/NewsletterSection';
+
 
 const fadeInUp = {
     initial: { opacity: 0, y: 20 },
@@ -256,7 +258,7 @@ export default function Home() {
                             <div className="h-full rounded-[3rem] overflow-hidden bg-gradient-to-br from-primary to-primary-dark text-white p-10 flex flex-col items-center text-center shadow-2xl hover:-translate-y-2 transition-all duration-700 relative">
                                 <div className="absolute top-0 right-0 p-8 opacity-5"><Trophy className="w-24 h-24 text-secondary scale-150 rotate-12" /></div>
                                 <div className="w-44 h-44 rounded-[2.5rem] overflow-hidden mb-8 border-4 border-white/30 shadow-2xl relative z-10">
-                                    <img src="/mam.jpeg" alt="Dr. Namrta Jain" className="w-full h-full object-cover object-top group-hover:scale-110 transition-all duration-700" />
+                                    <img loading="lazy" src="/mam.jpeg" alt="Dr. Namrta Jain" className="w-full h-full object-cover object-top group-hover:scale-110 transition-all duration-700" />
                                 </div>
                                 <span className="inline-block px-4 py-1.5 bg-secondary/25 border border-secondary/40 rounded-full text-[10px] text-secondary font-black tracking-widest uppercase mb-4 w-fit">Editor-in-Chief</span>
                                 <h3 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold mb-2 tracking-tight group-hover:text-secondary-light transition-colors duration-300">Dr. Namrta Jain</h3>
@@ -283,7 +285,7 @@ export default function Home() {
                             <div className="h-full rounded-[3rem] overflow-hidden bg-surface border border-gray-100 p-10 flex flex-col items-center text-center shadow-lg hover:shadow-2xl hover:border-primary/20 hover:-translate-y-2 transition-all duration-700 relative">
                                 <div className="absolute top-0 right-0 p-8 opacity-5"><Users className="w-24 h-24 text-primary scale-150 -rotate-12" /></div>
                                 <div className="w-44 h-44 rounded-[2.5rem] overflow-hidden mb-8 border-4 border-white shadow-xl relative z-10 rotate-3 group-hover:rotate-0 transition-transform duration-500">
-                                    <img src="/sir.jpeg" alt="Dr. Ratnesh Kumar Jain" className="w-full h-full object-cover object-top group-hover:scale-110 transition-all duration-700" />
+                                    <img loading="lazy" src="/sir.jpeg" alt="Dr. Ratnesh Kumar Jain" className="w-full h-full object-cover object-top group-hover:scale-110 transition-all duration-700" />
                                 </div>
                                 <span className="inline-block px-4 py-1.5 bg-primary/8 rounded-full text-[10px] text-primary font-black tracking-widest uppercase mb-4">Managing Editor</span>
                                 <h3 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-2 group-hover:text-primary transition-colors duration-300">Dr. Ratnesh Kumar Jain</h3>
@@ -400,7 +402,7 @@ export default function Home() {
                             className="relative group"
                         >
                             <div className="rounded-[3rem] overflow-hidden shadow-2xl aspect-[4/5] relative">
-                                <img src="/fistudy-assets/resources/research_library.png" alt="Premium Books" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000" />
+                                <img loading="lazy" src="/fistudy-assets/resources/research_library.png" alt="Premium Books" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent" />
                             </div>
 
@@ -511,30 +513,62 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* ─── NEWSLETTER (Coral Red Banner) ─── */}
-            <section className="py-16 bg-coral relative overflow-hidden">
-                <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.2) 1px, transparent 0)', backgroundSize: '32px 32px' }} />
+            {/* ─── TRENDING / MOST READ SECTION ─── */}
+            <section className="py-20 bg-white relative overflow-hidden">
+                <div className="absolute -top-40 left-0 w-[600px] h-[600px] bg-primary/3 rounded-full blur-[120px]" />
                 <div className="container-custom relative z-10">
-                    <div className="flex flex-col lg:flex-row items-center gap-10 justify-between">
-                        <div className="text-white text-center lg:text-left">
-                            <p className="text-white/70 font-black text-[11px] uppercase tracking-[0.35em] mb-2 flex items-center gap-2 justify-center lg:justify-start">
-                                <Send className="w-3.5 h-3.5" /> Stay Updated
-                            </p>
-                            <h3 className="text-xl md:text-2xl lg:text-3xl lg:text-4xl font-serif font-bold">Subscribe for New Releases & Launch Events</h3>
+                    <motion.div {...fadeInUp} className="flex flex-col md:flex-row items-end justify-between gap-8 mb-14">
+                        <div>
+                            <div className="flex items-center gap-4 mb-4">
+                                <span className="h-px w-10 bg-secondary" />
+                                <span className="text-secondary font-black text-[11px] uppercase tracking-[0.3em]">Most Accessed</span>
+                            </div>
+                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-dark leading-tight">
+                                Trending <span className="text-primary italic">Research Papers</span>
+                            </h2>
                         </div>
-                        <div className="flex gap-3 flex-shrink-0 w-full lg:w-auto">
-                            <input
-                                type="email"
-                                placeholder="Enter your email address..."
-                                className="flex-1 lg:w-72 px-6 py-4 rounded-2xl bg-white/15 border border-white/25 text-white placeholder-white/50 focus:outline-none focus:border-white/50 focus:bg-white/20 transition-all font-medium text-sm"
-                            />
-                            <button className="px-8 py-4 bg-white text-coral font-black rounded-2xl text-sm uppercase tracking-widest hover:shadow-2xl hover:-translate-y-0.5 transition-all shrink-0">
-                                Subscribe
-                            </button>
-                        </div>
+                        <Link href="/archive" className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-dark/60 hover:text-primary transition-colors group shrink-0">
+                            Browse All Archives <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+                        </Link>
+                    </motion.div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {[
+                            { rank: '01', field: 'Social Sciences', title: 'Impact of Digital Literacy on Rural Education Outcomes in India', authors: 'Dr. Ravi Sharma, Prof. Anita Gupta', reads: '1.2k reads', tag: 'Hot' },
+                            { rank: '02', field: 'Commerce & Economics', title: 'Post-Pandemic MSME Recovery: A Multidisciplinary Analysis', authors: 'Dr. Priya Mehta, Dr. Arun Singh', reads: '987 reads', tag: 'Trending' },
+                            { rank: '03', field: 'Education Research', title: 'NEP 2020 Implementation: Challenges and Opportunities in Higher Education', authors: 'Prof. S.K. Verma', reads: '876 reads', tag: 'Featured' },
+                        ].map((paper, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                                className="group relative bg-warm-bg border border-gray-100 rounded-[2rem] p-8 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(79,119,255,0.10)] hover:-translate-y-2 transition-all duration-500 overflow-hidden"
+                            >
+                                <div className="absolute top-6 right-6 flex items-center gap-2">
+                                    <span className="bg-secondary/10 text-secondary text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest">{paper.tag}</span>
+                                </div>
+                                <div className="text-7xl font-black text-primary/5 group-hover:text-primary/10 transition-colors leading-none mb-4 -ml-2">{paper.rank}</div>
+                                <p className="text-secondary font-black text-[10px] uppercase tracking-[0.2em] mb-3">{paper.field}</p>
+                                <h3 className="font-serif font-bold text-dark text-lg leading-snug mb-4 group-hover:text-primary transition-colors">{paper.title}</h3>
+                                <p className="text-muted text-[12px] font-medium mb-6 truncate">{paper.authors}</p>
+                                <div className="flex items-center justify-between">
+                                    <span className="flex items-center gap-2 text-muted text-[11px] font-bold">
+                                        <Globe className="w-3.5 h-3.5 text-secondary" /> {paper.reads}
+                                    </span>
+                                    <Link href="/archive" className="text-primary text-[11px] font-black uppercase tracking-widest flex items-center gap-1 hover:gap-2 transition-all">
+                                        View <ChevronRight className="w-3.5 h-3.5" />
+                                    </Link>
+                                </div>
+                            </motion.div>
+                        ))}
                     </div>
                 </div>
             </section>
+
+            {/* ─── NEWSLETTER (Fully Functional) ─── */}
+            <NewsletterSection />
 
             {/* ─── INVITATION (CTA) ─── */}
             <section className="py-12 lg:py-24">

@@ -32,7 +32,7 @@ export default function Login({ status, canResetPassword }) {
             <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
                 <div className="flex justify-center mb-6">
                     <div className="w-20 h-20 rounded-xl overflow-hidden shadow-lg bg-white p-2 border border-slate-100">
-                        <img
+                        <img loading="lazy"
                             src="/logo.jpg"
                             alt="Sanmati Journal Logo"
                             className="object-contain w-full h-full"

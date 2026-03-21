@@ -4,6 +4,9 @@ use App\Http\Controllers\JournalController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [JournalController::class, 'index'])->name('home');
+Route::get('/api/search', [\App\Http\Controllers\SearchController::class, 'search'])->name('api.search');
+Route::post('/api/newsletter/subscribe', [\App\Http\Controllers\NewsletterController::class, 'subscribe'])->name('newsletter.subscribe')->middleware('throttle:5,1');
+Route::post('/api/newsletter/unsubscribe', [\App\Http\Controllers\NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe');
 // Route removed: Route::get('/editorial-team', [JournalController::class, 'editorialTeam'])->name('editorial-team');
 Route::get('/editorial-team/editors', [JournalController::class, 'editors'])->name('editorial-team.editors');
 Route::get('/editorial-team/editorial-board', [JournalController::class, 'editorialBoard'])->name('editorial-team.board');

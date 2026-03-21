@@ -11,7 +11,7 @@ const FeatureBlock = ({ title, description, image, align = 'left', icon: Icon, d
                     <ScrollReveal variants={align === 'left' ? revealVariants.left : revealVariants.right} delay={delay}>
                         <div className="relative group rounded-3xl overflow-hidden shadow-2xl border border-gray-200/50 bg-white">
                             <div className="aspect-[4/3] w-full bg-gray-50 relative overflow-hidden">
-                                <img
+                                <img loading="lazy"
                                     src={image}
                                     alt={title}
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"

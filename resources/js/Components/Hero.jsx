@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
-import { ArrowRight, BookOpen, Users, Star, CheckCircle, Clock, BookMarked, Sparkles } from 'lucide-react';
+import { ArrowRight, BookOpen, Users, Star, CheckCircle, Clock, BookMarked, Sparkles, Globe } from 'lucide-react';
+
 
 const Hero = () => {
     const [daysLeft, setDaysLeft] = useState(0);
@@ -36,12 +37,17 @@ const Hero = () => {
                         transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
                     >
                         {/* Tagline pill */}
-                        <div className="inline-flex items-center gap-2 px-5 py-2 bg-[#687EFF]/10 border border-[#687EFF]/25 rounded-full mb-8">
+                        <div className="inline-flex items-center gap-2 px-5 py-2 bg-[#687EFF]/10 border border-[#687EFF]/25 rounded-full mb-6">
                             <Sparkles className="w-3.5 h-3.5 text-[#687EFF]" />
                             <span className="text-[#687EFF] font-black text-[11px] uppercase tracking-[0.35em]">
                                 ISSN: 3108-1819 · Peer-Reviewed Journal
                             </span>
                         </div>
+
+                        {/* Hindi Tagline */}
+                        <p className="text-[#F87A53] font-bold text-base mb-3 font-sans" lang="hi">
+                            ज्ञान, शोध और प्रकाशन का एक राष्ट्रीय मंच
+                        </p>
 
                         {/* Main Headline */}
                         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-black mb-8 leading-[1.15] tracking-tight text-[#052143]">
@@ -70,28 +76,31 @@ const Hero = () => {
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
                             </Link>
                             <Link
+                                href="/archive"
+                                className="group px-8 py-4 bg-[#052143] text-white rounded-full font-bold text-sm hover:bg-[#0a1f3d] transition-all flex items-center gap-3 hover:-translate-y-1 uppercase tracking-[0.1em] shadow-lg shadow-[#052143]/25"
+                            >
+                                <BookOpen className="w-4 h-4" /> Read Archive
+                            </Link>
+                            <Link
                                 href="/book-publication"
                                 className="group px-8 py-4 bg-[#F87A53] text-white rounded-full font-bold text-sm hover:bg-[#e56940] transition-all flex items-center gap-3 hover:-translate-y-1 uppercase tracking-[0.1em] shadow-lg shadow-[#F87A53]/25"
                             >
                                 <BookMarked className="w-4 h-4" /> Book Publications
                             </Link>
-                            <Link
-                                href="/basic-info/about-journal"
-                                className="px-8 py-4 bg-white border border-[#687EFF]/30 text-[#052143] rounded-full font-bold text-sm hover:border-[#687EFF] hover:text-[#687EFF] transition-all flex items-center gap-3 hover:-translate-y-1 uppercase tracking-[0.1em] shadow-sm"
-                            >
-                                <BookOpen className="w-4 h-4 text-[#687EFF]" /> Explore Journal
-                            </Link>
                         </div>
 
-                        {/* Credibility Badges */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pt-8 border-t border-[#687EFF]/15">
+                        {/* Trust Indicators */}
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-8 border-t border-[#687EFF]/15">
                             {[
                                 { icon: CheckCircle, label: 'Authenticated', value: 'ISSN: 3108-1819', color: 'text-[#687EFF]' },
                                 { icon: Clock, label: 'Open Call', value: `Closes in ${daysLeft} days`, color: 'text-[#F87A53]' },
                                 { icon: Star, label: 'Impact', value: 'Double-Blind Review', color: 'text-[#F87A53]' },
+                                { icon: Users, label: 'Authors', value: '200+ Contributors', color: 'text-[#687EFF]' },
+                                { icon: BookOpen, label: 'Archive', value: '500+ Papers', color: 'text-[#052143]' },
+                                { icon: Globe, label: 'Scope', value: '25+ Research Fields', color: 'text-[#687EFF]' },
                             ].map((item, i) => (
                                 <div key={i} className="flex items-center gap-3 bg-white/80 backdrop-blur-sm px-4 py-2.5 rounded-xl border border-[#687EFF]/15 shadow-sm">
-                                    <item.icon className={`w-4 h-4 ${item.color}`} />
+                                    <item.icon className={`w-4 h-4 flex-shrink-0 ${item.color}`} />
                                     <div>
                                         <p className="text-[#052143] text-[10px] font-black uppercase tracking-widest leading-none mb-0.5">{item.label}</p>
                                         <p className="text-[#6B778B] text-[11px] font-bold">{item.value}</p>

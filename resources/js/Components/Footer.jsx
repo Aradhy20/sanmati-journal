@@ -39,7 +39,7 @@ const Footer = () => {
                             <Link href="/" className="inline-block group">
                                 <div className="flex items-center gap-3 mb-4">
                                     <div className="w-10 h-10 rounded-xl bg-white p-1 shadow-sm">
-                                        <img src="/logo.jpg" alt="Logo" className="w-full h-full object-contain" />
+                                        <img loading="lazy" src="/logo.jpg" alt="Logo" className="w-full h-full object-contain" />
                                     </div>
                                     <h3 className="text-xl font-bold text-white group-hover:text-secondary transition-colors tracking-tight">Sanmati Spectrum</h3>
                                 </div>

@@ -175,7 +175,7 @@ export default function AreaDetail({ slug }) {
             {/* Hero Section */}
             <div className="relative h-[60vh] min-h-[500px] flex items-end pb-20 overflow-hidden">
                 <div className="absolute inset-0">
-                    <img src={area.heroImage} alt={area.title} className="w-full h-full object-cover" />
+                    <img loading="lazy" src={area.heroImage} alt={area.title} className="w-full h-full object-cover" />
                     <div className={`absolute inset-0 bg-gradient-to-t from-${area.color}-900/95 via-${area.color}-900/70 to-black/30`} />
                     <GridPattern className="absolute top-0 right-0 text-white/10 w-full h-full opacity-30" />
                 </div>

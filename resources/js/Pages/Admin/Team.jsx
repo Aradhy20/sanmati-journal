@@ -129,7 +129,7 @@ export default function Team({ team = [] }) {
                                     <div className="flex justify-between items-start mb-6">
                                         <div className="w-20 h-20 rounded-2xl bg-gray-50 border border-slate-100 flex items-center justify-center overflow-hidden">
                                             {member.photo_url ? (
-                                                <img src={`/storage/${member.photo_url}`} alt={member.name} className="w-full h-full object-cover" />
+                                                <img loading="lazy" src={`/storage/${member.photo_url}`} alt={member.name} className="w-full h-full object-cover" />
                                             ) : (
                                                 <GraduationCap className="w-10 h-10 text-slate-300" />
                                             )}

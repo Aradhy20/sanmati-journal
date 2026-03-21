@@ -50,7 +50,7 @@ const BioModal = ({ member, isOpen, onClose }) => {
                                 {/* Modal Image Column (Desktop) / Header (Mobile) */}
                                 <div className="md:w-2/5 md:shrink-0 relative bg-dark">
                                     <div className="md:absolute inset-0 aspect-square md:aspect-auto">
-                                        <img 
+                                        <img loading="lazy" 
                                             src={member.image} 
                                             alt={member.name}
                                             className="w-full h-full object-cover object-top opacity-80"

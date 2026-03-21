@@ -19,7 +19,7 @@ export default function TeamMember({ name, role, title, phone, email, scholar, i
             
             <div className={photoContainerClasses}>
                 {image ? (
-                    <img src={image} alt={name} className="object-cover w-full h-full grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" />
+                    <img loading="lazy" src={image} alt={name} className="object-cover w-full h-full grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" />
                 ) : (
                     <div className="w-full h-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-3xl font-serif font-black text-white">
                         {name.charAt(0)}

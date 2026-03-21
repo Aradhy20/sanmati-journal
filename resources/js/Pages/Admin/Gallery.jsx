@@ -100,7 +100,7 @@ export default function Gallery({ gallery = [] }) {
                         gallery.map((item) => (
                             <div key={item.id} className="bg-white rounded-3xl border border-gray-200 shadow-sm overflow-hidden group hover:shadow-xl transition-all">
                                 <div className="relative h-48 bg-gray-50">
-                                    <img src={`/storage/${item.url}`} alt={item.caption} className="w-full h-full object-cover" />
+                                    <img loading="lazy" src={`/storage/${item.url}`} alt={item.caption} className="w-full h-full object-cover" />
                                     <div className="absolute top-4 right-4 flex gap-2 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all">
                                         <button
                                             onClick={() => deleteItem(item.id)}

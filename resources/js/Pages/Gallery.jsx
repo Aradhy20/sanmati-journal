@@ -178,7 +178,7 @@ export default function Gallery({ galleryItems = [] }) {
                                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                                 className="relative w-full h-full flex items-center justify-center"
                             >
-                                <img
+                                <img loading="lazy"
                                     src={currentItem.image_url}
                                     alt={currentItem.caption || 'Archival image'}
                                     className="max-h-full max-w-full object-contain drop-shadow-[0_40px_70px_rgba(0,0,0,0.6)] rounded-sm"

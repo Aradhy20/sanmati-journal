@@ -4,7 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Seo from '../Components/Seo';
 import CustomCursor from '../Components/CustomCursor';
 import Preloader from '../Components/Preloader';
-import { MessageCircle } from 'lucide-react';
+import { MessageCircle, FileText } from 'lucide-react';
+import { Link } from '@inertiajs/react';
 
 export default function MainLayout({ children, title, description, keywords }) {
     return (
@@ -47,6 +48,12 @@ export default function MainLayout({ children, title, description, keywords }) {
             >
                 <MessageCircle className="w-5 h-5 sm:w-7 sm:h-7" />
             </motion.a>
+
+            {/* Global Submit Manuscript CTA */}
+            <Link href="/contact" className="fixed bottom-4 sm:bottom-6 lg:bottom-10 left-4 sm:left-6 lg:left-10 z-[60] bg-primary text-white rounded-full shadow-[0_10px_30px_rgba(10,37,64,0.3)] flex items-center justify-center border-2 border-white px-5 sm:px-8 h-12 sm:h-14 hover:bg-secondary hover:-translate-y-1 transition-all duration-300 group">
+                <FileText className="w-4 h-4 sm:w-5 sm:h-5 mr-3 group-hover:-rotate-12 transition-transform" />
+                <span className="font-bold text-xs sm:text-sm tracking-widest uppercase">Submit Paper</span>
+            </Link>
         </div>
     );
 }

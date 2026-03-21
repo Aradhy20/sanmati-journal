@@ -49,7 +49,7 @@ export default function GalleryPhoto() {
                                     className="break-inside-avoid relative group rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 cursor-zoom-in"
                                     onClick={() => setSelectedImage(src)}
                                 >
-                                    <img
+                                    <img loading="lazy"
                                         src={src}
                                         alt={`Academic Event ${idx + 1}`}
                                         className="w-full h-auto transform transition-transform duration-700 group-hover:scale-110"
@@ -107,7 +107,7 @@ export default function GalleryPhoto() {
                             exit={{ scale: 0.9, opacity: 0 }}
                             className="relative w-full h-full flex items-center justify-center"
                         >
-                            <img
+                            <img loading="lazy"
                                 src={selectedImage}
                                 alt="Full view"
                                 className="max-w-full max-h-full object-contain rounded-xl"

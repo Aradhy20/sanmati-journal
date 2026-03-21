@@ -69,7 +69,7 @@ const Testimonials = () => {
 
                             <div className="flex flex-col items-center">
                                 <div className="w-20 h-20 rounded-full border-2 border-primary/30 p-1 mb-6 relative overflow-hidden">
-                                    <img
+                                    <img loading="lazy"
                                         src={testimonials[current].image}
                                         alt={testimonials[current].name}
                                         className="object-cover rounded-full w-full h-full"

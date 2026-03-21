@@ -95,7 +95,7 @@ export default function GalleryNews() {
                                         className="relative aspect-square rounded-2xl overflow-hidden cursor-pointer group shadow-sm bg-slate-200"
                                         onClick={() => setSelectedImage(src)}
                                     >
-                                        <img
+                                        <img loading="lazy"
                                             src={src}
                                             alt={`News Photo ${idx + 1}`}
                                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -135,7 +135,7 @@ export default function GalleryNews() {
                             exit={{ scale: 0.8, opacity: 0 }}
                             className="relative max-w-5xl w-full h-[80vh] flex items-center justify-center"
                         >
-                            <img
+                            <img loading="lazy"
                                 src={selectedImage}
                                 alt="Full view"
                                 className="max-w-full max-h-full object-contain rounded-xl"

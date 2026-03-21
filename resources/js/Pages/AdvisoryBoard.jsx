@@ -127,7 +127,7 @@ export default function AdvisoryBoard() {
                     <motion.div {...fadeInUp} transition={{ delay: 0.2 }} className="lg:col-span-12 xl:col-span-5 relative group">
                         <div className="absolute -inset-4 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 rounded-[3rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
                         <div className="relative aspect-square rounded-[3rem] overflow-hidden shadow-2xl bg-dark">
-                            <img src="/fistudy-assets/resources/about-journal-1.png" alt="Board" className="w-full h-full object-cover opacity-60 grayscale-[30%]" />
+                            <img loading="lazy" src="/fistudy-assets/resources/about-journal-1.png" alt="Board" className="w-full h-full object-cover opacity-60 grayscale-[30%]" />
                             <div className="absolute inset-0 bg-gradient-to-tr from-primary/40 to-transparent" />
                             <div className="absolute inset-x-0 bottom-0 p-6 lg:p-12 text-center">
                                 <Quote className="w-12 h-12 text-secondary mx-auto mb-6 opacity-50" />
