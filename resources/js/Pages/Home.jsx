@@ -21,8 +21,8 @@ const fadeInUp = {
 
 export default function Home() {
     return (
-        <MainLayout 
-            title="Sanmati Spectrum of Knowledge | National Multidisciplinary Research Journal" 
+        <MainLayout
+            title="Sanmati Spectrum of Knowledge | National Multidisciplinary Research Journal"
             description="Sanmati Spectrum is India's leading multidisciplinary peer-reviewed academic journal. Publishing high-quality research papers, thesis, and hardcover books across science, arts, commerce, and law."
             keywords="multidisciplinary journal india, peer-reviewed research, academic book publication, sanmati spectrum of knowledge, ugc care listed journal, publish book from thesis, national research journal"
         >
@@ -32,33 +32,6 @@ export default function Home() {
             </div>}>
                 <Hero />
             </Suspense>
-
-            {/* ─── INDEXING & TRUST SIGNALS ─── */}
-            <section className="py-10 bg-white border-y border-gray-100 relative z-20 shadow-sm">
-                <div className="container-custom">
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-                        <div className="shrink-0 text-center md:text-left">
-                            <p className="text-secondary font-black text-[10px] uppercase tracking-[0.3em] mb-1">Globally Recognized</p>
-                            <h3 className="text-dark font-serif font-bold text-lg">Indexed & Trusted By</h3>
-                        </div>
-                        
-                        <div className="flex-grow flex flex-wrap justify-center md:justify-end items-center gap-6 sm:gap-10 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
-                            {[
-                                { name: "UGC CARE", icon: "🇮🇳" },
-                                { name: "Google Scholar", icon: "🎓" },
-                                { name: "CrossRef DOI", icon: "🔗" },
-                                { name: "Open Access", icon: "🔓" },
-                                { name: "Blind Peer Review", icon: "👁️‍🗨️" }
-                            ].map((badge, i) => (
-                                <div key={i} className="flex items-center gap-2 group cursor-default">
-                                    <span className="text-2xl group-hover:scale-110 transition-transform">{badge.icon}</span>
-                                    <span className="text-sm font-bold text-dark-light whitespace-nowrap">{badge.name}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </section>
 
             {/* ─── ABOUT SECTION ─── */}
             <section className="py-32 bg-surface relative overflow-hidden">
@@ -82,7 +55,7 @@ export default function Home() {
                                     "A thriving academic ecosystem where groundbreaking <span className="text-primary italic">research meets global publishing</span>."
                                 </h3>
                             </div>
-                            
+
                             <div className="col-span-2 sm:col-span-1 bg-gradient-to-br from-primary to-primary-dark rounded-3xl p-8 lg:p-10 text-white relative overflow-hidden shadow-xl group cursor-default">
                                 <div className="absolute right-0 top-0 w-32 h-32 bg-white/5 rounded-full blur-xl group-hover:bg-white/10 transition-colors duration-700" />
                                 <BookOpen className="w-10 h-10 text-secondary mb-8 group-hover:scale-110 transition-transform duration-500" />
@@ -162,7 +135,7 @@ export default function Home() {
                             </Link>
                         </motion.div>
                     </div>
-                    
+
                     {/* Search and Filters UI */}
                     <div className="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100 flex flex-col md:flex-row gap-4 mb-12">
                         <div className="flex-grow flex items-center bg-warm-bg rounded-xl px-4 py-3 border border-transparent focus-within:bg-white focus-within:border-primary/30 transition-all">
@@ -290,7 +263,7 @@ export default function Home() {
                                 <h3 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold mb-2 tracking-tight group-hover:text-secondary-light transition-colors duration-300">Dr. Namrta Jain</h3>
                                 <p className="text-white/70 text-[12px] font-bold uppercase tracking-[0.05em] mb-2">Sanmati Spectrum of Knowledge & Emerging Discourse</p>
                                 <p className="text-white/40 text-[10px] uppercase font-black tracking-widest mb-6 min-h-[15px]"></p>
-                                
+
                                 <div className="w-full bg-white/10 rounded-2xl p-4 mb-6 border border-white/10 text-xs">
                                     <p className="flex justify-between border-b border-white/5 pb-2 mb-2"><span className="text-white/40 uppercase tracking-widest font-black text-[9px]">Email</span> <a href="mailto:sanmatijournal@gmail.com" className="font-bold hover:text-secondary transition-colors">sanmatijournal@gmail.com</a></p>
                                     <p className="flex justify-between"><span className="text-white/40 uppercase tracking-widest font-black text-[9px]">Mob</span> <span className="font-bold">+91 9870713912 / 8979782949</span></p>
@@ -317,7 +290,7 @@ export default function Home() {
                                 <h3 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-2 group-hover:text-primary transition-colors duration-300">Dr. Ratnesh Kumar Jain</h3>
                                 <p className="text-muted text-[12px] font-bold uppercase tracking-wider mb-2 min-h-[18px]"></p>
                                 <p className="text-dark/40 text-[10px] uppercase font-black tracking-widest mb-6 min-h-[15px]"></p>
-                                
+
                                 <div className="w-full bg-warm-bg rounded-2xl p-4 mb-6 border border-gray-50 text-xs text-left">
                                     <p className="flex justify-between border-b border-gray-200 pb-2 mb-2"><span className="text-muted uppercase tracking-widest font-black text-[9px]">Email</span> <a href="mailto:Jainratnesh79@gmail.com" className="font-bold text-dark hover:text-primary transition-colors">Jainratnesh79@gmail.com</a></p>
                                     <p className="flex justify-between"><span className="text-muted uppercase tracking-widest font-black text-[9px]">Mob</span> <span className="font-bold text-dark">+91 7999525735</span></p>
@@ -651,15 +624,13 @@ function PipelineSection() {
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.15, duration: 0.8 }}
                                 onClick={() => setActiveStep(isActive ? null : i)}
-                                className={`relative group p-8 flex flex-col items-center text-center rounded-[2rem] transition-all duration-500 cursor-pointer focus:outline-none ${
-                                    isActive
+                                className={`relative group p-8 flex flex-col items-center text-center rounded-[2rem] transition-all duration-500 cursor-pointer focus:outline-none ${isActive
                                         ? 'bg-primary shadow-2xl shadow-primary/20 -translate-y-2'
                                         : 'bg-white border border-gray-100 hover:border-primary/20 hover:shadow-xl hover:-translate-y-1'
-                                }`}
+                                    }`}
                             >
-                                <div className={`relative z-10 w-24 h-24 rounded-full flex items-center justify-center mb-6 transition-all duration-500 shadow-lg ${
-                                    isActive ? 'bg-white/20 border-2 border-white/30' : 'bg-surface border border-gray-100 group-hover:bg-primary group-hover:border-primary'
-                                }`}>
+                                <div className={`relative z-10 w-24 h-24 rounded-full flex items-center justify-center mb-6 transition-all duration-500 shadow-lg ${isActive ? 'bg-white/20 border-2 border-white/30' : 'bg-surface border border-gray-100 group-hover:bg-primary group-hover:border-primary'
+                                    }`}>
                                     <div className="absolute -top-2 left-1/2 -translate-x-1/2 bg-secondary text-white text-[10px] font-black px-3 py-1 rounded-full">{item.step}</div>
                                     <item.icon className={`w-10 h-10 transition-colors duration-300 ${isActive ? 'text-white' : 'text-secondary group-hover:text-white'}`} />
                                 </div>

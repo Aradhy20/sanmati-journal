@@ -102,7 +102,52 @@
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.05); }
   }
+
+  /* ── Design System v2: Academic Premium Tokens ── */
+
+  /* Merriweather as academic serif (scholarly authority) */
+  --font-merriweather: "Merriweather", Georgia, "Times New Roman", serif;
+
+  /* Emerald accent scale (knowledge / growth) */
+  --color-emerald-600: #059669;
+  --color-emerald-500: #10b981;
+  --color-emerald-400: #34d399;
+  --color-emerald-100: #d1fae5;
+
+  /* Slate neutrals */
+  --color-slate-950: #0f172a;
+  --color-slate-800: #1e293b;
+  --color-slate-700: #334155;
+  --color-slate-600: #475569;
+  --color-slate-300: #cbd5e1;
+  --color-slate-200: #e2e8f0;
+  --color-slate-100: #f1f5f9;
+  --color-slate-50:  #f8fafc;
+
+  /* Semantic aliases (use these in components) */
+  --color-ds-accent:        var(--color-emerald-600);
+  --color-ds-accent-light:  var(--color-emerald-500);
+  --color-ds-text:          #1e293b;
+  --color-ds-text-muted:    #64748b;
+  --color-ds-surface:       #ffffff;
+  --color-ds-bg:            var(--color-warm-bg);
+  --color-ds-border:        var(--color-slate-200);
+
+  /* Shadow scale */
+  --shadow-card:       0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -1px rgba(0,0,0,0.04);
+  --shadow-card-hover: 0 10px 25px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+  --shadow-lg:         0 20px 40px rgba(0,0,0,0.1);
+
+  /* Border radius */
+  --radius-card: 1rem;       /* 16px */
+  --radius-card-lg: 1.5rem;  /* 24px */
+  --radius-btn:  0.75rem;    /* 12px */
+
+  /* Typography scale */
+  --text-2xs: 0.625rem;
+  --prose-max-width: 72ch;
 }
+
 
 @layer base {
   html {
@@ -160,10 +205,12 @@
   }
 
   .fade-r {
+    -webkit-mask-image: linear-gradient(to right, black, transparent);
     mask-image: linear-gradient(to right, black, transparent);
   }
 
   .fade-l {
+    -webkit-mask-image: linear-gradient(to left, black, transparent);
     mask-image: linear-gradient(to left, black, transparent);
   }
 
@@ -188,6 +235,103 @@
 
   .book-card-img {
     @apply w-full h-full object-cover group-hover:scale-105 transition-transform duration-700;
+  }
+
+  /* ─── Design System v2 Components ─────────────────────────────────── */
+
+  /* Base button shape — shared via raw CSS (Tailwind v4 disallows @apply of custom classes) */
+  .ds-btn {
+    @apply inline-flex items-center justify-center gap-2 font-semibold transition-all duration-200
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
+           disabled:pointer-events-none disabled:opacity-50 select-none;
+    border-radius: var(--radius-btn);
+  }
+  /* Each variant is standalone (no @apply of ds-btn) */
+  .ds-btn-primary {
+    @apply inline-flex items-center justify-center gap-2 font-semibold transition-all duration-200
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
+           disabled:pointer-events-none disabled:opacity-50 select-none
+           bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm active:scale-[0.98];
+    border-radius: var(--radius-btn);
+    box-shadow: 0 1px 3px rgba(5,150,105,0.3);
+  }
+  .ds-btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 font-semibold transition-all duration-200
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
+           disabled:pointer-events-none disabled:opacity-50 select-none
+           bg-slate-100 text-slate-800 hover:bg-slate-200;
+    border-radius: var(--radius-btn);
+  }
+  .ds-btn-outline {
+    @apply inline-flex items-center justify-center gap-2 font-semibold transition-all duration-200
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
+           disabled:pointer-events-none disabled:opacity-50 select-none
+           border border-slate-300 bg-transparent text-slate-700 hover:bg-slate-50;
+    border-radius: var(--radius-btn);
+  }
+  .ds-btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 font-semibold transition-all duration-200
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
+           disabled:pointer-events-none disabled:opacity-50 select-none
+           text-slate-700 hover:bg-slate-100;
+    border-radius: var(--radius-btn);
+  }
+  .ds-btn-sm  { @apply text-sm px-4 h-9; }
+  .ds-btn-md  { @apply text-sm px-5 h-10; }
+  .ds-btn-lg  { @apply text-base px-8 h-12; }
+
+  /* Cards — standalone, no custom class chaining */
+  .ds-card {
+    background: var(--color-ds-surface);
+    border: 1px solid var(--color-ds-border);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    @apply transition-all duration-300 overflow-hidden;
+  }
+  .ds-card-hoverable:hover {
+    box-shadow: var(--shadow-card-hover);
+    @apply -translate-y-1;
+  }
+  .ds-card-featured {
+    border: 1px solid var(--color-emerald-100);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    background: linear-gradient(to bottom, rgba(209,250,229,0.3), white);
+    @apply transition-all duration-300 overflow-hidden;
+  }
+  .ds-card-stat {
+    background: var(--color-ds-surface);
+    border: 1px solid var(--color-slate-100);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    @apply text-center py-8 transition-all duration-300 overflow-hidden;
+  }
+  .ds-card-lg {
+    border-radius: var(--radius-card-lg);
+  }
+
+  /* Badges — standalone, no custom class chaining */
+  .ds-badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold;
+  }
+  .ds-badge-default  { @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold bg-slate-100 text-slate-700; }
+  .ds-badge-success  { @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold bg-emerald-100 text-emerald-800; }
+  .ds-badge-warning  { @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold bg-amber-100 text-amber-800; }
+  .ds-badge-info     { @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold bg-blue-100 text-blue-800; }
+  .ds-badge-hot      { @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold bg-red-100 text-red-800; }
+
+  /* Prose / academic body text */
+  .ds-prose {
+    font-family: var(--font-merriweather);
+    max-width: var(--prose-max-width);
+    line-height: 1.75;
+    color: var(--color-ds-text);
+  }
+  .ds-prose a { color: var(--color-ds-accent); }
+  .ds-prose h1, .ds-prose h2, .ds-prose h3 {
+    font-family: var(--font-merriweather);
+    letter-spacing: -0.02em;
+    color: var(--color-dark);
   }
 }
 
