@@ -12,7 +12,10 @@ const fadeInUp = {
 };
 
 export default function Archive({ issues = [] }) {
-    const scholarlySchema = issues.flatMap(issue => 
+    // Safely handle both array and Laravel paginator objects
+    const issueList = Array.isArray(issues) ? issues : (issues?.data || []);
+    
+    const scholarlySchema = issueList.flatMap(issue => 
         (issue.papers || []).map(paper => ({
             "@context": "https://schema.org",
             "@type": "ScholarlyArticle",
@@ -57,7 +60,7 @@ export default function Archive({ issues = [] }) {
                         </div>
                         <div>
                             <h2 className="text-2xl font-serif font-bold text-dark">Chronological Access</h2>
-                            <p className="text-muted text-xs font-medium uppercase tracking-widest mt-1">Found {issues.length} Total Issues</p>
+                            <p className="text-muted text-xs font-medium uppercase tracking-widest mt-1">Found {issueList.length} Total Issues</p>
                         </div>
                     </div>
                     <div className="relative w-full md:w-80">
@@ -70,9 +73,9 @@ export default function Archive({ issues = [] }) {
                     </div>
                 </div>
 
-                {issues.length > 0 ? (
+                {issueList.length > 0 ? (
                     <div className="space-y-20">
-                        {issues.map((issue, idx) => (
+                        {issueList.map((issue, idx) => (
                             <motion.div 
                                 key={issue.id}
                                 {...fadeInUp}
