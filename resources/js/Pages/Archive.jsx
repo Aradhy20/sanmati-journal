@@ -3,6 +3,7 @@ import { FileText, Download, Calendar, Layers, Search, Archive as ArchiveIcon } 
 import PageHeader from '../Components/PageHeader';
 import MainLayout from '../Layouts/MainLayout';
 import Seo from '../Components/Seo';
+import { SkeletonGrid } from '../Components/ui/SkeletonCard';
 
 const fadeInUp = {
     initial: { opacity: 0, y: 20 },
@@ -11,9 +12,11 @@ const fadeInUp = {
     transition: { duration: 0.6 }
 };
 
-export default function Archive({ issues = [] }) {
-    // Safely handle both array and Laravel paginator objects
+export default function Archive({ issues }) {
+    // issues=null means still loading; issues=[] means loaded but empty
+    const isLoading = issues == null;
     const issueList = Array.isArray(issues) ? issues : (issues?.data || []);
+
     
     const scholarlySchema = issueList.flatMap(issue => 
         (issue.papers || []).map(paper => ({
@@ -73,7 +76,9 @@ export default function Archive({ issues = [] }) {
                     </div>
                 </div>
 
-                {issueList.length > 0 ? (
+                {isLoading ? (
+                    <SkeletonGrid count={4} cols="2" className="mt-4" />
+                ) : issueList.length > 0 ? (
                     <div className="space-y-20">
                         {issueList.map((issue, idx) => (
                             <motion.div 

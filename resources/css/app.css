@@ -164,6 +164,36 @@
   h1, h2, h3, h4, h5, h6 {
     letter-spacing: -0.01em;
   }
+
+  /* ─── Dark Mode Base ─────────── */
+  .dark body {
+    background-color: #0f172a;
+    color: #e2e8f0;
+  }
+  .dark .ds-card,
+  .dark .ds-card-featured,
+  .dark .ds-card-stat {
+    background: #1e293b;
+    border-color: #334155;
+  }
+  .dark .ds-card-hoverable:hover {
+    background: #243347;
+  }
+  .dark .ds-btn-secondary {
+    background: #334155;
+    color: #e2e8f0;
+  }
+  .dark .ds-btn-outline {
+    border-color: #475569;
+    color: #cbd5e1;
+  }
+  .dark .ds-btn-ghost {
+    color: #cbd5e1;
+  }
+  .dark .ds-badge-default {
+    background: #334155;
+    color: #cbd5e1;
+  }
 }
 
 @layer components {

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, usePage } from '@inertiajs/react';
-import { Menu, X, ChevronDown, ArrowUpRight, Mail, Phone, MapPin } from 'lucide-react';
+import { Menu, X, ChevronDown, ArrowUpRight, Mail, Phone, MapPin, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 
@@ -8,8 +8,21 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState(null);
     const [scrolled, setScrolled] = useState(false);
+    const [dark, setDark] = useState(() => {
+        if (typeof window !== 'undefined') {
+            return document.documentElement.classList.contains('dark');
+        }
+        return false;
+    });
 
     const timeoutRef = useRef(null);
+
+    const toggleDark = () => {
+        const next = !dark;
+        setDark(next);
+        document.documentElement.classList.toggle('dark', next);
+        try { localStorage.setItem('theme', next ? 'dark' : 'light'); } catch {}
+    };
     const { url } = usePage();
 
 
@@ -153,27 +166,37 @@ const Navbar = () => {
                                 >
                                     {item.href === '#' ? (
                                         <button
-                                            className={`flex items-center text-[13px] font-bold px-5 py-2 rounded-full transition-all whitespace-nowrap tracking-wide ${isActive(item.href)
+                                            className={`relative flex flex-col items-center text-[13px] font-bold px-5 py-2 rounded-full transition-all whitespace-nowrap tracking-wide ${isActive(item.href)
                                                 ? 'text-primary bg-primary/5'
                                                 : 'text-dark/80 hover:text-primary hover:bg-primary/5'
                                                 }`}
                                         >
-                                            {item.name}
-                                            {item.dropdown && (
-                                                <ChevronDown className={`w-3.5 h-3.5 ml-1.5 transition-transform duration-300 ${activeDropdown === item.name ? 'rotate-180 text-secondary' : 'text-gray-400'}`} />
-                                            )}
+                                            <span className="flex items-center gap-1">
+                                                {item.name}
+                                                {item.dropdown && (
+                                                    <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${activeDropdown === item.name ? 'rotate-180 text-secondary' : 'text-gray-400'}`} />
+                                                )}
+                                            </span>
                                         </button>
                                     ) : (
                                         <Link
                                             href={item.href}
-                                            className={`flex items-center text-[13px] font-bold px-5 py-2 rounded-full transition-all whitespace-nowrap tracking-wide ${isActive(item.href)
+                                            className={`relative flex flex-col items-center text-[13px] font-bold px-5 py-2 rounded-full transition-all whitespace-nowrap tracking-wide ${isActive(item.href)
                                                 ? 'text-primary bg-primary/5'
                                                 : 'text-dark/80 hover:text-primary hover:bg-primary/5'
                                                 }`}
                                         >
-                                            {item.name}
-                                            {item.dropdown && (
-                                                <ChevronDown className={`w-3.5 h-3.5 ml-1.5 transition-transform duration-300 ${activeDropdown === item.name ? 'rotate-180 text-secondary' : 'text-gray-400'}`} />
+                                            <span className="flex items-center gap-1">
+                                                {item.name}
+                                                {item.dropdown && (
+                                                    <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${activeDropdown === item.name ? 'rotate-180 text-secondary' : 'text-gray-400'}`} />
+                                                )}
+                                            </span>
+                                            {isActive(item.href) && (
+                                                <motion.span
+                                                    layoutId="nav-active-dot"
+                                                    className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-secondary"
+                                                />
                                             )}
                                         </Link>
                                     )}
@@ -210,14 +233,26 @@ const Navbar = () => {
                         </div>
 
 
-                        {/* CTA + Mobile Toggle */}
-                        <div className="flex items-center gap-2 sm:gap-4">
+                        {/* CTA + Dark Mode Toggle + Mobile Toggle */}
+                        <div className="flex items-center gap-2 sm:gap-3">
                             <Link
                                 href="/submission-guidelines/call-for-papers"
                                 className="hidden xl:inline-flex px-7 py-3 bg-primary text-white text-[11px] font-bold tracking-[0.1em] uppercase rounded-full hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 hover:shadow-xl hover:-translate-y-0.5"
                             >
                                 Submit Manuscript
                             </Link>
+
+                            {/* Dark Mode Toggle */}
+                            <button
+                                onClick={toggleDark}
+                                className="p-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-dark transition-colors flex-shrink-0"
+                                aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
+                                title={dark ? 'Light mode' : 'Dark mode'}
+                            >
+                                {dark
+                                    ? <Sun className="w-4 h-4 text-amber-500" />
+                                    : <Moon className="w-4 h-4 text-slate-600" />}
+                            </button>
 
                             <button
                                 onClick={() => setIsOpen(!isOpen)}
