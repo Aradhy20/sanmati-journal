@@ -7,6 +7,7 @@ import Preloader from '../Components/Preloader';
 import { Toaster } from 'react-hot-toast';
 import { MessageCircle, FileText } from 'lucide-react';
 import { Link } from '@inertiajs/react';
+import FloatingSubmitButton from '../Components/FloatingSubmitButton';
 
 export default function MainLayout({ children, title, description, keywords }) {
     return (
@@ -26,6 +27,7 @@ export default function MainLayout({ children, title, description, keywords }) {
 
             <CustomCursor />
             <Preloader />
+            <FloatingSubmitButton />
             <Navbar />
             <main className="flex-grow relative z-10">
                 <AnimatePresence mode="wait">

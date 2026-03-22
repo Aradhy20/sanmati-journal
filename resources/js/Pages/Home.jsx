@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
 import MainLayout from '../Layouts/MainLayout';
 const Hero = React.lazy(() => import('../Components/Hero'));
 import { motion } from 'framer-motion';
@@ -494,50 +494,7 @@ export default function Home() {
             </section>
 
             {/* ─── PUBLICATION PROCESS ─── */}
-            <section className="py-32 bg-warm-bg relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[140px] -mr-96 -mt-96" />
-                <div className="container-custom relative z-10">
-                    <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-24">
-                        <motion.div {...fadeInUp} className="flex items-center justify-center gap-4 mb-6">
-                            <span className="h-px w-10 bg-secondary" />
-                            <span className="text-secondary font-black text-[11px] uppercase tracking-[0.4em]">Publication Pipeline</span>
-                            <span className="h-px w-10 bg-secondary" />
-                        </motion.div>
-                        <motion.h2 {...fadeInUp} transition={{ delay: 0.1 }} className="text-2xl md:text-3xl lg:text-4xl lg:text-5xl font-serif font-bold text-dark mb-6">
-                            The <span className="text-primary italic">Scholarly Journey</span>
-                        </motion.h2>
-                        <motion.p {...fadeInUp} transition={{ delay: 0.2 }} className="text-muted font-medium text-lg">
-                            From your manuscript to a published masterpiece — a transparent, rigorous process.
-                        </motion.p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
-                        <div className="hidden md:block absolute top-[60px] left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent" />
-                        {[
-                            { step: "01", title: "Manuscript Submission", desc: "Digital intake with initial ethics and originality validation.", icon: UploadCloud },
-                            { step: "02", title: "Peer Review", desc: "Double-blind evaluation by distinguished domain experts.", icon: FileCheck },
-                            { step: "03", title: "Refinement", desc: "Collaborative revision based on empirical rigor and expert feedback.", icon: RefreshCw },
-                            { step: "04", title: "Publication & Archival", desc: "Final curation, DOI registration, global indexing, and shipping.", icon: Globe },
-                        ].map((item, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.15, duration: 0.8 }}
-                                className="relative group p-10 flex flex-col items-center text-center"
-                            >
-                                <div className="z-10 w-28 h-28 rounded-full bg-white border border-gray-100 flex items-center justify-center mb-8 group-hover:bg-primary group-hover:border-primary transition-all duration-500 shadow-xl">
-                                    <div className="absolute -top-2 left-1/2 -translate-x-1/2 bg-secondary text-white text-[10px] font-black px-3 py-1 rounded-full">{item.step}</div>
-                                    <item.icon className="w-10 h-10 text-secondary group-hover:text-white transition-colors" />
-                                </div>
-                                <h3 className="text-lg font-serif font-bold text-dark mb-4 group-hover:text-primary transition-colors">{item.title}</h3>
-                                <p className="text-muted text-[13px] leading-relaxed font-medium">{item.desc}</p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <PipelineSection />
 
             {/* ─── TRENDING / MOST READ SECTION ─── */}
             <section className="py-20 bg-white relative overflow-hidden">
@@ -627,3 +584,114 @@ export default function Home() {
         </MainLayout>
     );
 };
+
+// ─── INTERACTIVE PIPELINE SECTION ─────────────────────────────────────────
+const pipelineSteps = [
+    {
+        step: "01",
+        title: "Manuscript Submission",
+        icon: UploadCloud,
+        shortDesc: "Digital intake with initial ethics and originality validation.",
+        fullDesc: "Authors submit via our secure portal. Each submission undergoes scope screening, formatting compliance check, and plagiarism analysis. A unique Tracking ID is emailed within 24 hours of receipt.",
+    },
+    {
+        step: "02",
+        title: "Double-Blind Peer Review",
+        icon: FileCheck,
+        shortDesc: "Evaluation by distinguished domain experts.",
+        fullDesc: "Our editorial team assigns two or three independent reviewers in the manuscript's domain. The double-blind process ensures impartiality. Reviewers evaluate methodology, originality, significance, and writing quality typically over 4–6 weeks.",
+    },
+    {
+        step: "03",
+        title: "Revision & Refinement",
+        icon: RefreshCw,
+        shortDesc: "Collaborative revision based on expert feedback.",
+        fullDesc: "Authors receive detailed reviewer feedback with an opportunity to revise and resubmit. The editorial team mediates the revision process, verifying all concerns are addressed before the manuscript moves forward.",
+    },
+    {
+        step: "04",
+        title: "Publication & Archival",
+        icon: Globe,
+        shortDesc: "DOI registration, global indexing, and distribution.",
+        fullDesc: "Accepted manuscripts are typeset, assigned a CrossRef DOI, and published in the next quarterly volume. They are simultaneously indexed in Google Scholar and UGC CARE with full open-access availability.",
+    },
+];
+
+function PipelineSection() {
+    const [activeStep, setActiveStep] = useState(null);
+
+    return (
+        <section className="py-32 bg-warm-bg relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[140px] -mr-96 -mt-96" />
+            <div className="container-custom relative z-10">
+                <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-20">
+                    <motion.div {...fadeInUp} className="flex items-center justify-center gap-4 mb-6">
+                        <span className="h-px w-10 bg-secondary" />
+                        <span className="text-secondary font-black text-[11px] uppercase tracking-[0.4em]">Publication Pipeline</span>
+                        <span className="h-px w-10 bg-secondary" />
+                    </motion.div>
+                    <motion.h2 {...fadeInUp} transition={{ delay: 0.1 }} className="text-2xl md:text-3xl lg:text-4xl lg:text-5xl font-serif font-bold text-dark mb-4">
+                        The <span className="text-primary italic">Scholarly Journey</span>
+                    </motion.h2>
+                    <motion.p {...fadeInUp} transition={{ delay: 0.2 }} className="text-muted font-medium text-base">
+                        Click any step to explore your manuscript's journey in detail.
+                    </motion.p>
+                </div>
+
+                {/* Steps Row */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 relative mb-6">
+                    <div className="hidden md:block absolute top-[52px] left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent" />
+                    {pipelineSteps.map((item, i) => {
+                        const isActive = activeStep === i;
+                        return (
+                            <motion.button
+                                key={i}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.15, duration: 0.8 }}
+                                onClick={() => setActiveStep(isActive ? null : i)}
+                                className={`relative group p-8 flex flex-col items-center text-center rounded-[2rem] transition-all duration-500 cursor-pointer focus:outline-none ${
+                                    isActive
+                                        ? 'bg-primary shadow-2xl shadow-primary/20 -translate-y-2'
+                                        : 'bg-white border border-gray-100 hover:border-primary/20 hover:shadow-xl hover:-translate-y-1'
+                                }`}
+                            >
+                                <div className={`relative z-10 w-24 h-24 rounded-full flex items-center justify-center mb-6 transition-all duration-500 shadow-lg ${
+                                    isActive ? 'bg-white/20 border-2 border-white/30' : 'bg-surface border border-gray-100 group-hover:bg-primary group-hover:border-primary'
+                                }`}>
+                                    <div className="absolute -top-2 left-1/2 -translate-x-1/2 bg-secondary text-white text-[10px] font-black px-3 py-1 rounded-full">{item.step}</div>
+                                    <item.icon className={`w-10 h-10 transition-colors duration-300 ${isActive ? 'text-white' : 'text-secondary group-hover:text-white'}`} />
+                                </div>
+                                <h3 className={`text-sm font-serif font-bold mb-2 transition-colors ${isActive ? 'text-white' : 'text-dark group-hover:text-primary'}`}>{item.title}</h3>
+                                <p className={`text-[11px] leading-relaxed font-medium hidden md:block ${isActive ? 'text-white/70' : 'text-muted'}`}>{item.shortDesc}</p>
+                            </motion.button>
+                        );
+                    })}
+                </div>
+
+                {/* Expanded Detail Panel */}
+                <motion.div
+                    initial={false}
+                    animate={{ opacity: activeStep !== null ? 1 : 0, y: activeStep !== null ? 0 : 10 }}
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    className={activeStep !== null ? 'block' : 'hidden'}
+                >
+                    {activeStep !== null && (
+                        <div className="bg-white rounded-[2.5rem] border border-primary/10 shadow-2xl p-10 md:p-14 flex flex-col md:flex-row items-start gap-10">
+                            <div className="w-20 h-20 bg-primary/8 rounded-2xl flex items-center justify-center shrink-0">
+                                {React.createElement(pipelineSteps[activeStep].icon, { className: 'w-10 h-10 text-primary' })}
+                            </div>
+                            <div>
+                                <span className="text-[10px] font-black uppercase tracking-widest text-secondary mb-2 block">Step {pipelineSteps[activeStep].step}</span>
+                                <h3 className="text-xl md:text-2xl font-serif font-bold text-dark mb-4">{pipelineSteps[activeStep].title}</h3>
+                                <p className="text-muted leading-relaxed text-base font-medium">{pipelineSteps[activeStep].fullDesc}</p>
+                            </div>
+                        </div>
+                    )}
+                </motion.div>
+            </div>
+        </section>
+    );
+}
+

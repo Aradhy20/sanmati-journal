@@ -158,6 +158,11 @@ class JournalController extends Controller
         return Inertia::render('Awards');
     }
 
+    public function trackManuscript()
+    {
+        return Inertia::render('TrackManuscript');
+    }
+
     public function bookPublication()
     {
         return Inertia::render('BookPublication', [

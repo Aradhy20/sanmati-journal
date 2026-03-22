@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, CheckCircle, AlertCircle, Loader2, Mail, BookOpen, Globe, Users } from 'lucide-react';
 import toast from 'react-hot-toast';
+import confetti from 'canvas-confetti';
 
 export default function NewsletterSection() {
     const [email, setEmail] = useState('');
@@ -44,6 +45,13 @@ export default function NewsletterSection() {
                 const successMsg = data.message || 'You have successfully subscribed!';
                 setMessage(successMsg);
                 toast.success(successMsg);
+                // 🎉 Fire confetti burst!
+                confetti({
+                    particleCount: 120,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#687EFF', '#F87A53', '#052143', '#ffffff'],
+                });
                 setEmail('');
                 setName('');
             } else {

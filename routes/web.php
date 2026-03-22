@@ -50,6 +50,12 @@ Route::get('/publication-policy/peer-review', [JournalController::class, 'peerRe
 Route::get('/awards', [JournalController::class, 'awards'])->name('awards');
 Route::get('/book-publication', [JournalController::class, 'bookPublication'])->name('book-publication');
 Route::get('/compliance', [JournalController::class, 'compliance'])->name('compliance');
+Route::get('/track-manuscript', [JournalController::class, 'trackManuscript'])->name('track-manuscript');
+
+// Catch-all 404 — renders the React custom 404 page
+Route::fallback(function () {
+    return \Inertia\Inertia::render('Error404');
+});
 
 // Authentication Routes
 Route::middleware('guest')->group(function () {
