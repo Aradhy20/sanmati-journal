@@ -7,8 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Submission extends Model
 {
     protected $fillable = [
-        'user_id', 'title', 'abstract', 'keywords', 'file_path', 'status', 'reviewer_id'
+        'user_id', 'author_name', 'author_email', 'author_phone', 'institution',
+        'subject_area', 'tracking_id', 'title', 'abstract', 'keywords',
+        'file_path', 'status', 'reviewer_id',
     ];
+
 
     public function author()
     {
