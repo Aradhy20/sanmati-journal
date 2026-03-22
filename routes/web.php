@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [JournalController::class, 'index'])->name('home');
 Route::get('/api/search', [\App\Http\Controllers\SearchController::class, 'search'])->name('api.search');
 Route::post('/api/newsletter/subscribe', [\App\Http\Controllers\NewsletterController::class, 'subscribe'])->name('newsletter.subscribe')->middleware('throttle:5,1');
-Route::post('/api/newsletter/unsubscribe', [\App\Http\Controllers\NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe');
+Route::get('/api/newsletter/unsubscribe/{email}', [\App\Http\Controllers\NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe')->middleware('signed');
 // Route removed: Route::get('/editorial-team', [JournalController::class, 'editorialTeam'])->name('editorial-team');
 Route::get('/editorial-team/editors', [JournalController::class, 'editors'])->name('editorial-team.editors');
 Route::get('/editorial-team/editorial-board', [JournalController::class, 'editorialBoard'])->name('editorial-team.board');
@@ -17,7 +17,7 @@ Route::get('/gallery/photo', [JournalController::class, 'galleryPhoto'])->name('
 Route::get('/media-news', [JournalController::class, 'galleryNews'])->name('gallery.news');
 Route::get('/archive', [JournalController::class, 'archive'])->name('archive');
 Route::get('/contact', [JournalController::class, 'contact'])->name('contact');
-Route::post('/contact', [JournalController::class, 'contactStore'])->name('contact.store')->middleware('throttle:60,1');
+Route::post('/contact', [JournalController::class, 'contactStore'])->name('contact.store')->middleware('throttle:3,1');
 
 // Basic info routes
 Route::get('/basic-info/vision-mission', [JournalController::class, 'visionMission'])->name('vision-mission');
@@ -63,8 +63,8 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'destroy'])->name('logout')->middleware('auth');
 
-// Admin Routes (Protected with auth + admin role check)
-Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
+// Admin Routes (Protected with auth + admin role check + rate limiting)
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:60,1'])->group(function () {
     Route::get('/', [\App\Http\Controllers\AdminController::class, 'index'])->name('dashboard');
     Route::get('/enquiries', [\App\Http\Controllers\AdminController::class, 'enquiries'])->name('enquiries');
     Route::patch('/enquiries/{enquiry}/status', [\App\Http\Controllers\AdminController::class, 'updateEnquiryStatus'])->name('enquiries.status');

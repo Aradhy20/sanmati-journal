@@ -33,13 +33,11 @@ class NewsletterController extends Controller
         return response()->json(['message' => 'Thank you for subscribing to Sanmati Spectrum!'], 201);
     }
 
-    public function unsubscribe(Request $request)
+    public function unsubscribe(Request $request, $email)
     {
-        $validated = $request->validate(['email' => ['required', 'email']]);
+        // The 'signed' middleware already validates the cryptographic signature of the URL.
+        NewsletterSubscriber::where('email', $email)->update(['status' => 'unsubscribed']);
 
-        NewsletterSubscriber::where('email', $validated['email'])
-            ->update(['status' => 'unsubscribed']);
-
-        return response()->json(['message' => 'You have been successfully unsubscribed.'], 200);
+        return redirect('/')->with('success', 'You have been successfully unsubscribed from the newsletter.');
     }
 }
