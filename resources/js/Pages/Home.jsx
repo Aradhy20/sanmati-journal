@@ -69,10 +69,9 @@ export default function Home() {
                             <div className="col-span-2 sm:col-span-1 bg-white rounded-3xl p-8 lg:p-10 shadow-[0_10px_40px_rgba(79,119,255,0.08)] border border-primary/10 relative overflow-hidden group hover:border-secondary/30 transition-all duration-500 cursor-default text-center flex flex-col items-center justify-center">
                                 <Award className="w-10 h-10 text-secondary mb-8 group-hover:scale-110 transition-transform duration-500" />
                                 <div className="flex items-baseline gap-1 mb-2">
-                                    <span className="text-5xl lg:text-6xl font-serif font-black text-dark">02</span>
-                                    <span className="text-primary text-4xl font-black">+</span>
+                                    <span className="text-5xl lg:text-6xl font-serif font-black text-dark">Est.</span>
                                 </div>
-                                <p className="text-primary/60 text-xs font-black uppercase tracking-widest leading-tight">Years Excellence</p>
+                                <p className="text-primary/60 text-xs font-black uppercase tracking-widest leading-tight">Founded 2023</p>
                             </div>
                         </motion.div>
 
@@ -366,7 +365,7 @@ export default function Home() {
                 <div className="container-custom relative z-10">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-12 text-center">
                         {[
-                            { icon: FileText, num: "500+", label: "Artifacts Published" },
+                            { icon: FileText, num: "500+", label: "Papers Received" },
                             { icon: Users, num: "200+", label: "Global Scholars" },
                             { icon: Award, num: "50+", label: "Expert Reviewers" },
                             { icon: Globe, num: "25+", label: "Domain Disciplines" },

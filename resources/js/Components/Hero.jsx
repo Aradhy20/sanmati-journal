@@ -129,7 +129,7 @@ const Hero = () => {
                             <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-white/40 via-transparent to-transparent">
                                 <div className="flex items-center gap-3 mb-3">
                                     <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                                    <span className="text-[#052143]/80 text-xs font-bold uppercase tracking-widest">Now Accepting Vol. 1 Submissions</span>
+                                    <span className="text-[#052143]/80 text-xs font-bold uppercase tracking-widest">New Submissions Open — 2026</span>
                                 </div>
                                 <div className="flex -space-x-3">
                                     {['/fistudy-assets/team/team-1-1.jpg', '/fistudy-assets/team/team-1-2.jpg', '/fistudy-assets/team/team-2-1.jpg'].map((src, j) => (

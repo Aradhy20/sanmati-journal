@@ -49,11 +49,33 @@ const Footer = () => {
                                 A premier national platform for multidisciplinary research, fostering academic discourse and innovation across sciences and humanities.
                             </p>
                             <div className="flex gap-4 pt-2">
-                                {[Linkedin, Facebook, Twitter].map((Icon, idx) => (
-                                    <a key={idx} href="#" className="size-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-secondary hover:border-secondary hover:text-white transition-all duration-300 group">
-                                        <Icon className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                                    </a>
-                                ))}
+                                <a
+                                    href="https://www.linkedin.com/company/sanmati-spectrum"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Sanmati Spectrum on LinkedIn"
+                                    className="size-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#0077B5] hover:border-[#0077B5] hover:text-white transition-all duration-300 group"
+                                >
+                                    <Linkedin className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                                </a>
+                                <a
+                                    href="https://www.facebook.com/sanmatijournal"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Sanmati Spectrum on Facebook"
+                                    className="size-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#1877F2] hover:border-[#1877F2] hover:text-white transition-all duration-300 group"
+                                >
+                                    <Facebook className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                                </a>
+                                <a
+                                    href="https://twitter.com/sanmatijournal"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Sanmati Spectrum on X / Twitter"
+                                    className="size-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#1DA1F2] hover:border-[#1DA1F2] hover:text-white transition-all duration-300 group"
+                                >
+                                    <Twitter className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                                </a>
                             </div>
                         </div>
 
@@ -104,12 +126,21 @@ const Footer = () => {
                                     <p className="text-[13px] leading-relaxed font-medium">JTS Publications<br />V-508 Gali No. 17, Vijay Park<br/>Delhi – 110053, Bharat (India)</p>
                                 </div>
                                 <div className="space-y-3 pl-2">
-                                    <div className="flex items-start gap-4 text-[13px] font-bold hover:text-secondary transition-colors">
-                                        <Phone className="w-4 h-4 text-secondary/70 mt-0.5 shrink-0" /> 
+                                    <div className="flex items-start gap-4 text-[13px] font-bold">
+                                        <Phone className="w-4 h-4 text-secondary/70 mt-0.5 shrink-0" />
                                         <div className="flex flex-col space-y-2">
-                                            <a href="tel:+919870713912" className="hover:text-primary transition-colors hover:underline">+91 9870713912</a>
-                                            <a href="tel:+918979782949" className="hover:text-primary transition-colors hover:underline">+91 8979782949</a>
-                                            <a href="tel:+917999525735" className="hover:text-primary transition-colors hover:underline">+91 7999525735</a>
+                                            <div>
+                                                <p className="text-[9px] font-black uppercase tracking-widest text-white/30 mb-0.5">Editor-in-Chief</p>
+                                                <a href="tel:+919870713912" className="hover:text-secondary transition-colors hover:underline">+91 9870713912</a>
+                                            </div>
+                                            <div>
+                                                <p className="text-[9px] font-black uppercase tracking-widest text-white/30 mb-0.5">Editorial Office</p>
+                                                <a href="tel:+918979782949" className="hover:text-secondary transition-colors hover:underline">+91 8979782949</a>
+                                            </div>
+                                            <div>
+                                                <p className="text-[9px] font-black uppercase tracking-widest text-white/30 mb-0.5">Managing Editor</p>
+                                                <a href="tel:+917999525735" className="hover:text-secondary transition-colors hover:underline">+91 7999525735</a>
+                                            </div>
                                         </div>
                                     </div>
                                     <a href="mailto:sanmatijournal@gmail.com" className="flex items-center gap-4 text-[13px] font-bold hover:text-secondary transition-colors mt-2">
