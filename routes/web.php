@@ -52,9 +52,16 @@ Route::get('/book-publication', [JournalController::class, 'bookPublication'])->
 Route::get('/compliance', [JournalController::class, 'compliance'])->name('compliance');
 
 // Authentication Routes
-Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'create'])->name('login');
-Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'store'])->middleware('throttle:5,1');
-Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'destroy'])->name('logout');
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'create'])->name('login');
+    Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'store'])->middleware('throttle:5,1');
+    Route::get('/forgot-password', [App\Http\Controllers\Auth\PasswordResetLinkController::class, 'create'])->name('password.request');
+    Route::post('/forgot-password', [App\Http\Controllers\Auth\PasswordResetLinkController::class, 'store'])->name('password.email')->middleware('throttle:5,1');
+    Route::get('/reset-password/{token}', [App\Http\Controllers\Auth\NewPasswordController::class, 'create'])->name('password.reset');
+    Route::post('/reset-password', [App\Http\Controllers\Auth\NewPasswordController::class, 'store'])->name('password.store');
+});
+
+Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'destroy'])->name('logout')->middleware('auth');
 
 // Admin Routes (Protected with auth + admin role check)
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
