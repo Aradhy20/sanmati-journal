@@ -69,6 +69,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:6
     Route::get('/enquiries', [\App\Http\Controllers\AdminController::class, 'enquiries'])->name('enquiries');
     Route::patch('/enquiries/{enquiry}/status', [\App\Http\Controllers\AdminController::class, 'updateEnquiryStatus'])->name('enquiries.status');
 
+    Route::get('/submissions', [\App\Http\Controllers\AdminController::class, 'submissions'])->name('submissions');
+    Route::get('/submissions/{submission}/download', [\App\Http\Controllers\AdminController::class, 'downloadSubmission'])->name('submissions.download');
+
     Route::get('/news', [\App\Http\Controllers\AdminController::class, 'news'])->name('news');
     Route::post('/news', [\App\Http\Controllers\AdminController::class, 'storeNews'])->name('news.store');
     Route::patch('/news/{news}/toggle', [\App\Http\Controllers\AdminController::class, 'toggleNews'])->name('news.toggle');

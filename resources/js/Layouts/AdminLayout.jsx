@@ -9,7 +9,8 @@ import {
     LogOut,
     Sparkles,
     Bell,
-    Settings
+    Settings,
+    Inbox
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -20,6 +21,7 @@ export default function AdminLayout({ children }) {
         { href: '/admin', label: 'Dashboard', icon: LayoutDashboard, color: 'from-blue-500 to-indigo-600' },
         { href: '/admin/news', label: 'News Ticker', icon: Newspaper, color: 'from-amber-500 to-orange-600' },
         { href: '/admin/papers', label: 'Issues & Papers', icon: FileText, color: 'from-emerald-500 to-teal-600' },
+        { href: '/admin/submissions', label: 'Submissions', icon: Inbox, color: 'from-violet-500 to-purple-600' },
         { href: '/admin/team', label: 'Editorial Team', icon: Users, color: 'from-purple-500 to-pink-600' },
         { href: '/admin/enquiries', label: 'Enquiries', icon: MessageSquare, color: 'from-rose-500 to-red-600' },
         { href: '/admin/gallery', label: 'Gallery', icon: ImageIcon, color: 'from-cyan-500 to-blue-600' },

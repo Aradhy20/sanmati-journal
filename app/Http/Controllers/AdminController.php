@@ -172,6 +172,22 @@ class AdminController extends Controller
         return back()->with('success', 'Team member deleted');
     }
 
+    // --- Submissions ---
+    public function submissions()
+    {
+        return Inertia::render('Admin/Submissions', [
+            'submissions' => \App\Models\Submission::orderBy('created_at', 'desc')->paginate(20)
+        ]);
+    }
+
+    public function downloadSubmission(\App\Models\Submission $submission)
+    {
+        if ($submission->file_path && \Illuminate\Support\Facades\Storage::disk('local')->exists($submission->file_path)) {
+            return \Illuminate\Support\Facades\Storage::disk('local')->download($submission->file_path, "Manuscript_{$submission->tracking_id}.pdf");
+        }
+        return back()->with('error', 'Manuscript file not found on disk.');
+    }
+
     // --- Gallery ---
     public function gallery()
     {
