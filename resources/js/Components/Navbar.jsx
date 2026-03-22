@@ -1,27 +1,17 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, usePage } from '@inertiajs/react';
-import { Menu, X, ChevronDown, ArrowUpRight, Mail, Phone, MapPin, Search } from 'lucide-react';
+import { Menu, X, ChevronDown, ArrowUpRight, Mail, Phone, MapPin } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import SearchModal from './SearchModal';
+
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState(null);
     const [scrolled, setScrolled] = useState(false);
-    const [isSearchOpen, setIsSearchOpen] = useState(false);
+
     const timeoutRef = useRef(null);
     const { url } = usePage();
 
-    useEffect(() => {
-        const handleKeyDown = (e) => {
-            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-                e.preventDefault();
-                setIsSearchOpen(true);
-            }
-        };
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
-    }, []);
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -219,17 +209,9 @@ const Navbar = () => {
                             ))}
                         </div>
 
+
                         {/* CTA + Mobile Toggle */}
                         <div className="flex items-center gap-2 sm:gap-4">
-                            <button
-                                onClick={() => setIsSearchOpen(true)}
-                                className="flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2.5 rounded-full bg-gray-50/50 hover:bg-gray-100 border border-gray-100 text-dark/70 hover:text-primary transition-all group"
-                                aria-label="Open Search"
-                            >
-                                <Search className="w-4 h-4" />
-                                <span className="hidden sm:inline-block text-[11px] font-bold uppercase tracking-widest bg-white shadow-sm border border-gray-100 px-2 py-0.5 rounded text-gray-400 group-hover:text-primary">Cmd K</span>
-                            </button>
-
                             <Link
                                 href="/submission-guidelines/call-for-papers"
                                 className="hidden xl:inline-flex px-7 py-3 bg-primary text-white text-[11px] font-bold tracking-[0.1em] uppercase rounded-full hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 hover:shadow-xl hover:-translate-y-0.5"
@@ -311,7 +293,6 @@ const Navbar = () => {
                 </AnimatePresence>
             </nav>
 
-            <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
         </>
     );
 };
