@@ -5,7 +5,7 @@ export default function Seo({ title, description, keywords, image, type = 'websi
     const defaultDescription = "Sanmati Spectrum of Knowledge & Emerging Discourse - A national, peer-reviewed, multidisciplinary research journal.";
     const defaultKeywords = "research journal, peer-reviewed, multidisciplinary, sanmati, academic publishing, open access";
     const defaultImage = "/logo.jpg";
-    const siteUrl = "https://sanmatijournal.com";
+    const siteUrl = "https://sanmatijournal.in";
 
     const { url } = usePage();
     const fullTitle = title ? `${title} | ${siteName}` : siteName;

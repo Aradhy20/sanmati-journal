@@ -7,6 +7,7 @@ export default defineConfig({
     plugins: [
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.jsx'],
+            ssr: 'resources/js/ssr.jsx',
             refresh: true,
         }),
         react(),
@@ -15,9 +16,15 @@ export default defineConfig({
     build: {
         rollupOptions: {
             output: {
-                manualChunks: {
-                    vendor: ['react', 'react-dom', 'framer-motion', '@inertiajs/react'],
-                    ui: ['lucide-react']
+                manualChunks(id) {
+                    if (id.includes('node_modules')) {
+                        if (id.includes('react') || id.includes('framer-motion') || id.includes('@inertiajs')) {
+                            return 'vendor';
+                        }
+                        if (id.includes('lucide-react')) {
+                            return 'ui';
+                        }
+                    }
                 }
             }
         }

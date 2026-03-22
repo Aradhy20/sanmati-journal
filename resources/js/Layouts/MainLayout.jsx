@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Seo from '../Components/Seo';
 import CustomCursor from '../Components/CustomCursor';
 import Preloader from '../Components/Preloader';
+import { Toaster } from 'react-hot-toast';
 import { MessageCircle, FileText } from 'lucide-react';
 import { Link } from '@inertiajs/react';
 
@@ -11,6 +12,10 @@ export default function MainLayout({ children, title, description, keywords }) {
     return (
         <div className="min-h-screen flex flex-col bg-warm-bg font-sans antialiased relative overflow-x-hidden selection:bg-primary/10 selection:text-primary">
             <Seo title={title} description={description} keywords={keywords} />
+            <Toaster position="top-center" toastOptions={{
+                duration: 5000,
+                style: { background: '#fff', color: '#052143', fontWeight: 'bold' }
+            }} />
             
             {/* Elegant Background Accents */}
             <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">

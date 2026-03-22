@@ -4,6 +4,7 @@ import MainLayout from '../../Layouts/MainLayout';
 import { Calendar, FileText, ArrowRight, UploadCloud, CheckCircle, ShieldCheck, User } from 'lucide-react';
 import { useForm, usePage } from '@inertiajs/react';
 import { motion, AnimatePresence } from 'framer-motion';
+import toast from 'react-hot-toast';
 
 export default function CallForPapers() {
     const { flash } = usePage().props;
@@ -32,6 +33,10 @@ export default function CallForPapers() {
             onSuccess: () => {
                 reset();
                 setStep(4); // Success Step
+                toast.success('Manuscript submitted successfully. Tracking ID generated.');
+            },
+            onError: (errs) => {
+                toast.error('Submission failed. Please check your uploaded file and inputs.');
             },
             forceFormData: true,
         });

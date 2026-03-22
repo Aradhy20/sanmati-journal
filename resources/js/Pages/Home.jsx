@@ -33,6 +33,33 @@ export default function Home() {
                 <Hero />
             </Suspense>
 
+            {/* ─── INDEXING & TRUST SIGNALS ─── */}
+            <section className="py-10 bg-white border-y border-gray-100 relative z-20 shadow-sm">
+                <div className="container-custom">
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+                        <div className="shrink-0 text-center md:text-left">
+                            <p className="text-secondary font-black text-[10px] uppercase tracking-[0.3em] mb-1">Globally Recognized</p>
+                            <h3 className="text-dark font-serif font-bold text-lg">Indexed & Trusted By</h3>
+                        </div>
+                        
+                        <div className="flex-grow flex flex-wrap justify-center md:justify-end items-center gap-6 sm:gap-10 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+                            {[
+                                { name: "UGC CARE", icon: "🇮🇳" },
+                                { name: "Google Scholar", icon: "🎓" },
+                                { name: "CrossRef DOI", icon: "🔗" },
+                                { name: "Open Access", icon: "🔓" },
+                                { name: "Blind Peer Review", icon: "👁️‍🗨️" }
+                            ].map((badge, i) => (
+                                <div key={i} className="flex items-center gap-2 group cursor-default">
+                                    <span className="text-2xl group-hover:scale-110 transition-transform">{badge.icon}</span>
+                                    <span className="text-sm font-bold text-dark-light whitespace-nowrap">{badge.name}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* ─── ABOUT SECTION ─── */}
             <section className="py-32 bg-surface relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-96 h-96 bg-primary/4 rounded-full -ml-48 -mt-48 blur-[100px]" />

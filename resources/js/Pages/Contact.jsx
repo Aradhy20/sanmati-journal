@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useForm } from '@inertiajs/react';
 import { Mail, Phone, MapPin, Send, MessageSquare, Clock } from 'lucide-react';
+import toast from 'react-hot-toast';
 import PageHeader from '../Components/PageHeader';
 import MainLayout from '../Layouts/MainLayout';
 import { motion } from 'framer-motion';
@@ -129,7 +130,13 @@ function ContactForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
         post('/contact', {
-            onSuccess: () => reset(),
+            onSuccess: () => {
+                reset();
+                toast.success('Protocol Engaged: Your message has been transmitted successfully.');
+            },
+            onError: () => {
+                toast.error('Transmission Failed: Please check your inputs and try again.');
+            }
         });
     };
 
@@ -138,17 +145,6 @@ function ContactForm() {
 
     return (
         <form className="space-y-6" onSubmit={handleSubmit}>
-            {recentlySuccessful && (
-                <motion.div 
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="p-5 bg-primary/5 text-primary rounded-2xl border border-primary/10 font-bold mb-6 text-sm flex items-center gap-3"
-                >
-                    <Send className="w-5 h-5" />
-                    Protocol Engaged: Your message has been transmitted successfully.
-                </motion.div>
-            )}
-
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                     <label htmlFor="firstName" className={labelClass}>First Dimension</label>

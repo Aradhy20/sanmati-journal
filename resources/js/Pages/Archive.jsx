@@ -12,11 +12,34 @@ const fadeInUp = {
 };
 
 export default function Archive({ issues = [] }) {
+    const scholarlySchema = issues.flatMap(issue => 
+        (issue.papers || []).map(paper => ({
+            "@context": "https://schema.org",
+            "@type": "ScholarlyArticle",
+            "headline": paper.title,
+            "author": [
+                {
+                    "@type": "Person",
+                    "name": paper.authors
+                }
+            ],
+            "url": `https://sanmatijournal.in/storage/${paper.file_path}`,
+            "publisher": {
+                "@type": "Organization",
+                "name": "Sanmati Journal"
+            },
+            "issueNumber": issue.number,
+            "volumeNumber": issue.volume,
+            "datePublished": issue.year?.toString()
+        }))
+    );
+    
     return (
         <MainLayout>
             <Seo 
                 title="Journal Archive" 
                 description="Access our repository of past volumes and peer-reviewed research issues."
+                jsonLd={scholarlySchema.length > 0 ? scholarlySchema : undefined}
             />
             
             <PageHeader

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, CheckCircle, AlertCircle, Loader2, Mail, BookOpen, Globe, Users } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 export default function NewsletterSection() {
     const [email, setEmail] = useState('');
@@ -40,17 +41,21 @@ export default function NewsletterSection() {
 
             if (res.ok || res.status === 200 || res.status === 201) {
                 setStatus('success');
-                setMessage(data.message || 'You have successfully subscribed!');
+                const successMsg = data.message || 'You have successfully subscribed!';
+                setMessage(successMsg);
+                toast.success(successMsg);
                 setEmail('');
                 setName('');
             } else {
                 const errMsg = data.errors?.email?.[0] || data.message || 'Something went wrong. Please try again.';
                 setStatus('error');
                 setMessage(errMsg);
+                toast.error(errMsg);
             }
         } catch (err) {
             setStatus('error');
             setMessage('Network error. Please check your connection.');
+            toast.error('Network error. Please check your connection.');
         }
     };
 
