@@ -65,7 +65,7 @@ export default function Contact() {
                         <div className="absolute -inset-4 bg-gradient-to-br from-secondary/10 via-transparent to-primary/10 rounded-[3rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
                         <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl bg-dark">
                             <img loading="lazy"
-                                src="/fistudy-assets/resources/about-3.jpg"
+                                src="/fistudy-assets/resources/about-three-img-1.jpg"
                                 alt="Editorial Office"
                                 className="w-full h-full object-cover min-h-[500px] lg:min-h-[600px] opacity-60 group-hover:opacity-40 transition-opacity duration-700"
                             />

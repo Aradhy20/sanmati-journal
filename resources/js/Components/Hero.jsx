@@ -67,23 +67,23 @@ const Hero = () => {
                         </p>
 
                         {/* CTA Buttons */}
-                        <div className="flex flex-wrap items-center gap-4 mb-12">
+                        <div className="flex flex-col sm:flex-row flex-wrap items-center gap-3 mb-12 max-w-2xl">
                             <Link
                                 href="/submission-guidelines/call-for-papers"
-                                className="group px-8 py-4 bg-[#687EFF] text-white rounded-full font-bold text-sm shadow-lg shadow-[#687EFF]/30 hover:bg-[#052143] transition-all flex items-center gap-3 hover:-translate-y-1 uppercase tracking-[0.1em]"
+                                className="group w-full sm:w-auto justify-center px-7 py-3.5 bg-[#687EFF] text-white rounded-full font-bold text-xs shadow-lg shadow-[#687EFF]/30 hover:bg-[#052143] transition-all flex items-center gap-2 hover:-translate-y-1 uppercase tracking-[0.1em]"
                             >
                                 Submit Manuscript
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
                             </Link>
                             <Link
                                 href="/archive"
-                                className="group px-8 py-4 bg-[#052143] text-white rounded-full font-bold text-sm hover:bg-[#0a1f3d] transition-all flex items-center gap-3 hover:-translate-y-1 uppercase tracking-[0.1em] shadow-lg shadow-[#052143]/25"
+                                className="group w-full sm:w-auto justify-center px-7 py-3.5 bg-[#052143] text-white rounded-full font-bold text-xs hover:bg-[#0a1f3d] transition-all flex items-center gap-2 hover:-translate-y-1 uppercase tracking-[0.1em] shadow-lg shadow-[#052143]/25"
                             >
                                 <BookOpen className="w-4 h-4" /> Read Archive
                             </Link>
                             <Link
                                 href="/book-publication"
-                                className="group px-8 py-4 bg-[#F87A53] text-white rounded-full font-bold text-sm hover:bg-[#e56940] transition-all flex items-center gap-3 hover:-translate-y-1 uppercase tracking-[0.1em] shadow-lg shadow-[#F87A53]/25"
+                                className="group w-full sm:w-auto justify-center px-7 py-3.5 bg-[#F87A53] text-white rounded-full font-bold text-xs hover:bg-[#e56940] transition-all flex items-center gap-2 hover:-translate-y-1 uppercase tracking-[0.1em] shadow-lg shadow-[#F87A53]/25"
                             >
                                 <BookMarked className="w-4 h-4" /> Book Publications
                             </Link>
@@ -144,7 +144,7 @@ const Hero = () => {
                         <motion.div
                             animate={{ y: [0, -8, 0] }}
                             transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                            className="absolute -top-6 -left-8 bg-white rounded-2xl shadow-xl p-5 border border-[#687EFF]/15 z-20"
+                            className="absolute top-12 -left-12 bg-white rounded-2xl shadow-xl p-5 border border-[#687EFF]/15 z-20"
                         >
                             <div className="flex items-center gap-3">
                                 <div className="w-11 h-11 rounded-xl bg-[#687EFF]/10 flex items-center justify-center">
@@ -161,7 +161,7 @@ const Hero = () => {
                         <motion.div
                             animate={{ y: [0, 8, 0] }}
                             transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-                            className="absolute -bottom-6 -right-8 bg-white rounded-2xl shadow-xl p-5 border border-[#F87A53]/15 z-20"
+                            className="absolute -bottom-6 right-12 bg-white rounded-2xl shadow-xl p-5 border border-[#F87A53]/15 z-20"
                         >
                             <div className="flex items-center gap-3">
                                 <div className="w-11 h-11 rounded-xl bg-[#F87A53]/10 flex items-center justify-center">
@@ -178,7 +178,7 @@ const Hero = () => {
                         <motion.div
                             animate={{ y: [0, -5, 0] }}
                             transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                            className="absolute top-1/2 -right-10 bg-[#052143] rounded-2xl shadow-xl p-4 border border-white/10 z-20"
+                            className="absolute top-1/3 -right-6 bg-[#052143] rounded-2xl shadow-xl p-4 border border-white/10 z-20"
                         >
                             <div className="flex gap-1 mb-1">
                                 {[...Array(5)].map((_, k) => (
