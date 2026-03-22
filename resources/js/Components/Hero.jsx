@@ -2,16 +2,14 @@ import { useState, useEffect } from 'react';
 import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { ArrowRight, BookOpen, Users, Star, CheckCircle, Clock, BookMarked, Sparkles, Globe } from 'lucide-react';
-
+import CountdownTimer from './ui/CountdownTimer';
 
 const Hero = () => {
-    const [daysLeft, setDaysLeft] = useState(0);
-
-    useEffect(() => {
+    // End of current month
+    const [eomDate, setEomDate] = useState(() => {
         const now = new Date();
-        const eom = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-        setDaysLeft(Math.ceil((eom - now) / (1000 * 60 * 60 * 24)));
-    }, []);
+        return new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59).toISOString();
+    });
 
     return (
         <section className="relative min-h-[95vh] flex items-center overflow-hidden bg-gradient-to-br from-[#eef1ff] via-[#f5f0ff] to-[#fff0f5]">
@@ -90,23 +88,31 @@ const Hero = () => {
                         </div>
 
                         {/* Trust Indicators */}
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-8 border-t border-[#687EFF]/15">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-8 border-t border-[#687EFF]/15 mb-8">
                             {[
                                 { icon: CheckCircle, label: 'Authenticated', value: 'ISSN: 3108-1819', color: 'text-[#687EFF]' },
-                                { icon: Clock, label: 'Open Call', value: `Closes in ${daysLeft} days`, color: 'text-[#F87A53]' },
                                 { icon: Star, label: 'Impact', value: 'Double-Blind Review', color: 'text-[#F87A53]' },
                                 { icon: Users, label: 'Authors', value: '200+ Contributors', color: 'text-[#687EFF]' },
                                 { icon: BookOpen, label: 'Archive', value: '500+ Papers', color: 'text-[#052143]' },
                                 { icon: Globe, label: 'Scope', value: '25+ Research Fields', color: 'text-[#687EFF]' },
                             ].map((item, i) => (
-                                <div key={i} className="flex items-center gap-3 bg-white/80 backdrop-blur-sm px-4 py-2.5 rounded-xl border border-[#687EFF]/15 shadow-sm">
+                                <div key={i} className="flex items-center gap-3 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm px-4 py-2.5 rounded-xl border border-[#687EFF]/15 dark:border-slate-700 shadow-sm">
                                     <item.icon className={`w-4 h-4 flex-shrink-0 ${item.color}`} />
                                     <div>
-                                        <p className="text-[#052143] text-[10px] font-black uppercase tracking-widest leading-none mb-0.5">{item.label}</p>
-                                        <p className="text-[#6B778B] text-[11px] font-bold">{item.value}</p>
+                                        <p className="text-[#052143] dark:text-slate-300 text-[10px] font-black uppercase tracking-widest leading-none mb-0.5">{item.label}</p>
+                                        <p className="text-[#6B778B] dark:text-slate-400 text-[11px] font-bold">{item.value}</p>
                                     </div>
                                 </div>
                             ))}
+                        </div>
+
+                        {/* Live Timer Element */}
+                        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-md rounded-2xl border border-emerald-500/20 shadow-sm p-4 inline-block mb-12">
+                            <p className="text-[#052143] dark:text-slate-300 text-[10px] font-black uppercase tracking-widest mb-3 flex items-center gap-2">
+                                <Clock className="w-3.5 h-3.5 text-emerald-500" />
+                                Current Cycle Closes In
+                            </p>
+                            <CountdownTimer targetDate={eomDate} />
                         </div>
                     </motion.div>
 

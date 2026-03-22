@@ -1,9 +1,13 @@
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FileText, Download, Calendar, Layers, Search, Archive as ArchiveIcon } from 'lucide-react';
+import { FileText, Download, Calendar, Layers, Search, Archive as ArchiveIcon, Quote, BookOpen } from 'lucide-react';
+import { Link } from '@inertiajs/react';
 import PageHeader from '../Components/PageHeader';
 import MainLayout from '../Layouts/MainLayout';
 import Seo from '../Components/Seo';
 import { SkeletonGrid } from '../Components/ui/SkeletonCard';
+import Modal from '../Components/ui/Modal';
+import CitationGenerator from '../Components/ui/CitationGenerator';
 
 const fadeInUp = {
     initial: { opacity: 0, y: 20 },
@@ -16,6 +20,7 @@ export default function Archive({ issues }) {
     // issues=null means still loading; issues=[] means loaded but empty
     const isLoading = issues == null;
     const issueList = Array.isArray(issues) ? issues : (issues?.data || []);
+    const [citationPaper, setCitationPaper] = useState(null);
 
     
     const scholarlySchema = issueList.flatMap(issue => 
@@ -129,16 +134,34 @@ export default function Archive({ issues }) {
                                                             <FileText className="w-4 h-4 text-secondary" />
                                                             <span className="text-[10px] font-black text-secondary uppercase tracking-[0.2em]">Research Article</span>
                                                         </div>
-                                                        <h4 className="text-xl font-bold text-dark mb-3 group-hover:text-primary transition-colors">{paper.title}</h4>
+                                                        <Link href={`/article/${paper.id}`} className="block">
+                                                            <h4 className="text-xl font-bold text-dark mb-3 group-hover:text-primary transition-colors leading-[1.4]">{paper.title}</h4>
+                                                        </Link>
                                                         <p className="text-muted font-medium italic text-sm">{paper.authors}</p>
                                                     </div>
-                                                    <a 
-                                                        href={`/storage/${paper.file_path}`} 
-                                                        className="flex items-center gap-3 px-6 py-3 bg-dark text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-secondary transition-all shadow-lg shadow-dark/10 group-hover:-translate-y-1"
-                                                    >
-                                                        <Download className="w-4 h-4" />
-                                                        Manuscript
-                                                    </a>
+                                                    <div className="flex flex-col sm:flex-row items-center gap-3 mt-4 md:mt-0">
+                                                        <Link 
+                                                            href={`/article/${paper.id}`} 
+                                                            className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-secondary/10 text-secondary rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-secondary/20 transition-all"
+                                                        >
+                                                            <BookOpen className="w-4 h-4" />
+                                                            View
+                                                        </Link>
+                                                        <button 
+                                                            onClick={() => setCitationPaper(paper)}
+                                                            className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-slate-100 text-slate-700 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-200 transition-all"
+                                                        >
+                                                            <Quote className="w-4 h-4" />
+                                                            Cite
+                                                        </button>
+                                                        <a 
+                                                            href={`/download/paper/${paper.id}`} 
+                                                            className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-dark text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all shadow-lg shadow-dark/10 group-hover:-translate-y-1"
+                                                        >
+                                                            <Download className="w-4 h-4" />
+                                                            PDF
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </motion.div>
                                         ))}
@@ -166,6 +189,21 @@ export default function Archive({ issues }) {
                     </motion.div>
                 )}
             </div>
+
+            {/* Citation Modal Overlay */}
+            <Modal
+                isOpen={!!citationPaper}
+                onClose={() => setCitationPaper(null)}
+                title="Citation Engine"
+                size="lg"
+            >
+                {citationPaper && (
+                    <div className="p-6">
+                        <p className="text-slate-500 mb-6 text-sm">Use the provided formats to cite this research paper accurately in your bibliography.</p>
+                        <CitationGenerator paper={citationPaper} />
+                    </div>
+                )}
+            </Modal>
         </MainLayout>
     );
 }

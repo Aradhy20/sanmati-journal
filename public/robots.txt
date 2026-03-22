@@ -1,7 +1,12 @@
 User-agent: *
-Allow: /
-Disallow: /admin
+Disallow: /admin/
+Disallow: /api/
 Disallow: /login
-Disallow: /logout
+Disallow: /forgot-password
+Disallow: /reset-password
+Allow: /
+Allow: /archive
+Allow: /download/
 
+# Sitemaps
 Sitemap: https://sanmatijournal.in/sitemap.xml

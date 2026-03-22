@@ -14,16 +14,27 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        if (!User::where('email', 'admin@sanmati.com')->exists()) {
-            User::create([
-                'full_name' => 'Admin User',
-                'email' => 'admin@sanmati.com',
-                'password' => Hash::make('ChangeMe@2026!'), // Change this immediately after deployment
-                'role' => 'admin',
-            ]);
-            $this->command->info('Admin user created: admin@sanmati.com — CHANGE PASSWORD IMMEDIATELY!');
-        } else {
-            $this->command->info('Admin user already exists.');
+        // Delete the old placeholder admin if it exists
+        $oldAdmin = User::where('email', 'admin@sanmati.com')->first();
+        if ($oldAdmin) {
+            $oldAdmin->delete();
         }
+
+        // Create or update the official admin user
+        $admin = User::firstOrCreate(
+            ['email' => 'sanmatijournal@gmail.com'],
+            [
+                'full_name' => 'Admin User',
+                'password' => Hash::make('Njain@1984'),
+                'role' => 'admin',
+            ]
+        );
+
+        // If it already existed but might need a password reset:
+        $admin->password = Hash::make('Njain@1984');
+        $admin->role = 'admin';
+        $admin->save();
+
+        $this->command->info('Admin user created successfully: sanmatijournal@gmail.com');
     }
 }

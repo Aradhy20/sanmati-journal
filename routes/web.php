@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [JournalController::class, 'index'])->name('home');
 Route::get('/api/search', [\App\Http\Controllers\SearchController::class, 'search'])->name('api.search');
+Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
+
 Route::post('/api/newsletter/subscribe', [\App\Http\Controllers\NewsletterController::class, 'subscribe'])->name('newsletter.subscribe')->middleware('throttle:5,1');
 Route::get('/api/newsletter/unsubscribe/{email}', [\App\Http\Controllers\NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe')->middleware('signed');
 // Route removed: Route::get('/editorial-team', [JournalController::class, 'editorialTeam'])->name('editorial-team');
@@ -16,7 +18,10 @@ Route::get('/gallery-view', [JournalController::class, 'gallery'])->name('galler
 Route::get('/gallery/photo', [JournalController::class, 'galleryPhoto'])->name('gallery.photo');
 Route::get('/media-news', [JournalController::class, 'galleryNews'])->name('gallery.news');
 Route::get('/archive', [JournalController::class, 'archive'])->name('archive');
+Route::get('/article/{id}', [JournalController::class, 'article'])->name('article.show');
+Route::get('/download/paper/{id}', [\App\Http\Controllers\DownloadController::class, 'paper'])->name('paper.download');
 Route::get('/contact', [JournalController::class, 'contact'])->name('contact');
+
 Route::post('/contact', [JournalController::class, 'contactStore'])->name('contact.store')->middleware('throttle:3,1');
 
 // Basic info routes

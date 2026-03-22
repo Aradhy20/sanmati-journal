@@ -5,6 +5,7 @@ import { Calendar, FileText, ArrowRight, UploadCloud, CheckCircle, ShieldCheck, 
 import { useForm, usePage } from '@inertiajs/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
+import DropZone from '../../Components/ui/DropZone';
 
 export default function CallForPapers() {
     const { flash } = usePage().props;
@@ -163,37 +164,21 @@ export default function CallForPapers() {
                                                     <p className="text-slate-500">Upload your blinded manuscript (PDF format only, max 10MB).</p>
                                                 </div>
 
-                                                <div className="relative border-2 border-dashed border-gray-300 rounded-3xl p-6 lg:p-12 text-center hover:bg-slate-50 hover:border-blue-400 transition-colors group cursor-pointer">
-                                                    <input 
-                                                        type="file" 
-                                                        accept=".pdf"
-                                                        onChange={e => setData('manuscript', e.target.files[0])}
-                                                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-                                                        required
-                                                    />
-                                                    <div className="w-20 h-20 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-500 shadow-inner">
-                                                        <UploadCloud className="w-10 h-10" />
-                                                    </div>
-                                                    
-                                                    {data.manuscript ? (
-                                                        <div>
-                                                            <p className="text-lg font-bold text-slate-900 mb-2">{data.manuscript.name}</p>
-                                                            <p className="text-sm font-medium text-green-600 bg-green-50 inline-block px-4 py-1 rounded-full border border-green-200"><CheckCircle className="w-4 h-4 inline mr-1" /> File Attached</p>
-                                                        </div>
-                                                    ) : (
-                                                        <div>
-                                                            <p className="text-xl font-bold text-slate-700 mb-2 group-hover:text-blue-600 transition-colors">Drag &amp; Drop or Click to Browse</p>
-                                                            <p className="text-slate-400 font-medium">Strictly .pdf files under 10MB</p>
-                                                        </div>
-                                                    )}
-                                                    {errors.manuscript && <p className="text-red-500 text-sm mt-4 font-bold">{errors.manuscript}</p>}
-                                                </div>
+                                                <DropZone
+                                                    id="manuscript-upload"
+                                                    label="Upload Manuscript PDF"
+                                                    accept=".pdf,application/pdf"
+                                                    maxSizeMB={10}
+                                                    file={data.manuscript}
+                                                    onFileSelect={(file) => setData('manuscript', file)}
+                                                    error={errors.manuscript}
+                                                />
 
-                                                <div className="mt-10 flex justify-between">
-                                                    <button type="button" onClick={() => setStep(1)} className="px-8 py-4 bg-white text-slate-700 border border-gray-200 font-bold rounded-xl hover:bg-slate-50 transition-colors">
+                                                <div className="mt-10 flex flex-col-reverse sm:flex-row justify-between gap-4">
+                                                    <button type="button" onClick={() => setStep(1)} className="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 border border-gray-200 font-bold rounded-xl hover:bg-slate-50 transition-colors">
                                                         Back
                                                     </button>
-                                                    <button type="submit" disabled={!data.manuscript} className="px-8 py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-blue-600 transition-colors flex items-center gap-2 group disabled:opacity-50">
+                                                    <button type="submit" disabled={!data.manuscript} className="w-full sm:w-auto px-8 py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-blue-600 transition-colors flex justify-center items-center gap-2 group disabled:opacity-50">
                                                         Final Step <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                                     </button>
                                                 </div>

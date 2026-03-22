@@ -164,8 +164,10 @@ const Navbar = () => {
                                     onMouseEnter={() => handleMouseEnter(item.name)}
                                     onMouseLeave={handleMouseLeave}
                                 >
-                                    {item.href === '#' ? (
+                                {item.href === '#' ? (
                                         <button
+                                            aria-haspopup="true"
+                                            aria-expanded={activeDropdown === item.name}
                                             className={`relative flex flex-col items-center text-[13px] font-bold px-5 py-2 rounded-full transition-all whitespace-nowrap tracking-wide ${isActive(item.href)
                                                 ? 'text-primary bg-primary/5'
                                                 : 'text-dark/80 hover:text-primary hover:bg-primary/5'

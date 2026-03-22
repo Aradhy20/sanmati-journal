@@ -219,6 +219,15 @@ class JournalController extends Controller
         return Inertia::render('Contact');
     }
 
+    public function article($id)
+    {
+        $paper = \App\Models\Paper::with('issue')->findOrFail($id);
+        
+        return Inertia::render('Article', [
+            'paper' => $paper
+        ]);
+    }
+
     public function contactStore(ContactRequest $request)
     {
         $validated = $request->validated();

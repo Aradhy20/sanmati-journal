@@ -6,6 +6,7 @@ import PageHeader from '../Components/PageHeader';
 import MainLayout from '../Layouts/MainLayout';
 import { motion } from 'framer-motion';
 import Seo from '../Components/Seo';
+import FloatInput from '../Components/ui/FloatInput';
 
 const fadeInUp = {
     initial: { opacity: 0, y: 30 },
@@ -140,56 +141,83 @@ function ContactForm() {
         });
     };
 
-    const inputClass = "w-full px-6 py-4 bg-white border border-gray-100 rounded-2xl focus:ring-4 focus:ring-primary/5 focus:border-primary focus:bg-white transition-all outline-none disabled:opacity-50 text-sm font-medium placeholder:text-gray-300";
-    const labelClass = "block text-[10px] font-black text-dark/40 uppercase tracking-[0.2em] mb-3 ml-1";
-
     return (
         <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div>
-                    <label htmlFor="firstName" className={labelClass}>First Dimension</label>
-                    <input id="firstName" name="firstName" required type="text" placeholder="Given Name" className={inputClass}
-                        value={data.firstName} onChange={e => setData('firstName', e.target.value)} disabled={processing} />
-                    {errors.firstName && <div className="text-rose-500 text-[10px] mt-2 font-bold uppercase tracking-widest">{errors.firstName}</div>}
-                </div>
-                <div>
-                    <label htmlFor="lastName" className={labelClass}>Last Dimension</label>
-                    <input id="lastName" name="lastName" required type="text" placeholder="Family Name" className={inputClass}
-                        value={data.lastName} onChange={e => setData('lastName', e.target.value)} disabled={processing} />
-                    {errors.lastName && <div className="text-rose-500 text-[10px] mt-2 font-bold uppercase tracking-widest">{errors.lastName}</div>}
-                </div>
+                <FloatInput
+                    id="firstName"
+                    name="firstName"
+                    type="text"
+                    label="Given Name"
+                    value={data.firstName}
+                    onChange={e => setData('firstName', e.target.value)}
+                    error={errors.firstName}
+                    disabled={processing}
+                    required
+                />
+                <FloatInput
+                    id="lastName"
+                    name="lastName"
+                    type="text"
+                    label="Family Name"
+                    value={data.lastName}
+                    onChange={e => setData('lastName', e.target.value)}
+                    error={errors.lastName}
+                    disabled={processing}
+                    required
+                />
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div>
-                    <label htmlFor="email" className={labelClass}>Email Channel</label>
-                    <input id="email" name="email" required type="email" placeholder="author@institute.edu" className={inputClass}
-                        value={data.email} onChange={e => setData('email', e.target.value)} disabled={processing} />
-                    {errors.email && <div className="text-rose-500 text-[10px] mt-2 font-bold uppercase tracking-widest">{errors.email}</div>}
-                </div>
-                <div>
-                    <label htmlFor="subject" className={labelClass}>Inquiry Node</label>
-                    <select id="subject" name="subject" title="Subject" className={inputClass}
-                        value={data.subject} onChange={e => setData('subject', e.target.value)} disabled={processing}>
+                <FloatInput
+                    id="email"
+                    name="email"
+                    type="email"
+                    label="Email Channel"
+                    value={data.email}
+                    onChange={e => setData('email', e.target.value)}
+                    error={errors.email}
+                    disabled={processing}
+                    required
+                />
+                <div className="relative">
+                    <select 
+                        id="subject" 
+                        name="subject" 
+                        title="Subject" 
+                        className="block w-full px-4 h-14 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white text-base focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all duration-300 disabled:opacity-50"
+                        value={data.subject} 
+                        onChange={e => setData('subject', e.target.value)} 
+                        disabled={processing}
+                    >
                         <option>General Inquiry</option>
                         <option>Submission Query</option>
                         <option>Payment Issue</option>
                         <option>Technical Support</option>
                     </select>
-                    {errors.subject && <div className="text-rose-500 text-[10px] mt-2 font-bold uppercase tracking-widest">{errors.subject}</div>}
+                    <label htmlFor="subject" className="absolute left-4 -top-2.5 bg-white dark:bg-slate-900 px-1 text-xs font-bold text-slate-500 dark:text-slate-400">
+                        Inquiry Node
+                    </label>
+                    {errors.subject && <div className="text-red-500 text-xs mt-1.5 ml-1 font-medium">{errors.subject}</div>}
                 </div>
             </div>
 
-            <div>
-                <label htmlFor="message" className={labelClass}>Discourse Content</label>
-                <textarea id="message" name="message" required rows={5} placeholder="Describe your inquiry with scholarly precision..." className={inputClass}
-                    value={data.message} onChange={e => setData('message', e.target.value)} disabled={processing}></textarea>
-                {errors.message && <div className="text-rose-500 text-[10px] mt-2 font-bold uppercase tracking-widest">{errors.message}</div>}
-            </div>
+            <FloatInput
+                id="message"
+                name="message"
+                textarea
+                rows={5}
+                label="Discourse Content"
+                value={data.message}
+                onChange={e => setData('message', e.target.value)}
+                error={errors.message}
+                disabled={processing}
+                required
+            />
 
             <button
                 type="submit"
-                className="w-full py-5 bg-dark text-white font-black uppercase tracking-[0.2em] rounded-2xl hover:bg-secondary transition-all flex items-center justify-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed text-xs shadow-2xl hover:-translate-y-1"
+                className="w-full py-5 bg-dark dark:bg-primary-dark text-white font-black uppercase tracking-[0.2em] rounded-2xl hover:bg-secondary dark:hover:bg-primary transition-all flex items-center justify-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed text-xs shadow-2xl hover:-translate-y-1"
                 disabled={processing}
             >
                 {processing ? 'Transmitting...' : 'Dispatch Inquiry'} 
