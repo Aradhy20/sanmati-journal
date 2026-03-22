@@ -38,7 +38,7 @@ class SubmissionController extends Controller
 
         // Save submission record to database
         $submission = Submission::create([
-            'user_id'      => Auth::id() ?? 1,
+            'user_id'      => Auth::id(),
             'author_name'  => $validated['author_name'],
             'author_email' => $validated['author_email'],
             'author_phone' => $validated['author_phone'] ?? null,
