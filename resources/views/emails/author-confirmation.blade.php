@@ -29,9 +29,9 @@ Thank you for submitting your manuscript to **Sanmati Spectrum of Knowledge**. W
 
 For queries, email us at [sanmatijournal@gmail.com](mailto:sanmatijournal@gmail.com) or call **+91 8979782949**.
 
-@component('mail::button', ['url' => 'https://sanmatijournal.in/submission-guidelines', 'color' => 'primary'])
+<x-mail::button url="https://sanmatijournal.in/submission-guidelines" color="primary">
 View Submission Guidelines
-@endcomponent
+</x-mail::button>
 
 Warm Regards,
 **Editorial Team**

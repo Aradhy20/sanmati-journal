@@ -34,9 +34,9 @@ A new paper has been submitted to **Sanmati Spectrum of Knowledge**. The author'
 
 ---
 
-@component('mail::button', ['url' => config('app.url') . '/admin', 'color' => 'primary'])
+<x-mail::button :url="config('app.url') . '/admin'" color="primary">
 Open Editorial Dashboard
-@endcomponent
+</x-mail::button>
 
 > **Note:** The PDF manuscript is attached to this email as `Manuscript_{{ $trackingId }}.pdf`.
 > Please check the spam folder if you do not see the attachment.
