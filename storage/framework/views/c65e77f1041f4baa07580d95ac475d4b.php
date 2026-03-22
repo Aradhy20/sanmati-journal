@@ -9,7 +9,7 @@
         <title inertia><?php echo e(config('app.name', 'Sanmati Journal')); ?> | Spectrum of Knowledge</title>
 
         <!-- Google Tag Manager -->
-        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        <script nonce="<?php echo e(Vite::cspNonce()); ?>">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
@@ -18,7 +18,7 @@
 
         <!-- Google Analytics 4 -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-        <script>
+        <script nonce="<?php echo e(Vite::cspNonce()); ?>">
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
