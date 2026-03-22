@@ -16,14 +16,13 @@ class SearchController extends Controller
             return response()->json(['papers' => [], 'books' => []]);
         }
 
-        $papers = Paper::where('title', 'like', "%{$query}%")
-            ->orWhere('abstract', 'like', "%{$query}%")
-            ->orWhere('authors', 'like', "%{$query}%")
+        // Use FULLTEXT indexing for title, abstract, authors
+        $papers = Paper::whereFullText(['title', 'abstract', 'authors'], $query)
             ->limit(5)
             ->get(['id', 'title', 'authors']);
 
-        $books = Book::where('title', 'like', "%{$query}%")
-            ->orWhere('author', 'like', "%{$query}%")
+        // Use FULLTEXT for title and author, but keep LIKE for exact ISBN matches
+        $books = Book::whereFullText(['title', 'author'], $query)
             ->orWhere('isbn', 'like', "%{$query}%")
             ->limit(5)
             ->get(['id', 'title', 'author', 'cover_image']);
