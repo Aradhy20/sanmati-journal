@@ -50,7 +50,7 @@ const Footer = () => {
                             </p>
                             <div className="flex gap-4 pt-2">
                                 <a
-                                    href="https://www.linkedin.com/company/sanmati-spectrum"
+                                    href="https://www.linkedin.com/company/sanamti-journal/?viewAsMember=true"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="Sanmati Spectrum on LinkedIn"
