@@ -77,6 +77,7 @@ const Navbar = () => {
             ],
         },
         { name: 'Archives', href: '/archive' },
+        { name: 'Books', href: '/book-publication' },
         {
             name: 'Events & News',
             href: '#',
@@ -84,7 +85,6 @@ const Navbar = () => {
                 { name: 'Seminars', href: '/academic-events/seminar' },
                 { name: 'Conferences', href: '/academic-events/conferences' },
                 { name: 'Workshops', href: '/academic-events/workshop' },
-                { name: 'Book Publication', href: '/book-publication' },
                 { name: 'Awards', href: '/awards' },
             ],
         },
