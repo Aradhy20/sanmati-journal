@@ -1,16 +1,8 @@
-import { useState, useEffect } from 'react';
 import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
-import { ArrowRight, BookOpen, Users, Star, CheckCircle, Clock, BookMarked, Sparkles, Globe } from 'lucide-react';
-import CountdownTimer from './ui/CountdownTimer';
+import { ArrowRight, BookOpen, Users, Star, CheckCircle, BookMarked, Sparkles, Globe } from 'lucide-react';
 
 const Hero = () => {
-    // End of current month
-    const [eomDate, setEomDate] = useState(() => {
-        const now = new Date();
-        return new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59).toISOString();
-    });
-
     return (
         <section className="relative min-h-[95vh] flex items-center overflow-hidden bg-gradient-to-br from-[#eef1ff] via-[#f5f0ff] to-[#fff0f5]">
             {/* Soft decorative blobs */}
@@ -60,8 +52,8 @@ const Hero = () => {
                         </h1>
 
                         {/* Description */}
-                        <p className="text-lg md:text-xl text-[#6B778B] font-medium leading-relaxed mb-10 max-w-lg border-l-4 border-[#687EFF]/40 pl-6">
-                            A national, multidisciplinary, peer-reviewed and referred quarterly journal. The journal provides a scholarly platform for original research, case studies, thematic articles, book reviews, and conference/seminar papers across diverse disciplines.
+                        <p className="text-lg md:text-xl text-slate-600 font-medium leading-relaxed mb-10 max-w-lg border-l-4 border-[#687EFF]/40 pl-6">
+                            A place for experts to share new ideas. A national, peer-reviewed quarterly journal inviting original research, case studies, and book publications across a wide range of research fields.
                         </p>
 
                         {/* CTA Buttons */}
@@ -70,49 +62,21 @@ const Hero = () => {
                                 href="/submission-guidelines/call-for-papers"
                                 className="group w-full sm:w-auto justify-center px-7 py-3.5 bg-[#687EFF] text-white rounded-full font-bold text-xs shadow-lg shadow-[#687EFF]/30 hover:bg-[#052143] transition-all flex items-center gap-2 hover:-translate-y-1 uppercase tracking-[0.1em]"
                             >
-                                Submit Manuscript
+                                Submit
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
                             </Link>
                             <Link
                                 href="/archive"
                                 className="group w-full sm:w-auto justify-center px-7 py-3.5 bg-[#052143] text-white rounded-full font-bold text-xs hover:bg-[#0a1f3d] transition-all flex items-center gap-2 hover:-translate-y-1 uppercase tracking-[0.1em] shadow-lg shadow-[#052143]/25"
                             >
-                                <BookOpen className="w-4 h-4" /> Read Archive
+                                <BookOpen className="w-4 h-4" /> Explore
                             </Link>
                             <Link
                                 href="/book-publication"
                                 className="group w-full sm:w-auto justify-center px-7 py-3.5 bg-[#F87A53] text-white rounded-full font-bold text-xs hover:bg-[#e56940] transition-all flex items-center gap-2 hover:-translate-y-1 uppercase tracking-[0.1em] shadow-lg shadow-[#F87A53]/25"
                             >
-                                <BookMarked className="w-4 h-4" /> Book Publications
+                                <BookMarked className="w-4 h-4" /> Learn
                             </Link>
-                        </div>
-
-                        {/* Trust Indicators */}
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-8 border-t border-[#687EFF]/15 mb-8">
-                            {[
-                                { icon: CheckCircle, label: 'Authenticated', value: 'ISSN: 3108-1819', color: 'text-[#687EFF]' },
-                                { icon: Star, label: 'Impact', value: 'Double-Blind Review', color: 'text-[#F87A53]' },
-                                { icon: Users, label: 'Authors', value: '200+ Contributors', color: 'text-[#687EFF]' },
-                                { icon: BookOpen, label: 'Archive', value: '500+ Papers', color: 'text-[#052143]' },
-                                { icon: Globe, label: 'Scope', value: '25+ Research Fields', color: 'text-[#687EFF]' },
-                            ].map((item, i) => (
-                                <div key={i} className="flex items-center gap-3 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm px-4 py-2.5 rounded-xl border border-[#687EFF]/15 dark:border-slate-700 shadow-sm">
-                                    <item.icon className={`w-4 h-4 flex-shrink-0 ${item.color}`} />
-                                    <div>
-                                        <p className="text-[#052143] dark:text-slate-300 text-[10px] font-black uppercase tracking-widest leading-none mb-0.5">{item.label}</p>
-                                        <p className="text-[#6B778B] dark:text-slate-400 text-[11px] font-bold">{item.value}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* Live Timer Element */}
-                        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-md rounded-2xl border border-emerald-500/20 shadow-sm p-4 inline-block mb-12">
-                            <p className="text-[#052143] dark:text-slate-300 text-[10px] font-black uppercase tracking-widest mb-3 flex items-center gap-2">
-                                <Clock className="w-3.5 h-3.5 text-emerald-500" />
-                                Current Cycle Closes In
-                            </p>
-                            <CountdownTimer targetDate={eomDate} />
                         </div>
                     </motion.div>
 
@@ -146,54 +110,31 @@ const Hero = () => {
                             </div>
                         </div>
 
-                        {/* Floating Badge — Readers */}
-                        <motion.div
-                            animate={{ y: [0, -8, 0] }}
-                            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                            className="absolute top-12 -left-12 bg-white rounded-2xl shadow-xl p-5 border border-[#687EFF]/15 z-20"
-                        >
-                            <div className="flex items-center gap-3">
-                                <div className="w-11 h-11 rounded-xl bg-[#687EFF]/10 flex items-center justify-center">
-                                    <Users className="w-5 h-5 text-[#687EFF]" />
-                                </div>
-                                <div>
-                                    <p className="text-2xl font-black text-[#052143] leading-none">2,000+</p>
-                                    <p className="text-[#6B778B] text-[10px] font-black uppercase tracking-widest mt-0.5">Active Readers</p>
-                                </div>
-                            </div>
-                        </motion.div>
-
-                        {/* Floating Badge — Research Artifacts */}
-                        <motion.div
-                            animate={{ y: [0, 8, 0] }}
-                            transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-                            className="absolute -bottom-6 right-12 bg-white rounded-2xl shadow-xl p-5 border border-[#F87A53]/15 z-20"
-                        >
-                            <div className="flex items-center gap-3">
-                                <div className="w-11 h-11 rounded-xl bg-[#F87A53]/10 flex items-center justify-center">
-                                    <BookOpen className="w-5 h-5 text-[#F87A53]" />
-                                </div>
-                                <div>
-                                    <p className="text-2xl font-black text-[#052143] leading-none">500+</p>
-                                    <p className="text-[#6B778B] text-[10px] font-black uppercase tracking-widest mt-0.5">Research Artifacts</p>
-                                </div>
-                            </div>
-                        </motion.div>
-
-                        {/* Floating Badge — Star Rating */}
-                        <motion.div
-                            animate={{ y: [0, -5, 0] }}
-                            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                            className="absolute top-1/3 -right-6 bg-[#052143] rounded-2xl shadow-xl p-4 border border-white/10 z-20"
-                        >
-                            <div className="flex gap-1 mb-1">
-                                {[...Array(5)].map((_, k) => (
-                                    <Star key={k} className="w-3.5 h-3.5 fill-[#F87A53] text-[#F87A53]" />
-                                ))}
-                            </div>
-                            <p className="text-white text-[11px] font-bold">50+ Expert Reviewers</p>
-                        </motion.div>
+                        {/* Remove floating badges since they are now in the trust bar below */}
                     </motion.div>
+                </div>
+            </div>
+
+            {/* Horizontal Trust Bar below the Hero Section */}
+            <div className="absolute bottom-0 w-full bg-white/80 backdrop-blur-md border-t border-gray-100 py-4 shadow-sm z-20">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+                    <div className="flex flex-wrap items-center justify-center sm:justify-between gap-6 md:gap-8">
+                        {[
+                            { icon: CheckCircle, label: 'Authenticated', value: 'ISSN: 3108-1819', color: 'text-[#687EFF]' },
+                            { icon: Star, label: 'Impact', value: 'Double-Blind Review', color: 'text-[#F87A53]' },
+                            { icon: Users, label: 'Authors', value: '200+ Contributors', color: 'text-[#687EFF]' },
+                            { icon: BookOpen, label: 'Archive', value: '500+ Papers', color: 'text-[#052143]' },
+                            { icon: Globe, label: 'Scope', value: 'A Wide Range of Research Fields', color: 'text-[#687EFF]' },
+                        ].map((item, i) => (
+                            <div key={i} className="flex items-center gap-3">
+                                <item.icon className={`w-5 h-5 flex-shrink-0 ${item.color}`} />
+                                <div>
+                                    <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest leading-none mb-0.5">{item.label}</p>
+                                    <p className="text-slate-800 text-[12px] font-bold">{item.value}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>

@@ -34,8 +34,9 @@ const Footer = () => {
             <div className="pt-20 pb-10">
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-20">
-                        {/* Brand Container */}
+                        {/* About Column */}
                         <div className="space-y-6">
+                            <h4 className="text-[11px] font-black tracking-[0.2em] uppercase text-white mb-6 border-l-2 border-secondary pl-4">About</h4>
                             <Link href="/" className="inline-block group">
                                 <div className="flex items-center gap-3 mb-4">
                                     <div className="w-10 h-10 rounded-xl bg-white p-1 shadow-sm">
@@ -43,9 +44,9 @@ const Footer = () => {
                                     </div>
                                     <h3 className="text-xl font-bold text-white group-hover:text-secondary transition-colors tracking-tight">Sanmati Spectrum</h3>
                                 </div>
-                                <span className="inline-block px-3 py-1 bg-secondary/10 border border-secondary/20 rounded-full text-[9px] text-secondary font-black tracking-[0.2em] uppercase">ISSN: 3108-1819</span>
+                                <span className="inline-block px-3 py-1 bg-secondary/20 border border-secondary/30 rounded-full text-[9px] text-white font-black tracking-[0.2em] uppercase">ISSN: 3108-1819</span>
                             </Link>
-                            <p className="text-sm leading-relaxed text-white/40 font-medium">
+                            <p className="text-sm leading-relaxed text-slate-300 font-medium">
                                 A premier national platform for multidisciplinary research, fostering academic discourse and innovation across sciences and humanities.
                             </p>
                             <div className="flex gap-4 pt-2">
@@ -82,7 +83,7 @@ const Footer = () => {
                         {/* Navigation Columns */}
                         {[
                             {
-                                title: 'Publication',
+                                title: 'Publications',
                                 links: [
                                     { name: 'Latest Issues', href: '/archive' },
                                     { name: 'Call for Papers', href: '/submission-guidelines/call-for-papers' },
@@ -92,7 +93,7 @@ const Footer = () => {
                                 ]
                             },
                             {
-                                title: 'Trust & Safety',
+                                title: 'Policies',
                                 links: [
                                     { name: 'Ethics Policy', href: '/publication-policy/ethics' },
                                     { name: 'Peer Review', href: '/publication-policy/peer-review' },
@@ -107,8 +108,8 @@ const Footer = () => {
                                 <ul className="space-y-4">
                                     {col.links.map((link, i) => (
                                         <li key={i}>
-                                            <Link href={link.href} className="text-sm font-medium hover:text-secondary transition-colors flex items-center gap-3 group">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-white/10 group-hover:bg-secondary group-hover:scale-125 transition-all" />
+                                            <Link href={link.href} className="text-sm font-medium text-slate-300 hover:text-white transition-colors flex items-center gap-3 group">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-white/20 group-hover:bg-secondary group-hover:scale-125 transition-all" />
                                                 {link.name}
                                             </Link>
                                         </li>
@@ -119,32 +120,35 @@ const Footer = () => {
 
                         {/* Contact Info */}
                         <div>
-                            <h4 className="text-[11px] font-black tracking-[0.2em] uppercase text-white mb-8 border-l-2 border-secondary pl-4">Inquiries</h4>
+                            <h4 className="text-[11px] font-black tracking-[0.2em] uppercase text-white mb-8 border-l-2 border-secondary pl-4">Contact</h4>
                             <div className="space-y-5">
-                                <div className="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-white/10 transition-colors">
+                                <div className="flex items-start gap-4 p-4 rounded-2xl bg-white/10 border border-white/20 hover:border-white/30 transition-colors">
                                     <MapPin className="w-5 h-5 text-secondary shrink-0 mt-0.5" />
-                                    <p className="text-[13px] leading-relaxed font-medium">JTS Publications<br />V-508 Gali No. 17, Vijay Park<br/>Delhi – 110053, Bharat (India)</p>
+                                    <p className="text-[13px] leading-relaxed text-white font-medium">JTS Publications<br />V-508 Gali No. 17, Vijay Park<br/>Delhi – 110053, Bharat (India)</p>
                                 </div>
                                 <div className="space-y-3 pl-2">
                                     <div className="flex items-start gap-4 text-[13px] font-bold">
-                                        <Phone className="w-4 h-4 text-secondary/70 mt-0.5 shrink-0" />
+                                        <Phone className="w-4 h-4 text-white mt-0.5 shrink-0" />
                                         <div className="flex flex-col space-y-2">
                                             <div>
-                                                <p className="text-[9px] font-black uppercase tracking-widest text-white/30 mb-0.5">Editor-in-Chief</p>
-                                                <a href="tel:+919870713912" className="hover:text-secondary transition-colors hover:underline">+91 9870713912</a>
+                                                <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-0.5">Editor-in-Chief</p>
+                                                <a href="tel:+919870713912" className="text-slate-200 hover:text-white transition-colors hover:underline">+91 9870713912</a>
                                             </div>
                                             <div>
-                                                <p className="text-[9px] font-black uppercase tracking-widest text-white/30 mb-0.5">Editorial Office</p>
-                                                <a href="tel:+918979782949" className="hover:text-secondary transition-colors hover:underline">+91 8979782949</a>
+                                                <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-0.5">Editorial Office</p>
+                                                <a href="tel:+918979782949" className="text-slate-200 hover:text-white transition-colors hover:underline">+91 8979782949</a>
                                             </div>
                                             <div>
-                                                <p className="text-[9px] font-black uppercase tracking-widest text-white/30 mb-0.5">Managing Editor</p>
-                                                <a href="tel:+917999525735" className="hover:text-secondary transition-colors hover:underline">+91 7999525735</a>
+                                                <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-0.5">Managing Editor</p>
+                                                <a href="tel:+917999525735" className="text-slate-200 hover:text-white transition-colors hover:underline">+91 7999525735</a>
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="mailto:sanmatijournal@gmail.com" className="flex items-center gap-4 text-[13px] font-bold hover:text-secondary transition-colors mt-2">
-                                        <Mail className="w-4 h-4 text-secondary/70 shrink-0" /> <span className="hover:underline hover:text-primary">sanmatijournal@gmail.com</span>
+                                    <a href="mailto:sanmatijournal@gmail.com" className="flex items-center gap-4 text-[13px] font-bold text-slate-200 hover:text-white transition-colors mt-2">
+                                        <Mail className="w-4 h-4 text-white shrink-0" /> <span className="hover:underline">sanmatijournal@gmail.com</span>
+                                    </a>
+                                    <a href="https://www.linkedin.com/company/sanamti-journal/?viewAsMember=true" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-[13px] font-bold text-slate-200 hover:text-white transition-colors mt-2">
+                                        <Linkedin className="w-4 h-4 text-[#0077B5] shrink-0" /> <span className="hover:underline">LinkedIn Profile</span>
                                     </a>
                                 </div>
                             </div>
@@ -152,15 +156,15 @@ const Footer = () => {
                     </div>
 
                     {/* Bottom Bar */}
-                    <div className="border-t border-white/5 pt-10 flex flex-col md:flex-row items-center justify-between gap-6">
-                        <div className="text-[12px] font-medium text-white/30 flex items-center gap-2">
+                    <div className="border-t border-white/20 pt-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div className="text-[13px] font-medium text-slate-400 flex items-center gap-2">
                             <span>© {new Date().getFullYear()}</span>
-                            <span className="w-1 h-1 rounded-full bg-white/10" />
-                            <span>Sanmati Spectrum of Knowledge</span>
+                            <span className="w-1 h-1 rounded-full bg-slate-500" />
+                            <span className="text-slate-300">Sanmati Spectrum of Knowledge</span>
                         </div>
                         <div className="flex items-center gap-8">
-                            <Link href="/terms" className="text-[12px] font-bold text-white/30 hover:text-secondary transition-colors uppercase tracking-widest">Legal</Link>
-                            <Link href="/privacy" className="text-[12px] font-bold text-white/30 hover:text-secondary transition-colors uppercase tracking-widest">Sitemap</Link>
+                            <Link href="/terms" className="text-[12px] font-bold text-slate-300 hover:text-white transition-colors uppercase tracking-widest">Legal</Link>
+                            <Link href="/privacy" className="text-[12px] font-bold text-slate-300 hover:text-white transition-colors uppercase tracking-widest">Sitemap</Link>
                         </div>
                     </div>
                 </div>

@@ -82,10 +82,10 @@ export default function Home() {
                                 <span className="text-secondary font-black text-[11px] uppercase tracking-[0.3em]">Our Philosophical Core</span>
                             </div>
                             <h2 className="text-2xl md:text-3xl lg:text-4xl lg:text-5xl font-serif font-bold text-dark leading-[1.1] mb-8">
-                                Cultivating a Global <span className="text-primary italic">Spectrum of Knowledge</span>
+                                Building a <span className="text-primary italic">Global Research Community</span>
                             </h2>
-                            <p className="text-muted leading-relaxed text-lg mb-10 border-l-2 border-primary/15 pl-8">
-                                Sanmati Spectrum is India's rising multidisciplinary beacon, dedicating to bridging the gap between traditional intellectual rigor and modern scientific discourse. We celebrate original research and book publications alike.
+                            <p className="text-slate-600 font-medium leading-relaxed text-lg mb-10 border-l-2 border-primary/15 pl-8">
+                                Sanmati Spectrum is India's leading platform, dedicated to bridging the gap between traditional research and modern scientific discussion. We publish original research and high-quality books across diverse fields.
                             </p>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
@@ -158,7 +158,7 @@ export default function Home() {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
                         {[
                             {
                                 genre: 'Quantum Physics',
@@ -197,9 +197,9 @@ export default function Home() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                                className="group relative flex flex-col h-full bg-white rounded-[2rem] overflow-hidden border border-gray-100 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(79,119,255,0.12)] hover:-translate-y-2 transition-all duration-500"
+                                className="md:col-span-4 group relative flex flex-col h-full bg-white rounded-[2rem] overflow-hidden border border-gray-100 hover:border-primary/20 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(79,119,255,0.12)] hover:-translate-y-2 transition-all duration-500"
                             >
-                                <div className="h-56 overflow-hidden relative">
+                                <div className="aspect-[4/3] overflow-hidden relative">
                                     <img src={book.img} alt={book.title} className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" loading="lazy" />
                                     {book.badge && (
                                         <span className="absolute top-4 left-4 bg-secondary text-white text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg">
@@ -215,12 +215,12 @@ export default function Home() {
                                         ))}
                                     </div>
                                     <p className="text-primary font-black text-[10px] tracking-[0.2em] uppercase mb-1">{book.genre}</p>
-                                    <p className="text-muted text-[11px] font-bold mb-4">{book.format}</p>
-                                    <h3 className="text-xl font-serif font-bold text-dark mb-4 group-hover:text-primary transition-colors leading-tight">
+                                    <p className="text-slate-500 text-[11px] font-bold mb-4">{book.format}</p>
+                                    <h3 className="text-xl font-serif font-bold text-dark mb-4 group-hover:text-primary transition-colors leading-tight line-clamp-2">
                                         {book.title}
                                     </h3>
-                                    <p className="text-muted text-sm leading-relaxed mb-6 flex-grow">{book.excerpt}</p>
-                                    <Link href="/book-publication" className="inline-flex items-center justify-center gap-2 w-full py-3.5 bg-primary/8 text-primary rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-primary hover:text-white transition-all group/btn">
+                                    <p className="text-slate-600 text-sm leading-relaxed mb-6 flex-grow line-clamp-3">{book.excerpt}</p>
+                                    <Link href="/book-publication" className="mt-auto inline-flex items-center justify-center gap-2 w-full py-3.5 bg-primary/8 text-primary rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-primary hover:text-white transition-all group/btn">
                                         {book.price} <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                                     </Link>
                                 </div>
@@ -326,7 +326,7 @@ export default function Home() {
                     </div>
 
                     <motion.div
-                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch"
                         initial="initial" whileInView="whileInView" viewport={{ once: true }}
                         variants={{ whileInView: { transition: { staggerChildren: 0.05 } } }}
                     >
@@ -343,13 +343,13 @@ export default function Home() {
                             <motion.div
                                 key={idx}
                                 variants={{ initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 } }}
-                                className="group p-8 rounded-[2.5rem] bg-warm-bg border border-gray-100 hover:border-primary/20 hover:shadow-[0_20px_40px_rgba(79,119,255,0.08)] transition-all duration-500 flex flex-col items-center text-center"
+                                className="h-full group p-8 rounded-[2.5rem] bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:border-primary/20 hover:shadow-[0_20px_40px_rgba(79,119,255,0.08)] transition-all duration-500 flex flex-col items-center text-center"
                             >
-                                <div className={`w-20 h-20 rounded-[1.75rem] ${cat.color} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-sm`}>
+                                <div className={`w-20 h-20 rounded-[1.75rem] ${cat.color} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-sm shrink-0`}>
                                     <cat.icon className="w-9 h-9" />
                                 </div>
                                 <h3 className="font-bold text-dark text-base mb-2 px-2 group-hover:text-primary transition-colors tracking-tight leading-tight">{cat.name}</h3>
-                                <div className="mt-auto pt-4 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-muted">
+                                <div className="mt-auto pt-4 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-500">
                                     <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
                                     {cat.count} Publications
                                 </div>
@@ -432,8 +432,8 @@ export default function Home() {
                             <h2 className="text-2xl md:text-3xl lg:text-4xl lg:text-5xl font-serif font-bold text-dark leading-[1.15] mb-8">
                                 Premium <span className="text-primary italic">Publishing Excellence</span> for Every Author
                             </h2>
-                            <p className="text-muted font-medium text-lg leading-relaxed mb-12">
-                                We deliver world-class book publishing services — from manuscript review and design to global distribution. Every title we publish carries the stamp of academic integrity and premium production quality.
+                            <p className="text-slate-600 font-medium text-lg leading-relaxed mb-12">
+                                We deliver high-quality book publishing services — from review and design to global distribution. Every book we publish is crafted with academic integrity and premium quality.
                             </p>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
