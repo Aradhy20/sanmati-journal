@@ -110,7 +110,7 @@ const Navbar = () => {
         <>
             {/* Top Info Bar - Top Notice Banner for Countdown */}
             <div className="bg-amber-100/90 backdrop-blur-sm text-amber-900 border-b border-amber-200 sticky top-0 z-50">
-                <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-center gap-4">
+                <div className="max-w-7xl mx-auto px-4 py-2 flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4">
                     <span className="text-[11px] font-black uppercase tracking-widest text-amber-800">
                         Current Cycle Closes In
                     </span>
@@ -144,7 +144,7 @@ const Navbar = () => {
                         </Link>
 
                         {/* Desktop Menu */}
-                        <div className="hidden xl:flex items-center gap-1">
+                        <div className="hidden xl:flex items-center gap-8">
                             {navItems.map((item) => (
                                 <div
                                     key={item.name}
@@ -229,7 +229,7 @@ const Navbar = () => {
                                 href="/submission-guidelines/call-for-papers"
                                 className="hidden xl:inline-flex px-7 py-3 bg-primary text-white text-[11px] font-bold tracking-[0.1em] uppercase rounded-full hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 hover:shadow-xl hover:-translate-y-0.5"
                             >
-                                Submit
+                                Send Your Paper
                             </Link>
 
                             {/* Dark Mode Toggle */}
@@ -309,7 +309,7 @@ const Navbar = () => {
                                         className="block w-full py-4 text-center text-xs font-bold tracking-widest uppercase text-white bg-primary rounded-full shadow-xl shadow-primary/20"
                                         onClick={() => setIsOpen(false)}
                                     >
-                                        Submit
+                                        Send Your Paper
                                     </Link>
                                 </div>
                             </div>

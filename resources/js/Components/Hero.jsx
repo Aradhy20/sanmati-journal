@@ -47,7 +47,7 @@ const Hero = () => {
                             </span>
                             <br />
                             <span className="text-[#052143]">
-                                &amp; Emerging Discourse
+                                &amp; New Ideas &amp; Research
                             </span>
                         </h1>
 
@@ -110,7 +110,22 @@ const Hero = () => {
                             </div>
                         </div>
 
-                        {/* Remove floating badges since they are now in the trust bar below */}
+                        {/* Floating Badge — Readers (Glassmorphism z-10 over z-0 image) */}
+                        <motion.div
+                            animate={{ y: [0, -8, 0] }}
+                            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                            className="absolute top-12 -left-8 bg-white/60 backdrop-blur-md rounded-2xl shadow-xl p-5 border border-white/40 z-10"
+                        >
+                            <div className="flex items-center gap-3">
+                                <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center backdrop-blur-sm">
+                                    <Users className="w-5 h-5 text-primary" />
+                                </div>
+                                <div>
+                                    <p className="text-2xl font-black text-dark leading-none">2,000+</p>
+                                    <p className="text-slate-600 text-[10px] font-black uppercase tracking-widest mt-0.5">Active Readers</p>
+                                </div>
+                            </div>
+                        </motion.div>
                     </motion.div>
                 </div>
             </div>

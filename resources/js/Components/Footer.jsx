@@ -13,19 +13,22 @@ const Footer = () => {
                             <h3 className="text-2xl font-serif font-bold text-white mb-2 tracking-tight">Stay Informed</h3>
                             <p className="text-white/50 text-sm max-w-md">Receive latest research updates, call for papers, and academic news directly in your inbox.</p>
                         </div>
-                        <div className="flex w-full lg:w-auto gap-3">
+                        <form action="https://formspree.io/f/PLACEHOLDER_ENDPOINT" method="POST" className="flex w-full lg:w-auto gap-3">
                             <div className="relative w-full lg:w-96 group">
                                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30 group-focus-within:text-secondary transition-colors" />
                                 <input
                                     type="email"
+                                    name="email"
+                                    required
                                     placeholder="your-email@academic.edu"
                                     className="w-full pl-12 pr-6 py-4 rounded-2xl text-sm bg-white/5 border border-white/10 text-white placeholder-white/20 focus:outline-none focus:ring-2 focus:ring-secondary/30 focus:border-secondary/30 transition-all"
                                 />
+                                <input type="hidden" name="_subject" value="New Newsletter Subscriber!" />
                             </div>
-                            <button className="px-8 py-4 bg-secondary text-white font-bold text-sm rounded-2xl hover:bg-secondary-dark transition-all flex items-center gap-2 whitespace-nowrap shadow-lg shadow-secondary/10 hover:shadow-secondary/20 hover:-translate-y-0.5">
+                            <button type="submit" className="px-8 py-4 bg-secondary text-white font-bold text-sm rounded-2xl hover:bg-secondary-dark transition-all flex items-center gap-2 whitespace-nowrap shadow-lg shadow-secondary/10 hover:shadow-secondary/20 hover:-translate-y-0.5">
                                 Join <Send className="w-4 h-4" />
                             </button>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -33,9 +36,9 @@ const Footer = () => {
             {/* Main Footer - Luxury Academic Feel */}
             <div className="pt-20 pb-10">
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-20">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-16 mb-20">
                         {/* About Column */}
-                        <div className="space-y-6">
+                        <div className="space-y-6 lg:col-span-2">
                             <h4 className="text-[11px] font-black tracking-[0.2em] uppercase text-white mb-6 border-l-2 border-secondary pl-4">About</h4>
                             <Link href="/" className="inline-block group">
                                 <div className="flex items-center gap-3 mb-4">
@@ -49,35 +52,6 @@ const Footer = () => {
                             <p className="text-sm leading-relaxed text-slate-300 font-medium">
                                 A premier national platform for multidisciplinary research, fostering academic discourse and innovation across sciences and humanities.
                             </p>
-                            <div className="flex gap-4 pt-2">
-                                <a
-                                    href="https://www.linkedin.com/company/sanamti-journal/?viewAsMember=true"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="Sanmati Spectrum on LinkedIn"
-                                    className="size-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#0077B5] hover:border-[#0077B5] hover:text-white transition-all duration-300 group"
-                                >
-                                    <Linkedin className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                                </a>
-                                <a
-                                    href="https://www.facebook.com/sanmatijournal"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="Sanmati Spectrum on Facebook"
-                                    className="size-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#1877F2] hover:border-[#1877F2] hover:text-white transition-all duration-300 group"
-                                >
-                                    <Facebook className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                                </a>
-                                <a
-                                    href="https://twitter.com/sanmatijournal"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="Sanmati Spectrum on X / Twitter"
-                                    className="size-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#1DA1F2] hover:border-[#1DA1F2] hover:text-white transition-all duration-300 group"
-                                >
-                                    <Twitter className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                                </a>
-                            </div>
                         </div>
 
                         {/* Navigation Columns */}
@@ -118,6 +92,31 @@ const Footer = () => {
                             </div>
                         ))}
 
+                        {/* Social Column */}
+                        <div>
+                            <h4 className="text-[11px] font-black tracking-[0.2em] uppercase text-white mb-8 border-l-2 border-secondary pl-4">Social</h4>
+                            <div className="flex items-center gap-4">
+                                <a
+                                    href="https://www.linkedin.com/company/sanmati-journal/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Sanmati Spectrum on LinkedIn"
+                                    className="size-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#0077B5] hover:border-[#0077B5] hover:text-white transition-all duration-300 group shadow-lg"
+                                >
+                                    <Linkedin className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                                </a>
+                                <a
+                                    href="https://www.facebook.com/profile.php?id=61584411285548"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Sanmati Spectrum on Facebook"
+                                    className="size-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#1877F2] hover:border-[#1877F2] hover:text-white transition-all duration-300 group shadow-lg"
+                                >
+                                    <Facebook className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                                </a>
+                            </div>
+                        </div>
+
                         {/* Contact Info */}
                         <div>
                             <h4 className="text-[11px] font-black tracking-[0.2em] uppercase text-white mb-8 border-l-2 border-secondary pl-4">Contact</h4>
@@ -147,9 +146,6 @@ const Footer = () => {
                                     <a href="mailto:sanmatijournal@gmail.com" className="flex items-center gap-4 text-[13px] font-bold text-slate-200 hover:text-white transition-colors mt-2">
                                         <Mail className="w-4 h-4 text-white shrink-0" /> <span className="hover:underline">sanmatijournal@gmail.com</span>
                                     </a>
-                                    <a href="https://www.linkedin.com/company/sanamti-journal/?viewAsMember=true" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-[13px] font-bold text-slate-200 hover:text-white transition-colors mt-2">
-                                        <Linkedin className="w-4 h-4 text-[#0077B5] shrink-0" /> <span className="hover:underline">LinkedIn Profile</span>
-                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -162,9 +158,9 @@ const Footer = () => {
                             <span className="w-1 h-1 rounded-full bg-slate-500" />
                             <span className="text-slate-300">Sanmati Spectrum of Knowledge</span>
                         </div>
-                        <div className="flex items-center gap-8">
+                        <div className="flex items-center gap-6">
+                            <Link href="/privacy" className="text-[12px] font-bold text-slate-300 hover:text-white transition-colors uppercase tracking-widest">Privacy Policy</Link>
                             <Link href="/terms" className="text-[12px] font-bold text-slate-300 hover:text-white transition-colors uppercase tracking-widest">Legal</Link>
-                            <Link href="/privacy" className="text-[12px] font-bold text-slate-300 hover:text-white transition-colors uppercase tracking-widest">Sitemap</Link>
                         </div>
                     </div>
                 </div>

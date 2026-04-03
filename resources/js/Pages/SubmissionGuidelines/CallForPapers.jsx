@@ -28,19 +28,38 @@ export default function CallForPapers() {
         }
     };
 
-    const submit = (e) => {
+    const submit = async (e) => {
         e.preventDefault();
-        post(route('submission-guidelines.call.store'), {
-            onSuccess: () => {
+        
+        // Setup Formspree Submission using FormData API (supports files)
+        const formData = new FormData();
+        formData.append('title', data.title);
+        formData.append('abstract', data.abstract);
+        formData.append('keywords', data.keywords);
+        formData.append('consent', data.consent);
+        formData.append('manuscript', data.manuscript);
+        formData.append('_replyto', 'sanmatijournal@gmail.com');
+
+        try {
+            // NOTE: Replace the fetch URL with your actual Formspree Endpoint ID, e.g., 'https://formspree.io/f/xqk...'
+            const response = await fetch('https://formspree.io/f/PLACEHOLDER_ENDPOINT', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
                 reset();
                 setStep(4); // Success Step
                 toast.success('Manuscript submitted successfully. Tracking ID generated.');
-            },
-            onError: (errs) => {
-                toast.error('Submission failed. Please check your uploaded file and inputs.');
-            },
-            forceFormData: true,
-        });
+            } else {
+                toast.error('Submission failed. Please check your Formspree configuration.');
+            }
+        } catch (error) {
+            toast.error('An error occurred during submission.');
+        }
     };
 
     return (
@@ -56,9 +75,9 @@ export default function CallForPapers() {
                     
                     {/* Stepper Wizard Header */}
                     {step < 4 && (
-                        <div className="flex justify-between items-center mb-12 relative">
-                            <div className="absolute top-1/2 left-0 w-full h-1 bg-gray-200 -z-10 -translate-y-1/2 rounded-full"></div>
-                            <div className={`absolute top-1/2 left-0 h-1 bg-blue-600 -z-10 -translate-y-1/2 rounded-full transition-all duration-500`} style={{ width: `${(step - 1) * 50}%` }}></div>
+                        <div className="flex flex-col sm:flex-row justify-between items-center gap-6 sm:gap-0 mb-12 relative z-0">
+                            <div className="hidden sm:block absolute top-1/2 left-0 w-full h-1 bg-gray-200 -z-10 -translate-y-1/2 rounded-full"></div>
+                            <div className="hidden sm:block absolute top-1/2 left-0 h-1 bg-blue-600 -z-10 -translate-y-1/2 rounded-full transition-all duration-500" style={{ width: `${(step - 1) * 50}%` }}></div>
                             
                             {[
                                 { num: 1, label: 'Metadata', icon: FileText },
@@ -106,10 +125,10 @@ export default function CallForPapers() {
                                             <motion.div key="step1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
                                                 <div className="mb-10">
                                                     <h3 className="text-2xl font-serif font-bold text-slate-900 mb-2">Manuscript Details</h3>
-                                                    <p className="text-slate-500">Provide the foundational metadata for indexing and peer-review matching.</p>
+                                                    <p className="text-slate-500">Basic information for your paper.</p>
                                                 </div>
 
-                                                <div className="space-y-6">
+                                                <div className="space-y-6 max-w-2xl w-full">
                                                     <div>
                                                         <label className="block text-sm font-bold text-slate-700 mb-2">Full Research Title *</label>
                                                         <input 
@@ -117,14 +136,14 @@ export default function CallForPapers() {
                                                             value={data.title}
                                                             onChange={e => setData('title', e.target.value)}
                                                             className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none"
-                                                            placeholder="e.g. Pedagogical Impacts of Machine Learning..."
+                                                            placeholder="Example: Teaching with AI"
                                                             required
                                                         />
                                                         {errors.title && <p className="text-red-500 text-xs mt-2 font-medium">{errors.title}</p>}
                                                     </div>
 
                                                     <div>
-                                                        <label className="block text-sm font-bold text-slate-700 mb-2">Abstract Synopsis *</label>
+                                                        <label className="block text-sm font-bold text-slate-700 mb-2">Summary of your work *</label>
                                                         <textarea 
                                                             value={data.abstract}
                                                             onChange={e => setData('abstract', e.target.value)}
@@ -148,8 +167,8 @@ export default function CallForPapers() {
                                                     </div>
                                                 </div>
 
-                                                <div className="mt-10 flex justify-end">
-                                                    <button type="submit" disabled={!data.title || !data.abstract} className="px-8 py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-blue-600 transition-colors flex items-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed">
+                                                <div className="mt-10 flex justify-start">
+                                                    <button type="button" onClick={handleNextStep} disabled={!data.title || !data.abstract} className="px-8 py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-blue-600 transition-colors flex items-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed">
                                                         Proceed to Upload <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                                     </button>
                                                 </div>
