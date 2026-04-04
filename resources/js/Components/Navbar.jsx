@@ -108,10 +108,10 @@ const Navbar = () => {
     };
 
     return (
-        <>
+        <header className="sticky top-0 z-50 flex flex-col w-full">
 
             {/* Top Info Bar - Top Notice Banner for Countdown */}
-            <div className="bg-primary-dark text-white border-b border-primary/50 sticky top-0 z-50">
+            <div className="bg-primary-dark text-white border-b border-primary/50 relative z-50">
                 <div className="max-w-7xl mx-auto px-4 py-2 flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4">
                     <div className="flex items-center gap-4 text-[11px] font-bold tracking-widest uppercase text-white/80">
                         <span>ISSN: 3108-1819</span>
@@ -128,8 +128,8 @@ const Navbar = () => {
             </div>
 
             {/* Main Navbar - Solid Academic Header */}
-            <nav className={`sticky top-[52px] w-full z-40 transition-all duration-500 ease-[0.22,1,0.36,1] ${scrolled ? 'bg-white shadow-md border-b border-gray-200 py-2' : 'bg-white border-b border-gray-100 py-4'}`}>
-                <div className="max-w-7xl mx-auto px-6 lg:px-12">
+            <nav className={`w-full relative z-40 transition-all duration-500 ease-[0.22,1,0.36,1] ${scrolled ? 'bg-white shadow-md border-b border-gray-200 py-2' : 'bg-white border-b border-gray-100 py-4'}`}>
+                <div className="max-w-7xl mx-auto px-4 lg:px-8">
                     <div className="flex items-center justify-between h-16">
                         {/* Logo - Refined */}
                         <Link href="/" className="flex items-center gap-4 flex-shrink-0 group">
@@ -153,11 +153,11 @@ const Navbar = () => {
                         </Link>
 
                         {/* Desktop Menu */}
-                        <div className="hidden xl:flex items-center gap-8">
+                        <div className="hidden xl:flex items-center gap-2 xl:gap-4 lg:flex-wrap">
                             {navItems.map((item) => (
                                 <div
                                     key={item.name}
-                                    className="relative"
+                                    className="relative flex-shrink-0"
                                     onMouseEnter={() => handleMouseEnter(item.name)}
                                     onMouseLeave={handleMouseLeave}
                                 >
@@ -165,7 +165,7 @@ const Navbar = () => {
                                         <button
                                             aria-haspopup="true"
                                             aria-expanded={activeDropdown === item.name}
-                                            className={`relative flex flex-col items-center text-[13px] font-bold px-5 py-2 rounded-full transition-all whitespace-nowrap tracking-wide ${isActive(item.href)
+                                            className={`relative flex flex-col items-center text-[12px] xl:text-[13px] font-bold px-2 xl:px-3 py-2 rounded-full transition-all whitespace-nowrap tracking-wide ${isActive(item.href)
                                                 ? 'text-primary bg-primary/5'
                                                 : 'text-dark/80 hover:text-primary hover:bg-primary/5'
                                                 }`}
@@ -180,7 +180,7 @@ const Navbar = () => {
                                     ) : (
                                         <Link
                                             href={item.href}
-                                            className={`relative flex flex-col items-center text-[13px] font-bold px-5 py-2 rounded-full transition-all whitespace-nowrap tracking-wide ${isActive(item.href)
+                                            className={`relative flex flex-col items-center text-[12px] xl:text-[13px] font-bold px-2 xl:px-3 py-2 rounded-full transition-all whitespace-nowrap tracking-wide ${isActive(item.href)
                                                 ? 'text-primary bg-primary/5'
                                                 : 'text-dark/80 hover:text-primary hover:bg-primary/5'
                                                 }`}
@@ -327,7 +327,7 @@ const Navbar = () => {
                 </AnimatePresence>
             </nav>
 
-        </>
+        </header>
     );
 };
 

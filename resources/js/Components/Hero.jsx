@@ -47,7 +47,7 @@ const Hero = () => {
                             </span>
                             <br />
                             <span className="text-[#052143]">
-                                &amp; New Ideas &amp; Research
+                                &amp; Emerging Discourse
                             </span>
                         </h1>
 
