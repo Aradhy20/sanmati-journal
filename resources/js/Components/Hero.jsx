@@ -17,8 +17,8 @@ const Hero = () => {
                 style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #687EFF 1.5px, transparent 0)', backgroundSize: '40px 40px' }} />
 
             {/* Main Content – Two-Column Split */}
-            <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-24 lg:py-32">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-32 pb-24 lg:pt-36 lg:pb-28">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-16 items-start">
 
                     {/* ── LEFT: Text Content ── */}
                     <motion.div
@@ -88,11 +88,11 @@ const Hero = () => {
                         className="relative hidden lg:block"
                     >
                         {/* Main large image */}
-                        <div className="relative rounded-[3rem] overflow-hidden shadow-[0_30px_80px_rgba(104,126,255,0.18)] border-2 border-white animate-float">
+                        <div className="relative rounded-[3rem] overflow-hidden shadow-[0_30px_80px_rgba(104,126,255,0.18)] border-2 border-white">
                             <img
                                 src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=1200&auto=format&fit=crop"
                                 alt="Sanmati Journal Library — Academic Research"
-                                className="w-full h-[520px] object-cover object-center"
+                                className="w-full aspect-[4/3] object-cover object-top"
                                 loading="eager"
                             />
                             {/* Bottom overlay detail */}
