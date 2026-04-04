@@ -272,9 +272,9 @@ const Navbar = () => {
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.3, ease: 'easeInOut' }}
-                            className="xl:hidden bg-white border-t border-gray-100 overflow-hidden shadow-2xl"
+                            className="xl:hidden absolute top-full left-0 w-full bg-white border-t border-gray-100 shadow-2xl overflow-hidden z-50 origin-top"
                         >
-                            <div className="px-6 py-8 space-y-4 max-h-[80vh] overflow-y-auto">
+                            <div className="px-6 py-6 space-y-4 max-h-[calc(100vh-130px)] overflow-y-auto pb-12">
                                 {navItems.map((item) => (
                                     <div key={item.name} className="border-b border-gray-50 last:border-0 pb-3 last:pb-0">
                                         {item.dropdown ? (
