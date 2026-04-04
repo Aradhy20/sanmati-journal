@@ -33,7 +33,8 @@ export default function Archive({ issues }) {
                     id: 'static-1',
                     title: 'Sanmati Spectrum of Knowledge & Emerging Discourse (January-March, 2026) Hindi & English',
                     authors: 'Sanmati Journal Editorial Board',
-                    file_path: '/pdfs/Sanmati_Spectrum_Vol1_Jan_Mar_2026.pdf'
+                    file_path: 'https://drive.google.com/file/d/1nPxKxugSA6yMcpbJyQuNuEQ7QcnrpPt2/view?usp=sharing',
+                    thumbnail: 'https://drive.google.com/thumbnail?id=1nPxKxugSA6yMcpbJyQuNuEQ7QcnrpPt2&sz=w800'
                 }
             ]
         }
@@ -127,15 +128,38 @@ export default function Archive({ issues }) {
                                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
                                     {/* Issue Meta Card */}
                                     <div className="lg:col-span-4">
-                                        <div className="bg-surface border border-gray-100 p-8 rounded-[2.5rem] sticky top-32 shadow-sm">
-                                            <span className="text-[10px] font-black uppercase tracking-widest text-secondary block mb-4">Current Issue</span>
-                                            <h3 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-6">Issue No. {issue.number}</h3>
-                                            <p className="text-muted text-sm leading-relaxed mb-8">
-                                                This issue features a compilation of peer-reviewed research and analytical discourse focusing on emergent multidisciplinary themes.
-                                            </p>
-                                            <div className="flex items-center gap-3 text-dark font-black text-[10px] uppercase tracking-widest">
-                                                <Layers className="w-4 h-4 text-primary" />
-                                                {issue.papers?.length || 0} Research Papers
+                                        <div className="bg-surface border border-gray-100 rounded-[2.5rem] sticky top-32 shadow-sm overflow-hidden">
+                                            {/* Thumbnail if available */}
+                                            {issue.papers?.[0]?.thumbnail && (
+                                                <a
+                                                    href={issue.papers[0].file_path}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="block group relative overflow-hidden"
+                                                >
+                                                    <img
+                                                        src={issue.papers[0].thumbnail}
+                                                        alt={`Volume ${issue.volume} Cover`}
+                                                        className="w-full aspect-[3/4] object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                                        loading="lazy"
+                                                    />
+                                                    <div className="absolute inset-0 bg-dark/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                                        <span className="text-white text-xs font-black uppercase tracking-widest bg-white/20 px-4 py-2 rounded-full backdrop-blur-sm">
+                                                            View PDF
+                                                        </span>
+                                                    </div>
+                                                </a>
+                                            )}
+                                            <div className="p-8">
+                                                <span className="text-[10px] font-black uppercase tracking-widest text-secondary block mb-4">Inaugural Issue</span>
+                                                <h3 className="text-xl md:text-2xl font-serif font-bold text-dark mb-3">Issue No. {issue.number}</h3>
+                                                <p className="text-muted text-sm leading-relaxed mb-6">
+                                                    This issue features a compilation of peer-reviewed research and analytical discourse across multidisciplinary themes.
+                                                </p>
+                                                <div className="flex items-center gap-3 text-dark font-black text-[10px] uppercase tracking-widest">
+                                                    <Layers className="w-4 h-4 text-primary" />
+                                                    {issue.papers?.length || 0} Research Papers
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
