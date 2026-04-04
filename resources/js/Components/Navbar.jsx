@@ -154,7 +154,7 @@ const Navbar = ({ onOpenSearch }) => {
                         </Link>
 
                         {/* Desktop Menu */}
-                        <div className="hidden lg:flex items-center gap-2 xl:gap-4 flex-wrap overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 min-w-0">
+                        <div className="hidden lg:flex items-center gap-2 xl:gap-4 flex-1 flex-wrap overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 min-w-0 max-w-full">
                             {navItems.map((item) => (
                                 <div
                                     key={item.name}
