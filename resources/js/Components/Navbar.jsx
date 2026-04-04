@@ -131,7 +131,8 @@ const Navbar = () => {
             <nav className={`w-full relative z-40 transition-all duration-500 ease-[0.22,1,0.36,1] ${scrolled ? 'bg-white shadow-md border-b border-gray-200 py-2' : 'bg-white border-b border-gray-100 py-4'}`}>
                 <div className="max-w-7xl mx-auto px-4 lg:px-8">
                     <div className="flex items-center justify-between h-16">
-                        {/* Logo - Refined */}
+                        <div className="flex items-center gap-4 xl:gap-10">
+                            {/* Logo - Refined */}
                         <Link href="/" className="flex items-center gap-4 flex-shrink-0 group">
                             <motion.div 
                                 className={`rounded-xl overflow-hidden shadow-sm border border-gray-100 flex-shrink-0 bg-white group-hover:shadow-md transition-all duration-500 ${scrolled ? 'w-10 h-10 p-0.5' : 'w-12 h-12 p-1'}`}
@@ -230,7 +231,7 @@ const Navbar = () => {
                                 </div>
                             ))}
                         </div>
-
+                        </div>
 
                         {/* CTA + Dark Mode Toggle + Mobile Toggle */}
                         <div className="flex items-center gap-2 sm:gap-3">
