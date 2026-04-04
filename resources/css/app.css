@@ -170,6 +170,13 @@
     letter-spacing: -0.01em;
   }
 
+  /* Accessibility Focus Rings */
+  :focus-visible {
+    outline: 2px solid var(--color-emerald-600);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
   /* ─── Dark Mode Base ─────────── */
   .dark body {
     background-color: #0f172a;

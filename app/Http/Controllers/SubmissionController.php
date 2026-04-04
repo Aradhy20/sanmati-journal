@@ -18,7 +18,7 @@ class SubmissionController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $validator = \Illuminate\Support\Facades\Validator::make($request->all(), [
             'title'        => 'required|string|max:255',
             'abstract'     => 'required|string',
             'keywords'     => 'nullable|string|max:500',
@@ -27,8 +27,27 @@ class SubmissionController extends Controller
             'author_phone' => 'nullable|string|max:20',
             'institution'  => 'nullable|string|max:255',
             'subject_area' => 'nullable|string|max:150',
-            'manuscript'   => 'required|file|mimes:pdf|max:10240', // 10 MB
+            'manuscript'   => 'required|file|mimes:pdf,doc,docx|max:20480', // 20 MB
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 400);
+        }
+        $validated = $validator->validated();
+
+        $file = $request->file('manuscript');
+        $escapedPath = escapeshellarg($file->getRealPath());
+        exec("clamscan " . $escapedPath, $output, $returnCode);
+
+        // Clamscan returns 0 if no virus is found, 1 if a virus is found. Any other code is an execution error.
+        // We reject if it's not 0 or if we specifically want to enforce a pass. But if clamscan is absent (127),
+        // we might fail all uploads. For safety, we'll enforce 0 or return 400.
+        if ($returnCode === 1) {
+            return response()->json(['error' => 'Malware detected in upload.'], 400);
+        } elseif ($returnCode !== 0) {
+            // If clamscan is missing or fails to execute, we reject the upload to be strictly compliant
+            return response()->json(['error' => 'Unable to scan file for viruses.'], 400);
+        }
 
         // Store the uploaded PDF securely
         $path = $request->file('manuscript')->store('submissions', 'local');

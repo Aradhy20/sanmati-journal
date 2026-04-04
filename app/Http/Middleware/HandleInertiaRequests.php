@@ -47,6 +47,13 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'meta' => function () use ($request) {
+                return [
+                    'title' => 'Sanmati Journal | Spectrum of Knowledge',
+                    'description' => 'Top-ranking research journal in India. Publish your research paper fast.',
+                    'image' => url('/logo.jpg'),
+                ];
+            }
         ]);
     }
 }

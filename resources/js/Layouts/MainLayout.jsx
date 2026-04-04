@@ -8,10 +8,13 @@ import { Toaster } from 'react-hot-toast';
 import { MessageCircle, FileText } from 'lucide-react';
 import { Link } from '@inertiajs/react';
 
-export default function MainLayout({ children, title, description, keywords }) {
+export default function MainLayout({ children, title, description, keywords, jsonLd }) {
     return (
         <div className="min-h-screen flex flex-col bg-warm-bg font-sans antialiased relative overflow-x-hidden selection:bg-primary/10 selection:text-primary">
-            <Seo title={title} description={description} keywords={keywords} />
+            <Seo title={title} description={description} keywords={keywords} jsonLd={jsonLd} />
+            <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-6 focus:py-3 focus:bg-primary focus:text-white focus:rounded-xl focus:shadow-xl font-bold">
+                Skip to main content
+            </a>
             <Toaster position="top-center" toastOptions={{
                 duration: 5000,
                 style: { background: '#fff', color: '#052143', fontWeight: 'bold' }
@@ -26,8 +29,10 @@ export default function MainLayout({ children, title, description, keywords }) {
 
             <CustomCursor />
             <Preloader />
-            <Navbar />
-            <main className="flex-grow relative z-10">
+            <header role="banner">
+                <Navbar />
+            </header>
+            <main id="main-content" className="flex-grow relative z-10">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={title}
@@ -40,7 +45,9 @@ export default function MainLayout({ children, title, description, keywords }) {
                     </motion.div>
                 </AnimatePresence>
             </main>
-            <Footer />
+            <footer role="contentinfo">
+                <Footer />
+            </footer>
 
             {/* Floating Conversion WhatsApp / Support CTA */}
             <motion.a

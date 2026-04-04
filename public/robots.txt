@@ -1,6 +1,7 @@
 User-agent: *
 Disallow: /admin/
 Disallow: /api/
+Disallow: /reviewer/
 Disallow: /login
 Disallow: /forgot-password
 Disallow: /reset-password

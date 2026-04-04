@@ -18,6 +18,26 @@
 
         <title inertia>{{ config('app.name', 'Sanmati Journal') }} | Spectrum of Knowledge</title>
 
+        @if(isset($page['props']['meta']))
+            <meta name="description" content="{{ $page['props']['meta']['description'] ?? 'Top-ranking research journal in India. Publish your research paper fast. A high-authority, peer-reviewed, UGC-approved (proposed) multidisciplinary academic journal indexing high-quality research and books.' }}">
+            <meta property="og:title" content="{{ $page['props']['meta']['title'] ?? 'Sanmati Journal | Spectrum of Knowledge' }}">
+            <meta property="og:description" content="{{ $page['props']['meta']['description'] ?? 'Top-ranking research journal in India. Publish your research paper fast. A high-authority, peer-reviewed, UGC-approved (proposed) multidisciplinary academic journal indexing high-quality research and books.' }}">
+            <meta property="og:image" content="{{ $page['props']['meta']['image'] ?? url('/logo.jpg') }}">
+            
+            <meta name="twitter:card" content="summary_large_image">
+            <meta name="twitter:title" content="{{ $page['props']['meta']['title'] ?? 'Sanmati Journal | Spectrum of Knowledge' }}">
+            <meta name="twitter:description" content="{{ $page['props']['meta']['description'] ?? 'Top-ranking research journal in India. Publish your research paper fast. A high-authority, peer-reviewed, UGC-approved (proposed) multidisciplinary academic journal indexing high-quality research and books.' }}">
+            <meta name="twitter:image" content="{{ $page['props']['meta']['image'] ?? url('/logo.jpg') }}">
+        @else
+            <meta name="description" content="Top-ranking research journal in India. Publish your research paper fast. A high-authority, peer-reviewed, UGC-approved (proposed) multidisciplinary academic journal indexing high-quality research and books.">
+            <meta property="og:title" content="Sanmati Journal | Spectrum of Knowledge">
+            <meta property="og:description" content="Top-ranking research journal in India. Publish your research paper fast. A high-authority, peer-reviewed, UGC-approved (proposed) multidisciplinary academic journal indexing high-quality research and books.">
+            <meta property="og:image" content="{{ url('/logo.jpg') }}">
+            <meta name="twitter:card" content="summary_large_image">
+            <meta name="twitter:title" content="Sanmati Journal | Spectrum of Knowledge">
+            <meta name="twitter:description" content="Top-ranking research journal in India. Publish your research paper fast. A high-authority, peer-reviewed, UGC-approved (proposed) multidisciplinary academic journal indexing high-quality research and books.">
+            <meta name="twitter:image" content="{{ url('/logo.jpg') }}">
+        @endif
         <!-- Google Tag Manager -->
         <script nonce="{{ Vite::cspNonce() }}">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

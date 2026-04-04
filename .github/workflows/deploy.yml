@@ -1,98 +1,90 @@
-name: Deploy to Hostinger
+name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  deploy:
+  test:
+    name: Run Lints and Tests
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.3'
-        extensions: mbstring, intl, pdo_mysql
-        coverage: none
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
+      - name: Install Dependencies
+        run: npm ci
 
-    - name: Install Composer Dependencies
-      run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+      - name: Run Web Accessibility, Performance & SEO Checks (Lighthouse CI)
+        run: npm install -g @lhci/cli@0.12.x && lhci autorun
+        env:
+           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
 
-    - name: Install NPM Dependencies
-      run: npm ci
+      - name: Run Linter
+        run: npm run lint
 
-    - name: Create .env file for Build
-      run: |
-        echo "${{ secrets.ENV_FILE }}" > .env
+      - name: Run Unit Tests
+        run: npm run test:unit --if-present
 
-    - name: Build Assets
-      run: npm run build
+      - name: Run Playwright E2E Tests
+        run: |
+          npx playwright install --with-deps
+          npx playwright test
 
-    - name: Prepare Deployment Artifact
-      run: tar --exclude='.git' --exclude='node_modules' --exclude='.github' --exclude='release.tar.gz' -czf release.tar.gz .
+  build:
+    name: Build Application
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.repository == 'owner/repo' && github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-    - name: Setup Server Directories
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOSTINGER_HOST }}
-        username: ${{ secrets.HOSTINGER_USERNAME }}
-        password: ${{ secrets.HOSTINGER_PASSWORD }}
-        port: ${{ secrets.HOSTINGER_PORT }}
-        script: |
-          mkdir -p ~/domains/sanmatijournal.com/laravel_app
-          mkdir -p ~/domains/sanmatijournal.com/laravel_app/public
-          mkdir -p ~/domains/sanmatijournal.com/laravel_app/storage
-          mkdir -p ~/domains/sanmatijournal.com/laravel_app/bootstrap/cache
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
 
-    - name: Copy Files to Server
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.HOSTINGER_HOST }}
-        username: ${{ secrets.HOSTINGER_USERNAME }}
-        password: ${{ secrets.HOSTINGER_PASSWORD }}
-        port: ${{ secrets.HOSTINGER_PORT }}
-        source: "release.tar.gz"
-        target: "~/domains/sanmatijournal.com/laravel_app"
+      - name: Install Dependencies
+        run: npm ci
 
-    - name: Extract and Deploy
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOSTINGER_HOST }}
-        username: ${{ secrets.HOSTINGER_USERNAME }}
-        password: ${{ secrets.HOSTINGER_PASSWORD }}
-        port: ${{ secrets.HOSTINGER_PORT }}
-        script: |
-          # 1. Go to Project Directory
-          cd ~/domains/sanmatijournal.com/laravel_app
+      - name: Build Next.js
+        working-directory: ./frontend
+        run: npm run build
 
-          # 2. Extract Files
-          tar -xzf release.tar.gz
-          rm release.tar.gz
+      - name: Build Laravel Backend
+        run: composer install --no-dev --optimize-autoloader
 
-          # 3. Create Symlink if not exists (Web Root Separation)
-          # Use -h to check if public_html is a symlink, if not backup and link
-          if [ ! -h ~/domains/sanmatijournal.com/public_html ]; then
-             echo "Setting up Web Root Separation..."
-             mv ~/domains/sanmatijournal.com/public_html ~/domains/sanmatijournal.com/public_html_backup_$(date +%F)
-             ln -s ~/domains/sanmatijournal.com/laravel_app/public ~/domains/sanmatijournal.com/public_html
-             echo "Symlink created. Old public_html backed up."
-          fi
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.repository == 'owner/repo' && github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-          # 4. Set Permissions
-          chmod -R 755 storage bootstrap/cache
+      - name: Setup SSH Key for Deployment
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.PROD_SSH_KEY }}
+
+      - name: Rsync to Remote Server 
+        run: |
+          ssh-keyscan -H ${{ secrets.PROD_SERVER_IP }} >> ~/.ssh/known_hosts
+          rsync -azP --delete ./ ${{ secrets.PROD_USER }}@${{ secrets.PROD_SERVER_IP }}:/var/www/sanmatijournal/
           
-          # 5. Optimize
-          php artisan migrate --force
-          php artisan config:cache
-          php artisan route:cache
-          php artisan view:cache
-          
-          echo "Deployment Complete with Web Root Separation!"
+      - name: Run remote commands
+        run: |
+          ssh ${{ secrets.PROD_USER }}@${{ secrets.PROD_SERVER_IP }} "cd /var/www/sanmatijournal && php artisan migrate --force && php artisan config:cache"
