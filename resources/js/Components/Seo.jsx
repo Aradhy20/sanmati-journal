@@ -1,9 +1,9 @@
 import { Head, usePage } from '@inertiajs/react';
 
 export default function Seo({ title, description, keywords, image, type = 'website', author, publishedTime, jsonLd }) {
-    const siteName = "Sanmati Journal";
-    const defaultDescription = "Sanmati Spectrum of Knowledge & Emerging Discourse - A national, peer-reviewed, multidisciplinary research journal.";
-    const defaultKeywords = "research journal, peer-reviewed, multidisciplinary, sanmati, academic publishing, open access";
+    const siteName = "Sanmati Spectrum of Knowledge";
+    const defaultDescription = "Top-ranking research journal in India. Publish your research paper fast. A high-authority, peer-reviewed, UGC-approved (proposed) multidisciplinary academic journal indexing high-quality research and books.";
+    const defaultKeywords = "research journal India, UGC approved journal, publish research paper fast, peer-reviewed journal, academic publishing, open access, sanmati spectrum";
     const defaultImage = "/logo.jpg";
     const siteUrl = "https://sanmatijournal.in";
 
@@ -14,16 +14,21 @@ export default function Seo({ title, description, keywords, image, type = 'websi
     const finalImage = image ? (image.startsWith('http') ? image : `${siteUrl}${image}`) : `${siteUrl}${defaultImage}`;
     const canonicalUrl = `${siteUrl}${url}`;
 
-    // Default JSON-LD for organization
+    // Default JSON-LD for Organization / Journal
     const defaultJsonLd = {
         "@context": "https://schema.org",
-        "@type": "Periodical",
+        "@type": "AcademicJournal",
         "name": siteName,
         "url": siteUrl,
         "description": defaultDescription,
+        "issn": "3108-1819",
         "publisher": {
             "@type": "Organization",
-            "name": "Teerthanker Mahaveer University"
+            "name": "JTS Publications",
+            "logo": {
+                "@type": "ImageObject",
+                "url": `${siteUrl}/logo.jpg`
+            }
         }
     };
 

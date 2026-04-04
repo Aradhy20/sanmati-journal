@@ -57,6 +57,10 @@ Route::get('/book-publication', [JournalController::class, 'bookPublication'])->
 Route::get('/compliance', [JournalController::class, 'compliance'])->name('compliance');
 Route::get('/track-manuscript', [JournalController::class, 'trackManuscript'])->name('track-manuscript');
 
+// Blog System
+Route::get('/blog', [JournalController::class, 'blogIndex'])->name('blog.index');
+Route::get('/blog/{slug}', [JournalController::class, 'blogShow'])->name('blog.show');
+
 // Catch-all 404 — renders the React custom 404 page
 Route::fallback(function () {
     return \Inertia\Inertia::render('Error404');

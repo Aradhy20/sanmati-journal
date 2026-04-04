@@ -52,14 +52,21 @@ const Footer = () => {
                             <p className="text-sm leading-relaxed text-slate-300 font-medium">
                                 A premier national platform for multidisciplinary research, fostering academic discourse and innovation across sciences and humanities.
                             </p>
+                            <div className="mt-4 p-4 bg-white/5 border border-secondary border-dashed rounded-xl">
+                                <h5 className="text-[10px] font-black tracking-widest text-secondary uppercase mb-2">Academic Integrity</h5>
+                                <p className="text-xs text-white/80 leading-relaxed font-medium">
+                                    This journal follows the guidelines formulated by the <strong className="text-white">Committee on Publication Ethics (COPE)</strong>. All manuscripts are subject to rigorous Double-Blind Peer Review and iThenticate similarity checks.
+                                </p>
+                            </div>
                         </div>
 
                         {/* Navigation Columns */}
                         {[
-                            {
+                                {
                                 title: 'Publications',
                                 links: [
                                     { name: 'Latest Issues', href: '/archive' },
+                                    { name: 'Journal Blog', href: '/blog' },
                                     { name: 'Call for Papers', href: '/submission-guidelines/call-for-papers' },
                                     { name: 'Submission Guide', href: '/submission-guidelines' },
                                     { name: 'Editorial Team', href: '/editorial-team/editorial-board' },

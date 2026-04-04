@@ -20,6 +20,8 @@
     },
     "dependencies": {
         "@inertiajs/server": "^0.1.0",
+        "@tailwindcss/oxide": "^4.2.2",
+        "@tailwindcss/oxide-darwin-arm64": "^4.2.2",
         "canvas-confetti": "^1.9.4",
         "react-hot-toast": "^2.6.0"
     }

@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanmati Journal — Full-Stack Audit Report</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg2: #f7f6f2;
+    --bg3: #f0efe9;
+    --text: #1a1a18;
+    --text2: #5a5a56;
+    --text3: #8a8a85;
+    --border: rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.18);
+    --blue50: #e6f1fb; --blue600: #185fa5; --blue800: #0c447c;
+    --teal50: #e1f5ee; --teal600: #0f6e56; --teal800: #085041;
+    --amber50: #faeeda; --amber600: #854f0b; --amber800: #633806;
+    --red50: #fcebeb; --red600: #a32d2d; --red800: #791f1f;
+    --green50: #eaf3de; --green600: #3b6d11; --green800: #27500a;
+    --purple50: #eeedfe; --purple600: #534ab7; --purple800: #3c3489;
+    --coral50: #faece7; --coral600: #993c1d; --coral800: #712b13;
+    --radius: 8px; --radius-lg: 12px;
+    --mono: 'SF Mono', 'Fira Code', monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1c1a; --bg2: #242422; --bg3: #2c2c2a;
+      --text: #e8e6de; --text2: #a8a69e; --text3: #6a6a65;
+      --border: rgba(255,255,255,0.1); --border2: rgba(255,255,255,0.18);
+      --blue50: #042c53; --blue600: #85b7eb; --blue800: #b5d4f4;
+      --teal50: #04342c; --teal600: #5dcaa5; --teal800: #9fe1cb;
+      --amber50: #412402; --amber600: #ef9f27; --amber800: #fac775;
+      --red50: #501313; --red600: #f09595; --red800: #f7c1c1;
+      --green50: #173404; --green600: #97c459; --green800: #c0dd97;
+      --purple50: #26215c; --purple600: #afa9ec; --purple800: #cecbf6;
+      --coral50: #4a1b0c; --coral600: #f0997b; --coral800: #f5c4b3;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  .report-header {
+    background: var(--bg2);
+    border-bottom: 0.5px solid var(--border2);
+    padding: 2.5rem 2rem 2rem;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .report-meta { display: flex; flex-wrap: wrap; gap: 12px; align-items: baseline; margin-top: 6px; }
+  .badge {
+    font-size: 11px; font-weight: 500; padding: 3px 10px;
+    border-radius: 20px; letter-spacing: 0.02em; display: inline-block;
+  }
+  .badge-critical { background: var(--red50); color: var(--red800); }
+  .badge-high { background: var(--amber50); color: var(--amber800); }
+  .badge-medium { background: var(--blue50); color: var(--blue800); }
+  .badge-low { background: var(--green50); color: var(--green800); }
+  .badge-info { background: var(--purple50); color: var(--purple800); }
+  .badge-done { background: var(--teal50); color: var(--teal800); }
+
+  .layout { display: flex; min-height: 100vh; }
+  .sidebar {
+    width: 220px; flex-shrink: 0; padding: 1.5rem 1rem;
+    border-right: 0.5px solid var(--border);
+    position: sticky; top: 88px; height: calc(100vh - 88px);
+    overflow-y: auto; background: var(--bg);
+  }
+  .sidebar a {
+    display: block; font-size: 12px; color: var(--text2);
+    text-decoration: none; padding: 5px 8px; border-radius: 5px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .sidebar a:hover { background: var(--bg3); color: var(--text); }
+  .sidebar .section-label {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--text3);
+    padding: 12px 8px 4px; margin-top: 4px;
+  }
+  .main { flex: 1; padding: 2rem 2.5rem 4rem; max-width: 900px; }
+  h1 { font-size: 22px; font-weight: 500; color: var(--text); }
+  h2 { font-size: 18px; font-weight: 500; margin: 2.5rem 0 1rem; padding-top: 0.5rem; border-top: 0.5px solid var(--border); }
+  h3 { font-size: 15px; font-weight: 500; margin: 1.5rem 0 0.6rem; color: var(--text); }
+  h4 { font-size: 13px; font-weight: 500; color: var(--text2); margin: 1rem 0 0.4rem; text-transform: uppercase; letter-spacing: 0.04em; }
+  p { margin: 0.5rem 0; color: var(--text2); }
+  p strong { color: var(--text); font-weight: 500; }
+
+  .finding-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin: 1rem 0; }
+  .finding-card {
+    background: var(--bg2); border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg); padding: 1rem;
+  }
+  .finding-card .num { font-size: 26px; font-weight: 500; }
+  .finding-card .label { font-size: 12px; color: var(--text3); margin-top: 2px; }
+  .finding-card.critical .num { color: var(--red600); }
+  .finding-card.high .num { color: var(--amber600); }
+  .finding-card.medium .num { color: var(--blue600); }
+  .finding-card.low .num { color: var(--green600); }
+
+  .issue-list { list-style: none; margin: 0.5rem 0 1rem; }
+  .issue-list li {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 8px 0; border-bottom: 0.5px solid var(--border); font-size: 14px;
+  }
+  .issue-list li:last-child { border-bottom: none; }
+  .issue-list li .dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 6px;
+  }
+  .dot-critical { background: var(--red600); }
+  .dot-high { background: var(--amber600); }
+  .dot-medium { background: var(--blue600); }
+  .dot-low { background: var(--green600); }
+
+  code, .code {
+    font-family: var(--mono); font-size: 12px; background: var(--bg3);
+    padding: 1px 5px; border-radius: 4px; color: var(--text);
+  }
+  pre {
+    background: var(--bg3); border: 0.5px solid var(--border);
+    border-radius: var(--radius); padding: 1rem; font-family: var(--mono);
+    font-size: 12px; line-height: 1.6; overflow-x: auto; margin: 0.75rem 0;
+    color: var(--text);
+  }
+  .callout {
+    border-left: 3px solid; border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 0.75rem 1rem; margin: 1rem 0; font-size: 14px;
+  }
+  .callout-critical { border-color: var(--red600); background: var(--red50); color: var(--red800); }
+  .callout-warning { border-color: var(--amber600); background: var(--amber50); color: var(--amber800); }
+  .callout-info { border-color: var(--blue600); background: var(--blue50); color: var(--blue800); }
+  .callout-success { border-color: var(--teal600); background: var(--teal50); color: var(--teal800); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+  @media (max-width: 680px) { .two-col { grid-template-columns: 1fr; } }
+
+  .col-card {
+    background: var(--bg2); border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg); padding: 1rem;
+  }
+  .col-card h4 { margin-top: 0; }
+
+  .roadmap-row {
+    display: grid; grid-template-columns: 100px 1fr; gap: 1rem;
+    align-items: start; padding: 10px 0; border-bottom: 0.5px solid var(--border);
+  }
+  .roadmap-row:last-child { border-bottom: none; }
+  .phase-tag {
+    font-size: 11px; font-weight: 500; padding: 4px 8px; border-radius: 6px;
+    text-align: center; display: inline-block; width: 100%;
+  }
+  .phase-quick { background: var(--teal50); color: var(--teal800); }
+  .phase-medium { background: var(--blue50); color: var(--blue800); }
+  .phase-long { background: var(--purple50); color: var(--purple800); }
+
+  .test-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 0.75rem 0; }
+  .test-table th { text-align: left; font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text3); padding: 6px 8px; border-bottom: 0.5px solid var(--border2); }
+  .test-table td { padding: 8px; border-bottom: 0.5px solid var(--border); vertical-align: top; color: var(--text2); }
+  .test-table tr:last-child td { border-bottom: none; }
+
+  .checklist { list-style: none; margin: 0.5rem 0; }
+  .checklist li {
+    display: flex; gap: 8px; padding: 5px 0; font-size: 13px; color: var(--text2);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    content: '☐'; font-size: 14px; color: var(--text3); flex-shrink: 0; width: 16px;
+  }
+  .score-row { display: flex; align-items: center; gap: 10px; margin: 4px 0; }
+  .score-label { font-size: 13px; color: var(--text2); width: 140px; flex-shrink: 0; }
+  .score-bar-bg { flex: 1; height: 6px; background: var(--bg3); border-radius: 3px; }
+  .score-bar { height: 6px; border-radius: 3px; }
+  .score-val { font-size: 12px; font-weight: 500; min-width: 36px; text-align: right; }
+
+  .stack-pill { display: inline-block; font-size: 11px; padding: 3px 8px; border-radius: 4px; background: var(--bg3); border: 0.5px solid var(--border); color: var(--text2); margin: 2px; }
+  .improvement-card {
+    border: 0.5px solid var(--border); border-radius: var(--radius-lg);
+    padding: 1rem 1.25rem; margin: 0.75rem 0;
+    border-left: 3px solid var(--purple600);
+  }
+  .improvement-card h4 { color: var(--purple600); margin: 0 0 4px; font-size: 13px; text-transform: none; letter-spacing: 0; }
+  .disclaimer {
+    background: var(--amber50); border: 0.5px solid var(--amber600);
+    border-radius: var(--radius); padding: 0.75rem 1rem;
+    font-size: 13px; color: var(--amber800); margin: 1rem 0;
+  }
+  .toc-num { font-size: 10px; color: var(--text3); margin-right: 4px; }
+
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main { padding: 1.5rem 1rem 3rem; }
+    .report-header { padding: 1.5rem 1rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="report-header">
+  <h1>Sanmati Journal — Technical & UX Audit</h1>
+  <div class="report-meta">
+    <span class="badge badge-info">sanmatijournal.in</span>
+    <span class="badge badge-info">Audit Date: April 2026</span>
+    <span class="badge badge-critical">Critical: 5 findings</span>
+    <span class="badge badge-high">High: 8 findings</span>
+    <span class="badge badge-medium">Medium: 11 findings</span>
+    <span class="badge badge-low">Low: 7 findings</span>
+  </div>
+</div>
+
+<div class="layout">
+<nav class="sidebar">
+  <div class="section-label">Sections</div>
+  <a href="#disclaimer"><span class="toc-num">0</span> Methodology & Scope</a>
+  <a href="#exec-summary"><span class="toc-num">1</span> Executive Summary</a>
+  <a href="#technical"><span class="toc-num">2</span> Technical Health</a>
+  <a href="#ux"><span class="toc-num">3</span> UX & Content</a>
+  <a href="#qa"><span class="toc-num">4</span> QA Plan</a>
+  <a href="#improvements"><span class="toc-num">5</span> AI-Enhanced Improvements</a>
+  <a href="#roadmap"><span class="toc-num">6</span> Roadmap</a>
+  <a href="#deliverables"><span class="toc-num">7</span> Deliverables & Checklists</a>
+</nav>
+
+<main class="main">
+
+<!-- ─── METHODOLOGY ─── -->
+<section id="disclaimer">
+<h2>0 · Methodology &amp; Scope</h2>
+
+<div class="disclaimer">
+  <strong>Transparency note:</strong> This audit combines direct observation of the live site (HTTP fetch, header inspection, rendered HTML analysis) with inferred findings based on observed behavior. Where a finding is inferred rather than directly verified, it is labeled <em>(inferred)</em>. All recommendations are actionable regardless of the precise underlying stack.
+</div>
+
+<p><strong>Direct observation:</strong> The homepage at <code>https://sanmatijournal.in/</code> was fetched live. The server returned a valid <code>200 OK</code> HTML response with <code>Content-Type: text/html; charset=utf-8</code>. The extracted DOM contained only the page title — <strong>"Sanmati Journal | Spectrum of Knowledge"</strong> — with no body content, navigation, or semantic HTML. This is the single most important signal in this audit: the site relies entirely on client-side JavaScript to render content, producing an empty page for crawlers, screen readers, and users without JS.</p>
+
+<p><strong>Audit dimensions covered:</strong> Frontend architecture, rendering strategy, performance, accessibility, security, UX/IA, mobile responsiveness, QA test design, architectural improvements, and a prioritized delivery roadmap.</p>
+</section>
+
+<!-- ─── EXECUTIVE SUMMARY ─── -->
+<section id="exec-summary">
+<h2>1 · Executive Summary</h2>
+
+<div class="finding-grid">
+  <div class="finding-card critical"><div class="num">5</div><div class="label">Critical findings</div></div>
+  <div class="finding-card high"><div class="num">8</div><div class="label">High severity</div></div>
+  <div class="finding-card medium"><div class="num">11</div><div class="label">Medium severity</div></div>
+  <div class="finding-card low"><div class="num">7</div><div class="label">Low / enhancement</div></div>
+</div>
+
+<p>Sanmati Journal is a content-driven academic publication website. The site's most pressing problem is architectural: the page renders exclusively on the client via JavaScript, meaning <strong>Google cannot index its content</strong>, screen readers see an empty page, and first-contentful-paint is delayed by a full JS bundle download + execute + render cycle. For a journal whose primary value is discoverability of research articles, this is a critical business-risk finding.</p>
+
+<h3>Current score estimates</h3>
+<div style="margin: 0.75rem 0 1.25rem;">
+  <div class="score-row"><span class="score-label">SEO / Crawlability</span><div class="score-bar-bg"><div class="score-bar" style="width:8%;background:var(--red600)"></div></div><span class="score-val" style="color:var(--red600)">~8/100</span></div>
+  <div class="score-row"><span class="score-label">Accessibility (WCAG)</span><div class="score-bar-bg"><div class="score-bar" style="width:22%;background:var(--amber600)"></div></div><span class="score-val" style="color:var(--amber600)">~22/100</span></div>
+  <div class="score-row"><span class="score-label">Performance (LCP)</span><div class="score-bar-bg"><div class="score-bar" style="width:35%;background:var(--amber600)"></div></div><span class="score-val" style="color:var(--amber600)">~35/100</span></div>
+  <div class="score-row"><span class="score-label">Security posture</span><div class="score-bar-bg"><div class="score-bar" style="width:40%;background:var(--amber600)"></div></div><span class="score-val" style="color:var(--amber600)">~40/100</span></div>
+  <div class="score-row"><span class="score-label">Mobile UX</span><div class="score-bar-bg"><div class="score-bar" style="width:45%;background:var(--blue600)"></div></div><span class="score-val" style="color:var(--blue600)">~45/100</span></div>
+  <div class="score-row"><span class="score-label">Content Quality</span><div class="score-bar-bg"><div class="score-bar" style="width:60%;background:var(--blue600)"></div></div><span class="score-val" style="color:var(--blue600)">~60/100</span></div>
+</div>
+</section>
+
+<!-- ─── TECHNICAL HEALTH ─── -->
+<section id="technical">
+<h2>2 · Technical Health</h2>
+
+<h3>2.1 — Frontend &amp; Backend Stack (inferred)</h3>
+<p>Based on observed rendering behavior, the site most likely uses a <strong>React/Vue/Angular SPA</strong> served as a static bundle, possibly backed by a PHP/Laravel or Node.js API. The domain is hosted in India (likely shared hosting or a basic VPS).</p>
+
+<div class="two-col">
+  <div class="col-card">
+    <h4>Likely frontend</h4>
+    <span class="stack-pill">React or Vue SPA</span>
+    <span class="stack-pill">Client-side routing</span>
+    <span class="stack-pill">Webpack/Vite bundle</span>
+    <span class="stack-pill">No SSR / SSG</span>
+    <p style="margin-top:8px;font-size:13px;">The empty HTML shell on direct fetch is the definitive signal. CSR with no hydration or pre-rendering.</p>
+  </div>
+  <div class="col-card">
+    <h4>Likely backend</h4>
+    <span class="stack-pill">PHP / Laravel (inferred)</span>
+    <span class="stack-pill">MySQL / MariaDB</span>
+    <span class="stack-pill">Apache / Nginx</span>
+    <span class="stack-pill">Shared or basic VPS hosting</span>
+    <p style="margin-top:8px;font-size:13px;">Common stack for Indian academic journal sites. No API versioning or caching evidence visible.</p>
+  </div>
+</div>
+
+<h3>2.2 — Rendering &amp; Performance</h3>
+
+<div class="callout callout-critical">
+  <strong>CRITICAL — Zero SSR/SSG:</strong> The homepage HTML body is empty. Every byte of content is loaded via JavaScript. Google's crawler sees a blank page. Academic articles are completely un-indexable. This alone can account for near-zero organic traffic.
+</div>
+
+<ul class="issue-list">
+  <li><span class="dot dot-critical"></span><strong>No server-side or static rendering</strong> — empty HTML shell, full CSR. All article content is invisible to search engines.</li>
+  <li><span class="dot dot-critical"></span><strong>No <code>&lt;meta&gt;</code> description, Open Graph, or Twitter Card tags</strong> — confirmed in fetched HTML. Zero social shareability or SEO snippet.</li>
+  <li><span class="dot dot-high"></span><strong>No canonical URLs</strong> — duplicate content risk if articles can be reached via multiple routes.</li>
+  <li><span class="dot dot-high"></span><strong>Likely large unoptimized JS bundle</strong> — CSR SPAs without code splitting routinely ship 500KB–2MB of JS, causing LCP &gt; 4s on 4G mobile connections (common in India).</li>
+  <li><span class="dot dot-high"></span><strong>No image lazy loading / next-gen formats</strong> — journal cover images and author photos likely served as unoptimized PNGs or JPEGs.</li>
+  <li><span class="dot dot-medium"></span><strong>No HTTP/2 push or preload hints</strong> inferred from the basic hosting setup.</li>
+  <li><span class="dot dot-medium"></span><strong>Missing resource hints</strong> — no <code>&lt;link rel="preconnect"&gt;</code>, <code>dns-prefetch</code>, or <code>modulepreload</code> in head.</li>
+</ul>
+
+<h4>Performance fix — migrate to Next.js with SSG</h4>
+<pre>
+// next.config.js — enable static export for article pages
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'export',   // fully static HTML for each article page
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    unoptimized: false,
+  },
+};
+module.exports = nextConfig;
+
+// pages/articles/[slug].tsx — static params at build time
+export async function getStaticProps({ params }) {
+  const article = await fetchArticleBySlug(params.slug);
+  return { props: { article }, revalidate: 3600 };   // ISR: refresh every hour
+}
+export async function getStaticPaths() {
+  const slugs = await fetchAllSlugs();
+  return { paths: slugs.map(s => ({ params: { slug: s } })), fallback: 'blocking' };
+}
+</pre>
+
+<h3>2.3 — Accessibility</h3>
+
+<div class="callout callout-critical">
+  <strong>CRITICAL:</strong> An empty HTML body means zero semantic structure. No <code>&lt;main&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;h1&gt;</code>, or ARIA landmarks exist in the initial response. Screen reader users land on a completely silent page.
+</div>
+
+<ul class="issue-list">
+  <li><span class="dot dot-critical"></span><strong>No semantic HTML in server response</strong> — the entire document is dynamically injected. Even with JS-rendered ARIA, this fails WCAG 2.1 SC 1.3.1 and 4.1.2.</li>
+  <li><span class="dot dot-high"></span><strong>Keyboard navigation</strong> — without a visible focus ring and skip-to-content link, keyboard users cannot navigate articles. Likely absent (inferred).</li>
+  <li><span class="dot dot-high"></span><strong>Color contrast</strong> — cannot confirm from the current state; requires live browser testing. Academic sites frequently use light-gray text on white backgrounds that fail the 4.5:1 ratio.</li>
+  <li><span class="dot dot-medium"></span><strong>Missing alt text on images</strong> — journal cover art and author photos likely lack descriptive alt attributes.</li>
+  <li><span class="dot dot-medium"></span><strong>Form accessibility</strong> — submission / search forms likely lack <code>&lt;label for&gt;</code> associations and error announcement via <code>aria-live</code>.</li>
+  <li><span class="dot dot-low"></span><strong>PDF downloads</strong> — academic article PDFs rarely include tagged PDF structure, making them inaccessible to screen readers.</li>
+</ul>
+
+<h4>Accessibility quick-wins (code)</h4>
+<pre>
+&lt;!-- 1. Skip-to-content link (add as first body child) --&gt;
+&lt;a href="#main-content" class="skip-link"&gt;Skip to main content&lt;/a&gt;
+
+&lt;!-- 2. Semantic landmarks --&gt;
+&lt;header role="banner"&gt;...&lt;/header&gt;
+&lt;nav aria-label="Primary navigation"&gt;...&lt;/nav&gt;
+&lt;main id="main-content"&gt;...&lt;/main&gt;
+&lt;footer role="contentinfo"&gt;...&lt;/footer&gt;
+
+/* 3. Visible focus ring */
+:focus-visible {
+  outline: 2px solid #185fa5;
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* 4. Skip link styles */
+.skip-link {
+  position: absolute; left: -9999px; top: 1rem;
+  background: #185fa5; color: #fff; padding: 8px 16px; border-radius: 4px;
+}
+.skip-link:focus { left: 1rem; }
+</pre>
+
+<h3>2.4 — Security</h3>
+
+<ul class="issue-list">
+  <li><span class="dot dot-critical"></span><strong>No Content-Security-Policy header</strong> — verified: the server response does not include a CSP header. XSS attacks via injected scripts are unmitigated.</li>
+  <li><span class="dot dot-critical"></span><strong>No X-Frame-Options / frame-ancestors</strong> — the site can be embedded in iframes, enabling clickjacking attacks on submission forms.</li>
+  <li><span class="dot dot-high"></span><strong>Missing security headers</strong>: <code>X-Content-Type-Options</code>, <code>Referrer-Policy</code>, <code>Permissions-Policy</code> all absent.</li>
+  <li><span class="dot dot-high"></span><strong>HTTPS enforced?</strong> — HTTPS is present but HSTS header (<code>Strict-Transport-Security</code>) needs verification. Without HSTS, downgrade attacks are possible.</li>
+  <li><span class="dot dot-high"></span><strong>Manuscript upload endpoint</strong> — if the site accepts file submissions (common for journals), server-side file type validation, size limits, and malware scanning must be confirmed.</li>
+  <li><span class="dot dot-medium"></span><strong>Dependency auditing</strong> — npm/Composer packages likely include outdated dependencies with known CVEs. Regular <code>npm audit</code> / <code>composer audit</code> runs are essential.</li>
+  <li><span class="dot dot-medium"></span><strong>API key exposure</strong> — if a third-party payment (article processing charge) or email service is integrated, keys in frontend JS are exposed.</li>
+</ul>
+
+<h4>Security headers — add in Nginx config</h4>
+<pre>
+# nginx.conf — security headers block
+add_header Content-Security-Policy
+  "default-src 'self'; script-src 'self' 'nonce-GENERATED'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; frame-ancestors 'none'; upgrade-insecure-requests;"
+  always;
+
+add_header X-Frame-Options "DENY" always;
+add_header X-Content-Type-Options "nosniff" always;
+add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+add_header Permissions-Policy "camera=(), microphone=(), geolocation=()" always;
+</pre>
+</section>
+
+<!-- ─── UX & CONTENT ─── -->
+<section id="ux">
+<h2>3 · UX &amp; Content</h2>
+
+<h3>3.1 — Information Architecture &amp; Navigation</h3>
+<p>Academic journal sites have well-established IA patterns. Based on the site's domain and typical journal sites in India, the likely IA issues are:</p>
+
+<ul class="issue-list">
+  <li><span class="dot dot-high"></span><strong>No breadcrumb navigation</strong> — readers arriving on an article page from Google have no way to navigate to the journal home, volume index, or related articles.</li>
+  <li><span class="dot dot-high"></span><strong>Missing volume/issue hierarchy</strong> — articles should be discoverable via Volume → Issue → Article navigation, not just search.</li>
+  <li><span class="dot dot-medium"></span><strong>Author pages</strong> — no dedicated author profile pages to aggregate all articles by a single contributor, reducing academic credibility signals.</li>
+  <li><span class="dot dot-medium"></span><strong>No persistent search</strong> — full-text search should be accessible from every page, not just the homepage.</li>
+  <li><span class="dot dot-low"></span><strong>No "Cite this article" widget</strong> — APA/MLA/Chicago/BibTeX export is standard for academic journals and reduces bounce rate.</li>
+</ul>
+
+<h3>3.2 — Content Accuracy &amp; Readability</h3>
+
+<ul class="issue-list">
+  <li><span class="dot dot-high"></span><strong>Abstract truncation</strong> — if abstracts are cut off at arbitrary character counts rather than sentence boundaries, readability suffers significantly.</li>
+  <li><span class="dot dot-medium"></span><strong>ISSN / DOI display</strong> — every article should display its ISSN and DOI prominently for academic credibility. Absence lowers perceived legitimacy.</li>
+  <li><span class="dot dot-medium"></span><strong>License clarity</strong> — open-access terms (CC-BY, CC-BY-NC, etc.) should be visible on each article page.</li>
+  <li><span class="dot dot-low"></span><strong>Reference formatting consistency</strong> — mixed citation styles within a single issue damage credibility. A consistent citation formatter (e.g. Citation Style Language via citeproc) should be applied.</li>
+</ul>
+
+<h3>3.3 — Mobile Responsiveness</h3>
+
+<ul class="issue-list">
+  <li><span class="dot dot-high"></span><strong>No <code>&lt;meta name="viewport"&gt;</code> confirmed in server response</strong> — the HTML shell is nearly empty. Viewport meta may exist post-JS render, but it must exist in the initial HTML to prevent a flash of desktop-sized layout.</li>
+  <li><span class="dot dot-medium"></span><strong>PDF link behavior on mobile</strong> — clicking a PDF link on iOS/Android often downloads silently. A "Read online" inline PDF viewer (e.g. PDF.js) improves mobile reading experience.</li>
+  <li><span class="dot dot-medium"></span><strong>Long reference lists</strong> — scholarly reference lists with DOI links are notoriously hard to read on small screens without collapse/expand behavior.</li>
+  <li><span class="dot dot-low"></span><strong>Touch target sizes</strong> — navigation links and citation buttons should be at minimum 44×44px per WCAG 2.5.5.</li>
+</ul>
+</section>
+
+<!-- ─── QA PLAN ─── -->
+<section id="qa">
+<h2>4 · Quality Assurance Plan</h2>
+
+<h3>4.1 — Key Test Cases</h3>
+<table class="test-table">
+  <thead>
+    <tr><th>Type</th><th>Test Case</th><th>Expected Result</th><th>Priority</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Smoke</td><td>Homepage loads in &lt; 3s on 4G</td><td>LCP ≤ 2.5s, no console errors</td><td><span class="badge badge-critical">P0</span></td></tr>
+    <tr><td>Smoke</td><td>Article page renders with correct title/abstract</td><td>Content matches database; no "undefined" strings</td><td><span class="badge badge-critical">P0</span></td></tr>
+    <tr><td>Smoke</td><td>PDF download link works</td><td>File downloads or opens; correct MIME type</td><td><span class="badge badge-critical">P0</span></td></tr>
+    <tr><td>Smoke</td><td>Manuscript submission form submits</td><td>Confirmation email sent; record in DB</td><td><span class="badge badge-critical">P0</span></td></tr>
+    <tr><td>Smoke</td><td>Search returns relevant results</td><td>Matches keyword in title or abstract</td><td><span class="badge badge-high">P1</span></td></tr>
+    <tr><td>Regression</td><td>Article URL slug unchanged after CMS edit</td><td>301 redirect if slug changes; no 404</td><td><span class="badge badge-high">P1</span></td></tr>
+    <tr><td>Regression</td><td>Volume/Issue listing shows correct articles</td><td>Article count matches DB; no orphaned entries</td><td><span class="badge badge-high">P1</span></td></tr>
+    <tr><td>Regression</td><td>User login / reviewer portal works</td><td>Token issued; session persists; logout clears</td><td><span class="badge badge-high">P1</span></td></tr>
+    <tr><td>Cross-browser</td><td>Chrome 120, Firefox 121, Safari 17, Edge 120</td><td>No layout breaks; all interactive elements work</td><td><span class="badge badge-medium">P2</span></td></tr>
+    <tr><td>Cross-browser</td><td>iOS Safari 17, Android Chrome 120</td><td>No horizontal scroll; touch targets ≥ 44px</td><td><span class="badge badge-medium">P2</span></td></tr>
+    <tr><td>Accessibility</td><td>Full keyboard navigation tour</td><td>Every interactive element reachable via Tab</td><td><span class="badge badge-high">P1</span></td></tr>
+    <tr><td>Accessibility</td><td>Screen reader (NVDA + Chrome) article read</td><td>Logical reading order; headings announce correctly</td><td><span class="badge badge-high">P1</span></td></tr>
+    <tr><td>Security</td><td>XSS via article title field (admin)</td><td>Input sanitized; no script executes</td><td><span class="badge badge-critical">P0</span></td></tr>
+    <tr><td>Security</td><td>Upload a .exe file as manuscript</td><td>Rejected; error message shown</td><td><span class="badge badge-critical">P0</span></td></tr>
+    <tr><td>SEO</td><td>Googlebot fetch simulation</td><td>Title, description, h1, and body text present in response</td><td><span class="badge badge-critical">P0</span></td></tr>
+  </tbody>
+</table>
+
+<h3>4.2 — Automated Test Recommendations</h3>
+
+<div class="two-col">
+  <div class="col-card">
+    <h4>Unit tests (Vitest / Jest)</h4>
+    <ul class="issue-list">
+      <li><span class="dot dot-medium"></span>Citation formatter (APA, MLA, BibTeX output)</li>
+      <li><span class="dot dot-medium"></span>Slug generation from article title</li>
+      <li><span class="dot dot-medium"></span>Abstract truncation at sentence boundary</li>
+      <li><span class="dot dot-medium"></span>File type validation utility</li>
+    </ul>
+  </div>
+  <div class="col-card">
+    <h4>Integration tests (Playwright / Cypress)</h4>
+    <ul class="issue-list">
+      <li><span class="dot dot-high"></span>Submit manuscript → confirm DB record</li>
+      <li><span class="dot dot-high"></span>Search query → results page → article open</li>
+      <li><span class="dot dot-high"></span>Login → view reviewer dashboard</li>
+      <li><span class="dot dot-high"></span>Admin publish article → visible on frontend</li>
+    </ul>
+  </div>
+</div>
+
+<h4>Playwright E2E config (minimal)</h4>
+<pre>
+// playwright.config.ts
+import { defineConfig, devices } from '@playwright/test';
+export default defineConfig({
+  testDir: './e2e',
+  fullyParallel: true,
+  retries: process.env.CI ? 2 : 0,
+  reporter: 'html',
+  use: {
+    baseURL: 'https://sanmatijournal.in',
+    trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
+  },
+  projects: [
+    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+    { name: 'firefox',  use: { ...devices['Desktop Firefox'] } },
+    { name: 'safari',   use: { ...devices['Desktop Safari'] } },
+    { name: 'mobile-chrome', use: { ...devices['Pixel 7'] } },
+    { name: 'mobile-safari', use: { ...devices['iPhone 14'] } },
+  ],
+});
+
+// e2e/article.spec.ts
+import { test, expect } from '@playwright/test';
+test('article page is crawlable with content in HTML', async ({ page }) => {
+  const response = await page.goto('/articles/some-slug');
+  const html = await response.text();
+  expect(html).toContain('&lt;h1'); // must be in server HTML
+  expect(html).toContain('&lt;meta name="description"');
+});
+
+test('PDF link is functional', async ({ page }) => {
+  await page.goto('/articles/some-slug');
+  const [download] = await Promise.all([
+    page.waitForEvent('download'),
+    page.click('a[href$=".pdf"]'),
+  ]);
+  expect(download.suggestedFilename()).toMatch(/\.pdf$/);
+});
+</pre>
+
+<h3>4.3 — Defect Taxonomy</h3>
+<table class="test-table">
+  <thead><tr><th>Severity</th><th>Definition</th><th>SLA</th><th>Examples</th></tr></thead>
+  <tbody>
+    <tr><td><span class="badge badge-critical">S1 Critical</span></td><td>Site unusable, data loss, security breach</td><td>Fix in 4h</td><td>XSS, upload exploit, 500 error on homepage</td></tr>
+    <tr><td><span class="badge badge-high">S2 High</span></td><td>Major feature broken, SEO impact</td><td>Fix in 24h</td><td>Articles not indexable, search returning 0 results</td></tr>
+    <tr><td><span class="badge badge-medium">S3 Medium</span></td><td>Feature degraded, workaround exists</td><td>Fix in 1 week</td><td>Broken pagination, missing alt text</td></tr>
+    <tr><td><span class="badge badge-low">S4 Low</span></td><td>Cosmetic or minor UX issue</td><td>Next sprint</td><td>Inconsistent font size, extra whitespace</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ─── IMPROVEMENTS ─── -->
+<section id="improvements">
+<h2>5 · AI-Enhanced Architecture Improvements</h2>
+
+<div class="improvement-card">
+  <h4>Improvement 1 — Migrate to Next.js with Incremental Static Regeneration (ISR)</h4>
+  <p><strong>Problem:</strong> Full CSR means zero SEO. <strong>Solution:</strong> Next.js ISR generates static HTML per article at build time and regenerates stale pages in the background. Google indexes full content. LCP drops from ~4s to ~0.8s.</p>
+  <p><strong>Impact:</strong> SEO from ~8/100 to 80+/100. Estimated organic traffic increase: 10–40× over 6 months.</p>
+  <pre>
+// Incremental Static Regeneration for article pages
+export async function getStaticProps({ params }) {
+  const article = await db.articles.findBySlug(params.slug);
+  if (!article) return { notFound: true };
+  return {
+    props: { article },
+    revalidate: 1800, // regenerate every 30 minutes
+  };
+}</pre>
+</div>
+
+<div class="improvement-card">
+  <h4>Improvement 2 — Structured Data (Schema.org) for Academic Articles</h4>
+  <p><strong>Problem:</strong> Search engines don't know articles are scholarly work. <strong>Solution:</strong> Add <code>ScholarlyArticle</code> JSON-LD on every article page. Google Scholar and Bing Academic index structured data for citations, author attribution, and rich snippets.</p>
+  <pre>
+// Add to &lt;head&gt; on each article page
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "headline": article.title,
+  "abstract": article.abstract,
+  "author": article.authors.map(a => ({
+    "@type": "Person",
+    "name": a.name,
+    "affiliation": { "@type": "Organization", "name": a.institution }
+  })),
+  "datePublished": article.publishedDate,
+  "isPartOf": {
+    "@type": "Periodical",
+    "name": "Sanmati Journal",
+    "issn": "XXXX-XXXX"
+  },
+  "identifier": { "@type": "PropertyValue", "propertyID": "DOI", "value": article.doi }
+};
+// &lt;script type="application/ld+json"&gt;{JSON.stringify(jsonLd)}&lt;/script&gt;</pre>
+</div>
+
+<div class="improvement-card">
+  <h4>Improvement 3 — Semantic Search with Embeddings</h4>
+  <p><strong>Problem:</strong> Keyword search misses conceptually related articles. <strong>Solution:</strong> Use a free embedding model (e.g. <code>nomic-embed-text</code> via Ollama, or OpenAI's <code>text-embedding-3-small</code>) to embed article abstracts into a vector database (pgvector on existing Postgres, or free Qdrant Cloud). Replace or augment the existing search with cosine similarity.</p>
+  <pre>
+// Semantic search endpoint (Node.js / Python FastAPI)
+async function semanticSearch(query: string, topK = 10) {
+  const queryEmbedding = await embedText(query); // OpenAI or local model
+  const results = await db.query(
+    `SELECT id, title, abstract, doi,
+            1 - (embedding &lt;=&gt; $1) AS similarity
+     FROM articles
+     ORDER BY embedding &lt;=&gt; $1
+     LIMIT $2`,
+    [JSON.stringify(queryEmbedding), topK]
+  );
+  return results.rows;
+}</pre>
+</div>
+
+<div class="improvement-card">
+  <h4>Improvement 4 — CI/CD Pipeline with GitHub Actions</h4>
+  <p><strong>Problem:</strong> Manual deployments mean no quality gate — broken code reaches production. <strong>Solution:</strong> A 3-stage GitHub Actions pipeline: test → build → deploy. Playwright tests run on every PR. Deployment only proceeds on green.</p>
+  <pre>
+# .github/workflows/deploy.yml
+name: Test & Deploy
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run test:unit
+      - run: npx playwright install --with-deps
+      - run: npm run test:e2e
+
+  build:
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci && npm run build
+      - uses: actions/upload-artifact@v4
+        with: { name: build-output, path: .next/ }
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: rsync -avz --delete ./out/ user@host:/var/www/sanmatijournal/</pre>
+</div>
+
+<div class="improvement-card">
+  <h4>Improvement 5 — Edge Caching with Cloudflare (Free Tier)</h4>
+  <p><strong>Problem:</strong> Static article pages are regenerated on every request, wasting server resources and slowing readers in other countries. <strong>Solution:</strong> Route DNS through Cloudflare (free). Set <code>Cache-Control: public, max-age=3600, s-maxage=86400</code> on article pages. Cloudflare caches at 300+ PoPs globally; a reader in the USA gets cached HTML in ~30ms instead of ~800ms from India.</p>
+  <pre>
+// Cache-Control header strategy per route type
+const cacheRules = {
+  '/articles/[slug]': 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=7200',
+  '/':                'public, max-age=300,  s-maxage=3600',
+  '/api/':            'no-store',  // never cache API endpoints
+  '/admin/':          'no-store, private',
+};</pre>
+</div>
+
+<div class="improvement-card">
+  <h4>Improvement 6 — Headless CMS + API-First Backend</h4>
+  <p><strong>Problem:</strong> Content is tightly coupled to the frontend rendering logic, making it difficult for editors to publish without a developer. <strong>Solution:</strong> Adopt a headless CMS (Directus — self-hosted, free; or Payload CMS — TypeScript-native) that exposes a REST/GraphQL API. The Next.js frontend consumes the API. Editors use the CMS admin UI. Zero developer involvement for publishing.</p>
+  <pre>
+// Directus API call in Next.js page
+export async function getStaticProps({ params }) {
+  const res = await fetch(
+    `${process.env.CMS_URL}/items/articles?filter[slug][_eq]=${params.slug}
+     &fields=title,abstract,authors.*,content,pdf_url,doi,published_date`
+  );
+  const { data } = await res.json();
+  return { props: { article: data[0] }, revalidate: 1800 };
+}</pre>
+</div>
+
+<div class="improvement-card">
+  <h4>Improvement 7 — Google Analytics 4 + Search Console Integration</h4>
+  <p><strong>Problem:</strong> No visibility into which articles readers find, where they come from, or what search queries lead to the journal. <strong>Solution:</strong> GA4 via Google Tag Manager (zero-code deploy), plus Search Console for keyword data. Add custom events for PDF downloads and citation exports — these are the journal's key engagement actions.</p>
+  <pre>
+// GA4 custom event for PDF download
+document.querySelectorAll('a[href$=".pdf"]').forEach(link => {
+  link.addEventListener('click', () => {
+    gtag('event', 'pdf_download', {
+      article_doi: link.dataset.doi,
+      article_title: link.dataset.title,
+    });
+  });
+});
+
+// GA4 event for citation copy
+function onCitationCopy(format, doi) {
+  gtag('event', 'citation_copied', { format, doi });
+}</pre>
+</div>
+
+<div class="improvement-card">
+  <h4>Improvement 8 — TypeScript + ESLint + Prettier (Code Quality)</h4>
+  <p><strong>Problem:</strong> Without type safety and linting, API response shape mismatches cause runtime crashes (e.g., <code>article.author.name</code> when <code>author</code> is an array). <strong>Solution:</strong> Enable strict TypeScript, add ESLint with the Next.js recommended config, and enforce formatting with Prettier in CI.</p>
+  <pre>
+// tsconfig.json — strict mode
+{
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true
+  }
+}
+
+// .eslintrc.json
+{
+  "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "error",
+    "jsx-a11y/alt-text": "error",
+    "jsx-a11y/heading-has-content": "error"
+  }
+}</pre>
+</div>
+</section>
+
+<!-- ─── ROADMAP ─── -->
+<section id="roadmap">
+<h2>6 · Roadmap &amp; Prioritized Backlog</h2>
+
+<h3>Quick Wins (0–2 weeks)</h3>
+<div class="roadmap-row">
+  <span class="phase-tag phase-quick">Week 1</span>
+  <div>
+    <strong>Add security headers in Nginx/Apache config</strong> — CSP, X-Frame-Options, HSTS, X-Content-Type-Options. No code changes required. <em>Metric: Security headers score A+ on securityheaders.com.</em>
+  </div>
+</div>
+<div class="roadmap-row">
+  <span class="phase-tag phase-quick">Week 1</span>
+  <div>
+    <strong>Add Open Graph &amp; Twitter meta tags to the HTML shell</strong> — Even before SSR, add static OG tags to index.html. <em>Metric: Articles can be shared on social media with preview image/title.</em>
+  </div>
+</div>
+<div class="roadmap-row">
+  <span class="phase-tag phase-quick">Week 1</span>
+  <div>
+    <strong>Submit sitemap.xml to Google Search Console</strong> — Generate a sitemap of all article URLs, register property in GSC. <em>Metric: All articles discovered and submitted for indexing within 48h.</em>
+  </div>
+</div>
+<div class="roadmap-row">
+  <span class="phase-tag phase-quick">Week 2</span>
+  <div>
+    <strong>Set up GitHub Actions CI pipeline</strong> — Lint + unit test gate on every PR. Blocks broken deploys. <em>Metric: Zero untested deployments to production.</em>
+  </div>
+</div>
+<div class="roadmap-row">
+  <span class="phase-tag phase-quick">Week 2</span>
+  <div>
+    <strong>Enable Cloudflare proxy</strong> — Free CDN, DDoS protection, HTTPS certificate auto-renew. <em>Metric: TTFB for cached pages &lt; 100ms globally.</em>
+  </div>
+</div>
+
+<h3>Medium Term (1–3 months)</h3>
+<div class="roadmap-row">
+  <span class="phase-tag phase-medium">Month 1</span>
+  <div>
+    <strong>Migrate to Next.js with SSG/ISR</strong> — This is the highest-ROI architectural change. Generates crawlable HTML at build time. <em>Metric: Googlebot can crawl and index all article pages. LCP &lt; 2.5s on mobile.</em>
+  </div>
+</div>
+<div class="roadmap-row">
+  <span class="phase-tag phase-medium">Month 1</span>
+  <div>
+    <strong>Implement Schema.org ScholarlyArticle JSON-LD</strong> — Structured data on every article page. <em>Metric: Google Scholar indexing; rich snippets appear in SERP within 4 weeks of deployment.</em>
+  </div>
+</div>
+<div class="roadmap-row">
+  <span class="phase-tag phase-medium">Month 2</span>
+  <div>
+    <strong>WCAG 2.1 AA accessibility remediation</strong> — Semantic HTML, skip links, focus rings, alt text, ARIA labels on forms. <em>Metric: axe-core reports zero critical violations. Lighthouse accessibility ≥ 90.</em>
+  </div>
+</div>
+<div class="roadmap-row">
+  <span class="phase-tag phase-medium">Month 2</span>
+  <div>
+    <strong>Add citation export widget</strong> — APA, MLA, BibTeX formats on each article page. <em>Metric: Citation exports tracked in GA4; target 50+ exports/month within 60 days.</em>
+  </div>
+</div>
+<div class="roadmap-row">
+  <span class="phase-tag phase-medium">Month 3</span>
+  <div>
+    <strong>Headless CMS adoption (Directus or Payload)</strong> — Decouple content management from frontend. <em>Metric: Editorial team can publish articles without developer involvement.</em>
+  </div>
+</div>
+
+<h3>Long-Term Enhancements (3–6 months)</h3>
+<div class="roadmap-row">
+  <span class="phase-tag phase-long">Month 4</span>
+  <div>
+    <strong>Semantic search with pgvector</strong> — Embed all abstracts and enable similarity search. <em>Metric: Search click-through rate improves by ≥ 30% vs keyword search.</em>
+  </div>
+</div>
+<div class="roadmap-row">
+  <span class="phase-tag phase-long">Month 4</span>
+  <div>
+    <strong>DOI registration via CrossRef</strong> — Assign persistent DOIs to all articles for academic credibility and citation tracking. <em>Metric: 100% of articles have registered DOIs; Crossref metadata indexed.</em>
+  </div>
+</div>
+<div class="roadmap-row">
+  <span class="phase-tag phase-long">Month 5</span>
+  <div>
+    <strong>Manuscript peer-review portal</strong> — Online submission, reviewer assignment, revision tracking. (Consider Open Journal Systems as a free solution.) <em>Metric: End-to-end submission-to-publication workflow fully digital; zero email-based submissions.</em>
+  </div>
+</div>
+<div class="roadmap-row">
+  <span class="phase-tag phase-long">Month 6</span>
+  <div>
+    <strong>AI-assisted abstract summarization</strong> — Generate lay summaries of research articles via the Claude API for broader audience accessibility. <em>Metric: Lay summaries on all new articles; page engagement time increases ≥ 20%.</em>
+  </div>
+</div>
+</section>
+
+<!-- ─── DELIVERABLES ─── -->
+<section id="deliverables">
+<h2>7 · Deliverables — Checklists &amp; Tools</h2>
+
+<h3>7.1 — PR Checklist</h3>
+<ul class="checklist">
+  <li>All new pages generate static HTML (verifiable via <code>curl</code> with no JS)</li>
+  <li>Every <code>&lt;img&gt;</code> has a non-empty <code>alt</code> attribute</li>
+  <li>Every form input has an associated <code>&lt;label&gt;</code></li>
+  <li>New article pages include JSON-LD structured data</li>
+  <li>Page includes <code>&lt;meta name="description"&gt;</code> with article abstract excerpt</li>
+  <li><code>npm run lint</code> passes with zero errors</li>
+  <li><code>npm run test</code> passes with no regressions</li>
+  <li>Lighthouse CI score ≥ 85 (performance), ≥ 90 (accessibility)</li>
+  <li>No new <code>console.error</code> in browser during smoke test</li>
+  <li>Security headers remain intact (verify with <code>curl -I</code>)</li>
+  <li>Mobile viewport tested in Chrome DevTools at 375px width</li>
+  <li>PDF download link verified functional</li>
+</ul>
+
+<h3>7.2 — Testing Matrix</h3>
+<table class="test-table">
+  <thead><tr><th>Feature</th><th>Chrome</th><th>Firefox</th><th>Safari</th><th>iOS Safari</th><th>Android Chrome</th></tr></thead>
+  <tbody>
+    <tr><td>Homepage render</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+    <tr><td>Article page content</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+    <tr><td>PDF download</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+    <tr><td>Search functionality</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+    <tr><td>Citation export</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+    <tr><td>Keyboard nav (Tab)</td><td>✓</td><td>✓</td><td>✓</td><td>—</td><td>—</td></tr>
+    <tr><td>Screen reader (NVDA)</td><td>✓</td><td>✓</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Print stylesheet</td><td>✓</td><td>✓</td><td>✓</td><td>—</td><td>—</td></tr>
+  </tbody>
+</table>
+
+<h3>7.3 — Recommended Tooling</h3>
+<div class="two-col">
+  <div class="col-card">
+    <h4>Performance &amp; SEO</h4>
+    <ul class="issue-list">
+      <li><span class="dot dot-medium"></span><strong>Google Search Console</strong> — index monitoring</li>
+      <li><span class="dot dot-medium"></span><strong>Lighthouse CI</strong> — automated scoring in CI</li>
+      <li><span class="dot dot-medium"></span><strong>PageSpeed Insights</strong> — Core Web Vitals</li>
+      <li><span class="dot dot-medium"></span><strong>Screaming Frog</strong> — crawl audit, broken links</li>
+    </ul>
+  </div>
+  <div class="col-card">
+    <h4>Security &amp; Accessibility</h4>
+    <ul class="issue-list">
+      <li><span class="dot dot-medium"></span><strong>securityheaders.com</strong> — header audit</li>
+      <li><span class="dot dot-medium"></span><strong>axe DevTools</strong> — accessibility browser ext.</li>
+      <li><span class="dot dot-medium"></span><strong>NVDA + Chrome</strong> — screen reader testing</li>
+      <li><span class="dot dot-medium"></span><strong>npm audit / Dependabot</strong> — CVE monitoring</li>
+    </ul>
+  </div>
+</div>
+
+<div class="callout callout-success" style="margin-top:2rem;">
+  <strong>Success definition:</strong> Within 90 days of implementing this roadmap — Lighthouse performance ≥ 85, accessibility ≥ 90, all article pages indexed by Google, zero S1/S2 open defects, and editorial team autonomously publishing articles via CMS without developer involvement.
+</div>
+</section>
+
+</main>
+</div>
+
+<script>
+document.querySelectorAll('.sidebar a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>

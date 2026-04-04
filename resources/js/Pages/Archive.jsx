@@ -178,7 +178,7 @@ export default function Archive({ issues }) {
                                                             <FileText className="w-4 h-4 text-secondary" />
                                                             <span className="text-[10px] font-black text-secondary uppercase tracking-[0.2em]">Research Article</span>
                                                         </div>
-                                                        {paper.id.startsWith('static-') ? (
+                                                        {String(paper.id).startsWith('static-') ? (
                                                             <a href={paper.file_path} target="_blank" rel="noopener noreferrer" className="block">
                                                                 <h4 className="text-xl font-bold text-dark mb-3 group-hover:text-primary transition-colors leading-[1.4]">{paper.title}</h4>
                                                             </a>
@@ -190,7 +190,7 @@ export default function Archive({ issues }) {
                                                         <p className="text-muted font-medium italic text-sm">{paper.authors}</p>
                                                     </div>
                                                     <div className="flex flex-col sm:flex-row items-center gap-3 mt-4 md:mt-0">
-                                                        {paper.id.startsWith('static-') ? (
+                                                        {String(paper.id).startsWith('static-') ? (
                                                             <>
                                                                 <a 
                                                                     href={paper.file_path}

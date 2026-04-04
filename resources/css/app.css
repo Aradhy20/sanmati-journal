@@ -2,7 +2,7 @@
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  --font-serif: "Poppins", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 
   /* ── Production Graded Variables ── */
   --container-width: 1200px;
@@ -14,25 +14,26 @@
 
 
   /* ── Sanmati Premium Palette (2026 Redesign) ── */
+  /* ── Sanmati Premium Palette (2026 Redesign) ── */
   --color-primary: #0A2540;        /* Deep Navy */
   --color-primary-dark: #051A2E;   /* Darker Navy */
   --color-primary-light: #183C64;  /* Lighter Navy */
 
-  --color-secondary: #00C4B4;      /* Accent Teal */
-  --color-secondary-dark: #00A396; /* Dark Teal */
-  --color-secondary-light: #30E3D5;/* Light Teal */
+  --color-secondary: #B8965E;      /* Elegant Gold Accent */
+  --color-secondary-dark: #A1814E; /* Dark Gold */
+  --color-secondary-light: #D4B688;/* Light Gold */
 
-  --color-coral: #00C4B4;          /* Remapped to Teal */
-  --color-coral-dark: #00A396;
+  --color-coral: #B8965E;          /* Remapped to Gold to avoid issues in components */
+  --color-coral-dark: #A1814E;
 
   --color-success: #059669;
   --color-info: #0284c7;
 
-  --color-dark: #071523;           /* Ultra Dark Navy */
-  --color-dark-light: #142E46;     /* Slate Navy */
+  --color-dark: #0A192F;           /* Ultra Dark Navy */
+  --color-dark-light: #112240;     /* Slate Navy */
 
-  --color-accent: #FFC224;         /* Gold accent */
-  --color-accent-light: #FFD96E;
+  --color-accent: #B8965E;         /* Gold accent */
+  --color-accent-light: #D4B688;
 
   --color-warm-bg: #F8F9FA;        /* Off-white / Cream */
   --color-surface: #ffffff;
@@ -105,8 +106,8 @@
 
   /* ── Design System v2: Academic Premium Tokens ── */
 
-  /* Merriweather as academic serif (scholarly authority) */
-  --font-merriweather: "Merriweather", Georgia, "Times New Roman", serif;
+  /* Playfair Display as academic serif (scholarly authority) */
+  --font-merriweather: "Playfair Display", Georgia, "Times New Roman", serif;
 
   /* Emerald accent scale (knowledge / growth) */
   --color-emerald-600: #059669;

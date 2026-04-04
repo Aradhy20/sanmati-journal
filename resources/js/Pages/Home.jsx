@@ -473,6 +473,30 @@ export default function Home() {
             {/* ─── PUBLICATION PROCESS ─── */}
             <PipelineSection />
 
+            {/* ─── INDEXING & ABSTRACTING ─── */}
+            <section className="py-20 bg-warm-bg border-y border-gray-100">
+                <div className="container-custom">
+                    <div className="text-center mb-10">
+                        <div className="flex items-center justify-center gap-4 mb-4">
+                            <span className="h-px w-10 bg-secondary" />
+                            <span className="text-secondary font-black text-[11px] uppercase tracking-[0.3em]">Global Visibility</span>
+                            <span className="h-px w-10 bg-secondary" />
+                        </div>
+                        <h2 className="text-2xl md:text-3xl font-serif font-bold text-dark">
+                            Indexed & <span className="text-primary italic">Abstracted In</span>
+                        </h2>
+                    </div>
+                    <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70">
+                        {/* Placeholder Logos for Indexing */}
+                        <div className="font-bold text-xl tracking-tight text-gray-500">Google Scholar</div>
+                        <div className="font-bold text-xl tracking-tight text-gray-500">CrossRef</div>
+                        <div className="font-bold text-xl tracking-tight text-gray-500">UGC CARE (Proposed)</div>
+                        <div className="font-bold text-xl tracking-tight text-gray-500">Directory of Open Access Journals (DOAJ)</div>
+                        <div className="font-bold text-xl tracking-tight text-gray-500">ResearchGate</div>
+                    </div>
+                </div>
+            </section>
+
             {/* ─── TRENDING / MOST READ SECTION ─── */}
             <section className="py-20 bg-white relative overflow-hidden">
                 <div className="absolute -top-40 left-0 w-[600px] h-[600px] bg-primary/3 rounded-full blur-[120px]" />

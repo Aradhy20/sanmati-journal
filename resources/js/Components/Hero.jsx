@@ -130,6 +130,29 @@ const Hero = () => {
                 </div>
             </div>
 
+            {/* Horizontal Trust Bar below the Hero Section */}
+            <div className="absolute bottom-0 w-full bg-white/80 backdrop-blur-md border-t border-gray-100 py-4 shadow-sm z-20">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+                    <div className="flex flex-wrap items-center justify-center sm:justify-between gap-6 md:gap-8">
+                        {[
+                            { icon: CheckCircle, label: 'Authenticated', value: 'ISSN: 3108-1819', color: 'text-[#687EFF]' },
+                            { icon: Star, label: 'Impact', value: 'Double-Blind Review', color: 'text-[#F87A53]' },
+                            { icon: Users, label: 'Authors', value: '200+ Contributors', color: 'text-[#687EFF]' },
+                            { icon: BookOpen, label: 'Archive', value: '500+ Papers', color: 'text-[#052143]' },
+                            { icon: Globe, label: 'Scope', value: 'A Wide Range of Research Fields', color: 'text-[#687EFF]' },
+                        ].map((item, i) => (
+                            <div key={i} className="flex items-center gap-3">
+                                <item.icon className={`w-5 h-5 flex-shrink-0 ${item.color}`} />
+                                <div>
+                                    <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest leading-none mb-0.5">{item.label}</p>
+                                    <p className="text-slate-800 text-[12px] font-bold">{item.value}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
         </section>
     );
 };

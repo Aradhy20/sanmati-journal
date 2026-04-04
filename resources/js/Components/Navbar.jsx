@@ -98,6 +98,7 @@ const Navbar = () => {
                 { name: 'News', href: '/media-news' },
             ],
         },
+        { name: 'Blog', href: '/blog' },
         { name: 'Contact', href: '/contact' },
     ];
 
@@ -109,8 +110,25 @@ const Navbar = () => {
     return (
         <>
 
-            {/* Main Navbar - Premium Glassmorphism */}
-            <nav className={`sticky top-0 w-full z-40 transition-all duration-500 ease-[0.22,1,0.36,1] ${scrolled ? 'bg-white/80 backdrop-blur-2xl shadow-sm border-b border-gray-100/50 py-1' : 'bg-white/95 border-b border-transparent py-4'}`}>
+            {/* Top Info Bar - Top Notice Banner for Countdown */}
+            <div className="bg-primary-dark text-white border-b border-primary/50 sticky top-0 z-50">
+                <div className="max-w-7xl mx-auto px-4 py-2 flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4">
+                    <div className="flex items-center gap-4 text-[11px] font-bold tracking-widest uppercase text-white/80">
+                        <span>ISSN: 3108-1819</span>
+                        <span className="w-1 h-1 rounded-full bg-secondary"></span>
+                        <span>UGC CARE Listed (Proposed)</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <span className="text-[11px] font-black uppercase tracking-widest text-secondary">
+                            Next Current Cycle Closes In
+                        </span>
+                        <CountdownTimer targetDate={targetDate} className="scale-75 origin-left" />
+                    </div>
+                </div>
+            </div>
+
+            {/* Main Navbar - Solid Academic Header */}
+            <nav className={`sticky top-[52px] w-full z-40 transition-all duration-500 ease-[0.22,1,0.36,1] ${scrolled ? 'bg-white shadow-md border-b border-gray-200 py-2' : 'bg-white border-b border-gray-100 py-4'}`}>
                 <div className="max-w-7xl mx-auto px-6 lg:px-12">
                     <div className="flex items-center justify-between h-16">
                         {/* Logo - Refined */}

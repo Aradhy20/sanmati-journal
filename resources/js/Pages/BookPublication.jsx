@@ -25,39 +25,303 @@ export default function BookPublication({ books }) {
     
     // Antigravity Placeholder Books - Wait for Admin to populate or replace hardcoded
     const hardcodedBooks = [
-        {
-            id: 1,
-            title: "Advanced Research Methodologies & Analytical Frameworks",
-            author: "Dr. A. K. Jain",
-            image_url: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=600&auto=format&fit=crop",
-            amazon_link: "#",
-            flipkart_link: "#"
-        },
-        {
-            id: 2,
-            title: "Emerging Paradigms in Modern Social Sciences",
-            author: "JTS Publications",
-            image_url: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=600&auto=format&fit=crop",
-            amazon_link: "#",
-            flipkart_link: ""
-        },
-        {
-            id: 3,
-            title: "Global Economic Perspectives & Policy",
-            author: "Editorial Board",
-            image_url: "https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=600&auto=format&fit=crop",
-            amazon_link: "",
-            flipkart_link: "#"
-        },
-        {
-            id: 4,
-            title: "Multidisciplinary Approaches to Humanities",
-            author: "Dr. S. Sharma",
-            image_url: "https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=600&auto=format&fit=crop",
-            amazon_link: "#",
-            flipkart_link: "#"
-        }
-    ];
+    {
+        "id": 1,
+        "title": "Published Volume 1",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.23 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 2,
+        "title": "Published Volume 2",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.24 PM (1).jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 3,
+        "title": "Published Volume 3",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.24 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 4,
+        "title": "Published Volume 4",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.25 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 5,
+        "title": "Published Volume 5",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.26 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 6,
+        "title": "Published Volume 6",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.27 PM (1).jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 7,
+        "title": "Published Volume 7",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.27 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 8,
+        "title": "Published Volume 8",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.29 PM (1).jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 9,
+        "title": "Published Volume 9",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.29 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 10,
+        "title": "Published Volume 10",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.30 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 11,
+        "title": "Published Volume 11",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.33 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 12,
+        "title": "Published Volume 12",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.34 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 13,
+        "title": "Published Volume 13",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.35 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 14,
+        "title": "Published Volume 14",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.36 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 15,
+        "title": "Published Volume 15",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.37 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 16,
+        "title": "Published Volume 16",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.38 PM (1).jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 17,
+        "title": "Published Volume 17",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.38 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 18,
+        "title": "Published Volume 18",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.39 PM (1).jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 19,
+        "title": "Published Volume 19",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.39 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 20,
+        "title": "Published Volume 20",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.40 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 21,
+        "title": "Published Volume 21",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.41 PM (1).jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 22,
+        "title": "Published Volume 22",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.41 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 23,
+        "title": "Published Volume 23",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.42 PM (1).jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 24,
+        "title": "Published Volume 24",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.42 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 25,
+        "title": "Published Volume 25",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.43 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 26,
+        "title": "Published Volume 26",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.44 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 27,
+        "title": "Published Volume 27",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.45 PM (1).jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 28,
+        "title": "Published Volume 28",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.45 PM (2).jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 29,
+        "title": "Published Volume 29",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.45 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 30,
+        "title": "Published Volume 30",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.46 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 31,
+        "title": "Published Volume 31",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.20.47 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 32,
+        "title": "Published Volume 32",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.21.47 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 33,
+        "title": "Published Volume 33",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.21.48 PM (1).jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 34,
+        "title": "Published Volume 34",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.21.48 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 35,
+        "title": "Published Volume 35",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.21.49 PM (1).jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 36,
+        "title": "Published Volume 36",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.21.49 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    },
+    {
+        "id": 37,
+        "title": "Published Volume 37",
+        "author": "Sanmati Journal Collections",
+        "image_url": "/images/books/WhatsApp Image 2026-02-16 at 9.21.50 PM.jpeg",
+        "amazon_link": "",
+        "flipkart_link": ""
+    }
+];
 
     const displayBooks = dbBooks.length > 0 ? dbBooks : hardcodedBooks;
 
