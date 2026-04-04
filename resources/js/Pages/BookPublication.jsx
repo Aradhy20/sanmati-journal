@@ -21,7 +21,45 @@ const staggerContainer = {
 };
 
 export default function BookPublication({ books }) {
-    const displayBooks = books || [];
+    const dbBooks = books || [];
+    
+    // Antigravity Placeholder Books - Wait for Admin to populate or replace hardcoded
+    const hardcodedBooks = [
+        {
+            id: 1,
+            title: "Advanced Research Methodologies & Analytical Frameworks",
+            author: "Dr. A. K. Jain",
+            image_url: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=600&auto=format&fit=crop",
+            amazon_link: "#",
+            flipkart_link: "#"
+        },
+        {
+            id: 2,
+            title: "Emerging Paradigms in Modern Social Sciences",
+            author: "JTS Publications",
+            image_url: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=600&auto=format&fit=crop",
+            amazon_link: "#",
+            flipkart_link: ""
+        },
+        {
+            id: 3,
+            title: "Global Economic Perspectives & Policy",
+            author: "Editorial Board",
+            image_url: "https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=600&auto=format&fit=crop",
+            amazon_link: "",
+            flipkart_link: "#"
+        },
+        {
+            id: 4,
+            title: "Multidisciplinary Approaches to Humanities",
+            author: "Dr. S. Sharma",
+            image_url: "https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=600&auto=format&fit=crop",
+            amazon_link: "#",
+            flipkart_link: "#"
+        }
+    ];
+
+    const displayBooks = dbBooks.length > 0 ? dbBooks : hardcodedBooks;
 
     return (
         <MainLayout>
