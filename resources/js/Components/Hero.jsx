@@ -4,7 +4,7 @@ import { ArrowRight, BookOpen, Users, Star, CheckCircle, BookMarked, Sparkles, G
 
 const Hero = () => {
     return (
-        <section className="relative min-h-[95vh] flex items-center overflow-hidden bg-gradient-to-br from-[#eef1ff] via-[#f5f0ff] to-[#fff0f5]">
+        <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#eef1ff] via-[#f5f0ff] to-[#fff0f5]">
             {/* Soft decorative blobs */}
             <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
                 <div className="absolute top-0 -left-1/4 w-[650px] h-[650px] bg-[#687EFF]/10 rounded-full blur-[180px]" />
@@ -90,9 +90,9 @@ const Hero = () => {
                         {/* Main large image */}
                         <div className="relative rounded-[3rem] overflow-hidden shadow-[0_30px_80px_rgba(104,126,255,0.18)] border-2 border-white animate-float">
                             <img
-                                src="/fistudy-assets/backgrounds/slider-1-1.png"
-                                alt="Sanmati Journal Publication"
-                                className="w-full h-[520px] object-cover"
+                                src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=1200&auto=format&fit=crop"
+                                alt="Sanmati Journal Library — Academic Research"
+                                className="w-full h-[520px] object-cover object-center"
                                 loading="eager"
                             />
                             {/* Bottom overlay detail */}
@@ -102,7 +102,7 @@ const Hero = () => {
                                     <span className="text-[#052143]/80 text-xs font-bold uppercase tracking-widest">New Submissions Open — 2026</span>
                                 </div>
                                 <div className="flex -space-x-3">
-                                    {['/fistudy-assets/team/team-1-1.jpg', '/fistudy-assets/team/team-1-2.jpg', '/fistudy-assets/team/team-2-1.jpg'].map((src, j) => (
+                                    {['https://i.pravatar.cc/36?img=3', 'https://i.pravatar.cc/36?img=5', 'https://i.pravatar.cc/36?img=7'].map((src, j) => (
                                         <img key={j} src={src} alt="Reviewer" className="w-9 h-9 rounded-full border-2 border-white object-cover shadow" />
                                     ))}
                                     <div className="w-9 h-9 rounded-full border-2 border-white bg-[#687EFF] flex items-center justify-center text-[10px] font-black text-white shadow">+12</div>
