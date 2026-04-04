@@ -97,7 +97,7 @@ const Footer = () => {
                             <h4 className="text-[11px] font-black tracking-[0.2em] uppercase text-white mb-8 border-l-2 border-secondary pl-4">Social</h4>
                             <div className="flex items-center gap-4">
                                 <a
-                                    href="https://www.linkedin.com/company/sanmati-journal/"
+                                    href="https://www.linkedin.com/company/sanamti-journal/"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="Sanmati Spectrum on LinkedIn"
