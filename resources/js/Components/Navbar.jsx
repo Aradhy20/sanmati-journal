@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, usePage } from '@inertiajs/react';
-import { Menu, X, ChevronDown, ArrowUpRight, Mail, Phone, MapPin, Sun, Moon } from 'lucide-react';
+import { Menu, X, ChevronDown, ArrowUpRight, Mail, Phone, MapPin, Sun, Moon, Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CountdownTimer from './ui/CountdownTimer';
 
-const Navbar = () => {
+const Navbar = ({ onOpenSearch }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState(null);
     const [scrolled, setScrolled] = useState(false);
@@ -108,27 +108,27 @@ const Navbar = () => {
     };
 
     return (
-        <header className="sticky top-0 z-50 flex flex-col w-full">
+        <header className="sticky top-0 z-50 flex flex-col w-full overflow-x-visible">
 
             {/* Top Info Bar - Top Notice Banner for Countdown */}
             <div className="bg-primary-dark text-white border-b border-primary/50 relative z-50">
-                <div className="max-w-7xl mx-auto px-4 py-2 flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4">
-                    <div className="flex items-center gap-4 text-[11px] font-bold tracking-widest uppercase text-white/80">
-                        <span>ISSN: 3108-1819</span>
+                <div className="max-w-7xl mx-auto px-4 py-2.5 flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4">
+                    <div className="flex items-center gap-4 text-[10px] sm:text-[11px] font-bold tracking-[0.2em] uppercase text-white">
+                        <span className="opacity-90">ISSN: 3108-1819</span>
                         <span className="w-1 h-1 rounded-full bg-secondary"></span>
-                        <span>UGC CARE Listed (Proposed)</span>
+                        <span className="text-secondary-light">UGC CARE Listed (Proposed)</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                        <span className="text-[11px] font-black uppercase tracking-widest text-secondary">
-                            Next Current Cycle Closes In
+                    <div className="flex items-center gap-3">
+                        <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.15em] text-white/70">
+                            Current Cycle Closes In:
                         </span>
-                        <CountdownTimer targetDate={targetDate} className="scale-75 origin-left" />
+                        <CountdownTimer targetDate={targetDate} className="scale-90 origin-right" />
                     </div>
                 </div>
             </div>
 
             {/* Main Navbar - Solid Academic Header */}
-            <nav className={`w-full relative z-40 transition-all duration-500 ease-[0.22,1,0.36,1] ${scrolled ? 'bg-white shadow-md border-b border-gray-200 py-2' : 'bg-white border-b border-gray-100 py-4'}`}>
+            <nav className={`w-full relative z-40 overflow-x-visible transition-all duration-500 ease-[0.22,1,0.36,1] ${scrolled ? 'bg-white shadow-md border-b border-gray-200 py-2' : 'bg-white border-b border-gray-100 py-4'}`}>
                 <div className="max-w-7xl mx-auto px-4 lg:px-8">
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center gap-4 xl:gap-10">
@@ -154,7 +154,7 @@ const Navbar = () => {
                         </Link>
 
                         {/* Desktop Menu */}
-                        <div className="hidden xl:flex items-center gap-2 xl:gap-4 lg:flex-wrap">
+                        <div className="hidden lg:flex items-center gap-2 xl:gap-4 flex-wrap overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 min-w-0">
                             {navItems.map((item) => (
                                 <div
                                     key={item.name}
@@ -233,15 +233,23 @@ const Navbar = () => {
                         </div>
                         </div>
 
-                        {/* CTA + Dark Mode Toggle + Mobile Toggle */}
-                        <div className="flex items-center gap-2 sm:gap-3">
+                        {/* CTA + Search + Toggle */}
+                        <div className="flex items-center gap-2 sm:gap-4">
+                            <button
+                                onClick={onOpenSearch}
+                                className="p-2.5 rounded-xl bg-gray-100 hover:bg-primary/10 text-dark hover:text-primary transition-all flex-shrink-0"
+                                aria-label="Search"
+                            >
+                                <Search className="w-5 h-5" />
+                            </button>
+
                             <Link
                                 href="/submission-guidelines/call-for-papers"
                                 className="hidden xl:inline-flex px-7 py-3 bg-primary text-white text-[11px] font-bold tracking-[0.1em] uppercase rounded-full hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 hover:shadow-xl hover:-translate-y-0.5"
                             >
                                 Send Your Paper
                             </Link>
-
+                            
                             {/* Dark Mode Toggle */}
                             <button
                                 onClick={toggleDark}
