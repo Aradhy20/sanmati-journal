@@ -1,76 +1,79 @@
 {
   "node_modules/laravel-vite-plugin/inertia-helpers/index.js": [],
   "resources/js/Components/CustomCursor.jsx": [
-    "/build/assets/MainLayout-DYvdgHCs.js"
+    "/build/assets/MainLayout-B53y4pKW.js"
   ],
   "resources/js/Components/DecorativeElements.jsx": [
     "/build/assets/DecorativeElements-DDr-sYpo.js"
   ],
   "resources/js/Components/Footer.jsx": [
-    "/build/assets/MainLayout-DYvdgHCs.js"
+    "/build/assets/MainLayout-B53y4pKW.js"
   ],
   "resources/js/Components/Graphics.jsx": [
     "/build/assets/ScrollReveal-BS2wxcDt.js"
   ],
   "resources/js/Components/Hero.jsx": [
-    "/build/assets/Hero-ITreP8AR.js"
+    "/build/assets/Hero-sEgNw7nB.js"
   ],
   "resources/js/Components/Navbar.jsx": [
-    "/build/assets/MainLayout-DYvdgHCs.js"
+    "/build/assets/MainLayout-B53y4pKW.js"
   ],
   "resources/js/Components/NewsletterSection.jsx": [
-    "/build/assets/Home-Cknx__YC.js"
+    "/build/assets/Home-BbqNB3cL.js"
   ],
   "resources/js/Components/PageHeader.jsx": [
     "/build/assets/PageHeader-DHJj0W5D.js"
   ],
   "resources/js/Components/Preloader.jsx": [
-    "/build/assets/MainLayout-DYvdgHCs.js"
+    "/build/assets/MainLayout-B53y4pKW.js"
   ],
   "resources/js/Components/ScrollReveal.jsx": [
     "/build/assets/ScrollReveal-BS2wxcDt.js"
   ],
+  "resources/js/Components/SearchModal.jsx": [
+    "/build/assets/MainLayout-B53y4pKW.js"
+  ],
   "resources/js/Components/Seo.jsx": [
-    "/build/assets/MainLayout-DYvdgHCs.js"
+    "/build/assets/MainLayout-B53y4pKW.js"
   ],
   "resources/js/Components/TeamMember.jsx": [
-    "/build/assets/EditorialTeam-CJb7KfIB.js"
+    "/build/assets/EditorialTeam-BYz0Bk44.js"
   ],
   "resources/js/Components/ui/CitationGenerator.jsx": [
     "/build/assets/CitationGenerator-Nttig6Bx.js"
   ],
   "resources/js/Components/ui/CountdownTimer.jsx": [
-    "/build/assets/MainLayout-DYvdgHCs.js"
+    "/build/assets/MainLayout-B53y4pKW.js"
   ],
   "resources/js/Components/ui/DropZone.jsx": [
-    "/build/assets/CallForPapers-DMbjEPii.js"
+    "/build/assets/CallForPapers-D3lPtM6G.js"
   ],
   "resources/js/Components/ui/FloatInput.jsx": [
-    "/build/assets/Contact-Ft7k5UXs.js"
+    "/build/assets/Contact-COU6qZg-.js"
   ],
   "resources/js/Components/ui/Modal.jsx": [
     "/build/assets/CitationGenerator-Nttig6Bx.js"
   ],
   "resources/js/Components/ui/SkeletonCard.jsx": [
-    "/build/assets/Archive-CSw8xr6F.js"
+    "/build/assets/Archive-D1fhSVGv.js"
   ],
   "resources/js/Layouts/AdminLayout.jsx": [
     "/build/assets/AdminLayout-B8jAos2V.js"
   ],
   "resources/js/Layouts/MainLayout.jsx": [
-    "/build/assets/MainLayout-DYvdgHCs.js"
+    "/build/assets/MainLayout-B53y4pKW.js"
   ],
   "resources/js/Pages/AboutJournal.jsx": [
-    "/build/assets/AboutJournal-Bbv8JhpU.js"
+    "/build/assets/AboutJournal-BZQgbHRR.js"
   ],
   "resources/js/Pages/AcademicEvents/Conferences.jsx": [
-    "/build/assets/Conferences-Bng1q7dY.js"
+    "/build/assets/Conferences-uTuUXxC2.js"
   ],
   "resources/js/Pages/AcademicEvents/Seminars.jsx": [
-    "/build/assets/Seminars-C-g87JLP.js"
+    "/build/assets/Seminars-DsC0AkFD.js"
   ],
   "resources/js/Pages/AcademicEvents/Workshop.jsx": [
-    "/build/assets/Workshop-DNDKrwbw.js"
+    "/build/assets/Workshop-CLCfcgAW.js"
   ],
   "resources/js/Pages/Admin/Dashboard.jsx": [
     "/build/assets/Dashboard-CwgikyWn.js"
@@ -94,13 +97,13 @@
     "/build/assets/Team-DkSB4nqQ.js"
   ],
   "resources/js/Pages/AdvisoryBoard.jsx": [
-    "/build/assets/AdvisoryBoard-B5ugQ6fa.js"
+    "/build/assets/AdvisoryBoard-DNP1rSIX.js"
   ],
   "resources/js/Pages/Archive.jsx": [
-    "/build/assets/Archive-CSw8xr6F.js"
+    "/build/assets/Archive-D1fhSVGv.js"
   ],
   "resources/js/Pages/Article.jsx": [
-    "/build/assets/Article-CynRiZUe.js"
+    "/build/assets/Article-cPCSIadi.js"
   ],
   "resources/js/Pages/Auth/ForgotPassword.jsx": [
     "/build/assets/ForgotPassword-io-Z37Ky.js"
@@ -112,94 +115,94 @@
     "/build/assets/ResetPassword-CHq1sW0S.js"
   ],
   "resources/js/Pages/Author/Dashboard.jsx": [
-    "/build/assets/Dashboard-D6Ie090K.js"
+    "/build/assets/Dashboard-B3OV0M41.js"
   ],
   "resources/js/Pages/Awards.jsx": [
-    "/build/assets/Awards-kOl2DbqL.js"
+    "/build/assets/Awards-BxgHPQRN.js"
   ],
   "resources/js/Pages/BasicInfo/Indexing.jsx": [
-    "/build/assets/Indexing-BHrp1rc0.js"
+    "/build/assets/Indexing-3NH-JLX_.js"
   ],
   "resources/js/Pages/BasicInfo/JournalInfo.jsx": [
-    "/build/assets/JournalInfo-B54Sdg9r.js"
+    "/build/assets/JournalInfo-X1wNEeAD.js"
   ],
   "resources/js/Pages/BasicInfo/ObjectiveScope.jsx": [
-    "/build/assets/ObjectiveScope-5N4Pfqxk.js"
+    "/build/assets/ObjectiveScope-uSOthUab.js"
   ],
   "resources/js/Pages/BasicInfo/VisionMission.jsx": [
-    "/build/assets/VisionMission-BLdTm3WT.js"
+    "/build/assets/VisionMission-BU8myQN-.js"
   ],
   "resources/js/Pages/Blog/Index.jsx": [
-    "/build/assets/Index-DxqvDfoX.js"
+    "/build/assets/Index-D1WFFnXP.js"
   ],
   "resources/js/Pages/Blog/Show.jsx": [
-    "/build/assets/Show-oq-Z1IuM.js"
+    "/build/assets/Show-CUU7zdwM.js"
   ],
   "resources/js/Pages/BookPublication.jsx": [
-    "/build/assets/BookPublication-D7TSx_nz.js"
+    "/build/assets/BookPublication-DS3Z7Ot_.js"
   ],
   "resources/js/Pages/Compliance.jsx": [
-    "/build/assets/Compliance-D9ApCPQq.js"
+    "/build/assets/Compliance-BYKsD5ix.js"
   ],
   "resources/js/Pages/Contact.jsx": [
-    "/build/assets/Contact-Ft7k5UXs.js"
+    "/build/assets/Contact-COU6qZg-.js"
   ],
   "resources/js/Pages/EditorialBoard.jsx": [
-    "/build/assets/EditorialBoard-C3TiKTJC.js"
+    "/build/assets/EditorialBoard-C4DR9wuW.js"
   ],
   "resources/js/Pages/EditorialTeam.jsx": [
-    "/build/assets/EditorialTeam-CJb7KfIB.js"
+    "/build/assets/EditorialTeam-BYz0Bk44.js"
   ],
   "resources/js/Pages/Editors.jsx": [
-    "/build/assets/Editors-Bl3tZ1Nl.js"
+    "/build/assets/Editors-xTC-WfEW.js"
   ],
   "resources/js/Pages/Error404.jsx": [
-    "/build/assets/Error404-M5uhnSGo.js"
+    "/build/assets/Error404-CA0psiBY.js"
   ],
   "resources/js/Pages/Gallery.jsx": [
-    "/build/assets/Gallery-D_3SXrfD.js"
+    "/build/assets/Gallery-CMLTmK29.js"
   ],
   "resources/js/Pages/Gallery/News.jsx": [
-    "/build/assets/News-DgqlBZvI.js"
+    "/build/assets/News-C_kj4A97.js"
   ],
   "resources/js/Pages/Gallery/Photo.jsx": [
-    "/build/assets/Photo-CsYccKc_.js"
+    "/build/assets/Photo-Dzg9VTli.js"
   ],
   "resources/js/Pages/Home.jsx": [
-    "/build/assets/Home-Cknx__YC.js"
+    "/build/assets/Home-BbqNB3cL.js"
   ],
   "resources/js/Pages/PublicationPolicy/Ethics.jsx": [
-    "/build/assets/Ethics-B6z-DHi1.js"
+    "/build/assets/Ethics-DvJRTkoY.js"
   ],
   "resources/js/Pages/PublicationPolicy/PeerReview.jsx": [
-    "/build/assets/PeerReview-BMGK_nC_.js"
+    "/build/assets/PeerReview-Dp8QgB5_.js"
   ],
   "resources/js/Pages/PublicationPolicy/Plagiarism.jsx": [
-    "/build/assets/Plagiarism-DJNpH9tY.js"
+    "/build/assets/Plagiarism-BWCOVV-F.js"
   ],
   "resources/js/Pages/SubmissionGuidelines/AreaDetail.jsx": [
-    "/build/assets/AreaDetail-CJenb7AI.js"
+    "/build/assets/AreaDetail-696K9j1e.js"
   ],
   "resources/js/Pages/SubmissionGuidelines/Areas.jsx": [
-    "/build/assets/Areas-CHYryR5e.js"
+    "/build/assets/Areas-C4FfPPOw.js"
   ],
   "resources/js/Pages/SubmissionGuidelines/CallForPapers.jsx": [
-    "/build/assets/CallForPapers-DMbjEPii.js"
+    "/build/assets/CallForPapers-D3lPtM6G.js"
   ],
   "resources/js/Pages/SubmissionGuidelines/ImportantInfo.jsx": [
-    "/build/assets/ImportantInfo-DBlG855v.js"
+    "/build/assets/ImportantInfo-BsYlY9L1.js"
   ],
   "resources/js/Pages/SubmissionGuidelines/Index.jsx": [
-    "/build/assets/Index-CZr_p4lr.js"
+    "/build/assets/Index-CWBq3Pli.js"
   ],
   "resources/js/Pages/SubmissionGuidelines/PublicationCharges.jsx": [
-    "/build/assets/PublicationCharges-B3YFBaqj.js"
+    "/build/assets/PublicationCharges-C_cuZZ7z.js"
   ],
   "resources/js/Pages/SubmissionGuidelines/ReviewProcess.jsx": [
-    "/build/assets/ReviewProcess-C06zwA4H.js"
+    "/build/assets/ReviewProcess-FPJ5K5Mo.js"
   ],
   "resources/js/Pages/TrackManuscript.jsx": [
-    "/build/assets/TrackManuscript-DSeZkSAJ.js"
+    "/build/assets/TrackManuscript-DDuICEtD.js"
   ],
   "resources/js/ssr.jsx": []
 }

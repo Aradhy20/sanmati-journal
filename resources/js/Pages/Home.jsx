@@ -137,7 +137,7 @@ export default function Home() {
                     </div>
 
                     {/* Search and Filters UI */}
-                    <div className="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100 flex flex-col md:flex-row gap-4 mb-12">
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col md:flex-row gap-4 mb-12">
                         <div className="flex-grow flex items-center bg-warm-bg rounded-xl px-4 py-3 border border-transparent focus-within:bg-white focus-within:border-primary/30 transition-all">
                             <Search className="w-5 h-5 text-muted mr-3" />
                             <input type="text" placeholder="Search by title, author, or keyword..." className="w-full bg-transparent border-none outline-none text-sm font-medium text-dark placeholder:text-muted/60" />
@@ -197,7 +197,7 @@ export default function Home() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                                className="md:col-span-4 group relative flex flex-col justify-between h-full bg-white rounded-[2rem] overflow-hidden border border-gray-100 hover:border-primary/20 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(79,119,255,0.12)] hover:-translate-y-2 transition-all duration-500"
+                                className="md:col-span-4 group relative flex flex-col justify-between h-full bg-white rounded-xl overflow-hidden border border-gray-100 hover:border-primary/20 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(79,119,255,0.12)] hover:-translate-y-1 transition-all duration-500"
                             >
                                 <div className="aspect-[3/4] overflow-hidden relative">
                                     <img src={book.img} alt={book.title} className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" loading="lazy" />
@@ -256,15 +256,14 @@ export default function Home() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12 max-w-5xl mx-auto">
                         {/* Editor-in-Chief : Dr. Namrta Jain */}
                         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="group">
-                            <div className="h-full rounded-[3rem] overflow-hidden bg-gradient-to-br from-primary to-primary-dark text-white p-10 flex flex-col items-center text-center shadow-2xl hover:-translate-y-2 transition-all duration-700 relative">
+                            <div className="h-full rounded-2xl overflow-hidden bg-gradient-to-br from-primary to-primary-dark text-white p-10 flex flex-col items-center text-center shadow-2xl hover:-translate-y-1 transition-all duration-700 relative">
                                 <div className="absolute top-0 right-0 p-8 opacity-5"><Trophy className="w-24 h-24 text-secondary scale-150 rotate-12" /></div>
-                                <div className="w-44 h-44 rounded-[2.5rem] overflow-hidden mb-8 border-4 border-white/30 shadow-2xl relative z-10">
+                                <div className="w-44 h-44 rounded-2xl overflow-hidden mb-8 border-4 border-white/30 shadow-2xl relative z-10">
                                     <img loading="lazy" src="/mam.jpeg" alt="Dr. Namrta Jain" className="w-full h-full object-cover object-top group-hover:scale-110 transition-all duration-700" />
                                 </div>
                                 <span className="inline-block px-4 py-1.5 bg-secondary/25 border border-secondary/40 rounded-full text-[10px] text-secondary font-black tracking-widest uppercase mb-4 w-fit">Editor-in-Chief</span>
                                 <h3 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold mb-2 tracking-tight group-hover:text-secondary-light transition-colors duration-300">Dr. Namrta Jain</h3>
-                                <p className="text-white/70 text-[12px] font-bold uppercase tracking-[0.05em] mb-2">Sanmati Spectrum of Knowledge & Emerging Discourse</p>
-                                <p className="text-white/40 text-[10px] uppercase font-black tracking-widest mb-6 min-h-[15px]"></p>
+                                <p className="text-white/70 text-[12px] font-bold uppercase tracking-[0.05em] mb-8">Sanmati Spectrum of Knowledge & Emerging Discourse</p>
 
                                 <div className="w-full bg-white/10 rounded-2xl p-4 mb-6 border border-white/10 text-xs">
                                     <p className="flex justify-between border-b border-white/5 pb-2 mb-2"><span className="text-white/40 uppercase tracking-widest font-black text-[9px]">Email</span> <a href="mailto:sanmatijournal@gmail.com" className="font-bold hover:text-secondary transition-colors">sanmatijournal@gmail.com</a></p>
@@ -283,15 +282,14 @@ export default function Home() {
 
                         {/* Managing Editor : Dr. Ratnesh Kumar Jain */}
                         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.15 }} className="group">
-                            <div className="h-full rounded-[3rem] overflow-hidden bg-surface border border-gray-100 p-10 flex flex-col items-center text-center shadow-lg hover:shadow-2xl hover:border-primary/20 hover:-translate-y-2 transition-all duration-700 relative">
+                            <div className="h-full rounded-2xl overflow-hidden bg-surface border border-gray-100 p-10 flex flex-col items-center text-center shadow-lg hover:shadow-2xl hover:border-primary/20 hover:-translate-y-1 transition-all duration-700 relative">
                                 <div className="absolute top-0 right-0 p-8 opacity-5"><Users className="w-24 h-24 text-primary scale-150 -rotate-12" /></div>
-                                <div className="w-44 h-44 rounded-[2.5rem] overflow-hidden mb-8 border-4 border-white shadow-xl relative z-10 rotate-3 group-hover:rotate-0 transition-transform duration-500">
+                                <div className="w-44 h-44 rounded-2xl overflow-hidden mb-8 border-4 border-white shadow-xl relative z-10 rotate-3 group-hover:rotate-0 transition-transform duration-500">
                                     <img loading="lazy" src="/sir.jpeg" alt="Dr. Ratnesh Kumar Jain" className="w-full h-full object-cover object-top group-hover:scale-110 transition-all duration-700" />
                                 </div>
                                 <span className="inline-block px-4 py-1.5 bg-primary/8 rounded-full text-[10px] text-primary font-black tracking-widest uppercase mb-4">Managing Editor</span>
                                 <h3 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-2 group-hover:text-primary transition-colors duration-300">Dr. Ratnesh Kumar Jain</h3>
-                                <p className="text-muted text-[12px] font-bold uppercase tracking-wider mb-2 min-h-[18px]"></p>
-                                <p className="text-dark/40 text-[10px] uppercase font-black tracking-widest mb-6 min-h-[15px]"></p>
+                                <p className="text-dark/40 text-[10px] uppercase font-black tracking-widest mb-8 min-h-[15px]"></p>
 
                                 <div className="w-full bg-warm-bg rounded-2xl p-4 mb-6 border border-gray-50 text-xs text-left">
                                     <p className="flex justify-between border-b border-gray-200 pb-2 mb-2"><span className="text-muted uppercase tracking-widest font-black text-[9px]">Email</span> <a href="mailto:Jainratnesh79@gmail.com" className="font-bold text-dark hover:text-primary transition-colors">Jainratnesh79@gmail.com</a></p>
@@ -345,10 +343,10 @@ export default function Home() {
                             <motion.div
                                 key={idx}
                                 variants={{ initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 } }}
-                                className="h-full group p-8 rounded-[2.5rem] bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:border-primary/20 hover:shadow-[0_20px_40px_rgba(79,119,255,0.08)] transition-all duration-500 flex flex-col justify-between items-center text-center"
+                                className="h-full group p-8 rounded-2xl bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:border-primary/20 hover:shadow-[0_20px_40px_rgba(79,119,255,0.08)] transition-all duration-500 flex flex-col justify-between items-center text-center"
                             >
                                 <div className="flex flex-col items-center">
-                                    <div className={`w-20 h-20 rounded-[1.75rem] ${cat.color} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-sm shrink-0`}>
+                                    <div className={`w-20 h-20 rounded-xl ${cat.color} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-sm shrink-0`}>
                                         <cat.icon className="w-9 h-9" />
                                     </div>
                                     <h3 className="font-bold text-dark text-base mb-2 px-2 group-hover:text-primary transition-colors tracking-tight leading-tight">{cat.name}</h3>
@@ -404,7 +402,7 @@ export default function Home() {
                             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                             className="relative group"
                         >
-                            <div className="rounded-[3rem] overflow-hidden shadow-2xl aspect-[4/5] relative">
+                            <div className="rounded-2xl overflow-hidden shadow-2xl aspect-[4/5] relative">
                                 <img loading="lazy" src="/fistudy-assets/resources/research_library.png" alt="Premium Books" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent" />
                             </div>
@@ -414,7 +412,7 @@ export default function Home() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.5, duration: 0.8 }}
-                                className="absolute -bottom-10 -right-10 bg-white p-10 rounded-[2.5rem] shadow-[0_30px_60px_rgba(79,119,255,0.12)] border border-gray-100"
+                                className="absolute -bottom-10 -right-10 bg-white p-10 rounded-2xl shadow-[0_30px_60px_rgba(79,119,255,0.12)] border border-gray-100"
                             >
                                 <div className="flex items-center gap-6">
                                     <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center">
@@ -528,7 +526,7 @@ export default function Home() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                                className="group relative bg-warm-bg border border-gray-100 rounded-[2rem] p-8 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(79,119,255,0.10)] hover:-translate-y-2 transition-all duration-500 overflow-hidden"
+                                className="group relative bg-warm-bg border border-gray-100 rounded-xl p-8 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(79,119,255,0.10)] hover:-translate-y-1 transition-all duration-500 overflow-hidden"
                             >
                                 <div className="absolute top-6 right-6 flex items-center gap-2">
                                     <span className="bg-secondary/10 text-secondary text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest">{paper.tag}</span>
@@ -557,7 +555,7 @@ export default function Home() {
             {/* ─── INVITATION (CTA) ─── */}
             <section className="py-12 lg:py-24">
                 <div className="container-custom">
-                    <div className="relative rounded-[3.5rem] bg-gradient-to-br from-primary via-primary-dark to-[#0a0f2e] p-14 lg:p-24 overflow-hidden text-center shadow-[0_50px_100px_rgba(79,119,255,0.25)]">
+                    <div className="relative rounded-3xl bg-gradient-to-br from-primary via-primary-dark to-[#0a0f2e] p-14 lg:p-24 overflow-hidden text-center shadow-[0_50px_100px_rgba(79,119,255,0.25)]">
                         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0)', backgroundSize: '40px 40px' }} />
                         <div className="absolute -top-20 -right-20 w-80 h-80 bg-secondary/15 rounded-full blur-[100px]" />
                         <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-coral/10 rounded-full blur-[100px]" />
@@ -652,7 +650,7 @@ function PipelineSection() {
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.15, duration: 0.8 }}
                                 onClick={() => setActiveStep(isActive ? null : i)}
-                                className={`relative group p-8 flex flex-col items-center text-center rounded-[2rem] transition-all duration-500 cursor-pointer focus:outline-none ${isActive
+                                className={`relative group p-8 flex flex-col items-center text-center rounded-xl transition-all duration-500 cursor-pointer focus:outline-none ${isActive
                                         ? 'bg-primary shadow-2xl shadow-primary/20 -translate-y-2'
                                         : 'bg-white border border-gray-100 hover:border-primary/20 hover:shadow-xl hover:-translate-y-1'
                                     }`}
@@ -677,7 +675,7 @@ function PipelineSection() {
                     className={activeStep !== null ? 'block' : 'hidden'}
                 >
                     {activeStep !== null && (
-                        <div className="bg-white rounded-[2.5rem] border border-primary/10 shadow-2xl p-10 md:p-14 flex flex-col md:flex-row items-start gap-10">
+                        <div className="bg-white rounded-2xl border border-primary/10 shadow-2xl p-10 md:p-14 flex flex-col md:flex-row items-start gap-10">
                             <div className="w-20 h-20 bg-primary/8 rounded-2xl flex items-center justify-center shrink-0">
                                 {React.createElement(pipelineSteps[activeStep].icon, { className: 'w-10 h-10 text-primary' })}
                             </div>

@@ -13,7 +13,7 @@ const Footer = () => {
                             <h3 className="text-2xl font-serif font-bold text-white mb-2 tracking-tight">Stay Informed</h3>
                             <p className="text-white/50 text-sm max-w-md">Receive latest research updates, call for papers, and academic news directly in your inbox.</p>
                         </div>
-                        <form action="https://formspree.io/f/PLACEHOLDER_ENDPOINT" method="POST" className="flex w-full lg:w-auto gap-3">
+                        <form action="/api/newsletter/subscribe" method="POST" className="flex w-full lg:w-auto gap-3">
                             <div className="relative w-full lg:w-96 group">
                                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30 group-focus-within:text-secondary transition-colors" />
                                 <input

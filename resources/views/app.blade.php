@@ -46,15 +46,16 @@
         })(window,document,'script','dataLayer','GTM-K4FNSFHK');</script>
         <!-- End Google Tag Manager -->
 
-        <!-- Google Analytics 4 -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+        <!-- Google Analytics 4 (Add Property ID here when available) -->
+        <!--
+        <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA_ID"></script>
         <script nonce="{{ Vite::cspNonce() }}">
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-XXXXXXXXXX');
+          gtag('config', 'YOUR_GA_ID');
         </script>
-        <!-- End Google Analytics 4 -->
+        -->
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">

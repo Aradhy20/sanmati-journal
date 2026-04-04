@@ -3,7 +3,7 @@ import createServer from '@inertiajs/server';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import ReactDOMServer from 'react-dom/server';
 
-const appName = window.document?.getElementsByTagName('title')[0]?.innerText || 'Sanmati Journal';
+const appName = import.meta.env.VITE_APP_NAME || 'Sanmati Journal';
 
 createServer((page) =>
     createInertiaApp({
