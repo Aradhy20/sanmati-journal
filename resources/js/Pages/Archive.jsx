@@ -19,7 +19,27 @@ const fadeInUp = {
 export default function Archive({ issues }) {
     // issues=null means still loading; issues=[] means loaded but empty
     const isLoading = issues == null;
-    const issueList = Array.isArray(issues) ? issues : (issues?.data || []);
+    const dbIssues = Array.isArray(issues) ? issues : (issues?.data || []);
+    
+    // Hardcoded Inaugural Volume
+    const hardcodedIssues = [
+        {
+            id: 'vol1-issue1',
+            volume: '1',
+            number: '1',
+            year: 'Jan-March 2026',
+            papers: [
+                {
+                    id: 'static-1',
+                    title: 'Sanmati Spectrum of Knowledge & Emerging Discourse (January-March, 2026) Hindi & English',
+                    authors: 'Sanmati Journal Editorial Board',
+                    file_path: '/pdfs/Sanmati_Spectrum_Vol1_Jan_Mar_2026.pdf'
+                }
+            ]
+        }
+    ];
+
+    const issueList = dbIssues.length > 0 ? dbIssues : hardcodedIssues;
     const [citationPaper, setCitationPaper] = useState(null);
 
     
@@ -134,33 +154,64 @@ export default function Archive({ issues }) {
                                                             <FileText className="w-4 h-4 text-secondary" />
                                                             <span className="text-[10px] font-black text-secondary uppercase tracking-[0.2em]">Research Article</span>
                                                         </div>
-                                                        <Link href={`/article/${paper.id}`} className="block">
-                                                            <h4 className="text-xl font-bold text-dark mb-3 group-hover:text-primary transition-colors leading-[1.4]">{paper.title}</h4>
-                                                        </Link>
+                                                        {paper.id.startsWith('static-') ? (
+                                                            <a href={paper.file_path} target="_blank" rel="noopener noreferrer" className="block">
+                                                                <h4 className="text-xl font-bold text-dark mb-3 group-hover:text-primary transition-colors leading-[1.4]">{paper.title}</h4>
+                                                            </a>
+                                                        ) : (
+                                                            <Link href={`/article/${paper.id}`} className="block">
+                                                                <h4 className="text-xl font-bold text-dark mb-3 group-hover:text-primary transition-colors leading-[1.4]">{paper.title}</h4>
+                                                            </Link>
+                                                        )}
                                                         <p className="text-muted font-medium italic text-sm">{paper.authors}</p>
                                                     </div>
                                                     <div className="flex flex-col sm:flex-row items-center gap-3 mt-4 md:mt-0">
-                                                        <Link 
-                                                            href={`/article/${paper.id}`} 
-                                                            className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-secondary/10 text-secondary rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-secondary/20 transition-all"
-                                                        >
-                                                            <BookOpen className="w-4 h-4" />
-                                                            View
-                                                        </Link>
-                                                        <button 
-                                                            onClick={() => setCitationPaper(paper)}
-                                                            className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-slate-100 text-slate-700 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-200 transition-all"
-                                                        >
-                                                            <Quote className="w-4 h-4" />
-                                                            Cite
-                                                        </button>
-                                                        <a 
-                                                            href={`/download/paper/${paper.id}`} 
-                                                            className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-dark text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all shadow-lg shadow-dark/10 group-hover:-translate-y-1"
-                                                        >
-                                                            <Download className="w-4 h-4" />
-                                                            PDF
-                                                        </a>
+                                                        {paper.id.startsWith('static-') ? (
+                                                            <>
+                                                                <a 
+                                                                    href={paper.file_path}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-secondary/10 text-secondary rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-secondary/20 transition-all"
+                                                                >
+                                                                    <BookOpen className="w-4 h-4" />
+                                                                    View
+                                                                </a>
+                                                                <a 
+                                                                    href={paper.file_path} 
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-dark text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all shadow-lg shadow-dark/10 group-hover:-translate-y-1"
+                                                                >
+                                                                    <Download className="w-4 h-4" />
+                                                                    PDF
+                                                                </a>
+                                                            </>
+                                                        ) : (
+                                                            <>
+                                                                <Link 
+                                                                    href={`/article/${paper.id}`} 
+                                                                    className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-secondary/10 text-secondary rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-secondary/20 transition-all"
+                                                                >
+                                                                    <BookOpen className="w-4 h-4" />
+                                                                    View
+                                                                </Link>
+                                                                <button 
+                                                                    onClick={() => setCitationPaper(paper)}
+                                                                    className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-slate-100 text-slate-700 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-200 transition-all"
+                                                                >
+                                                                    <Quote className="w-4 h-4" />
+                                                                    Cite
+                                                                </button>
+                                                                <a 
+                                                                    href={`/download/paper/${paper.id}`} 
+                                                                    className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-dark text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all shadow-lg shadow-dark/10 group-hover:-translate-y-1"
+                                                                >
+                                                                    <Download className="w-4 h-4" />
+                                                                    PDF
+                                                                </a>
+                                                            </>
+                                                        )}
                                                     </div>
                                                 </div>
                                             </motion.div>
