@@ -183,22 +183,23 @@ function Archive({ issues }) {
                   issue.year
                 ] })
               ] }),
-              /* @__PURE__ */ jsxs("div", { className: "grid grid-cols-1 lg:grid-cols-12 gap-10", children: [
-                /* @__PURE__ */ jsx("div", { className: "lg:col-span-4", children: /* @__PURE__ */ jsxs("div", { className: "bg-surface border border-gray-100 rounded-[2.5rem] sticky top-32 shadow-sm overflow-hidden", children: [
+              /* @__PURE__ */ jsxs("div", { className: "grid lg:grid-cols-12 gap-12", children: [
+                /* @__PURE__ */ jsx("div", { className: "lg:col-span-4 relative group", children: /* @__PURE__ */ jsxs("div", { className: "aspect-[3/4] rounded-3xl overflow-hidden bg-gray-50 border border-gray-100 shadow-sm relative group-hover:shadow-2xl transition-all duration-700", children: [
+                  /* @__PURE__ */ jsx("div", { className: "absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-3xl animate-pulse" }),
                   ((_b = (_a = issue.papers) == null ? void 0 : _a[0]) == null ? void 0 : _b.thumbnail) && /* @__PURE__ */ jsxs(
                     "a",
                     {
                       href: issue.papers[0].file_path,
                       target: "_blank",
                       rel: "noopener noreferrer",
-                      className: "block group relative overflow-hidden aspect-square",
+                      className: "w-full h-full block",
                       children: [
                         /* @__PURE__ */ jsx(
                           "img",
                           {
                             src: issue.papers[0].thumbnail,
                             alt: `Volume ${issue.volume} Cover`,
-                            className: "w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500",
+                            className: "w-full h-full object-cover transition-transform duration-700 group-hover:scale-110",
                             loading: "lazy"
                           }
                         ),

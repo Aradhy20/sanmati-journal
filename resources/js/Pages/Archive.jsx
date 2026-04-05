@@ -135,22 +135,24 @@ export default function Archive({ issues }) {
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-                                    {/* Issue Meta Card */}
-                                    <div className="lg:col-span-4">
-                                        <div className="bg-surface border border-gray-100 rounded-[2.5rem] sticky top-32 shadow-sm overflow-hidden">
-                                            {/* Thumbnail if available */}
+                                <div className="grid lg:grid-cols-12 gap-12">
+                                    {/* Issue Cover & Info Card */}
+                                    <div className="lg:col-span-4 relative group">
+                                        <div className="aspect-[3/4] rounded-3xl overflow-hidden bg-gray-50 border border-gray-100 shadow-sm relative group-hover:shadow-2xl transition-all duration-700">
+                                            {/* Decorative Background Glow */}
+                                            <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-3xl animate-pulse" />
+                                            
                                             {issue.papers?.[0]?.thumbnail && (
-                                                <a
-                                                    href={issue.papers[0].file_path}
-                                                    target="_blank"
+                                                <a 
+                                                    href={issue.papers[0].file_path} 
+                                                    target="_blank" 
                                                     rel="noopener noreferrer"
-                                                    className="block group relative overflow-hidden aspect-square"
+                                                    className="w-full h-full block"
                                                 >
-                                                    <img
-                                                        src={issue.papers[0].thumbnail}
+                                                    <img 
+                                                        src={issue.papers[0].thumbnail} 
                                                         alt={`Volume ${issue.volume} Cover`}
-                                                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                                         loading="lazy"
                                                     />
                                                     <div className="absolute inset-0 bg-dark/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
