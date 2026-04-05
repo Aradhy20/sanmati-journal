@@ -13,6 +13,7 @@ Route::get('/api/newsletter/unsubscribe/{email}', [\App\Http\Controllers\Newslet
 Route::get('/editorial-team/editors', [JournalController::class, 'editors'])->name('editorial-team.editors');
 Route::get('/editorial-team/editorial-board', [JournalController::class, 'editorialBoard'])->name('editorial-team.board');
 Route::get('/editorial-team/advisory-board', [JournalController::class, 'advisoryBoard'])->name('editorial-team.advisory');
+Route::get('/editorial-team/technical-team', [JournalController::class, 'technicalTeam'])->name('editorial-team.technical');
 Route::get('/about-journal', [JournalController::class, 'aboutJournal'])->name('about-journal');
 Route::get('/gallery-view', [JournalController::class, 'gallery'])->name('gallery');
 Route::get('/gallery/photo', [JournalController::class, 'galleryPhoto'])->name('gallery.photo');

@@ -61,6 +61,7 @@ const Navbar = ({ onOpenSearch }) => {
                 { name: 'Editor', href: '/editorial-team/editors' },
                 { name: 'Editorial Board', href: '/editorial-team/editorial-board' },
                 { name: 'Advisory Board', href: '/editorial-team/advisory-board' },
+                { name: 'Technical Team', href: '/editorial-team/technical-team' },
             ],
         },
         {

@@ -194,6 +194,11 @@ class JournalController extends Controller
         return Inertia::render('AdvisoryBoard');
     }
 
+    public function technicalTeam()
+    {
+        return Inertia::render('TechnicalTeam');
+    }
+
     public function archive()
     {
         return Inertia::render('Archive', [
