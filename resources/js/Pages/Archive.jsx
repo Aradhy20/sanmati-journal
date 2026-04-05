@@ -42,10 +42,14 @@ export default function Archive({ issues }) {
         }
     ];
 
-    // Always show hardcoded inaugural volume first, then any additional DB entries
+    // Always show hardcoded inaugural volume first.
+    // We filter out the placeholder DB entries (like the fake AI paper) to maintain professional standards.
     const issueList = [
         ...hardcodedIssues,
-        ...dbIssues.filter(d => String(d.id) !== 'vol1-issue1')
+        ...dbIssues.filter(d => 
+            String(d.id) !== 'vol1-issue1' && 
+            !d.papers?.[0]?.title?.includes("Revolutionizing AI")
+        )
     ];
     const [citationPaper, setCitationPaper] = useState(null);
 

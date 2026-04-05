@@ -89,7 +89,12 @@ function Archive({ issues }) {
   ];
   const issueList = [
     ...hardcodedIssues,
-    ...dbIssues.filter((d) => String(d.id) !== "vol1-issue1")
+    ...dbIssues.filter(
+      (d) => {
+        var _a, _b, _c;
+        return String(d.id) !== "vol1-issue1" && !((_c = (_b = (_a = d.papers) == null ? void 0 : _a[0]) == null ? void 0 : _b.title) == null ? void 0 : _c.includes("Revolutionizing AI"));
+      }
+    )
   ];
   const [citationPaper, setCitationPaper] = useState(null);
   const scholarlySchema = issueList.flatMap(
