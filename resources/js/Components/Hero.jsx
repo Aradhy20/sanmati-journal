@@ -4,7 +4,7 @@ import { ArrowRight, BookOpen, Users, Star, CheckCircle, BookMarked, Sparkles, G
 
 const Hero = () => {
     return (
-        <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#eef1ff] via-[#f5f0ff] to-[#fff0f5]">
+        <section className="relative flex flex-col min-h-[100svh] overflow-hidden bg-gradient-to-br from-blue-50/50 via-white to-orange-50/30">
             {/* Soft decorative blobs */}
             <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
                 <div className="absolute top-0 -left-1/4 w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] lg:w-[650px] lg:h-[650px] bg-primary/10 rounded-full blur-[120px] sm:blur-[150px] lg:blur-[180px]" />
@@ -17,8 +17,8 @@ const Hero = () => {
                 style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, var(--color-primary, #687EFF) 1.5px, transparent 0)', backgroundSize: '40px 40px' }} />
 
             {/* Main Content – Two-Column Split */}
-            <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-32 pb-24 lg:pt-36 lg:pb-28">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-16 items-start">
+            <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-32 pb-24 lg:pt-36 lg:pb-32 flex-1 flex flex-col justify-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-16 items-center">
 
                     {/* ── LEFT: Text Content ── */}
                     <motion.div
@@ -131,9 +131,9 @@ const Hero = () => {
             </div>
 
             {/* Horizontal Trust Bar below the Hero Section */}
-            <div className="absolute bottom-0 w-full bg-white/80 backdrop-blur-md border-t border-gray-100 py-4 shadow-sm z-20">
+            <div className="relative w-full bg-white/80 backdrop-blur-md border-t border-gray-100 py-4 shadow-sm z-20 mt-auto">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
                         {[
                             { icon: CheckCircle, label: 'Authenticated', value: 'ISSN: 3108-1819', color: 'text-primary' },
                             { icon: Star, label: 'Impact', value: 'Double-Blind Review', color: 'text-secondary' },

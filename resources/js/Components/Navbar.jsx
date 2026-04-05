@@ -110,24 +110,23 @@ const Navbar = ({ onOpenSearch }) => {
             {/* Main Navbar - Solid Academic Header */}
             <nav className={`w-full relative z-40 overflow-x-visible transition-all duration-500 ease-[0.22,1,0.36,1] ${scrolled ? 'bg-white shadow-md border-b border-gray-200 py-2' : 'bg-white border-b border-gray-100 py-4'}`}>
                 <div className="max-w-7xl mx-auto px-4 lg:px-8">
-                    <div className="flex items-center justify-between h-16">
-                        <div className="flex items-center gap-4 xl:gap-10">
-                            {/* Logo - Refined */}
-                        <Link href="/" className="flex items-center gap-4 flex-shrink-0 group">
+                    <div className="flex items-center justify-between h-20 sm:h-[104px] gap-4 xl:gap-8">
+                        {/* Logo - Refined & Enlarged */}
+                        <Link href="/" className="flex items-center gap-3 sm:gap-5 flex-shrink-0 group">
                             <motion.div 
-                                className={`rounded-xl overflow-hidden shadow-sm border border-gray-100 flex-shrink-0 bg-white group-hover:shadow-md transition-all duration-500 ${scrolled ? 'w-10 h-10 p-0.5' : 'w-12 h-12 p-1'}`}
+                                className={`rounded-2xl overflow-hidden shadow-md border border-gray-100 flex-shrink-0 bg-white group-hover:shadow-xl group-hover:border-primary/30 transition-all duration-500 ${scrolled ? 'w-12 h-12 p-1' : 'w-16 h-16 sm:w-24 sm:h-24 p-2'}`}
                             >
                                 <img
                                     src="/logo.jpg"
                                     alt="Sanmati Journal Logo"
-                                    className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-500"
+                                    className="object-contain w-full h-full group-hover:scale-110 transition-transform duration-700"
                                 />
                             </motion.div>
                             <div className="hidden sm:block">
-                                <span className="text-lg font-bold text-dark leading-tight block group-hover:text-primary transition-colors tracking-tight">
+                                <span className={`block font-black text-dark group-hover:text-primary transition-colors tracking-tight ${scrolled ? 'text-xl' : 'text-2xl sm:text-3xl'}`}>
                                     Sanmati Spectrum
                                 </span>
-                                <span className={`text-[9px] font-bold tracking-[0.2em] uppercase transition-colors ${scrolled ? 'text-secondary' : 'text-gray-400'}`}>
+                                <span className={`font-bold tracking-[0.25em] uppercase transition-colors block mt-0.5 ${scrolled ? 'text-[9px] text-secondary' : 'text-[10px] sm:text-[11px] text-gray-500'}`}>
                                     Research Journal
                                 </span>
                             </div>
@@ -210,7 +209,6 @@ const Navbar = ({ onOpenSearch }) => {
                                     )}
                                 </div>
                             ))}
-                        </div>
                         </div>
 
                         {/* CTA + Search + Toggle */}

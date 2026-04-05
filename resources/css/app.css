@@ -13,31 +13,30 @@
   --shadow: 0 4px 20px rgba(0,0,0,0.08);
 
 
-  /* ── Sanmati Premium Palette (2026 Redesign) ── */
-  /* ── Sanmati Premium Palette (2026 Redesign) ── */
-  --color-primary: #0A2540;        /* Deep Navy */
-  --color-primary-dark: #051A2E;   /* Darker Navy */
-  --color-primary-light: #183C64;  /* Lighter Navy */
+  /* ── Sanmati Premium Palette (Vibrant Redesign) ── */
+  --color-primary: #1E3A8A;        /* Rich Royal Blue */
+  --color-primary-dark: #1e3a8a;   /* Slightly darker */
+  --color-primary-light: #3B82F6;  /* Vibrant Blue Accent */
 
-  --color-secondary: #B8965E;      /* Elegant Gold Accent */
-  --color-secondary-dark: #A1814E; /* Dark Gold */
-  --color-secondary-light: #D4B688;/* Light Gold */
+  --color-secondary: #F59E0B;      /* Vibrant Amber/Gold Accent */
+  --color-secondary-dark: #D97706; /* Dark Amber */
+  --color-secondary-light: #FCD34D;/* Light Amber */
 
-  --color-coral: #B8965E;          /* Remapped to Gold to avoid issues in components */
-  --color-coral-dark: #A1814E;
+  --color-coral: #F97316;          /* Bright Warm Orange */
+  --color-coral-dark: #EA580C;
 
-  --color-success: #059669;
-  --color-info: #0284c7;
+  --color-success: #10B981;        /* Emerland */
+  --color-info: #0EA5E9;           /* Sky Blue */
 
-  --color-dark: #0A192F;           /* Ultra Dark Navy */
-  --color-dark-light: #112240;     /* Slate Navy */
+  --color-dark: #0F172A;           /* Deep Slate - highly modern */
+  --color-dark-light: #1E293B;     /* Lighter Slate */
 
-  --color-accent: #B8965E;         /* Gold accent */
-  --color-accent-light: #D4B688;
+  --color-accent: #10B981;         /* Emerald Accent */
+  --color-accent-light: #34D399;
 
-  --color-warm-bg: #F8F9FA;        /* Off-white / Cream */
+  --color-warm-bg: #F8FAFC;        /* Crisp Slate 50 */
   --color-surface: #ffffff;
-  --color-muted: #6B778B;          /* Slate Gray */
+  --color-muted: #64748B;          /* Slate Gray */
 
   --animate-blob: blob 10s infinite;
   --animate-float: float 4s ease-in-out infinite;
