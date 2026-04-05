@@ -6,6 +6,7 @@ import { UploadCloud, FileText, CheckCircle, X, AlertCircle, ShieldCheck, ArrowR
 import { usePage, useForm } from "@inertiajs/react";
 import { motion, AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
+import axios from "axios";
 function DropZone({
   id,
   label = "Upload Manuscript PDF",
@@ -171,50 +172,60 @@ function DropZone({
   ] });
 }
 function CallForPapers() {
-  var _a;
+  var _a, _b;
   const { flash } = usePage().props;
   const [step, setStep] = useState(1);
-  const { data, setData, post, processing, errors, reset } = useForm({
+  const [trackingId, setTrackingId] = useState(null);
+  const { data, setData, processing, errors, reset, setError, clearErrors } = useForm({
     title: "",
     abstract: "",
     keywords: "",
+    author_name: "",
+    author_email: "",
+    author_phone: "",
+    institution: "",
+    subject_area: "",
     manuscript: null,
     consent: false
   });
   const handleNextStep = (e) => {
     e.preventDefault();
-    if (step === 1 && data.title && data.abstract) {
+    if (step === 1 && data.title && data.abstract && data.author_name && data.author_email) {
       setStep(2);
     } else if (step === 2 && data.manuscript) {
       setStep(3);
     }
   };
   const submit = async (e) => {
+    var _a2, _b2;
     e.preventDefault();
     const formData = new FormData();
-    formData.append("title", data.title);
-    formData.append("abstract", data.abstract);
-    formData.append("keywords", data.keywords);
-    formData.append("consent", data.consent);
-    formData.append("manuscript", data.manuscript);
-    formData.append("_replyto", "sanmatijournal@gmail.com");
+    Object.keys(data).forEach((key) => {
+      if (data[key] !== null) {
+        formData.append(key, data[key]);
+      }
+    });
     try {
-      const response = await fetch("https://formspree.io/f/PLACEHOLDER_ENDPOINT", {
-        method: "POST",
-        body: formData,
-        headers: {
-          "Accept": "application/json"
-        }
+      const response = await axios.post(route("submission-guidelines.call.store"), formData, {
+        headers: { "Content-Type": "multipart/form-data" }
       });
-      if (response.ok) {
+      if (response.status === 201) {
+        setTrackingId(response.data.tracking_id);
         reset();
         setStep(4);
-        toast.success("Manuscript submitted successfully. Tracking ID generated.");
-      } else {
-        toast.error("Submission failed. Please check your Formspree configuration.");
+        toast.success("Manuscript submitted successfully.");
       }
     } catch (error) {
-      toast.error("An error occurred during submission.");
+      if ((_b2 = (_a2 = error.response) == null ? void 0 : _a2.data) == null ? void 0 : _b2.errors) {
+        const backendErrors = error.response.data.errors;
+        Object.keys(backendErrors).forEach((key) => {
+          setError(key, backendErrors[key][0]);
+        });
+        setStep(1);
+        toast.error("Validation failed. Please check the form.");
+      } else {
+        toast.error("Submission failed. Please try again later.");
+      }
     }
   };
   return /* @__PURE__ */ jsx(MainLayout, { children: /* @__PURE__ */ jsxs("div", { className: "bg-[#eef1ff] min-h-screen", children: [
@@ -246,65 +257,129 @@ function CallForPapers() {
           /* @__PURE__ */ jsx("p", { className: "text-slate-600 text-lg max-w-lg mx-auto mb-10", children: "Your manuscript has been securely encrypted and routed to our editorial board. You will receive an email confirmation shortly." }),
           /* @__PURE__ */ jsxs("div", { className: "bg-slate-50 border border-slate-100 rounded-2xl p-6 mb-8 max-w-sm mx-auto text-left", children: [
             /* @__PURE__ */ jsx("p", { className: "text-xs font-bold text-slate-400 uppercase tracking-widest mb-1", children: "Tracking ID" }),
-            /* @__PURE__ */ jsxs("p", { className: "font-mono text-slate-900 font-bold text-lg", children: [
-              "SJ-",
-              Math.floor(1e5 + Math.random() * 9e5)
-            ] })
+            /* @__PURE__ */ jsx("p", { className: "font-mono text-slate-900 font-bold text-lg", children: trackingId || "SJ-PENDING" })
           ] }),
-          /* @__PURE__ */ jsx("button", { onClick: () => setStep(1), className: "text-blue-600 font-bold hover:underline", children: "Submit another paper" })
+          /* @__PURE__ */ jsx("button", { onClick: () => {
+            setStep(1);
+            setTrackingId(null);
+          }, className: "text-blue-600 font-bold hover:underline", children: "Submit another paper" })
         ] }),
         step < 4 && /* @__PURE__ */ jsx("form", { onSubmit: step === 3 ? submit : handleNextStep, encType: "multipart/form-data", children: /* @__PURE__ */ jsxs(AnimatePresence, { mode: "wait", children: [
           step === 1 && /* @__PURE__ */ jsxs(motion.div, { initial: { opacity: 0, x: 20 }, animate: { opacity: 1, x: 0 }, exit: { opacity: 0, x: -20 }, children: [
-            /* @__PURE__ */ jsxs("div", { className: "mb-10", children: [
-              /* @__PURE__ */ jsx("h3", { className: "text-2xl font-serif font-bold text-slate-900 mb-2", children: "Manuscript Details" }),
-              /* @__PURE__ */ jsx("p", { className: "text-slate-500", children: "Basic information for your paper." })
-            ] }),
-            /* @__PURE__ */ jsxs("div", { className: "space-y-6 max-w-2xl w-full", children: [
-              /* @__PURE__ */ jsxs("div", { children: [
-                /* @__PURE__ */ jsx("label", { className: "block text-sm font-bold text-slate-700 mb-2", children: "Full Research Title *" }),
-                /* @__PURE__ */ jsx(
-                  "input",
-                  {
-                    type: "text",
-                    value: data.title,
-                    onChange: (e) => setData("title", e.target.value),
-                    className: "w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none",
-                    placeholder: "Example: Teaching with AI",
-                    required: true
-                  }
-                ),
-                errors.title && /* @__PURE__ */ jsx("p", { className: "text-red-500 text-xs mt-2 font-medium", children: errors.title })
+            /* @__PURE__ */ jsxs("div", { className: "grid grid-cols-1 lg:grid-cols-2 gap-12", children: [
+              /* @__PURE__ */ jsxs("div", { className: "space-y-6", children: [
+                /* @__PURE__ */ jsxs("div", { className: "mb-10", children: [
+                  /* @__PURE__ */ jsx("h3", { className: "text-2xl font-serif font-bold text-slate-900 mb-2", children: "Manuscript Details" }),
+                  /* @__PURE__ */ jsx("p", { className: "text-slate-500", children: "Provide the core metadata for your research paper." })
+                ] }),
+                /* @__PURE__ */ jsxs("div", { children: [
+                  /* @__PURE__ */ jsx("label", { className: "block text-sm font-bold text-slate-700 mb-2", children: "Full Research Title *" }),
+                  /* @__PURE__ */ jsx(
+                    "input",
+                    {
+                      type: "text",
+                      value: data.title,
+                      onChange: (e) => setData("title", e.target.value),
+                      className: `w-full px-5 py-4 rounded-xl border ${errors.title ? "border-red-300 bg-red-50" : "border-gray-200 bg-slate-50"} focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none`,
+                      placeholder: "Example: Teaching with AI",
+                      required: true
+                    }
+                  ),
+                  errors.title && /* @__PURE__ */ jsx("p", { className: "text-red-500 text-xs mt-2 font-medium", children: errors.title })
+                ] }),
+                /* @__PURE__ */ jsxs("div", { children: [
+                  /* @__PURE__ */ jsx("label", { className: "block text-sm font-bold text-slate-700 mb-2", children: "Summary of your work *" }),
+                  /* @__PURE__ */ jsx(
+                    "textarea",
+                    {
+                      value: data.abstract,
+                      onChange: (e) => setData("abstract", e.target.value),
+                      rows: "7",
+                      className: `w-full px-5 py-4 rounded-xl border ${errors.abstract ? "border-red-300 bg-red-50" : "border-gray-200 bg-slate-50"} focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none resize-none`,
+                      placeholder: "Provide a 200-300 word summary of methodology and findings.",
+                      required: true
+                    }
+                  ),
+                  errors.abstract && /* @__PURE__ */ jsx("p", { className: "text-red-500 text-xs mt-2 font-medium", children: errors.abstract })
+                ] }),
+                /* @__PURE__ */ jsxs("div", { children: [
+                  /* @__PURE__ */ jsx("label", { className: "block text-sm font-bold text-slate-700 mb-2", children: "Index Keywords" }),
+                  /* @__PURE__ */ jsx(
+                    "input",
+                    {
+                      type: "text",
+                      value: data.keywords,
+                      onChange: (e) => setData("keywords", e.target.value),
+                      className: "w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none",
+                      placeholder: "Comma separated: Education, AI, Pedagogy"
+                    }
+                  )
+                ] })
               ] }),
-              /* @__PURE__ */ jsxs("div", { children: [
-                /* @__PURE__ */ jsx("label", { className: "block text-sm font-bold text-slate-700 mb-2", children: "Summary of your work *" }),
-                /* @__PURE__ */ jsx(
-                  "textarea",
-                  {
-                    value: data.abstract,
-                    onChange: (e) => setData("abstract", e.target.value),
-                    rows: "5",
-                    className: "w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none resize-none",
-                    placeholder: "Provide a 200-300 word summary of methodology and findings.",
-                    required: true
-                  }
-                ),
-                errors.abstract && /* @__PURE__ */ jsx("p", { className: "text-red-500 text-xs mt-2 font-medium", children: errors.abstract })
-              ] }),
-              /* @__PURE__ */ jsxs("div", { children: [
-                /* @__PURE__ */ jsx("label", { className: "block text-sm font-bold text-slate-700 mb-2", children: "Index Keywords" }),
-                /* @__PURE__ */ jsx(
-                  "input",
-                  {
-                    type: "text",
-                    value: data.keywords,
-                    onChange: (e) => setData("keywords", e.target.value),
-                    className: "w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none",
-                    placeholder: "Comma separated: Education, AI, Pedagogy"
-                  }
-                )
+              /* @__PURE__ */ jsxs("div", { className: "space-y-6", children: [
+                /* @__PURE__ */ jsxs("div", { className: "mb-10", children: [
+                  /* @__PURE__ */ jsx("h3", { className: "text-2xl font-serif font-bold text-slate-900 mb-2", children: "Primary Author Identity" }),
+                  /* @__PURE__ */ jsx("p", { className: "text-slate-500", children: "Who should we contact regarding this manuscript?" })
+                ] }),
+                /* @__PURE__ */ jsxs("div", { children: [
+                  /* @__PURE__ */ jsx("label", { className: "block text-sm font-bold text-slate-700 mb-2", children: "Full Legal Name *" }),
+                  /* @__PURE__ */ jsx(
+                    "input",
+                    {
+                      type: "text",
+                      value: data.author_name,
+                      onChange: (e) => setData("author_name", e.target.value),
+                      className: `w-full px-5 py-4 rounded-xl border ${errors.author_name ? "border-red-300 bg-red-50" : "border-gray-200 bg-slate-50"} focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none`,
+                      placeholder: "Dr. Aradhya Jain",
+                      required: true
+                    }
+                  ),
+                  errors.author_name && /* @__PURE__ */ jsx("p", { className: "text-red-500 text-xs mt-2 font-medium", children: errors.author_name })
+                ] }),
+                /* @__PURE__ */ jsxs("div", { children: [
+                  /* @__PURE__ */ jsx("label", { className: "block text-sm font-bold text-slate-700 mb-2", children: "Official Email ID *" }),
+                  /* @__PURE__ */ jsx(
+                    "input",
+                    {
+                      type: "email",
+                      value: data.author_email,
+                      onChange: (e) => setData("author_email", e.target.value),
+                      className: `w-full px-5 py-4 rounded-xl border ${errors.author_email ? "border-red-300 bg-red-50" : "border-gray-200 bg-slate-50"} focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none`,
+                      placeholder: "aradhya@university.edu",
+                      required: true
+                    }
+                  ),
+                  errors.author_email && /* @__PURE__ */ jsx("p", { className: "text-red-500 text-xs mt-2 font-medium", children: errors.author_email })
+                ] }),
+                /* @__PURE__ */ jsxs("div", { children: [
+                  /* @__PURE__ */ jsx("label", { className: "block text-sm font-bold text-slate-700 mb-2", children: "Contact Number" }),
+                  /* @__PURE__ */ jsx(
+                    "input",
+                    {
+                      type: "text",
+                      value: data.author_phone,
+                      onChange: (e) => setData("author_phone", e.target.value),
+                      className: "w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none",
+                      placeholder: "+91 XXXXXXXXXX"
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ jsxs("div", { children: [
+                  /* @__PURE__ */ jsx("label", { className: "block text-sm font-bold text-slate-700 mb-2", children: "Affiliated Institution" }),
+                  /* @__PURE__ */ jsx(
+                    "input",
+                    {
+                      type: "text",
+                      value: data.institution,
+                      onChange: (e) => setData("institution", e.target.value),
+                      className: "w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none",
+                      placeholder: "University Name / Research Center"
+                    }
+                  )
+                ] })
               ] })
             ] }),
-            /* @__PURE__ */ jsx("div", { className: "mt-10 flex justify-start", children: /* @__PURE__ */ jsxs("button", { type: "button", onClick: handleNextStep, disabled: !data.title || !data.abstract, className: "px-8 py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-blue-600 transition-colors flex items-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed", children: [
+            /* @__PURE__ */ jsx("div", { className: "mt-12 flex justify-end border-t border-gray-50 pt-8", children: /* @__PURE__ */ jsxs("button", { type: "button", onClick: handleNextStep, disabled: !data.title || !data.abstract || !data.author_name || !data.author_email, className: "px-10 py-5 bg-slate-900 text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-blue-600 transition-all flex items-center gap-4 group disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-blue-600/20", children: [
               "Proceed to Upload ",
               /* @__PURE__ */ jsx(ArrowRight, { className: "w-5 h-5 group-hover:translate-x-1 transition-transform" })
             ] }) })
@@ -328,7 +403,7 @@ function CallForPapers() {
             ),
             /* @__PURE__ */ jsxs("div", { className: "mt-10 flex flex-col-reverse sm:flex-row justify-between gap-4", children: [
               /* @__PURE__ */ jsx("button", { type: "button", onClick: () => setStep(1), className: "w-full sm:w-auto px-8 py-4 bg-white text-slate-700 border border-gray-200 font-bold rounded-xl hover:bg-slate-50 transition-colors", children: "Back" }),
-              /* @__PURE__ */ jsxs("button", { type: "submit", disabled: !data.manuscript, className: "w-full sm:w-auto px-8 py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-blue-600 transition-colors flex justify-center items-center gap-2 group disabled:opacity-50", children: [
+              /* @__PURE__ */ jsxs("button", { type: "button", onClick: () => setStep(3), disabled: !data.manuscript, className: "w-full sm:w-auto px-8 py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-blue-600 transition-colors flex justify-center items-center gap-2 group disabled:opacity-50", children: [
                 "Final Step ",
                 /* @__PURE__ */ jsx(ArrowRight, { className: "w-5 h-5 group-hover:translate-x-1 transition-transform" })
               ] })
@@ -339,17 +414,32 @@ function CallForPapers() {
               /* @__PURE__ */ jsx("h3", { className: "text-2xl font-serif font-bold text-slate-900 mb-2", children: "Final Verification" }),
               /* @__PURE__ */ jsx("p", { className: "text-slate-500", children: "Please review your submission and agree to our academic integrity policies." })
             ] }),
-            /* @__PURE__ */ jsx("div", { className: "bg-slate-50 rounded-2xl p-8 mb-8 border border-gray-100", children: /* @__PURE__ */ jsxs("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-8", children: [
+            /* @__PURE__ */ jsx("div", { className: "bg-slate-50 rounded-2xl p-8 mb-8 border border-gray-100", children: /* @__PURE__ */ jsxs("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12", children: [
+              /* @__PURE__ */ jsxs("div", { className: "md:col-span-2", children: [
+                /* @__PURE__ */ jsx("p", { className: "text-xs font-black uppercase tracking-widest text-slate-400 mb-2", children: "Manuscript Title" }),
+                /* @__PURE__ */ jsx("p", { className: "font-medium text-slate-900 leading-relaxed", children: data.title })
+              ] }),
               /* @__PURE__ */ jsxs("div", { children: [
-                /* @__PURE__ */ jsx("p", { className: "text-xs font-black uppercase tracking-widest text-slate-400 mb-2", children: "Title" }),
-                /* @__PURE__ */ jsx("p", { className: "font-medium text-slate-900 line-clamp-2", children: data.title })
+                /* @__PURE__ */ jsx("p", { className: "text-xs font-black uppercase tracking-widest text-slate-400 mb-2", children: "Corresponding Author" }),
+                /* @__PURE__ */ jsx("p", { className: "font-medium text-slate-900", children: data.author_name }),
+                /* @__PURE__ */ jsx("p", { className: "text-xs text-slate-500 mt-1", children: data.author_email })
+              ] }),
+              /* @__PURE__ */ jsxs("div", { children: [
+                /* @__PURE__ */ jsx("p", { className: "text-xs font-black uppercase tracking-widest text-slate-400 mb-2", children: "Institution" }),
+                /* @__PURE__ */ jsx("p", { className: "font-medium text-slate-900", children: data.institution || "Not Specified" })
               ] }),
               /* @__PURE__ */ jsxs("div", { children: [
                 /* @__PURE__ */ jsx("p", { className: "text-xs font-black uppercase tracking-widest text-slate-400 mb-2", children: "Attached File" }),
                 /* @__PURE__ */ jsxs("p", { className: "font-medium text-blue-600 flex items-center gap-2", children: [
                   /* @__PURE__ */ jsx(FileText, { className: "w-4 h-4" }),
-                  " ",
-                  (_a = data.manuscript) == null ? void 0 : _a.name
+                  /* @__PURE__ */ jsx("span", { className: "truncate max-w-[200px]", children: (_a = data.manuscript) == null ? void 0 : _a.name })
+                ] })
+              ] }),
+              /* @__PURE__ */ jsxs("div", { children: [
+                /* @__PURE__ */ jsx("p", { className: "text-xs font-black uppercase tracking-widest text-slate-400 mb-2", children: "File Size" }),
+                /* @__PURE__ */ jsxs("p", { className: "font-medium text-slate-900", children: [
+                  (((_b = data.manuscript) == null ? void 0 : _b.size) / (1024 * 1024)).toFixed(2),
+                  " MB"
                 ] })
               ] })
             ] }) }),

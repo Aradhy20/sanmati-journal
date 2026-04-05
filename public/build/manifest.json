@@ -46,7 +46,7 @@
     "name": "vendor"
   },
   "resources/css/app.css": {
-    "file": "assets/app-CNeFPKOg.css",
+    "file": "assets/app-Bwrj3VH3.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -416,7 +416,7 @@
     ]
   },
   "resources/js/Pages/Home.jsx": {
-    "file": "assets/Home-C7UyaDzg.js",
+    "file": "assets/Home-B99xXnJM.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.jsx",
     "isDynamicEntry": true,
@@ -429,7 +429,7 @@
       "resources/js/Components/Hero.jsx"
     ],
     "css": [
-      "assets/app-CNeFPKOg.css"
+      "assets/app-Bwrj3VH3.css"
     ]
   },
   "resources/js/Pages/PublicationPolicy/Ethics.jsx": {
@@ -493,7 +493,7 @@
     ]
   },
   "resources/js/Pages/SubmissionGuidelines/CallForPapers.jsx": {
-    "file": "assets/CallForPapers-CNPxY4yY.js",
+    "file": "assets/CallForPapers-D2MQMQ6-.js",
     "name": "CallForPapers",
     "src": "resources/js/Pages/SubmissionGuidelines/CallForPapers.jsx",
     "isDynamicEntry": true,
@@ -573,7 +573,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-DuKzLRYX.js",
+    "file": "assets/app-BVshjX6P.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
@@ -629,7 +629,7 @@
       "resources/js/Pages/TrackManuscript.jsx"
     ],
     "css": [
-      "assets/app-CNeFPKOg.css"
+      "assets/app-Bwrj3VH3.css"
     ]
   }
 }

@@ -6,22 +6,29 @@ import { useForm, usePage } from '@inertiajs/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
 import DropZone from '../../Components/ui/DropZone';
+import axios from 'axios';
 
 export default function CallForPapers() {
     const { flash } = usePage().props;
     const [step, setStep] = useState(1);
+    const [trackingId, setTrackingId] = useState(null);
     
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData, processing, errors, reset, setError, clearErrors } = useForm({
         title: '',
         abstract: '',
         keywords: '',
+        author_name: '',
+        author_email: '',
+        author_phone: '',
+        institution: '',
+        subject_area: '',
         manuscript: null,
         consent: false
     });
 
     const handleNextStep = (e) => {
         e.preventDefault();
-        if (step === 1 && data.title && data.abstract) {
+        if (step === 1 && data.title && data.abstract && data.author_name && data.author_email) {
             setStep(2);
         } else if (step === 2 && data.manuscript) {
             setStep(3);
@@ -31,34 +38,35 @@ export default function CallForPapers() {
     const submit = async (e) => {
         e.preventDefault();
         
-        // Setup Formspree Submission using FormData API (supports files)
         const formData = new FormData();
-        formData.append('title', data.title);
-        formData.append('abstract', data.abstract);
-        formData.append('keywords', data.keywords);
-        formData.append('consent', data.consent);
-        formData.append('manuscript', data.manuscript);
-        formData.append('_replyto', 'sanmatijournal@gmail.com');
+        Object.keys(data).forEach(key => {
+            if (data[key] !== null) {
+                formData.append(key, data[key]);
+            }
+        });
 
         try {
-            // NOTE: Replace the fetch URL with your actual Formspree Endpoint ID, e.g., 'https://formspree.io/f/xqk...'
-            const response = await fetch('https://formspree.io/f/PLACEHOLDER_ENDPOINT', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
+            const response = await axios.post(route('submission-guidelines.call.store'), formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
             });
 
-            if (response.ok) {
+            if (response.status === 201) {
+                setTrackingId(response.data.tracking_id);
                 reset();
-                setStep(4); // Success Step
-                toast.success('Manuscript submitted successfully. Tracking ID generated.');
-            } else {
-                toast.error('Submission failed. Please check your Formspree configuration.');
+                setStep(4);
+                toast.success('Manuscript submitted successfully.');
             }
         } catch (error) {
-            toast.error('An error occurred during submission.');
+            if (error.response?.data?.errors) {
+                const backendErrors = error.response.data.errors;
+                Object.keys(backendErrors).forEach(key => {
+                    setError(key, backendErrors[key][0]);
+                });
+                setStep(1); // Go back to fix errors
+                toast.error('Validation failed. Please check the form.');
+            } else {
+                toast.error('Submission failed. Please try again later.');
+            }
         }
     };
 
@@ -109,9 +117,9 @@ export default function CallForPapers() {
                                     </p>
                                     <div className="bg-slate-50 border border-slate-100 rounded-2xl p-6 mb-8 max-w-sm mx-auto text-left">
                                         <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Tracking ID</p>
-                                        <p className="font-mono text-slate-900 font-bold text-lg">SJ-{Math.floor(100000 + Math.random() * 900000)}</p>
+                                        <p className="font-mono text-slate-900 font-bold text-lg">{trackingId || 'SJ-PENDING'}</p>
                                     </div>
-                                    <button onClick={() => setStep(1)} className="text-blue-600 font-bold hover:underline">Submit another paper</button>
+                                    <button onClick={() => { setStep(1); setTrackingId(null); }} className="text-blue-600 font-bold hover:underline">Submit another paper</button>
                                 </motion.div>
                             )}
 
@@ -123,52 +131,111 @@ export default function CallForPapers() {
                                         {/* STEP 1: METADATA */}
                                         {step === 1 && (
                                             <motion.div key="step1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-                                                <div className="mb-10">
-                                                    <h3 className="text-2xl font-serif font-bold text-slate-900 mb-2">Manuscript Details</h3>
-                                                    <p className="text-slate-500">Basic information for your paper.</p>
+                                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                                                    {/* Column 1: Manuscript Details */}
+                                                    <div className="space-y-6">
+                                                        <div className="mb-10">
+                                                            <h3 className="text-2xl font-serif font-bold text-slate-900 mb-2">Manuscript Details</h3>
+                                                            <p className="text-slate-500">Provide the core metadata for your research paper.</p>
+                                                        </div>
+
+                                                        <div>
+                                                            <label className="block text-sm font-bold text-slate-700 mb-2">Full Research Title *</label>
+                                                            <input 
+                                                                type="text" 
+                                                                value={data.title}
+                                                                onChange={e => setData('title', e.target.value)}
+                                                                className={`w-full px-5 py-4 rounded-xl border ${errors.title ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-slate-50'} focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none`}
+                                                                placeholder="Example: Teaching with AI"
+                                                                required
+                                                            />
+                                                            {errors.title && <p className="text-red-500 text-xs mt-2 font-medium">{errors.title}</p>}
+                                                        </div>
+
+                                                        <div>
+                                                            <label className="block text-sm font-bold text-slate-700 mb-2">Summary of your work *</label>
+                                                            <textarea 
+                                                                value={data.abstract}
+                                                                onChange={e => setData('abstract', e.target.value)}
+                                                                rows="7"
+                                                                className={`w-full px-5 py-4 rounded-xl border ${errors.abstract ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-slate-50'} focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none resize-none`}
+                                                                placeholder="Provide a 200-300 word summary of methodology and findings."
+                                                                required
+                                                            ></textarea>
+                                                            {errors.abstract && <p className="text-red-500 text-xs mt-2 font-medium">{errors.abstract}</p>}
+                                                        </div>
+
+                                                        <div>
+                                                            <label className="block text-sm font-bold text-slate-700 mb-2">Index Keywords</label>
+                                                            <input 
+                                                                type="text" 
+                                                                value={data.keywords}
+                                                                onChange={e => setData('keywords', e.target.value)}
+                                                                className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none"
+                                                                placeholder="Comma separated: Education, AI, Pedagogy"
+                                                            />
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Column 2: Author Details */}
+                                                    <div className="space-y-6">
+                                                        <div className="mb-10">
+                                                            <h3 className="text-2xl font-serif font-bold text-slate-900 mb-2">Primary Author Identity</h3>
+                                                            <p className="text-slate-500">Who should we contact regarding this manuscript?</p>
+                                                        </div>
+
+                                                        <div>
+                                                            <label className="block text-sm font-bold text-slate-700 mb-2">Full Legal Name *</label>
+                                                            <input 
+                                                                type="text" 
+                                                                value={data.author_name}
+                                                                onChange={e => setData('author_name', e.target.value)}
+                                                                className={`w-full px-5 py-4 rounded-xl border ${errors.author_name ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-slate-50'} focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none`}
+                                                                placeholder="Dr. Aradhya Jain"
+                                                                required
+                                                            />
+                                                            {errors.author_name && <p className="text-red-500 text-xs mt-2 font-medium">{errors.author_name}</p>}
+                                                        </div>
+
+                                                        <div>
+                                                            <label className="block text-sm font-bold text-slate-700 mb-2">Official Email ID *</label>
+                                                            <input 
+                                                                type="email" 
+                                                                value={data.author_email}
+                                                                onChange={e => setData('author_email', e.target.value)}
+                                                                className={`w-full px-5 py-4 rounded-xl border ${errors.author_email ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-slate-50'} focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none`}
+                                                                placeholder="aradhya@university.edu"
+                                                                required
+                                                            />
+                                                            {errors.author_email && <p className="text-red-500 text-xs mt-2 font-medium">{errors.author_email}</p>}
+                                                        </div>
+
+                                                        <div>
+                                                            <label className="block text-sm font-bold text-slate-700 mb-2">Contact Number</label>
+                                                            <input 
+                                                                type="text" 
+                                                                value={data.author_phone}
+                                                                onChange={e => setData('author_phone', e.target.value)}
+                                                                className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none"
+                                                                placeholder="+91 XXXXXXXXXX"
+                                                            />
+                                                        </div>
+
+                                                        <div>
+                                                            <label className="block text-sm font-bold text-slate-700 mb-2">Affiliated Institution</label>
+                                                            <input 
+                                                                type="text" 
+                                                                value={data.institution}
+                                                                onChange={e => setData('institution', e.target.value)}
+                                                                className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none"
+                                                                placeholder="University Name / Research Center"
+                                                            />
+                                                        </div>
+                                                    </div>
                                                 </div>
 
-                                                <div className="space-y-6 max-w-2xl w-full">
-                                                    <div>
-                                                        <label className="block text-sm font-bold text-slate-700 mb-2">Full Research Title *</label>
-                                                        <input 
-                                                            type="text" 
-                                                            value={data.title}
-                                                            onChange={e => setData('title', e.target.value)}
-                                                            className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none"
-                                                            placeholder="Example: Teaching with AI"
-                                                            required
-                                                        />
-                                                        {errors.title && <p className="text-red-500 text-xs mt-2 font-medium">{errors.title}</p>}
-                                                    </div>
-
-                                                    <div>
-                                                        <label className="block text-sm font-bold text-slate-700 mb-2">Summary of your work *</label>
-                                                        <textarea 
-                                                            value={data.abstract}
-                                                            onChange={e => setData('abstract', e.target.value)}
-                                                            rows="5"
-                                                            className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none resize-none"
-                                                            placeholder="Provide a 200-300 word summary of methodology and findings."
-                                                            required
-                                                        ></textarea>
-                                                        {errors.abstract && <p className="text-red-500 text-xs mt-2 font-medium">{errors.abstract}</p>}
-                                                    </div>
-
-                                                    <div>
-                                                        <label className="block text-sm font-bold text-slate-700 mb-2">Index Keywords</label>
-                                                        <input 
-                                                            type="text" 
-                                                            value={data.keywords}
-                                                            onChange={e => setData('keywords', e.target.value)}
-                                                            className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none"
-                                                            placeholder="Comma separated: Education, AI, Pedagogy"
-                                                        />
-                                                    </div>
-                                                </div>
-
-                                                <div className="mt-10 flex justify-start">
-                                                    <button type="button" onClick={handleNextStep} disabled={!data.title || !data.abstract} className="px-8 py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-blue-600 transition-colors flex items-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed">
+                                                <div className="mt-12 flex justify-end border-t border-gray-50 pt-8">
+                                                    <button type="button" onClick={handleNextStep} disabled={!data.title || !data.abstract || !data.author_name || !data.author_email} className="px-10 py-5 bg-slate-900 text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-blue-600 transition-all flex items-center gap-4 group disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-blue-600/20">
                                                         Proceed to Upload <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                                     </button>
                                                 </div>
@@ -197,7 +264,7 @@ export default function CallForPapers() {
                                                     <button type="button" onClick={() => setStep(1)} className="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 border border-gray-200 font-bold rounded-xl hover:bg-slate-50 transition-colors">
                                                         Back
                                                     </button>
-                                                    <button type="submit" disabled={!data.manuscript} className="w-full sm:w-auto px-8 py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-blue-600 transition-colors flex justify-center items-center gap-2 group disabled:opacity-50">
+                                                    <button type="button" onClick={() => setStep(3)} disabled={!data.manuscript} className="w-full sm:w-auto px-8 py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-blue-600 transition-colors flex justify-center items-center gap-2 group disabled:opacity-50">
                                                         Final Step <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                                     </button>
                                                 </div>
@@ -213,14 +280,30 @@ export default function CallForPapers() {
                                                 </div>
 
                                                 <div className="bg-slate-50 rounded-2xl p-8 mb-8 border border-gray-100">
-                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12">
+                                                        <div className="md:col-span-2">
+                                                            <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Manuscript Title</p>
+                                                            <p className="font-medium text-slate-900 leading-relaxed">{data.title}</p>
+                                                        </div>
                                                         <div>
-                                                            <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Title</p>
-                                                            <p className="font-medium text-slate-900 line-clamp-2">{data.title}</p>
+                                                            <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Corresponding Author</p>
+                                                            <p className="font-medium text-slate-900">{data.author_name}</p>
+                                                            <p className="text-xs text-slate-500 mt-1">{data.author_email}</p>
+                                                        </div>
+                                                        <div>
+                                                            <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Institution</p>
+                                                            <p className="font-medium text-slate-900">{data.institution || 'Not Specified'}</p>
                                                         </div>
                                                         <div>
                                                             <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Attached File</p>
-                                                            <p className="font-medium text-blue-600 flex items-center gap-2"><FileText className="w-4 h-4"/> {data.manuscript?.name}</p>
+                                                            <p className="font-medium text-blue-600 flex items-center gap-2">
+                                                                <FileText className="w-4 h-4"/> 
+                                                                <span className="truncate max-w-[200px]">{data.manuscript?.name}</span>
+                                                            </p>
+                                                        </div>
+                                                        <div>
+                                                            <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2">File Size</p>
+                                                            <p className="font-medium text-slate-900">{(data.manuscript?.size / (1024 * 1024)).toFixed(2)} MB</p>
                                                         </div>
                                                     </div>
                                                 </div>
