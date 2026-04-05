@@ -96,7 +96,6 @@ const Navbar = ({ onOpenSearch }) => {
                 { name: 'News', href: '/media-news' },
             ],
         },
-        { name: 'Blog', href: '/blog' },
         { name: 'Contact', href: '/contact' },
     ];
 
@@ -135,7 +134,7 @@ const Navbar = ({ onOpenSearch }) => {
                         </Link>
 
                         {/* Desktop Menu */}
-                        <div className="hidden md:flex items-center gap-2 xl:gap-4 flex-1 flex-wrap overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 min-w-0 max-w-full">
+                        <div className="hidden lg:flex items-center justify-center gap-2 xl:gap-4 flex-1 flex-wrap min-w-0 max-w-full">
                             {navItems.map((item) => (
                                 <div
                                     key={item.name}
