@@ -1,12 +1,11 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { P as PageHeader } from "./PageHeader-DHJj0W5D.js";
 import { M as MainLayout } from "./MainLayout-DnA_ZOa1.js";
 import { UploadCloud, FileText, CheckCircle, X, AlertCircle, ShieldCheck, ArrowRight } from "lucide-react";
 import { usePage, useForm } from "@inertiajs/react";
 import { motion, AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
-import axios from "axios";
 function DropZone({
   id,
   label = "Upload Manuscript PDF",
@@ -176,7 +175,7 @@ function CallForPapers() {
   const { flash } = usePage().props;
   const [step, setStep] = useState(1);
   const [trackingId, setTrackingId] = useState(null);
-  const { data, setData, processing, errors, reset, setError, clearErrors } = useForm({
+  const { data, setData, post, processing, errors, reset, setError, clearErrors } = useForm({
     title: "",
     abstract: "",
     keywords: "",
@@ -188,6 +187,13 @@ function CallForPapers() {
     manuscript: null,
     consent: false
   });
+  useEffect(() => {
+    var _a2;
+    if ((_a2 = flash == null ? void 0 : flash.success) == null ? void 0 : _a2.tracking_id) {
+      setTrackingId(flash.success.tracking_id);
+      setStep(4);
+    }
+  }, [flash]);
   const handleNextStep = (e) => {
     e.preventDefault();
     if (step === 1 && data.title && data.abstract && data.author_name && data.author_email) {
@@ -196,37 +202,29 @@ function CallForPapers() {
       setStep(3);
     }
   };
-  const submit = async (e) => {
-    var _a2, _b2;
+  const submit = (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    Object.keys(data).forEach((key) => {
-      if (data[key] !== null) {
-        formData.append(key, data[key]);
-      }
+    post(route("submission-guidelines.call.store"), {
+      forceFormData: true,
+      onSuccess: (page) => {
+        var _a2;
+        const successData = (_a2 = page.props.flash) == null ? void 0 : _a2.success;
+        if (successData == null ? void 0 : successData.tracking_id) {
+          setTrackingId(successData.tracking_id);
+          reset();
+          setStep(4);
+          toast.success("Manuscript submitted successfully.");
+        }
+      },
+      onError: (errs) => {
+        const errorMessage = errs.error || "Submission failed. Please check for errors.";
+        toast.error(errorMessage);
+        if (Object.keys(errs).length > 0) {
+          setStep(1);
+        }
+      },
+      preserveScroll: true
     });
-    try {
-      const response = await axios.post(route("submission-guidelines.call.store"), formData, {
-        headers: { "Content-Type": "multipart/form-data" }
-      });
-      if (response.status === 201) {
-        setTrackingId(response.data.tracking_id);
-        reset();
-        setStep(4);
-        toast.success("Manuscript submitted successfully.");
-      }
-    } catch (error) {
-      if ((_b2 = (_a2 = error.response) == null ? void 0 : _a2.data) == null ? void 0 : _b2.errors) {
-        const backendErrors = error.response.data.errors;
-        Object.keys(backendErrors).forEach((key) => {
-          setError(key, backendErrors[key][0]);
-        });
-        setStep(1);
-        toast.error("Validation failed. Please check the form.");
-      } else {
-        toast.error("Submission failed. Please try again later.");
-      }
-    }
   };
   return /* @__PURE__ */ jsx(MainLayout, { children: /* @__PURE__ */ jsxs("div", { className: "bg-[#eef1ff] min-h-screen", children: [
     /* @__PURE__ */ jsx(
@@ -262,6 +260,7 @@ function CallForPapers() {
           /* @__PURE__ */ jsx("button", { onClick: () => {
             setStep(1);
             setTrackingId(null);
+            clearErrors();
           }, className: "text-blue-600 font-bold hover:underline", children: "Submit another paper" })
         ] }),
         step < 4 && /* @__PURE__ */ jsx("form", { onSubmit: step === 3 ? submit : handleNextStep, encType: "multipart/form-data", children: /* @__PURE__ */ jsxs(AnimatePresence, { mode: "wait", children: [

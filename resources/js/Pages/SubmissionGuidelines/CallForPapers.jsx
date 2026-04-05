@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PageHeader from '../../Components/PageHeader';
 import MainLayout from '../../Layouts/MainLayout';
 import { Calendar, FileText, ArrowRight, UploadCloud, CheckCircle, ShieldCheck, User } from 'lucide-react';
@@ -6,14 +6,13 @@ import { useForm, usePage } from '@inertiajs/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
 import DropZone from '../../Components/ui/DropZone';
-import axios from 'axios';
 
 export default function CallForPapers() {
     const { flash } = usePage().props;
     const [step, setStep] = useState(1);
     const [trackingId, setTrackingId] = useState(null);
     
-    const { data, setData, processing, errors, reset, setError, clearErrors } = useForm({
+    const { data, setData, post, processing, errors, reset, setError, clearErrors } = useForm({
         title: '',
         abstract: '',
         keywords: '',
@@ -26,6 +25,14 @@ export default function CallForPapers() {
         consent: false
     });
 
+    // Handle tracking ID from flash message if using Inertia redirects
+    useEffect(() => {
+        if (flash?.success?.tracking_id) {
+            setTrackingId(flash.success.tracking_id);
+            setStep(4);
+        }
+    }, [flash]);
+
     const handleNextStep = (e) => {
         e.preventDefault();
         if (step === 1 && data.title && data.abstract && data.author_name && data.author_email) {
@@ -35,39 +42,30 @@ export default function CallForPapers() {
         }
     };
 
-    const submit = async (e) => {
+    const submit = (e) => {
         e.preventDefault();
         
-        const formData = new FormData();
-        Object.keys(data).forEach(key => {
-            if (data[key] !== null) {
-                formData.append(key, data[key]);
-            }
+        post(route('submission-guidelines.call.store'), {
+            forceFormData: true,
+            onSuccess: (page) => {
+                // If the controller returns a redirect with flash
+                const successData = page.props.flash?.success;
+                if (successData?.tracking_id) {
+                    setTrackingId(successData.tracking_id);
+                    reset();
+                    setStep(4);
+                    toast.success('Manuscript submitted successfully.');
+                }
+            },
+            onError: (errs) => {
+                const errorMessage = errs.error || 'Submission failed. Please check for errors.';
+                toast.error(errorMessage);
+                if (Object.keys(errs).length > 0) {
+                    setStep(1); // Return to metadata step to fix validation errors
+                }
+            },
+            preserveScroll: true
         });
-
-        try {
-            const response = await axios.post(route('submission-guidelines.call.store'), formData, {
-                headers: { 'Content-Type': 'multipart/form-data' }
-            });
-
-            if (response.status === 201) {
-                setTrackingId(response.data.tracking_id);
-                reset();
-                setStep(4);
-                toast.success('Manuscript submitted successfully.');
-            }
-        } catch (error) {
-            if (error.response?.data?.errors) {
-                const backendErrors = error.response.data.errors;
-                Object.keys(backendErrors).forEach(key => {
-                    setError(key, backendErrors[key][0]);
-                });
-                setStep(1); // Go back to fix errors
-                toast.error('Validation failed. Please check the form.');
-            } else {
-                toast.error('Submission failed. Please try again later.');
-            }
-        }
     };
 
     return (
@@ -119,7 +117,7 @@ export default function CallForPapers() {
                                         <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Tracking ID</p>
                                         <p className="font-mono text-slate-900 font-bold text-lg">{trackingId || 'SJ-PENDING'}</p>
                                     </div>
-                                    <button onClick={() => { setStep(1); setTrackingId(null); }} className="text-blue-600 font-bold hover:underline">Submit another paper</button>
+                                    <button onClick={() => { setStep(1); setTrackingId(null); clearErrors(); }} className="text-blue-600 font-bold hover:underline">Submit another paper</button>
                                 </motion.div>
                             )}
 

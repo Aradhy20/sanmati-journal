@@ -83,16 +83,28 @@ class SubmissionController extends Controller
         );
 
         // 1️⃣ Send full details + PDF to the editorial inbox
-        Mail::to(self::EDITORIAL_EMAIL)->send($mail);
+        try {
+            Mail::to(self::EDITORIAL_EMAIL)->send($mail);
 
-        // 2️⃣ Send a lightweight confirmation to the author
-        Mail::to($validated['author_email'])->send(
-            new AuthorConfirmationMail(
-                authorName: $validated['author_name'],
-                paperTitle: $validated['title'],
-                trackingId: $trackingId,
-            )
-        );
+            // 2️⃣ Send a lightweight confirmation to the author
+            Mail::to($validated['author_email'])->send(
+                new AuthorConfirmationMail(
+                    authorName: $validated['author_name'],
+                    paperTitle: $validated['title'],
+                    trackingId: $trackingId,
+                )
+            );
+        } catch (\Exception $e) {
+            // Log mail failure but don't crash the submission
+            \Illuminate\Support\Facades\Log::error("Mail submission failed for {$trackingId}: " . $e->getMessage());
+        }
+
+        if ($request->header('X-Inertia')) {
+            return redirect()->back()->with('success', [
+                'message' => 'Manuscript submitted successfully.',
+                'tracking_id' => $trackingId
+            ]);
+        }
 
         return response()->json([
             'message'     => 'Manuscript submitted successfully.',
