@@ -237,18 +237,7 @@ const Navbar = ({ onOpenSearch }) => {
                             >
                                 Send Paper
                             </Link>
-                            
-                            {/* Dark Mode Toggle */}
-                            <button
-                                onClick={toggleDark}
-                                className="p-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-dark transition-colors flex-shrink-0"
-                                aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
-                                title={dark ? 'Light mode' : 'Dark mode'}
-                            >
-                                {dark
-                                    ? <Sun className="w-4 h-4 text-amber-500" />
-                                    : <Moon className="w-4 h-4 text-slate-600" />}
-                            </button>
+
 
                             <button
                                 onClick={() => setIsOpen(!isOpen)}
