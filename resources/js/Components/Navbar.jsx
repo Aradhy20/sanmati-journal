@@ -134,7 +134,7 @@ const Navbar = ({ onOpenSearch }) => {
                         </Link>
 
                         {/* Desktop Menu */}
-                        <div className="hidden lg:flex items-center justify-center gap-2 xl:gap-4 flex-1 flex-wrap min-w-0 max-w-full">
+                        <div className="hidden xl:flex items-center justify-center gap-2 flex-1 min-w-0 max-w-full">
                             {navItems.map((item) => (
                                 <div
                                     key={item.name}
@@ -244,7 +244,7 @@ const Navbar = ({ onOpenSearch }) => {
 
                             <button
                                 onClick={() => setIsOpen(!isOpen)}
-                                className="md:hidden bg-gray-100 text-dark p-2.5 rounded-xl hover:bg-gray-200 transition-colors"
+                                className="xl:hidden bg-gray-100 text-dark p-2.5 rounded-xl hover:bg-gray-200 transition-colors"
                                 aria-label="Toggle menu"
                             >
                                 {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -261,7 +261,7 @@ const Navbar = ({ onOpenSearch }) => {
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.3, ease: 'easeInOut' }}
-                            className="md:hidden absolute top-full left-0 w-full bg-white border-t border-gray-100 shadow-2xl overflow-hidden z-50 origin-top"
+                            className="xl:hidden absolute top-full left-0 w-full bg-white border-t border-gray-100 shadow-2xl overflow-hidden z-50 origin-top"
                         >
                             <div className="px-6 py-6 space-y-4 max-h-[calc(100vh-130px)] overflow-y-auto pb-12">
                                 {navItems.map((item) => (
