@@ -46,7 +46,7 @@
     "name": "vendor"
   },
   "resources/css/app.css": {
-    "file": "assets/app-XeLYFP-G.css",
+    "file": "assets/app-CNeFPKOg.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -188,7 +188,7 @@
     ]
   },
   "resources/js/Pages/Archive.jsx": {
-    "file": "assets/Archive-CBS9Dy3Q.js",
+    "file": "assets/Archive-BlXoUNKE.js",
     "name": "Archive",
     "src": "resources/js/Pages/Archive.jsx",
     "isDynamicEntry": true,
@@ -329,7 +329,7 @@
     ]
   },
   "resources/js/Pages/Contact.jsx": {
-    "file": "assets/Contact-DqLH3-hU.js",
+    "file": "assets/Contact-vKP683ab.js",
     "name": "Contact",
     "src": "resources/js/Pages/Contact.jsx",
     "isDynamicEntry": true,
@@ -416,7 +416,7 @@
     ]
   },
   "resources/js/Pages/Home.jsx": {
-    "file": "assets/Home-C3hZU8kn.js",
+    "file": "assets/Home-C7UyaDzg.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.jsx",
     "isDynamicEntry": true,
@@ -429,7 +429,7 @@
       "resources/js/Components/Hero.jsx"
     ],
     "css": [
-      "assets/app-XeLYFP-G.css"
+      "assets/app-CNeFPKOg.css"
     ]
   },
   "resources/js/Pages/PublicationPolicy/Ethics.jsx": {
@@ -573,7 +573,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-CjY89RrT.js",
+    "file": "assets/app-DuKzLRYX.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
@@ -629,7 +629,7 @@
       "resources/js/Pages/TrackManuscript.jsx"
     ],
     "css": [
-      "assets/app-XeLYFP-G.css"
+      "assets/app-CNeFPKOg.css"
     ]
   }
 }

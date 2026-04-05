@@ -144,9 +144,9 @@ function Contact() {
             "img",
             {
               loading: "lazy",
-              src: "/fistudy-assets/resources/about-three-img-1.jpg",
+              src: "/images/contact/editorial_office.png",
               alt: "Editorial Office",
-              className: "w-full h-full object-cover min-h-[500px] lg:min-h-[600px] opacity-60 group-hover:opacity-40 transition-opacity duration-700"
+              className: "w-full h-full object-cover min-h-[500px] lg:min-h-[600px] opacity-80 group-hover:opacity-70 transition-opacity duration-700"
             }
           ),
           /* @__PURE__ */ jsxs("div", { className: "absolute inset-x-0 bottom-0 p-10 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent", children: [
@@ -157,7 +157,7 @@ function Contact() {
             /* @__PURE__ */ jsx("h3", { className: "text-xl md:text-2xl lg:text-3xl font-serif font-bold text-white mb-4", children: "The Editorial Office" }),
             /* @__PURE__ */ jsx("p", { className: "text-white/40 text-sm leading-relaxed mb-6 font-medium italic", children: '"Transparent communication is the cornerstone of scholarly integrity. Our team is dedicated to supporting authors at every stage of the peer-review journey."' }),
             /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-4", children: [
-              /* @__PURE__ */ jsx("div", { className: "w-10 h-10 rounded-full border border-white/10 overflow-hidden", children: /* @__PURE__ */ jsx("img", { loading: "lazy", src: "/fistudy-assets/team/team-1-1.jpg", alt: "Editor", className: "w-full h-full object-cover" }) }),
+              /* @__PURE__ */ jsx("div", { className: "w-10 h-10 rounded-full border border-white/10 overflow-hidden", children: /* @__PURE__ */ jsx("img", { loading: "lazy", src: "/images/contact/dr_namrta_jain_avatar.png", alt: "Editor", className: "w-full h-full object-cover" }) }),
               /* @__PURE__ */ jsxs("div", { children: [
                 /* @__PURE__ */ jsx("p", { className: "text-white font-bold text-sm leading-none mb-1", children: "Dr. Namrta Jain" }),
                 /* @__PURE__ */ jsx("p", { className: "text-white/30 text-[10px] uppercase font-black tracking-widest leading-none", children: "Editor-in-Chief" })

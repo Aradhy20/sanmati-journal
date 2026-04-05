@@ -46,13 +46,13 @@
     "/build/assets/CallForPapers-BRe53rqx.js"
   ],
   "resources/js/Components/ui/FloatInput.jsx": [
-    "/build/assets/Contact-BtBxhSjS.js"
+    "/build/assets/Contact-DZRUoWI0.js"
   ],
   "resources/js/Components/ui/Modal.jsx": [
     "/build/assets/CitationGenerator-Nttig6Bx.js"
   ],
   "resources/js/Components/ui/SkeletonCard.jsx": [
-    "/build/assets/Archive-DHNdlQhC.js"
+    "/build/assets/Archive-BIBy5Fpa.js"
   ],
   "resources/js/Layouts/AdminLayout.jsx": [
     "/build/assets/AdminLayout-B8jAos2V.js"
@@ -97,7 +97,7 @@
     "/build/assets/AdvisoryBoard-CZydGv06.js"
   ],
   "resources/js/Pages/Archive.jsx": [
-    "/build/assets/Archive-DHNdlQhC.js"
+    "/build/assets/Archive-BIBy5Fpa.js"
   ],
   "resources/js/Pages/Article.jsx": [
     "/build/assets/Article-CLZCtyxj.js"
@@ -136,7 +136,7 @@
     "/build/assets/Compliance-r_vlPSxe.js"
   ],
   "resources/js/Pages/Contact.jsx": [
-    "/build/assets/Contact-BtBxhSjS.js"
+    "/build/assets/Contact-DZRUoWI0.js"
   ],
   "resources/js/Pages/EditorialBoard.jsx": [
     "/build/assets/EditorialBoard-D1m7FX5d.js"

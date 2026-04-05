@@ -67,9 +67,9 @@ export default function Contact() {
                         <div className="absolute -inset-4 bg-gradient-to-br from-secondary/10 via-transparent to-primary/10 rounded-[3rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
                         <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl bg-dark">
                             <img loading="lazy"
-                                src="/fistudy-assets/resources/about-three-img-1.jpg"
+                                src="/images/contact/editorial_office.png"
                                 alt="Editorial Office"
-                                className="w-full h-full object-cover min-h-[500px] lg:min-h-[600px] opacity-60 group-hover:opacity-40 transition-opacity duration-700"
+                                className="w-full h-full object-cover min-h-[500px] lg:min-h-[600px] opacity-80 group-hover:opacity-70 transition-opacity duration-700"
                             />
                             <div className="absolute inset-x-0 bottom-0 p-10 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent">
                                 <div className="flex items-center gap-4 mb-4">
@@ -82,7 +82,7 @@ export default function Contact() {
                                 </p>
                                 <div className="flex items-center gap-4">
                                     <div className="w-10 h-10 rounded-full border border-white/10 overflow-hidden">
-                                        <img loading="lazy" src="/fistudy-assets/team/team-1-1.jpg" alt="Editor" className="w-full h-full object-cover" />
+                                        <img loading="lazy" src="/images/contact/dr_namrta_jain_avatar.png" alt="Editor" className="w-full h-full object-cover" />
                                     </div>
                                     <div>
                                         <p className="text-white font-bold text-sm leading-none mb-1">Dr. Namrta Jain</p>

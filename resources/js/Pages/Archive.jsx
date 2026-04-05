@@ -36,7 +36,7 @@ export default function Archive({ issues }) {
                     authors: 'Sanmati Journal Editorial Board',
                     abstract: 'The inaugural issue of Sanmati Spectrum of Knowledge & Emerging Discourse — a national peer-reviewed multidisciplinary research journal publishing original research, case studies and book reviews across a wide range of academic fields.',
                     file_path: 'https://drive.google.com/file/d/1nPxKxugSA6yMcpbJyQuNuEQ7QcnrpPt2/view?usp=sharing',
-                    thumbnail: '/images/archive/vol1_cover.jpg'
+                    thumbnail: '/images/archive/vol1_front_cover.png'
                 }
             ]
         }
