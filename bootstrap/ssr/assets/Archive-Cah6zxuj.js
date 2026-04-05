@@ -78,11 +78,11 @@ function Archive({ issues }) {
       papers: [
         {
           id: "static-1",
-          title: "Sanmati Spectrum of Knowledge & Emerging Discourse — Volume 1, Issue 1 (January–March 2026) [Hindi & English]",
-          authors: "Sanmati Journal Editorial Board",
+          title: "Sanmati Spectrum of Knowledge & Emerging Discourse (Inaugural Issue)",
+          authors: "Dr. Shweta Singh (Editor-in-Chief), Dr. Rajesh Sharma, Dr. Priya Kumari",
           abstract: "The inaugural issue of Sanmati Spectrum of Knowledge & Emerging Discourse — a national peer-reviewed multidisciplinary research journal publishing original research, case studies and book reviews across a wide range of academic fields.",
           file_path: "https://drive.google.com/file/d/1nPxKxugSA6yMcpbJyQuNuEQ7QcnrpPt2/view?usp=sharing",
-          thumbnail: "/images/archive/vol1_front_cover.png"
+          thumbnail: "/images/archive/vol1_official_cover.png"
         }
       ]
     }
