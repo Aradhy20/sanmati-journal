@@ -110,23 +110,23 @@ const Navbar = ({ onOpenSearch }) => {
             {/* Main Navbar - Solid Academic Header */}
             <nav className={`w-full relative z-40 overflow-x-visible transition-all duration-500 ease-[0.22,1,0.36,1] ${scrolled ? 'bg-white shadow-md border-b border-gray-200 py-2' : 'bg-white border-b border-gray-100 py-4'}`}>
                 <div className="max-w-7xl mx-auto px-4 lg:px-8">
-                    <div className="flex items-center justify-between h-20 sm:h-[104px] gap-4 xl:gap-8">
-                        {/* Logo - Refined & Enlarged */}
-                        <Link href="/" className="flex items-center gap-3 sm:gap-5 flex-shrink-0 group">
+                    <div className="flex items-center justify-between h-16 sm:h-[72px] gap-3 xl:gap-6">
+                        {/* Logo */}
+                        <Link href="/" className="flex items-center gap-2.5 sm:gap-3 flex-shrink-0 group min-w-0">
                             <motion.div 
-                                className={`rounded-2xl overflow-hidden shadow-md border border-gray-100 flex-shrink-0 bg-white group-hover:shadow-xl group-hover:border-primary/30 transition-all duration-500 ${scrolled ? 'w-12 h-12 p-1' : 'w-16 h-16 sm:w-24 sm:h-24 p-2'}`}
+                                className={`rounded-xl overflow-hidden shadow-sm border border-gray-100 flex-shrink-0 bg-white group-hover:shadow-md group-hover:border-primary/20 transition-all duration-500 ${scrolled ? 'w-9 h-9 p-0.5' : 'w-11 h-11 sm:w-14 sm:h-14 p-1'}`}
                             >
                                 <img
                                     src="/logo.jpg"
                                     alt="Sanmati Journal Logo"
-                                    className="object-contain w-full h-full group-hover:scale-110 transition-transform duration-700"
+                                    className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-500"
                                 />
                             </motion.div>
-                            <div className="hidden sm:block">
-                                <span className={`block font-black text-dark group-hover:text-primary transition-colors tracking-tight ${scrolled ? 'text-xl' : 'text-2xl sm:text-3xl'}`}>
+                            <div className="hidden sm:block min-w-0">
+                                <span className={`block font-black text-dark group-hover:text-primary transition-colors tracking-tight leading-tight truncate ${scrolled ? 'text-base' : 'text-lg sm:text-xl'}`}>
                                     Sanmati Spectrum
                                 </span>
-                                <span className={`font-bold tracking-[0.25em] uppercase transition-colors block mt-0.5 ${scrolled ? 'text-[9px] text-secondary' : 'text-[10px] sm:text-[11px] text-gray-500'}`}>
+                                <span className={`font-semibold tracking-[0.2em] uppercase transition-colors block ${scrolled ? 'text-[8px] text-secondary' : 'text-[9px] text-gray-400'}`}>
                                     Research Journal
                                 </span>
                             </div>
@@ -255,13 +255,29 @@ const Navbar = ({ onOpenSearch }) => {
                 <AnimatePresence>
                     {isOpen && (
                         <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.3, ease: 'easeInOut' }}
-                            className="xl:hidden absolute top-full left-0 w-full bg-white border-t border-gray-100 shadow-2xl overflow-hidden z-50 origin-top"
+                            initial={{ opacity: 0, x: '100%' }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: '100%' }}
+                            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                            className="xl:hidden fixed inset-0 top-0 left-0 w-full h-full bg-white z-[999] overflow-y-auto"
                         >
-                            <div className="px-6 py-6 space-y-4 max-h-[calc(100vh-130px)] overflow-y-auto pb-12">
+                            {/* Mobile menu header */}
+                            <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 sticky top-0 bg-white z-10 shadow-sm">
+                                <Link href="/" className="flex items-center gap-2.5 group" onClick={() => setIsOpen(false)}>
+                                    <div className="w-9 h-9 rounded-xl overflow-hidden shadow-sm border border-gray-100 flex-shrink-0">
+                                        <img src="/logo.jpg" alt="Sanmati Journal Logo" className="object-contain w-full h-full" />
+                                    </div>
+                                    <span className="text-base font-black text-dark">Sanmati Spectrum</span>
+                                </Link>
+                                <button
+                                    onClick={() => setIsOpen(false)}
+                                    className="p-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-dark transition-colors"
+                                    aria-label="Close menu"
+                                >
+                                    <X className="w-5 h-5" />
+                                </button>
+                            </div>
+                            <div className="px-4 py-5 space-y-1 pb-24">
                                 {navItems.map((item) => (
                                     <div key={item.name} className="border-b border-gray-50 last:border-0 pb-3 last:pb-0">
                                         {item.dropdown ? (
