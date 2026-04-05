@@ -21,18 +21,20 @@ export default function Archive({ issues }) {
     const isLoading = issues == null;
     const dbIssues = Array.isArray(issues) ? issues : (issues?.data || []);
     
-    // Hardcoded Inaugural Volume
+    // Current live volume — always shown as the primary issue.
+    // DB issues (added via admin panel) will appear alongside this.
     const hardcodedIssues = [
         {
             id: 'vol1-issue1',
             volume: '1',
             number: '1',
-            year: 'Jan-March 2026',
+            year: 'January–March 2026',
             papers: [
                 {
                     id: 'static-1',
-                    title: 'Sanmati Spectrum of Knowledge & Emerging Discourse (January-March, 2026) Hindi & English',
+                    title: 'Sanmati Spectrum of Knowledge & Emerging Discourse — Volume 1, Issue 1 (January–March 2026) [Hindi & English]',
                     authors: 'Sanmati Journal Editorial Board',
+                    abstract: 'The inaugural issue of Sanmati Spectrum of Knowledge & Emerging Discourse — a national peer-reviewed multidisciplinary research journal publishing original research, case studies and book reviews across a wide range of academic fields.',
                     file_path: 'https://drive.google.com/file/d/1nPxKxugSA6yMcpbJyQuNuEQ7QcnrpPt2/view?usp=sharing',
                     thumbnail: 'https://drive.google.com/thumbnail?id=1nPxKxugSA6yMcpbJyQuNuEQ7QcnrpPt2&sz=w800'
                 }
@@ -40,7 +42,11 @@ export default function Archive({ issues }) {
         }
     ];
 
-    const issueList = dbIssues.length > 0 ? dbIssues : hardcodedIssues;
+    // Always show hardcoded inaugural volume first, then any additional DB entries
+    const issueList = [
+        ...hardcodedIssues,
+        ...dbIssues.filter(d => String(d.id) !== 'vol1-issue1')
+    ];
     const [citationPaper, setCitationPaper] = useState(null);
 
     
