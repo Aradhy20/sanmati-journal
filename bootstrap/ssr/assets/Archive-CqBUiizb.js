@@ -82,7 +82,7 @@ function Archive({ issues }) {
           authors: "Sanmati Journal Editorial Board",
           abstract: "The inaugural issue of Sanmati Spectrum of Knowledge & Emerging Discourse — a national peer-reviewed multidisciplinary research journal publishing original research, case studies and book reviews across a wide range of academic fields.",
           file_path: "https://drive.google.com/file/d/1nPxKxugSA6yMcpbJyQuNuEQ7QcnrpPt2/view?usp=sharing",
-          thumbnail: "https://drive.google.com/thumbnail?id=1nPxKxugSA6yMcpbJyQuNuEQ7QcnrpPt2&sz=w800"
+          thumbnail: "/images/archive/vol1_cover.jpg"
         }
       ]
     }
@@ -125,8 +125,8 @@ function Archive({ issues }) {
     /* @__PURE__ */ jsx(
       Seo,
       {
-        title: "Journal Archive",
-        description: "Access our repository of past volumes and peer-reviewed research issues.",
+        title: "Journal Archive | Sanmati Spectrum of Knowledge",
+        description: "Explore previous volumes and issues of Sanmati Spectrum of Knowledge & Emerging Discourse. High-quality multidisciplinary research repository.",
         jsonLd: scholarlySchema.length > 0 ? scholarlySchema : void 0
       }
     ),
@@ -191,14 +191,14 @@ function Archive({ issues }) {
                       href: issue.papers[0].file_path,
                       target: "_blank",
                       rel: "noopener noreferrer",
-                      className: "block group relative overflow-hidden",
+                      className: "block group relative overflow-hidden aspect-square",
                       children: [
                         /* @__PURE__ */ jsx(
                           "img",
                           {
                             src: issue.papers[0].thumbnail,
                             alt: `Volume ${issue.volume} Cover`,
-                            className: "w-full aspect-[3/4] object-cover object-top group-hover:scale-105 transition-transform duration-500",
+                            className: "w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500",
                             loading: "lazy"
                           }
                         ),
