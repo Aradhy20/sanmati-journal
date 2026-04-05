@@ -112,9 +112,9 @@ const Navbar = ({ onOpenSearch }) => {
                 <div className="max-w-7xl mx-auto px-4 lg:px-8">
                     <div className="flex items-center justify-between h-16 sm:h-[72px] gap-3 xl:gap-6">
                         {/* Logo */}
-                        <Link href="/" className="flex items-center gap-2.5 sm:gap-3 flex-shrink-0 group min-w-0">
+                        <Link href="/" className="flex items-center gap-2 sm:gap-3 flex-shrink-0 group min-w-0">
                             <motion.div 
-                                className={`rounded-xl overflow-hidden shadow-sm border border-gray-100 flex-shrink-0 bg-white group-hover:shadow-md group-hover:border-primary/20 transition-all duration-500 ${scrolled ? 'w-9 h-9 p-0.5' : 'w-11 h-11 sm:w-14 sm:h-14 p-1'}`}
+                                className={`rounded-xl overflow-hidden shadow-sm border border-gray-100 flex-shrink-0 bg-white group-hover:shadow-md group-hover:border-primary/20 transition-all duration-500 ${scrolled ? 'w-9 h-9 p-0.5' : 'w-11 h-11 sm:w-13 sm:h-13 p-1'}`}
                             >
                                 <img
                                     src="/logo.jpg"
@@ -122,7 +122,8 @@ const Navbar = ({ onOpenSearch }) => {
                                     className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-500"
                                 />
                             </motion.div>
-                            <div className="hidden sm:block min-w-0">
+                            {/* Text hidden on xl desktops to give nav links room; visible on tablet/mobile header */}
+                            <div className="hidden sm:block xl:hidden min-w-0">
                                 <span className={`block font-black text-dark group-hover:text-primary transition-colors tracking-tight leading-tight truncate ${scrolled ? 'text-base' : 'text-lg sm:text-xl'}`}>
                                     Sanmati Spectrum
                                 </span>
@@ -130,10 +131,19 @@ const Navbar = ({ onOpenSearch }) => {
                                     Research Journal
                                 </span>
                             </div>
+                            {/* On xl+ show compact text so brand is still visible */}
+                            <div className="hidden xl:block min-w-0">
+                                <span className={`block font-black text-dark group-hover:text-primary transition-colors tracking-tight leading-tight whitespace-nowrap ${scrolled ? 'text-sm' : 'text-base'}`}>
+                                    Sanmati Spectrum
+                                </span>
+                                <span className="text-[8px] font-semibold tracking-[0.18em] uppercase text-gray-400 block">
+                                    Research Journal
+                                </span>
+                            </div>
                         </Link>
 
                         {/* Desktop Menu */}
-                        <div className="hidden xl:flex items-center justify-center gap-2 flex-1 min-w-0 max-w-full">
+                        <div className="hidden xl:flex items-center justify-center gap-0.5 flex-1 min-w-0 overflow-visible">
                             {navItems.map((item) => (
                                 <div
                                     key={item.name}
@@ -145,7 +155,7 @@ const Navbar = ({ onOpenSearch }) => {
                                         <button
                                             aria-haspopup="true"
                                             aria-expanded={activeDropdown === item.name}
-                                            className={`relative flex flex-col items-center text-[12px] xl:text-[13px] font-bold px-2 xl:px-3 py-2 rounded-full transition-all whitespace-nowrap tracking-wide ${isActive(item.href)
+                                            className={`relative flex flex-col items-center text-[11px] font-bold px-1.5 xl:px-2 py-2 rounded-full transition-all whitespace-nowrap tracking-wide ${isActive(item.href)
                                                 ? 'text-primary bg-primary/5'
                                                 : 'text-dark/80 hover:text-primary hover:bg-primary/5'
                                                 }`}
@@ -160,7 +170,7 @@ const Navbar = ({ onOpenSearch }) => {
                                     ) : (
                                         <Link
                                             href={item.href}
-                                            className={`relative flex flex-col items-center text-[12px] xl:text-[13px] font-bold px-2 xl:px-3 py-2 rounded-full transition-all whitespace-nowrap tracking-wide ${isActive(item.href)
+                                            className={`relative flex flex-col items-center text-[11px] font-bold px-1.5 xl:px-2 py-2 rounded-full transition-all whitespace-nowrap tracking-wide ${isActive(item.href)
                                                 ? 'text-primary bg-primary/5'
                                                 : 'text-dark/80 hover:text-primary hover:bg-primary/5'
                                                 }`}
@@ -223,9 +233,9 @@ const Navbar = ({ onOpenSearch }) => {
 
                             <Link
                                 href="/submission-guidelines/call-for-papers"
-                                className="hidden xl:inline-flex px-7 py-3 bg-primary text-white text-[11px] font-bold tracking-[0.1em] uppercase rounded-full hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 hover:shadow-xl hover:-translate-y-0.5"
+                                className="hidden xl:inline-flex px-4 py-2.5 bg-primary text-white text-[10px] font-bold tracking-[0.08em] uppercase rounded-full hover:bg-primary-dark transition-all shadow-md shadow-primary/20 hover:shadow-lg whitespace-nowrap flex-shrink-0"
                             >
-                                Send Your Paper
+                                Send Paper
                             </Link>
                             
                             {/* Dark Mode Toggle */}
