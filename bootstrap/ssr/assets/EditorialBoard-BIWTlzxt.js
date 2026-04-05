@@ -128,7 +128,7 @@ function EditorialBoard() {
           },
           {
             name: "Dr. Kalpna Jain",
-            title: "Executive Editor",
+            title: "Board Member",
             affiliation: "",
             email: "Kalpnajain69@gmail.com",
             profileUrl: "https://www.researchgate.net/profile/Dr-Jain-23",
