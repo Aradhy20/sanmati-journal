@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import { Menu, X, ChevronDown, ArrowUpRight, Mail, Phone, MapPin, Sun, Moon, Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import CountdownTimer from './ui/CountdownTimer';
 
 const Navbar = ({ onOpenSearch }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +23,6 @@ const Navbar = ({ onOpenSearch }) => {
         try { localStorage.setItem('theme', next ? 'dark' : 'light'); } catch {}
     };
 
-    const targetDate = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0, 23, 59, 59).toISOString();
     const { url } = usePage();
 
 
@@ -109,23 +107,6 @@ const Navbar = ({ onOpenSearch }) => {
 
     return (
         <header className="sticky top-0 z-50 flex flex-col w-full overflow-x-visible">
-
-            {/* Top Info Bar - Top Notice Banner for Countdown */}
-            <div className="bg-primary-dark text-white border-b border-primary/50 relative z-50">
-                <div className="max-w-7xl mx-auto px-4 py-2.5 flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4">
-                    <div className="flex items-center gap-4 text-[10px] sm:text-[11px] font-bold tracking-[0.2em] uppercase text-white">
-                        <span className="opacity-90">ISSN: 3108-1819</span>
-                        <span className="w-1 h-1 rounded-full bg-secondary"></span>
-                        <span className="text-secondary-light">UGC CARE Listed (Proposed)</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                        <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.15em] text-white/70">
-                            Current Cycle Closes In:
-                        </span>
-                        <CountdownTimer targetDate={targetDate} className="scale-90 origin-right" />
-                    </div>
-                </div>
-            </div>
 
             {/* Main Navbar - Solid Academic Header */}
             <nav className={`w-full relative z-40 overflow-x-visible transition-all duration-500 ease-[0.22,1,0.36,1] ${scrolled ? 'bg-white shadow-md border-b border-gray-200 py-2' : 'bg-white border-b border-gray-100 py-4'}`}>
