@@ -66,7 +66,6 @@ const Footer = () => {
                                 title: 'Publications',
                                 links: [
                                     { name: 'Latest Issues', href: '/archive' },
-                                    { name: 'Journal Blog', href: '/blog' },
                                     { name: 'Call for Papers', href: '/submission-guidelines/call-for-papers' },
                                     { name: 'Submission Guide', href: '/submission-guidelines' },
                                     { name: 'Editorial Team', href: '/editorial-team/editorial-board' },

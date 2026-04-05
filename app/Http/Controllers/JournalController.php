@@ -163,19 +163,6 @@ class JournalController extends Controller
         return Inertia::render('TrackManuscript');
     }
 
-    // --- Blog System ---
-    public function blogIndex()
-    {
-        // For now, pass a static list of articles or fetch from DB if available.
-        return Inertia::render('Blog/Index');
-    }
-
-    public function blogShow($slug)
-    {
-        return Inertia::render('Blog/Show', [
-            'slug' => $slug
-        ]);
-    }
 
     public function bookPublication()
     {
