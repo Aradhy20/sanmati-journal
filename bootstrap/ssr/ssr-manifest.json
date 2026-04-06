@@ -19,7 +19,7 @@
     "/build/assets/MainLayout-DnA_ZOa1.js"
   ],
   "resources/js/Components/NewsletterSection.jsx": [
-    "/build/assets/Home-D5gxs7Z-.js"
+    "/build/assets/Home-C0GI-5jt.js"
   ],
   "resources/js/Components/PageHeader.jsx": [
     "/build/assets/PageHeader-DHJj0W5D.js"
@@ -52,7 +52,7 @@
     "/build/assets/CitationGenerator-Nttig6Bx.js"
   ],
   "resources/js/Components/ui/SkeletonCard.jsx": [
-    "/build/assets/Archive-IMY1QEnh.js"
+    "/build/assets/Archive-BeqquLbX.js"
   ],
   "resources/js/Layouts/AdminLayout.jsx": [
     "/build/assets/AdminLayout-B8jAos2V.js"
@@ -97,7 +97,7 @@
     "/build/assets/AdvisoryBoard-CZydGv06.js"
   ],
   "resources/js/Pages/Archive.jsx": [
-    "/build/assets/Archive-IMY1QEnh.js"
+    "/build/assets/Archive-BeqquLbX.js"
   ],
   "resources/js/Pages/Article.jsx": [
     "/build/assets/Article-CLZCtyxj.js"
@@ -160,7 +160,7 @@
     "/build/assets/Photo-DcjbzsUx.js"
   ],
   "resources/js/Pages/Home.jsx": [
-    "/build/assets/Home-D5gxs7Z-.js"
+    "/build/assets/Home-C0GI-5jt.js"
   ],
   "resources/js/Pages/PublicationPolicy/Ethics.jsx": [
     "/build/assets/Ethics-C0xCnISb.js"

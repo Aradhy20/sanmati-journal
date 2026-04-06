@@ -79,7 +79,7 @@ function Archive({ issues }) {
         {
           id: "static-1",
           title: "Sanmati Spectrum of Knowledge & Emerging Discourse (January-March, 2026)",
-          authors: "Dr. Shweta Singh (Editor-in-Chief), Dr. Rajesh Sharma, Dr. Priya Kumari",
+          authors: "Dr. Namrta Jain (Editor-in-Chief), Dr. Ratnesh Kumar Jain (Managing Editor)",
           abstract: "The January-March 2026 issue (Vol-1, Issue-1) of Sanmati Spectrum of Knowledge & Emerging Discourse — a national peer-reviewed multidisciplinary research journal in English & Hindi.",
           file_path: "https://drive.google.com/file/d/1nPxKxugSA6yMcpbJyQuNuEQ7QcnrpPt2/view?usp=sharing",
           thumbnail: "/images/archive/vol1_official_cover.png"
