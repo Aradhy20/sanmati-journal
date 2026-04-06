@@ -32,9 +32,9 @@ export default function Archive({ issues }) {
             papers: [
                 {
                     id: 'static-1',
-                    title: 'Sanmati Spectrum of Knowledge & Emerging Discourse (Inaugural Issue)',
+                    title: 'Sanmati Spectrum of Knowledge & Emerging Discourse (January-March, 2026)',
                     authors: 'Dr. Shweta Singh (Editor-in-Chief), Dr. Rajesh Sharma, Dr. Priya Kumari',
-                    abstract: 'The inaugural issue of Sanmati Spectrum of Knowledge & Emerging Discourse — a national peer-reviewed multidisciplinary research journal publishing original research, case studies and book reviews across a wide range of academic fields.',
+                    abstract: 'The January-March 2026 issue (Vol-1, Issue-1) of Sanmati Spectrum of Knowledge & Emerging Discourse — a national peer-reviewed multidisciplinary research journal in English & Hindi.',
                     file_path: 'https://drive.google.com/file/d/1nPxKxugSA6yMcpbJyQuNuEQ7QcnrpPt2/view?usp=sharing',
                     thumbnail: '/images/archive/vol1_official_cover.png'
                 }
@@ -163,7 +163,7 @@ export default function Archive({ issues }) {
                                                 </a>
                                             )}
                                             <div className="p-8">
-                                                <span className="text-[10px] font-black uppercase tracking-widest text-secondary block mb-4">Inaugural Issue</span>
+                                                <span className="text-[10px] font-black uppercase tracking-widest text-secondary block mb-4">January-March 2026</span>
                                                 <h3 className="text-xl md:text-2xl font-serif font-bold text-dark mb-3">Issue No. {issue.number}</h3>
                                                 <p className="text-muted text-sm leading-relaxed mb-6">
                                                     This issue features a compilation of peer-reviewed research and analytical discourse across multidisciplinary themes.
