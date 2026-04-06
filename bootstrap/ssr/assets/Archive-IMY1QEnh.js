@@ -78,9 +78,9 @@ function Archive({ issues }) {
       papers: [
         {
           id: "static-1",
-          title: "Sanmati Spectrum of Knowledge & Emerging Discourse (Inaugural Issue)",
+          title: "Sanmati Spectrum of Knowledge & Emerging Discourse (January-March, 2026)",
           authors: "Dr. Shweta Singh (Editor-in-Chief), Dr. Rajesh Sharma, Dr. Priya Kumari",
-          abstract: "The inaugural issue of Sanmati Spectrum of Knowledge & Emerging Discourse — a national peer-reviewed multidisciplinary research journal publishing original research, case studies and book reviews across a wide range of academic fields.",
+          abstract: "The January-March 2026 issue (Vol-1, Issue-1) of Sanmati Spectrum of Knowledge & Emerging Discourse — a national peer-reviewed multidisciplinary research journal in English & Hindi.",
           file_path: "https://drive.google.com/file/d/1nPxKxugSA6yMcpbJyQuNuEQ7QcnrpPt2/view?usp=sharing",
           thumbnail: "/images/archive/vol1_official_cover.png"
         }
@@ -208,7 +208,7 @@ function Archive({ issues }) {
                     }
                   ),
                   /* @__PURE__ */ jsxs("div", { className: "p-8", children: [
-                    /* @__PURE__ */ jsx("span", { className: "text-[10px] font-black uppercase tracking-widest text-secondary block mb-4", children: "Inaugural Issue" }),
+                    /* @__PURE__ */ jsx("span", { className: "text-[10px] font-black uppercase tracking-widest text-secondary block mb-4", children: "January-March 2026" }),
                     /* @__PURE__ */ jsxs("h3", { className: "text-xl md:text-2xl font-serif font-bold text-dark mb-3", children: [
                       "Issue No. ",
                       issue.number

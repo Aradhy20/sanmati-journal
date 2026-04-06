@@ -316,34 +316,34 @@ function Home() {
           ] }),
           /* @__PURE__ */ jsx("div", { className: "grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch", children: [
             {
-              genre: "Quantum Physics",
-              format: "Hardcover · 320 Pages",
-              title: "Non-Linear Dynamics in Sub-Atomic Particles",
-              excerpt: "Investigating quantum fields under high-stress gravitational simulations — a groundbreaking multi-disciplinary synthesis.",
-              img: "/fistudy-assets/resources/paper-physics.png",
+              genre: "Academic Research",
+              format: "Hardcover · 520 Pages",
+              title: "Published Volume 37",
+              excerpt: "A comprehensive collection of multidisciplinary research papers exploring emerging trends in science, arts, and commerce.",
+              img: "/images/books/WhatsApp Image 2026-02-16 at 9.21.50 PM.jpeg",
+              badge: "Latest Release",
+              price: "Order Now",
+              stars: 5
+            },
+            {
+              genre: "Multidisciplinary",
+              format: "Hardcover · 480 Pages",
+              title: "Published Volume 35",
+              excerpt: "Exploring the intersections of traditional knowledge and modern scientific discourse through peer-reviewed excellence.",
+              img: "/images/books/WhatsApp Image 2026-02-16 at 9.21.49 PM (1).jpeg",
+              badge: "Bestseller",
+              price: "Order Now",
+              stars: 5
+            },
+            {
+              genre: "Social Sciences",
+              format: "Hardcover · 450 Pages",
+              title: "Published Volume 32",
+              excerpt: "Documenting critical insights and scholarly perspectives on global socio-economic challenges and modern society.",
+              img: "/images/books/WhatsApp Image 2026-02-16 at 9.21.47 PM.jpeg",
               badge: "Editor's Choice",
               price: "Order Now",
               stars: 5
-            },
-            {
-              genre: "Behavioral Economics",
-              format: "E-book · 280 Pages",
-              title: "The Cognitive Architecture of Market Shifts",
-              excerpt: "A multidisciplinary study on human heuristic biases in rapid digital-first economic environments.",
-              img: "/fistudy-assets/resources/paper-neuro.png",
-              badge: "Bestseller",
-              price: "Pre-Order",
-              stars: 5
-            },
-            {
-              genre: "Sustainability",
-              format: "Hardcover · 350 Pages",
-              title: "Urban Resilience in the Anthropocene Era",
-              excerpt: "Analyzing the intersection of sociological patterns and environmental engineering in future megacities.",
-              img: "/fistudy-assets/resources/paper-social.png",
-              badge: "New Release",
-              price: "Order Now",
-              stars: 4
             }
           ].map((book, i) => /* @__PURE__ */ jsxs(
             motion.div,
@@ -623,9 +623,9 @@ function Home() {
               ] })
             ] }),
             /* @__PURE__ */ jsx("div", { className: "grid grid-cols-1 md:grid-cols-3 gap-6", children: [
-              { rank: "01", field: "Social Sciences", title: "Impact of Digital Literacy on Rural Education Outcomes in India", authors: "Dr. Ravi Sharma, Prof. Anita Gupta", reads: "1.2k reads", tag: "Hot" },
-              { rank: "02", field: "Commerce & Economics", title: "Post-Pandemic MSME Recovery: A Multidisciplinary Analysis", authors: "Dr. Priya Mehta, Dr. Arun Singh", reads: "987 reads", tag: "Trending" },
-              { rank: "03", field: "Education Research", title: "NEP 2020 Implementation: Challenges and Opportunities in Higher Education", authors: "Prof. S.K. Verma", reads: "876 reads", tag: "Featured" }
+              { rank: "01", field: "Multidisciplinary", title: "Sanmati Spectrum of Knowledge & Emerging Discourse (January-March, 2026)", authors: "Dr. Shweta Singh, Dr. Rajesh Sharma", reads: "Featured Issue", tag: "Hot" },
+              { rank: "02", field: "Commerce & Economics", title: "Impact of Digital Literacy on Rural Education Outcomes", authors: "Dr. Ravi Sharma, Prof. Anita Gupta", reads: "1.2k reads", tag: "Trending" },
+              { rank: "03", field: "Social Science", title: "Multidisciplinary Perspectives on Modern Academic Discourse", authors: "Dr. Priya Kumari, Dr. Ratnesh Jain", reads: "987 reads", tag: "Featured" }
             ].map((paper, i) => /* @__PURE__ */ jsxs(
               motion.div,
               {
