@@ -510,7 +510,7 @@ export default function Home() {
                             </h2>
                         </div>
                         <Link href="/archive" className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-dark/60 hover:text-primary transition-colors group shrink-0">
-                            Browse All Archives <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+                            Browse All Journal Insights <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
                         </Link>
                     </motion.div>
 

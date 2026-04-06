@@ -86,7 +86,7 @@ export default function Archive({ issues }) {
             
             <PageHeader
                 title="The Knowledge Repository"
-                breadcrumb="Archives"
+                breadcrumb="Journal Insights"
                 subtitle="Curated collection of multidisciplinary scholarly discourse across previous volumes."
             />
 
@@ -102,14 +102,14 @@ export default function Archive({ issues }) {
                             <p className="text-muted text-xs font-medium uppercase tracking-widest mt-1">Found {issueList.length} Total Issues</p>
                         </div>
                     </div>
-                    <div className="relative w-full md:w-80">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
-                        <input 
-                            type="text" 
-                            placeholder="Search archives..." 
-                            className="w-full pl-12 pr-6 py-4 bg-surface border border-gray-100 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
-                        />
-                    </div>
+                        <div className="relative w-full md:w-80">
+                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
+                            <input 
+                                type="text" 
+                                placeholder="Search journal insights..." 
+                                className="w-full pl-12 pr-6 py-4 bg-surface border border-gray-100 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                            />
+                        </div>
                 </div>
 
                 {isLoading ? (

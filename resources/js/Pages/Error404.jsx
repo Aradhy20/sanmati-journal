@@ -56,7 +56,7 @@ export default function Error404() {
                         <h1 className="text-5xl sm:text-7xl font-serif font-black text-[#052143] mb-6 leading-none tracking-tight">
                             Lost in the{' '}
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#687EFF] to-[#F87A53]">
-                                Archives
+                                Journal Insights
                             </span>
                         </h1>
 
@@ -77,7 +77,7 @@ export default function Error404() {
                                 className="group flex items-center justify-center gap-3 px-8 py-4 bg-white text-[#052143] rounded-2xl font-bold text-xs uppercase tracking-widest border border-[#687EFF]/20 hover:border-[#687EFF] hover:shadow-xl transition-all hover:-translate-y-1"
                             >
                                 <BookOpen className="w-4 h-4" />
-                                Browse Archives
+                                Browse Journal Insights
                             </Link>
                         </div>
 

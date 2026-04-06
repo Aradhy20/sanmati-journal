@@ -77,7 +77,7 @@ const Navbar = ({ onOpenSearch }) => {
                 { name: 'Peer Review Process', href: '/publication-policy/peer-review' },
             ],
         },
-        { name: 'Archives', href: '/archive' },
+        { name: 'Journal Insights', href: '/archive' },
         { name: 'Books', href: '/book-publication' },
         {
             name: 'Events & News',

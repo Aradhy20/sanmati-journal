@@ -31,7 +31,7 @@ export default class ErrorBoundary extends React.Component {
                         onClick={() => window.location.href = '/'}
                         className="px-8 py-4 bg-dark text-white rounded-xl font-black uppercase tracking-widest text-xs hover:bg-secondary transition-colors flex items-center gap-3"
                     >
-                        <Home className="w-4 h-4" /> Return to Archives
+                        <Home className="w-4 h-4" /> Return to Journal Insights
                     </button>
                 </div>
             );

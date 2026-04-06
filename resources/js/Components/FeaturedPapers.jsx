@@ -35,7 +35,7 @@ const FeaturedPapers = ({ papers = [] }) => {
                             href="/archive"
                             className="bg-white text-dark px-8 py-4 rounded-full font-bold shadow-sm border border-gray-200 hover:shadow-xl hover:-translate-y-1 transition-all flex items-center gap-2"
                         >
-                            Explore Archives <ArrowUpRight className="w-5 h-5" />
+                            Explore Journal Insights <ArrowUpRight className="w-5 h-5" />
                         </Link>
                     </ScrollReveal>
                 </div>

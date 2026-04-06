@@ -199,7 +199,7 @@ export default function AboutJournal() {
                             {[
                                 { label: "ISSN (Print)", value: "3108-1819" },
                                 { label: "Cycle Frequency", value: "Quarterly (4 Issues/Year)" },
-                                { label: "Dissemination", value: "Print / Physical Archives" },
+                                { label: "Dissemination", value: "Print / Physical Insights" },
                                 { label: "Linguistic Scope", value: "Bilingual (Hindi & English)" }
                             ].map((item, i) => (
                                 <div key={i} className="flex justify-between items-center p-6 bg-surface rounded-2xl border border-gray-50 hover:border-primary/20 transition-all group">
