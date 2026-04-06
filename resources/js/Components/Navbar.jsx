@@ -3,6 +3,49 @@ import { Link, usePage } from '@inertiajs/react';
 import { Menu, X, ChevronDown, ArrowUpRight, Mail, Phone, MapPin, Sun, Moon, Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const MobileNavDropdown = ({ item, isActive, setIsOpen }) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+    return (
+        <div className="space-y-1">
+            <button 
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="w-full flex items-center justify-between px-4 py-3 text-sm font-bold text-dark hover:text-primary hover:bg-primary/5 rounded-xl transition-colors"
+                aria-expanded={isExpanded}
+            >
+                {item.name}
+                <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isExpanded ? 'rotate-180 text-secondary' : 'text-gray-400'}`} />
+            </button>
+            <AnimatePresence initial={false}>
+                {isExpanded && (
+                    <motion.div 
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="overflow-hidden"
+                    >
+                        <div className="pl-2 pr-2 py-1 grid grid-cols-1 gap-1 border-l-2 border-primary/10 ml-6 mt-1 mb-2">
+                             {item.dropdown.map((subItem) => (
+                                <Link
+                                    key={subItem.name}
+                                    href={subItem.href}
+                                    className={`block px-4 py-2.5 text-[13px] rounded-xl transition-colors ${isActive(subItem.href)
+                                        ? 'bg-primary/5 text-primary font-bold'
+                                        : 'text-dark/70 font-medium hover:text-primary hover:bg-primary/5'
+                                        }`}
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    {subItem.name}
+                                </Link>
+                            ))}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
+    );
+};
+
 const Navbar = ({ onOpenSearch }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState(null);
@@ -281,26 +324,7 @@ const Navbar = ({ onOpenSearch }) => {
                                 {navItems.map((item) => (
                                     <div key={item.name} className="border-b border-gray-50 last:border-0 pb-3 last:pb-0">
                                         {item.dropdown ? (
-                                            <div className="space-y-2">
-                                                <div className="font-black text-secondary px-4 pt-2 pb-1 text-[10px] uppercase tracking-[0.3em]">
-                                                    {item.name}
-                                                </div>
-                                                <div className="grid grid-cols-1 gap-1">
-                                                    {item.dropdown.map((subItem) => (
-                                                        <Link
-                                                            key={subItem.name}
-                                                            href={subItem.href}
-                                                            className={`block px-5 py-3 text-[13px] rounded-xl transition-colors ${isActive(subItem.href)
-                                                                ? 'bg-primary/5 text-primary font-bold'
-                                                                : 'text-dark/60 font-medium hover:text-primary hover:bg-primary/5'
-                                                                }`}
-                                                            onClick={() => setIsOpen(false)}
-                                                        >
-                                                            {subItem.name}
-                                                        </Link>
-                                                    ))}
-                                                </div>
-                                            </div>
+                                            <MobileNavDropdown item={item} isActive={isActive} setIsOpen={setIsOpen} />
                                         ) : (
                                             <Link
                                                 href={item.href}
