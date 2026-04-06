@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Sparkles, ArrowRight, BookOpen, BookMarked, Users, CheckCircle, Star, Globe } from "lucide-react";
 const Hero = () => {
   return /* @__PURE__ */ jsxs("section", { className: "relative flex flex-col min-h-[100svh] overflow-hidden bg-cover bg-center bg-no-repeat", style: { backgroundImage: "url('/images/library-bg.png')" }, children: [
-    /* @__PURE__ */ jsx("div", { className: "absolute inset-0 bg-white/85 backdrop-blur-[1px] z-0" }),
+    /* @__PURE__ */ jsx("div", { className: "absolute inset-0 bg-gradient-to-r from-white/95 via-white/75 to-white/10 backdrop-blur-[2px] z-0" }),
     /* @__PURE__ */ jsxs("div", { className: "absolute inset-0 z-0 pointer-events-none overflow-hidden", children: [
       /* @__PURE__ */ jsx("div", { className: "absolute top-0 -left-1/4 w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] lg:w-[650px] lg:h-[650px] bg-primary/10 rounded-full blur-[120px] sm:blur-[150px] lg:blur-[180px]" }),
       /* @__PURE__ */ jsx("div", { className: "absolute bottom-0 right-0 w-[260px] h-[260px] sm:w-[380px] sm:h-[380px] lg:w-[500px] lg:h-[500px] bg-secondary/8 rounded-full blur-[120px]" }),
