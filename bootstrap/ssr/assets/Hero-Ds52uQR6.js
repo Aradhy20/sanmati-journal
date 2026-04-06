@@ -3,7 +3,8 @@ import { Link } from "@inertiajs/react";
 import { motion } from "framer-motion";
 import { Sparkles, ArrowRight, BookOpen, BookMarked, Users, CheckCircle, Star, Globe } from "lucide-react";
 const Hero = () => {
-  return /* @__PURE__ */ jsxs("section", { className: "relative flex flex-col min-h-[100svh] overflow-hidden bg-gradient-to-br from-blue-50/50 via-white to-orange-50/30", children: [
+  return /* @__PURE__ */ jsxs("section", { className: "relative flex flex-col min-h-[100svh] overflow-hidden bg-cover bg-center bg-no-repeat", style: { backgroundImage: "url('/images/library-bg.png')" }, children: [
+    /* @__PURE__ */ jsx("div", { className: "absolute inset-0 bg-white/85 backdrop-blur-[1px] z-0" }),
     /* @__PURE__ */ jsxs("div", { className: "absolute inset-0 z-0 pointer-events-none overflow-hidden", children: [
       /* @__PURE__ */ jsx("div", { className: "absolute top-0 -left-1/4 w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] lg:w-[650px] lg:h-[650px] bg-primary/10 rounded-full blur-[120px] sm:blur-[150px] lg:blur-[180px]" }),
       /* @__PURE__ */ jsx("div", { className: "absolute bottom-0 right-0 w-[260px] h-[260px] sm:w-[380px] sm:h-[380px] lg:w-[500px] lg:h-[500px] bg-secondary/8 rounded-full blur-[120px]" }),
@@ -83,13 +84,13 @@ const Hero = () => {
           transition: { duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] },
           className: "relative hidden lg:block",
           children: [
-            /* @__PURE__ */ jsxs("div", { className: "relative rounded-2xl overflow-hidden shadow-[0_30px_80px_rgba(104,126,255,0.18)] border-2 border-white", children: [
+            /* @__PURE__ */ jsxs("div", { className: "relative rounded-2xl overflow-hidden shadow-[0_30px_80px_rgba(104,126,255,0.25)] border-4 border-white/60 bg-white/40 backdrop-blur-md p-6", children: [
               /* @__PURE__ */ jsx(
                 "img",
                 {
-                  src: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=1200&auto=format&fit=crop",
-                  alt: "Sanmati Journal Library — Academic Research",
-                  className: "w-full aspect-[4/3] object-cover object-top",
+                  src: "/images/saraswati.jpeg",
+                  alt: "Goddess Saraswati — Symbol of Knowledge",
+                  className: "w-full aspect-square object-contain drop-shadow-2xl transition-transform duration-700 hover:scale-105",
                   loading: "eager"
                 }
               ),
