@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Sparkles, ArrowRight, BookOpen, BookMarked, Users, CheckCircle, Star, Globe } from "lucide-react";
 const Hero = () => {
   return /* @__PURE__ */ jsxs("section", { className: "relative flex flex-col min-h-[100svh] overflow-hidden bg-cover bg-center bg-no-repeat", style: { backgroundImage: "url('/images/library-bg.png')" }, children: [
-    /* @__PURE__ */ jsx("div", { className: "absolute inset-0 bg-gradient-to-r from-white/95 via-white/75 to-white/10 backdrop-blur-[2px] z-0" }),
+    /* @__PURE__ */ jsx("div", { className: "absolute inset-0 bg-gradient-to-r from-white/98 via-white/70 to-transparent z-0" }),
     /* @__PURE__ */ jsxs("div", { className: "absolute inset-0 z-0 pointer-events-none overflow-hidden", children: [
       /* @__PURE__ */ jsx("div", { className: "absolute top-0 -left-1/4 w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] lg:w-[650px] lg:h-[650px] bg-primary/10 rounded-full blur-[120px] sm:blur-[150px] lg:blur-[180px]" }),
       /* @__PURE__ */ jsx("div", { className: "absolute bottom-0 right-0 w-[260px] h-[260px] sm:w-[380px] sm:h-[380px] lg:w-[500px] lg:h-[500px] bg-secondary/8 rounded-full blur-[120px]" }),
@@ -84,13 +84,13 @@ const Hero = () => {
           transition: { duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] },
           className: "relative hidden lg:block",
           children: [
-            /* @__PURE__ */ jsxs("div", { className: "relative rounded-2xl overflow-hidden shadow-[0_30px_80px_rgba(104,126,255,0.25)] border-4 border-white/60 bg-white/40 backdrop-blur-md p-6", children: [
+            /* @__PURE__ */ jsxs("div", { className: "relative rounded-[2rem] overflow-hidden shadow-[0_40px_100px_rgba(104,126,255,0.25)] bg-white p-1", children: [
               /* @__PURE__ */ jsx(
                 "img",
                 {
                   src: "/images/saraswati.jpeg",
                   alt: "Goddess Saraswati — Symbol of Knowledge",
-                  className: "w-full aspect-square object-contain drop-shadow-2xl transition-transform duration-700 hover:scale-105",
+                  className: "w-full aspect-square object-contain transition-transform duration-700 hover:scale-105 rounded-[1.8rem]",
                   loading: "eager"
                 }
               ),
@@ -110,7 +110,7 @@ const Hero = () => {
               {
                 animate: { y: [0, -8, 0] },
                 transition: { duration: 3, repeat: Infinity, ease: "easeInOut" },
-                className: "absolute top-12 -left-8 bg-white/60 backdrop-blur-md rounded-2xl shadow-xl p-5 border border-white/40 z-10",
+                className: "absolute top-8 -left-12 bg-white/90 backdrop-blur-md rounded-2xl shadow-xl p-5 border border-white/50 z-10",
                 children: /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-3", children: [
                   /* @__PURE__ */ jsx("div", { className: "w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center backdrop-blur-sm", children: /* @__PURE__ */ jsx(Users, { className: "w-5 h-5 text-primary" }) }),
                   /* @__PURE__ */ jsxs("div", { children: [

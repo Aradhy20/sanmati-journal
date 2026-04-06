@@ -180,7 +180,7 @@ function NewsletterSection() {
     ] }) })
   ] });
 }
-const Hero = React.lazy(() => import("./Hero-CcVeCnIq.js"));
+const Hero = React.lazy(() => import("./Hero-CICwWZ3W.js"));
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },

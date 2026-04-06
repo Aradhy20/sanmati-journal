@@ -6,7 +6,7 @@ const Hero = () => {
     return (
         <section className="relative flex flex-col min-h-[100svh] overflow-hidden bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/images/library-bg.png')" }}>
             {/* Soft white overlay gradient for readability on left, visibility on right */}
-            <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/75 to-white/10 backdrop-blur-[2px] z-0" />
+            <div className="absolute inset-0 bg-gradient-to-r from-white/98 via-white/70 to-transparent z-0" />
             {/* Soft decorative blobs */}
             <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
                 <div className="absolute top-0 -left-1/4 w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] lg:w-[650px] lg:h-[650px] bg-primary/10 rounded-full blur-[120px] sm:blur-[150px] lg:blur-[180px]" />
@@ -90,11 +90,11 @@ const Hero = () => {
                         className="relative hidden lg:block"
                     >
                         {/* Main large image — Goddess Saraswati */}
-                        <div className="relative rounded-2xl overflow-hidden shadow-[0_30px_80px_rgba(104,126,255,0.25)] border-4 border-white/60 bg-white/40 backdrop-blur-md p-6">
+                        <div className="relative rounded-[2rem] overflow-hidden shadow-[0_40px_100px_rgba(104,126,255,0.25)] bg-white p-1">
                             <img
                                 src="/images/saraswati.jpeg"
                                 alt="Goddess Saraswati — Symbol of Knowledge"
-                                className="w-full aspect-square object-contain drop-shadow-2xl transition-transform duration-700 hover:scale-105"
+                                className="w-full aspect-square object-contain transition-transform duration-700 hover:scale-105 rounded-[1.8rem]"
                                 loading="eager"
                             />
                             {/* Bottom overlay detail */}
@@ -112,11 +112,11 @@ const Hero = () => {
                             </div>
                         </div>
 
-                        {/* Floating Badge — Readers (Glassmorphism z-10 over z-0 image) */}
+                        {/* Floating Badge — Readers */}
                         <motion.div
                             animate={{ y: [0, -8, 0] }}
                             transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                            className="absolute top-12 -left-8 bg-white/60 backdrop-blur-md rounded-2xl shadow-xl p-5 border border-white/40 z-10"
+                            className="absolute top-8 -left-12 bg-white/90 backdrop-blur-md rounded-2xl shadow-xl p-5 border border-white/50 z-10"
                         >
                             <div className="flex items-center gap-3">
                                 <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center backdrop-blur-sm">
