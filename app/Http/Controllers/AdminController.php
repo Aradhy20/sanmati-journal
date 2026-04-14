@@ -19,6 +19,8 @@ use Inertia\Inertia;
 
 class AdminController extends Controller
 {
+    public function index()
+    {
         $health = (new SystemHealthController())->getStatus();
 
         return Inertia::render('Admin/Dashboard', [
