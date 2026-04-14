@@ -19,6 +19,7 @@ use App\Models\Book;
 use App\Models\Testimonial;
 use App\Models\NewsletterSubscriber;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class AdminController extends Controller
