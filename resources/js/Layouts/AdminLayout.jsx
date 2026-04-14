@@ -10,21 +10,25 @@ import {
     Sparkles,
     Bell,
     Settings,
-    Inbox
+    Inbox,
+    Search,
+    ChevronRight,
+    Circle
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function AdminLayout({ children }) {
-    const { url } = usePage();
+    const { url, auth } = usePage().props;
+    const user = auth.user || { full_name: 'Admin User', email: 'admin@sanmati.com' };
 
     const links = [
-        { href: '/admin', label: 'Dashboard', icon: LayoutDashboard, color: 'from-blue-500 to-indigo-600' },
-        { href: '/admin/news', label: 'News Ticker', icon: Newspaper, color: 'from-amber-500 to-orange-600' },
-        { href: '/admin/papers', label: 'Issues & Papers', icon: FileText, color: 'from-emerald-500 to-teal-600' },
-        { href: '/admin/submissions', label: 'Submissions', icon: Inbox, color: 'from-violet-500 to-purple-600' },
-        { href: '/admin/team', label: 'Editorial Team', icon: Users, color: 'from-purple-500 to-pink-600' },
-        { href: '/admin/enquiries', label: 'Enquiries', icon: MessageSquare, color: 'from-rose-500 to-red-600' },
-        { href: '/admin/gallery', label: 'Gallery', icon: ImageIcon, color: 'from-cyan-500 to-blue-600' },
+        { href: '/admin', label: 'Dashboard', icon: LayoutDashboard, color: 'from-blue-600 to-indigo-700' },
+        { href: '/admin/news', label: 'News Ticker', icon: Newspaper, color: 'from-amber-600 to-orange-700' },
+        { href: '/admin/papers', label: 'Issues & Papers', icon: FileText, color: 'from-emerald-600 to-teal-700' },
+        { href: '/admin/submissions', label: 'Submissions', icon: Inbox, color: 'from-violet-600 to-purple-700' },
+        { href: '/admin/team', label: 'Editorial Team', icon: Users, color: 'from-purple-600 to-pink-700' },
+        { href: '/admin/enquiries', label: 'Enquiries', icon: MessageSquare, color: 'from-rose-600 to-red-700' },
+        { href: '/admin/gallery', label: 'Gallery', icon: ImageIcon, color: 'from-cyan-600 to-blue-700' },
     ];
 
     const isActive = (href) => {
@@ -33,130 +37,126 @@ export default function AdminLayout({ children }) {
     };
 
     return (
-        <div className="min-h-screen bg-slate-50 flex transition-colors duration-300">
-            {/* Enhanced Sidebar with Glassmorphism */}
-            <aside className="w-72 bg-white/80 backdrop-blur-xl border-r border-slate-200/50 fixed h-screen overflow-y-auto shadow-2xl shadow-slate-900/5 transition-all">
-                {/* Header with Gradient */}
-                <div className="p-8 border-b border-slate-100/50 bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-grid-white/5 opacity-10"></div>
+        <div className="min-h-screen bg-[#F8FAFC] flex font-sans selection:bg-blue-100 selection:text-blue-700">
+            {/* Elegant Sidebar */}
+            <aside className="w-80 bg-white border-r border-slate-200/60 fixed h-screen flex flex-col z-50 shadow-[4px_0_24px_rgba(0,0,0,0.02)]">
+                {/* Brand Identity */}
+                <div className="p-8">
                     <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="relative z-10"
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="flex items-center gap-4 group cursor-pointer"
                     >
-                        <div className="flex items-center gap-2 mb-2">
-                            <Sparkles className="w-6 h-6 text-yellow-300" />
-                            <h1 className="text-2xl font-serif font-bold text-white">Sanmati Admin</h1>
+                        <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:rotate-6 transition-transform duration-300">
+                            <Sparkles className="w-6 h-6 text-white" />
                         </div>
-                        <p className="text-xs text-blue-200 font-bold uppercase tracking-widest">Control Panel</p>
+                        <div>
+                            <h1 className="text-xl font-bold text-slate-900 tracking-tight">Sanmati</h1>
+                            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600/80">Control Center</p>
+                        </div>
                     </motion.div>
                 </div>
 
-                {/* Navigation with Hover Effects */}
-                <nav className="p-6 space-y-2">
+                {/* Navigation Menu */}
+                <nav className="flex-grow px-4 space-y-1.5 overflow-y-auto py-4 custom-scrollbar">
                     {links.map((link, index) => {
                         const Icon = link.icon;
                         const active = isActive(link.href);
                         return (
-                            <motion.div
+                            <Link
                                 key={link.href}
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: index * 0.05 }}
+                                href={link.href}
+                                className={`group flex items-center gap-3.5 px-4 py-3.5 rounded-2xl font-semibold transition-all duration-300 relative ${active
+                                    ? 'text-white shadow-lg shadow-blue-500/10'
+                                    : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
+                                    }`}
                             >
-                                <Link
-                                    href={link.href}
-                                    className={`group flex items-center gap-3 px-4 py-3.5 rounded-2xl font-bold transition-all relative overflow-hidden ${active
-                                        ? 'text-white shadow-xl'
-                                        : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900 hover:shadow-md'
-                                        }`}
-                                >
-                                    {active && (
-                                        <motion.div
-                                            layoutId="activeTab"
-                                            className={`absolute inset-0 bg-gradient-to-r ${link.color} rounded-2xl`}
-                                            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                                        />
-                                    )}
-                                    <Icon className={`w-5 h-5 relative z-10 ${active ? 'animate-pulse' : 'group-hover:scale-110 transition-transform'}`} />
-                                    <span className="relative z-10">{link.label}</span>
-                                    {active && (
-                                        <motion.div
-                                            initial={{ scale: 0 }}
-                                            animate={{ scale: 1 }}
-                                            className="ml-auto w-2 h-2 bg-white rounded-full relative z-10"
-                                        />
-                                    )}
-                                </Link>
-                            </motion.div>
+                                {active && (
+                                    <motion.div
+                                        layoutId="sidebarActiveTab"
+                                        className={`absolute inset-0 bg-gradient-to-r ${link.color} rounded-2xl`}
+                                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                    />
+                                )}
+                                <Icon className={`w-5 h-5 relative z-10 ${active ? 'text-white' : 'text-slate-400 group-hover:text-blue-600 transition-colors'}`} />
+                                <span className="relative z-10 text-[0.9375rem]">{link.label}</span>
+                                {active && (
+                                    <motion.div
+                                        initial={{ opacity: 0, x: -10 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        className="ml-auto relative z-10"
+                                    >
+                                        <ChevronRight className="w-4 h-4 text-white/70" />
+                                    </motion.div>
+                                )}
+                            </Link>
                         );
                     })}
                 </nav>
 
-                {/* Enhanced Sign Out Button */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-slate-100/50 bg-white/50 backdrop-blur">
-                    <button className="flex items-center gap-3 px-4 py-3.5 rounded-2xl font-bold text-rose-600 hover:bg-rose-50 hover:shadow-lg transition-all w-full group">
-                        <LogOut className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                        Sign Out
-                    </button>
+                {/* User Profile & Sign Out */}
+                <div className="p-6 mt-auto">
+                    <div className="bg-slate-50 rounded-3xl p-4 border border-slate-100 flex flex-col gap-4">
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-blue-600 font-bold shadow-sm">
+                                {user.full_name.charAt(0)}
+                            </div>
+                            <div className="flex-grow min-w-0">
+                                <p className="text-sm font-bold text-slate-900 truncate">{user.full_name}</p>
+                                <p className="text-[11px] text-slate-500 truncate">{user.email}</p>
+                            </div>
+                        </div>
+                        <Link
+                            href="/logout"
+                            method="post"
+                            as="button"
+                            className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-[13px] font-bold text-rose-600 bg-rose-50 hover:bg-rose-100 transition-colors border border-rose-100"
+                        >
+                            <LogOut className="w-4 h-4" />
+                            Sign Out
+                        </Link>
+                    </div>
                 </div>
             </aside>
 
-            {/* Main Content with Enhanced Header */}
-            <main className="flex-grow pl-72">
-                <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-slate-200/50 px-10 py-6 shadow-sm">
-                    <div className="flex justify-between items-center">
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                        >
-                            <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
-                                {links.find(l => isActive(l.href))?.label || 'Dashboard'}
-                                <span className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded-full font-black uppercase tracking-wider">Live</span>
-                            </h2>
-                            <p className="text-xs text-slate-500 mt-1">Manage your content with ease</p>
-                        </motion.div>
-                        <div className="flex items-center gap-4">
-                            {/* Notification Bell */}
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="relative p-3 rounded-xl bg-slate-50 hover:bg-slate-100 transition-all group"
-                            >
-                                <Bell className="w-5 h-5 text-slate-600 group-hover:text-slate-900" />
-                                <span className="absolute top-2 right-2 w-2 h-2 bg-rose-500 rounded-full animate-pulse"></span>
-                            </motion.button>
-
-                            {/* Settings */}
-                            <motion.button
-                                whileHover={{ scale: 1.05, rotate: 90 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 transition-all"
-                            >
-                                <Settings className="w-5 h-5 text-slate-600" />
-                            </motion.button>
-
-                            {/* User Profile */}
-                            <div className="flex items-center gap-3 pl-4 border-l border-slate-200">
-                                <div className="text-right">
-                                    <p className="text-sm font-bold text-slate-900">Admin User</p>
-                                    <p className="text-xs text-slate-500">sanmatijournal@gmail.com</p>
-                                </div>
-                                <motion.div
-                                    whileHover={{ scale: 1.1 }}
-                                    className="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-600 flex items-center justify-center text-white font-bold shadow-xl shadow-blue-500/30 cursor-pointer"
-                                >
-                                    A
-                                </motion.div>
-                            </div>
+            {/* Main Content Area */}
+            <main className="flex-grow pl-80 min-h-screen">
+                {/* Global Topbar */}
+                <header className="h-24 sticky top-0 z-40 bg-white/70 backdrop-blur-2xl border-b border-slate-200/60 px-10 flex items-center justify-between">
+                    <div className="flex items-center gap-6">
+                        <div className="relative group flex items-center">
+                            <Search className="absolute left-4 w-4.5 h-4.5 text-slate-400 group-focus-within:text-blue-600 transition-colors" />
+                            <input
+                                type="text"
+                                placeholder="Search Command (⌘ K)"
+                                className="bg-slate-100/50 border-none rounded-2xl pl-12 pr-6 py-2.5 text-sm w-80 focus:ring-2 focus:ring-blue-500/20 focus:bg-white transition-all outline-none text-slate-600 placeholder:text-slate-400 font-medium"
+                            />
                         </div>
+                    </div>
+
+                    <div className="flex items-center gap-5">
+                        <div className="flex items-center gap-2 mr-4">
+                            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                            <span className="text-[11px] font-bold text-emerald-600 uppercase tracking-widest">Server Live</span>
+                        </div>
+
+                        <button className="relative w-11 h-11 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500 hover:text-blue-600 hover:bg-blue-50 transition-all group">
+                            <Bell className="w-5 h-5" />
+                            <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-rose-500 rounded-full border-2 border-white" />
+                        </button>
+
+                        <button className="w-11 h-11 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500 hover:text-blue-600 hover:bg-blue-50 transition-all">
+                            <Settings className="w-5 h-5" />
+                        </button>
                     </div>
                 </header>
 
-                <div className="p-10">
+                {/* Page Content */}
+                <div className="p-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
                     {children}
                 </div>
             </main>
         </div>
     );
 }
+

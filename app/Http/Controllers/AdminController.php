@@ -14,20 +14,21 @@ use App\Http\Requests\StoreGalleryItemRequest;
 use App\Http\Requests\StoreIssueRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Admin\SystemHealthController;
 use Inertia\Inertia;
 
 class AdminController extends Controller
 {
-    public function index()
-    {
+        $health = (new SystemHealthController())->getStatus();
+
         return Inertia::render('Admin/Dashboard', [
             'stats' => [
                 'pendingEnquiries' => Enquiry::where('status', 'new')->count(),
                 'totalPapers' => Paper::count(),
                 'activeNews' => News::where('is_active', true)->count(),
                 'teamMembers' => TeamMember::count(),
-            ]
+            ],
+            'systemHealth' => $health
         ]);
     }
 
