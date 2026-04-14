@@ -15,6 +15,10 @@ use App\Http\Requests\StoreIssueRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Admin\SystemHealthController;
+use App\Models\Book;
+use App\Models\Testimonial;
+use App\Models\NewsletterSubscriber;
+use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
 class AdminController extends Controller
@@ -220,5 +224,101 @@ class AdminController extends Controller
         }
         $gallery->delete();
         return back()->with('success', 'Gallery item deleted');
+    }
+
+    // --- Books ---
+    public function books()
+    {
+        return Inertia::render('Admin/Books', [
+            'books' => Book::orderBy('created_at', 'desc')->paginate(20)
+        ]);
+    }
+
+    public function storeBook(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'author' => 'nullable|string|max:255',
+            'image' => 'nullable|image|max:2048',
+            'amazon_link' => 'nullable|url',
+            'flipkart_link' => 'nullable|url',
+            'is_published' => 'boolean',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('books', 'public');
+            $validated['image_url'] = $path;
+        } else {
+            $validated['image_url'] = '/images/books/placeholder.jpg';
+        }
+        unset($validated['image']);
+
+        Book::create($validated);
+        return back()->with('success', 'Book added successfully');
+    }
+
+    public function deleteBook(Book $book)
+    {
+        if ($book->image_url && !str_starts_with($book->image_url, '/') && \Illuminate\Support\Facades\Storage::disk('public')->exists($book->image_url)) {
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($book->image_url);
+        }
+        $book->delete();
+        return back()->with('success', 'Book deleted');
+    }
+
+    // --- Testimonials ---
+    public function testimonials()
+    {
+        return Inertia::render('Admin/Testimonials', [
+            'testimonials' => Testimonial::orderBy('created_at', 'desc')->paginate(20)
+        ]);
+    }
+
+    public function storeTestimonial(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'role' => 'required|string|max:255',
+            'text' => 'required|string',
+            'stars' => 'required|integer|min:1|max:5',
+        ]);
+
+        Testimonial::create($validated);
+        return back()->with('success', 'Testimonial added');
+    }
+
+    public function deleteTestimonial(Testimonial $testimonial)
+    {
+        $testimonial->delete();
+        return back()->with('success', 'Testimonial deleted');
+    }
+
+    // --- Newsletter ---
+    public function newsletter()
+    {
+        return Inertia::render('Admin/Newsletter', [
+            'subscribers' => NewsletterSubscriber::orderBy('created_at', 'desc')->paginate(50)
+        ]);
+    }
+
+    public function deleteSubscriber(NewsletterSubscriber $subscriber)
+    {
+        $subscriber->delete();
+        return back()->with('success', 'Subscriber removed');
+    }
+
+    // --- Emergency Setup ---
+    public function setup()
+    {
+        $admin = \App\Models\User::updateOrCreate(
+            ['email' => 'sanmatijournal@gmail.com'],
+            [
+                'full_name' => 'Admin User',
+                'password' => Hash::make('Njain@1984'),
+                'role' => 'admin',
+            ]
+        );
+
+        return "Admin account configured successfully for {$admin->email}. Please try logging in now.";
     }
 }

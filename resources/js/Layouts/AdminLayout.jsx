@@ -13,7 +13,9 @@ import {
     Inbox,
     Search,
     ChevronRight,
-    Circle
+    Circle,
+    Mail,
+    MessageSquareQuote
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -26,6 +28,9 @@ export default function AdminLayout({ children }) {
         { href: '/admin/news', label: 'News Ticker', icon: Newspaper, color: 'from-amber-600 to-orange-700' },
         { href: '/admin/papers', label: 'Issues & Papers', icon: FileText, color: 'from-emerald-600 to-teal-700' },
         { href: '/admin/submissions', label: 'Submissions', icon: Inbox, color: 'from-violet-600 to-purple-700' },
+        { href: '/admin/books', label: 'Books Library', icon: Sparkles, color: 'from-blue-500 to-indigo-600' },
+        { href: '/admin/testimonials', label: 'Testimonials', icon: MessageSquareQuote, color: 'from-amber-400 to-orange-500' },
+        { href: '/admin/newsletter', label: 'Newsletters', icon: Mail, color: 'from-rose-500 to-pink-600' },
         { href: '/admin/team', label: 'Editorial Team', icon: Users, color: 'from-purple-600 to-pink-700' },
         { href: '/admin/enquiries', label: 'Enquiries', icon: MessageSquare, color: 'from-rose-600 to-red-700' },
         { href: '/admin/gallery', label: 'Gallery', icon: ImageIcon, color: 'from-cyan-600 to-blue-700' },

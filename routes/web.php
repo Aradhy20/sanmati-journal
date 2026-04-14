@@ -104,6 +104,21 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:6
     Route::get('/gallery', [\App\Http\Controllers\AdminController::class, 'gallery'])->name('gallery');
     Route::post('/gallery', [\App\Http\Controllers\AdminController::class, 'storeGalleryItem'])->name('gallery.store');
     Route::delete('/gallery/{gallery}', [\App\Http\Controllers\AdminController::class, 'deleteGalleryItem'])->name('gallery.delete');
+
+    // --- Books ---
+    Route::get('/books', [\App\Http\Controllers\AdminController::class, 'books'])->name('books');
+    Route::post('/books', [\App\Http\Controllers\AdminController::class, 'storeBook'])->name('books.store');
+    Route::delete('/books/{book}', [\App\Http\Controllers\AdminController::class, 'deleteBook'])->name('books.delete');
+
+    // --- Testimonials ---
+    Route::get('/testimonials', [\App\Http\Controllers\AdminController::class, 'testimonials'])->name('testimonials');
+    Route::post('/testimonials', [\App\Http\Controllers\AdminController::class, 'storeTestimonial'])->name('testimonials.store');
+    Route::delete('/testimonials/{testimonial}', [\App\Http\Controllers\AdminController::class, 'deleteTestimonial'])->name('testimonials.delete');
+
+    // --- Newsletter ---
+    Route::get('/newsletter', [\App\Http\Controllers\AdminController::class, 'newsletter'])->name('newsletter');
+    Route::delete('/newsletter/{subscriber}', [\App\Http\Controllers\AdminController::class, 'deleteSubscriber'])->name('newsletter.delete');
 });
 
-
+// Emergency Admin Setup (Temporary)
+Route::get('/admin/setup', [\App\Http\Controllers\AdminController::class, 'setup'])->name('admin.setup');
