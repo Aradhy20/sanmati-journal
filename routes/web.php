@@ -122,3 +122,4 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:6
 
 // Emergency Admin Setup (Temporary)
 Route::get('/admin/setup', [\App\Http\Controllers\AdminController::class, 'setup'])->name('admin.setup');
+Route::get('/admin/migrate', [\App\Http\Controllers\AdminController::class, 'migrate'])->name('admin.migrate');
