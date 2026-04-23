@@ -34,6 +34,7 @@ export default function Archive({ issues }) {
                     id: 'static-1',
                     title: 'Sanmati Spectrum of Knowledge & Emerging Discourse (January-March, 2026)',
                     authors: 'Dr. Namrta Jain (Editor-in-Chief), Dr. Ratnesh Kumar Jain (Managing Editor)',
+                    doi: 'https://doi.org/10.5281/zenodo.19710093',
                     abstract: 'The January-March 2026 issue (Vol-1, Issue-1) of Sanmati Spectrum of Knowledge & Emerging Discourse — a national peer-reviewed multidisciplinary research journal in English & Hindi.',
                     file_path: 'https://drive.google.com/file/d/1nPxKxugSA6yMcpbJyQuNuEQ7QcnrpPt2/view?usp=sharing',
                     thumbnail: '/images/archive/vol1_official_cover.png'
@@ -199,7 +200,15 @@ export default function Archive({ issues }) {
                                                                 <h4 className="text-xl font-bold text-dark mb-3 group-hover:text-primary transition-colors leading-[1.4]">{paper.title}</h4>
                                                             </Link>
                                                         )}
-                                                        <p className="text-muted font-medium italic text-sm">{paper.authors}</p>
+                                                        <p className="text-muted font-medium italic text-sm mb-2">{paper.authors}</p>
+                                                        {paper.doi && (
+                                                            <div className="flex items-center gap-2 text-primary font-bold text-[10px] uppercase tracking-widest bg-primary/5 px-3 py-1 rounded-full w-fit">
+                                                                <span className="opacity-60 text-dark">DOI:</span>
+                                                                <a href={paper.doi} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                                                                    {paper.doi.replace('https://doi.org/', '')}
+                                                                </a>
+                                                            </div>
+                                                        )}
                                                     </div>
                                                     <div className="flex flex-col sm:flex-row items-center gap-3 mt-4 md:mt-0">
                                                         {String(paper.id).startsWith('static-') ? (

@@ -516,7 +516,7 @@ export default function Home() {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {[
-                            { rank: '01', field: 'Multidisciplinary', title: 'Sanmati Spectrum of Knowledge & Emerging Discourse (January-March, 2026)', authors: 'Dr. Namrta Jain, Dr. Ratnesh Kumar Jain', reads: 'Featured Issue', tag: 'Hot' },
+                            { rank: '01', field: 'Multidisciplinary', title: 'Sanmati Spectrum of Knowledge & Emerging Discourse (January-March, 2026)', authors: 'Dr. Namrta Jain, Dr. Ratnesh Kumar Jain', doi: 'https://doi.org/10.5281/zenodo.19710093', reads: 'Featured Issue', tag: 'Hot' },
                             { rank: '02', field: 'Commerce & Economics', title: 'Impact of Digital Literacy on Rural Education Outcomes', authors: 'Dr. Ravi Sharma, Prof. Anita Gupta', reads: '1.2k reads', tag: 'Trending' },
                             { rank: '03', field: 'Social Science', title: 'Multidisciplinary Perspectives on Modern Academic Discourse', authors: 'Dr. Priya Kumari, Dr. Ratnesh Jain', reads: '987 reads', tag: 'Featured' },
                         ].map((paper, i) => (
@@ -534,7 +534,15 @@ export default function Home() {
                                 <div className="text-7xl font-black text-primary/5 group-hover:text-primary/10 transition-colors leading-none mb-4 -ml-2">{paper.rank}</div>
                                 <p className="text-secondary font-black text-[10px] uppercase tracking-[0.2em] mb-3">{paper.field}</p>
                                 <h3 className="font-serif font-bold text-dark text-lg leading-snug mb-4 group-hover:text-primary transition-colors">{paper.title}</h3>
-                                <p className="text-muted text-[12px] font-medium mb-6 truncate">{paper.authors}</p>
+                                <p className="text-muted text-[12px] font-medium mb-4 truncate">{paper.authors}</p>
+                                {paper.doi && (
+                                    <div className="flex items-center gap-2 text-primary font-bold text-[9px] uppercase tracking-widest mb-6">
+                                        <span className="opacity-40 text-dark">DOI:</span>
+                                        <a href={paper.doi} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                                            {paper.doi.replace('https://doi.org/', '')}
+                                        </a>
+                                    </div>
+                                )}
                                 <div className="flex items-center justify-between">
                                     <span className="flex items-center gap-2 text-muted text-[11px] font-bold">
                                         <Globe className="w-3.5 h-3.5 text-secondary" /> {paper.reads}

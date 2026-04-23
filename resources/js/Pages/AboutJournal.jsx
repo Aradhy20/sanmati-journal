@@ -178,7 +178,7 @@ export default function AboutJournal() {
                                     A key strength of "Sanmati Spectrum" lies in its focus on emerging research areas of contemporary societal importance, including <strong className="text-dark">artificial intelligence, digital humanities, climate change, media and democracy, and Indian knowledge systems</strong>. It explores the rich diversity of Indian intellectual traditions while simultaneously engaging with global theories.
                                 </p>
                                 <p className="text-muted leading-relaxed">
-                                    Looking toward the future, the journal aspires to achieve international recognition by being indexed into reputed databases such as <strong>Scopus, Web of Science, and ABDC</strong>. Plans are underway to expand into digital platforms, establish collaborations with international institutions, and adopt advanced publishing standards such as <strong>DOI and Crossref</strong> integration.
+                                    Looking toward the future, the journal aspires to achieve international recognition by being indexed into reputed databases such as <strong>Scopus, Web of Science, and ABDC</strong>. The journal has already established advanced publishing standards through <strong>DOI and Crossref</strong> integration, with digital platform expansion underway.
                                 </p>
                             </div>
                         </div>
