@@ -86,7 +86,7 @@ export default function Contact() {
                                     </div>
                                     <div>
                                         <p className="text-white font-bold text-sm leading-none mb-1">Dr. Namrta Jain</p>
-                                        <p className="text-white/30 text-[10px] uppercase font-black tracking-widest leading-none">Editor-in-Chief</p>
+                                        <p className="text-white/30 text-[10px] uppercase font-black tracking-widest leading-none">President</p>
                                     </div>
                                 </div>
                             </div>

@@ -274,7 +274,7 @@ export default function Editors() {
     const executiveMembers = [
         {
             name: "Dr. Namrta Jain",
-            role: "Editor-in–Chief",
+            role: "President",
             title: "Sanmati Spectrum of Knowledge & Emerging Discourse",
             email: "sanmatijournal@gmail.com",
             phone: "+91 9870713912 & +91 8979782949",

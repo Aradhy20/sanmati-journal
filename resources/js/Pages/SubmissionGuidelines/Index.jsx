@@ -40,7 +40,7 @@ export default function SubmissionGuidelines() {
         },
         {
             title: "Contact Us",
-            description: "Reach our Editorial Office - Dr. Namrta Jain for any submission queries.",
+            description: "Reach our President - Dr. Namrta Jain for any submission queries.",
             icon: <MapPin className="w-6 h-6 text-rose-600" />,
             href: "/contact",
             color: "rose"

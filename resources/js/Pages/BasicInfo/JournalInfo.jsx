@@ -42,7 +42,7 @@ export default function JournalInfo() {
                                 </td>
                             </tr>
                             <tr className="hover:bg-warm-bg transition-colors">
-                                <th className="py-6 px-8 text-dark font-bold bg-warm-bg/50 border-r border-slate-100">Chief Editor</th>
+                                <th className="py-6 px-8 text-dark font-bold bg-warm-bg/50 border-r border-slate-100">President</th>
                                 <td className="py-6 px-8 text-dark/80">Dr. Namrta Jain</td>
                             </tr>
                         </tbody>
