@@ -259,7 +259,7 @@ export default function Home() {
                             <div className="h-full rounded-2xl overflow-hidden bg-gradient-to-br from-primary to-primary-dark text-white p-10 flex flex-col items-center text-center shadow-2xl hover:-translate-y-1 transition-all duration-700 relative">
                                 <div className="absolute top-0 right-0 p-8 opacity-5"><Trophy className="w-24 h-24 text-secondary scale-150 rotate-12" /></div>
                                 <div className="w-44 h-44 rounded-2xl overflow-hidden mb-8 border-4 border-white/30 shadow-2xl relative z-10">
-                                    <img loading="lazy" src="/mam.jpeg" alt="Dr. Namrta Jain" className="w-full h-full object-cover object-top group-hover:scale-110 transition-all duration-700" />
+                                    <img loading="lazy" src="/mam.jpeg" alt="Dr Namrata Jain" className="w-full h-full object-cover object-top group-hover:scale-110 transition-all duration-700" />
                                 </div>
                                 <span className="inline-block px-4 py-1.5 bg-secondary/25 border border-secondary/40 rounded-full text-[10px] text-secondary font-black tracking-widest uppercase mb-4 w-fit">President</span>
                                 <h3 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold mb-2 tracking-tight group-hover:text-secondary-light transition-colors duration-300">Dr Namrata Jain</h3>
@@ -517,7 +517,7 @@ export default function Home() {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {[
-                            { rank: '01', field: 'Multidisciplinary', title: 'Sanmati Spectrum of Knowledge & Emerging Discourse (January-March, 2026)', authors: 'Dr. Namrta Jain, Dr. Ratnesh Kumar Jain', doi: 'https://doi.org/10.5281/zenodo.19710093', reads: 'Featured Issue', tag: 'Hot' },
+                            { rank: '01', field: 'Multidisciplinary', title: 'Sanmati Spectrum of Knowledge & Emerging Discourse (January-March, 2026)', authors: 'Dr Namrata Jain, Dr. Ratnesh Kumar Jain', doi: 'https://doi.org/10.5281/zenodo.19710093', reads: 'Featured Issue', tag: 'Hot' },
                             { rank: '02', field: 'Commerce & Economics', title: 'Impact of Digital Literacy on Rural Education Outcomes', authors: 'Dr. Ravi Sharma, Prof. Anita Gupta', reads: '1.2k reads', tag: 'Trending' },
                             { rank: '03', field: 'Social Science', title: 'Multidisciplinary Perspectives on Modern Academic Discourse', authors: 'Dr. Priya Kumari, Dr. Ratnesh Jain', reads: '987 reads', tag: 'Featured' },
                         ].map((paper, i) => (

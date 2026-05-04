@@ -82,7 +82,7 @@ export default function Contact() {
                                 </p>
                                 <div className="flex items-center gap-4">
                                     <div className="w-10 h-10 rounded-full border border-white/10 overflow-hidden">
-                                        <img loading="lazy" src="/images/contact/dr_namrta_jain_avatar.png" alt="Editor" className="w-full h-full object-cover" />
+                                        <img loading="lazy" src="/images/contact/dr_namrta_jain_avatar.png" alt="Dr Namrata Jain" className="w-full h-full object-cover" />
                                     </div>
                                     <div>
                                         <p className="text-white font-bold text-sm leading-none mb-1">Dr Namrata Jain</p>

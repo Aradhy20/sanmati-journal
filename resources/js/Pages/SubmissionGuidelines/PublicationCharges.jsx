@@ -93,7 +93,7 @@ export default function PublicationCharges() {
                                                     In the name of
                                                 </h4>
                                                 <div className="pl-14">
-                                                    <p className="text-xl md:text-2xl lg:text-3xl font-black italic text-dark leading-none">NAMRTA</p>
+                                                    <p className="text-xl md:text-2xl lg:text-3xl font-black italic text-dark leading-none">NAMRATA</p>
                                                     <div className="mt-6 p-4 bg-amber-50 rounded-2xl border border-amber-100 flex items-start gap-3 relative overflow-hidden">
                                                         <GridPattern className="opacity-5" />
                                                         <Mail className="w-5 h-5 text-amber-600 shrink-0 mt-0.5 relative z-10" />
