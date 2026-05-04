@@ -25,6 +25,11 @@ export default function CallForPapers() {
         consent: false
     });
 
+    // Scroll to top when step changes
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [step]);
+
     // Handle tracking ID from flash message if using Inertia redirects
     useEffect(() => {
         if (flash?.success?.tracking_id) {
@@ -60,8 +65,15 @@ export default function CallForPapers() {
             onError: (errs) => {
                 const errorMessage = errs.error || 'Submission failed. Please check for errors.';
                 toast.error(errorMessage);
-                if (Object.keys(errs).length > 0) {
-                    setStep(1); // Return to metadata step to fix validation errors
+                
+                // Only return to step 1 if there are errors specifically for step 1 fields
+                const step1Fields = ['title', 'abstract', 'author_name', 'author_email'];
+                const hasStep1Errors = Object.keys(errs).some(key => step1Fields.includes(key));
+                
+                if (hasStep1Errors) {
+                    setStep(1);
+                } else if (errs.manuscript) {
+                    setStep(2);
                 }
             },
             preserveScroll: true
@@ -100,7 +112,7 @@ export default function CallForPapers() {
                         </div>
                     )}
 
-                    <div className="bg-white rounded-[2rem] shadow-xl border border-gray-100 overflow-hidden relative">
+                    <div className="bg-white rounded-[2rem] shadow-xl border border-gray-100 relative">
                         <div className="p-8 md:p-12">
                             
                             {/* STEP 4: SUCCESS */}
@@ -292,17 +304,23 @@ export default function CallForPapers() {
                                                             <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Institution</p>
                                                             <p className="font-medium text-slate-900">{data.institution || 'Not Specified'}</p>
                                                         </div>
-                                                        <div>
-                                                            <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Attached File</p>
-                                                            <p className="font-medium text-blue-600 flex items-center gap-2">
-                                                                <FileText className="w-4 h-4"/> 
-                                                                <span className="truncate max-w-[200px]">{data.manuscript?.name}</span>
-                                                            </p>
-                                                        </div>
-                                                        <div>
-                                                            <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2">File Size</p>
-                                                            <p className="font-medium text-slate-900">{(data.manuscript?.size / (1024 * 1024)).toFixed(2)} MB</p>
-                                                        </div>
+                                                        {data.manuscript && (
+                                                            <>
+                                                                <div>
+                                                                    <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Attached File</p>
+                                                                    <p className="font-medium text-blue-600 flex items-center gap-2">
+                                                                        <FileText className="w-4 h-4"/> 
+                                                                        <span className="truncate max-w-[200px]">{data.manuscript?.name}</span>
+                                                                    </p>
+                                                                </div>
+                                                                <div>
+                                                                    <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2">File Size</p>
+                                                                    <p className="font-medium text-slate-900">
+                                                                        {data.manuscript?.size ? (data.manuscript.size / (1024 * 1024)).toFixed(2) : '0.00'} MB
+                                                                    </p>
+                                                                </div>
+                                                            </>
+                                                        )}
                                                     </div>
                                                 </div>
 

@@ -31,6 +31,9 @@ class SubmissionController extends Controller
         ]);
 
         if ($validator->fails()) {
+            if ($request->header('X-Inertia')) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
             return response()->json(['errors' => $validator->errors()], 400);
         }
         $validated = $validator->validated();
