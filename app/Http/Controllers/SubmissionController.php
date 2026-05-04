@@ -39,15 +39,21 @@ class SubmissionController extends Controller
         $validated = $validator->validated();
 
         $file = $request->file('manuscript');
-        $escapedPath = escapeshellarg($file->getRealPath());
-        @exec("clamscan " . $escapedPath, $output, $returnCode);
+        $returnCode = 0;
+        
+        if ($file && file_exists($file->getRealPath())) {
+            $escapedPath = escapeshellarg($file->getRealPath());
+            // Only run clamscan if it's available in the system
+            $hasClamscan = shell_exec('which clamscan');
+            if ($hasClamscan) {
+                @exec("clamscan " . $escapedPath, $output, $returnCode);
+            }
+        }
 
-        // Clamscan returns 0 if no virus is found, 1 if a virus is found. Any other code is an execution error.
-        // If returnCode is 1, malware is confirmed. If not 0 or 1, clamscan probably failed or is missing.
+        // Clamscan returns 0 if no virus is found, 1 if a virus is found.
         if ($returnCode === 1) {
             return response()->json(['error' => 'The uploaded file has been flagged for security risks. Please contact editorial office.'], 400);
         }
-        // NOTE: We allow the upload if clamscan is missing (127) to maintain service availability.
 
         // Store the uploaded PDF securely
         $path = $request->file('manuscript')->store('submissions', 'local');

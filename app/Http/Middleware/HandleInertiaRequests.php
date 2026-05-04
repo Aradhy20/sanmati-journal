@@ -47,6 +47,10 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'flash' => [
+                'success' => $request->session()->get('success'),
+                'error' => $request->session()->get('error'),
+            ],
             'meta' => function () use ($request) {
                 return [
                     'title' => 'Sanmati Journal | Spectrum of Knowledge',

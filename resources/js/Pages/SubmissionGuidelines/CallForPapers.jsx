@@ -38,46 +38,47 @@ export default function CallForPapers() {
         }
     }, [flash]);
 
-    const handleNextStep = (e) => {
-        e.preventDefault();
-        if (step === 1 && data.title && data.abstract && data.author_name && data.author_email) {
-            setStep(2);
-        } else if (step === 2 && data.manuscript) {
-            setStep(3);
-        }
-    };
-
-    const submit = (e) => {
-        e.preventDefault();
+    const handleSubmit = (e) => {
+        if (e) e.preventDefault();
         
-        post(route('submission-guidelines.call.store'), {
-            forceFormData: true,
-            onSuccess: (page) => {
-                // If the controller returns a redirect with flash
-                const successData = page.props.flash?.success;
-                if (successData?.tracking_id) {
-                    setTrackingId(successData.tracking_id);
-                    reset();
-                    setStep(4);
-                    toast.success('Manuscript submitted successfully.');
-                }
-            },
-            onError: (errs) => {
-                const errorMessage = errs.error || 'Submission failed. Please check for errors.';
-                toast.error(errorMessage);
-                
-                // Only return to step 1 if there are errors specifically for step 1 fields
-                const step1Fields = ['title', 'abstract', 'author_name', 'author_email'];
-                const hasStep1Errors = Object.keys(errs).some(key => step1Fields.includes(key));
-                
-                if (hasStep1Errors) {
-                    setStep(1);
-                } else if (errs.manuscript) {
-                    setStep(2);
-                }
-            },
-            preserveScroll: true
-        });
+        if (step === 1) {
+            if (data.title && data.abstract && data.author_name && data.author_email) {
+                setStep(2);
+            }
+        } else if (step === 2) {
+            if (data.manuscript) {
+                setStep(3);
+            }
+        } else if (step === 3) {
+            if (!data.consent) return;
+            
+            post(route('submission-guidelines.call.store'), {
+                forceFormData: true,
+                onSuccess: (page) => {
+                    const successData = page.props.flash?.success;
+                    if (successData?.tracking_id) {
+                        setTrackingId(successData.tracking_id);
+                        reset();
+                        setStep(4);
+                        toast.success('Manuscript submitted successfully.');
+                    }
+                },
+                onError: (errs) => {
+                    const errorMessage = errs.error || 'Submission failed. Please check for errors.';
+                    toast.error(errorMessage);
+                    
+                    const step1Fields = ['title', 'abstract', 'author_name', 'author_email'];
+                    const hasStep1Errors = Object.keys(errs).some(key => step1Fields.includes(key));
+                    
+                    if (hasStep1Errors) {
+                        setStep(1);
+                    } else if (errs.manuscript) {
+                        setStep(2);
+                    }
+                },
+                preserveScroll: true
+            });
+        }
     };
 
     return (
@@ -135,7 +136,7 @@ export default function CallForPapers() {
 
                             {/* STEPS 1-3 */}
                             {step < 4 && (
-                                <form onSubmit={step === 3 ? submit : handleNextStep} encType="multipart/form-data">
+                                <form onSubmit={handleSubmit} encType="multipart/form-data">
                                     <AnimatePresence mode="wait">
                                         
                                         {/* STEP 1: METADATA */}
@@ -245,7 +246,7 @@ export default function CallForPapers() {
                                                 </div>
 
                                                 <div className="mt-12 flex justify-end border-t border-gray-50 pt-8">
-                                                    <button type="button" onClick={handleNextStep} disabled={!data.title || !data.abstract || !data.author_name || !data.author_email} className="px-10 py-5 bg-slate-900 text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-blue-600 transition-all flex items-center gap-4 group disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-blue-600/20">
+                                                    <button type="submit" disabled={!data.title || !data.abstract || !data.author_name || !data.author_email} className="px-10 py-5 bg-slate-900 text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-blue-600 transition-all flex items-center gap-4 group disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-blue-600/20">
                                                         Proceed to Upload <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                                     </button>
                                                 </div>
@@ -274,7 +275,7 @@ export default function CallForPapers() {
                                                     <button type="button" onClick={() => setStep(1)} className="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 border border-gray-200 font-bold rounded-xl hover:bg-slate-50 transition-colors">
                                                         Back
                                                     </button>
-                                                    <button type="button" onClick={() => setStep(3)} disabled={!data.manuscript} className="w-full sm:w-auto px-8 py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-blue-600 transition-colors flex justify-center items-center gap-2 group disabled:opacity-50">
+                                                    <button type="submit" disabled={!data.manuscript} className="w-full sm:w-auto px-8 py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-blue-600 transition-colors flex justify-center items-center gap-2 group disabled:opacity-50">
                                                         Final Step <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                                     </button>
                                                 </div>
