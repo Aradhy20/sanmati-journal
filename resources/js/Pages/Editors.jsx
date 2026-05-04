@@ -217,7 +217,7 @@ const ExecutiveMember = ({ member, index }) => {
                 {/* Content Area */}
                 <div className="p-8 pt-6 flex-1 flex flex-col bg-white relative z-10">
                     <p className="text-muted text-[10px] font-black uppercase tracking-widest mb-3">Official Designation</p>
-                    <div className="text-dark/80 font-bold text-sm leading-relaxed mb-8 flex-1">
+                    <div className="text-dark/80 font-bold text-sm leading-relaxed mb-8 flex-1 whitespace-pre-line">
                         {member.title}
                     </div>
 
@@ -273,9 +273,9 @@ const ExecutiveMember = ({ member, index }) => {
 export default function Editors() {
     const executiveMembers = [
         {
-            name: "Dr. Namrta Jain",
+            name: "Dr Namrata Jain",
             role: "President",
-            title: "Sanmati Spectrum of Knowledge & Emerging Discourse",
+            title: "Sanmati Education & Research Foundation Of India\n\nEditor-in-Chief\nSanmati Spectrum of Knowledge & Emerging Discourse",
             email: "sanmatijournal@gmail.com",
             phone: "+91 9870713912 & +91 8979782949",
             profileUrl: "https://scholar.google.com/citations?user=YzXafxwAAAAJ&hl=en",

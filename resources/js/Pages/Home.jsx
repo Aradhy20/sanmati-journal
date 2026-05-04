@@ -262,8 +262,9 @@ export default function Home() {
                                     <img loading="lazy" src="/mam.jpeg" alt="Dr. Namrta Jain" className="w-full h-full object-cover object-top group-hover:scale-110 transition-all duration-700" />
                                 </div>
                                 <span className="inline-block px-4 py-1.5 bg-secondary/25 border border-secondary/40 rounded-full text-[10px] text-secondary font-black tracking-widest uppercase mb-4 w-fit">President</span>
-                                <h3 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold mb-2 tracking-tight group-hover:text-secondary-light transition-colors duration-300">Dr. Namrta Jain</h3>
-                                <p className="text-white/70 text-[12px] font-bold uppercase tracking-[0.05em] mb-8">Sanmati Spectrum of Knowledge & Emerging Discourse</p>
+                                <h3 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold mb-2 tracking-tight group-hover:text-secondary-light transition-colors duration-300">Dr Namrata Jain</h3>
+                                <p className="text-white/70 text-[12px] font-bold uppercase tracking-[0.05em] mb-2">Sanmati Education & Research Foundation Of India</p>
+                                <p className="text-white/50 text-[10px] font-medium uppercase tracking-[0.05em] mb-8">Editor-in-Chief: Sanmati Spectrum of Knowledge</p>
 
                                 <div className="w-full bg-white/10 rounded-2xl p-4 mb-6 border border-white/10 text-xs">
                                     <p className="flex justify-between border-b border-white/5 pb-2 mb-2"><span className="text-white/40 uppercase tracking-widest font-black text-[9px]">Email</span> <a href="mailto:sanmatijournal@gmail.com" className="font-bold hover:text-secondary transition-colors">sanmatijournal@gmail.com</a></p>

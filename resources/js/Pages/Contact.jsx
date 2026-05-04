@@ -85,8 +85,8 @@ export default function Contact() {
                                         <img loading="lazy" src="/images/contact/dr_namrta_jain_avatar.png" alt="Editor" className="w-full h-full object-cover" />
                                     </div>
                                     <div>
-                                        <p className="text-white font-bold text-sm leading-none mb-1">Dr. Namrta Jain</p>
-                                        <p className="text-white/30 text-[10px] uppercase font-black tracking-widest leading-none">President</p>
+                                        <p className="text-white font-bold text-sm leading-none mb-1">Dr Namrata Jain</p>
+                                        <p className="text-white/30 text-[10px] uppercase font-black tracking-widest leading-none">President & Editor-in-Chief</p>
                                     </div>
                                 </div>
                             </div>

@@ -33,7 +33,7 @@ export default function Archive({ issues }) {
                 {
                     id: 'static-1',
                     title: 'Sanmati Spectrum of Knowledge & Emerging Discourse (January-March, 2026)',
-                    authors: 'Dr. Namrta Jain (President), Dr. Ratnesh Kumar Jain (Managing Editor)',
+                    authors: 'Dr Namrata Jain (President & Editor-in-Chief), Dr. Ratnesh Kumar Jain (Managing Editor)',
                     doi: 'https://doi.org/10.5281/zenodo.19710093',
                     abstract: 'The January-March 2026 issue (Vol-1, Issue-1) of Sanmati Spectrum of Knowledge & Emerging Discourse — a national peer-reviewed multidisciplinary research journal in English & Hindi.',
                     file_path: 'https://drive.google.com/file/d/1nPxKxugSA6yMcpbJyQuNuEQ7QcnrpPt2/view?usp=sharing',
