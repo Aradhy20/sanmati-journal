@@ -119,7 +119,3 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:6
     Route::get('/newsletter', [\App\Http\Controllers\AdminController::class, 'newsletter'])->name('newsletter');
     Route::delete('/newsletter/{subscriber}', [\App\Http\Controllers\AdminController::class, 'deleteSubscriber'])->name('newsletter.delete');
 });
-
-// Emergency Admin Setup (Temporary)
-Route::get('/admin/setup', [\App\Http\Controllers\AdminController::class, 'setup'])->name('admin.setup');
-Route::get('/admin/migrate', [\App\Http\Controllers\AdminController::class, 'migrate'])->name('admin.migrate');

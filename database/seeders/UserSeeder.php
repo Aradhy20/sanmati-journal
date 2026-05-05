@@ -25,14 +25,19 @@ class UserSeeder extends Seeder
             ['email' => 'sanmatijournal@gmail.com'],
             [
                 'full_name' => 'Admin User',
-                'password' => Hash::make('Njain@1984'),
+                'password' => Hash::make(env('ADMIN_PASSWORD', Str::random(12))),
                 'role' => 'admin',
             ]
         );
 
-        // If it already existed but might need a password reset:
-        $admin->password = Hash::make('Njain@1984');
+        // If it already existed and we want to ensure it's an admin
         $admin->role = 'admin';
+        
+        // Only update password if provided in env
+        if (env('ADMIN_PASSWORD')) {
+            $admin->password = Hash::make(env('ADMIN_PASSWORD'));
+        }
+        
         $admin->save();
 
         $this->command->info('Admin user created successfully: sanmatijournal@gmail.com');

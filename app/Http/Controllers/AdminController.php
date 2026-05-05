@@ -308,35 +308,4 @@ class AdminController extends Controller
         return back()->with('success', 'Subscriber removed');
     }
 
-    // --- Emergency Setup & Migration ---
-    public function migrate()
-    {
-        try {
-            \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
-            return "Migrations executed successfully: <pre>" . \Illuminate\Support\Facades\Artisan::output() . "</pre>";
-        } catch (\Exception $e) {
-            return "Migration failed: " . $e->getMessage();
-        }
-    }
-
-    public function setup()
-    {
-        try {
-            // Check if 'password' column exists, if not use 'password_hash'
-            $column = \Illuminate\Support\Facades\Schema::hasColumn('users', 'password') ? 'password' : 'password_hash';
-
-            $admin = \App\Models\User::updateOrCreate(
-                ['email' => 'sanmatijournal@gmail.com'],
-                [
-                    'full_name' => 'Admin User',
-                    $column => Hash::make('Njain@1984'),
-                    'role' => 'admin',
-                ]
-            );
-
-            return "Admin account configured successfully for {$admin->email} using column '{$column}'. Please try logging in now.";
-        } catch (\Exception $e) {
-            return "Setup failed: " . $e->getMessage();
-        }
-    }
 }
