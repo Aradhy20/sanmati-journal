@@ -159,16 +159,9 @@ const ExecutiveMember = ({ member, index }) => {
                 loading: "lazy"
               }
             ) }),
-            /* @__PURE__ */ jsxs("div", { className: "flex-1 pt-2", children: [
-              /* @__PURE__ */ jsxs("span", { className: `inline-flex items-center gap-2 px-3 py-1 bg-gradient-to-r ${member.colorClass.includes("gold") ? "from-amber-500/10 to-amber-600/10 text-amber-600 border-amber-500/10" : "from-primary/10 to-secondary/10 text-primary border-primary/10"} text-[10px] font-black uppercase tracking-widest rounded-full mb-3 border`, children: [
-                /* @__PURE__ */ jsx(Icon, { className: "w-3.5 h-3.5" }),
-                member.role
-              ] }),
-              /* @__PURE__ */ jsx("h3", { className: "text-2xl sm:text-3xl font-serif font-bold text-dark leading-tight group-hover:text-primary transition-colors", children: member.name })
-            ] })
+            /* @__PURE__ */ jsx("div", { className: "flex-1", children: /* @__PURE__ */ jsx("h3", { className: "text-3xl sm:text-4xl font-serif font-bold text-dark leading-tight group-hover:text-primary transition-colors", children: member.name }) })
           ] }),
           /* @__PURE__ */ jsxs("div", { className: "p-8 pt-6 flex-1 flex flex-col bg-white relative z-10", children: [
-            /* @__PURE__ */ jsx("p", { className: "text-muted text-[10px] font-black uppercase tracking-widest mb-3", children: "Official Designation" }),
             /* @__PURE__ */ jsx("div", { className: "text-dark/80 font-bold text-sm leading-relaxed mb-8 flex-1 whitespace-pre-line", children: member.title }),
             /* @__PURE__ */ jsxs("div", { className: "w-full rounded-2xl p-5 mb-8 border border-gray-100 bg-surface/50 text-xs", children: [
               member.email && /* @__PURE__ */ jsxs("p", { className: "flex justify-between items-center border-b border-gray-200/50 pb-3 mb-3", children: [
@@ -225,7 +218,7 @@ function Editors() {
     {
       name: "Dr Namrata Jain",
       role: "President & Editor-in-Chief",
-      title: "Sanmati Education & Research Foundation Of India\n\nSanmati Spectrum of Knowledge & Emerging Discourse",
+      title: "President\nSanmati Education & Research Foundation Of India\n\nEditor-in-Chief\nSanmati Spectrum of Knowledge & Emerging Discourse",
       email: "sanmatijournal@gmail.com",
       phone: "+91 9870713912 & +91 8979782949",
       profileUrl: "https://scholar.google.com/citations?user=YzXafxwAAAAJ&hl=en",

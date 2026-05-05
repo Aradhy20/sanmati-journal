@@ -203,12 +203,8 @@ const ExecutiveMember = ({ member, index }) => {
                             loading="lazy"
                         />
                     </div>
-                    <div className="flex-1 pt-2">
-                        <span className={`inline-flex items-center gap-2 px-3 py-1 bg-gradient-to-r ${member.colorClass.includes('gold') ? 'from-amber-500/10 to-amber-600/10 text-amber-600 border-amber-500/10' : 'from-primary/10 to-secondary/10 text-primary border-primary/10'} text-[10px] font-black uppercase tracking-widest rounded-full mb-3 border`}>
-                            <Icon className="w-3.5 h-3.5" />
-                            {member.role}
-                        </span>
-                        <h3 className="text-2xl sm:text-3xl font-serif font-bold text-dark leading-tight group-hover:text-primary transition-colors">
+                    <div className="flex-1">
+                        <h3 className="text-3xl sm:text-4xl font-serif font-bold text-dark leading-tight group-hover:text-primary transition-colors">
                             {member.name}
                         </h3>
                     </div>
@@ -216,7 +212,6 @@ const ExecutiveMember = ({ member, index }) => {
 
                 {/* Content Area */}
                 <div className="p-8 pt-6 flex-1 flex flex-col bg-white relative z-10">
-                    <p className="text-muted text-[10px] font-black uppercase tracking-widest mb-3">Official Designation</p>
                     <div className="text-dark/80 font-bold text-sm leading-relaxed mb-8 flex-1 whitespace-pre-line">
                         {member.title}
                     </div>
@@ -275,7 +270,7 @@ export default function Editors() {
         {
             name: "Dr Namrata Jain",
             role: "President & Editor-in-Chief",
-            title: "Sanmati Education & Research Foundation Of India\n\nSanmati Spectrum of Knowledge & Emerging Discourse",
+            title: "President\nSanmati Education & Research Foundation Of India\n\nEditor-in-Chief\nSanmati Spectrum of Knowledge & Emerging Discourse",
             email: "sanmatijournal@gmail.com",
             phone: "+91 9870713912 & +91 8979782949",
             profileUrl: "https://scholar.google.com/citations?user=YzXafxwAAAAJ&hl=en",

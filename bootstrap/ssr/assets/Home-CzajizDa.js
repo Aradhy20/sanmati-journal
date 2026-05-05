@@ -398,11 +398,16 @@ function Home() {
             /* @__PURE__ */ jsx(motion.div, { initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true }, className: "group", children: /* @__PURE__ */ jsxs("div", { className: "h-full rounded-2xl overflow-hidden bg-gradient-to-br from-primary to-primary-dark text-white p-10 flex flex-col items-center text-center shadow-2xl hover:-translate-y-1 transition-all duration-700 relative", children: [
               /* @__PURE__ */ jsx("div", { className: "absolute top-0 right-0 p-8 opacity-5", children: /* @__PURE__ */ jsx(Trophy, { className: "w-24 h-24 text-secondary scale-150 rotate-12" }) }),
               /* @__PURE__ */ jsx("div", { className: "w-44 h-44 rounded-2xl overflow-hidden mb-8 border-4 border-white/30 shadow-2xl relative z-10", children: /* @__PURE__ */ jsx("img", { loading: "lazy", src: "/mam.jpeg", alt: "Dr Namrata Jain", className: "w-full h-full object-cover object-top group-hover:scale-110 transition-all duration-700" }) }),
-              /* @__PURE__ */ jsx("span", { className: "inline-block px-4 py-1.5 bg-secondary/25 border border-secondary/40 rounded-full text-[10px] text-secondary font-black tracking-widest uppercase mb-4 w-fit", children: "President & Editor-in-Chief" }),
-              /* @__PURE__ */ jsx("h3", { className: "text-xl md:text-2xl lg:text-3xl font-serif font-bold mb-2 tracking-tight group-hover:text-secondary-light transition-colors duration-300", children: "Dr Namrata Jain" }),
-              /* @__PURE__ */ jsxs("div", { className: "space-y-1 mb-8", children: [
-                /* @__PURE__ */ jsx("p", { className: "text-white/80 text-[12px] font-bold uppercase tracking-[0.05em]", children: "Sanmati Education & Research Foundation Of India" }),
-                /* @__PURE__ */ jsx("p", { className: "text-white/60 text-[10px] font-medium uppercase tracking-[0.05em]", children: "Sanmati Spectrum of Knowledge & Emerging Discourse" })
+              /* @__PURE__ */ jsx("h3", { className: "text-2xl md:text-3xl lg:text-4xl font-serif font-bold mb-6 tracking-tight group-hover:text-secondary-light transition-colors duration-300", children: "Dr Namrata Jain" }),
+              /* @__PURE__ */ jsxs("div", { className: "space-y-6 mb-10 w-full", children: [
+                /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-center", children: [
+                  /* @__PURE__ */ jsx("p", { className: "text-secondary font-black text-[10px] uppercase tracking-[0.3em] mb-1", children: "President" }),
+                  /* @__PURE__ */ jsx("p", { className: "text-white font-bold text-[13px] uppercase tracking-wide", children: "Sanmati Education & Research Foundation Of India" })
+                ] }),
+                /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-center", children: [
+                  /* @__PURE__ */ jsx("p", { className: "text-secondary font-black text-[10px] uppercase tracking-[0.3em] mb-1", children: "Editor-in-Chief" }),
+                  /* @__PURE__ */ jsx("p", { className: "text-white/80 font-bold text-[11px] uppercase tracking-wide", children: "Sanmati Spectrum of Knowledge & Emerging Discourse" })
+                ] })
               ] }),
               /* @__PURE__ */ jsxs("div", { className: "w-full bg-white/10 rounded-2xl p-4 mb-6 border border-white/10 text-xs", children: [
                 /* @__PURE__ */ jsxs("p", { className: "flex justify-between border-b border-white/5 pb-2 mb-2", children: [
