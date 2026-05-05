@@ -129,7 +129,7 @@ const Footer = () => {
                             <div className="space-y-5">
                                 <div className="flex items-start gap-4 p-4 rounded-2xl bg-white/10 border border-white/20 hover:border-white/30 transition-colors">
                                     <MapPin className="w-5 h-5 text-secondary shrink-0 mt-0.5" />
-                                    <p className="text-[13px] leading-relaxed text-white font-medium">JTS Publications<br />V-508 Gali No. 17, Vijay Park<br/>Delhi – 110053, Bharat (India)</p>
+                                    <p className="text-[13px] leading-relaxed text-white font-medium">Sanmati Publication<br />Moradabad – 244001<br/>Bharat (India)</p>
                                 </div>
                                 <div className="space-y-3 pl-2">
                                     <div className="flex items-start gap-4 text-[13px] font-bold">

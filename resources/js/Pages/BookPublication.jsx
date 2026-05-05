@@ -360,7 +360,7 @@ export default function BookPublication({ books }) {
                                 </h2>
                                 
                                 <p className="text-xl text-dark/70 font-medium leading-relaxed mb-6">
-                                    Beyond our quarterly journals, JTS Publications curates and publishes highly specialized monographs and books focusing on multifaceted disciplines. 
+                                    Beyond our quarterly journals, Sanmati Publication curates and publishes highly specialized monographs and books focusing on multifaceted disciplines. 
                                 </p>
                                 <p className="text-muted leading-relaxed">
                                     Browse our extensive repository of beautifully bound academic books. Each publication undergoes rigorous peer-review and editorial formatting to meet global university press standards.
@@ -443,7 +443,7 @@ export default function BookPublication({ books }) {
                                     </h4>
                                     <p className="text-muted text-[10px] uppercase font-black tracking-widest mt-2 flex items-center gap-1">
                                         <span className="w-1.5 h-1.5 rounded-full bg-secondary inline-block" />
-                                        {book.author || 'JTS Publications'}
+                                        {book.author || 'Sanmati Publication'}
                                     </p>
                                 </div>
                             </motion.div>
@@ -466,7 +466,7 @@ export default function BookPublication({ books }) {
                         <div className="relative z-10 max-w-2xl mx-auto">
                             <h3 className="text-xl md:text-2xl lg:text-3xl md:text-4xl font-serif font-bold text-white mb-6">Want to Publish Your Manuscript?</h3>
                             <p className="text-white/60 text-lg mb-10">
-                                JTS Publications offers comprehensive editorial, peer-review, and physical printing services for academic authors. Turn your thesis into a globally distributed book.
+                                Sanmati Publication offers comprehensive editorial, peer-review, and physical printing services for academic authors. Turn your thesis into a globally distributed book.
                             </p>
                             <Link href="/contact" className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-dark font-black tracking-widest text-xs uppercase rounded-full hover:bg-secondary hover:text-white transition-all duration-300 shadow-[0_0_40px_rgba(255,255,255,0.1)] hover:shadow-[0_0_40px_rgba(0,196,180,0.3)] hover:-translate-y-1">
                                 Contact Editorial Board <ArrowRight className="w-4 h-4" />

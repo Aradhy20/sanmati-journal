@@ -24,7 +24,7 @@ export default function Seo({ title, description, keywords, image, type = 'websi
         "issn": "3108-1819",
         "publisher": {
             "@type": "Organization",
-            "name": "JTS Publications",
+            "name": "Sanmati Publication",
             "logo": {
                 "@type": "ImageObject",
                 "url": `${siteUrl}/logo.jpg`

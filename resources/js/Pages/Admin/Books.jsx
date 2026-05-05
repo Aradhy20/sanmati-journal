@@ -234,7 +234,7 @@ export default function Books({ books }) {
                                             value={data.author}
                                             onChange={e => setData('author', e.target.value)}
                                             className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-blue-500/10 focus:bg-white transition-all outline-none font-bold text-slate-900 placeholder:text-slate-300"
-                                            placeholder="e.g. JTS Publications"
+                                            placeholder="e.g. Sanmati Publication"
                                         />
                                     </div>
 

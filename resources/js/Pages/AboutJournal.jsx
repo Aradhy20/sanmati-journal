@@ -229,10 +229,9 @@ export default function AboutJournal() {
                                 
                                 <div className="p-8 bg-gradient-to-br from-primary/5 to-transparent rounded-3xl border border-primary/10 mt-6">
                                     <span className="text-[10px] font-black uppercase tracking-widest text-secondary block mb-4">Official Publisher Address</span>
-                                    <h4 className="text-xl font-bold text-dark mb-2">JTS Publications</h4>
+                                    <h4 className="text-xl font-bold text-dark mb-2">Sanmati Publication</h4>
                                     <p className="text-muted text-sm leading-relaxed">
-                                        V-508 Gali No. 17, Vijay Park,<br />
-                                        Delhi – 110053, Bharat (India)
+                                        Moradabad – 244001, Bharat (India)
                                     </p>
                                 </div>
                             </div>

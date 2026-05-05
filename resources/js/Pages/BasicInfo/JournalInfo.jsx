@@ -37,8 +37,8 @@ export default function JournalInfo() {
                             <tr className="hover:bg-warm-bg transition-colors">
                                 <th className="py-6 px-8 text-dark font-bold bg-warm-bg/50 border-r border-slate-100">Publisher</th>
                                 <td className="py-6 px-8 text-dark/80">
-                                    <div className="font-bold text-dark">JTS Publications</div>
-                                    <div className="text-sm text-gray-500 mt-1">V-508 Gali No. 17, Vijay Park, Delhi – 110053</div>
+                                    <div className="font-bold text-dark">Sanmati Publication</div>
+                                    <div className="text-sm text-gray-500 mt-1">Moradabad – 244001, Bharat (India)</div>
                                 </td>
                             </tr>
                             <tr className="hover:bg-warm-bg transition-colors">
