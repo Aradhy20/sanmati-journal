@@ -272,7 +272,7 @@ export default function Editors() {
             role: "President & Editor-in-Chief",
             title: "President\nSanmati Education & Research Foundation Of India\n\nEditor-in-Chief\nSanmati Spectrum of Knowledge & Emerging Discourse",
             email: "sanmatijournal@gmail.com",
-            phone: "+91 9870713912 & +91 8979782949",
+            phone: "+91 9870713912",
             profileUrl: "https://scholar.google.com/citations?user=YzXafxwAAAAJ&hl=en",
             image: "/images/team/mam.jpeg",
             icon: Trophy,

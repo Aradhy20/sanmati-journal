@@ -276,7 +276,7 @@ export default function Home() {
 
                                 <div className="w-full bg-white/10 rounded-2xl p-4 mb-6 border border-white/10 text-xs">
                                     <p className="flex justify-between border-b border-white/5 pb-2 mb-2"><span className="text-white/40 uppercase tracking-widest font-black text-[9px]">Email</span> <a href="mailto:sanmatijournal@gmail.com" className="font-bold hover:text-secondary transition-colors">sanmatijournal@gmail.com</a></p>
-                                    <p className="flex justify-between"><span className="text-white/40 uppercase tracking-widest font-black text-[9px]">Mob</span> <span className="font-bold">+91 9870713912 / 8979782949</span></p>
+                                    <p className="flex justify-between"><span className="text-white/40 uppercase tracking-widest font-black text-[9px]">Mob</span> <span className="font-bold">+91 9870713912</span></p>
                                 </div>
 
                                 <div className="mt-auto w-full pt-4">

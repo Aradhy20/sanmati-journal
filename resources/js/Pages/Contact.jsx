@@ -34,7 +34,7 @@ export default function Contact() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {[
                         { icon: MapPin, title: "Registry Office", desc: "B-002 Faculty Block TMU Campus, Delhi Road Moradabad (U.P) 244001", color: "from-dark to-dark/90", iconColor: "text-secondary" },
-                        { icon: Phone, title: "Strategic Liaison", desc: "+91 8979782949\n+91 7999525735", color: "from-primary to-primary-dark", iconColor: "text-white" },
+                        { icon: Phone, title: "Strategic Liaison", desc: "+91 7999525735", color: "from-primary to-primary-dark", iconColor: "text-white" },
                         { icon: Mail, title: "Manuscript Queries", desc: "sanmatijournal@gmail.com", color: "from-secondary to-secondary-dark", iconColor: "text-white" },
                         { icon: Clock, title: "Operational Hours", desc: "Mon - Fri\n10:00 AM - 6:00 PM (IST)", color: "from-surface to-white", iconColor: "text-primary", border: "border-gray-100" },
                     ].map((item, i) => (

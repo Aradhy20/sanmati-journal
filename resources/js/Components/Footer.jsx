@@ -141,7 +141,7 @@ const Footer = () => {
                                             </div>
                                             <div>
                                                 <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-0.5">Editorial Office</p>
-                                                <a href="tel:+918979782949" className="text-slate-200 hover:text-white transition-colors hover:underline">+91 8979782949</a>
+                                                <a href="tel:+919870713912" className="text-slate-200 hover:text-white transition-colors hover:underline">+91 9870713912</a>
                                             </div>
                                             <div>
                                                 <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-0.5">Managing Editor</p>
