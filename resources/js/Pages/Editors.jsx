@@ -288,8 +288,8 @@ export default function Editors() {
         },
         {
             name: "Dr. Ratnesh Kumar Jain",
-            role: "Managing Editor",
-            title: "Teerthanker Mahaveer University, Moradabad",
+            role: "President & Managing Editor",
+            title: "President\nSanmati Education & Research Foundation Of India\n\nManaging Editor\nSanmati Spectrum of Knowledge & Emerging Discourse",
             email: "Jainratnesh79@gmail.com",
             phone: "+91 7999525735",
             profileUrl: "https://www.tmu.ac.in/nss-coordinator-desk",

@@ -429,9 +429,17 @@ function Home() {
             /* @__PURE__ */ jsx(motion.div, { initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true }, transition: { delay: 0.15 }, className: "group", children: /* @__PURE__ */ jsxs("div", { className: "h-full rounded-2xl overflow-hidden bg-surface border border-gray-100 p-10 flex flex-col items-center text-center shadow-lg hover:shadow-2xl hover:border-primary/20 hover:-translate-y-1 transition-all duration-700 relative", children: [
               /* @__PURE__ */ jsx("div", { className: "absolute top-0 right-0 p-8 opacity-5", children: /* @__PURE__ */ jsx(Users, { className: "w-24 h-24 text-primary scale-150 -rotate-12" }) }),
               /* @__PURE__ */ jsx("div", { className: "w-44 h-44 rounded-2xl overflow-hidden mb-8 border-4 border-white shadow-xl relative z-10 rotate-3 group-hover:rotate-0 transition-transform duration-500", children: /* @__PURE__ */ jsx("img", { loading: "lazy", src: "/sir.jpeg", alt: "Dr. Ratnesh Kumar Jain", className: "w-full h-full object-cover object-top group-hover:scale-110 transition-all duration-700" }) }),
-              /* @__PURE__ */ jsx("span", { className: "inline-block px-4 py-1.5 bg-primary/8 rounded-full text-[10px] text-primary font-black tracking-widest uppercase mb-4", children: "Managing Editor" }),
-              /* @__PURE__ */ jsx("h3", { className: "text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-2 group-hover:text-primary transition-colors duration-300", children: "Dr. Ratnesh Kumar Jain" }),
-              /* @__PURE__ */ jsx("p", { className: "text-dark/40 text-[10px] uppercase font-black tracking-widest mb-8 min-h-[15px]" }),
+              /* @__PURE__ */ jsx("h3", { className: "text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-6 group-hover:text-primary transition-colors duration-300", children: "Dr. Ratnesh Kumar Jain" }),
+              /* @__PURE__ */ jsxs("div", { className: "space-y-6 mb-10 w-full", children: [
+                /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-center", children: [
+                  /* @__PURE__ */ jsx("p", { className: "text-primary font-black text-[10px] uppercase tracking-[0.3em] mb-1", children: "President" }),
+                  /* @__PURE__ */ jsx("p", { className: "text-dark font-bold text-[13px] uppercase tracking-wide", children: "Sanmati Education & Research Foundation Of India" })
+                ] }),
+                /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-center", children: [
+                  /* @__PURE__ */ jsx("p", { className: "text-primary font-black text-[10px] uppercase tracking-[0.3em] mb-1", children: "Managing Editor" }),
+                  /* @__PURE__ */ jsx("p", { className: "text-dark/60 font-bold text-[11px] uppercase tracking-wide", children: "Sanmati Spectrum of Knowledge & Emerging Discourse" })
+                ] })
+              ] }),
               /* @__PURE__ */ jsxs("div", { className: "w-full bg-warm-bg rounded-2xl p-4 mb-6 border border-gray-50 text-xs text-left", children: [
                 /* @__PURE__ */ jsxs("p", { className: "flex justify-between border-b border-gray-200 pb-2 mb-2", children: [
                   /* @__PURE__ */ jsx("span", { className: "text-muted uppercase tracking-widest font-black text-[9px]", children: "Email" }),

@@ -296,9 +296,18 @@ export default function Home() {
                                 <div className="w-44 h-44 rounded-2xl overflow-hidden mb-8 border-4 border-white shadow-xl relative z-10 rotate-3 group-hover:rotate-0 transition-transform duration-500">
                                     <img loading="lazy" src="/sir.jpeg" alt="Dr. Ratnesh Kumar Jain" className="w-full h-full object-cover object-top group-hover:scale-110 transition-all duration-700" />
                                 </div>
-                                <span className="inline-block px-4 py-1.5 bg-primary/8 rounded-full text-[10px] text-primary font-black tracking-widest uppercase mb-4">Managing Editor</span>
-                                <h3 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-2 group-hover:text-primary transition-colors duration-300">Dr. Ratnesh Kumar Jain</h3>
-                                <p className="text-dark/40 text-[10px] uppercase font-black tracking-widest mb-8 min-h-[15px]"></p>
+                                <h3 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-6 group-hover:text-primary transition-colors duration-300">Dr. Ratnesh Kumar Jain</h3>
+                                
+                                <div className="space-y-6 mb-10 w-full">
+                                    <div className="flex flex-col items-center">
+                                        <p className="text-primary font-black text-[10px] uppercase tracking-[0.3em] mb-1">President</p>
+                                        <p className="text-dark font-bold text-[13px] uppercase tracking-wide">Sanmati Education & Research Foundation Of India</p>
+                                    </div>
+                                    <div className="flex flex-col items-center">
+                                        <p className="text-primary font-black text-[10px] uppercase tracking-[0.3em] mb-1">Managing Editor</p>
+                                        <p className="text-dark/60 font-bold text-[11px] uppercase tracking-wide">Sanmati Spectrum of Knowledge & Emerging Discourse</p>
+                                    </div>
+                                </div>
 
                                 <div className="w-full bg-warm-bg rounded-2xl p-4 mb-6 border border-gray-50 text-xs text-left">
                                     <p className="flex justify-between border-b border-gray-200 pb-2 mb-2"><span className="text-muted uppercase tracking-widest font-black text-[9px]">Email</span> <a href="mailto:Jainratnesh79@gmail.com" className="font-bold text-dark hover:text-primary transition-colors">Jainratnesh79@gmail.com</a></p>
