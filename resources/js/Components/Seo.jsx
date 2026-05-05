@@ -3,7 +3,7 @@ import { Head, usePage } from '@inertiajs/react';
 export default function Seo({ title, description, keywords, image, type = 'website', author, publishedTime, jsonLd }) {
     const siteName = "Sanmati Spectrum of Knowledge";
     const defaultDescription = "Top-ranking research journal in India. Publish your research paper fast. A high-authority, peer-reviewed, UGC-approved (proposed) multidisciplinary academic journal indexing high-quality research and books.";
-    const defaultKeywords = "research journal India, UGC approved journal, publish research paper fast, peer-reviewed journal, academic publishing, open access, sanmati spectrum";
+    const defaultKeywords = "UGC CARE listed journal, peer reviewed journal India, multidisciplinary research journal, publish research paper India, international journal India, sanmati spectrum of knowledge, academic publishing, open access journal";
     const defaultImage = "/logo.jpg";
     const siteUrl = "https://sanmatijournal.in";
 
@@ -31,6 +31,18 @@ export default function Seo({ title, description, keywords, image, type = 'websi
             }
         }
     };
+
+    // Breadcrumb Schema
+    const breadcrumbJsonLd = jsonLd?.breadcrumb ? {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": jsonLd.breadcrumb.map((item, index) => ({
+            "@type": "ListItem",
+            "position": index + 1,
+            "name": item.name,
+            "item": item.url ? (item.url.startsWith('http') ? item.url : `${siteUrl}${item.url}`) : undefined
+        }))
+    } : null;
 
     return (
         <Head>
@@ -60,8 +72,13 @@ export default function Seo({ title, description, keywords, image, type = 'websi
 
             {/* JSON-LD Structured Data */}
             <script type="application/ld+json">
-                {JSON.stringify(jsonLd || defaultJsonLd)}
+                {JSON.stringify(jsonLd?.schema || jsonLd || defaultJsonLd)}
             </script>
+            {breadcrumbJsonLd && (
+                <script type="application/ld+json">
+                    {JSON.stringify(breadcrumbJsonLd)}
+                </script>
+            )}
         </Head>
     );
 }

@@ -77,12 +77,20 @@ export default function Archive({ issues }) {
         }))
     );
     
+    const archiveSeoData = {
+        schema: scholarlySchema.length > 0 ? scholarlySchema : undefined,
+        breadcrumb: [
+            { name: 'Home', url: '/' },
+            { name: 'Archive', url: '/archive' }
+        ]
+    };
+    
     return (
         <MainLayout>
             <Seo 
                 title="Journal Archive | Sanmati Spectrum of Knowledge" 
                 description="Explore previous volumes and issues of Sanmati Spectrum of Knowledge & Emerging Discourse. High-quality multidisciplinary research repository."
-                jsonLd={scholarlySchema.length > 0 ? scholarlySchema : undefined}
+                jsonLd={archiveSeoData}
             />
             
             <PageHeader

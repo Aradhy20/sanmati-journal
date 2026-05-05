@@ -15,22 +15,29 @@ export default function Article({ paper }) {
         : new Date(paper.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
     const scholarlyArticleJsonLd = {
-        "@context": "https://schema.org",
-        "@type": "ScholarlyArticle",
-        "headline": paper.title,
-        "abstract": paper.abstract,
-        "author": paper.authors.split(',').map(name => ({
-            "@type": "Person",
-            "name": name.trim()
-        })),
-        "datePublished": paper.issue?.year ? String(paper.issue.year) : new Date(paper.created_at).toISOString().split('T')[0],
-        "isPartOf": {
-            "@type": "Periodical",
-            "name": "Sanmati Journal",
-            "issn": "3108-1819"
+        schema: {
+            "@context": "https://schema.org",
+            "@type": "ScholarlyArticle",
+            "headline": paper.title,
+            "abstract": paper.abstract,
+            "author": paper.authors.split(',').map(name => ({
+                "@type": "Person",
+                "name": name.trim()
+            })),
+            "datePublished": paper.issue?.year ? String(paper.issue.year) : new Date(paper.created_at).toISOString().split('T')[0],
+            "isPartOf": {
+                "@type": "Periodical",
+                "name": "Sanmati Journal",
+                "issn": "3108-1819"
+            },
+            "identifier": paper.doi ? { "@type": "PropertyValue", "propertyID": "DOI", "value": paper.doi } : undefined,
+            "url": `${window.location.origin}/download/paper/${paper.id}`
         },
-        "identifier": paper.doi ? { "@type": "PropertyValue", "propertyID": "DOI", "value": paper.doi } : undefined,
-        "url": `${window.location.origin}/download/paper/${paper.id}`
+        breadcrumb: [
+            { name: 'Home', url: '/' },
+            { name: 'Archive', url: '/archive' },
+            { name: 'Article', url: `/article/${paper.id}` }
+        ]
     };
 
     return (
