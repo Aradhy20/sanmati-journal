@@ -432,7 +432,7 @@ function Home() {
               /* @__PURE__ */ jsx("h3", { className: "text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-6 group-hover:text-primary transition-colors duration-300", children: "Dr. Ratnesh Kumar Jain" }),
               /* @__PURE__ */ jsxs("div", { className: "space-y-6 mb-10 w-full", children: [
                 /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-center", children: [
-                  /* @__PURE__ */ jsx("p", { className: "text-primary font-black text-[10px] uppercase tracking-[0.3em] mb-1", children: "President" }),
+                  /* @__PURE__ */ jsx("p", { className: "text-primary font-black text-[10px] uppercase tracking-[0.3em] mb-1", children: "Secretary" }),
                   /* @__PURE__ */ jsx("p", { className: "text-dark font-bold text-[13px] uppercase tracking-wide", children: "Sanmati Education & Research Foundation Of India" })
                 ] }),
                 /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-center", children: [

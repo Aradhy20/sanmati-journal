@@ -300,7 +300,7 @@ export default function Home() {
                                 
                                 <div className="space-y-6 mb-10 w-full">
                                     <div className="flex flex-col items-center">
-                                        <p className="text-primary font-black text-[10px] uppercase tracking-[0.3em] mb-1">President</p>
+                                        <p className="text-primary font-black text-[10px] uppercase tracking-[0.3em] mb-1">Secretary</p>
                                         <p className="text-dark font-bold text-[13px] uppercase tracking-wide">Sanmati Education & Research Foundation Of India</p>
                                     </div>
                                     <div className="flex flex-col items-center">

@@ -50,13 +50,13 @@ const BioModal = ({ member, isOpen, onClose }) => {
                                 {/* Modal Image Column (Desktop) / Header (Mobile) */}
                                 <div className="md:w-2/5 md:shrink-0 relative bg-dark">
                                     <div className="md:absolute inset-0 aspect-square md:aspect-auto">
-                                        <img loading="lazy" 
-                                            src={member.image} 
+                                        <img loading="lazy"
+                                            src={member.image}
                                             alt={member.name}
                                             className="w-full h-full object-cover object-top opacity-80"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent" />
-                                        
+
                                         <div className="absolute bottom-6 left-6 right-6">
                                             <span className="inline-block px-4 py-1.5 bg-secondary/90 backdrop-blur-md rounded-full text-[10px] text-white font-black tracking-widest uppercase mb-4 shadow-xl">
                                                 {member.role}
@@ -64,8 +64,8 @@ const BioModal = ({ member, isOpen, onClose }) => {
                                             <h2 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-white leading-tight mb-2">
                                                 {member.name}
                                             </h2>
-                                            <a 
-                                                href={member.email ? `mailto:${member.email}` : '#'} 
+                                            <a
+                                                href={member.email ? `mailto:${member.email}` : '#'}
                                                 className="text-white/70 text-[11px] font-bold tracking-widest uppercase hover:text-white transition-colors"
                                             >
                                                 {member.email}
@@ -76,7 +76,7 @@ const BioModal = ({ member, isOpen, onClose }) => {
 
                                 {/* Modal Content Area */}
                                 <div className="md:w-3/5 p-8 md:p-12 lg:p-16 relative bg-warm-bg flex flex-col max-h-[85vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
-                                    <button 
+                                    <button
                                         onClick={onClose}
                                         className="absolute top-6 right-6 lg:top-8 lg:right-8 w-12 h-12 bg-white rounded-full flex items-center justify-center text-dark/50 hover:text-dark hover:bg-gray-100 transition-all shadow-sm border border-gray-100 z-10"
                                     >
@@ -157,9 +157,9 @@ const BioModal = ({ member, isOpen, onClose }) => {
                                         {/* Bottom Actions */}
                                         {member.profileUrl && (
                                             <div className="pt-8 border-t border-gray-100 flex justify-end">
-                                                <a 
-                                                    href={member.profileUrl} 
-                                                    target="_blank" 
+                                                <a
+                                                    href={member.profileUrl}
+                                                    target="_blank"
                                                     rel="noreferrer"
                                                     className="inline-flex items-center gap-3 px-6 py-3 bg-dark text-white text-[11px] font-black uppercase tracking-widest rounded-xl hover:bg-primary transition-colors shadow-lg shadow-dark/10"
                                                 >
@@ -184,8 +184,8 @@ const ExecutiveMember = ({ member, index }) => {
 
     return (
         <>
-            <motion.div 
-                {...fadeInUp} 
+            <motion.div
+                {...fadeInUp}
                 transition={{ delay: index * 0.1 }}
                 className={`group flex flex-col h-full bg-white rounded-[2rem] border ${index === 0 ? 'border-primary/20 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_40px_rgba(var(--primary),0.12)]' : 'border-gray-100 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:border-gray-200'} transition-all duration-500 overflow-hidden relative`}
             >
@@ -196,8 +196,8 @@ const ExecutiveMember = ({ member, index }) => {
                 {/* Top Area: Image & Name */}
                 <div className="p-8 pb-6 flex flex-col sm:flex-row gap-6 items-start relative z-10 border-b border-gray-50 bg-gradient-to-b from-surface/50 to-white">
                     <div className="w-28 h-28 sm:w-32 sm:h-32 shrink-0 rounded-[1.5rem] overflow-hidden shadow-md border-2 border-white ring-1 ring-gray-100 relative">
-                        <img 
-                            src={member.image} 
+                        <img
+                            src={member.image}
                             alt={member.name}
                             className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700"
                             loading="lazy"
@@ -219,13 +219,13 @@ const ExecutiveMember = ({ member, index }) => {
                     <div className="w-full rounded-2xl p-5 mb-8 border border-gray-100 bg-surface/50 text-xs">
                         {member.email && (
                             <p className="flex justify-between items-center border-b border-gray-200/50 pb-3 mb-3">
-                                <span className="text-muted uppercase tracking-widest font-black text-[9px] flex items-center gap-2"><Mail className="w-3.5 h-3.5" /> Email</span> 
+                                <span className="text-muted uppercase tracking-widest font-black text-[9px] flex items-center gap-2"><Mail className="w-3.5 h-3.5" /> Email</span>
                                 <a href={`mailto:${member.email}`} className="font-bold text-dark hover:text-primary transition-colors truncate ml-4">{member.email}</a>
                             </p>
                         )}
                         {member.phone && (
                             <p className="flex justify-between items-center">
-                                <span className="text-muted uppercase tracking-widest font-black text-[9px] flex items-center gap-2"><Phone className="w-3.5 h-3.5" /> Mob</span> 
+                                <span className="text-muted uppercase tracking-widest font-black text-[9px] flex items-center gap-2"><Phone className="w-3.5 h-3.5" /> Mob</span>
                                 <span className="font-bold text-dark text-right">{member.phone}</span>
                             </p>
                         )}
@@ -233,7 +233,7 @@ const ExecutiveMember = ({ member, index }) => {
 
                     <div className="flex flex-col gap-3 mt-auto">
                         {member.bio && (
-                            <button 
+                            <button
                                 onClick={() => setIsBioOpen(true)}
                                 className="w-full py-3.5 bg-dark text-white rounded-xl text-[11px] font-black uppercase tracking-widest shadow-lg shadow-dark/10 hover:bg-primary transition-all duration-300 flex items-center justify-center gap-2 group/btn"
                             >
@@ -255,10 +255,10 @@ const ExecutiveMember = ({ member, index }) => {
             </motion.div>
 
             {member.bio && (
-                <BioModal 
-                    member={member} 
-                    isOpen={isBioOpen} 
-                    onClose={() => setIsBioOpen(false)} 
+                <BioModal
+                    member={member}
+                    isOpen={isBioOpen}
+                    onClose={() => setIsBioOpen(false)}
                 />
             )}
         </>
@@ -288,8 +288,8 @@ export default function Editors() {
         },
         {
             name: "Dr. Ratnesh Kumar Jain",
-            role: "President & Managing Editor",
-            title: "President\nSanmati Education & Research Foundation Of India\n\nManaging Editor\nSanmati Spectrum of Knowledge & Emerging Discourse",
+            role: "Secretary  & Managing Editor",
+            title: "Secretary \nSanmati Education & Research Foundation Of India\n\nManaging Editor\nSanmati Spectrum of Knowledge & Emerging Discourse",
             email: "Jainratnesh79@gmail.com",
             phone: "+91 7999525735",
             profileUrl: "https://www.tmu.ac.in/nss-coordinator-desk",
@@ -309,19 +309,19 @@ export default function Editors() {
 
     return (
         <MainLayout>
-            <Seo 
-                title="Executive Editors" 
+            <Seo
+                title="Executive Editors"
                 description="The supreme academic leadership and founding editors guiding the multidisciplinary vision of Sanmati Journal."
             />
-            
-            <PageHeader 
+
+            <PageHeader
                 title="Executive Editors"
                 breadcrumb="Leadership"
                 subtitle="The architects of our empirical standards and global scholarly narrative."
             />
 
             <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-24 relative">
-                
+
                 <div className="flex flex-col items-center text-center mb-12 lg:mb-24">
                     <motion.div {...fadeInUp} className="flex items-center gap-4 mb-6">
                         <span className="h-px w-10 bg-secondary" />

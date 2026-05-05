@@ -46,7 +46,7 @@
     "name": "vendor"
   },
   "resources/css/app.css": {
-    "file": "assets/app-D7l876dD.css",
+    "file": "assets/app-CsO7JTY0.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -392,7 +392,7 @@
     ]
   },
   "resources/js/Pages/Editors.jsx": {
-    "file": "assets/Editors-CE8OPD4W.js",
+    "file": "assets/Editors-BqGkgD2T.js",
     "name": "Editors",
     "src": "resources/js/Pages/Editors.jsx",
     "isDynamicEntry": true,
@@ -446,7 +446,7 @@
     ]
   },
   "resources/js/Pages/Home.jsx": {
-    "file": "assets/Home-D5Q7t0uY.js",
+    "file": "assets/Home-GFVddT33.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.jsx",
     "isDynamicEntry": true,
@@ -459,7 +459,7 @@
       "resources/js/Components/Hero.jsx"
     ],
     "css": [
-      "assets/app-D7l876dD.css"
+      "assets/app-CsO7JTY0.css"
     ]
   },
   "resources/js/Pages/PublicationPolicy/Ethics.jsx": {
@@ -603,7 +603,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-CFxOLric.js",
+    "file": "assets/app-BB2bcesa.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
@@ -662,7 +662,7 @@
       "resources/js/Pages/TrackManuscript.jsx"
     ],
     "css": [
-      "assets/app-D7l876dD.css"
+      "assets/app-CsO7JTY0.css"
     ]
   }
 }
