@@ -68,117 +68,110 @@ export default function NewsletterSection() {
     };
 
     return (
-        <section className="py-20 bg-gradient-to-br from-[#0a0f2e] via-primary-dark to-primary relative overflow-hidden">
+        <section className="py-12 bg-gradient-to-br from-[#0a0f2e] via-primary-dark to-primary relative overflow-hidden">
             <div className="absolute inset-0 opacity-10"
                 style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.08) 1px, transparent 0)', backgroundSize: '36px 36px' }} />
             <div className="absolute -top-40 left-0 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-[120px]" />
-            <div className="absolute -bottom-40 right-0 w-[500px] h-[500px] bg-[#F87A53]/8 rounded-full blur-[120px]" />
-
+            
             <div className="container-custom relative z-10">
-                <div className="max-w-5xl mx-auto">
+                <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12">
                     {/* Header */}
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.7 }}
-                        className="text-center mb-14"
+                        className="lg:w-1/2 text-center lg:text-left"
                     >
-                        <div className="inline-flex items-center gap-2 px-5 py-2 bg-white/10 border border-white/20 rounded-full mb-6">
-                            <Mail className="w-3.5 h-3.5 text-secondary" />
-                            <span className="text-secondary font-black text-[11px] uppercase tracking-[0.35em]">Academic Newsletter</span>
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 border border-white/20 rounded-full mb-6">
+                            <Mail className="w-3 h-3 text-secondary" />
+                            <span className="text-secondary font-black text-[9px] uppercase tracking-[0.35em]">Academic Newsletter</span>
                         </div>
-                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-white mb-4 leading-tight">
-                            Stay at the Forefront of <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-[#F87A53]">Scholarly Research</span>
+                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-white mb-4 leading-tight">
+                            Stay Updated with <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-[#F87A53]">Latest Research</span>
                         </h2>
-                        <p className="text-white/50 text-lg font-medium max-w-2xl mx-auto">
-                            Subscribe to receive Call for Papers alerts, new book releases, and academic event announcements directly to your inbox.
+                        <p className="text-white/50 text-sm font-medium max-w-xl">
+                            Receive Call for Papers alerts, book releases, and academic news directly in your inbox.
                         </p>
+                        
+                        <div className="flex flex-wrap justify-center lg:justify-start gap-4 mt-8">
+                            {[
+                                { icon: Users, label: '2,000+ Subs' },
+                                { icon: BookOpen, label: 'Monthly Digest' },
+                            ].map((item, i) => (
+                                <div key={i} className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-4 py-2">
+                                    <item.icon className="w-3.5 h-3.5 text-secondary" />
+                                    <span className="text-white/60 text-[11px] font-bold uppercase tracking-wider">{item.label}</span>
+                                </div>
+                            ))}
+                        </div>
                     </motion.div>
 
-                    {/* Stat Pills */}
+                    {/* Form Container */}
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.7, delay: 0.1 }}
-                        className="flex flex-wrap justify-center gap-6 mb-12"
-                    >
-                        {[
-                            { icon: Users, label: '2,000+ Subscribers' },
-                            { icon: BookOpen, label: 'Monthly Digest' },
-                            { icon: Globe, label: 'Across India & Abroad' },
-                        ].map((item, i) => (
-                            <div key={i} className="flex items-center gap-3 bg-white/8 border border-white/10 rounded-2xl px-6 py-3">
-                                <item.icon className="w-4 h-4 text-secondary" />
-                                <span className="text-white/70 text-sm font-bold">{item.label}</span>
-                            </div>
-                        ))}
-                    </motion.div>
-
-                    {/* Form */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.7, delay: 0.2 }}
+                        className="lg:w-1/2 w-full"
                     >
-                        <form onSubmit={handleSubmit} className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-8 md:p-12">
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                                <input
-                                    type="text"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    placeholder="Your Name (optional)"
-                                    className="px-6 py-4 bg-white/10 border border-white/15 rounded-2xl text-white placeholder-white/40 focus:outline-none focus:border-secondary/60 focus:bg-white/15 transition-all font-medium text-sm"
-                                />
-                                <input
-                                    type="email"
-                                    value={email}
-                                    onChange={(e) => { setEmail(e.target.value); if (status !== 'idle') setStatus('idle'); }}
-                                    placeholder="Enter your email address *"
-                                    required
-                                    className="px-6 py-4 bg-white/10 border border-white/15 rounded-2xl text-white placeholder-white/40 focus:outline-none focus:border-secondary/60 focus:bg-white/15 transition-all font-medium text-sm"
-                                />
+                        <form onSubmit={handleSubmit} className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-8">
+                            <div className="flex flex-col gap-3">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <input
+                                        type="text"
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                        placeholder="Name (Optional)"
+                                        className="px-5 py-3.5 bg-white/10 border border-white/15 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-secondary/60 focus:bg-white/15 transition-all font-medium text-xs"
+                                    />
+                                    <input
+                                        type="email"
+                                        value={email}
+                                        onChange={(e) => { setEmail(e.target.value); if (status !== 'idle') setStatus('idle'); }}
+                                        placeholder="Email Address *"
+                                        required
+                                        className="px-5 py-3.5 bg-white/10 border border-white/15 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-secondary/60 focus:bg-white/15 transition-all font-medium text-xs"
+                                    />
+                                </div>
                                 <button
                                     type="submit"
                                     disabled={status === 'loading' || status === 'success'}
-                                    className="flex items-center justify-center gap-3 px-8 py-4 bg-secondary text-white rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-secondary-light transition-all hover:-translate-y-0.5 hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed"
+                                    className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-secondary text-white rounded-xl font-black text-[11px] uppercase tracking-widest hover:bg-secondary-light transition-all hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed"
                                 >
                                     {status === 'loading' ? (
-                                        <><Loader2 className="w-5 h-5 animate-spin" /> Subscribing...</>
+                                        <><Loader2 className="w-4 h-4 animate-spin" /> Subscribing...</>
                                     ) : status === 'success' ? (
-                                        <><CheckCircle className="w-5 h-5" /> Subscribed!</>
+                                        <><CheckCircle className="w-4 h-4" /> Subscribed!</>
                                     ) : (
-                                        <><Send className="w-4 h-4" /> Subscribe</>
+                                        <><Send className="w-3.5 h-3.5" /> Join Newsletter</>
                                     )}
                                 </button>
                             </div>
 
-                            {/* Status Messages */}
                             <AnimatePresence>
                                 {message && (
                                     <motion.div
-                                        initial={{ opacity: 0, y: -10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0 }}
-                                        className={`flex items-center gap-3 mt-4 p-4 rounded-2xl text-sm font-bold ${
+                                        initial={{ opacity: 0, height: 0 }}
+                                        animate={{ opacity: 1, height: 'auto' }}
+                                        exit={{ opacity: 0, height: 0 }}
+                                        className={`flex items-center gap-3 mt-4 p-3 rounded-xl text-[11px] font-bold ${
                                             status === 'success'
-                                                ? 'bg-green-500/15 border border-green-500/30 text-green-400'
-                                                : 'bg-red-500/15 border border-red-500/30 text-red-400'
+                                                ? 'bg-green-500/10 border border-green-500/20 text-green-400'
+                                                : 'bg-red-500/10 border border-red-500/20 text-red-400'
                                         }`}
                                     >
                                         {status === 'success'
-                                            ? <CheckCircle className="w-5 h-5 flex-shrink-0" />
-                                            : <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                                            ? <CheckCircle className="w-4 h-4 flex-shrink-0" />
+                                            : <AlertCircle className="w-4 h-4 flex-shrink-0" />
                                         }
                                         {message}
                                     </motion.div>
                                 )}
                             </AnimatePresence>
-
-                            <p className="text-white/30 text-center text-[11px] mt-6 font-medium">
-                                No spam, ever. Unsubscribe anytime. Your email is safe with us.
+                            
+                            <p className="text-white/20 text-center text-[10px] mt-4 font-medium uppercase tracking-widest">
+                                Secure Academic Gateway • Encrypted Subscriptions
                             </p>
                         </form>
                     </motion.div>
@@ -187,3 +180,4 @@ export default function NewsletterSection() {
         </section>
     );
 }
+

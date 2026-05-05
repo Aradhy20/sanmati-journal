@@ -3,7 +3,7 @@ import React, { useState, Suspense } from "react";
 import { M as MainLayout } from "./MainLayout-0sRvoMTm.js";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "@inertiajs/react";
-import { Mail, Users, BookOpen, Globe, Loader2, CheckCircle, Send, AlertCircle, Quote, Award, ChevronRight, ArrowRight, Search, Star, ArrowUpRight, Trophy, Microscope, Palette, Calculator, Scale, GraduationCap, Cpu, Lightbulb, FileText, Feather, Zap, Package, UploadCloud, FileCheck, RefreshCw } from "lucide-react";
+import { Mail, Users, BookOpen, Loader2, CheckCircle, Send, AlertCircle, Globe, Quote, Award, ChevronRight, ArrowRight, Search, Star, ArrowUpRight, Trophy, Microscope, Palette, Calculator, Scale, GraduationCap, Cpu, Lightbulb, FileText, Feather, Zap, Package, UploadCloud, FileCheck, RefreshCw } from "lucide-react";
 import toast from "react-hot-toast";
 import confetti from "canvas-confetti";
 function NewsletterSection() {
@@ -58,7 +58,7 @@ function NewsletterSection() {
       toast.error("Network error. Please check your connection.");
     }
   };
-  return /* @__PURE__ */ jsxs("section", { className: "py-20 bg-gradient-to-br from-[#0a0f2e] via-primary-dark to-primary relative overflow-hidden", children: [
+  return /* @__PURE__ */ jsxs("section", { className: "py-12 bg-gradient-to-br from-[#0a0f2e] via-primary-dark to-primary relative overflow-hidden", children: [
     /* @__PURE__ */ jsx(
       "div",
       {
@@ -67,95 +67,86 @@ function NewsletterSection() {
       }
     ),
     /* @__PURE__ */ jsx("div", { className: "absolute -top-40 left-0 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-[120px]" }),
-    /* @__PURE__ */ jsx("div", { className: "absolute -bottom-40 right-0 w-[500px] h-[500px] bg-[#F87A53]/8 rounded-full blur-[120px]" }),
-    /* @__PURE__ */ jsx("div", { className: "container-custom relative z-10", children: /* @__PURE__ */ jsxs("div", { className: "max-w-5xl mx-auto", children: [
+    /* @__PURE__ */ jsx("div", { className: "container-custom relative z-10", children: /* @__PURE__ */ jsxs("div", { className: "max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12", children: [
       /* @__PURE__ */ jsxs(
         motion.div,
         {
-          initial: { opacity: 0, y: 20 },
-          whileInView: { opacity: 1, y: 0 },
+          initial: { opacity: 0, x: -20 },
+          whileInView: { opacity: 1, x: 0 },
           viewport: { once: true },
           transition: { duration: 0.7 },
-          className: "text-center mb-14",
+          className: "lg:w-1/2 text-center lg:text-left",
           children: [
-            /* @__PURE__ */ jsxs("div", { className: "inline-flex items-center gap-2 px-5 py-2 bg-white/10 border border-white/20 rounded-full mb-6", children: [
-              /* @__PURE__ */ jsx(Mail, { className: "w-3.5 h-3.5 text-secondary" }),
-              /* @__PURE__ */ jsx("span", { className: "text-secondary font-black text-[11px] uppercase tracking-[0.35em]", children: "Academic Newsletter" })
+            /* @__PURE__ */ jsxs("div", { className: "inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 border border-white/20 rounded-full mb-6", children: [
+              /* @__PURE__ */ jsx(Mail, { className: "w-3 h-3 text-secondary" }),
+              /* @__PURE__ */ jsx("span", { className: "text-secondary font-black text-[9px] uppercase tracking-[0.35em]", children: "Academic Newsletter" })
             ] }),
-            /* @__PURE__ */ jsxs("h2", { className: "text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-white mb-4 leading-tight", children: [
-              "Stay at the Forefront of ",
-              /* @__PURE__ */ jsx("span", { className: "text-transparent bg-clip-text bg-gradient-to-r from-secondary to-[#F87A53]", children: "Scholarly Research" })
+            /* @__PURE__ */ jsxs("h2", { className: "text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-white mb-4 leading-tight", children: [
+              "Stay Updated with ",
+              /* @__PURE__ */ jsx("span", { className: "text-transparent bg-clip-text bg-gradient-to-r from-secondary to-[#F87A53]", children: "Latest Research" })
             ] }),
-            /* @__PURE__ */ jsx("p", { className: "text-white/50 text-lg font-medium max-w-2xl mx-auto", children: "Subscribe to receive Call for Papers alerts, new book releases, and academic event announcements directly to your inbox." })
+            /* @__PURE__ */ jsx("p", { className: "text-white/50 text-sm font-medium max-w-xl", children: "Receive Call for Papers alerts, book releases, and academic news directly in your inbox." }),
+            /* @__PURE__ */ jsx("div", { className: "flex flex-wrap justify-center lg:justify-start gap-4 mt-8", children: [
+              { icon: Users, label: "2,000+ Subs" },
+              { icon: BookOpen, label: "Monthly Digest" }
+            ].map((item, i) => /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-4 py-2", children: [
+              /* @__PURE__ */ jsx(item.icon, { className: "w-3.5 h-3.5 text-secondary" }),
+              /* @__PURE__ */ jsx("span", { className: "text-white/60 text-[11px] font-bold uppercase tracking-wider", children: item.label })
+            ] }, i)) })
           ]
         }
       ),
       /* @__PURE__ */ jsx(
         motion.div,
         {
-          initial: { opacity: 0, y: 20 },
-          whileInView: { opacity: 1, y: 0 },
-          viewport: { once: true },
-          transition: { duration: 0.7, delay: 0.1 },
-          className: "flex flex-wrap justify-center gap-6 mb-12",
-          children: [
-            { icon: Users, label: "2,000+ Subscribers" },
-            { icon: BookOpen, label: "Monthly Digest" },
-            { icon: Globe, label: "Across India & Abroad" }
-          ].map((item, i) => /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-3 bg-white/8 border border-white/10 rounded-2xl px-6 py-3", children: [
-            /* @__PURE__ */ jsx(item.icon, { className: "w-4 h-4 text-secondary" }),
-            /* @__PURE__ */ jsx("span", { className: "text-white/70 text-sm font-bold", children: item.label })
-          ] }, i))
-        }
-      ),
-      /* @__PURE__ */ jsx(
-        motion.div,
-        {
-          initial: { opacity: 0, y: 30 },
-          whileInView: { opacity: 1, y: 0 },
+          initial: { opacity: 0, x: 20 },
+          whileInView: { opacity: 1, x: 0 },
           viewport: { once: true },
           transition: { duration: 0.7, delay: 0.2 },
-          children: /* @__PURE__ */ jsxs("form", { onSubmit: handleSubmit, className: "bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-8 md:p-12", children: [
-            /* @__PURE__ */ jsxs("div", { className: "grid grid-cols-1 md:grid-cols-3 gap-4 mb-4", children: [
-              /* @__PURE__ */ jsx(
-                "input",
-                {
-                  type: "text",
-                  value: name,
-                  onChange: (e) => setName(e.target.value),
-                  placeholder: "Your Name (optional)",
-                  className: "px-6 py-4 bg-white/10 border border-white/15 rounded-2xl text-white placeholder-white/40 focus:outline-none focus:border-secondary/60 focus:bg-white/15 transition-all font-medium text-sm"
-                }
-              ),
-              /* @__PURE__ */ jsx(
-                "input",
-                {
-                  type: "email",
-                  value: email,
-                  onChange: (e) => {
-                    setEmail(e.target.value);
-                    if (status !== "idle") setStatus("idle");
-                  },
-                  placeholder: "Enter your email address *",
-                  required: true,
-                  className: "px-6 py-4 bg-white/10 border border-white/15 rounded-2xl text-white placeholder-white/40 focus:outline-none focus:border-secondary/60 focus:bg-white/15 transition-all font-medium text-sm"
-                }
-              ),
+          className: "lg:w-1/2 w-full",
+          children: /* @__PURE__ */ jsxs("form", { onSubmit: handleSubmit, className: "bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-8", children: [
+            /* @__PURE__ */ jsxs("div", { className: "flex flex-col gap-3", children: [
+              /* @__PURE__ */ jsxs("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-3", children: [
+                /* @__PURE__ */ jsx(
+                  "input",
+                  {
+                    type: "text",
+                    value: name,
+                    onChange: (e) => setName(e.target.value),
+                    placeholder: "Name (Optional)",
+                    className: "px-5 py-3.5 bg-white/10 border border-white/15 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-secondary/60 focus:bg-white/15 transition-all font-medium text-xs"
+                  }
+                ),
+                /* @__PURE__ */ jsx(
+                  "input",
+                  {
+                    type: "email",
+                    value: email,
+                    onChange: (e) => {
+                      setEmail(e.target.value);
+                      if (status !== "idle") setStatus("idle");
+                    },
+                    placeholder: "Email Address *",
+                    required: true,
+                    className: "px-5 py-3.5 bg-white/10 border border-white/15 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-secondary/60 focus:bg-white/15 transition-all font-medium text-xs"
+                  }
+                )
+              ] }),
               /* @__PURE__ */ jsx(
                 "button",
                 {
                   type: "submit",
                   disabled: status === "loading" || status === "success",
-                  className: "flex items-center justify-center gap-3 px-8 py-4 bg-secondary text-white rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-secondary-light transition-all hover:-translate-y-0.5 hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed",
+                  className: "w-full flex items-center justify-center gap-3 px-8 py-4 bg-secondary text-white rounded-xl font-black text-[11px] uppercase tracking-widest hover:bg-secondary-light transition-all hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed",
                   children: status === "loading" ? /* @__PURE__ */ jsxs(Fragment, { children: [
-                    /* @__PURE__ */ jsx(Loader2, { className: "w-5 h-5 animate-spin" }),
+                    /* @__PURE__ */ jsx(Loader2, { className: "w-4 h-4 animate-spin" }),
                     " Subscribing..."
                   ] }) : status === "success" ? /* @__PURE__ */ jsxs(Fragment, { children: [
-                    /* @__PURE__ */ jsx(CheckCircle, { className: "w-5 h-5" }),
+                    /* @__PURE__ */ jsx(CheckCircle, { className: "w-4 h-4" }),
                     " Subscribed!"
                   ] }) : /* @__PURE__ */ jsxs(Fragment, { children: [
-                    /* @__PURE__ */ jsx(Send, { className: "w-4 h-4" }),
-                    " Subscribe"
+                    /* @__PURE__ */ jsx(Send, { className: "w-3.5 h-3.5" }),
+                    " Join Newsletter"
                   ] })
                 }
               )
@@ -163,17 +154,17 @@ function NewsletterSection() {
             /* @__PURE__ */ jsx(AnimatePresence, { children: message && /* @__PURE__ */ jsxs(
               motion.div,
               {
-                initial: { opacity: 0, y: -10 },
-                animate: { opacity: 1, y: 0 },
-                exit: { opacity: 0 },
-                className: `flex items-center gap-3 mt-4 p-4 rounded-2xl text-sm font-bold ${status === "success" ? "bg-green-500/15 border border-green-500/30 text-green-400" : "bg-red-500/15 border border-red-500/30 text-red-400"}`,
+                initial: { opacity: 0, height: 0 },
+                animate: { opacity: 1, height: "auto" },
+                exit: { opacity: 0, height: 0 },
+                className: `flex items-center gap-3 mt-4 p-3 rounded-xl text-[11px] font-bold ${status === "success" ? "bg-green-500/10 border border-green-500/20 text-green-400" : "bg-red-500/10 border border-red-500/20 text-red-400"}`,
                 children: [
-                  status === "success" ? /* @__PURE__ */ jsx(CheckCircle, { className: "w-5 h-5 flex-shrink-0" }) : /* @__PURE__ */ jsx(AlertCircle, { className: "w-5 h-5 flex-shrink-0" }),
+                  status === "success" ? /* @__PURE__ */ jsx(CheckCircle, { className: "w-4 h-4 flex-shrink-0" }) : /* @__PURE__ */ jsx(AlertCircle, { className: "w-4 h-4 flex-shrink-0" }),
                   message
                 ]
               }
             ) }),
-            /* @__PURE__ */ jsx("p", { className: "text-white/30 text-center text-[11px] mt-6 font-medium", children: "No spam, ever. Unsubscribe anytime. Your email is safe with us." })
+            /* @__PURE__ */ jsx("p", { className: "text-white/20 text-center text-[10px] mt-4 font-medium uppercase tracking-widest", children: "Secure Academic Gateway • Encrypted Subscriptions" })
           ] })
         }
       )
@@ -678,24 +669,23 @@ function Home() {
           ] })
         ] }),
         /* @__PURE__ */ jsx(NewsletterSection, {}),
-        /* @__PURE__ */ jsx("section", { className: "py-12 lg:py-24", children: /* @__PURE__ */ jsx("div", { className: "container-custom", children: /* @__PURE__ */ jsxs("div", { className: "relative rounded-3xl bg-gradient-to-br from-primary via-primary-dark to-[#0a0f2e] p-14 lg:p-24 overflow-hidden text-center shadow-[0_50px_100px_rgba(79,119,255,0.25)]", children: [
+        /* @__PURE__ */ jsx("section", { className: "py-12 lg:py-16", children: /* @__PURE__ */ jsx("div", { className: "container-custom", children: /* @__PURE__ */ jsxs("div", { className: "relative rounded-[2rem] bg-gradient-to-br from-primary via-primary-dark to-[#0a0f2e] p-10 lg:p-16 overflow-hidden text-center shadow-2xl", children: [
           /* @__PURE__ */ jsx("div", { className: "absolute inset-0 opacity-10", style: { backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0)", backgroundSize: "40px 40px" } }),
           /* @__PURE__ */ jsx("div", { className: "absolute -top-20 -right-20 w-80 h-80 bg-secondary/15 rounded-full blur-[100px]" }),
-          /* @__PURE__ */ jsx("div", { className: "absolute -bottom-20 -left-20 w-80 h-80 bg-coral/10 rounded-full blur-[100px]" }),
           /* @__PURE__ */ jsxs("div", { className: "relative z-10 max-w-4xl mx-auto", children: [
-            /* @__PURE__ */ jsx("span", { className: "inline-block px-5 py-2 bg-white/8 border border-white/15 rounded-full text-[10px] text-secondary font-black tracking-[0.3em] uppercase mb-8", children: "Ready for Publication" }),
-            /* @__PURE__ */ jsxs("h2", { className: "text-3xl md:text-4xl lg:text-5xl lg:text-7xl font-serif font-bold text-white mb-10 leading-[1.1] tracking-tight", children: [
+            /* @__PURE__ */ jsx("span", { className: "inline-block px-4 py-1.5 bg-white/10 border border-white/15 rounded-full text-[9px] text-secondary font-black tracking-[0.3em] uppercase mb-6", children: "Ready for Publication" }),
+            /* @__PURE__ */ jsxs("h2", { className: "text-2xl md:text-3xl lg:text-5xl font-serif font-bold text-white mb-6 leading-tight tracking-tight", children: [
               "Shaping the Future of ",
               /* @__PURE__ */ jsx("span", { className: "text-transparent bg-clip-text bg-gradient-to-r from-secondary to-secondary-light", children: "Global Research" })
             ] }),
-            /* @__PURE__ */ jsx("p", { className: "text-white/45 text-xl font-medium mb-12 max-w-2xl mx-auto leading-relaxed", children: "Join our community of scholars and authors. Submit your manuscript or explore our latest book releases." }),
-            /* @__PURE__ */ jsxs("div", { className: "flex flex-col sm:flex-row gap-6 justify-center items-center", children: [
-              /* @__PURE__ */ jsxs(Link, { href: "/submission-guidelines/call-for-papers", className: "group px-12 py-6 bg-secondary text-white rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-white hover:text-dark transition-all flex items-center gap-3 shadow-2xl", children: [
+            /* @__PURE__ */ jsx("p", { className: "text-white/40 text-sm font-medium mb-8 max-w-xl mx-auto leading-relaxed", children: "Join our community of scholars and authors. Submit your manuscript or explore our latest book releases." }),
+            /* @__PURE__ */ jsxs("div", { className: "flex flex-col sm:flex-row gap-4 justify-center items-center", children: [
+              /* @__PURE__ */ jsxs(Link, { href: "/submission-guidelines/call-for-papers", className: "group px-8 py-4 bg-secondary text-white rounded-xl font-black uppercase tracking-widest text-[10px] hover:bg-white hover:text-dark transition-all flex items-center gap-3 shadow-xl", children: [
                 "Submit Manuscript ",
-                /* @__PURE__ */ jsx(ArrowUpRight, { className: "w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" })
+                /* @__PURE__ */ jsx(ArrowUpRight, { className: "w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" })
               ] }),
-              /* @__PURE__ */ jsxs(Link, { href: "/book-publication", className: "px-12 py-6 border border-white/15 text-white rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-white/8 transition-all flex items-center gap-3", children: [
-                /* @__PURE__ */ jsx(BookOpen, { className: "w-4 h-4" }),
+              /* @__PURE__ */ jsxs(Link, { href: "/book-publication", className: "px-8 py-4 border border-white/15 text-white rounded-xl font-black uppercase tracking-widest text-[10px] hover:bg-white/10 transition-all flex items-center gap-3", children: [
+                /* @__PURE__ */ jsx(BookOpen, { className: "w-3.5 h-3.5" }),
                 " Browse Publications"
               ] })
             ] })

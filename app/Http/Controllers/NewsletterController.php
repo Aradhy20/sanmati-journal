@@ -10,7 +10,7 @@ class NewsletterController extends Controller
     public function subscribe(Request $request)
     {
         $validated = $request->validate([
-            'email' => ['required', 'email:rfc,dns'],
+            'email' => ['required', 'email'],
             'name'  => ['nullable', 'string', 'max:100'],
         ]);
 

@@ -579,27 +579,26 @@ export default function Home() {
             <NewsletterSection />
 
             {/* ─── INVITATION (CTA) ─── */}
-            <section className="py-12 lg:py-24">
+            <section className="py-12 lg:py-16">
                 <div className="container-custom">
-                    <div className="relative rounded-3xl bg-gradient-to-br from-primary via-primary-dark to-[#0a0f2e] p-14 lg:p-24 overflow-hidden text-center shadow-[0_50px_100px_rgba(79,119,255,0.25)]">
+                    <div className="relative rounded-[2rem] bg-gradient-to-br from-primary via-primary-dark to-[#0a0f2e] p-10 lg:p-16 overflow-hidden text-center shadow-2xl">
                         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0)', backgroundSize: '40px 40px' }} />
                         <div className="absolute -top-20 -right-20 w-80 h-80 bg-secondary/15 rounded-full blur-[100px]" />
-                        <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-coral/10 rounded-full blur-[100px]" />
-
+                        
                         <div className="relative z-10 max-w-4xl mx-auto">
-                            <span className="inline-block px-5 py-2 bg-white/8 border border-white/15 rounded-full text-[10px] text-secondary font-black tracking-[0.3em] uppercase mb-8">Ready for Publication</span>
-                            <h2 className="text-3xl md:text-4xl lg:text-5xl lg:text-7xl font-serif font-bold text-white mb-10 leading-[1.1] tracking-tight">
+                            <span className="inline-block px-4 py-1.5 bg-white/10 border border-white/15 rounded-full text-[9px] text-secondary font-black tracking-[0.3em] uppercase mb-6">Ready for Publication</span>
+                            <h2 className="text-2xl md:text-3xl lg:text-5xl font-serif font-bold text-white mb-6 leading-tight tracking-tight">
                                 Shaping the Future of <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-secondary-light">Global Research</span>
                             </h2>
-                            <p className="text-white/45 text-xl font-medium mb-12 max-w-2xl mx-auto leading-relaxed">
+                            <p className="text-white/40 text-sm font-medium mb-8 max-w-xl mx-auto leading-relaxed">
                                 Join our community of scholars and authors. Submit your manuscript or explore our latest book releases.
                             </p>
-                            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                                <Link href="/submission-guidelines/call-for-papers" className="group px-12 py-6 bg-secondary text-white rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-white hover:text-dark transition-all flex items-center gap-3 shadow-2xl">
-                                    Submit Manuscript <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                                <Link href="/submission-guidelines/call-for-papers" className="group px-8 py-4 bg-secondary text-white rounded-xl font-black uppercase tracking-widest text-[10px] hover:bg-white hover:text-dark transition-all flex items-center gap-3 shadow-xl">
+                                    Submit Manuscript <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                                 </Link>
-                                <Link href="/book-publication" className="px-12 py-6 border border-white/15 text-white rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-white/8 transition-all flex items-center gap-3">
-                                    <BookOpen className="w-4 h-4" /> Browse Publications
+                                <Link href="/book-publication" className="px-8 py-4 border border-white/15 text-white rounded-xl font-black uppercase tracking-widest text-[10px] hover:bg-white/10 transition-all flex items-center gap-3">
+                                    <BookOpen className="w-3.5 h-3.5" /> Browse Publications
                                 </Link>
                             </div>
                         </div>
