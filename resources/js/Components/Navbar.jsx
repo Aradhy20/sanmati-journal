@@ -98,7 +98,7 @@ const Navbar = ({ onOpenSearch }) => {
             ],
         },
         {
-            name: 'Editorial Team',
+            name: 'Editorial',
             href: '#',
             dropdown: [
                 { name: 'Editor', href: '/editorial-team/editors' },
@@ -108,7 +108,7 @@ const Navbar = ({ onOpenSearch }) => {
             ],
         },
         {
-            name: 'For Authors',
+            name: 'Authors',
             href: '#',
             dropdown: [
                 { name: 'Submission Guidelines', href: '/submission-guidelines' },
@@ -120,11 +120,11 @@ const Navbar = ({ onOpenSearch }) => {
                 { name: 'Peer Review Process', href: '/publication-policy/peer-review' },
             ],
         },
-        { name: 'Journal Insights', href: '/archive' },
-        { name: 'The Foundation', href: '/about-foundation' },
+        { name: 'Archive', href: '/archive' },
+        { name: 'Foundation', href: '/about-foundation' },
         { name: 'Books', href: '/book-publication' },
         {
-            name: 'Events & News',
+            name: 'Events',
             href: '#',
             dropdown: [
                 { name: 'Seminars', href: '/academic-events/seminar' },
