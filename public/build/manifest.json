@@ -46,12 +46,12 @@
     "name": "vendor"
   },
   "resources/css/app.css": {
-    "file": "assets/app-CrgZHGOB.css",
+    "file": "assets/app-BNM-U_Gz.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/Components/Hero.jsx": {
-    "file": "assets/Hero-C5_qA4y0.js",
+    "file": "assets/Hero-ZorSuUGP.js",
     "name": "Hero",
     "src": "resources/js/Components/Hero.jsx",
     "isDynamicEntry": true,
@@ -457,7 +457,7 @@
     ]
   },
   "resources/js/Pages/Home.jsx": {
-    "file": "assets/Home-B7d-DdAI.js",
+    "file": "assets/Home-CM38-QpV.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.jsx",
     "isDynamicEntry": true,
@@ -470,7 +470,7 @@
       "resources/js/Components/Hero.jsx"
     ],
     "css": [
-      "assets/app-CrgZHGOB.css"
+      "assets/app-BNM-U_Gz.css"
     ]
   },
   "resources/js/Pages/PublicationPolicy/Ethics.jsx": {
@@ -614,7 +614,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-608FaEvZ.js",
+    "file": "assets/app-Btok_Gwg.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
@@ -674,7 +674,7 @@
       "resources/js/Pages/TrackManuscript.jsx"
     ],
     "css": [
-      "assets/app-CrgZHGOB.css"
+      "assets/app-BNM-U_Gz.css"
     ]
   }
 }

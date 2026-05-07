@@ -71,7 +71,7 @@ export default function NewsletterSection() {
         <section className="py-12 relative overflow-hidden bg-[#0a0f2e]">
             {/* Background Image */}
             <div 
-                className="absolute inset-0 z-0 mix-blend-screen opacity-40"
+                className="absolute inset-0 z-0 opacity-60 mix-blend-screen"
                 style={{ 
                     backgroundImage: 'url(/images/newsletter-bg.png)', 
                     backgroundSize: 'cover', 
@@ -81,11 +81,11 @@ export default function NewsletterSection() {
             />
             
             {/* Gradient Overlay */}
-            <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#0a0f2e]/90 via-primary-dark/80 to-primary/90 mix-blend-multiply" />
+            <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#0a0f2e]/80 via-[#10245E]/70 to-[#273295]/80 mix-blend-multiply" />
 
             <div className="absolute inset-0 z-0 opacity-10"
                 style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.08) 1px, transparent 0)', backgroundSize: '36px 36px' }} />
-            <div className="absolute -top-40 left-0 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-[120px] z-0" />
+            <div className="absolute -top-40 left-0 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[120px] z-0" />
             
             <div className="container-custom relative z-10">
                 <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12">

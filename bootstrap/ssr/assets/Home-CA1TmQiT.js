@@ -62,7 +62,7 @@ function NewsletterSection() {
     /* @__PURE__ */ jsx(
       "div",
       {
-        className: "absolute inset-0 z-0 mix-blend-screen opacity-40",
+        className: "absolute inset-0 z-0 opacity-60 mix-blend-screen",
         style: {
           backgroundImage: "url(/images/newsletter-bg.png)",
           backgroundSize: "cover",
@@ -71,7 +71,7 @@ function NewsletterSection() {
         }
       }
     ),
-    /* @__PURE__ */ jsx("div", { className: "absolute inset-0 z-0 bg-gradient-to-br from-[#0a0f2e]/90 via-primary-dark/80 to-primary/90 mix-blend-multiply" }),
+    /* @__PURE__ */ jsx("div", { className: "absolute inset-0 z-0 bg-gradient-to-br from-[#0a0f2e]/80 via-[#10245E]/70 to-[#273295]/80 mix-blend-multiply" }),
     /* @__PURE__ */ jsx(
       "div",
       {
@@ -79,7 +79,7 @@ function NewsletterSection() {
         style: { backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.08) 1px, transparent 0)", backgroundSize: "36px 36px" }
       }
     ),
-    /* @__PURE__ */ jsx("div", { className: "absolute -top-40 left-0 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-[120px] z-0" }),
+    /* @__PURE__ */ jsx("div", { className: "absolute -top-40 left-0 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[120px] z-0" }),
     /* @__PURE__ */ jsx("div", { className: "container-custom relative z-10", children: /* @__PURE__ */ jsxs("div", { className: "max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12", children: [
       /* @__PURE__ */ jsxs(
         motion.div,
@@ -184,7 +184,7 @@ function NewsletterSection() {
     ] }) })
   ] });
 }
-const Hero = React.lazy(() => import("./Hero-DFaOlkNU.js"));
+const Hero = React.lazy(() => import("./Hero-ras8nzKx.js"));
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
@@ -540,11 +540,11 @@ function Home() {
             )
           ] })
         ] }),
-        /* @__PURE__ */ jsxs("section", { className: "py-10 lg:py-16 relative overflow-hidden bg-slate-900", children: [
+        /* @__PURE__ */ jsxs("section", { className: "py-10 lg:py-16 relative overflow-hidden bg-[#050B14]", children: [
           /* @__PURE__ */ jsx(
             "div",
             {
-              className: "absolute inset-0 z-0 mix-blend-overlay opacity-60",
+              className: "absolute inset-0 z-0 opacity-60 mix-blend-screen",
               style: {
                 backgroundImage: "url(/images/stats-bg.png)",
                 backgroundSize: "cover",
@@ -553,7 +553,7 @@ function Home() {
               }
             }
           ),
-          /* @__PURE__ */ jsx("div", { className: "absolute inset-0 z-0 bg-gradient-to-br from-primary/90 to-primary-dark/95" }),
+          /* @__PURE__ */ jsx("div", { className: "absolute inset-0 z-0 bg-gradient-to-br from-[#10245E]/80 to-[#1e1b4b]/80 mix-blend-multiply" }),
           /* @__PURE__ */ jsx("div", { className: "absolute inset-0 z-0 opacity-10", style: { backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.08) 1px, transparent 0)", backgroundSize: "40px 40px" } }),
           /* @__PURE__ */ jsx("div", { className: "container-custom relative z-10", children: /* @__PURE__ */ jsx("div", { className: "grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-12 text-center", children: [
             { icon: FileText, num: 500, label: "Papers Received", suffix: "+" },
