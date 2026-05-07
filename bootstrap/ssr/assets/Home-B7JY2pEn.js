@@ -423,12 +423,12 @@ function Home() {
               /* @__PURE__ */ jsx("h3", { className: "text-2xl md:text-3xl lg:text-4xl font-serif font-bold mb-6 tracking-tight group-hover:text-secondary-light transition-colors duration-300", children: "Dr Namrata Jain" }),
               /* @__PURE__ */ jsxs("div", { className: "space-y-6 mb-10 w-full", children: [
                 /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-center", children: [
-                  /* @__PURE__ */ jsx("p", { className: "text-secondary font-black text-[10px] uppercase tracking-[0.3em] mb-1", children: "President" }),
+                  /* @__PURE__ */ jsx("p", { className: "text-blue-200 font-black text-[10px] uppercase tracking-[0.3em] mb-1", children: "President" }),
                   /* @__PURE__ */ jsx("p", { className: "text-white font-bold text-[13px] uppercase tracking-wide", children: "Sanmati Education & Research Foundation Of India" })
                 ] }),
                 /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-center", children: [
-                  /* @__PURE__ */ jsx("p", { className: "text-secondary font-black text-[10px] uppercase tracking-[0.3em] mb-1", children: "Editor-in-Chief" }),
-                  /* @__PURE__ */ jsx("p", { className: "text-white/80 font-bold text-[11px] uppercase tracking-wide", children: "Sanmati Spectrum of Knowledge & Emerging Discourse" })
+                  /* @__PURE__ */ jsx("p", { className: "text-blue-200 font-black text-[10px] uppercase tracking-[0.3em] mb-1", children: "Editor-in-Chief" }),
+                  /* @__PURE__ */ jsx("p", { className: "text-white/90 font-bold text-[11px] uppercase tracking-wide", children: "Sanmati Spectrum of Knowledge & Emerging Discourse" })
                 ] })
               ] }),
               /* @__PURE__ */ jsxs("div", { className: "w-full bg-white/10 rounded-2xl p-4 mb-6 border border-white/10 text-xs", children: [

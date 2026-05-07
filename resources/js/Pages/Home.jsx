@@ -287,12 +287,12 @@ export default function Home() {
                                 
                                 <div className="space-y-6 mb-10 w-full">
                                     <div className="flex flex-col items-center">
-                                        <p className="text-secondary font-black text-[10px] uppercase tracking-[0.3em] mb-1">President</p>
+                                        <p className="text-blue-200 font-black text-[10px] uppercase tracking-[0.3em] mb-1">President</p>
                                         <p className="text-white font-bold text-[13px] uppercase tracking-wide">Sanmati Education & Research Foundation Of India</p>
                                     </div>
                                     <div className="flex flex-col items-center">
-                                        <p className="text-secondary font-black text-[10px] uppercase tracking-[0.3em] mb-1">Editor-in-Chief</p>
-                                        <p className="text-white/80 font-bold text-[11px] uppercase tracking-wide">Sanmati Spectrum of Knowledge & Emerging Discourse</p>
+                                        <p className="text-blue-200 font-black text-[10px] uppercase tracking-[0.3em] mb-1">Editor-in-Chief</p>
+                                        <p className="text-white/90 font-bold text-[11px] uppercase tracking-wide">Sanmati Spectrum of Knowledge & Emerging Discourse</p>
                                     </div>
                                 </div>
 
