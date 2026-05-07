@@ -349,30 +349,35 @@ export default function Home() {
                         variants={{ whileInView: { transition: { staggerChildren: 0.05 } } }}
                     >
                         {[
-                            { name: "Science & Technology", icon: Microscope, color: "bg-blue-50 text-blue-600", count: "15+" },
-                            { name: "Social Sciences", icon: Users, color: "bg-emerald-50 text-emerald-600", count: "12+" },
-                            { name: "Arts & Humanities", icon: Palette, color: "bg-purple-50 text-purple-600", count: "10+" },
-                            { name: "Commerce & Management", icon: Calculator, color: "bg-orange-50 text-orange-600", count: "8+" },
-                            { name: "Law & Governance", icon: Scale, color: "bg-red-50 text-red-600", count: "6+" },
-                            { name: "Education", icon: GraduationCap, color: "bg-cyan-50 text-cyan-600", count: "9+" },
-                            { name: "Computer Science", icon: Cpu, color: "bg-indigo-50 text-indigo-600", count: "11+" },
-                            { name: "Innovation Research", icon: Lightbulb, color: "bg-yellow-50 text-yellow-600", count: "7+" },
+                            { name: "Science & Technology", icon: Microscope, color: "bg-blue-50 text-blue-600", count: "15+", slug: "science-technology" },
+                            { name: "Social Sciences", icon: Users, color: "bg-emerald-50 text-emerald-600", count: "12+", slug: "social-sciences" },
+                            { name: "Arts & Humanities", icon: Palette, color: "bg-purple-50 text-purple-600", count: "10+", slug: "arts-humanities" },
+                            { name: "Commerce & Management", icon: Calculator, color: "bg-orange-50 text-orange-600", count: "8+", slug: "management-commerce" },
+                            { name: "Law & Governance", icon: Scale, color: "bg-red-50 text-red-600", count: "6+", slug: "law-governance" },
+                            { name: "Education", icon: GraduationCap, color: "bg-cyan-50 text-cyan-600", count: "9+", slug: "education" },
+                            { name: "Computer Science", icon: Cpu, color: "bg-indigo-50 text-indigo-600", count: "11+", slug: "science-technology" },
+                            { name: "Innovation Research", icon: Lightbulb, color: "bg-yellow-50 text-yellow-600", count: "7+", slug: "science-technology" },
                         ].map((cat, idx) => (
                             <motion.div
                                 key={idx}
                                 variants={{ initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 } }}
-                                className="h-full group p-8 rounded-2xl bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:border-primary/20 hover:shadow-[0_20px_40px_rgba(79,119,255,0.08)] transition-all duration-500 flex flex-col justify-between items-center text-center"
+                                className="h-full"
                             >
-                                <div className="flex flex-col items-center">
-                                    <div className={`w-20 h-20 rounded-xl ${cat.color} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-sm shrink-0`}>
-                                        <cat.icon className="w-9 h-9" />
+                                <Link 
+                                    href={`/submission-guidelines/areas/${cat.slug}`}
+                                    className="h-full group p-8 rounded-2xl bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:border-primary/20 hover:shadow-[0_20px_40px_rgba(79,119,255,0.08)] transition-all duration-500 flex flex-col justify-between items-center text-center block"
+                                >
+                                    <div className="flex flex-col items-center">
+                                        <div className={`w-20 h-20 rounded-xl ${cat.color} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-sm shrink-0`}>
+                                            <cat.icon className="w-9 h-9" />
+                                        </div>
+                                        <h3 className="font-bold text-dark text-base mb-2 px-2 group-hover:text-primary transition-colors tracking-tight leading-tight">{cat.name}</h3>
                                     </div>
-                                    <h3 className="font-bold text-dark text-base mb-2 px-2 group-hover:text-primary transition-colors tracking-tight leading-tight">{cat.name}</h3>
-                                </div>
-                                <div className="mt-auto pt-4 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-500">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
-                                    {cat.count} Publications
-                                </div>
+                                    <div className="mt-auto pt-4 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-500">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
+                                        {cat.count} Publications
+                                    </div>
+                                </Link>
                             </motion.div>
                         ))}
                     </motion.div>
