@@ -64,6 +64,11 @@ class JournalController extends Controller
         return Inertia::render('AboutJournal');
     }
 
+    public function aboutFoundation()
+    {
+        return Inertia::render('AboutFoundation');
+    }
+
     public function visionMission()
     {
         return Inertia::render('BasicInfo/VisionMission');

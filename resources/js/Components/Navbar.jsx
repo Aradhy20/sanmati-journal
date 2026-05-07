@@ -121,6 +121,7 @@ const Navbar = ({ onOpenSearch }) => {
             ],
         },
         { name: 'Journal Insights', href: '/archive' },
+        { name: 'The Foundation', href: '/about-foundation' },
         { name: 'Books', href: '/book-publication' },
         {
             name: 'Events & News',

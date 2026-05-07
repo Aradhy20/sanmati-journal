@@ -19,6 +19,7 @@ Route::get('/gallery-view', [JournalController::class, 'gallery'])->name('galler
 Route::get('/gallery/photo', [JournalController::class, 'galleryPhoto'])->name('gallery.photo');
 Route::get('/media-news', [JournalController::class, 'galleryNews'])->name('gallery.news');
 Route::get('/archive', [JournalController::class, 'archive'])->name('archive');
+Route::get('/about-foundation', [JournalController::class, 'aboutFoundation'])->name('about-foundation');
 Route::get('/article/{id}', [JournalController::class, 'article'])->name('article.show');
 Route::get('/download/paper/{id}', [\App\Http\Controllers\DownloadController::class, 'paper'])->name('paper.download');
 Route::get('/contact', [JournalController::class, 'contact'])->name('contact');
