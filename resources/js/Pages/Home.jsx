@@ -1,7 +1,7 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useState, useRef, useEffect } from 'react';
 import MainLayout from '../Layouts/MainLayout';
 const Hero = React.lazy(() => import('../Components/Hero'));
-import { motion } from 'framer-motion';
+import { motion, useInView, animate } from 'framer-motion';
 import { Link } from '@inertiajs/react';
 import {
     ArrowRight, BookOpen, Users, Globe, Award, FileText, Send, Star, Trophy,
@@ -17,6 +17,28 @@ const fadeInUp = {
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true, margin: "-100px" },
     transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
+};
+
+// Reusable Animated Counter
+const AnimatedCounter = ({ from, to, duration = 2 }) => {
+    const nodeRef = useRef();
+    const inView = useInView(nodeRef, { once: true });
+    
+    useEffect(() => {
+        if (!inView) return;
+        const node = nodeRef.current;
+        const controls = animate(from, to, {
+            duration,
+            onUpdate(value) {
+                if (node) {
+                    node.textContent = Math.round(value);
+                }
+            },
+        });
+        return () => controls.stop();
+    }, [from, to, duration, inView]);
+    
+    return <span ref={nodeRef}>{from}</span>;
 };
 
 export default function Home() {
@@ -390,10 +412,10 @@ export default function Home() {
                 <div className="container-custom relative z-10">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-12 text-center">
                         {[
-                            { icon: FileText, num: "500+", label: "Papers Received" },
-                            { icon: Users, num: "200+", label: "Global Scholars" },
-                            { icon: Award, num: "50+", label: "Expert Reviewers" },
-                            { icon: Globe, num: "25+", label: "Domain Disciplines" },
+                            { icon: FileText, num: 500, label: "Papers Received", suffix: "+" },
+                            { icon: Users, num: 200, label: "Global Scholars", suffix: "+" },
+                            { icon: Award, num: 50, label: "Expert Reviewers", suffix: "+" },
+                            { icon: Globe, num: 25, label: "Domain Disciplines", suffix: "+" },
                         ].map((stat, i) => (
                             <motion.div
                                 key={i}
@@ -406,7 +428,9 @@ export default function Home() {
                                 <div className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-4 md:mb-6 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center group-hover:bg-white/20 transition-all duration-500">
                                     <stat.icon className="w-6 h-6 md:w-8 md:h-8 text-white/80 group-hover:scale-110 transition-transform" />
                                 </div>
-                                <div className="text-2xl md:text-3xl lg:text-4xl font-black text-white mb-2 tracking-tighter">{stat.num}</div>
+                                <div className="text-2xl md:text-3xl lg:text-4xl font-black text-white mb-2 tracking-tighter">
+                                    <AnimatedCounter from={0} to={stat.num} duration={2} />{stat.suffix}
+                                </div>
                                 <p className="text-white/50 text-[10px] font-black uppercase tracking-[0.2em]">{stat.label}</p>
                             </motion.div>
                         ))}

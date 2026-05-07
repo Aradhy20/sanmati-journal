@@ -5,7 +5,7 @@ import Seo from '../Components/Seo';
 import CustomCursor from '../Components/CustomCursor';
 import Preloader from '../Components/Preloader';
 import { Toaster } from 'react-hot-toast';
-import { MessageCircle, FileText } from 'lucide-react';
+import { MessageCircle, FileText, ArrowUp } from 'lucide-react';
 import { Link } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 import SearchModal from '../Components/SearchModal';
@@ -13,11 +13,24 @@ import SearchModal from '../Components/SearchModal';
 export default function MainLayout({ children, title, description, keywords, jsonLd }) {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
 
+    const [isScrolled, setIsScrolled] = useState(false);
+
     useEffect(() => {
         const handleOpenSearch = () => setIsSearchOpen(true);
         window.addEventListener('open-search', handleOpenSearch);
-        return () => window.removeEventListener('open-search', handleOpenSearch);
+        
+        const handleScroll = () => setIsScrolled(window.scrollY > 300);
+        window.addEventListener('scroll', handleScroll);
+        
+        return () => {
+            window.removeEventListener('open-search', handleOpenSearch);
+            window.removeEventListener('scroll', handleScroll);
+        };
     }, []);
+
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
     return (
         <div className="min-h-screen flex flex-col bg-warm-bg font-sans antialiased relative overflow-x-hidden selection:bg-primary/10 selection:text-primary">
             <Seo title={title} description={description} keywords={keywords} jsonLd={jsonLd} />
@@ -72,6 +85,24 @@ export default function MainLayout({ children, title, description, keywords, jso
             >
                 <MessageCircle className="w-7 h-7" />
             </motion.a>
+
+            {/* Scroll to Top Button */}
+            <AnimatePresence>
+                {isScrolled && (
+                    <motion.button
+                        initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.8, y: 20 }}
+                        whileHover={{ scale: 1.1, translateY: -5 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={scrollToTop}
+                        className="fixed bottom-24 right-6 lg:bottom-28 lg:right-10 w-12 h-12 bg-dark text-white rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.2)] flex items-center justify-center z-[60] border border-white/20 focus:outline-none focus:ring-4 focus:ring-dark/50"
+                        aria-label="Scroll to top"
+                    >
+                        <ArrowUp className="w-6 h-6" />
+                    </motion.button>
+                )}
+            </AnimatePresence>
 
         </div>
     );

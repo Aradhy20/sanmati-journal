@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { FileText, Download, Calendar, Layers, Search, Archive as ArchiveIcon, Quote, BookOpen } from 'lucide-react';
 import { Link } from '@inertiajs/react';
@@ -53,8 +53,33 @@ export default function Archive({ issues }) {
         )
     ];
     const [citationPaper, setCitationPaper] = useState(null);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [sortBy, setSortBy] = useState('newest');
 
+    // Flatten all papers for the featured carousel (e.g., take the first 3)
+    const allPapers = useMemo(() => {
+        return issueList.flatMap(issue => issue.papers || []);
+    }, [issueList]);
     
+    const featuredPapers = allPapers.slice(0, 3);
+
+    // Filter and sort the issues based on search and sort
+    const filteredIssues = useMemo(() => {
+        let result = issueList.map(issue => {
+            if (!searchQuery) return issue;
+            const q = searchQuery.toLowerCase();
+            const filteredDocs = (issue.papers || []).filter(p => 
+                p.title?.toLowerCase().includes(q) || 
+                p.authors?.toLowerCase().includes(q)
+            );
+            return { ...issue, papers: filteredDocs };
+        }).filter(issue => issue.papers && issue.papers.length > 0);
+
+        if (sortBy === 'oldest') {
+            result = result.reverse();
+        }
+        return result;
+    }, [issueList, searchQuery, sortBy]);
     const scholarlySchema = issueList.flatMap(issue => 
         (issue.papers || []).map(paper => ({
             "@context": "https://schema.org",
@@ -108,24 +133,61 @@ export default function Archive({ issues }) {
                         </div>
                         <div>
                             <h2 className="text-2xl font-serif font-bold text-dark">Chronological Access</h2>
-                            <p className="text-muted text-xs font-medium uppercase tracking-widest mt-1">Found {issueList.length} Total Issues</p>
+                            <p className="text-muted text-xs font-medium uppercase tracking-widest mt-1">Found {filteredIssues.length} Total Issues</p>
                         </div>
                     </div>
-                        <div className="relative w-full md:w-80">
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
-                            <input 
-                                type="text" 
-                                placeholder="Search journal insights..." 
-                                className="w-full pl-12 pr-6 py-4 bg-surface border border-gray-100 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
-                            />
+                        <div className="relative w-full md:w-96 flex gap-2">
+                            <div className="relative flex-1">
+                                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
+                                <input 
+                                    type="text" 
+                                    placeholder="Search journal insights..." 
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    className="w-full pl-12 pr-6 py-4 bg-surface border border-gray-100 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                                />
+                            </div>
+                            <select 
+                                value={sortBy}
+                                onChange={(e) => setSortBy(e.target.value)}
+                                className="px-4 py-4 bg-surface border border-gray-100 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 cursor-pointer"
+                            >
+                                <option value="newest">Newest First</option>
+                                <option value="oldest">Oldest First</option>
+                            </select>
                         </div>
                 </div>
 
                 {isLoading ? (
                     <SkeletonGrid count={4} cols="2" className="mt-4" />
-                ) : issueList.length > 0 ? (
+                ) : filteredIssues.length > 0 ? (
                     <div className="space-y-20">
-                        {issueList.map((issue, idx) => (
+                        {/* Featured Carousel (Simulated with horizontal scroll) */}
+                        {!searchQuery && featuredPapers.length > 0 && (
+                            <div className="mb-16">
+                                <h3 className="text-xl font-bold font-serif mb-6 flex items-center gap-2">
+                                    <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                                    Featured Research Highlights
+                                </h3>
+                                <div className="flex overflow-x-auto gap-6 pb-6 snap-x hide-scrollbar">
+                                    {featuredPapers.map((fp, i) => (
+                                        <div key={i} className="min-w-[320px] md:min-w-[400px] snap-start bg-white border border-gray-100 p-6 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300">
+                                            <div className="text-[10px] font-black uppercase tracking-widest text-secondary mb-3 flex justify-between">
+                                                <span>Featured Article</span>
+                                                <span>12 Min Read</span>
+                                            </div>
+                                            <h4 className="font-bold text-dark text-lg mb-2 line-clamp-2">{fp.title}</h4>
+                                            <p className="text-sm text-muted italic mb-4 line-clamp-1">{fp.authors}</p>
+                                            <a href={fp.file_path} target="_blank" rel="noopener noreferrer" className="text-primary font-bold text-sm flex items-center gap-1 hover:underline">
+                                                Read Now <ArchiveIcon className="w-4 h-4" />
+                                            </a>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {filteredIssues.map((issue, idx) => (
                             <motion.div 
                                 key={issue.id}
                                 {...fadeInUp}
