@@ -533,7 +533,7 @@ export default function Home() {
             <PipelineSection />
 
             {/* ─── INDEXING & ABSTRACTING ─── */}
-            <section className="py-12 lg:py-20 bg-warm-bg border-y border-gray-100">
+            <section className="pb-12 lg:pb-20 pt-4 bg-warm-bg border-b border-gray-100">
                 <div className="container-custom">
                     <div className="text-center mb-10">
                         <div className="flex items-center justify-center gap-4 mb-4">
@@ -688,7 +688,7 @@ function PipelineSection() {
     const [activeStep, setActiveStep] = useState(null);
 
     return (
-        <section className="py-16 lg:py-24 bg-warm-bg relative overflow-hidden">
+        <section className="pt-16 lg:pt-24 pb-8 lg:pb-12 bg-warm-bg relative overflow-hidden">
             <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[140px] -mr-96 -mt-96" />
             <div className="container-custom relative z-10">
                 <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-20">

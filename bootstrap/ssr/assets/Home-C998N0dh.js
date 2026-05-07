@@ -644,7 +644,7 @@ function Home() {
           ] })
         ] }) }) }),
         /* @__PURE__ */ jsx(PipelineSection, {}),
-        /* @__PURE__ */ jsx("section", { className: "py-12 lg:py-20 bg-warm-bg border-y border-gray-100", children: /* @__PURE__ */ jsxs("div", { className: "container-custom", children: [
+        /* @__PURE__ */ jsx("section", { className: "pb-12 lg:pb-20 pt-4 bg-warm-bg border-b border-gray-100", children: /* @__PURE__ */ jsxs("div", { className: "container-custom", children: [
           /* @__PURE__ */ jsxs("div", { className: "text-center mb-10", children: [
             /* @__PURE__ */ jsxs("div", { className: "flex items-center justify-center gap-4 mb-4", children: [
               /* @__PURE__ */ jsx("span", { className: "h-px w-10 bg-secondary" }),
@@ -781,7 +781,7 @@ const pipelineSteps = [
 ];
 function PipelineSection() {
   const [activeStep, setActiveStep] = useState(null);
-  return /* @__PURE__ */ jsxs("section", { className: "py-16 lg:py-24 bg-warm-bg relative overflow-hidden", children: [
+  return /* @__PURE__ */ jsxs("section", { className: "pt-16 lg:pt-24 pb-8 lg:pb-12 bg-warm-bg relative overflow-hidden", children: [
     /* @__PURE__ */ jsx("div", { className: "absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[140px] -mr-96 -mt-96" }),
     /* @__PURE__ */ jsxs("div", { className: "container-custom relative z-10", children: [
       /* @__PURE__ */ jsxs("div", { className: "text-center max-w-3xl mx-auto mb-12 lg:mb-20", children: [
