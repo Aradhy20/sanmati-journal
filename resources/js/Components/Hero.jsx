@@ -7,7 +7,7 @@ const Hero = () => {
         <section className="relative flex flex-col min-h-[100svh] overflow-hidden bg-[#050B14]">
             {/* Background Image */}
             <div 
-                className="absolute inset-0 z-0 opacity-60 mix-blend-screen"
+                className="absolute inset-0 z-0"
                 style={{ 
                     backgroundImage: 'url(/images/hero-bg.png)', 
                     backgroundSize: 'cover', 
@@ -16,18 +16,8 @@ const Hero = () => {
                 }} 
             />
             
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#10245E]/80 via-[#273295]/70 to-[#3F2B96]/80 mix-blend-multiply" />
-
-            {/* Soft decorative blobs */}
-            <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-                <div className="absolute top-0 -left-1/4 w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] lg:w-[650px] lg:h-[650px] bg-blue-500/10 rounded-full blur-[120px] sm:blur-[150px] lg:blur-[180px]" />
-                <div className="absolute bottom-0 right-0 w-[260px] h-[260px] sm:w-[380px] sm:h-[380px] lg:w-[500px] lg:h-[500px] bg-indigo-500/10 rounded-full blur-[120px]" />
-            </div>
-
-            {/* Subtle dot-grid pattern */}
-            <div className="absolute inset-0 z-0 opacity-[0.15]"
-                style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,1) 1.5px, transparent 0)', backgroundSize: '40px 40px' }} />
+            {/* Clean Gradient Overlay for Readability */}
+            <div className="absolute inset-0 z-0 bg-gradient-to-r from-slate-900/95 via-slate-900/80 to-slate-900/60" />
 
             {/* Main Content – Two-Column Split */}
             <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-32 pb-24 lg:pt-36 lg:pb-32 flex-1 flex flex-col justify-center">
