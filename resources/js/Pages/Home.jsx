@@ -407,8 +407,22 @@ export default function Home() {
             </section>
 
             {/* ─── ACADEMIC IMPACT (Counters) ─── */}
-            <section className="py-10 lg:py-16 bg-gradient-to-br from-primary to-primary-dark relative overflow-hidden">
-                <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.08) 1px, transparent 0)', backgroundSize: '40px 40px' }} />
+            <section className="py-10 lg:py-16 relative overflow-hidden bg-slate-900">
+                {/* Background Image */}
+                <div 
+                    className="absolute inset-0 z-0 mix-blend-overlay opacity-60"
+                    style={{ 
+                        backgroundImage: 'url(/images/stats-bg.png)', 
+                        backgroundSize: 'cover', 
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat'
+                    }} 
+                />
+                
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 z-0 bg-gradient-to-br from-primary/90 to-primary-dark/95" />
+                
+                <div className="absolute inset-0 z-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.08) 1px, transparent 0)', backgroundSize: '40px 40px' }} />
                 <div className="container-custom relative z-10">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-12 text-center">
                         {[

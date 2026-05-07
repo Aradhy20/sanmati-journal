@@ -3,7 +3,20 @@ import { Link } from "@inertiajs/react";
 import { motion } from "framer-motion";
 import { Sparkles, ArrowRight, BookOpen, Users, CheckCircle, Star, Globe } from "lucide-react";
 const Hero = () => {
-  return /* @__PURE__ */ jsxs("section", { className: "relative flex flex-col min-h-[100svh] overflow-hidden bg-gradient-to-br from-primary via-[#4f46e5] to-secondary", children: [
+  return /* @__PURE__ */ jsxs("section", { className: "relative flex flex-col min-h-[100svh] overflow-hidden bg-slate-900", children: [
+    /* @__PURE__ */ jsx(
+      "div",
+      {
+        className: "absolute inset-0 z-0 mix-blend-overlay opacity-50",
+        style: {
+          backgroundImage: "url(/images/hero-bg.png)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat"
+        }
+      }
+    ),
+    /* @__PURE__ */ jsx("div", { className: "absolute inset-0 z-0 bg-gradient-to-br from-primary/95 via-[#4f46e5]/90 to-secondary/95" }),
     /* @__PURE__ */ jsxs("div", { className: "absolute inset-0 z-0 pointer-events-none overflow-hidden", children: [
       /* @__PURE__ */ jsx("div", { className: "absolute top-0 -left-1/4 w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] lg:w-[650px] lg:h-[650px] bg-white/10 rounded-full blur-[120px] sm:blur-[150px] lg:blur-[180px]" }),
       /* @__PURE__ */ jsx("div", { className: "absolute bottom-0 right-0 w-[260px] h-[260px] sm:w-[380px] sm:h-[380px] lg:w-[500px] lg:h-[500px] bg-white/10 rounded-full blur-[120px]" })
@@ -11,7 +24,7 @@ const Hero = () => {
     /* @__PURE__ */ jsx(
       "div",
       {
-        className: "absolute inset-0 z-0 opacity-[0.1]",
+        className: "absolute inset-0 z-0 opacity-[0.15]",
         style: { backgroundImage: "radial-gradient(circle at 2px 2px, rgba(255,255,255,1) 1.5px, transparent 0)", backgroundSize: "40px 40px" }
       }
     ),
