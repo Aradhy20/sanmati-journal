@@ -392,7 +392,7 @@ export default function BookPublication({ books }) {
                         initial="initial"
                         whileInView="whileInView"
                         viewport={{ once: true, margin: "-100px" }}
-                        className="grid grid-cols-2 ml:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 xl:gap-8"
+                        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 xl:gap-8"
                     >
                         {displayBooks.map((book, index) => (
                             <motion.div 

@@ -34,7 +34,7 @@ export default function Home() {
             </Suspense>
 
             {/* ─── ABOUT SECTION ─── */}
-            <section className="py-32 bg-surface relative overflow-hidden">
+            <section className="py-16 lg:py-24 bg-surface relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-96 h-96 bg-primary/4 rounded-full -ml-48 -mt-48 blur-[100px]" />
                 <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full -mr-48 -mb-48 blur-[100px]" />
 
@@ -117,7 +117,7 @@ export default function Home() {
             </section>
 
             {/* ─── LATEST BOOK RELEASES ─── */}
-            <section className="py-32 bg-warm-bg">
+            <section className="py-16 lg:py-24 bg-warm-bg">
                 <div className="container-custom">
                     <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-8">
                         <motion.div {...fadeInUp} className="max-w-2xl">
@@ -158,7 +158,7 @@ export default function Home() {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 items-stretch">
                         {[
                             {
                                 genre: 'Academic Research',
@@ -207,7 +207,7 @@ export default function Home() {
                                         </span>
                                     )}
                                 </div>
-                                <div className="p-8 flex flex-col justify-between flex-grow">
+                                <div className="p-6 lg:p-8 flex flex-col justify-between flex-grow">
                                     <div>
                                         {/* Stars */}
                                         <div className="flex gap-1 mb-3">
@@ -233,7 +233,7 @@ export default function Home() {
             </section>
 
             {/* ─── EDITORIAL LEADERSHIP ─── */}
-            <section className="py-32 bg-white relative">
+            <section className="py-16 lg:py-24 bg-white relative">
                 <div className="container-custom">
                     <div className="flex flex-col lg:flex-row items-end justify-between gap-10 mb-10 lg:mb-20">
                         <motion.div {...fadeInUp} className="max-w-2xl">
@@ -326,7 +326,7 @@ export default function Home() {
             </section>
 
             {/* ─── ACADEMIC DOMAINS ─── */}
-            <section className="py-32 bg-white relative overflow-hidden">
+            <section className="py-16 lg:py-24 bg-white relative overflow-hidden">
                 <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[800px] h-[800px] bg-primary/2 rounded-full blur-[120px] -ml-96" />
                 <div className="container-custom relative z-10">
                     <div className="text-center max-w-3xl mx-auto mb-10 lg:mb-20">
@@ -380,7 +380,7 @@ export default function Home() {
             </section>
 
             {/* ─── ACADEMIC IMPACT (Counters) ─── */}
-            <section className="py-12 lg:py-24 bg-gradient-to-br from-primary to-primary-dark relative overflow-hidden">
+            <section className="py-10 lg:py-16 bg-gradient-to-br from-primary to-primary-dark relative overflow-hidden">
                 <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.08) 1px, transparent 0)', backgroundSize: '40px 40px' }} />
                 <div className="container-custom relative z-10">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-12 text-center">
@@ -398,10 +398,10 @@ export default function Home() {
                                 transition={{ delay: i * 0.1, duration: 0.8 }}
                                 className="group"
                             >
-                                <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center group-hover:bg-white/20 transition-all duration-500">
-                                    <stat.icon className="w-8 h-8 text-white/80 group-hover:scale-110 transition-transform" />
+                                <div className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-4 md:mb-6 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center group-hover:bg-white/20 transition-all duration-500">
+                                    <stat.icon className="w-6 h-6 md:w-8 md:h-8 text-white/80 group-hover:scale-110 transition-transform" />
                                 </div>
-                                <div className="text-2xl md:text-3xl lg:text-4xl lg:text-5xl font-black text-white mb-2 tracking-tighter">{stat.num}</div>
+                                <div className="text-2xl md:text-3xl lg:text-4xl font-black text-white mb-2 tracking-tighter">{stat.num}</div>
                                 <p className="text-white/50 text-[10px] font-black uppercase tracking-[0.2em]">{stat.label}</p>
                             </motion.div>
                         ))}
@@ -410,7 +410,7 @@ export default function Home() {
             </section>
 
             {/* ─── WHY CHOOSE OUR BOOKS ─── */}
-            <section className="py-32 bg-white relative overflow-hidden">
+            <section className="py-16 lg:py-24 bg-white relative overflow-hidden">
                 <div className="container-custom">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                         <motion.div
@@ -490,7 +490,7 @@ export default function Home() {
             <PipelineSection />
 
             {/* ─── INDEXING & ABSTRACTING ─── */}
-            <section className="py-20 bg-warm-bg border-y border-gray-100">
+            <section className="py-12 lg:py-20 bg-warm-bg border-y border-gray-100">
                 <div className="container-custom">
                     <div className="text-center mb-10">
                         <div className="flex items-center justify-center gap-4 mb-4">
@@ -502,19 +502,19 @@ export default function Home() {
                             Indexed & <span className="text-primary italic">Abstracted In</span>
                         </h2>
                     </div>
-                    <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70">
+                    <div className="flex flex-wrap justify-center items-center gap-4 md:gap-12 opacity-70">
                         {/* Placeholder Logos for Indexing */}
-                        <div className="font-bold text-xl tracking-tight text-gray-500">Google Scholar</div>
-                        <div className="font-bold text-xl tracking-tight text-gray-500">CrossRef</div>
-                        <div className="font-bold text-xl tracking-tight text-gray-500">UGC CARE (Proposed)</div>
-                        <div className="font-bold text-xl tracking-tight text-gray-500">Directory of Open Access Journals (DOAJ)</div>
-                        <div className="font-bold text-xl tracking-tight text-gray-500">ResearchGate</div>
+                        <div className="font-bold text-sm md:text-lg tracking-tight text-gray-500">Google Scholar</div>
+                        <div className="font-bold text-sm md:text-lg tracking-tight text-gray-500">CrossRef</div>
+                        <div className="font-bold text-sm md:text-lg tracking-tight text-gray-500">UGC CARE (Proposed)</div>
+                        <div className="font-bold text-sm md:text-lg tracking-tight text-gray-500">Directory of Open Access Journals (DOAJ)</div>
+                        <div className="font-bold text-sm md:text-lg tracking-tight text-gray-500">ResearchGate</div>
                     </div>
                 </div>
             </section>
 
             {/* ─── TRENDING / MOST READ SECTION ─── */}
-            <section className="py-20 bg-white relative overflow-hidden">
+            <section className="py-16 lg:py-24 bg-white relative overflow-hidden">
                 <div className="absolute -top-40 left-0 w-[600px] h-[600px] bg-primary/3 rounded-full blur-[120px]" />
                 <div className="container-custom relative z-10">
                     <motion.div {...fadeInUp} className="flex flex-col md:flex-row items-end justify-between gap-8 mb-14">
@@ -645,7 +645,7 @@ function PipelineSection() {
     const [activeStep, setActiveStep] = useState(null);
 
     return (
-        <section className="py-32 bg-warm-bg relative overflow-hidden">
+        <section className="py-16 lg:py-24 bg-warm-bg relative overflow-hidden">
             <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[140px] -mr-96 -mt-96" />
             <div className="container-custom relative z-10">
                 <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-20">
