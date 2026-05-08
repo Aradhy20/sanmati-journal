@@ -13,13 +13,13 @@
     "/build/assets/Graphics-CZ-Bhg_h.js"
   ],
   "resources/js/Components/Hero.jsx": [
-    "/build/assets/Hero-CdFOUpv0.js"
+    "/build/assets/Hero-D5N_avrL.js"
   ],
   "resources/js/Components/Navbar.jsx": [
     "/build/assets/MainLayout-Z2n4S167.js"
   ],
   "resources/js/Components/NewsletterSection.jsx": [
-    "/build/assets/Home-BxUvyvfe.js"
+    "/build/assets/Home-CtqSBOex.js"
   ],
   "resources/js/Components/PageHeader.jsx": [
     "/build/assets/PageHeader-DHJj0W5D.js"
@@ -40,7 +40,7 @@
     "/build/assets/EditorialTeam-CMHupVbs.js"
   ],
   "resources/js/Components/Testimonials.jsx": [
-    "/build/assets/Home-BxUvyvfe.js"
+    "/build/assets/Home-CtqSBOex.js"
   ],
   "resources/js/Components/ui/CitationGenerator.jsx": [
     "/build/assets/CitationGenerator-Nttig6Bx.js"
@@ -175,7 +175,7 @@
     "/build/assets/Photo-BuiAi-Lg.js"
   ],
   "resources/js/Pages/Home.jsx": [
-    "/build/assets/Home-BxUvyvfe.js"
+    "/build/assets/Home-CtqSBOex.js"
   ],
   "resources/js/Pages/PublicationPolicy/Ethics.jsx": [
     "/build/assets/Ethics-B7bMZlo3.js"

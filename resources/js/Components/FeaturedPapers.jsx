@@ -3,16 +3,14 @@ import { FileText, ArrowUpRight, Clock, Star, Users } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
 import { Link } from '@inertiajs/react';
 
-
-
 const FeaturedPapers = ({ papers = [] }) => {
     // Helper to generate consistent colors based on category or index
     const getPaperStyle = (index) => {
         const styles = [
-            { color: "from-blue-600 to-indigo-600", bg: "from-blue-500 to-indigo-600" },
-            { color: "from-emerald-600 to-teal-600", bg: "from-emerald-500 to-teal-600" },
-            { color: "from-purple-600 to-pink-600", bg: "from-purple-500 to-pink-600" },
-            { color: "from-amber-500 to-orange-600", bg: "from-amber-500 to-orange-600" },
+            { color: "from-blue-600/20 to-indigo-600/20", bg: "from-blue-500 to-indigo-600", accent: "text-blue-500" },
+            { color: "from-emerald-600/20 to-teal-600/20", bg: "from-emerald-500 to-teal-600", accent: "text-emerald-500" },
+            { color: "from-purple-600/20 to-pink-600/20", bg: "from-purple-500 to-pink-600", accent: "text-purple-500" },
+            { color: "from-amber-500/20 to-orange-600/20", bg: "from-amber-500 to-orange-600", accent: "text-amber-500" },
         ];
         return styles[index % styles.length];
     };
@@ -20,22 +18,22 @@ const FeaturedPapers = ({ papers = [] }) => {
     if (!papers || papers.length === 0) return null;
 
     return (
-        <section className="py-24 bg-warm-bg overflow-hidden transition-colors duration-300">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-24 bg-slate-50 dark:bg-slate-950 border-t border-slate-100 dark:border-slate-900 transition-colors duration-500 overflow-hidden">
+            <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
                     <ScrollReveal>
                         <div className="max-w-2xl">
-                            <span className="text-primary font-bold tracking-widest text-xs uppercase mb-3 block">High Impact Research</span>
-                            <h2 className="text-4xl md:text-5xl font-serif font-bold text-dark mb-4">Featured Publications</h2>
-                            <p className="text-gray-600 text-lg">Exploring groundbreaking findings across our latest issues.</p>
+                            <span className="text-primary dark:text-primary-light font-black tracking-[0.25em] text-[10px] uppercase mb-3 block">High Impact Research</span>
+                            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-black text-dark dark:text-white mb-4">Featured Publications</h2>
+                            <p className="text-slate-500 dark:text-slate-400 text-sm sm:text-base font-medium">Exploring groundbreaking findings across our latest peer-reviewed issues.</p>
                         </div>
                     </ScrollReveal>
                     <ScrollReveal delay={0.2}>
                         <Link
                             href="/archive"
-                            className="bg-white text-dark px-8 py-4 rounded-full font-bold shadow-sm border border-gray-200 hover:shadow-xl hover:-translate-y-1 transition-all flex items-center gap-2"
+                            className="bg-white dark:bg-slate-900 text-dark dark:text-white px-8 py-4 rounded-xl font-bold text-xs uppercase tracking-widest shadow-sm hover:shadow-2xl border border-slate-100 dark:border-slate-800 hover:-translate-y-1 transition-all duration-300 flex items-center gap-2"
                         >
-                            Explore Journal Insights <ArrowUpRight className="w-5 h-5" />
+                            Explore Insights <ArrowUpRight className="w-4 h-4" />
                         </Link>
                     </ScrollReveal>
                 </div>
@@ -46,48 +44,48 @@ const FeaturedPapers = ({ papers = [] }) => {
                         return (
                             <ScrollReveal key={paper.id} delay={index * 0.1}>
                                 <motion.div
-                                    whileHover={{ y: -10 }}
-                                    className="group relative bg-white rounded-[2rem] p-8 border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden h-full flex flex-col"
+                                    whileHover={{ y: -8 }}
+                                    className="group relative bg-white dark:bg-slate-900 rounded-[2rem] p-8 border border-slate-100 dark:border-slate-800/80 hover:border-primary/20 dark:hover:border-primary-light/20 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden h-full flex flex-col"
                                 >
                                     {/* Paper Glow Background */}
-                                    <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${style.color} opacity-[0.03] group-hover:opacity-10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl transition-opacity animate-pulse`} />
+                                    <div className={`absolute top-0 right-0 w-36 h-36 bg-gradient-to-br ${style.color} opacity-40 group-hover:opacity-100 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl transition-opacity duration-700 pointer-events-none`} />
 
                                     <div className="mb-8 flex justify-between items-start">
-                                        <span className={`px-4 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r ${style.bg} text-white shadow-lg shadow-blue-500/20`}>
+                                        <span className={`px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-wider bg-gradient-to-r ${style.bg} text-white shadow-lg shadow-blue-500/10`}>
                                             {paper.category || 'General'}
                                         </span>
-                                        <div className="p-3 bg-warm-bg rounded-2xl group-hover:bg-primary/5 transition-colors">
-                                            <FileText className="w-6 h-6 text-gray-400 group-hover:text-primary" />
+                                        <div className="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-2xl group-hover:bg-primary/5 dark:group-hover:bg-primary-light/5 transition-colors">
+                                            <FileText className={`w-5 h-5 text-slate-400 group-hover:${style.accent} transition-colors`} />
                                         </div>
                                     </div>
 
-                                    <h3 className="text-2xl font-serif font-bold text-dark mb-4 leading-tight group-hover:text-indigo-900 transition-colors line-clamp-3">
+                                    <h3 className="text-xl font-serif font-black text-dark dark:text-white mb-4 leading-snug group-hover:text-primary dark:group-hover:text-primary-light transition-colors line-clamp-3">
                                         {paper.title}
                                     </h3>
 
-                                    <div className="flex items-center gap-3 mb-8">
-                                        <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center">
-                                            <Users className="w-5 h-5 text-gray-400" />
+                                    <div className="flex items-center gap-3 mb-8 mt-4">
+                                        <div className="w-10 h-10 rounded-xl bg-slate-50 dark:bg-slate-800/60 flex items-center justify-center border border-slate-100 dark:border-slate-700/50">
+                                            <Users className="w-4 h-4 text-slate-400" />
                                         </div>
                                         <div>
-                                            <p className="text-sm font-bold text-dark line-clamp-1">{paper.authors}</p>
-                                            <p className="text-xs text-gray-500">Author(s)</p>
+                                            <p className="text-xs sm:text-sm font-bold text-dark dark:text-slate-200 line-clamp-1">{paper.authors}</p>
+                                            <p className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider mt-0.5">Author(s)</p>
                                         </div>
                                     </div>
 
-                                    <div className="mt-auto grid grid-cols-2 gap-4 pt-6 border-t border-slate-50">
-                                        <div className="flex items-center gap-2 text-gray-500 text-sm">
+                                    <div className="mt-auto grid grid-cols-2 gap-4 pt-6 border-t border-slate-50 dark:border-slate-800/80">
+                                        <div className="flex items-center gap-2 text-slate-400 dark:text-slate-500 text-xs font-medium">
                                             <Clock className="w-4 h-4" />
                                             <span>{new Date(paper.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
                                         </div>
-                                        <div className="flex items-center gap-2 text-gray-500 text-sm justify-end">
-                                            <Star className="w-4 h-4 text-amber-500" />
-                                            <span>{paper.citations || 0} Citations</span>
+                                        <div className="flex items-center gap-2 text-slate-400 dark:text-slate-500 text-xs font-medium justify-end">
+                                            <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
+                                            <span className="font-bold text-slate-500 dark:text-slate-400">{paper.citations || 0} Citations</span>
                                         </div>
                                     </div>
 
-                                    {/* Interactive Hover Border */}
-                                    <div className="absolute inset-0 border-2 border-transparent group-hover:border-indigo-500/20 rounded-[2rem] transition-all pointer-events-none" />
+                                    {/* Interactive Hover Border Overlay */}
+                                    <div className="absolute inset-0 border border-transparent group-hover:border-primary/10 dark:group-hover:border-primary-light/10 rounded-[2rem] transition-all duration-500 pointer-events-none" />
                                 </motion.div>
                             </ScrollReveal>
                         );
