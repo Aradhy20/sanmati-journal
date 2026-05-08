@@ -276,6 +276,14 @@ const Navbar = ({ onOpenSearch }) => {
                                 <Search className="w-5 h-5" />
                             </button>
 
+                            <button
+                                onClick={toggleDark}
+                                className="p-2.5 rounded-xl bg-gray-100 hover:bg-primary/10 text-dark hover:text-primary transition-all flex-shrink-0"
+                                aria-label="Toggle Dark Mode"
+                            >
+                                {dark ? <Sun className="w-5 h-5 text-amber-500" /> : <Moon className="w-5 h-5" />}
+                            </button>
+
                             <Link
                                 href="/submission-guidelines/call-for-papers"
                                 className="hidden xl:inline-flex px-4 py-2.5 bg-primary text-white text-[10px] font-bold tracking-[0.08em] uppercase rounded-full hover:bg-primary-dark transition-all shadow-md shadow-primary/20 hover:shadow-lg whitespace-nowrap flex-shrink-0"
