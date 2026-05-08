@@ -287,7 +287,7 @@ const Testimonials = () => {
     ] })
   ] });
 };
-const Hero = React.lazy(() => import("./Hero-BLf6iMWi.js"));
+const Hero = React.lazy(() => import("./Hero-CdFOUpv0.js"));
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
@@ -317,12 +317,43 @@ function Home() {
   const toggleSavePaper = (idx) => {
     setSavedPapers((prev) => ({ ...prev, [idx]: !prev[idx] }));
   };
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I submit my research paper to Sanmati Spectrum?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Authors can submit their manuscripts digitally via our call for papers submission portal. Our editorial team conducts an initial screening, followed by a double-blind peer review."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the journal provide a CrossRef DOI for published papers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, every research paper accepted and published in Sanmati Spectrum of Knowledge receives a registered CrossRef DOI for global archival indexing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the indexing standards of Sanmati Journal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sanmati Spectrum is indexed with Google Scholar, CrossRef DOIs, and follows strict publishing ethics compliant with the Committee on Publication Ethics (COPE)."
+        }
+      }
+    ]
+  };
   return /* @__PURE__ */ jsxs(
     MainLayout,
     {
       title: "Sanmati Spectrum of Knowledge | National Multidisciplinary Research Journal",
       description: "Sanmati Spectrum is India's leading multidisciplinary peer-reviewed academic journal. Publishing high-quality research papers, thesis, and hardcover books across science, arts, commerce, and law.",
       keywords: "multidisciplinary journal india, peer-reviewed research, academic book publication, sanmati spectrum of knowledge, ugc care listed journal, publish book from thesis, national research journal",
+      jsonLd: faqSchema,
       children: [
         /* @__PURE__ */ jsx(Suspense, { fallback: /* @__PURE__ */ jsxs("div", { className: "min-h-[95vh] flex flex-col gap-4 items-center justify-center text-primary font-bold bg-[#050B14]", children: [
           /* @__PURE__ */ jsx(Globe, { className: "w-12 h-12 animate-spin text-accent opacity-20" }),
@@ -608,7 +639,7 @@ function Home() {
                 Link,
                 {
                   href: `/submission-guidelines/areas/${cat.slug}`,
-                  className: "group p-8 rounded-3xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-primary/20 dark:hover:border-primary-light/20 hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center h-full block",
+                  className: "group p-8 rounded-3xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-primary/20 dark:hover:border-primary-light/20 hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center h-full block focus:ring-2 focus:ring-primary/40 dark:focus:ring-primary-light/40 focus:outline-none",
                   children: [
                     /* @__PURE__ */ jsx("div", { className: `w-14 h-14 rounded-2xl ${cat.color} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-primary dark:group-hover:bg-primary-light group-hover:text-white dark:group-hover:text-slate-950 transition-all duration-300`, children: /* @__PURE__ */ jsx(cat.icon, { className: "w-6 h-6" }) }),
                     /* @__PURE__ */ jsx("h3", { className: "font-bold text-dark dark:text-white text-base mb-2 group-hover:text-primary dark:group-hover:text-primary-light transition-colors tracking-tight leading-snug", children: cat.name }),

@@ -121,6 +121,7 @@ const Hero = () => {
                                 alt="Goddess Saraswati — Symbol of Knowledge"
                                 className="w-full aspect-square object-contain transition-transform duration-1000 group-hover:scale-103 rounded-[2rem] bg-white"
                                 loading="eager"
+                                fetchPriority="high"
                             />
                             {/* Floating bottom glass overlay */}
                             <div className="absolute bottom-6 left-6 right-6 p-6 bg-[#0c1322]/90 backdrop-blur-xl rounded-2xl border border-white/10 shadow-xl">

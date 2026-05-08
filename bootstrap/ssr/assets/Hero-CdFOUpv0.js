@@ -115,7 +115,8 @@ const Hero = () => {
                   src: "/images/saraswati.jpeg",
                   alt: "Goddess Saraswati — Symbol of Knowledge",
                   className: "w-full aspect-square object-contain transition-transform duration-1000 group-hover:scale-103 rounded-[2rem] bg-white",
-                  loading: "eager"
+                  loading: "eager",
+                  fetchPriority: "high"
                 }
               ),
               /* @__PURE__ */ jsxs("div", { className: "absolute bottom-6 left-6 right-6 p-6 bg-[#0c1322]/90 backdrop-blur-xl rounded-2xl border border-white/10 shadow-xl", children: [
