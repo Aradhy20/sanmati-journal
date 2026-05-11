@@ -75,7 +75,7 @@ const Testimonials = () => {
                                         className="object-cover rounded-full w-full h-full"
                                     />
                                 </div>
-                                <h4 className="text-xl font-bold text-white mb-1">{testimonials[current].name}</h4>
+                                <h3 className="text-xl font-bold text-white mb-1">{testimonials[current].name}</h3>
                                 <p className="text-primary-light font-medium text-sm tracking-wide">{testimonials[current].role}</p>
                             </div>
                         </motion.div>
@@ -105,9 +105,11 @@ const Testimonials = () => {
                             key={i}
                             onClick={() => setCurrent(i)}
                             title={`Go to slide ${i + 1}`}
-                            className={`h-1.5 transition-all duration-500 rounded-full ${i === current ? 'w-8 bg-primary' : 'w-2 bg-slate-700'}`}
+                            className="group p-2 -m-2 transition-all duration-200 cursor-pointer outline-none"
                             aria-label={`Go to slide ${i + 1}`}
-                        />
+                        >
+                            <div className={`h-1.5 transition-all duration-500 rounded-full ${i === current ? 'w-8 bg-primary' : 'w-2 bg-slate-700 group-hover:bg-slate-500'}`} />
+                        </button>
                     ))}
                 </div>
             </div>

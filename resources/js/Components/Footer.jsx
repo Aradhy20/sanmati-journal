@@ -113,11 +113,11 @@ const Footer = () => {
                                 <div className="pt-2">
                                     <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.06]">
                                         <div className="flex justify-between items-center mb-1">
-                                            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Chief Editor</span>
+                                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Chief Editor</span>
                                             <span className="text-[11px] font-semibold text-slate-300">+91 9870713912</span>
                                         </div>
                                         <div className="flex justify-between items-center">
-                                            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Managing</span>
+                                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Managing</span>
                                             <span className="text-[11px] font-semibold text-slate-300">+91 7999525735</span>
                                         </div>
                                     </div>
@@ -130,25 +130,23 @@ const Footer = () => {
                 {/* Bottom Credentials */}
                 <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
                     <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-                        <p className="text-[12px] font-medium text-slate-500">
+                        <p className="text-[12px] font-medium text-slate-400">
                             © {new Date().getFullYear()} Sanmati Spectrum. All rights reserved.
                         </p>
-                        <div className="flex items-center gap-4 text-[11px] font-semibold text-slate-500">
-                            <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
-                            <span className="text-white/10">/</span>
-                            <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
-                            <span className="text-white/10">/</span>
-                            <Link href="/compliance" className="hover:text-white transition-colors">Compliance</Link>
+                        <div className="flex items-center gap-2 text-[11px] font-semibold text-slate-400">
+                            <Link href="/privacy" className="px-3 py-1.5 rounded-lg bg-white/[0.02] hover:bg-white/[0.06] hover:text-white transition-all duration-300">Privacy</Link>
+                            <Link href="/terms" className="px-3 py-1.5 rounded-lg bg-white/[0.02] hover:bg-white/[0.06] hover:text-white transition-all duration-300">Terms</Link>
+                            <Link href="/compliance" className="px-3 py-1.5 rounded-lg bg-white/[0.02] hover:bg-white/[0.06] hover:text-white transition-all duration-300">Compliance</Link>
                         </div>
                     </div>
                     <div className="flex gap-3">
                         <div className="flex items-center gap-2 px-3 py-1.5 bg-white/[0.03] rounded-lg border border-white/[0.05]">
                             <ShieldCheck className="w-3.5 h-3.5 text-secondary/70" />
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">COPE MEMBER</span>
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-300">COPE MEMBER</span>
                         </div>
                         <div className="flex items-center gap-2 px-3 py-1.5 bg-white/[0.03] rounded-lg border border-white/[0.05]">
                             <Award className="w-3.5 h-3.5 text-emerald-400/70" />
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">PEER REVIEWED</span>
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-300">PEER REVIEWED</span>
                         </div>
                     </div>
                 </div>

@@ -175,7 +175,7 @@ const Navbar = ({ onOpenSearch }) => {
                                 <span className={`block font-serif font-bold text-primary leading-none tracking-tight transition-all duration-500 ${scrolled ? 'text-lg' : 'text-lg xl:text-xl 2xl:text-2xl'}`}>
                                     Sanmati <span className="text-secondary font-normal italic">Spectrum</span>
                                 </span>
-                                <span className="text-[8px] font-bold tracking-wider 2xl:tracking-[0.3em] uppercase text-muted mt-0.5 font-sans">
+                                <span className="text-[10px] font-bold tracking-wider 2xl:tracking-[0.3em] uppercase text-slate-600 mt-0.5 font-sans">
                                     Academic Research
                                 </span>
                             </div>
@@ -194,7 +194,7 @@ const Navbar = ({ onOpenSearch }) => {
                                         <button
                                             aria-haspopup="true"
                                             aria-expanded={activeDropdown === item.name}
-                                            className={`relative group/nav flex items-center gap-1 text-[9px] 2xl:text-[10px] font-black uppercase tracking-wider 2xl:tracking-[0.15em] px-1.5 2xl:px-3 py-2 rounded-lg transition-all duration-300 font-sans ${activeDropdown === item.name || isActive(item.href)
+                                            className={`relative group/nav flex items-center gap-1 text-[10px] 2xl:text-[11px] font-black uppercase tracking-wider 2xl:tracking-[0.15em] px-1.5 2xl:px-3 py-2 rounded-lg transition-all duration-300 font-sans ${activeDropdown === item.name || isActive(item.href)
                                                 ? 'text-primary'
                                                 : 'text-slate-600 hover:text-primary'
                                                 }`}
@@ -208,7 +208,7 @@ const Navbar = ({ onOpenSearch }) => {
                                     ) : (
                                         <Link
                                             href={item.href}
-                                            className={`relative group/nav flex items-center gap-1 text-[9px] 2xl:text-[10px] font-black uppercase tracking-wider 2xl:tracking-[0.15em] px-1.5 2xl:px-3 py-2 rounded-lg transition-all duration-300 font-sans ${isActive(item.href)
+                                            className={`relative group/nav flex items-center gap-1 text-[10px] 2xl:text-[11px] font-black uppercase tracking-wider 2xl:tracking-[0.15em] px-1.5 2xl:px-3 py-2 rounded-lg transition-all duration-300 font-sans ${isActive(item.href)
                                                 ? 'text-primary'
                                                 : 'text-slate-600 hover:text-primary'
                                                 }`}
@@ -272,7 +272,7 @@ const Navbar = ({ onOpenSearch }) => {
 
                             <Link
                                 href="/submission-guidelines/call-for-papers"
-                                className="hidden lg:inline-flex px-3 2xl:px-6 py-3 bg-secondary text-white text-[9px] 2xl:text-[10px] font-black tracking-wider 2xl:tracking-[0.2em] uppercase rounded-xl hover:bg-secondary-dark transition-all shadow-lg shadow-secondary/20 hover:shadow-xl hover:shadow-secondary/30 active:scale-[0.98] whitespace-nowrap font-sans"
+                                className="hidden lg:inline-flex px-3 2xl:px-6 py-3 bg-secondary text-white text-[10px] 2xl:text-[11px] font-black tracking-wider 2xl:tracking-[0.2em] uppercase rounded-xl hover:bg-secondary-dark transition-all shadow-lg shadow-secondary/20 hover:shadow-xl hover:shadow-secondary/30 active:scale-[0.98] whitespace-nowrap font-sans"
                             >
                                 Submit Manuscript
                             </Link>

@@ -168,15 +168,15 @@ const Hero = () => {
                         >
                             <div className="text-center lg:text-left">
                                 <p className="text-2xl font-bold text-primary">550+</p>
-                                <p className="text-[9px] uppercase font-black text-slate-400 tracking-wider">Papers</p>
+                                <p className="text-[10px] uppercase font-black text-slate-600 tracking-wider">Papers</p>
                             </div>
                             <div className="text-center lg:text-left border-x border-slate-200/60">
                                 <p className="text-2xl font-bold text-primary">2.5K</p>
-                                <p className="text-[9px] uppercase font-black text-slate-400 tracking-wider">Citations</p>
+                                <p className="text-[10px] uppercase font-black text-slate-600 tracking-wider">Citations</p>
                             </div>
                             <div className="text-center lg:text-left">
                                 <p className="text-2xl font-bold text-primary">Fast</p>
-                                <p className="text-[9px] uppercase font-black text-slate-400 tracking-wider">Review</p>
+                                <p className="text-[10px] uppercase font-black text-slate-600 tracking-wider">Review</p>
                             </div>
                         </motion.div>
                     </motion.div>

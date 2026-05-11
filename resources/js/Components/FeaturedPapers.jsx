@@ -69,18 +69,18 @@ const FeaturedPapers = ({ papers = [] }) => {
                                         </div>
                                         <div>
                                             <p className="text-xs sm:text-sm font-bold text-dark dark:text-slate-200 line-clamp-1">{paper.authors}</p>
-                                            <p className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider mt-0.5">Author(s)</p>
+                                            <p className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider mt-0.5">Author(s)</p>
                                         </div>
                                     </div>
 
                                     <div className="mt-auto grid grid-cols-2 gap-4 pt-6 border-t border-slate-50 dark:border-slate-800/80">
-                                        <div className="flex items-center gap-2 text-slate-400 dark:text-slate-500 text-xs font-medium">
+                                        <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-xs font-medium">
                                             <Clock className="w-4 h-4" />
                                             <span>{new Date(paper.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
                                         </div>
-                                        <div className="flex items-center gap-2 text-slate-400 dark:text-slate-500 text-xs font-medium justify-end">
+                                        <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-xs font-medium justify-end">
                                             <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
-                                            <span className="font-bold text-slate-500 dark:text-slate-400">{paper.citations || 0} Citations</span>
+                                            <span className="font-bold text-slate-600 dark:text-slate-300">{paper.citations || 0} Citations</span>
                                         </div>
                                     </div>
 
