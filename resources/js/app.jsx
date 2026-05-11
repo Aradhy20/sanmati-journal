@@ -6,6 +6,15 @@ import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import ErrorBoundary from './Components/ErrorBoundary';
 
+// Self-healing mechanism for stale assets: reload page if a module fails to load
+window.addEventListener('error', (e) => {
+    const isChunkError = /Failed to fetch dynamically imported module|Loading chunk .* failed/i.test(e.message);
+    if (isChunkError) {
+        console.warn("Stale asset detected, triggering healing reload.");
+        window.location.reload();
+    }
+}, true);
+
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
 createInertiaApp({
