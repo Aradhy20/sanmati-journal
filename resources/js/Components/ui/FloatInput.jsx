@@ -53,6 +53,7 @@ export default function FloatInput({
                     required={required}
                     rows={textarea ? rows : undefined}
                     className={`block w-full px-4 ${textarea ? 'py-4' : 'h-14'} bg-white border ${borderColor} rounded-xl text-slate-900 text-base focus:outline-none focus:ring-4 ${ringColor} transition-all duration-300 peer disabled:opacity-50 disabled:cursor-not-allowed`}
+                    style={{ backgroundColor: '#ffffff', color: '#0f172a' }}
                     {...props}
                 />
                 
@@ -64,6 +65,7 @@ export default function FloatInput({
                             ? `-top-2.5 text-xs font-bold ${labelColor}` 
                             : `${textarea ? 'top-4' : 'top-1/2 -translate-y-1/2'} text-base ${labelColor}`
                     }`}
+                    style={{ backgroundColor: '#ffffff' }}
                 >
                     {label} {required && <span className="text-red-500 ml-0.5">*</span>}
                 </label>

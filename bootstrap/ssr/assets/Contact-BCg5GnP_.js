@@ -53,6 +53,7 @@ function FloatInput({
           required,
           rows: textarea ? rows : void 0,
           className: `block w-full px-4 ${textarea ? "py-4" : "h-14"} bg-white border ${borderColor} rounded-xl text-slate-900 text-base focus:outline-none focus:ring-4 ${ringColor} transition-all duration-300 peer disabled:opacity-50 disabled:cursor-not-allowed`,
+          style: { backgroundColor: "#ffffff", color: "#0f172a" },
           ...props
         }
       ),
@@ -61,6 +62,7 @@ function FloatInput({
         {
           htmlFor: id,
           className: `absolute left-4 transition-all duration-300 pointer-events-none bg-white px-1 ${isFloating ? `-top-2.5 text-xs font-bold ${labelColor}` : `${textarea ? "top-4" : "top-1/2 -translate-y-1/2"} text-base ${labelColor}`}`,
+          style: { backgroundColor: "#ffffff" },
           children: [
             label,
             " ",
@@ -255,18 +257,19 @@ function ContactForm() {
             name: "subject",
             title: "Subject",
             className: "block w-full px-4 h-14 bg-white border border-slate-300 rounded-xl text-slate-900 text-base focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all duration-300 disabled:opacity-50",
+            style: { backgroundColor: "#ffffff", color: "#0f172a" },
             value: data.subject,
             onChange: (e) => setData("subject", e.target.value),
             disabled: processing,
             children: [
-              /* @__PURE__ */ jsx("option", { children: "General Inquiry" }),
-              /* @__PURE__ */ jsx("option", { children: "Submission Query" }),
-              /* @__PURE__ */ jsx("option", { children: "Payment Issue" }),
-              /* @__PURE__ */ jsx("option", { children: "Technical Support" })
+              /* @__PURE__ */ jsx("option", { style: { backgroundColor: "#ffffff", color: "#0f172a" }, children: "General Inquiry" }),
+              /* @__PURE__ */ jsx("option", { style: { backgroundColor: "#ffffff", color: "#0f172a" }, children: "Submission Query" }),
+              /* @__PURE__ */ jsx("option", { style: { backgroundColor: "#ffffff", color: "#0f172a" }, children: "Payment Issue" }),
+              /* @__PURE__ */ jsx("option", { style: { backgroundColor: "#ffffff", color: "#0f172a" }, children: "Technical Support" })
             ]
           }
         ),
-        /* @__PURE__ */ jsx("label", { htmlFor: "subject", className: "absolute left-4 -top-2.5 bg-white px-1 text-xs font-bold text-slate-500", children: "Inquiry Node" }),
+        /* @__PURE__ */ jsx("label", { htmlFor: "subject", className: "absolute left-4 -top-2.5 bg-white px-1 text-xs font-bold text-slate-500", style: { backgroundColor: "#ffffff" }, children: "Inquiry Node" }),
         errors.subject && /* @__PURE__ */ jsx("div", { className: "text-red-500 text-xs mt-1.5 ml-1 font-medium", children: errors.subject })
       ] })
     ] }),

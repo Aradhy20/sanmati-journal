@@ -186,16 +186,17 @@ function ContactForm() {
                         name="subject" 
                         title="Subject" 
                         className="block w-full px-4 h-14 bg-white border border-slate-300 rounded-xl text-slate-900 text-base focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all duration-300 disabled:opacity-50"
+                        style={{ backgroundColor: '#ffffff', color: '#0f172a' }}
                         value={data.subject} 
                         onChange={e => setData('subject', e.target.value)} 
                         disabled={processing}
                     >
-                        <option>General Inquiry</option>
-                        <option>Submission Query</option>
-                        <option>Payment Issue</option>
-                        <option>Technical Support</option>
+                        <option style={{ backgroundColor: '#ffffff', color: '#0f172a' }}>General Inquiry</option>
+                        <option style={{ backgroundColor: '#ffffff', color: '#0f172a' }}>Submission Query</option>
+                        <option style={{ backgroundColor: '#ffffff', color: '#0f172a' }}>Payment Issue</option>
+                        <option style={{ backgroundColor: '#ffffff', color: '#0f172a' }}>Technical Support</option>
                     </select>
-                    <label htmlFor="subject" className="absolute left-4 -top-2.5 bg-white px-1 text-xs font-bold text-slate-500">
+                    <label htmlFor="subject" className="absolute left-4 -top-2.5 bg-white px-1 text-xs font-bold text-slate-500" style={{ backgroundColor: '#ffffff' }}>
                         Inquiry Node
                     </label>
                     {errors.subject && <div className="text-red-500 text-xs mt-1.5 ml-1 font-medium">{errors.subject}</div>}
