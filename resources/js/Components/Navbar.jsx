@@ -157,7 +157,7 @@ const Navbar = ({ onOpenSearch }) => {
                 ? 'bg-white/80 backdrop-blur-xl border-slate-200/60 shadow-lg shadow-primary/5 py-1.5' 
                 : 'bg-white/60 backdrop-blur-md border-transparent py-4'}`}>
                 <div className="container-custom">
-                    <div className="flex items-center justify-between h-16 sm:h-[72px] gap-3 xl:gap-6">
+                    <div className="flex items-center justify-between h-16 sm:h-[72px] gap-1.5 xl:gap-2 2xl:gap-6">
                         {/* Luxury Animated Logo & Nameplate */}
                         <Link href="/" className="flex items-center gap-3 flex-shrink-0 group min-w-0 relative">
                             <div className="absolute -inset-2 bg-gradient-to-r from-secondary/10 to-accent/10 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
@@ -172,17 +172,17 @@ const Navbar = ({ onOpenSearch }) => {
                             </motion.div>
                             
                             <div className="hidden sm:flex flex-col min-w-0 relative z-10">
-                                <span className={`block font-serif font-bold text-primary leading-none tracking-tight transition-all duration-500 ${scrolled ? 'text-lg' : 'text-xl sm:text-2xl'}`}>
+                                <span className={`block font-serif font-bold text-primary leading-none tracking-tight transition-all duration-500 ${scrolled ? 'text-lg' : 'text-lg xl:text-xl 2xl:text-2xl'}`}>
                                     Sanmati <span className="text-secondary font-normal italic">Spectrum</span>
                                 </span>
-                                <span className="text-[8px] font-bold tracking-[0.3em] uppercase text-muted mt-0.5 font-sans">
+                                <span className="text-[8px] font-bold tracking-wider 2xl:tracking-[0.3em] uppercase text-muted mt-0.5 font-sans">
                                     Academic Research
                                 </span>
                             </div>
                         </Link>
 
                         {/* Desktop Menu - Luxury Glass Styling */}
-                        <div className="hidden xl:flex items-center justify-center gap-1 flex-1 min-w-0 overflow-visible relative">
+                        <div className="hidden xl:flex items-center justify-center gap-0.5 2xl:gap-1 flex-1 min-w-0 overflow-visible relative">
                             {navItems.map((item) => (
                                 <div
                                     key={item.name}
@@ -194,7 +194,7 @@ const Navbar = ({ onOpenSearch }) => {
                                         <button
                                             aria-haspopup="true"
                                             aria-expanded={activeDropdown === item.name}
-                                            className={`relative group/nav flex items-center gap-1 text-[10px] font-black uppercase tracking-[0.15em] px-3 py-2 rounded-lg transition-all duration-300 font-sans ${activeDropdown === item.name || isActive(item.href)
+                                            className={`relative group/nav flex items-center gap-1 text-[9px] 2xl:text-[10px] font-black uppercase tracking-wider 2xl:tracking-[0.15em] px-1.5 2xl:px-3 py-2 rounded-lg transition-all duration-300 font-sans ${activeDropdown === item.name || isActive(item.href)
                                                 ? 'text-primary'
                                                 : 'text-slate-600 hover:text-primary'
                                                 }`}
@@ -208,7 +208,7 @@ const Navbar = ({ onOpenSearch }) => {
                                     ) : (
                                         <Link
                                             href={item.href}
-                                            className={`relative group/nav flex items-center gap-1 text-[10px] font-black uppercase tracking-[0.15em] px-3 py-2 rounded-lg transition-all duration-300 font-sans ${isActive(item.href)
+                                            className={`relative group/nav flex items-center gap-1 text-[9px] 2xl:text-[10px] font-black uppercase tracking-wider 2xl:tracking-[0.15em] px-1.5 2xl:px-3 py-2 rounded-lg transition-all duration-300 font-sans ${isActive(item.href)
                                                 ? 'text-primary'
                                                 : 'text-slate-600 hover:text-primary'
                                                 }`}
@@ -251,7 +251,7 @@ const Navbar = ({ onOpenSearch }) => {
                         </div>
 
                         {/* Glass Interaction Array */}
-                        <div className="flex items-center gap-2.5">
+                        <div className="flex items-center gap-1.5 2xl:gap-2.5">
                             <div className="hidden sm:flex items-center gap-1.5 bg-slate-100/50 border border-slate-200/50 p-1 rounded-xl backdrop-blur-sm">
                                 <button
                                     onClick={onOpenSearch}
@@ -272,7 +272,7 @@ const Navbar = ({ onOpenSearch }) => {
 
                             <Link
                                 href="/submission-guidelines/call-for-papers"
-                                className="hidden lg:inline-flex px-6 py-3 bg-secondary text-white text-[10px] font-black tracking-[0.2em] uppercase rounded-xl hover:bg-secondary-dark transition-all shadow-lg shadow-secondary/20 hover:shadow-xl hover:shadow-secondary/30 active:scale-[0.98] whitespace-nowrap font-sans"
+                                className="hidden lg:inline-flex px-3 2xl:px-6 py-3 bg-secondary text-white text-[9px] 2xl:text-[10px] font-black tracking-wider 2xl:tracking-[0.2em] uppercase rounded-xl hover:bg-secondary-dark transition-all shadow-lg shadow-secondary/20 hover:shadow-xl hover:shadow-secondary/30 active:scale-[0.98] whitespace-nowrap font-sans"
                             >
                                 Submit Manuscript
                             </Link>
