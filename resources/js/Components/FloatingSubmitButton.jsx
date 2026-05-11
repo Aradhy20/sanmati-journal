@@ -25,11 +25,11 @@ export default function FloatingSubmitButton() {
                 >
                     <Link
                         href="/submission-guidelines/call-for-papers"
-                        className="group relative flex items-center gap-3 bg-[#687EFF] text-white px-5 py-3.5 rounded-2xl shadow-2xl shadow-[#687EFF]/40 transition-all active:scale-95"
+                        className="group relative flex items-center gap-3 bg-secondary text-white px-5 py-3.5 rounded-2xl shadow-2xl shadow-secondary/40 transition-all active:scale-95"
                         aria-label="Submit Manuscript"
                     >
                         {/* Pulsing ring */}
-                        <span className="absolute inset-0 rounded-2xl animate-ping bg-[#687EFF]/30" />
+                        <span className="absolute inset-0 rounded-2xl animate-ping bg-secondary/30" />
 
                         <UploadCloud className="w-5 h-5 relative z-10" />
                         <span className="text-[11px] font-black uppercase tracking-widest relative z-10">

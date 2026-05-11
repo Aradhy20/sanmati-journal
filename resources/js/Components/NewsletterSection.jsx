@@ -50,7 +50,7 @@ export default function NewsletterSection() {
                     particleCount: 120,
                     spread: 70,
                     origin: { y: 0.6 },
-                    colors: ['#687EFF', '#F87A53', '#052143', '#ffffff'],
+                    colors: ['#0F766E', '#F59E0B', '#111827', '#ffffff'],
                 });
                 setEmail('');
                 setName('');
@@ -68,7 +68,7 @@ export default function NewsletterSection() {
     };
 
     return (
-        <section className="py-12 relative overflow-hidden bg-[#0a0f2e]">
+        <section className="py-12 relative overflow-hidden bg-primary">
             {/* Background Image */}
             <div 
                 className="absolute inset-0 z-0 opacity-60 mix-blend-screen"
@@ -81,11 +81,11 @@ export default function NewsletterSection() {
             />
             
             {/* Gradient Overlay */}
-            <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#0a0f2e]/80 via-[#10245E]/70 to-[#273295]/80 mix-blend-multiply" />
+            <div className="absolute inset-0 z-0 bg-gradient-to-br from-primary/90 via-primary/80 to-primary mix-blend-multiply" />
 
             <div className="absolute inset-0 z-0 opacity-10"
                 style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.08) 1px, transparent 0)', backgroundSize: '36px 36px' }} />
-            <div className="absolute -top-40 left-0 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[120px] z-0" />
+            <div className="absolute -top-40 left-0 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-[120px] z-0" />
             
             <div className="container-custom relative z-10">
                 <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12">
@@ -102,7 +102,7 @@ export default function NewsletterSection() {
                             <span className="text-secondary font-black text-[9px] uppercase tracking-[0.35em]">Academic Newsletter</span>
                         </div>
                         <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-white mb-4 leading-tight">
-                            Stay Updated with <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-[#F87A53]">Latest Research</span>
+                            Stay Updated with <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-secondary-light">Latest Research</span>
                         </h2>
                         <p className="text-white/50 text-sm font-medium max-w-xl">
                             Receive Call for Papers alerts, book releases, and academic news directly in your inbox.

@@ -1,8 +1,8 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,400;1,700&display=swap');
 @theme {
-  --font-sans: "Poppins", "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  --font-serif: "Playfair Display", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-serif: "Merriweather", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 
   /* ── Production Graded Variables ── */
   --container-width: 1200px;
@@ -13,14 +13,14 @@
   --shadow: 0 4px 20px rgba(0,0,0,0.08);
 
 
-  /* ── Sanmati Premium Palette (Vibrant Redesign) ── */
-  --color-primary: #2563EB;        /* Modern Blue */
-  --color-primary-dark: #1D4ED8;   /* Dark Blue */
-  --color-primary-light: #60A5FA;  /* Light Blue Accent */
+  /* ── Sanmati Premium Palette (Deep Editorial Redesign) ── */
+  --color-primary: #111827;        /* Ink Authority */
+  --color-primary-dark: #030712;   /* Deep Slate-Black */
+  --color-primary-light: #374151;  /* Soft Slate Accent */
 
-  --color-secondary: #7C3AED;      /* Purple Accent */
-  --color-secondary-dark: #6D28D9; /* Dark Purple */
-  --color-secondary-light: #A78BFA;/* Light Purple */
+  --color-secondary: #0F766E;      /* Scholarly Teal */
+  --color-secondary-dark: #0D9488; /* Bright Teal */
+  --color-secondary-light: #2DD4BF;/* Soft Cyan Light */
 
   --color-coral: #F97316;          /* Bright Warm Orange */
   --color-coral-dark: #EA580C;
@@ -105,11 +105,11 @@
 
   /* ── Design System v2: Academic Premium Tokens ── */
 
-  /* Playfair Display as academic serif (scholarly authority) */
-  --font-merriweather: "Playfair Display", Georgia, "Times New Roman", serif;
+  /* Merriweather as academic serif (scholarly authority) */
+  --font-merriweather: "Merriweather", Georgia, "Times New Roman", serif;
 
-  /* Emerald accent scale (knowledge / growth) */
-  --color-emerald-600: #059669;
+  /* Teal accent scale mapping to design system (knowledge / growth) */
+  --color-emerald-600: #0f766e;
   --color-emerald-500: #10b981;
   --color-emerald-400: #34d399;
   --color-emerald-100: #d1fae5;

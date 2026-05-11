@@ -268,7 +268,7 @@ export default function AreasOfSubmission() {
                                     <Sparkles className="w-3.5 h-3.5" /> Multidisciplinary Scope
                                 </span>
                                 <h2 className="text-2xl md:text-3xl font-bold text-dark mb-4 tracking-tight">
-                                    Scope of the <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600">Journal</span>
+                                    Scope of the <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Journal</span>
                                 </h2>
                                 <p className="text-gray-500 text-sm max-w-xl mx-auto leading-relaxed">
                                     We welcome original research across 10 major disciplines. Click any area to explore detailed topics and submission guidelines.

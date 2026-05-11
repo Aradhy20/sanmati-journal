@@ -88,9 +88,9 @@ export default function Home() {
             jsonLd={faqSchema}
         >
             <Suspense fallback={
-                <div className="min-h-[95vh] flex flex-col gap-4 items-center justify-center text-primary font-bold bg-[#050B14]">
-                    <Globe className="w-12 h-12 animate-spin text-accent opacity-20" />
-                    <span className="animate-pulse tracking-widest text-sm uppercase text-white/60">Loading Core Engine...</span>
+                <div className="min-h-[95vh] flex flex-col gap-4 items-center justify-center text-primary font-bold bg-white">
+                    <Globe className="w-12 h-12 animate-spin text-secondary opacity-20" />
+                    <span className="animate-pulse tracking-widest text-sm uppercase text-slate-400">Loading Content Engine...</span>
                 </div>
             }>
                 <Hero />
@@ -544,22 +544,22 @@ function PipelineSection() {
     const [activeStep, setActiveStep] = useState(null);
 
     return (
-        <section className="py-20 lg:py-32 bg-[#050B14] relative overflow-hidden border-t border-white/5 transition-colors duration-300">
+        <section className="py-20 lg:py-32 bg-slate-50 dark:bg-slate-900 relative overflow-hidden border-y border-slate-100 dark:border-slate-800 transition-colors duration-300">
             {/* Ambient glows inside pipeline */}
-            <div className="absolute top-0 left-1/4 w-[350px] h-[350px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute top-0 left-1/4 w-[350px] h-[350px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
             <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[120px] pointer-events-none" />
 
             <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
                 <div className="text-center max-w-2xl mx-auto mb-16">
                     <div className="flex items-center justify-center gap-3 mb-4">
-                        <span className="h-px w-8 bg-white/20" />
-                        <span className="text-cyan-400 font-black text-[10px] uppercase tracking-[0.3em]">Publication Journey</span>
-                        <span className="h-px w-8 bg-white/20" />
+                        <span className="h-px w-8 bg-primary/20" />
+                        <span className="text-secondary dark:text-secondary-light font-black text-[10px] uppercase tracking-[0.3em]">Publication Journey</span>
+                        <span className="h-px w-8 bg-primary/20" />
                     </div>
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-black text-white mb-4">
-                        Our Peer Review & <span className="text-cyan-400 italic font-serif">Publishing Workflow</span>
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-black text-dark dark:text-white mb-4">
+                        Our Peer Review & <span className="text-secondary dark:text-secondary-light italic font-serif">Publishing Workflow</span>
                     </h2>
-                    <p className="text-slate-400 font-medium text-sm">
+                    <p className="text-slate-500 dark:text-slate-400 font-medium text-sm">
                         Click any phase to explore your manuscript's journey in detail.
                     </p>
                 </div>
@@ -573,16 +573,16 @@ function PipelineSection() {
                                 key={i}
                                 onClick={() => setActiveStep(isActive ? null : i)}
                                 className={`group p-6 flex flex-col items-center text-center rounded-2xl transition-all duration-300 focus:outline-none ${isActive
-                                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-xl -translate-y-1'
-                                        : 'bg-white/5 border border-white/10 hover:border-white/20 hover:shadow-lg hover:-translate-y-0.5'
+                                        ? 'bg-primary text-white shadow-xl shadow-primary/20 -translate-y-1'
+                                        : 'bg-white dark:bg-slate-950 border border-slate-100 dark:border-slate-800 hover:border-primary/20 dark:hover:border-primary-light/20 hover:shadow-lg hover:-translate-y-0.5'
                                     }`}
                             >
-                                <div className={`w-14 h-14 rounded-full flex items-center justify-center mb-4 transition-all duration-300 shadow-sm ${isActive ? 'bg-white/10' : 'bg-slate-900 group-hover:bg-primary group-hover:text-white'}`}>
-                                    <item.icon className={`w-6 h-6 ${isActive ? 'text-white' : 'text-cyan-400 group-hover:text-white'}`} />
+                                <div className={`w-14 h-14 rounded-full flex items-center justify-center mb-4 transition-all duration-300 shadow-sm ${isActive ? 'bg-white/20' : 'bg-slate-50 dark:bg-slate-800 group-hover:bg-primary/10'}`}>
+                                    <item.icon className={`w-6 h-6 ${isActive ? 'text-white' : 'text-secondary group-hover:scale-110'}`} />
                                 </div>
-                                <span className={`text-[10px] font-black uppercase tracking-widest block mb-1 ${isActive ? 'text-white/60' : 'text-slate-400'}`}>Step {item.step}</span>
-                                <h3 className={`text-xs font-serif font-bold mb-1 ${isActive ? 'text-white' : 'text-white group-hover:text-cyan-400'}`}>{item.title}</h3>
-                                <p className={`text-[10px] leading-relaxed font-medium hidden md:block ${isActive ? 'text-white/70' : 'text-slate-400'}`}>{item.shortDesc}</p>
+                                <span className={`text-[10px] font-black uppercase tracking-widest block mb-1 ${isActive ? 'text-white/80' : 'text-slate-400 dark:text-slate-500'}`}>Step {item.step}</span>
+                                <h3 className={`text-xs font-serif font-bold mb-1 ${isActive ? 'text-white' : 'text-dark dark:text-white group-hover:text-primary'}`}>{item.title}</h3>
+                                <p className={`text-[10px] leading-relaxed font-medium hidden md:block ${isActive ? 'text-white/70' : 'text-slate-500 dark:text-slate-400'}`}>{item.shortDesc}</p>
                             </button>
                         );
                     })}
@@ -596,14 +596,14 @@ function PipelineSection() {
                     className={activeStep !== null ? 'block' : 'hidden'}
                 >
                     {activeStep !== null && (
-                        <div className="bg-white/5 rounded-2xl border border-white/10 p-8 flex flex-col sm:flex-row items-center sm:items-start gap-6">
-                            <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-purple-600 text-white rounded-2xl flex items-center justify-center shrink-0 shadow-md">
+                        <div className="bg-white dark:bg-slate-950 rounded-2xl border border-slate-100 dark:border-slate-800 p-8 flex flex-col sm:flex-row items-center sm:items-start gap-6 shadow-xl shadow-primary/5">
+                            <div className="w-14 h-14 bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light rounded-2xl flex items-center justify-center shrink-0 shadow-sm">
                                 {React.createElement(pipelineSteps[activeStep].icon, { className: 'w-6 h-6' })}
                             </div>
                             <div>
-                                <span className="text-[10px] font-black uppercase tracking-widest text-cyan-400 mb-1 block">Phase Details</span>
-                                <h3 className="text-lg font-serif font-bold text-white mb-2">{pipelineSteps[activeStep].title}</h3>
-                                <p className="text-slate-300 leading-relaxed text-sm font-medium">{pipelineSteps[activeStep].fullDesc}</p>
+                                <span className="text-[10px] font-black uppercase tracking-widest text-secondary dark:text-secondary-light mb-1 block">Phase Details</span>
+                                <h3 className="text-lg font-serif font-bold text-dark dark:text-white mb-2">{pipelineSteps[activeStep].title}</h3>
+                                <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm font-medium">{pipelineSteps[activeStep].fullDesc}</p>
                             </div>
                         </div>
                     )}

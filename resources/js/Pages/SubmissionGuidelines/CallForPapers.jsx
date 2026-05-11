@@ -83,7 +83,7 @@ export default function CallForPapers() {
 
     return (
         <MainLayout>
-            <div className="bg-[#eef1ff] min-h-screen">
+            <div className="bg-slate-50 min-h-screen">
                 <PageHeader
                     title="Manuscript Submission System"
                     breadcrumb="Submission Portal"
@@ -95,8 +95,8 @@ export default function CallForPapers() {
                     {/* Stepper Wizard Header */}
                     {step < 4 && (
                         <div className="flex flex-col sm:flex-row justify-between items-center gap-6 sm:gap-0 mb-12 relative z-0">
-                            <div className="hidden sm:block absolute top-1/2 left-0 w-full h-1 bg-gray-200 -z-10 -translate-y-1/2 rounded-full"></div>
-                            <div className="hidden sm:block absolute top-1/2 left-0 h-1 bg-blue-600 -z-10 -translate-y-1/2 rounded-full transition-all duration-500" style={{ width: `${(step - 1) * 50}%` }}></div>
+                            <div className="hidden sm:block absolute top-1/2 left-0 w-full h-1 bg-slate-200 -z-10 -translate-y-1/2 rounded-full"></div>
+                            <div className="hidden sm:block absolute top-1/2 left-0 h-1 bg-secondary -z-10 -translate-y-1/2 rounded-full transition-all duration-500" style={{ width: `${(step - 1) * 50}%` }}></div>
                             
                             {[
                                 { num: 1, label: 'Metadata', icon: FileText },
@@ -104,16 +104,16 @@ export default function CallForPapers() {
                                 { num: 3, label: 'Final Review', icon: ShieldCheck }
                             ].map((s) => (
                                 <div key={s.num} className="flex flex-col items-center">
-                                    <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg mb-3 shadow-md transition-colors duration-500 ${step >= s.num ? 'bg-blue-600 text-white border-4 border-blue-200' : 'bg-white text-gray-400 border-4 border-gray-100'}`}>
+                                    <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg mb-3 shadow-md transition-colors duration-500 ${step >= s.num ? 'bg-secondary text-white border-4 border-secondary/20' : 'bg-white text-gray-400 border-4 border-gray-100'}`}>
                                         <s.icon className="w-5 h-5" />
                                     </div>
-                                    <span className={`text-[11px] uppercase tracking-widest font-black ${step >= s.num ? 'text-blue-900' : 'text-gray-400'}`}>{s.label}</span>
+                                    <span className={`text-[11px] uppercase tracking-widest font-black ${step >= s.num ? 'text-primary' : 'text-gray-400'}`}>{s.label}</span>
                                 </div>
                             ))}
                         </div>
                     )}
 
-                    <div className="bg-white rounded-[2rem] shadow-xl border border-gray-100 relative">
+                    <div className="bg-white rounded-[2rem] shadow-xl border border-slate-100 relative">
                         <div className="p-8 md:p-12">
                             
                             {/* STEP 4: SUCCESS */}
@@ -130,7 +130,7 @@ export default function CallForPapers() {
                                         <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Tracking ID</p>
                                         <p className="font-mono text-slate-900 font-bold text-lg">{trackingId || 'SJ-PENDING'}</p>
                                     </div>
-                                    <button onClick={() => { setStep(1); setTrackingId(null); clearErrors(); }} className="text-blue-600 font-bold hover:underline">Submit another paper</button>
+                                    <button onClick={() => { setStep(1); setTrackingId(null); clearErrors(); }} className="text-secondary font-bold hover:underline">Submit another paper</button>
                                 </motion.div>
                             )}
 
@@ -156,7 +156,7 @@ export default function CallForPapers() {
                                                                 type="text" 
                                                                 value={data.title}
                                                                 onChange={e => setData('title', e.target.value)}
-                                                                className={`w-full px-5 py-4 rounded-xl border ${errors.title ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-slate-50'} focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none`}
+                                                                className={`w-full px-5 py-4 rounded-xl border ${errors.title ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-slate-50'} focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none`}
                                                                 placeholder="Example: Teaching with AI"
                                                                 required
                                                             />
@@ -169,7 +169,7 @@ export default function CallForPapers() {
                                                                 value={data.abstract}
                                                                 onChange={e => setData('abstract', e.target.value)}
                                                                 rows="7"
-                                                                className={`w-full px-5 py-4 rounded-xl border ${errors.abstract ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-slate-50'} focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none resize-none`}
+                                                                className={`w-full px-5 py-4 rounded-xl border ${errors.abstract ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-slate-50'} focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none resize-none`}
                                                                 placeholder="Provide a 200-300 word summary of methodology and findings."
                                                                 required
                                                             ></textarea>
@@ -182,7 +182,7 @@ export default function CallForPapers() {
                                                                 type="text" 
                                                                 value={data.keywords}
                                                                 onChange={e => setData('keywords', e.target.value)}
-                                                                className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none"
+                                                                className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none"
                                                                 placeholder="Comma separated: Education, AI, Pedagogy"
                                                             />
                                                         </div>
@@ -201,7 +201,7 @@ export default function CallForPapers() {
                                                                 type="text" 
                                                                 value={data.author_name}
                                                                 onChange={e => setData('author_name', e.target.value)}
-                                                                className={`w-full px-5 py-4 rounded-xl border ${errors.author_name ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-slate-50'} focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none`}
+                                                                className={`w-full px-5 py-4 rounded-xl border ${errors.author_name ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-slate-50'} focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none`}
                                                                 placeholder="Dr. Aradhya Jain"
                                                                 required
                                                             />
@@ -214,7 +214,7 @@ export default function CallForPapers() {
                                                                 type="email" 
                                                                 value={data.author_email}
                                                                 onChange={e => setData('author_email', e.target.value)}
-                                                                className={`w-full px-5 py-4 rounded-xl border ${errors.author_email ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-slate-50'} focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none`}
+                                                                className={`w-full px-5 py-4 rounded-xl border ${errors.author_email ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-slate-50'} focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none`}
                                                                 placeholder="aradhya@university.edu"
                                                                 required
                                                             />
@@ -227,7 +227,7 @@ export default function CallForPapers() {
                                                                 type="text" 
                                                                 value={data.author_phone}
                                                                 onChange={e => setData('author_phone', e.target.value)}
-                                                                className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none"
+                                                                className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none"
                                                                 placeholder="+91 XXXXXXXXXX"
                                                             />
                                                         </div>
@@ -238,15 +238,15 @@ export default function CallForPapers() {
                                                                 type="text" 
                                                                 value={data.institution}
                                                                 onChange={e => setData('institution', e.target.value)}
-                                                                className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none"
+                                                                className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none"
                                                                 placeholder="University Name / Research Center"
                                                             />
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div className="mt-12 flex justify-end border-t border-gray-50 pt-8">
-                                                    <button type="submit" disabled={!data.title || !data.abstract || !data.author_name || !data.author_email} className="px-10 py-5 bg-slate-900 text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-blue-600 transition-all flex items-center gap-4 group disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-blue-600/20">
+                                                <div className="mt-12 flex justify-end border-t border-slate-100 pt-8">
+                                                    <button type="submit" disabled={!data.title || !data.abstract || !data.author_name || !data.author_email} className="px-10 py-5 bg-primary text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-secondary transition-all flex items-center gap-4 group disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-secondary/20">
                                                         Proceed to Upload <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                                     </button>
                                                 </div>
@@ -275,7 +275,7 @@ export default function CallForPapers() {
                                                     <button type="button" onClick={() => setStep(1)} className="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 border border-gray-200 font-bold rounded-xl hover:bg-slate-50 transition-colors">
                                                         Back
                                                     </button>
-                                                    <button type="submit" disabled={!data.manuscript} className="w-full sm:w-auto px-8 py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-blue-600 transition-colors flex justify-center items-center gap-2 group disabled:opacity-50">
+                                                    <button type="submit" disabled={!data.manuscript} className="w-full sm:w-auto px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-secondary transition-colors flex justify-center items-center gap-2 group disabled:opacity-50">
                                                         Final Step <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                                     </button>
                                                 </div>
@@ -290,7 +290,7 @@ export default function CallForPapers() {
                                                     <p className="text-slate-500">Please review your submission and agree to our academic integrity policies.</p>
                                                 </div>
 
-                                                <div className="bg-slate-50 rounded-2xl p-8 mb-8 border border-gray-100">
+                                                <div className="bg-slate-50 rounded-2xl p-8 mb-8 border border-slate-100">
                                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12">
                                                         <div className="md:col-span-2">
                                                             <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Manuscript Title</p>
@@ -309,7 +309,7 @@ export default function CallForPapers() {
                                                             <>
                                                                 <div>
                                                                     <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Attached File</p>
-                                                                    <p className="font-medium text-blue-600 flex items-center gap-2">
+                                                                    <p className="font-medium text-secondary flex items-center gap-2">
                                                                         <FileText className="w-4 h-4"/> 
                                                                         <span className="truncate max-w-[200px]">{data.manuscript?.name}</span>
                                                                     </p>
@@ -325,14 +325,14 @@ export default function CallForPapers() {
                                                     </div>
                                                 </div>
 
-                                                <div className="bg-blue-50/50 border border-blue-100 rounded-2xl p-6 mb-10">
+                                                <div className="bg-secondary/5 border border-secondary/10 rounded-2xl p-6 mb-10">
                                                     <label className="flex items-start gap-4 cursor-pointer">
                                                         <div className="pt-1">
                                                             <input 
                                                                 type="checkbox" 
                                                                 checked={data.consent}
                                                                 onChange={e => setData('consent', e.target.checked)}
-                                                                className="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+                                                                className="w-5 h-5 rounded border-gray-300 text-secondary focus:ring-secondary"
                                                                 required
                                                             />
                                                         </div>
@@ -346,15 +346,15 @@ export default function CallForPapers() {
                                                 {/* ReCAPTCHA UI visual simulation for trust */}
                                                 <div className="flex items-center justify-end gap-3 mb-8">
                                                     <ShieldCheck className="w-5 h-5 text-green-600" />
-                                                    <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Protected by reCAPTCHA Enterprise</span>
+                                                    <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Protected by Secure Gate</span>
                                                 </div>
 
-                                                <div className="flex justify-between border-t border-gray-100 pt-8">
+                                                <div className="flex justify-between border-t border-slate-100 pt-8">
                                                     <button type="button" onClick={() => setStep(2)} disabled={processing} className="px-8 py-4 bg-white text-slate-700 border border-gray-200 font-bold rounded-xl hover:bg-slate-50 transition-colors disabled:opacity-50">
                                                         Back
                                                     </button>
-                                                    <button type="submit" disabled={processing || !data.consent} className="px-10 py-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-all flex items-center gap-2 shadow-lg shadow-blue-600/30 disabled:opacity-50 disabled:shadow-none relative overflow-hidden group">
-                                                        <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                                                    <button type="submit" disabled={processing || !data.consent} className="px-10 py-4 bg-secondary text-white font-bold rounded-xl hover:bg-secondary-light transition-all flex items-center gap-2 shadow-lg shadow-secondary/20 disabled:opacity-50 disabled:shadow-none relative overflow-hidden group">
+                                                        <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
                                                         {processing ? 'Encrypting & Submitting...' : 'Submit Manuscript Officially'}
                                                     </button>
                                                 </div>
