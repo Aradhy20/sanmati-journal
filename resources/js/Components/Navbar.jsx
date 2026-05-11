@@ -150,6 +150,7 @@ const Navbar = ({ onOpenSearch }) => {
     };
 
     return (
+        <>
         <header className="sticky top-0 z-50 flex flex-col w-full overflow-x-visible">
 
             {/* Main Navbar - 2026 Premium Glass Header */}
@@ -287,6 +288,10 @@ const Navbar = ({ onOpenSearch }) => {
                         </div>
                     </div>
                 </div>
+            </nav>
+
+        </header>
+
 
                 {/* Fullscreen Mobile Overlay - 2026 Refinement */}
                 <AnimatePresence>
@@ -354,9 +359,7 @@ const Navbar = ({ onOpenSearch }) => {
                         </motion.div>
                     )}
                 </AnimatePresence>
-            </nav>
-
-        </header>
+        </>
     );
 };
 
