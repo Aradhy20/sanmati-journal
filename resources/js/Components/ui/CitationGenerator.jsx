@@ -76,6 +76,7 @@ export default function CitationGenerator({ paper }) {
                         onClick={handleCopy}
                         className="p-2 text-slate-400 hover:text-blue-600 bg-slate-100 hover:bg-blue-50 rounded-lg transition-all"
                         title="Copy to Clipboard"
+                        aria-label="Copy citation to clipboard"
                     >
                         <Copy className="w-5 h-5" />
                     </button>

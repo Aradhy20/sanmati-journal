@@ -338,6 +338,7 @@ export default function Home() {
                                         <button 
                                             onClick={(e) => { e.preventDefault(); toggleSavePaper(i); }}
                                             className="w-7 h-7 rounded-full bg-white flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors border border-slate-100"
+                                            aria-label={savedPapers[i] ? "Remove paper from saved list" : "Save paper to your reading list"}
                                         >
                                             <Heart className={`w-3.5 h-3.5 ${savedPapers[i] ? 'fill-red-500 text-red-500' : ''}`} />
                                         </button>

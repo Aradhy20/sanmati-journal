@@ -85,7 +85,11 @@ export default function SearchModal({ isOpen, onClose }) {
                             {isSearching ? (
                                 <Loader2 className="w-5 h-5 text-primary animate-spin ml-4" />
                             ) : (
-                                <button onClick={onClose} className="p-2 hover:bg-gray-200 rounded-full transition-colors ml-2">
+                                <button 
+                                    onClick={onClose} 
+                                    className="p-2 hover:bg-gray-200 rounded-full transition-colors ml-2"
+                                    aria-label="Close search modal"
+                                >
                                     <X className="w-5 h-5 text-dark/50" />
                                 </button>
                             )}

@@ -9,6 +9,7 @@ const FAQItem = ({ question, answer, isOpen, onClick }) => {
             <button
                 className="w-full py-6 flex items-center justify-between gap-4 text-left group"
                 onClick={onClick}
+                aria-expanded={isOpen}
             >
                 <span className={`text-lg transition-colors font-medium ${isOpen ? 'text-primary' : 'text-dark group-hover:text-primary'}`}>
                     {question}

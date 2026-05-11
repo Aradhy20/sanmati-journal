@@ -309,6 +309,7 @@ const Navbar = ({ onOpenSearch }) => {
                                 <button
                                     onClick={() => setIsOpen(false)}
                                     className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 text-slate-700"
+                                    aria-label="Close navigation menu"
                                 >
                                     <X className="w-5 h-5" />
                                 </button>
