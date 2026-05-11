@@ -190,7 +190,7 @@ const Hero = () => {
                 initial: { opacity: 0, scale: 0.9, rotate: -5 },
                 animate: { opacity: 1, scale: 1, rotate: 0 },
                 transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.3 },
-                className: "relative w-4/5 h-4/5 rounded-[3rem] overflow-hidden shadow-2xl group border-4 border-white bg-white",
+                className: "relative w-[85%] h-[85%] sm:w-4/5 sm:h-4/5 rounded-[3rem] overflow-hidden shadow-2xl group border-4 border-white bg-white",
                 children: [
                   /* @__PURE__ */ jsx("div", { className: "absolute inset-0 bg-gradient-to-b from-transparent to-primary/10 z-10 pointer-events-none" }),
                   /* @__PURE__ */ jsx(
@@ -201,9 +201,9 @@ const Hero = () => {
                       className: "w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-[2s]"
                     }
                   ),
-                  /* @__PURE__ */ jsxs("div", { className: "absolute bottom-6 inset-x-6 p-4 bg-white/80 backdrop-blur-md border border-white/50 rounded-2xl shadow-lg z-20 text-center", children: [
-                    /* @__PURE__ */ jsx("span", { className: "block text-[9px] font-black uppercase tracking-widest text-secondary mb-1", children: "Global Recognition" }),
-                    /* @__PURE__ */ jsx("span", { className: "text-primary font-bold text-xs", children: "Double-Blind Peer Reviewed Journal" })
+                  /* @__PURE__ */ jsxs("div", { className: "absolute bottom-4 sm:bottom-6 inset-x-4 sm:inset-x-6 p-2.5 sm:p-4 bg-white/80 backdrop-blur-md border border-white/50 rounded-2xl shadow-lg z-20 text-center", children: [
+                    /* @__PURE__ */ jsx("span", { className: "block text-[8px] sm:text-[9px] font-black uppercase tracking-widest text-secondary mb-0.5 sm:mb-1", children: "Global Recognition" }),
+                    /* @__PURE__ */ jsx("span", { className: "text-primary font-bold text-[10px] sm:text-xs leading-tight inline-block", children: "Double-Blind Peer Reviewed Journal" })
                   ] })
                 ]
               }
@@ -213,12 +213,12 @@ const Hero = () => {
               {
                 animate: { y: [0, -10, 0], x: [0, 5, 0] },
                 transition: { duration: 5, repeat: Infinity, ease: "easeInOut" },
-                className: "absolute -top-4 -right-2 lg:-right-10 bg-white/80 backdrop-blur-xl border border-white rounded-2xl shadow-xl p-4 z-30 flex items-center gap-3.5 max-w-[200px]",
+                className: "absolute -top-4 right-0 lg:-right-10 bg-white/80 backdrop-blur-xl border border-white rounded-2xl shadow-xl p-2.5 sm:p-4 z-30 flex items-center gap-2 sm:gap-3.5 max-w-[140px] sm:max-w-[200px]",
                 children: [
-                  /* @__PURE__ */ jsx("div", { className: "w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600 flex-shrink-0", children: /* @__PURE__ */ jsx(ShieldCheck, { className: "w-5 h-5" }) }),
+                  /* @__PURE__ */ jsx("div", { className: "w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600 flex-shrink-0", children: /* @__PURE__ */ jsx(ShieldCheck, { className: "w-4 h-4 sm:w-5 sm:h-5" }) }),
                   /* @__PURE__ */ jsxs("div", { children: [
-                    /* @__PURE__ */ jsx("p", { className: "text-sm font-black text-primary leading-none", children: "UGC CARE" }),
-                    /* @__PURE__ */ jsx("p", { className: "text-[9px] font-bold text-slate-500 mt-1 uppercase", children: "Indexed Standards" })
+                    /* @__PURE__ */ jsx("p", { className: "text-[11px] sm:text-sm font-black text-primary leading-none", children: "UGC CARE" }),
+                    /* @__PURE__ */ jsx("p", { className: "text-[8px] sm:text-[9px] font-bold text-slate-500 mt-0.5 sm:mt-1 uppercase", children: "Indexed" })
                   ] })
                 ]
               }
@@ -228,12 +228,12 @@ const Hero = () => {
               {
                 animate: { y: [0, 12, 0], x: [0, -6, 0] },
                 transition: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 },
-                className: "absolute bottom-12 -left-2 lg:-left-10 bg-white/80 backdrop-blur-xl border border-white rounded-2xl shadow-xl p-4 z-30 flex items-center gap-3.5 max-w-[180px]",
+                className: "absolute bottom-8 left-0 lg:-left-10 bg-white/80 backdrop-blur-xl border border-white rounded-2xl shadow-xl p-2.5 sm:p-4 z-30 flex items-center gap-2 sm:gap-3.5 max-w-[140px] sm:max-w-[180px]",
                 children: [
-                  /* @__PURE__ */ jsx("div", { className: "w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600 flex-shrink-0", children: /* @__PURE__ */ jsx(Trophy, { className: "w-5 h-5" }) }),
+                  /* @__PURE__ */ jsx("div", { className: "w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-amber-50 flex items-center justify-center text-amber-600 flex-shrink-0", children: /* @__PURE__ */ jsx(Trophy, { className: "w-4 h-4 sm:w-5 sm:h-5" }) }),
                   /* @__PURE__ */ jsxs("div", { children: [
-                    /* @__PURE__ */ jsx("p", { className: "text-sm font-black text-primary leading-none", children: "High Impact" }),
-                    /* @__PURE__ */ jsx("p", { className: "text-[9px] font-bold text-slate-500 mt-1 uppercase", children: "Impact Rating" })
+                    /* @__PURE__ */ jsx("p", { className: "text-[11px] sm:text-sm font-black text-primary leading-none", children: "High Impact" }),
+                    /* @__PURE__ */ jsx("p", { className: "text-[8px] sm:text-[9px] font-bold text-slate-500 mt-0.5 sm:mt-1 uppercase", children: "Rating" })
                   ] })
                 ]
               }

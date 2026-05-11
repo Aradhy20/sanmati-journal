@@ -288,7 +288,7 @@ const Testimonials = () => {
     ] })
   ] });
 };
-const Hero = React.lazy(() => import("./Hero-_KYAAs0F.js"));
+const Hero = React.lazy(() => import("./Hero-Y0yNtLOz.js"));
 const fadeInUp = {
   initial: { opacity: 0, y: 30, filter: "blur(8px)" },
   whileInView: { opacity: 1, y: 0, filter: "blur(0px)" },

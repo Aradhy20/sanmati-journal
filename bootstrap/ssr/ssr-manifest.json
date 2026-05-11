@@ -13,13 +13,13 @@
     "/build/assets/Graphics-CZ-Bhg_h.js"
   ],
   "resources/js/Components/Hero.jsx": [
-    "/build/assets/Hero-_KYAAs0F.js"
+    "/build/assets/Hero-Y0yNtLOz.js"
   ],
   "resources/js/Components/Navbar.jsx": [
     "/build/assets/MainLayout-D4W6MRMl.js"
   ],
   "resources/js/Components/NewsletterSection.jsx": [
-    "/build/assets/Home-B5BU2YcY.js"
+    "/build/assets/Home-lJfGbJ-e.js"
   ],
   "resources/js/Components/PageHeader.jsx": [
     "/build/assets/PageHeader-DHJj0W5D.js"
@@ -40,7 +40,7 @@
     "/build/assets/EditorialTeam-BjKSsmwS.js"
   ],
   "resources/js/Components/Testimonials.jsx": [
-    "/build/assets/Home-B5BU2YcY.js"
+    "/build/assets/Home-lJfGbJ-e.js"
   ],
   "resources/js/Components/ui/CitationGenerator.jsx": [
     "/build/assets/CitationGenerator-DOIbYQyu.js"
@@ -175,7 +175,7 @@
     "/build/assets/Photo-D-w7zjfR.js"
   ],
   "resources/js/Pages/Home.jsx": [
-    "/build/assets/Home-B5BU2YcY.js"
+    "/build/assets/Home-lJfGbJ-e.js"
   ],
   "resources/js/Pages/PublicationPolicy/Ethics.jsx": [
     "/build/assets/Ethics-B513y84l.js"
