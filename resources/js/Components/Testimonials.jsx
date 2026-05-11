@@ -105,7 +105,7 @@ const Testimonials = () => {
                             key={i}
                             onClick={() => setCurrent(i)}
                             title={`Go to slide ${i + 1}`}
-                            className="group p-2 -m-2 transition-all duration-200 cursor-pointer outline-none"
+                            className="group py-3 px-2 -my-3 -mx-2 transition-all duration-200 cursor-pointer outline-none"
                             aria-label={`Go to slide ${i + 1}`}
                         >
                             <div className={`h-1.5 transition-all duration-500 rounded-full ${i === current ? 'w-8 bg-primary' : 'w-2 bg-slate-700 group-hover:bg-slate-500'}`} />

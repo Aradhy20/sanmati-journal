@@ -575,7 +575,7 @@ function PipelineSection() {
                                 <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-6 transition-all duration-500 ${isActive ? 'bg-white/10 border border-white/20' : 'bg-slate-50 group-hover:bg-secondary/10'}`}>
                                     <item.icon className={`w-5 h-5 ${isActive ? 'text-secondary' : 'text-slate-400 group-hover:text-secondary'} transition-colors`} />
                                 </div>
-                                <span className={`font-serif font-bold text-4xl block mb-4 ${isActive ? 'text-white/30' : 'text-slate-300 group-hover:text-slate-400'} transition-colors`}>{item.step}</span>
+                                <span className={`font-serif font-bold text-4xl block mb-4 ${isActive ? 'text-white/30' : 'text-slate-500 group-hover:text-slate-400'} transition-colors`}>{item.step}</span>
                                 <h3 className={`font-serif font-bold text-lg leading-tight mb-2 ${isActive ? 'text-white' : 'text-primary'}`}>{item.title}</h3>
                                 <p className={`text-[12px] leading-relaxed font-medium ${isActive ? 'text-slate-300' : 'text-slate-500'}`}>{item.shortDesc}</p>
                             </button>

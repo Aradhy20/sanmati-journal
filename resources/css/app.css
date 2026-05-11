@@ -23,7 +23,7 @@
   --color-primary-dark: #051225;   /* Darker Navy for active states */
   --color-primary-light: #1a2e4d;  /* Softened Navy */
 
-  --color-secondary: #917337;      /* High Contrast Premium Gold */
+  --color-secondary: #8b6c30;      /* High Contrast Premium Gold */
   --color-secondary-dark: #785e29; 
   --color-secondary-light: #a68846;
 
@@ -112,7 +112,7 @@
   /* ── Design System v3: Global Glassmorphism Tokens ── */
 
   /* Scale mapping based on design framework */
-  --color-gold-accent: #917337;
+  --color-gold-accent: #8b6c30;
   --color-navy-main:   #0B1F3A;
 
   /* Slate neutrals tuned for glass clarity */
@@ -192,7 +192,7 @@
   /* Premium Gold Button (Primary CTA) */
   .thm-btn {
     @apply inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-secondary text-white font-bold rounded-xl
-           hover:bg-secondary-dark hover:shadow-[0_10px_30px_-5px_rgba(145,115,55,0.4)]
+           hover:bg-secondary-dark hover:shadow-[0_10px_30px_-5px_rgba(139,108,48,0.4)]
            transition-all duration-300 active:scale-[0.98]
            text-xs uppercase tracking-[0.15em] shadow-md relative overflow-hidden;
   }

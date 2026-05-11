@@ -21,7 +21,7 @@ const Footer = () => {
                                 </div>
                                 <div>
                                     <h3 className="text-2xl font-serif font-bold text-white tracking-tight leading-none mb-1">Sanmati Spectrum</h3>
-                                    <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-secondary opacity-90">ISSN: 3108-1819</span>
+                                    <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#C8A96B]">ISSN: 3108-1819</span>
                                 </div>
                             </div>
                         </Link>
