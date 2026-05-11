@@ -43,10 +43,13 @@ class SubmissionController extends Controller
         
         if ($file && file_exists($file->getRealPath())) {
             $escapedPath = escapeshellarg($file->getRealPath());
-            // Only run clamscan if it's available in the system
-            $hasClamscan = shell_exec('which clamscan');
-            if ($hasClamscan) {
-                @exec("clamscan " . $escapedPath, $output, $returnCode);
+            
+            // Robust safety check: check if execution primitives are allowed on the server host
+            if (function_exists('shell_exec')) {
+                $hasClamscan = @shell_exec('which clamscan');
+                if ($hasClamscan && function_exists('exec')) {
+                    @exec("clamscan " . $escapedPath, $output, $returnCode);
+                }
             }
         }
 
