@@ -1,42 +1,45 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap');
+
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  --font-serif: "Merriweather", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-serif: "Playfair Display", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-body: "Inter", sans-serif;
 
   /* ── Production Graded Variables ── */
-  --container-width: 1200px;
+  --container-width: 1280px;
   --space-sm: 8px;
   --space-md: 16px;
   --space-lg: 32px;
   --radius: 12px;
-  --shadow: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow: 0 4px 20px rgba(0,0,0,0.05);
 
 
-  /* ── Sanmati Premium Palette (Deep Editorial Redesign) ── */
-  --color-primary: #111827;        /* Ink Authority */
-  --color-primary-dark: #030712;   /* Deep Slate-Black */
-  --color-primary-light: #374151;  /* Soft Slate Accent */
+  /* ── Sanmati Premium Global Redesign (2026) ── */
+  --color-primary: #0B1F3A;        /* Primary Navy */
+  --color-primary-dark: #051225;   /* Darker Navy for active states */
+  --color-primary-light: #1a2e4d;  /* Softened Navy */
 
-  --color-secondary: #0F766E;      /* Scholarly Teal */
-  --color-secondary-dark: #0D9488; /* Bright Teal */
-  --color-secondary-light: #2DD4BF;/* Soft Cyan Light */
+  --color-secondary: #C8A96B;      /* Premium Gold Accent */
+  --color-secondary-dark: #B39357; 
+  --color-secondary-light: #E5D2A8;
 
-  --color-coral: #F97316;          /* Bright Warm Orange */
-  --color-coral-dark: #EA580C;
+  --color-accent: #1E88E5;         /* Vibrant Academic Blue */
+  --color-accent-light: #42A5F5;
 
-  --color-success: #10B981;        /* Emerland */
-  --color-info: #0EA5E9;           /* Sky Blue */
+  --color-success: #059669;        /* Emerald 600 */
+  --color-info: #0284C7;           /* Sky 600 */
 
-  --color-dark: #0F172A;           /* Deep Slate - highly modern */
-  --color-dark-light: #1E293B;     /* Lighter Slate */
+  --color-dark: #111827;           /* Text Primary */
+  --color-dark-light: #374151;     /* Lighter Text */
 
-  --color-accent: #06B6D4;         /* Cyan Accent */
-  --color-accent-light: #22D3EE;
-
-  --color-warm-bg: #F8FAFC;        /* Crisp Slate 50 */
+  --color-warm-bg: #F8FAFC;        /* Clean Slate 50 for glass clarity */
   --color-surface: #ffffff;
-  --color-muted: #64748B;          /* Slate Gray */
+  --color-muted: #6B7280;          /* Text Secondary */
+
+  /* Glassmorphic Helpers */
+  --color-glass: rgba(255, 255, 255, 0.8);
+  --color-glass-border: rgba(255, 255, 255, 0.5);
 
   --animate-blob: blob 10s infinite;
   --animate-float: float 4s ease-in-out infinite;
@@ -103,49 +106,46 @@
     50% { transform: scale(1.05); }
   }
 
-  /* ── Design System v2: Academic Premium Tokens ── */
+  /* ── Design System v3: Global Glassmorphism Tokens ── */
 
-  /* Merriweather as academic serif (scholarly authority) */
-  --font-merriweather: "Merriweather", Georgia, "Times New Roman", serif;
+  /* Scale mapping based on design framework */
+  --color-gold-accent: #C8A96B;
+  --color-navy-main:   #0B1F3A;
 
-  /* Teal accent scale mapping to design system (knowledge / growth) */
-  --color-emerald-600: #0f766e;
-  --color-emerald-500: #10b981;
-  --color-emerald-400: #34d399;
-  --color-emerald-100: #d1fae5;
+  /* Slate neutrals tuned for glass clarity */
+  --color-slate-950: #0B1F3A;
+  --color-slate-900: #111827;
+  --color-slate-800: #1F2937;
+  --color-slate-700: #374151;
+  --color-slate-600: #4B5563;
+  --color-slate-500: #6B7280;
+  --color-slate-400: #9CA3AF;
+  --color-slate-300: #D1D5DB;
+  --color-slate-200: #E5E7EB;
+  --color-slate-100: #F3F4F6;
+  --color-slate-50:  #F9FAFB;
 
-  /* Slate neutrals */
-  --color-slate-950: #0f172a;
-  --color-slate-800: #1e293b;
-  --color-slate-700: #334155;
-  --color-slate-600: #475569;
-  --color-slate-300: #cbd5e1;
-  --color-slate-200: #e2e8f0;
-  --color-slate-100: #f1f5f9;
-  --color-slate-50:  #f8fafc;
-
-  /* Semantic aliases (use these in components) */
-  --color-ds-accent:        var(--color-emerald-600);
-  --color-ds-accent-light:  var(--color-emerald-500);
-  --color-ds-text:          #1e293b;
-  --color-ds-text-muted:    #64748b;
+  /* Semantic aliases */
+  --color-ds-accent:        var(--color-gold-accent);
+  --color-ds-text:          var(--color-dark);
+  --color-ds-text-muted:    var(--color-muted);
   --color-ds-surface:       #ffffff;
   --color-ds-bg:            var(--color-warm-bg);
-  --color-ds-border:        var(--color-slate-200);
+  --color-ds-border:        rgba(0, 0, 0, 0.06);
 
-  /* Shadow scale */
-  --shadow-card:       0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -1px rgba(0,0,0,0.04);
-  --shadow-card-hover: 0 10px 25px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-  --shadow-lg:         0 20px 40px rgba(0,0,0,0.1);
+  /* Elevating Ambient Shadows with subtle Navy tints */
+  --shadow-card:       0 4px 6px -1px rgba(11,31,58, 0.05), 0 2px 4px -1px rgba(11,31,58, 0.03);
+  --shadow-card-hover: 0 12px 28px -3px rgba(11,31,58, 0.12), 0 6px 10px -2px rgba(11,31,58, 0.06);
+  --shadow-lg:         0 30px 60px -12px rgba(11,31,58, 0.15);
 
-  /* Border radius */
-  --radius-card: 1rem;       /* 16px */
-  --radius-card-lg: 1.5rem;  /* 24px */
-  --radius-btn:  0.75rem;    /* 12px */
+  /* Radii */
+  --radius-card: 1rem;       
+  --radius-card-lg: 1.5rem; 
+  --radius-btn:  0.5rem;    
 
   /* Typography scale */
   --text-2xs: 0.625rem;
-  --prose-max-width: 72ch;
+  --prose-max-width: 70ch;
 }
 
 
@@ -161,61 +161,75 @@
 
   body {
     @apply bg-warm-bg text-dark overflow-x-hidden;
+    font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
+    font-family: var(--font-serif);
   }
 
   /* Accessibility Focus Rings */
   :focus-visible {
-    outline: 2px solid var(--color-emerald-600);
+    outline: 2px solid var(--color-accent);
     outline-offset: 3px;
     border-radius: 4px;
   }
 
-  /* ─── Dark Mode Base (Suspended for Luxury Light Edition) ─────────── */
-  /* .dark body { background-color: #0f172a; color: #e2e8f0; } */
+  /* ─── Dark Mode Base (Deactivated for 2026 Premium Light Experience) ─────────── */
 }
 
 @layer components {
   .container-custom {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8;
   }
 
+  /* Premium Gold Button (Primary CTA) */
   .thm-btn {
-    @apply inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-full
-           hover:bg-primary-dark transition-all duration-300 shadow-lg hover:shadow-xl
-           hover:-translate-y-0.5 text-sm uppercase tracking-wider;
+    @apply inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-secondary text-white font-bold rounded-xl
+           hover:bg-secondary-dark hover:shadow-[0_10px_30px_-5px_rgba(200,169,107,0.4)]
+           transition-all duration-300 active:scale-[0.98]
+           text-xs uppercase tracking-[0.15em] shadow-md relative overflow-hidden;
   }
 
-  .thm-btn-secondary {
-    @apply inline-flex items-center gap-2 px-8 py-4 bg-secondary text-white font-bold rounded-full
-           hover:bg-secondary-dark transition-all duration-300 shadow-lg hover:shadow-xl
-           hover:-translate-y-0.5 text-sm uppercase tracking-wider;
-  }
-
+  /* Authority Navy Button (Secondary CTA) */
   .thm-btn-dark {
-    @apply inline-flex items-center gap-2 px-8 py-4 bg-dark text-white font-bold rounded-full
-           hover:bg-dark-light transition-all duration-300 shadow-lg hover:shadow-xl
-           hover:-translate-y-0.5 text-sm uppercase tracking-wider;
+    @apply inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-primary text-white font-bold rounded-xl
+           hover:bg-primary-dark hover:shadow-[0_10px_30px_-5px_rgba(11,31,58,0.3)]
+           transition-all duration-300 active:scale-[0.98]
+           text-xs uppercase tracking-[0.15em] shadow-md;
+  }
+
+  /* Glassmorphism / Transparent Outline Button */
+  .thm-btn-outline {
+    @apply inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-white/80 backdrop-blur-md border border-slate-200 text-primary font-bold rounded-xl
+           hover:border-primary hover:bg-white transition-all duration-300 active:scale-[0.98]
+           text-xs uppercase tracking-[0.15em] shadow-sm;
   }
 
   .section-tagline {
-    @apply inline-flex items-center gap-2 px-5 py-2 bg-primary/10 text-primary
-           rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4;
+    @apply inline-flex items-center gap-2 px-4 py-1.5 bg-secondary/10 text-secondary-dark
+           rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-5 border border-secondary/20;
   }
 
   .section-title {
-    @apply text-4xl md:text-5xl font-serif font-bold text-dark leading-[1.1] tracking-tight;
+    @apply text-3xl md:text-5xl lg:text-6xl font-serif font-bold text-primary leading-[1.15] tracking-tight;
   }
 
+  /* Premium Academic Card */
   .card-modern {
-    @apply bg-white rounded-3xl border border-gray-100 shadow-[0_10px_30px_rgba(0,0,0,0.05)]
-           hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] hover:-translate-y-1
-           transition-all duration-300;
+    @apply bg-white rounded-2xl border border-slate-100 shadow-card
+           hover:shadow-card-hover hover:-translate-y-1
+           transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)];
+  }
+
+  /* Glassmorphic Card with border gradient glow effect */
+  .card-glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/50 shadow-card
+           hover:shadow-card-hover hover:-translate-y-1
+           transition-all duration-500;
   }
 
   .fade-r {
@@ -228,22 +242,10 @@
     mask-image: linear-gradient(to left, black, transparent);
   }
 
-  /* Book Publication Theme Utilities */
-  .bg-coral {
-    background-color: var(--color-coral);
-  }
-
-  .text-coral {
-    color: var(--color-coral);
-  }
-
-  .bg-coral-dark {
-    background-color: var(--color-coral-dark);
-  }
-
+  /* Publication Card Stylings */
   .book-card {
-    @apply bg-white rounded-[2rem] border border-gray-100 shadow-[0_8px_30px_rgba(79,119,255,0.06)]
-           hover:shadow-[0_20px_50px_rgba(79,119,255,0.14)] hover:-translate-y-2 hover:border-primary/20
+    @apply bg-white rounded-2xl border border-slate-100 shadow-card
+           hover:shadow-lg hover:-translate-y-1.5 hover:border-secondary/20
            transition-all duration-500;
   }
 
@@ -251,101 +253,65 @@
     @apply w-full h-full object-cover group-hover:scale-105 transition-transform duration-700;
   }
 
-  /* ─── Design System v2 Components ─────────────────────────────────── */
-
-  /* Base button shape — shared via raw CSS (Tailwind v4 disallows @apply of custom classes) */
-  .ds-btn {
-    @apply inline-flex items-center justify-center gap-2 font-semibold transition-all duration-200
-           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
-           disabled:pointer-events-none disabled:opacity-50 select-none;
-    border-radius: var(--radius-btn);
-  }
-  /* Each variant is standalone (no @apply of ds-btn) */
+  /* ─── Global Design System (DS) Utility Refinement ───────────────────────── */
+  
+  /* Overhauling the primary base design components to Gold accenting */
   .ds-btn-primary {
-    @apply inline-flex items-center justify-center gap-2 font-semibold transition-all duration-200
-           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
+    @apply inline-flex items-center justify-center gap-2 font-bold transition-all duration-200
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2
            disabled:pointer-events-none disabled:opacity-50 select-none
-           bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm active:scale-[0.98];
-    border-radius: var(--radius-btn);
-    box-shadow: 0 1px 3px rgba(5,150,105,0.3);
+           bg-secondary text-white hover:bg-secondary-dark shadow-md active:scale-[0.98] rounded-lg;
   }
-  .ds-btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 font-semibold transition-all duration-200
-           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
-           disabled:pointer-events-none disabled:opacity-50 select-none
-           bg-slate-100 text-slate-800 hover:bg-slate-200;
-    border-radius: var(--radius-btn);
-  }
-  .ds-btn-outline {
-    @apply inline-flex items-center justify-center gap-2 font-semibold transition-all duration-200
-           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
-           disabled:pointer-events-none disabled:opacity-50 select-none
-           border border-slate-300 bg-transparent text-slate-700 hover:bg-slate-50;
-    border-radius: var(--radius-btn);
-  }
-  .ds-btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 font-semibold transition-all duration-200
-           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
-           disabled:pointer-events-none disabled:opacity-50 select-none
-           text-slate-700 hover:bg-slate-100;
-    border-radius: var(--radius-btn);
-  }
-  .ds-btn-sm  { @apply text-sm px-4 h-9; }
-  .ds-btn-md  { @apply text-sm px-5 h-10; }
-  .ds-btn-lg  { @apply text-base px-8 h-12; }
 
-  /* Cards — standalone, no custom class chaining */
+  .ds-btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 font-bold transition-all duration-200
+           disabled:pointer-events-none disabled:opacity-50 select-none
+           bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-lg;
+  }
+
+  .ds-btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 font-bold transition-all duration-200
+           disabled:pointer-events-none disabled:opacity-50 select-none
+           text-primary hover:bg-slate-100 rounded-lg;
+  }
+
+  .ds-btn-sm  { @apply text-xs px-4 py-2; }
+  .ds-btn-md  { @apply text-sm px-5 py-2.5; }
+  .ds-btn-lg  { @apply text-base px-8 py-3.5; }
+
   .ds-card {
-    background: var(--color-ds-surface);
-    border: 1px solid var(--color-ds-border);
-    border-radius: var(--radius-card);
-    box-shadow: var(--shadow-card);
-    @apply transition-all duration-300 overflow-hidden;
-  }
-  .ds-card-hoverable:hover {
-    box-shadow: var(--shadow-card-hover);
-    @apply -translate-y-1;
-  }
-  .ds-card-featured {
-    border: 1px solid var(--color-emerald-100);
-    border-radius: var(--radius-card);
-    box-shadow: var(--shadow-card);
-    background: linear-gradient(to bottom, rgba(209,250,229,0.3), white);
-    @apply transition-all duration-300 overflow-hidden;
-  }
-  .ds-card-stat {
-    background: var(--color-ds-surface);
+    background: #ffffff;
     border: 1px solid var(--color-slate-100);
     border-radius: var(--radius-card);
     box-shadow: var(--shadow-card);
-    @apply text-center py-8 transition-all duration-300 overflow-hidden;
-  }
-  .ds-card-lg {
-    border-radius: var(--radius-card-lg);
+    @apply transition-all duration-300 overflow-hidden;
   }
 
-  /* Badges — standalone, no custom class chaining */
+  .ds-card-featured {
+    @apply border border-secondary/30 shadow-md bg-gradient-to-b from-secondary/5 to-white transition-all duration-300 overflow-hidden;
+    border-radius: var(--radius-card);
+  }
+
   .ds-badge {
-    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold;
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-bold tracking-wider uppercase;
   }
-  .ds-badge-default  { @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold bg-slate-100 text-slate-700; }
-  .ds-badge-success  { @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold bg-emerald-100 text-emerald-800; }
-  .ds-badge-warning  { @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold bg-amber-100 text-amber-800; }
-  .ds-badge-info     { @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold bg-blue-100 text-blue-800; }
-  .ds-badge-hot      { @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold bg-red-100 text-red-800; }
 
-  /* Prose / academic body text */
+  .ds-badge-success  { @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-bold tracking-wider uppercase bg-emerald-50 text-emerald-700 border border-emerald-200; }
+  .ds-badge-warning  { @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-bold tracking-wider uppercase bg-amber-50 text-amber-700 border border-amber-200; }
+  .ds-badge-info     { @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-bold tracking-wider uppercase bg-blue-50 text-blue-700 border border-blue-200; }
+  .ds-badge-accent   { @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-bold tracking-wider uppercase bg-secondary/10 text-secondary-dark border border-secondary/20; }
+
+  /* Prose and Academic Flow */
   .ds-prose {
-    font-family: var(--font-merriweather);
-    max-width: var(--prose-max-width);
-    line-height: 1.75;
-    color: var(--color-ds-text);
+    font-family: var(--font-body);
+    line-height: 1.8;
+    color: var(--color-slate-600);
   }
-  .ds-prose a { color: var(--color-ds-accent); }
+
   .ds-prose h1, .ds-prose h2, .ds-prose h3 {
-    font-family: var(--font-merriweather);
-    letter-spacing: -0.02em;
-    color: var(--color-dark);
+    font-family: var(--font-serif);
+    color: var(--color-primary);
+    font-weight: 700;
   }
 }
 
