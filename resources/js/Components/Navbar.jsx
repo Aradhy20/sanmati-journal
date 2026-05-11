@@ -70,7 +70,14 @@ const Navbar = ({ onOpenSearch }) => {
 
 
     useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 20);
+        let lastVal = false;
+        const handleScroll = () => {
+            const nextVal = window.scrollY > 20;
+            if (nextVal !== lastVal) {
+                lastVal = nextVal;
+                setScrolled(nextVal);
+            }
+        };
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
