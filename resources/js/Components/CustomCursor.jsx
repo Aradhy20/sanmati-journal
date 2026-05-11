@@ -13,6 +13,9 @@ const CustomCursor = () => {
     const cursorYSpring = useSpring(cursorY, springConfig);
 
     useEffect(() => {
+        // Performance optimization: Exit early if not on a device that supports precise pointing (mouse)
+        if (!window.matchMedia('(pointer: fine)').matches) return;
+
         const moveCursor = (e) => {
             cursorX.set(e.clientX);
             cursorY.set(e.clientY);

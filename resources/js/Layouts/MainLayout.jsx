@@ -51,11 +51,11 @@ export default function MainLayout({ children, title, description, keywords, jso
                 style: { background: '#fff', color: '#052143', fontWeight: 'bold' }
             }} />
             
-            {/* Elegant Background Accents */}
-            <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-                <div className="absolute top-[-10%] left-[-5%] w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] animate-blob" />
-                <div className="absolute bottom-[-10%] right-[-5%] w-[700px] h-[700px] bg-secondary/5 rounded-full blur-[140px] animate-blob animation-delay-4000" />
-                <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-accent/3 rounded-full blur-[100px] animate-blob animation-delay-2000" />
+            {/* Elegant Background Accents - hidden on mobile for massive performance gains */}
+            <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden hidden md:block">
+                <div className="absolute top-[-10%] left-[-5%] w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] animate-blob will-change-transform" />
+                <div className="absolute bottom-[-10%] right-[-5%] w-[700px] h-[700px] bg-secondary/5 rounded-full blur-[140px] animate-blob animation-delay-4000 will-change-transform" />
+                <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-accent/3 rounded-full blur-[100px] animate-blob animation-delay-2000 will-change-transform" />
             </div>
 
             <CustomCursor />

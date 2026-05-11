@@ -36,11 +36,10 @@ const Hero = () => {
     };
 
     const itemVariants = {
-        hidden: { opacity: 0, y: 40, filter: 'blur(10px)' },
+        hidden: { opacity: 0, y: 40 },
         visible: {
             opacity: 1,
             y: 0,
-            filter: 'blur(0px)',
             transition: {
                 duration: 1,
                 ease: [0.22, 1, 0.36, 1]
@@ -68,7 +67,7 @@ const Hero = () => {
                         rotate: [0, 5, 0] 
                     }}
                     transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute -top-40 -right-40 w-[700px] h-[700px] bg-secondary/5 rounded-full blur-[140px]"
+                    className="absolute -top-40 -right-40 w-[700px] h-[700px] bg-secondary/5 rounded-full blur-[140px] will-change-transform hidden md:block"
                 />
                 
                 <motion.div 
@@ -77,7 +76,7 @@ const Hero = () => {
                         y: [0, -60, 0]
                     }}
                     transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                    className="absolute -bottom-60 -left-40 w-[800px] h-[800px] bg-accent/5 rounded-full blur-[160px]"
+                    className="absolute -bottom-60 -left-40 w-[800px] h-[800px] bg-accent/5 rounded-full blur-[160px] will-change-transform hidden md:block"
                 />
 
                 {/* Floating Background Typography for "Editorial Scale" */}
@@ -238,8 +237,8 @@ const Hero = () => {
                             </motion.div>
 
                             {/* Absolute Background Decorative Rings */}
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[115%] h-[115%] border border-slate-200 rounded-full pointer-events-none z-0 opacity-60" />
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%] border border-slate-200/50 rounded-full border-dashed pointer-events-none z-0 opacity-40 animate-[spin_60s_linear_infinite]" />
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[115%] h-[115%] border border-slate-200 rounded-full pointer-events-none z-0 opacity-60 hidden md:block" />
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%] border border-slate-200/50 rounded-full border-dashed pointer-events-none z-0 opacity-40 animate-[spin_60s_linear_infinite] hidden lg:block will-change-transform" />
                         </motion.div>
                     </div>
                 </div>
