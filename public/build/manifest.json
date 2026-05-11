@@ -53,7 +53,7 @@
     "name": "vendor"
   },
   "resources/css/app.css": {
-    "file": "assets/app-CeMbOXyl.css",
+    "file": "assets/app-B7hEnc8S.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -467,7 +467,7 @@
     ]
   },
   "resources/js/Pages/Home.jsx": {
-    "file": "assets/Home-BxWjBxDx.js",
+    "file": "assets/Home-DCR6eH1m.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.jsx",
     "isDynamicEntry": true,
@@ -481,7 +481,7 @@
       "resources/js/Components/Hero.jsx"
     ],
     "css": [
-      "assets/app-CeMbOXyl.css"
+      "assets/app-B7hEnc8S.css"
     ]
   },
   "resources/js/Pages/PublicationPolicy/Ethics.jsx": {
@@ -633,7 +633,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-BHZeq2fN.js",
+    "file": "assets/app-CS-XU92A.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
@@ -693,7 +693,7 @@
       "resources/js/Pages/TrackManuscript.jsx"
     ],
     "css": [
-      "assets/app-CeMbOXyl.css"
+      "assets/app-B7hEnc8S.css"
     ]
   }
 }

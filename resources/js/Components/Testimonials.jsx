@@ -38,7 +38,7 @@ const Testimonials = () => {
     const prev = () => setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 
     return (
-        <section className="py-24 bg-dark text-white overflow-hidden relative">
+        <section className="py-16 bg-dark text-white overflow-hidden relative">
             {/* Background Texture - Using radial gradient */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:40px_40px]" />
 

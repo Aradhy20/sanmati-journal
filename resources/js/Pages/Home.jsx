@@ -98,7 +98,7 @@ export default function Home() {
             </Suspense>
 
             {/* ─── 1. CORE MISSION ─── */}
-            <section className="py-24 lg:py-36 relative overflow-hidden bg-white">
+            <section className="py-16 lg:py-24 relative overflow-hidden bg-white">
                 {/* High-end radial light touch */}
                 <div className="absolute -top-24 right-0 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[100px] pointer-events-none" />
                 
@@ -176,7 +176,7 @@ export default function Home() {
             </section>
 
             {/* ─── 2. CINEMATIC IMPACT METRICS (Dark Themed Elegant Slate) ─── */}
-            <section className="py-20 bg-primary relative overflow-hidden">
+            <section className="py-16 bg-primary relative overflow-hidden">
                 {/* Textured aesthetic */}
                 <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:3rem_3rem]" />
                 
@@ -211,7 +211,7 @@ export default function Home() {
             </section>
 
             {/* ─── 3. FEATURED PUBLICATIONS (High Contrast Cover Gallery) ─── */}
-            <section className="py-24 lg:py-36 bg-warm-bg">
+            <section className="py-16 lg:py-24 bg-warm-bg">
                 <div className="container-custom">
                     <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                         <motion.div {...fadeInUp} className="max-w-2xl">
@@ -298,7 +298,7 @@ export default function Home() {
             </section>
 
             {/* ─── 4. TRENDING RESEARCH SECTION (Premium Paper Cards) ─── */}
-            <section className="py-24 lg:py-36 bg-white relative border-y border-slate-100">
+            <section className="py-16 lg:py-24 bg-white relative border-y border-slate-100">
                 <div className="container-custom">
                     <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                         <motion.div {...fadeInUp} className="max-w-2xl">
@@ -364,7 +364,7 @@ export default function Home() {
             </section>
 
             {/* ─── 5. RESEARCH CATEGORIES (Refined Academic Matrix) ─── */}
-            <section className="py-24 lg:py-36 bg-slate-50">
+            <section className="py-16 lg:py-24 bg-slate-50">
                 <div className="container-custom">
                     <div className="text-center max-w-3xl mx-auto mb-20">
                         <div className="inline-flex items-center gap-3 mb-4 bg-white px-4 py-1.5 rounded-full border border-slate-200 shadow-sm">
@@ -414,7 +414,7 @@ export default function Home() {
             </section>
 
             {/* ─── 6. EDITORIAL LEADERSHIP ─── */}
-            <section className="py-24 lg:py-36 bg-white relative overflow-hidden">
+            <section className="py-16 lg:py-24 bg-white relative overflow-hidden">
                 <div className="absolute -top-24 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
                 
                 <div className="container-custom relative z-10">
@@ -473,45 +473,6 @@ export default function Home() {
             {/* ─── 8. REVIEWS ─── */}
             <Testimonials />
 
-            {/* ─── 9. FINAL CALL TO ACTION ─── */}
-            <section className="py-24 lg:py-36 bg-primary text-white relative overflow-hidden">
-                {/* Background aesthetics */}
-                <div className="absolute inset-0 pointer-events-none">
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary/10 rounded-full blur-[140px]" />
-                </div>
-
-                <div className="container-custom relative z-10 text-center max-w-4xl mx-auto">
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-[9px] font-black uppercase tracking-[0.25em] text-secondary mb-8 border border-white/10">
-                            Call For Manuscripts
-                        </span>
-                        
-                        <h2 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold text-white leading-[1.1] mb-8">
-                            Elevate Your Research to <br />
-                            <span className="text-secondary italic">Global Visibility</span>
-                        </h2>
-                        
-                        <p className="text-slate-300 text-base md:text-lg font-medium max-w-xl mx-auto mb-12 leading-relaxed">
-                            Join our recognized platform of over 2,500 educators and innovators. Submit your latest manuscript for fast-track editorial triage.
-                        </p>
-
-                        <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
-                            <Link href="/submission-guidelines/call-for-papers" className="thm-btn w-full sm:w-auto shadow-2xl">
-                                <span>Submit Manuscript</span>
-                                <ArrowRight className="w-4 h-4" />
-                            </Link>
-                            <Link href="/archive" className="thm-btn-outline !border-white/30 !text-white hover:!bg-white hover:!text-primary w-full sm:w-auto">
-                                <span>Explore Database</span>
-                            </Link>
-                        </div>
-                    </motion.div>
-                </div>
-            </section>
 
             <NewsletterSection />
         </MainLayout>
@@ -554,7 +515,7 @@ function PipelineSection() {
     const [activeStep, setActiveStep] = useState(null);
 
     return (
-        <section className="py-24 lg:py-36 bg-warm-bg border-y border-slate-200/50">
+        <section className="py-16 lg:py-24 bg-warm-bg border-y border-slate-200/50">
             <div className="container-custom">
                 <div className="text-center max-w-3xl mx-auto mb-20">
                     <span className="text-secondary font-black text-[10px] uppercase tracking-[0.3em] block mb-4">The Mechanism</span>

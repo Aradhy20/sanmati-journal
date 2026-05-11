@@ -215,7 +215,7 @@ const Testimonials = () => {
   }, []);
   const next = () => setCurrent((prev2) => (prev2 + 1) % testimonials.length);
   const prev = () => setCurrent((prev2) => (prev2 - 1 + testimonials.length) % testimonials.length);
-  return /* @__PURE__ */ jsxs("section", { className: "py-24 bg-dark text-white overflow-hidden relative", children: [
+  return /* @__PURE__ */ jsxs("section", { className: "py-16 bg-dark text-white overflow-hidden relative", children: [
     /* @__PURE__ */ jsx("div", { className: "absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:40px_40px]" }),
     /* @__PURE__ */ jsxs("div", { className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10", children: [
       /* @__PURE__ */ jsx(ScrollReveal, { children: /* @__PURE__ */ jsxs("div", { className: "text-center mb-16", children: [
@@ -360,7 +360,7 @@ function Home() {
           /* @__PURE__ */ jsx(Globe, { className: "w-12 h-12 animate-spin text-secondary opacity-30" }),
           /* @__PURE__ */ jsx("span", { className: "animate-pulse tracking-[0.3em] text-[10px] uppercase font-black text-slate-400", children: "Initializing Journal Framework" })
         ] }), children: /* @__PURE__ */ jsx(Hero, {}) }),
-        /* @__PURE__ */ jsxs("section", { className: "py-24 lg:py-36 relative overflow-hidden bg-white", children: [
+        /* @__PURE__ */ jsxs("section", { className: "py-16 lg:py-24 relative overflow-hidden bg-white", children: [
           /* @__PURE__ */ jsx("div", { className: "absolute -top-24 right-0 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[100px] pointer-events-none" }),
           /* @__PURE__ */ jsx("div", { className: "container-custom", children: /* @__PURE__ */ jsxs("div", { className: "grid grid-cols-1 lg:grid-cols-12 gap-16 xl:gap-24 items-center", children: [
             /* @__PURE__ */ jsxs(motion.div, { ...fadeInUp, className: "lg:col-span-7", children: [
@@ -426,7 +426,7 @@ function Home() {
             ] })
           ] }) })
         ] }),
-        /* @__PURE__ */ jsxs("section", { className: "py-20 bg-primary relative overflow-hidden", children: [
+        /* @__PURE__ */ jsxs("section", { className: "py-16 bg-primary relative overflow-hidden", children: [
           /* @__PURE__ */ jsx("div", { className: "absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:3rem_3rem]" }),
           /* @__PURE__ */ jsx("div", { className: "container-custom relative z-10", children: /* @__PURE__ */ jsx("div", { className: "grid grid-cols-2 lg:grid-cols-5 gap-8", children: [
             { icon: FileText, label: "Papers Published", value: 550, suffix: "+", color: "text-secondary" },
@@ -454,7 +454,7 @@ function Home() {
             i
           )) }) })
         ] }),
-        /* @__PURE__ */ jsx("section", { className: "py-24 lg:py-36 bg-warm-bg", children: /* @__PURE__ */ jsxs("div", { className: "container-custom", children: [
+        /* @__PURE__ */ jsx("section", { className: "py-16 lg:py-24 bg-warm-bg", children: /* @__PURE__ */ jsxs("div", { className: "container-custom", children: [
           /* @__PURE__ */ jsxs("div", { className: "flex flex-col md:flex-row justify-between items-end mb-16 gap-6", children: [
             /* @__PURE__ */ jsxs(motion.div, { ...fadeInUp, className: "max-w-2xl", children: [
               /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-3 mb-4", children: [
@@ -524,7 +524,7 @@ function Home() {
             i
           )) })
         ] }) }),
-        /* @__PURE__ */ jsx("section", { className: "py-24 lg:py-36 bg-white relative border-y border-slate-100", children: /* @__PURE__ */ jsxs("div", { className: "container-custom", children: [
+        /* @__PURE__ */ jsx("section", { className: "py-16 lg:py-24 bg-white relative border-y border-slate-100", children: /* @__PURE__ */ jsxs("div", { className: "container-custom", children: [
           /* @__PURE__ */ jsxs("div", { className: "flex flex-col md:flex-row justify-between items-end mb-16 gap-6", children: [
             /* @__PURE__ */ jsxs(motion.div, { ...fadeInUp, className: "max-w-2xl", children: [
               /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-3 mb-4", children: [
@@ -589,7 +589,7 @@ function Home() {
             i
           )) })
         ] }) }),
-        /* @__PURE__ */ jsx("section", { className: "py-24 lg:py-36 bg-slate-50", children: /* @__PURE__ */ jsxs("div", { className: "container-custom", children: [
+        /* @__PURE__ */ jsx("section", { className: "py-16 lg:py-24 bg-slate-50", children: /* @__PURE__ */ jsxs("div", { className: "container-custom", children: [
           /* @__PURE__ */ jsxs("div", { className: "text-center max-w-3xl mx-auto mb-20", children: [
             /* @__PURE__ */ jsxs("div", { className: "inline-flex items-center gap-3 mb-4 bg-white px-4 py-1.5 rounded-full border border-slate-200 shadow-sm", children: [
               /* @__PURE__ */ jsx("div", { className: "w-2 h-2 rounded-full bg-secondary" }),
@@ -633,7 +633,7 @@ function Home() {
             idx
           )) })
         ] }) }),
-        /* @__PURE__ */ jsxs("section", { className: "py-24 lg:py-36 bg-white relative overflow-hidden", children: [
+        /* @__PURE__ */ jsxs("section", { className: "py-16 lg:py-24 bg-white relative overflow-hidden", children: [
           /* @__PURE__ */ jsx("div", { className: "absolute -top-24 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" }),
           /* @__PURE__ */ jsxs("div", { className: "container-custom relative z-10", children: [
             /* @__PURE__ */ jsxs("div", { className: "text-center max-w-3xl mx-auto mb-16", children: [
@@ -679,34 +679,6 @@ function Home() {
         ] }),
         /* @__PURE__ */ jsx(PipelineSection, {}),
         /* @__PURE__ */ jsx(Testimonials, {}),
-        /* @__PURE__ */ jsxs("section", { className: "py-24 lg:py-36 bg-primary text-white relative overflow-hidden", children: [
-          /* @__PURE__ */ jsx("div", { className: "absolute inset-0 pointer-events-none", children: /* @__PURE__ */ jsx("div", { className: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary/10 rounded-full blur-[140px]" }) }),
-          /* @__PURE__ */ jsx("div", { className: "container-custom relative z-10 text-center max-w-4xl mx-auto", children: /* @__PURE__ */ jsxs(
-            motion.div,
-            {
-              initial: { opacity: 0, scale: 0.95 },
-              whileInView: { opacity: 1, scale: 1 },
-              viewport: { once: true },
-              transition: { duration: 0.8 },
-              children: [
-                /* @__PURE__ */ jsx("span", { className: "inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-[9px] font-black uppercase tracking-[0.25em] text-secondary mb-8 border border-white/10", children: "Call For Manuscripts" }),
-                /* @__PURE__ */ jsxs("h2", { className: "text-3xl sm:text-5xl lg:text-6xl font-serif font-bold text-white leading-[1.1] mb-8", children: [
-                  "Elevate Your Research to ",
-                  /* @__PURE__ */ jsx("br", {}),
-                  /* @__PURE__ */ jsx("span", { className: "text-secondary italic", children: "Global Visibility" })
-                ] }),
-                /* @__PURE__ */ jsx("p", { className: "text-slate-300 text-base md:text-lg font-medium max-w-xl mx-auto mb-12 leading-relaxed", children: "Join our recognized platform of over 2,500 educators and innovators. Submit your latest manuscript for fast-track editorial triage." }),
-                /* @__PURE__ */ jsxs("div", { className: "flex flex-col sm:flex-row gap-5 justify-center items-center", children: [
-                  /* @__PURE__ */ jsxs(Link, { href: "/submission-guidelines/call-for-papers", className: "thm-btn w-full sm:w-auto shadow-2xl", children: [
-                    /* @__PURE__ */ jsx("span", { children: "Submit Manuscript" }),
-                    /* @__PURE__ */ jsx(ArrowRight, { className: "w-4 h-4" })
-                  ] }),
-                  /* @__PURE__ */ jsx(Link, { href: "/archive", className: "thm-btn-outline !border-white/30 !text-white hover:!bg-white hover:!text-primary w-full sm:w-auto", children: /* @__PURE__ */ jsx("span", { children: "Explore Database" }) })
-                ] })
-              ]
-            }
-          ) })
-        ] }),
         /* @__PURE__ */ jsx(NewsletterSection, {})
       ]
     }
@@ -744,7 +716,7 @@ const pipelineSteps = [
 ];
 function PipelineSection() {
   const [activeStep, setActiveStep] = useState(null);
-  return /* @__PURE__ */ jsx("section", { className: "py-24 lg:py-36 bg-warm-bg border-y border-slate-200/50", children: /* @__PURE__ */ jsxs("div", { className: "container-custom", children: [
+  return /* @__PURE__ */ jsx("section", { className: "py-16 lg:py-24 bg-warm-bg border-y border-slate-200/50", children: /* @__PURE__ */ jsxs("div", { className: "container-custom", children: [
     /* @__PURE__ */ jsxs("div", { className: "text-center max-w-3xl mx-auto mb-20", children: [
       /* @__PURE__ */ jsx("span", { className: "text-secondary font-black text-[10px] uppercase tracking-[0.3em] block mb-4", children: "The Mechanism" }),
       /* @__PURE__ */ jsxs("h2", { className: "text-3xl md:text-5xl font-serif font-bold text-primary mb-4 tracking-tight", children: [
