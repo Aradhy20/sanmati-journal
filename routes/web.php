@@ -4,6 +4,7 @@ use App\Http\Controllers\JournalController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [JournalController::class, 'index'])->name('home');
+Route::redirect('/submit', '/submission-guidelines/call-for-papers');
 Route::get('/api/search', [\App\Http\Controllers\SearchController::class, 'search'])->name('api.search');
 Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
 
