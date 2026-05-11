@@ -5,13 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- Dark mode init: read localStorage before first paint to avoid FOUC -->
+        <!-- Rebranding initialization to ensure pure editorial light theme display -->
         <script nonce="{{ Vite::cspNonce() }}">
-            try {
-                var t = localStorage.getItem('theme');
-                if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                    document.documentElement.classList.add('dark');
-                }
-            } catch(e) {}
+            try { localStorage.removeItem('theme'); document.documentElement.classList.remove('dark'); } catch(e) {}
         </script>
         <link rel="icon" type="image/jpeg" href="/logo.jpg">
 

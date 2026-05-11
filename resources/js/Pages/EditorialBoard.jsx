@@ -18,14 +18,14 @@ const BoardMember = ({ name, title, affiliation, email, phone, profileUrl, image
         <motion.div 
             {...fadeInUp} 
             transition={{ delay: index * 0.1 }}
-            className="bg-white dark:bg-slate-900 rounded-[2rem] border border-gray-100 dark:border-slate-800 p-6 sm:p-8 flex flex-col hover:shadow-2xl hover:shadow-primary/5 hover:border-primary/20 hover:-translate-y-1.5 transition-all duration-500 group relative overflow-hidden"
+            className="bg-white rounded-[2rem] border border-gray-100 p-6 sm:p-8 flex flex-col hover:shadow-2xl hover:shadow-primary/5 hover:border-primary/20 hover:-translate-y-1.5 transition-all duration-500 group relative overflow-hidden"
         >
             <div className="absolute top-0 right-0 p-6 opacity-5 pointer-events-none transition-opacity duration-500 group-hover:opacity-10">
-                <Award className="w-24 h-24 text-primary dark:text-primary-light rotate-12" />
+                <Award className="w-24 h-24 text-primary rotate-12" />
             </div>
 
             <div className="flex items-center gap-5 mb-6 relative z-10">
-                <div className="w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-[1.5rem] overflow-hidden shadow-md border-2 border-white dark:border-slate-800 ring-1 ring-gray-50 dark:ring-slate-700/50 relative bg-surface dark:bg-slate-800 flex items-center justify-center">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-[1.5rem] overflow-hidden shadow-md border-2 border-white ring-1 ring-gray-50 relative bg-surface flex items-center justify-center">
                     {image && !imgError ? (
                         <img 
                             src={image} 
@@ -39,35 +39,35 @@ const BoardMember = ({ name, title, affiliation, email, phone, profileUrl, image
                     )}
                 </div>
                 <div>
-                    <span className="inline-block px-3 py-1 bg-gradient-to-r from-primary/10 to-secondary/10 dark:from-primary/20 dark:to-secondary/20 text-primary dark:text-primary-light text-[9px] font-black uppercase tracking-widest rounded-full mb-2 border border-primary/10">
+                    <span className="inline-block px-3 py-1 bg-gradient-to-r from-primary/10 to-secondary/10 text-primary text-[9px] font-black uppercase tracking-widest rounded-full mb-2 border border-primary/10">
                         {title}
                     </span>
-                    <h3 className="text-xl font-serif font-bold text-dark dark:text-white leading-tight group-hover:text-primary dark:group-hover:text-primary-light transition-colors">
+                    <h3 className="text-xl font-serif font-bold text-dark leading-tight group-hover:text-primary transition-colors">
                         {name}
                     </h3>
                 </div>
             </div>
             
             {affiliation && (
-                <p className="text-muted dark:text-slate-400 text-xs sm:text-sm leading-relaxed mb-6 flex-1 relative z-10 font-medium">
+                <p className="text-muted text-xs sm:text-sm leading-relaxed mb-6 flex-1 relative z-10 font-medium">
                     {affiliation}
                 </p>
             )}
 
             {(email || phone || profileUrl) && (
-                <div className="mt-auto pt-5 border-t border-gray-50 dark:border-slate-800/60 flex flex-col gap-3 relative z-10">
+                <div className="mt-auto pt-5 border-t border-gray-50 flex flex-col gap-3 relative z-10">
                     {email && (
-                        <a href={`mailto:${email}`} className="text-[11px] sm:text-xs font-medium text-dark/70 dark:text-slate-300 hover:text-primary dark:hover:text-primary-light transition-colors flex items-center gap-2 truncate">
+                        <a href={`mailto:${email}`} className="text-[11px] sm:text-xs font-medium text-dark/70 hover:text-primary transition-colors flex items-center gap-2 truncate">
                             <Mail className="w-4 h-4 text-primary/50 shrink-0" /> <span className="truncate">{email}</span>
                         </a>
                     )}
                     {phone && (
-                        <span className="text-[11px] sm:text-xs font-medium text-dark/70 dark:text-slate-300 flex items-center gap-2">
+                        <span className="text-[11px] sm:text-xs font-medium text-dark/70 flex items-center gap-2">
                             <Phone className="w-4 h-4 text-primary/50 shrink-0" /> {phone}
                         </span>
                     )}
                     {profileUrl && (
-                        <a href={profileUrl} target="_blank" rel="noreferrer" className="mt-3 inline-flex items-center justify-center w-full py-2.5 bg-surface dark:bg-slate-800 hover:bg-primary/5 text-primary dark:text-primary-light text-[10px] sm:text-[11px] font-black tracking-widest uppercase rounded-xl transition-colors border border-gray-100 dark:border-slate-700 hover:border-primary/20 group/btn gap-2 shadow-sm">
+                        <a href={profileUrl} target="_blank" rel="noreferrer" className="mt-3 inline-flex items-center justify-center w-full py-2.5 bg-surface hover:bg-primary/5 text-primary text-[10px] sm:text-[11px] font-black tracking-widest uppercase rounded-xl transition-colors border border-gray-100 hover:border-primary/20 group/btn gap-2 shadow-sm">
                              View Academic Profile <ExternalLink className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                         </a>
                     )}
@@ -126,13 +126,13 @@ export default function EditorialBoard() {
                     <motion.div {...fadeInUp} className="lg:col-span-12 xl:col-span-7">
                         <div className="flex items-center gap-4 mb-8">
                             <span className="h-px w-10 bg-secondary" />
-                            <span className="text-secondary dark:text-cyan-400 font-black text-[11px] uppercase tracking-[0.4em]">Governance</span>
+                            <span className="text-secondary font-black text-[11px] uppercase tracking-[0.4em]">Governance</span>
                         </div>
-                        <h2 className="text-2xl md:text-3xl lg:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-dark dark:text-white mb-8 leading-[1.05]">
+                        <h2 className="text-2xl md:text-3xl lg:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-dark mb-8 leading-[1.05]">
                             The Vanguard of <br />
-                            <span className="text-primary dark:text-primary-light italic">Academic Rigor</span>
+                            <span className="text-primary italic">Academic Rigor</span>
                         </h2>
-                        <p className="text-xl text-dark/70 dark:text-slate-300 font-medium leading-relaxed mb-10 border-l-4 border-primary/20 pl-8">
+                        <p className="text-xl text-dark/70 font-medium leading-relaxed mb-10 border-l-4 border-primary/20 pl-8">
                             Our editorial governance model is built on transparency, diversity, and an unwavering commitment to empirical excellence.
                         </p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -140,13 +140,13 @@ export default function EditorialBoard() {
                                 { title: "Intellectual Integrity", text: "Upholding the highest standards of peer-review precision." },
                                 { title: "Global Perspective", text: "Bridging international discourse across multidisciplinary nodes." }
                             ].map((feat, i) => (
-                                <div key={i} className="flex gap-4 p-6 bg-surface dark:bg-slate-900 rounded-3xl border border-gray-50 dark:border-slate-800 hover:shadow-xl transition-all duration-500">
+                                <div key={i} className="flex gap-4 p-6 bg-surface rounded-3xl border border-gray-50 hover:shadow-xl transition-all duration-500">
                                     <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                                        <Sparkles className="w-5 h-5 text-primary dark:text-primary-light" />
+                                        <Sparkles className="w-5 h-5 text-primary" />
                                     </div>
                                     <div>
-                                        <h4 className="font-bold text-dark dark:text-white text-sm mb-1">{feat.title}</h4>
-                                        <p className="text-muted dark:text-slate-400 text-xs leading-relaxed">{feat.text}</p>
+                                        <h4 className="font-bold text-dark text-sm mb-1">{feat.title}</h4>
+                                        <p className="text-muted text-xs leading-relaxed">{feat.text}</p>
                                     </div>
                                 </div>
                             ))}
@@ -159,7 +159,7 @@ export default function EditorialBoard() {
                             <img loading="lazy" src="/fistudy-assets/resources/about-journal-2.png" alt="Board" className="w-full h-full object-cover opacity-60" />
                             <div className="absolute inset-0 bg-gradient-to-tr from-primary/40 to-transparent" />
                             <div className="absolute inset-x-0 bottom-0 p-6 lg:p-12 text-center">
-                                <Quote className="w-12 h-12 text-secondary dark:text-cyan-400 mx-auto mb-6 opacity-50" />
+                                <Quote className="w-12 h-12 text-secondary mx-auto mb-6 opacity-50" />
                                 <p className="text-white text-lg font-serif italic font-medium leading-relaxed">
                                     "Scholarship is most transformative when guided by the collective wisdom of diverse academic leaders."
                                 </p>
@@ -171,9 +171,9 @@ export default function EditorialBoard() {
                 {/* ─── THE GRID (Distinguished Members) ─── */}
                 <div className="relative">
                     <div className="flex flex-col items-center text-center mb-10 lg:mb-20">
-                        <span className="text-secondary dark:text-cyan-400 font-black text-[10px] uppercase tracking-[0.4em] mb-4">Registry</span>
-                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-dark dark:text-white mb-4">Esteemed Board</h2>
-                        <div className="h-1 w-12 bg-primary dark:bg-primary-light rounded-full" />
+                        <span className="text-secondary font-black text-[10px] uppercase tracking-[0.4em] mb-4">Registry</span>
+                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-dark mb-4">Esteemed Board</h2>
+                        <div className="h-1 w-12 bg-primary rounded-full" />
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
