@@ -53,7 +53,7 @@
     "name": "vendor"
   },
   "resources/css/app.css": {
-    "file": "assets/app-4s1sl4we.css",
+    "file": "assets/app-Ddw3fdPW.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -78,7 +78,7 @@
     ]
   },
   "resources/js/Pages/AboutJournal.jsx": {
-    "file": "assets/AboutJournal-CL_vFgR5.js",
+    "file": "assets/AboutJournal-B4Uq-DOb.js",
     "name": "AboutJournal",
     "src": "resources/js/Pages/AboutJournal.jsx",
     "isDynamicEntry": true,
@@ -380,7 +380,7 @@
     ]
   },
   "resources/js/Pages/Contact.jsx": {
-    "file": "assets/Contact-CzGj8XYE.js",
+    "file": "assets/Contact-FVAPHEqq.js",
     "name": "Contact",
     "src": "resources/js/Pages/Contact.jsx",
     "isDynamicEntry": true,
@@ -467,7 +467,7 @@
     ]
   },
   "resources/js/Pages/Home.jsx": {
-    "file": "assets/Home-DRBhMfr0.js",
+    "file": "assets/Home-BTV2PsSI.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.jsx",
     "isDynamicEntry": true,
@@ -481,7 +481,7 @@
       "resources/js/Components/Hero.jsx"
     ],
     "css": [
-      "assets/app-4s1sl4we.css"
+      "assets/app-Ddw3fdPW.css"
     ]
   },
   "resources/js/Pages/PublicationPolicy/Ethics.jsx": {
@@ -633,7 +633,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-BKYKqjOL.js",
+    "file": "assets/app-C2GBmgTM.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
@@ -693,7 +693,7 @@
       "resources/js/Pages/TrackManuscript.jsx"
     ],
     "css": [
-      "assets/app-4s1sl4we.css"
+      "assets/app-Ddw3fdPW.css"
     ]
   }
 }

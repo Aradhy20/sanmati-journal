@@ -42,7 +42,7 @@ export default function AboutJournal() {
                 {/* ─── INTRODUCTION ─── */}
                 <motion.div {...fadeInUp} className="relative group mb-12 lg:mb-24">
                     <div className="absolute -inset-4 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 rounded-[3rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-                    <div className="relative bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-[2.5rem] p-10 md:p-16 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden">
+                    <div className="relative bg-white border border-gray-100 rounded-[2.5rem] p-10 md:p-16 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden">
                         <div className="absolute top-0 right-0 p-6 lg:p-12 opacity-[0.03] rotate-12">
                             <BookOpen className="w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 text-dark" />
                         </div>

@@ -185,7 +185,7 @@ function ContactForm() {
                         id="subject" 
                         name="subject" 
                         title="Subject" 
-                        className="block w-full px-4 h-14 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white text-base focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all duration-300 disabled:opacity-50"
+                        className="block w-full px-4 h-14 bg-white border border-slate-300 rounded-xl text-slate-900 text-base focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all duration-300 disabled:opacity-50"
                         value={data.subject} 
                         onChange={e => setData('subject', e.target.value)} 
                         disabled={processing}
@@ -195,7 +195,7 @@ function ContactForm() {
                         <option>Payment Issue</option>
                         <option>Technical Support</option>
                     </select>
-                    <label htmlFor="subject" className="absolute left-4 -top-2.5 bg-white dark:bg-slate-900 px-1 text-xs font-bold text-slate-500 dark:text-slate-400">
+                    <label htmlFor="subject" className="absolute left-4 -top-2.5 bg-white px-1 text-xs font-bold text-slate-500">
                         Inquiry Node
                     </label>
                     {errors.subject && <div className="text-red-500 text-xs mt-1.5 ml-1 font-medium">{errors.subject}</div>}

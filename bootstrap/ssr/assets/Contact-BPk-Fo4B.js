@@ -23,9 +23,9 @@ function FloatInput({
   const [focused, setFocused] = useState(false);
   const hasValue = value !== void 0 && value !== null && String(value).length > 0;
   const isFloating = focused || hasValue;
-  let borderColor = "border-slate-300 dark:border-slate-600";
-  let labelColor = "text-slate-500 dark:text-slate-400";
-  let ringColor = "focus:ring-primary/20 dark:focus:ring-primary/30";
+  let borderColor = "border-slate-300";
+  let labelColor = "text-slate-500";
+  let ringColor = "focus:ring-primary/20";
   if (error) {
     borderColor = "border-red-500 dark:border-red-500";
     labelColor = "text-red-500 dark:text-red-400";
@@ -35,8 +35,8 @@ function FloatInput({
     labelColor = "text-emerald-600 dark:text-emerald-400";
     ringColor = "focus:ring-emerald-500/20";
   } else if (focused) {
-    borderColor = "border-primary dark:border-primary";
-    labelColor = "text-primary dark:text-primary";
+    borderColor = "border-primary";
+    labelColor = "text-primary";
   }
   const InputComponent = textarea ? "textarea" : "input";
   return /* @__PURE__ */ jsxs("div", { className: `relative w-full ${className}`, children: [
@@ -52,7 +52,7 @@ function FloatInput({
           onBlur: () => setFocused(false),
           required,
           rows: textarea ? rows : void 0,
-          className: `block w-full px-4 ${textarea ? "py-4" : "h-14"} bg-white dark:bg-slate-900 border ${borderColor} rounded-xl text-slate-900 dark:text-white text-base focus:outline-none focus:ring-4 ${ringColor} transition-all duration-300 peer disabled:opacity-50 disabled:cursor-not-allowed`,
+          className: `block w-full px-4 ${textarea ? "py-4" : "h-14"} bg-white border ${borderColor} rounded-xl text-slate-900 text-base focus:outline-none focus:ring-4 ${ringColor} transition-all duration-300 peer disabled:opacity-50 disabled:cursor-not-allowed`,
           ...props
         }
       ),
@@ -60,7 +60,7 @@ function FloatInput({
         "label",
         {
           htmlFor: id,
-          className: `absolute left-4 transition-all duration-300 pointer-events-none bg-white dark:bg-slate-900 px-1 ${isFloating ? `-top-2.5 text-xs font-bold ${labelColor}` : `${textarea ? "top-4" : "top-1/2 -translate-y-1/2"} text-base ${labelColor}`}`,
+          className: `absolute left-4 transition-all duration-300 pointer-events-none bg-white px-1 ${isFloating ? `-top-2.5 text-xs font-bold ${labelColor}` : `${textarea ? "top-4" : "top-1/2 -translate-y-1/2"} text-base ${labelColor}`}`,
           children: [
             label,
             " ",
@@ -254,7 +254,7 @@ function ContactForm() {
             id: "subject",
             name: "subject",
             title: "Subject",
-            className: "block w-full px-4 h-14 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white text-base focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all duration-300 disabled:opacity-50",
+            className: "block w-full px-4 h-14 bg-white border border-slate-300 rounded-xl text-slate-900 text-base focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all duration-300 disabled:opacity-50",
             value: data.subject,
             onChange: (e) => setData("subject", e.target.value),
             disabled: processing,
@@ -266,7 +266,7 @@ function ContactForm() {
             ]
           }
         ),
-        /* @__PURE__ */ jsx("label", { htmlFor: "subject", className: "absolute left-4 -top-2.5 bg-white dark:bg-slate-900 px-1 text-xs font-bold text-slate-500 dark:text-slate-400", children: "Inquiry Node" }),
+        /* @__PURE__ */ jsx("label", { htmlFor: "subject", className: "absolute left-4 -top-2.5 bg-white px-1 text-xs font-bold text-slate-500", children: "Inquiry Node" }),
         errors.subject && /* @__PURE__ */ jsx("div", { className: "text-red-500 text-xs mt-1.5 ml-1 font-medium", children: errors.subject })
       ] })
     ] }),
