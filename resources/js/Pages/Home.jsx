@@ -473,6 +473,41 @@ export default function Home() {
             {/* ─── 8. REVIEWS ─── */}
             <Testimonials />
 
+            {/* ─── 9. FINAL CALL TO ACTION ─── */}
+            <section className="py-16 lg:py-24 bg-primary text-white relative overflow-hidden">
+                <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary/10 rounded-full blur-[140px]" />
+                </div>
+                <div className="container-custom relative z-10 text-center max-w-4xl mx-auto">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                    >
+                        <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-[9px] font-black uppercase tracking-[0.25em] text-secondary mb-8 border border-white/10">
+                            Call For Manuscripts
+                        </span>
+                        <h2 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold text-white leading-[1.1] mb-8">
+                            Elevate Your Research to <br />
+                            <span className="text-secondary italic">Global Visibility</span>
+                        </h2>
+                        <p className="text-slate-300 text-base md:text-lg font-medium max-w-xl mx-auto mb-12 leading-relaxed">
+                            Join our recognized platform of over 2,500 educators and innovators. Submit your latest manuscript for fast-track editorial triage.
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
+                            <Link href="/submission-guidelines/call-for-papers" className="thm-btn w-full sm:w-auto shadow-2xl">
+                                <span>Submit Manuscript</span>
+                                <ArrowRight className="w-4 h-4" />
+                            </Link>
+                            <Link href="/archive" className="thm-btn-outline !border-white/30 !text-white hover:!bg-white hover:!text-primary w-full sm:w-auto">
+                                <span>Explore Database</span>
+                            </Link>
+                        </div>
+                    </motion.div>
+                </div>
+            </section>
+
 
             <NewsletterSection />
         </MainLayout>

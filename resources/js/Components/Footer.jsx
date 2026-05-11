@@ -10,38 +10,6 @@ const Footer = () => {
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] -translate-x-1/3 translate-y-1/3 pointer-events-none" />
             
             <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-                {/* Upper CTA Tier */}
-                <div className="mb-16">
-                    <div className="relative group bg-white/[0.03] border border-white/[0.05] rounded-[2.5rem] p-8 md:p-12 backdrop-blur-xl overflow-hidden">
-                        <div className="absolute right-0 top-0 w-96 h-96 bg-gradient-radial from-secondary/10 to-transparent opacity-30 blur-3xl -mr-48 -mt-48 transition-opacity group-hover:opacity-50 duration-700" />
-                        
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center relative z-10">
-                            <div>
-                                <h3 className="font-serif text-3xl md:text-4xl font-bold text-white mb-3 tracking-tight">
-                                    Advance Your <span className="text-secondary">Research</span>
-                                </h3>
-                                <p className="text-slate-400 text-base font-medium leading-relaxed max-w-lg">
-                                    Join a global community of scholars. Submit your manuscript today and accelerate the impact of your academic findings.
-                                </p>
-                            </div>
-                            <div className="flex flex-col sm:flex-row gap-4 lg:justify-end">
-                                <Link 
-                                    href="/submit" 
-                                    className="thm-btn bg-secondary text-primary flex items-center justify-center gap-2 px-8 py-4 rounded-2xl shadow-[0_20px_40px_rgba(200,169,107,0.15)] hover:shadow-[0_20px_50px_rgba(200,169,107,0.25)]"
-                                >
-                                    Submit Manuscript
-                                    <ArrowRight className="w-4 h-4" />
-                                </Link>
-                                <Link 
-                                    href="/submission-guidelines" 
-                                    className="thm-btn-outline border-white/20 hover:border-white/40 text-white flex items-center justify-center gap-2 px-8 py-4 rounded-2xl"
-                                >
-                                    Author Guidelines
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b border-white/5">
                     {/* Brand Section */}
