@@ -20,3 +20,4 @@ deploy*.zip
 
 # Compiled build (regenerated on deploy, but tracked for Hostinger direct pull)
 # /public/build
+.git_old_backup/

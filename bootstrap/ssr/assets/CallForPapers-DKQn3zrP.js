@@ -474,11 +474,11 @@ function CallForPapers() {
               /* @__PURE__ */ jsx(ShieldCheck, { className: "w-5 h-5 text-green-600" }),
               /* @__PURE__ */ jsx("span", { className: "text-xs font-bold text-slate-400 uppercase tracking-widest", children: "Protected by Secure Gate" })
             ] }),
-            /* @__PURE__ */ jsxs("div", { className: "flex justify-between border-t border-slate-100 pt-8", children: [
-              /* @__PURE__ */ jsx("button", { type: "button", onClick: () => setStep(2), disabled: processing, className: "px-8 py-4 bg-white text-slate-700 border border-gray-200 font-bold rounded-xl hover:bg-slate-50 transition-colors disabled:opacity-50", children: "Back" }),
-              /* @__PURE__ */ jsxs("button", { type: "submit", disabled: processing || !data.consent, className: "px-10 py-4 bg-secondary text-white font-bold rounded-xl hover:bg-secondary-light transition-all flex items-center gap-2 shadow-lg shadow-secondary/20 disabled:opacity-50 disabled:shadow-none relative overflow-hidden group", children: [
+            /* @__PURE__ */ jsxs("div", { className: "flex flex-col sm:flex-row justify-between gap-4 border-t border-slate-100 pt-8 mt-8", children: [
+              /* @__PURE__ */ jsx("button", { type: "button", onClick: () => setStep(2), disabled: processing, className: "w-full sm:w-auto px-8 py-4 bg-white text-slate-700 border border-gray-200 font-bold rounded-xl hover:bg-slate-50 transition-colors disabled:opacity-50", children: "Back" }),
+              /* @__PURE__ */ jsxs("button", { type: "submit", disabled: processing || !data.consent, className: "w-full sm:w-auto px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-secondary transition-colors flex justify-center items-center gap-2 group disabled:opacity-50 relative overflow-hidden", children: [
                 /* @__PURE__ */ jsx("div", { className: "absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" }),
-                processing ? "Encrypting & Submitting..." : "Submit Manuscript Officially"
+                processing ? "Submitting..." : "Submit Manuscript Officially"
               ] })
             ] })
           ] }, "step3")

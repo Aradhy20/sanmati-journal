@@ -211,6 +211,38 @@ export default function Home() {
                 </div>
             </section>
 
+            {/* ─── UPCOMING SEMINAR ANNOUNCEMENT ─── */}
+            <section className="py-10 bg-secondary/5 border-y border-secondary/10">
+                <div className="container-custom">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.7 }}
+                        className="flex flex-col md:flex-row items-center justify-between gap-6 bg-white rounded-3xl px-8 py-7 shadow-ambient border border-secondary/20"
+                    >
+                        <div className="flex items-start gap-5">
+                            <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center shrink-0">
+                                <Globe className="w-6 h-6 text-secondary" />
+                            </div>
+                            <div>
+                                <span className="inline-block px-3 py-1 bg-secondary/10 text-secondary text-[9px] font-black uppercase tracking-widest rounded-full mb-2">Upcoming · 5 June 2026</span>
+                                <h3 className="text-lg font-serif font-bold text-primary leading-snug">
+                                    अंतरराष्ट्रीय सेमिनार एवं रिसर्च एक्सीलेंस अवार्ड
+                                </h3>
+                                <p className="text-slate-500 text-xs font-medium mt-1">SERFI · Hybrid Mode · ISSN Publication with DOI · Registration Free</p>
+                            </div>
+                        </div>
+                        <Link
+                            href="/academic-events/seminar"
+                            className="shrink-0 inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-white font-black text-[10px] uppercase tracking-widest rounded-2xl hover:bg-primary/90 transition-all shadow-lg"
+                        >
+                            View Details <ArrowRight className="w-4 h-4" />
+                        </Link>
+                    </motion.div>
+                </div>
+            </section>
+
             {/* ─── 3. FEATURED PUBLICATIONS (High Contrast Cover Gallery) ─── */}
             <section className="py-16 lg:py-24 bg-warm-bg">
                 <div className="container-custom">

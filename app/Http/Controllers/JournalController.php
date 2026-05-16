@@ -253,7 +253,7 @@ class JournalController extends Controller
 
         // Queue email notification (async with database queue)
         try {
-            Mail::to('sanmatijournal@gmail.com')->queue(new EnquiryReceived($validated));
+            Mail::to('sanmatijournal@gmail.com')->send(new EnquiryReceived($validated));
         } catch (\Exception $e) {
             Log::error('Failed to queue enquiry email: ' . $e->getMessage());
         }

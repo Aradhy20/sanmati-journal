@@ -349,13 +349,13 @@ export default function CallForPapers() {
                                                     <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Protected by Secure Gate</span>
                                                 </div>
 
-                                                <div className="flex justify-between border-t border-slate-100 pt-8">
-                                                    <button type="button" onClick={() => setStep(2)} disabled={processing} className="px-8 py-4 bg-white text-slate-700 border border-gray-200 font-bold rounded-xl hover:bg-slate-50 transition-colors disabled:opacity-50">
+                                                <div className="flex flex-col sm:flex-row justify-between gap-4 border-t border-slate-100 pt-8 mt-8">
+                                                    <button type="button" onClick={() => setStep(2)} disabled={processing} className="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 border border-gray-200 font-bold rounded-xl hover:bg-slate-50 transition-colors disabled:opacity-50">
                                                         Back
                                                     </button>
-                                                    <button type="submit" disabled={processing || !data.consent} className="px-10 py-4 bg-secondary text-white font-bold rounded-xl hover:bg-secondary-light transition-all flex items-center gap-2 shadow-lg shadow-secondary/20 disabled:opacity-50 disabled:shadow-none relative overflow-hidden group">
+                                                    <button type="submit" disabled={processing || !data.consent} className="w-full sm:w-auto px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-secondary transition-colors flex justify-center items-center gap-2 group disabled:opacity-50 relative overflow-hidden">
                                                         <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                                                        {processing ? 'Encrypting & Submitting...' : 'Submit Manuscript Officially'}
+                                                        {processing ? 'Submitting...' : 'Submit Manuscript Officially'}
                                                     </button>
                                                 </div>
                                             </motion.div>

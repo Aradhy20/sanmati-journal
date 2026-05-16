@@ -9,9 +9,9 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class EnquiryReceived extends Mailable implements ShouldQueue
+class EnquiryReceived extends Mailable
 {
-    use Queueable, SerializesModels;
+    use SerializesModels;
 
     public array $enquiryData;
 

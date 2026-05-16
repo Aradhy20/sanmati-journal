@@ -19,7 +19,8 @@ import {
     HardDrive,
     Cpu,
     ExternalLink,
-    AlertCircle
+    AlertCircle,
+    ChevronRight
 } from 'lucide-react';
 import AdminLayout from '../../Layouts/AdminLayout';
 
