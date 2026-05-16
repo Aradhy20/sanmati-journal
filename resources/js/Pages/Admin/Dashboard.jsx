@@ -12,7 +12,7 @@ import {
     FileText,
     Newspaper,
     Users,
-    ImageIcon,
+    Image as ImageIcon,
     ShieldCheck,
     Server,
     Database,
