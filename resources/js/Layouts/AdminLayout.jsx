@@ -104,10 +104,10 @@ export default function AdminLayout({ children }) {
                     <div className="bg-slate-50 rounded-3xl p-4 border border-slate-100 flex flex-col gap-4">
                         <div className="flex items-center gap-3">
                             <div className="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-blue-600 font-bold shadow-sm">
-                                {user.full_name.charAt(0)}
+                                {(user.full_name || 'A').charAt(0)}
                             </div>
                             <div className="flex-grow min-w-0">
-                                <p className="text-sm font-bold text-slate-900 truncate">{user.full_name}</p>
+                                <p className="text-sm font-bold text-slate-900 truncate">{user.full_name || 'Admin User'}</p>
                                 <p className="text-[11px] text-slate-500 truncate">{user.email}</p>
                             </div>
                         </div>
