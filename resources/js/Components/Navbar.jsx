@@ -260,23 +260,7 @@ const Navbar = ({ onOpenSearch }) => {
 
                         {/* Glass Interaction Array */}
                         <div className="flex items-center gap-1.5 2xl:gap-2.5">
-                            <div className="hidden sm:flex items-center gap-1.5 bg-slate-100/50 border border-slate-200/50 p-1 rounded-xl backdrop-blur-sm">
-                                <button
-                                    onClick={onOpenSearch}
-                                    className="p-2 rounded-lg text-slate-600 hover:text-primary hover:bg-white shadow-none hover:shadow-sm transition-all duration-300"
-                                    aria-label="Search"
-                                >
-                                    <Search className="w-4.5 h-4.5" />
-                                </button>
-
-                                <button
-                                    onClick={toggleDark}
-                                    className="p-2 rounded-lg text-slate-600 hover:text-primary hover:bg-white shadow-none hover:shadow-sm transition-all duration-300"
-                                    aria-label="Toggle Theme"
-                                >
-                                    {dark ? <Sun className="w-4.5 h-4.5 text-amber-500" /> : <Moon className="w-4.5 h-4.5" />}
-                                </button>
-                            </div>
+                            {/* Search and Dark mode buttons removed per user request */}
 
                             <Link
                                 href="/submission-guidelines/call-for-papers"
