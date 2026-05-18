@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useForm, router } from "@inertiajs/react";
 import { FolderPlus, CheckCircle2, Trash2, FilePlus, FileText, Eye } from "lucide-react";
-import { A as AdminLayout } from "./AdminLayout-CHt4j5hT.js";
+import { A as AdminLayout } from "./AdminLayout-uBWVhXVT.js";
 import "framer-motion";
 function Papers({ papers = [], issues = [] }) {
   const issueForm = useForm({

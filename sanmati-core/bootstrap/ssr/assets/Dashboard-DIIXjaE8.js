@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { motion } from "framer-motion";
 import { Link } from "@inertiajs/react";
 import { MessageSquare, FileText, Newspaper, Users, Server, Cpu, Database, HardDrive, Activity, Zap, ExternalLink, TrendingUp, ShieldCheck, AlertCircle, Clock, ChevronRight, Image } from "lucide-react";
-import { A as AdminLayout } from "./AdminLayout-CHt4j5hT.js";
+import { A as AdminLayout } from "./AdminLayout-uBWVhXVT.js";
 function Dashboard({ stats, systemHealth }) {
   const statCards = [
     {

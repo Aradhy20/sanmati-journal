@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useForm, router } from "@inertiajs/react";
 import { Plus, Newspaper, PowerOff, Power, Trash2, Calendar, Info, AlertCircle } from "lucide-react";
-import { A as AdminLayout } from "./AdminLayout-CHt4j5hT.js";
+import { A as AdminLayout } from "./AdminLayout-uBWVhXVT.js";
 import "framer-motion";
 function News({ news = [] }) {
   const { data, setData, post, reset, processing } = useForm({

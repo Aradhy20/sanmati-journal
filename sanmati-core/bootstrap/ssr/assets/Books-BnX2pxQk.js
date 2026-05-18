@@ -3,7 +3,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useForm } from "@inertiajs/react";
 import { Search, Plus, Book, ShoppingBag, Trash2, User, X, Image, Check } from "lucide-react";
-import { A as AdminLayout } from "./AdminLayout-CHt4j5hT.js";
+import { A as AdminLayout } from "./AdminLayout-uBWVhXVT.js";
 function Books({ books }) {
   const [isAdding, setIsAdding] = useState(false);
   const { data, setData, post, processing, reset, errors } = useForm({

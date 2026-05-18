@@ -3,7 +3,7 @@ import "react";
 import { motion } from "framer-motion";
 import { useForm, Link } from "@inertiajs/react";
 import { Download, Users, Search, Mail, Calendar, Trash2 } from "lucide-react";
-import { A as AdminLayout } from "./AdminLayout-CHt4j5hT.js";
+import { A as AdminLayout } from "./AdminLayout-uBWVhXVT.js";
 function Newsletter({ subscribers }) {
   const { post } = useForm();
   const deleteSubscriber = (id) => {

@@ -20,7 +20,8 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function AdminLayout({ children }) {
-    const { url, auth } = usePage().props;
+    const { url } = usePage();
+    const { auth } = usePage().props;
     const user = auth.user || { full_name: 'Admin User', email: 'admin@sanmati.com' };
 
     const links = [

@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import "@inertiajs/react";
 import { Search, FileText, Mail, BookOpen, Calendar, Download, ChevronLeft, ChevronRight } from "lucide-react";
-import { A as AdminLayout } from "./AdminLayout-CHt4j5hT.js";
+import { A as AdminLayout } from "./AdminLayout-uBWVhXVT.js";
 import "framer-motion";
 function Submissions({ submissions = { data: [] } }) {
   const data = submissions.data || [];

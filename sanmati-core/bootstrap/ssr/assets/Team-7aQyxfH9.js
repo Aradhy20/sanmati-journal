@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useForm, router } from "@inertiajs/react";
 import { UserPlus, Users, GraduationCap, Trash2, Briefcase } from "lucide-react";
-import { A as AdminLayout } from "./AdminLayout-CHt4j5hT.js";
+import { A as AdminLayout } from "./AdminLayout-uBWVhXVT.js";
 import "framer-motion";
 function Team({ team = [] }) {
   const { data, setData, post, reset, processing } = useForm({

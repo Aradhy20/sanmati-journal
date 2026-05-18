@@ -3,7 +3,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useForm } from "@inertiajs/react";
 import { Plus, Quote, Star, User, Trash2, X, ThumbsUp } from "lucide-react";
-import { A as AdminLayout } from "./AdminLayout-CHt4j5hT.js";
+import { A as AdminLayout } from "./AdminLayout-uBWVhXVT.js";
 function Testimonials({ testimonials }) {
   const [isAdding, setIsAdding] = useState(false);
   const { data, setData, post, processing, reset, errors } = useForm({

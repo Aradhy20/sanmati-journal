@@ -3,7 +3,8 @@ import { usePage, Link } from "@inertiajs/react";
 import { Sparkles, LayoutDashboard, Newspaper, FileText, Inbox, MessageCircle, Mail, Users, MessageSquare, Image, ChevronRight, LogOut, Search, Bell, Settings } from "lucide-react";
 import { motion } from "framer-motion";
 function AdminLayout({ children }) {
-  const { url, auth } = usePage().props;
+  const { url } = usePage();
+  const { auth } = usePage().props;
   const user = auth.user || { full_name: "Admin User", email: "admin@sanmati.com" };
   const links = [
     { href: "/admin", label: "Dashboard", icon: LayoutDashboard, color: "from-blue-600 to-indigo-700" },

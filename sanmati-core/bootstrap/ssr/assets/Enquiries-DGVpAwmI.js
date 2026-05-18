@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { router } from "@inertiajs/react";
 import { Search, Mail, CheckCircle2, Archive, ChevronLeft, ChevronRight, Clock } from "lucide-react";
-import { A as AdminLayout } from "./AdminLayout-CHt4j5hT.js";
+import { A as AdminLayout } from "./AdminLayout-uBWVhXVT.js";
 import "framer-motion";
 function Enquiries({ enquiries = [] }) {
   const updateStatus = (id, status) => {
