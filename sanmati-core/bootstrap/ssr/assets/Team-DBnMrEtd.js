@@ -3,7 +3,7 @@ import { useForm, router } from "@inertiajs/react";
 import { UserPlus, Users, GraduationCap, Trash2, Briefcase } from "lucide-react";
 import { A as AdminLayout } from "./AdminLayout-uBWVhXVT.js";
 import "framer-motion";
-function Team({ team = [] }) {
+function Team({ teamMembers = { data: [] } }) {
   const { data, setData, post, reset, processing } = useForm({
     name: "",
     role: "",
@@ -117,7 +117,7 @@ function Team({ team = [] }) {
     /* @__PURE__ */ jsx("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6", children: team.length === 0 ? /* @__PURE__ */ jsxs("div", { className: "col-span-full bg-white p-20 flex flex-col items-center justify-center text-gray-400 border border-gray-200 rounded-3xl", children: [
       /* @__PURE__ */ jsx(Users, { className: "w-16 h-16 mb-4 opacity-10" }),
       /* @__PURE__ */ jsx("p", { className: "font-bold italic text-lg", children: "No board members added yet." })
-    ] }) : team.map((member) => /* @__PURE__ */ jsx("div", { className: "bg-white rounded-3xl border border-gray-200 shadow-sm overflow-hidden hover:shadow-xl transition-all group", children: /* @__PURE__ */ jsxs("div", { className: "p-8", children: [
+    ] }) : teamMembers.data.map((member) => /* @__PURE__ */ jsx("div", { className: "bg-white rounded-3xl border border-gray-200 shadow-sm overflow-hidden hover:shadow-xl transition-all group", children: /* @__PURE__ */ jsxs("div", { className: "p-8", children: [
       /* @__PURE__ */ jsxs("div", { className: "flex justify-between items-start mb-6", children: [
         /* @__PURE__ */ jsx("div", { className: "w-20 h-20 rounded-2xl bg-gray-50 border border-slate-100 flex items-center justify-center overflow-hidden", children: member.photo_url ? /* @__PURE__ */ jsx("img", { loading: "lazy", src: `/storage/${member.photo_url}`, alt: member.name, className: "w-full h-full object-cover" }) : /* @__PURE__ */ jsx(GraduationCap, { className: "w-10 h-10 text-slate-300" }) }),
         /* @__PURE__ */ jsx("div", { className: "flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity", children: /* @__PURE__ */ jsx(

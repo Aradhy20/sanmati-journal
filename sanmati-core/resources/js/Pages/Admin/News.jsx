@@ -105,7 +105,7 @@ export default function News({ news = [] }) {
                                         </td>
                                     </tr>
                                 ) : (
-                                    news.map((item) => (
+                                    news.data.map((item) => (
                                         <tr key={item.id} className="hover:bg-warm-bg/50 transition-colors group">
                                             <td className="px-8 py-6">
                                                 <TypeBadge type={item.type} />

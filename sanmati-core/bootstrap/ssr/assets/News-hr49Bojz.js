@@ -79,7 +79,7 @@ function News({ news = [] }) {
       /* @__PURE__ */ jsx("tbody", { className: "divide-y divide-slate-50", children: news.length === 0 ? /* @__PURE__ */ jsx("tr", { children: /* @__PURE__ */ jsx("td", { colSpan: 5, className: "px-8 py-20 text-center", children: /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-center justify-center text-gray-400", children: [
         /* @__PURE__ */ jsx(Newspaper, { className: "w-12 h-12 mb-4 opacity-10" }),
         /* @__PURE__ */ jsx("p", { className: "font-bold italic", children: "No news items found." })
-      ] }) }) }) : news.map((item) => /* @__PURE__ */ jsxs("tr", { className: "hover:bg-warm-bg/50 transition-colors group", children: [
+      ] }) }) }) : news.data.map((item) => /* @__PURE__ */ jsxs("tr", { className: "hover:bg-warm-bg/50 transition-colors group", children: [
         /* @__PURE__ */ jsx("td", { className: "px-8 py-6", children: /* @__PURE__ */ jsx(TypeBadge, { type: item.type }) }),
         /* @__PURE__ */ jsx("td", { className: "px-8 py-6 max-w-xl", children: /* @__PURE__ */ jsx("p", { className: "font-bold text-dark leading-relaxed", children: item.content }) }),
         /* @__PURE__ */ jsx("td", { className: "px-8 py-6", children: /* @__PURE__ */ jsx("span", { className: `inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${item.is_active ? "bg-emerald-50 text-emerald-700 border-emerald-100" : "bg-warm-bg text-gray-400 border-gray-200"}`, children: item.is_active ? "Active" : "Disabled" }) }),

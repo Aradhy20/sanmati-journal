@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import AdminLayout from '../../Layouts/AdminLayout';
 
-export default function Team({ team = [] }) {
+export default function Team({ teamMembers = { data: [] } }) {
     const { data, setData, post, reset, processing } = useForm({
         name: '',
         role: '',
@@ -123,7 +123,7 @@ export default function Team({ team = [] }) {
                             <p className="font-bold italic text-lg">No board members added yet.</p>
                         </div>
                     ) : (
-                        team.map((member) => (
+                        teamMembers.data.map((member) => (
                             <div key={member.id} className="bg-white rounded-3xl border border-gray-200 shadow-sm overflow-hidden hover:shadow-xl transition-all group">
                                 <div className="p-8">
                                     <div className="flex justify-between items-start mb-6">

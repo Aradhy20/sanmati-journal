@@ -289,7 +289,7 @@ function Papers({ papers = [], issues = [] }) {
             /* @__PURE__ */ jsx("tbody", { className: "divide-y divide-slate-50", children: papers.length === 0 ? /* @__PURE__ */ jsx("tr", { children: /* @__PURE__ */ jsx("td", { colSpan: 4, className: "px-8 py-20 text-center", children: /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-center justify-center text-gray-400", children: [
               /* @__PURE__ */ jsx(FileText, { className: "w-12 h-12 mb-4 opacity-10" }),
               /* @__PURE__ */ jsx("p", { className: "font-bold italic", children: "No papers uploaded yet." })
-            ] }) }) }) : papers.map((paper) => {
+            ] }) }) }) : papers.data.map((paper) => {
               var _a, _b, _c;
               return /* @__PURE__ */ jsxs("tr", { className: "hover:bg-warm-bg/50 transition-colors group", children: [
                 /* @__PURE__ */ jsxs("td", { className: "px-8 py-6 whitespace-nowrap", children: [

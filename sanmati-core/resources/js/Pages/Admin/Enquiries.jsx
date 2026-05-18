@@ -61,7 +61,7 @@ export default function Enquiries({ enquiries = [] }) {
                                         </td>
                                     </tr>
                                 ) : (
-                                    enquiries.map((enquiry) => (
+                                    enquiries.data.map((enquiry) => (
                                         <tr key={enquiry.id} className="hover:bg-warm-bg/50 transition-colors group">
                                             <td className="px-8 py-6">
                                                 <div className="flex items-center gap-4">

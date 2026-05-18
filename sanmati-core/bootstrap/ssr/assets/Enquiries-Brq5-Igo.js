@@ -37,7 +37,7 @@ function Enquiries({ enquiries = [] }) {
         /* @__PURE__ */ jsx("tbody", { className: "divide-y divide-slate-50", children: enquiries.length === 0 ? /* @__PURE__ */ jsx("tr", { children: /* @__PURE__ */ jsx("td", { colSpan: 5, className: "px-8 py-20 text-center", children: /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-center justify-center text-gray-400", children: [
           /* @__PURE__ */ jsx(Mail, { className: "w-12 h-12 mb-4 opacity-10" }),
           /* @__PURE__ */ jsx("p", { className: "font-bold italic", children: "No enquiries found in the database." })
-        ] }) }) }) : enquiries.map((enquiry) => {
+        ] }) }) }) : enquiries.data.map((enquiry) => {
           var _a, _b;
           return /* @__PURE__ */ jsxs("tr", { className: "hover:bg-warm-bg/50 transition-colors group", children: [
             /* @__PURE__ */ jsx("td", { className: "px-8 py-6", children: /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-4", children: [

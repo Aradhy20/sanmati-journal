@@ -280,7 +280,7 @@ export default function Papers({ papers = [], issues = [] }) {
                                                 </td>
                                             </tr>
                                         ) : (
-                                            papers.map((paper) => (
+                                            papers.data.map((paper) => (
                                                 <tr key={paper.id} className="hover:bg-warm-bg/50 transition-colors group">
                                                     <td className="px-8 py-6 whitespace-nowrap">
                                                         <p className="text-xs font-bold text-dark">Vol. {paper.issue?.volume}, No. {paper.issue?.number}</p>

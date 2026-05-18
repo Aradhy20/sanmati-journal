@@ -97,7 +97,7 @@ export default function Gallery({ gallery = [] }) {
                             <p className="font-bold italic text-lg">No photos in the library yet.</p>
                         </div>
                     ) : (
-                        gallery.map((item) => (
+                        gallery.data.map((item) => (
                             <div key={item.id} className="bg-white rounded-3xl border border-gray-200 shadow-sm overflow-hidden group hover:shadow-xl transition-all">
                                 <div className="relative h-48 bg-gray-50">
                                     <img loading="lazy" src={`/storage/${item.url}`} alt={item.caption} className="w-full h-full object-cover" />

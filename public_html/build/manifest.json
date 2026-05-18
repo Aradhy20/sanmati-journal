@@ -181,7 +181,7 @@
     ]
   },
   "resources/js/Pages/Admin/Enquiries.jsx": {
-    "file": "assets/Enquiries-VjUJLT5b.js",
+    "file": "assets/Enquiries-DFW0MByj.js",
     "name": "Enquiries",
     "src": "resources/js/Pages/Admin/Enquiries.jsx",
     "isDynamicEntry": true,
@@ -191,7 +191,7 @@
     ]
   },
   "resources/js/Pages/Admin/Gallery.jsx": {
-    "file": "assets/Gallery-BORhIb-S.js",
+    "file": "assets/Gallery-CZqY2sJ1.js",
     "name": "Gallery",
     "src": "resources/js/Pages/Admin/Gallery.jsx",
     "isDynamicEntry": true,
@@ -201,7 +201,7 @@
     ]
   },
   "resources/js/Pages/Admin/News.jsx": {
-    "file": "assets/News-Dj9M21Za.js",
+    "file": "assets/News-BO8pjSIs.js",
     "name": "News",
     "src": "resources/js/Pages/Admin/News.jsx",
     "isDynamicEntry": true,
@@ -221,7 +221,7 @@
     ]
   },
   "resources/js/Pages/Admin/Papers.jsx": {
-    "file": "assets/Papers-BLpQewGP.js",
+    "file": "assets/Papers-BraVbiPS.js",
     "name": "Papers",
     "src": "resources/js/Pages/Admin/Papers.jsx",
     "isDynamicEntry": true,
@@ -241,7 +241,7 @@
     ]
   },
   "resources/js/Pages/Admin/Team.jsx": {
-    "file": "assets/Team-fGxcg-Er.js",
+    "file": "assets/Team-z8zQoCSl.js",
     "name": "Team",
     "src": "resources/js/Pages/Admin/Team.jsx",
     "isDynamicEntry": true,
@@ -500,7 +500,7 @@
     ]
   },
   "resources/js/Pages/Home.jsx": {
-    "file": "assets/Home-aC0NENnq.js",
+    "file": "assets/Home-LU4qcFT0.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.jsx",
     "isDynamicEntry": true,
@@ -669,7 +669,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-CdN4wQsw.js",
+    "file": "assets/app-B1HdwnHW.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,

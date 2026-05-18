@@ -91,7 +91,7 @@ function Gallery({ gallery = [] }) {
     /* @__PURE__ */ jsx("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6", children: gallery.length === 0 ? /* @__PURE__ */ jsxs("div", { className: "col-span-full bg-white p-20 flex flex-col items-center justify-center text-gray-400 border border-gray-200 rounded-3xl", children: [
       /* @__PURE__ */ jsx(Image, { className: "w-16 h-16 mb-4 opacity-10" }),
       /* @__PURE__ */ jsx("p", { className: "font-bold italic text-lg", children: "No photos in the library yet." })
-    ] }) : gallery.map((item) => /* @__PURE__ */ jsxs("div", { className: "bg-white rounded-3xl border border-gray-200 shadow-sm overflow-hidden group hover:shadow-xl transition-all", children: [
+    ] }) : gallery.data.map((item) => /* @__PURE__ */ jsxs("div", { className: "bg-white rounded-3xl border border-gray-200 shadow-sm overflow-hidden group hover:shadow-xl transition-all", children: [
       /* @__PURE__ */ jsxs("div", { className: "relative h-48 bg-gray-50", children: [
         /* @__PURE__ */ jsx("img", { loading: "lazy", src: `/storage/${item.url}`, alt: item.caption, className: "w-full h-full object-cover" }),
         /* @__PURE__ */ jsx("div", { className: "absolute top-4 right-4 flex gap-2 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all", children: /* @__PURE__ */ jsx(
