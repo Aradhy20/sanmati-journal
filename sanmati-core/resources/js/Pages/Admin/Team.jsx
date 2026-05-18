@@ -117,7 +117,7 @@ export default function Team({ teamMembers = { data: [] } }) {
 
                 {/* Team List */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {team.length === 0 ? (
+                    {teamMembers.data.length === 0 ? (
                         <div className="col-span-full bg-white p-20 flex flex-col items-center justify-center text-gray-400 border border-gray-200 rounded-3xl">
                             <Users className="w-16 h-16 mb-4 opacity-10" />
                             <p className="font-bold italic text-lg">No board members added yet.</p>
