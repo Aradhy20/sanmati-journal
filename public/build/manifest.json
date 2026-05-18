@@ -48,12 +48,16 @@
       "_vendor-CnxVWxBx.js"
     ]
   },
+  "_confetti.module-oQXWb4Lk.js": {
+    "file": "assets/confetti.module-oQXWb4Lk.js",
+    "name": "confetti.module"
+  },
   "_vendor-CnxVWxBx.js": {
     "file": "assets/vendor-CnxVWxBx.js",
     "name": "vendor"
   },
   "resources/css/app.css": {
-    "file": "assets/app-CQFDifQU.css",
+    "file": "assets/app-BkG79Kh5.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -67,12 +71,13 @@
     ]
   },
   "resources/js/Components/NewsletterSection.jsx": {
-    "file": "assets/NewsletterSection-BQDACqin.js",
+    "file": "assets/NewsletterSection-DP3bBjDS.js",
     "name": "NewsletterSection",
     "src": "resources/js/Components/NewsletterSection.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-CnxVWxBx.js"
+      "_vendor-CnxVWxBx.js",
+      "_confetti.module-oQXWb4Lk.js"
     ]
   },
   "resources/js/Components/PipelineSection.jsx": {
@@ -495,7 +500,7 @@
     ]
   },
   "resources/js/Pages/Home.jsx": {
-    "file": "assets/Home-DNHZJQ7Q.js",
+    "file": "assets/Home-e0hLD6sN.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.jsx",
     "isDynamicEntry": true,
@@ -511,7 +516,7 @@
       "resources/js/Components/NewsletterSection.jsx"
     ],
     "css": [
-      "assets/app-CQFDifQU.css"
+      "assets/app-BkG79Kh5.css"
     ]
   },
   "resources/js/Pages/PublicationPolicy/Ethics.jsx": {
@@ -580,14 +585,15 @@
     ]
   },
   "resources/js/Pages/SubmissionGuidelines/CallForPapers.jsx": {
-    "file": "assets/CallForPapers-C7pAD2qE.js",
+    "file": "assets/CallForPapers-CyQDG17C.js",
     "name": "CallForPapers",
     "src": "resources/js/Pages/SubmissionGuidelines/CallForPapers.jsx",
     "isDynamicEntry": true,
     "imports": [
       "_vendor-CnxVWxBx.js",
       "_PageHeader-BaGJ1a3o.js",
-      "_MainLayout-BQim_7Iy.js"
+      "_MainLayout-BQim_7Iy.js",
+      "_confetti.module-oQXWb4Lk.js"
     ]
   },
   "resources/js/Pages/SubmissionGuidelines/ImportantInfo.jsx": {
@@ -663,7 +669,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-CTuFujfY.js",
+    "file": "assets/app-B7NfMWpi.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
@@ -723,7 +729,7 @@
       "resources/js/Pages/TrackManuscript.jsx"
     ],
     "css": [
-      "assets/app-CQFDifQU.css"
+      "assets/app-BkG79Kh5.css"
     ]
   }
 }

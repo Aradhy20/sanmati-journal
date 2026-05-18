@@ -6,6 +6,8 @@ import { UploadCloud, FileText, CheckCircle, X, AlertCircle, ShieldCheck, ArrowR
 import { usePage, useForm } from "@inertiajs/react";
 import { motion, AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
+import confetti from "canvas-confetti";
 function DropZone({
   id,
   label = "Upload Manuscript PDF",
@@ -218,7 +220,18 @@ function CallForPapers() {
             setTrackingId(successData.tracking_id);
             reset();
             setStep(4);
-            toast.success("Manuscript submitted successfully.");
+            confetti({
+              particleCount: 150,
+              spread: 70,
+              origin: { y: 0.6 }
+            });
+            Swal.fire({
+              title: "Submission Successful!",
+              html: `Your manuscript has been securely routed.<br><br><b>Tracking ID: ${successData.tracking_id}</b>`,
+              icon: "success",
+              confirmButtonColor: "#0b2038",
+              confirmButtonText: "Great, thanks!"
+            });
           }
         },
         onError: (errs) => {

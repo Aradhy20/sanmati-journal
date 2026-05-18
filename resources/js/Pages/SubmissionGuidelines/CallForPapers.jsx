@@ -6,6 +6,8 @@ import { useForm, usePage } from '@inertiajs/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
 import DropZone from '../../Components/ui/DropZone';
+import Swal from 'sweetalert2';
+import confetti from 'canvas-confetti';
 
 export default function CallForPapers() {
     const { flash } = usePage().props;
@@ -60,7 +62,22 @@ export default function CallForPapers() {
                         setTrackingId(successData.tracking_id);
                         reset();
                         setStep(4);
-                        toast.success('Manuscript submitted successfully.');
+                        
+                        // Fire Confetti
+                        confetti({
+                            particleCount: 150,
+                            spread: 70,
+                            origin: { y: 0.6 }
+                        });
+
+                        // Show Big Visible Popup
+                        Swal.fire({
+                            title: 'Submission Successful!',
+                            html: `Your manuscript has been securely routed.<br><br><b>Tracking ID: ${successData.tracking_id}</b>`,
+                            icon: 'success',
+                            confirmButtonColor: '#0b2038',
+                            confirmButtonText: 'Great, thanks!'
+                        });
                     }
                 },
                 onError: (errs) => {
