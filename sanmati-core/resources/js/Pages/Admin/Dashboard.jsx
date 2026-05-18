@@ -7,7 +7,7 @@ import {
     Activity,
     Zap,
     Clock,
-    CheckCircle2,
+    CheckCircle,
     MessageSquare,
     FileText,
     Newspaper,
