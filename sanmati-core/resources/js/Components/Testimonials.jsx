@@ -3,7 +3,7 @@ import { Quote, ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { ScrollReveal } from './ScrollReveal';
 
-const testimonials = [
+const defaultTestimonials = [
     {
         quote: "The peer-review process at Sanmati Spectrum was incredibly rigorous yet efficient. The feedback from reviewers significantly improved my paper.",
         name: "Dr. Elena Rossi",
@@ -24,7 +24,17 @@ const testimonials = [
     }
 ];
 
-const Testimonials = () => {
+const Testimonials = ({ testimonials: dbTestimonials = [] }) => {
+    const testimonials = dbTestimonials.length > 0
+        ? dbTestimonials.map(t => ({
+            quote: t.text,
+            name: t.name,
+            role: t.role,
+            image: t.image_url.startsWith('/') || t.image_url.startsWith('http')
+                ? t.image_url
+                : `/storage/${t.image_url}`
+          }))
+        : defaultTestimonials;
     const [current, setCurrent] = useState(0);
 
     useEffect(() => {

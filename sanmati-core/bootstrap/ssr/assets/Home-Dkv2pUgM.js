@@ -6,7 +6,7 @@ import { Link } from "@inertiajs/react";
 import { Globe, ArrowRight, ShieldCheck, Award, Star, FileText, Users, Heart, ArrowUpRight, Microscope, Palette, Calculator, Scale, GraduationCap, Cpu, Feather, Quote, ChevronRight } from "lucide-react";
 import "react-hot-toast";
 const Hero = React.lazy(() => import("./Hero-BlzcD6vp.js"));
-const Testimonials = React.lazy(() => import("./Testimonials-C0oDc0_5.js"));
+const Testimonials = React.lazy(() => import("./Testimonials-vT9yqXyt.js"));
 const PipelineSection = React.lazy(() => import("./PipelineSection-odGSs9_P.js"));
 const NewsletterSection = React.lazy(() => import("./NewsletterSection-F6ZClJX7.js"));
 const fadeInUp = {
@@ -34,7 +34,7 @@ const AnimatedCounter = ({ from, to, duration = 2.5 }) => {
   }, [from, to, duration, inView]);
   return /* @__PURE__ */ jsx("span", { ref: nodeRef, children: from });
 };
-function Home() {
+function Home({ newsItems = [], featuredPapers = [], testimonials = [] }) {
   const [savedPapers, setSavedPapers] = useState({});
   const toggleSavePaper = (idx) => {
     setSavedPapers((prev) => ({ ...prev, [idx]: !prev[idx] }));
@@ -431,7 +431,7 @@ function Home() {
           ] })
         ] }),
         /* @__PURE__ */ jsx(Suspense, { fallback: /* @__PURE__ */ jsx("div", { className: "h-40 bg-warm-bg" }), children: /* @__PURE__ */ jsx(PipelineSection, {}) }),
-        /* @__PURE__ */ jsx(Suspense, { fallback: /* @__PURE__ */ jsx("div", { className: "h-40 bg-dark" }), children: /* @__PURE__ */ jsx(Testimonials, {}) }),
+        /* @__PURE__ */ jsx(Suspense, { fallback: /* @__PURE__ */ jsx("div", { className: "h-40 bg-dark" }), children: /* @__PURE__ */ jsx(Testimonials, { testimonials }) }),
         /* @__PURE__ */ jsxs("section", { className: "py-16 lg:py-24 bg-primary text-white relative overflow-hidden", children: [
           /* @__PURE__ */ jsx("div", { className: "absolute inset-0 pointer-events-none", children: /* @__PURE__ */ jsx("div", { className: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary/10 rounded-full blur-[140px]" }) }),
           /* @__PURE__ */ jsx("div", { className: "container-custom relative z-10 text-center max-w-4xl mx-auto", children: /* @__PURE__ */ jsxs(

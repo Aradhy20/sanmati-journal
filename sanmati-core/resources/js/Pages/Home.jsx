@@ -44,7 +44,7 @@ const AnimatedCounter = ({ from, to, duration = 2.5 }) => {
     return <span ref={nodeRef}>{from}</span>;
 };
 
-export default function Home() {
+export default function Home({ newsItems = [], featuredPapers = [], testimonials = [] }) {
     const [savedPapers, setSavedPapers] = useState({});
 
     const toggleSavePaper = (idx) => {
@@ -508,7 +508,7 @@ export default function Home() {
 
             {/* ─── 8. REVIEWS ─── */}
             <Suspense fallback={<div className="h-40 bg-dark" />}>
-                <Testimonials />
+                <Testimonials testimonials={testimonials} />
             </Suspense>
 
             {/* ─── 9. FINAL CALL TO ACTION ─── */}

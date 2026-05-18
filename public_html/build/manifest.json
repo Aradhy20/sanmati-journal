@@ -90,7 +90,7 @@
     ]
   },
   "resources/js/Components/Testimonials.jsx": {
-    "file": "assets/Testimonials-DbIZR2MX.js",
+    "file": "assets/Testimonials-BbZC-yMc.js",
     "name": "Testimonials",
     "src": "resources/js/Components/Testimonials.jsx",
     "isDynamicEntry": true,
@@ -500,7 +500,7 @@
     ]
   },
   "resources/js/Pages/Home.jsx": {
-    "file": "assets/Home-3Sm1bRjz.js",
+    "file": "assets/Home-CIdGHFDj.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.jsx",
     "isDynamicEntry": true,
@@ -669,7 +669,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-CXvRZUsi.js",
+    "file": "assets/app-Ba9IPnHj.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,

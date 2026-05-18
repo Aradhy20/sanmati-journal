@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Quote, Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { S as ScrollReveal } from "./ScrollReveal-1c_Su25q.js";
-const testimonials = [
+const defaultTestimonials = [
   {
     quote: "The peer-review process at Sanmati Spectrum was incredibly rigorous yet efficient. The feedback from reviewers significantly improved my paper.",
     name: "Dr. Elena Rossi",
@@ -23,7 +23,13 @@ const testimonials = [
     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=150&h=150"
   }
 ];
-const Testimonials = () => {
+const Testimonials = ({ testimonials: dbTestimonials = [] }) => {
+  const testimonials = dbTestimonials.length > 0 ? dbTestimonials.map((t) => ({
+    quote: t.text,
+    name: t.name,
+    role: t.role,
+    image: t.image_url.startsWith("/") || t.image_url.startsWith("http") ? t.image_url : `/storage/${t.image_url}`
+  })) : defaultTestimonials;
   const [current, setCurrent] = useState(0);
   useEffect(() => {
     const timer = setInterval(() => {
