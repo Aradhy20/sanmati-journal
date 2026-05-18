@@ -2,6 +2,16 @@
 
 use App\Http\Controllers\JournalController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+
+Route::get('/clear-cache', function () {
+    Artisan::call('optimize:clear');
+    Artisan::call('cache:clear');
+    Artisan::call('route:clear');
+    Artisan::call('view:clear');
+    Artisan::call('config:clear');
+    return "All Laravel caches have been successfully cleared! You can now go back to the homepage.";
+});
 
 Route::get('/', [JournalController::class, 'index'])->name('home');
 Route::redirect('/submit', '/submission-guidelines/call-for-papers');
