@@ -1,0 +1,6 @@
+# Disable all direct web access to the Laravel core folder for security
+Require all denied
+<IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+</IfModule>

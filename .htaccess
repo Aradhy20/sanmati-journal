@@ -1,0 +1,6 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Send all requests to the inner public_html folder
+    RewriteRule ^(.*)$ public_html/$1 [L]
+</IfModule>
