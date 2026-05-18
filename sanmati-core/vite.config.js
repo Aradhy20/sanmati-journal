@@ -8,6 +8,8 @@ export default defineConfig({
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.jsx'],
             ssr: 'resources/js/ssr.jsx',
+            publicDirectory: '../public_html',
+            buildDirectory: 'build',
             refresh: true,
         }),
         react(),

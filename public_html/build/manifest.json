@@ -1,513 +1,513 @@
 {
-  "_AdminLayout-BZ_XlnNX.js": {
-    "file": "assets/AdminLayout-BZ_XlnNX.js",
+  "_AdminLayout-opaAGkR8.js": {
+    "file": "assets/AdminLayout-opaAGkR8.js",
     "name": "AdminLayout",
     "imports": [
-      "_vendor-B9VemZoi.js"
+      "_vendor-DQ0jIspj.js"
     ]
   },
-  "_CitationGenerator-BcftsyMa.js": {
-    "file": "assets/CitationGenerator-BcftsyMa.js",
+  "_CitationGenerator-C84DlzPP.js": {
+    "file": "assets/CitationGenerator-C84DlzPP.js",
     "name": "CitationGenerator",
     "imports": [
-      "_vendor-B9VemZoi.js"
+      "_vendor-DQ0jIspj.js"
     ]
   },
-  "_DecorativeElements-CTVrM7I8.js": {
-    "file": "assets/DecorativeElements-CTVrM7I8.js",
+  "_DecorativeElements-DNZzig8b.js": {
+    "file": "assets/DecorativeElements-DNZzig8b.js",
     "name": "DecorativeElements",
     "imports": [
-      "_vendor-B9VemZoi.js"
+      "_vendor-DQ0jIspj.js"
     ]
   },
-  "_Graphics-B-DkdK38.js": {
-    "file": "assets/Graphics-B-DkdK38.js",
+  "_Graphics-BbpvOpm2.js": {
+    "file": "assets/Graphics-BbpvOpm2.js",
     "name": "Graphics",
     "imports": [
-      "_vendor-B9VemZoi.js"
+      "_vendor-DQ0jIspj.js"
     ]
   },
-  "_MainLayout-C8wbBFkP.js": {
-    "file": "assets/MainLayout-C8wbBFkP.js",
+  "_MainLayout-DWqlmIMV.js": {
+    "file": "assets/MainLayout-DWqlmIMV.js",
     "name": "MainLayout",
     "imports": [
-      "_vendor-B9VemZoi.js"
+      "_vendor-DQ0jIspj.js"
     ]
   },
-  "_PageHeader-B49GTetb.js": {
-    "file": "assets/PageHeader-B49GTetb.js",
+  "_PageHeader-DP8uAaXa.js": {
+    "file": "assets/PageHeader-DP8uAaXa.js",
     "name": "PageHeader",
     "imports": [
-      "_vendor-B9VemZoi.js"
+      "_vendor-DQ0jIspj.js"
     ]
   },
-  "_ScrollReveal-Ds2CP45D.js": {
-    "file": "assets/ScrollReveal-Ds2CP45D.js",
+  "_ScrollReveal-DeLOXZwp.js": {
+    "file": "assets/ScrollReveal-DeLOXZwp.js",
     "name": "ScrollReveal",
     "imports": [
-      "_vendor-B9VemZoi.js"
+      "_vendor-DQ0jIspj.js"
     ]
   },
   "_confetti.module-oQXWb4Lk.js": {
     "file": "assets/confetti.module-oQXWb4Lk.js",
     "name": "confetti.module"
   },
-  "_vendor-B9VemZoi.js": {
-    "file": "assets/vendor-B9VemZoi.js",
+  "_vendor-DQ0jIspj.js": {
+    "file": "assets/vendor-DQ0jIspj.js",
     "name": "vendor"
   },
   "resources/css/app.css": {
-    "file": "assets/app-BkG79Kh5.css",
+    "file": "assets/app-CQYc0IzC.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/Components/Hero.jsx": {
-    "file": "assets/Hero-kH27SAcE.js",
+    "file": "assets/Hero-BMHUzCIF.js",
     "name": "Hero",
     "src": "resources/js/Components/Hero.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js"
+      "_vendor-DQ0jIspj.js"
     ]
   },
   "resources/js/Components/NewsletterSection.jsx": {
-    "file": "assets/NewsletterSection-D5zcLL4P.js",
+    "file": "assets/NewsletterSection-Bohz1LC0.js",
     "name": "NewsletterSection",
     "src": "resources/js/Components/NewsletterSection.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
+      "_vendor-DQ0jIspj.js",
       "_confetti.module-oQXWb4Lk.js"
     ]
   },
   "resources/js/Components/PipelineSection.jsx": {
-    "file": "assets/PipelineSection-DgGBLjvb.js",
+    "file": "assets/PipelineSection-DuB_gd8h.js",
     "name": "PipelineSection",
     "src": "resources/js/Components/PipelineSection.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js"
+      "_vendor-DQ0jIspj.js"
     ]
   },
   "resources/js/Components/Testimonials.jsx": {
-    "file": "assets/Testimonials-D9vYvkXw.js",
+    "file": "assets/Testimonials-DbIZR2MX.js",
     "name": "Testimonials",
     "src": "resources/js/Components/Testimonials.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_ScrollReveal-Ds2CP45D.js"
+      "_vendor-DQ0jIspj.js",
+      "_ScrollReveal-DeLOXZwp.js"
     ]
   },
   "resources/js/Pages/AboutFoundation.jsx": {
-    "file": "assets/AboutFoundation-8ukKN6NG.js",
+    "file": "assets/AboutFoundation-Dl-6J1sS.js",
     "name": "AboutFoundation",
     "src": "resources/js/Pages/AboutFoundation.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_MainLayout-C8wbBFkP.js",
-      "_PageHeader-B49GTetb.js"
+      "_vendor-DQ0jIspj.js",
+      "_MainLayout-DWqlmIMV.js",
+      "_PageHeader-DP8uAaXa.js"
     ]
   },
   "resources/js/Pages/AboutJournal.jsx": {
-    "file": "assets/AboutJournal-DCLMwu3Z.js",
+    "file": "assets/AboutJournal-HbsWrqzh.js",
     "name": "AboutJournal",
     "src": "resources/js/Pages/AboutJournal.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js"
     ]
   },
   "resources/js/Pages/AcademicEvents/Conferences.jsx": {
-    "file": "assets/Conferences-CwNIfm3S.js",
+    "file": "assets/Conferences-wvUdFnMZ.js",
     "name": "Conferences",
     "src": "resources/js/Pages/AcademicEvents/Conferences.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js",
-      "_Graphics-B-DkdK38.js",
-      "_ScrollReveal-Ds2CP45D.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js",
+      "_Graphics-BbpvOpm2.js",
+      "_ScrollReveal-DeLOXZwp.js"
     ]
   },
   "resources/js/Pages/AcademicEvents/Seminars.jsx": {
-    "file": "assets/Seminars-V4GfhsFx.js",
+    "file": "assets/Seminars-NyaBE3Kw.js",
     "name": "Seminars",
     "src": "resources/js/Pages/AcademicEvents/Seminars.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js",
-      "_Graphics-B-DkdK38.js",
-      "_ScrollReveal-Ds2CP45D.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js",
+      "_Graphics-BbpvOpm2.js",
+      "_ScrollReveal-DeLOXZwp.js"
     ]
   },
   "resources/js/Pages/AcademicEvents/Workshop.jsx": {
-    "file": "assets/Workshop-ll0QO5QB.js",
+    "file": "assets/Workshop-BmCCQPjU.js",
     "name": "Workshop",
     "src": "resources/js/Pages/AcademicEvents/Workshop.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js",
-      "_Graphics-B-DkdK38.js",
-      "_ScrollReveal-Ds2CP45D.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js",
+      "_Graphics-BbpvOpm2.js",
+      "_ScrollReveal-DeLOXZwp.js"
     ]
   },
   "resources/js/Pages/Admin/Books.jsx": {
-    "file": "assets/Books-PKjtvR3c.js",
+    "file": "assets/Books-B_flLI_O.js",
     "name": "Books",
     "src": "resources/js/Pages/Admin/Books.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_AdminLayout-BZ_XlnNX.js"
+      "_vendor-DQ0jIspj.js",
+      "_AdminLayout-opaAGkR8.js"
     ]
   },
   "resources/js/Pages/Admin/Dashboard.jsx": {
-    "file": "assets/Dashboard-CRcevkat.js",
+    "file": "assets/Dashboard-DGXLyfbo.js",
     "name": "Dashboard",
     "src": "resources/js/Pages/Admin/Dashboard.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_AdminLayout-BZ_XlnNX.js"
+      "_vendor-DQ0jIspj.js",
+      "_AdminLayout-opaAGkR8.js"
     ]
   },
   "resources/js/Pages/Admin/Enquiries.jsx": {
-    "file": "assets/Enquiries-BnliiK5R.js",
+    "file": "assets/Enquiries-VjUJLT5b.js",
     "name": "Enquiries",
     "src": "resources/js/Pages/Admin/Enquiries.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_AdminLayout-BZ_XlnNX.js"
+      "_vendor-DQ0jIspj.js",
+      "_AdminLayout-opaAGkR8.js"
     ]
   },
   "resources/js/Pages/Admin/Gallery.jsx": {
-    "file": "assets/Gallery-By-RDXlb.js",
+    "file": "assets/Gallery-BORhIb-S.js",
     "name": "Gallery",
     "src": "resources/js/Pages/Admin/Gallery.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_AdminLayout-BZ_XlnNX.js"
+      "_vendor-DQ0jIspj.js",
+      "_AdminLayout-opaAGkR8.js"
     ]
   },
   "resources/js/Pages/Admin/News.jsx": {
-    "file": "assets/News-D-_Ztc3o.js",
+    "file": "assets/News-Dj9M21Za.js",
     "name": "News",
     "src": "resources/js/Pages/Admin/News.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_AdminLayout-BZ_XlnNX.js"
+      "_vendor-DQ0jIspj.js",
+      "_AdminLayout-opaAGkR8.js"
     ]
   },
   "resources/js/Pages/Admin/Newsletter.jsx": {
-    "file": "assets/Newsletter-DXR9jp0t.js",
+    "file": "assets/Newsletter-DXtKBN3e.js",
     "name": "Newsletter",
     "src": "resources/js/Pages/Admin/Newsletter.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_AdminLayout-BZ_XlnNX.js"
+      "_vendor-DQ0jIspj.js",
+      "_AdminLayout-opaAGkR8.js"
     ]
   },
   "resources/js/Pages/Admin/Papers.jsx": {
-    "file": "assets/Papers-CBDrq5nG.js",
+    "file": "assets/Papers-BLpQewGP.js",
     "name": "Papers",
     "src": "resources/js/Pages/Admin/Papers.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_AdminLayout-BZ_XlnNX.js"
+      "_vendor-DQ0jIspj.js",
+      "_AdminLayout-opaAGkR8.js"
     ]
   },
   "resources/js/Pages/Admin/Submissions.jsx": {
-    "file": "assets/Submissions-aezLj0tA.js",
+    "file": "assets/Submissions-DHFQLlNX.js",
     "name": "Submissions",
     "src": "resources/js/Pages/Admin/Submissions.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_AdminLayout-BZ_XlnNX.js"
+      "_vendor-DQ0jIspj.js",
+      "_AdminLayout-opaAGkR8.js"
     ]
   },
   "resources/js/Pages/Admin/Team.jsx": {
-    "file": "assets/Team-ClnLUhPs.js",
+    "file": "assets/Team-fGxcg-Er.js",
     "name": "Team",
     "src": "resources/js/Pages/Admin/Team.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_AdminLayout-BZ_XlnNX.js"
+      "_vendor-DQ0jIspj.js",
+      "_AdminLayout-opaAGkR8.js"
     ]
   },
   "resources/js/Pages/Admin/Testimonials.jsx": {
-    "file": "assets/Testimonials-N3jIX7fU.js",
+    "file": "assets/Testimonials-C309xIa2.js",
     "name": "Testimonials",
     "src": "resources/js/Pages/Admin/Testimonials.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_AdminLayout-BZ_XlnNX.js"
+      "_vendor-DQ0jIspj.js",
+      "_AdminLayout-opaAGkR8.js"
     ]
   },
   "resources/js/Pages/AdvisoryBoard.jsx": {
-    "file": "assets/AdvisoryBoard-B73dgwP_.js",
+    "file": "assets/AdvisoryBoard-sR1AYAlZ.js",
     "name": "AdvisoryBoard",
     "src": "resources/js/Pages/AdvisoryBoard.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js"
     ]
   },
   "resources/js/Pages/Archive.jsx": {
-    "file": "assets/Archive-DJQVHl-M.js",
+    "file": "assets/Archive-BSpUZUiJ.js",
     "name": "Archive",
     "src": "resources/js/Pages/Archive.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js",
-      "_CitationGenerator-BcftsyMa.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js",
+      "_CitationGenerator-C84DlzPP.js"
     ]
   },
   "resources/js/Pages/Article.jsx": {
-    "file": "assets/Article-DoMNBTty.js",
+    "file": "assets/Article-CYHM25k9.js",
     "name": "Article",
     "src": "resources/js/Pages/Article.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_MainLayout-C8wbBFkP.js",
-      "_PageHeader-B49GTetb.js",
-      "_CitationGenerator-BcftsyMa.js"
+      "_vendor-DQ0jIspj.js",
+      "_MainLayout-DWqlmIMV.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_CitationGenerator-C84DlzPP.js"
     ]
   },
   "resources/js/Pages/Auth/ForgotPassword.jsx": {
-    "file": "assets/ForgotPassword-CaGBGKNe.js",
+    "file": "assets/ForgotPassword-CUKKNJQ7.js",
     "name": "ForgotPassword",
     "src": "resources/js/Pages/Auth/ForgotPassword.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_DecorativeElements-CTVrM7I8.js"
+      "_vendor-DQ0jIspj.js",
+      "_DecorativeElements-DNZzig8b.js"
     ]
   },
   "resources/js/Pages/Auth/Login.jsx": {
-    "file": "assets/Login-CYXw7uWq.js",
+    "file": "assets/Login-CK92iCvK.js",
     "name": "Login",
     "src": "resources/js/Pages/Auth/Login.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_DecorativeElements-CTVrM7I8.js"
+      "_vendor-DQ0jIspj.js",
+      "_DecorativeElements-DNZzig8b.js"
     ]
   },
   "resources/js/Pages/Auth/ResetPassword.jsx": {
-    "file": "assets/ResetPassword-vCixOksg.js",
+    "file": "assets/ResetPassword-BzC8HHJW.js",
     "name": "ResetPassword",
     "src": "resources/js/Pages/Auth/ResetPassword.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_DecorativeElements-CTVrM7I8.js"
+      "_vendor-DQ0jIspj.js",
+      "_DecorativeElements-DNZzig8b.js"
     ]
   },
   "resources/js/Pages/Author/Dashboard.jsx": {
-    "file": "assets/Dashboard-ki6vpu5J.js",
+    "file": "assets/Dashboard-Dnhm57JD.js",
     "name": "Dashboard",
     "src": "resources/js/Pages/Author/Dashboard.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_MainLayout-C8wbBFkP.js",
-      "_PageHeader-B49GTetb.js"
+      "_vendor-DQ0jIspj.js",
+      "_MainLayout-DWqlmIMV.js",
+      "_PageHeader-DP8uAaXa.js"
     ]
   },
   "resources/js/Pages/Awards.jsx": {
-    "file": "assets/Awards-BwEXCfbW.js",
+    "file": "assets/Awards-_E3UL_gF.js",
     "name": "Awards",
     "src": "resources/js/Pages/Awards.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js"
     ]
   },
   "resources/js/Pages/BasicInfo/Indexing.jsx": {
-    "file": "assets/Indexing-CAB6hN2H.js",
+    "file": "assets/Indexing-Tqo7OQtZ.js",
     "name": "Indexing",
     "src": "resources/js/Pages/BasicInfo/Indexing.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_MainLayout-C8wbBFkP.js"
+      "_vendor-DQ0jIspj.js",
+      "_MainLayout-DWqlmIMV.js"
     ]
   },
   "resources/js/Pages/BasicInfo/JournalInfo.jsx": {
-    "file": "assets/JournalInfo-DDL9K-v8.js",
+    "file": "assets/JournalInfo-E-shMoww.js",
     "name": "JournalInfo",
     "src": "resources/js/Pages/BasicInfo/JournalInfo.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js"
     ]
   },
   "resources/js/Pages/BasicInfo/ObjectiveScope.jsx": {
-    "file": "assets/ObjectiveScope-LvVS5Bdg.js",
+    "file": "assets/ObjectiveScope-LAfjVJAC.js",
     "name": "ObjectiveScope",
     "src": "resources/js/Pages/BasicInfo/ObjectiveScope.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js"
     ]
   },
   "resources/js/Pages/BasicInfo/VisionMission.jsx": {
-    "file": "assets/VisionMission-X3yW9H7-.js",
+    "file": "assets/VisionMission-D6E3UL2V.js",
     "name": "VisionMission",
     "src": "resources/js/Pages/BasicInfo/VisionMission.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js"
     ]
   },
   "resources/js/Pages/BookPublication.jsx": {
-    "file": "assets/BookPublication-iuEkGLV7.js",
+    "file": "assets/BookPublication-D5TlFfD8.js",
     "name": "BookPublication",
     "src": "resources/js/Pages/BookPublication.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_MainLayout-C8wbBFkP.js",
-      "_PageHeader-B49GTetb.js"
+      "_vendor-DQ0jIspj.js",
+      "_MainLayout-DWqlmIMV.js",
+      "_PageHeader-DP8uAaXa.js"
     ]
   },
   "resources/js/Pages/Compliance.jsx": {
-    "file": "assets/Compliance-DKJx80dg.js",
+    "file": "assets/Compliance-CCxDEPKY.js",
     "name": "Compliance",
     "src": "resources/js/Pages/Compliance.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js"
     ]
   },
   "resources/js/Pages/Contact.jsx": {
-    "file": "assets/Contact-B33z_MpJ.js",
+    "file": "assets/Contact-CChOnTWp.js",
     "name": "Contact",
     "src": "resources/js/Pages/Contact.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js"
     ]
   },
   "resources/js/Pages/EditorialBoard.jsx": {
-    "file": "assets/EditorialBoard-DFkG3Bx_.js",
+    "file": "assets/EditorialBoard-DTv-mSiP.js",
     "name": "EditorialBoard",
     "src": "resources/js/Pages/EditorialBoard.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js"
     ]
   },
   "resources/js/Pages/EditorialTeam.jsx": {
-    "file": "assets/EditorialTeam-Dxl0Miqf.js",
+    "file": "assets/EditorialTeam-CkqSxpP2.js",
     "name": "EditorialTeam",
     "src": "resources/js/Pages/EditorialTeam.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js"
     ]
   },
   "resources/js/Pages/Editors.jsx": {
-    "file": "assets/Editors-D8SUdpe0.js",
+    "file": "assets/Editors-CvXCNqDB.js",
     "name": "Editors",
     "src": "resources/js/Pages/Editors.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js"
     ]
   },
   "resources/js/Pages/Error404.jsx": {
-    "file": "assets/Error404-CpGv5MM_.js",
+    "file": "assets/Error404-CL3-wXWA.js",
     "name": "Error404",
     "src": "resources/js/Pages/Error404.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_MainLayout-C8wbBFkP.js"
+      "_vendor-DQ0jIspj.js",
+      "_MainLayout-DWqlmIMV.js"
     ]
   },
   "resources/js/Pages/Gallery.jsx": {
-    "file": "assets/Gallery-B9wWnjNF.js",
+    "file": "assets/Gallery-DT4SC9QL.js",
     "name": "Gallery",
     "src": "resources/js/Pages/Gallery.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js"
     ]
   },
   "resources/js/Pages/Gallery/News.jsx": {
-    "file": "assets/News-DGl1Wpk_.js",
+    "file": "assets/News-DhG93oYE.js",
     "name": "News",
     "src": "resources/js/Pages/Gallery/News.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js"
     ]
   },
   "resources/js/Pages/Gallery/Photo.jsx": {
-    "file": "assets/Photo-DjwhEr9r.js",
+    "file": "assets/Photo-DtssSnZq.js",
     "name": "Photo",
     "src": "resources/js/Pages/Gallery/Photo.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js"
     ]
   },
   "resources/js/Pages/Home.jsx": {
-    "file": "assets/Home-BKKwsXvo.js",
+    "file": "assets/Home-aC0NENnq.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_vendor-B9VemZoi.js",
-      "_MainLayout-C8wbBFkP.js"
+      "_vendor-DQ0jIspj.js",
+      "_MainLayout-DWqlmIMV.js"
     ],
     "dynamicImports": [
       "resources/js/Components/Hero.jsx",
@@ -516,165 +516,165 @@
       "resources/js/Components/NewsletterSection.jsx"
     ],
     "css": [
-      "assets/app-BkG79Kh5.css"
+      "assets/app-CQYc0IzC.css"
     ]
   },
   "resources/js/Pages/PublicationPolicy/Ethics.jsx": {
-    "file": "assets/Ethics-BH5teBB6.js",
+    "file": "assets/Ethics-B4vJ6opZ.js",
     "name": "Ethics",
     "src": "resources/js/Pages/PublicationPolicy/Ethics.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js",
-      "_Graphics-B-DkdK38.js",
-      "_ScrollReveal-Ds2CP45D.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js",
+      "_Graphics-BbpvOpm2.js",
+      "_ScrollReveal-DeLOXZwp.js"
     ]
   },
   "resources/js/Pages/PublicationPolicy/PeerReview.jsx": {
-    "file": "assets/PeerReview-CAU81ymD.js",
+    "file": "assets/PeerReview-KMhzI2aN.js",
     "name": "PeerReview",
     "src": "resources/js/Pages/PublicationPolicy/PeerReview.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js",
-      "_Graphics-B-DkdK38.js",
-      "_ScrollReveal-Ds2CP45D.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js",
+      "_Graphics-BbpvOpm2.js",
+      "_ScrollReveal-DeLOXZwp.js"
     ]
   },
   "resources/js/Pages/PublicationPolicy/Plagiarism.jsx": {
-    "file": "assets/Plagiarism-BUD--FIv.js",
+    "file": "assets/Plagiarism-BSi1OiEd.js",
     "name": "Plagiarism",
     "src": "resources/js/Pages/PublicationPolicy/Plagiarism.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js",
-      "_Graphics-B-DkdK38.js",
-      "_ScrollReveal-Ds2CP45D.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js",
+      "_Graphics-BbpvOpm2.js",
+      "_ScrollReveal-DeLOXZwp.js"
     ]
   },
   "resources/js/Pages/SubmissionGuidelines/AreaDetail.jsx": {
-    "file": "assets/AreaDetail-DfhPdcG6.js",
+    "file": "assets/AreaDetail-C6R33SbC.js",
     "name": "AreaDetail",
     "src": "resources/js/Pages/SubmissionGuidelines/AreaDetail.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js",
-      "_ScrollReveal-Ds2CP45D.js",
-      "_Graphics-B-DkdK38.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js",
+      "_ScrollReveal-DeLOXZwp.js",
+      "_Graphics-BbpvOpm2.js"
     ]
   },
   "resources/js/Pages/SubmissionGuidelines/Areas.jsx": {
-    "file": "assets/Areas-DioitaF9.js",
+    "file": "assets/Areas-Q4ajkbjG.js",
     "name": "Areas",
     "src": "resources/js/Pages/SubmissionGuidelines/Areas.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js",
-      "_Graphics-B-DkdK38.js",
-      "_ScrollReveal-Ds2CP45D.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js",
+      "_Graphics-BbpvOpm2.js",
+      "_ScrollReveal-DeLOXZwp.js"
     ]
   },
   "resources/js/Pages/SubmissionGuidelines/CallForPapers.jsx": {
-    "file": "assets/CallForPapers-BHC-_JFZ.js",
+    "file": "assets/CallForPapers-ClwQtqxt.js",
     "name": "CallForPapers",
     "src": "resources/js/Pages/SubmissionGuidelines/CallForPapers.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js",
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js",
       "_confetti.module-oQXWb4Lk.js"
     ]
   },
   "resources/js/Pages/SubmissionGuidelines/ImportantInfo.jsx": {
-    "file": "assets/ImportantInfo-D6tRO2D6.js",
+    "file": "assets/ImportantInfo-BL2UXeQ5.js",
     "name": "ImportantInfo",
     "src": "resources/js/Pages/SubmissionGuidelines/ImportantInfo.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js",
-      "_Graphics-B-DkdK38.js",
-      "_ScrollReveal-Ds2CP45D.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js",
+      "_Graphics-BbpvOpm2.js",
+      "_ScrollReveal-DeLOXZwp.js"
     ]
   },
   "resources/js/Pages/SubmissionGuidelines/Index.jsx": {
-    "file": "assets/Index-CRHtelpb.js",
+    "file": "assets/Index-CndeXdaA.js",
     "name": "Index",
     "src": "resources/js/Pages/SubmissionGuidelines/Index.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js",
-      "_Graphics-B-DkdK38.js",
-      "_ScrollReveal-Ds2CP45D.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js",
+      "_Graphics-BbpvOpm2.js",
+      "_ScrollReveal-DeLOXZwp.js"
     ]
   },
   "resources/js/Pages/SubmissionGuidelines/PublicationCharges.jsx": {
-    "file": "assets/PublicationCharges-Bo5Ww27k.js",
+    "file": "assets/PublicationCharges-D3766T3M.js",
     "name": "PublicationCharges",
     "src": "resources/js/Pages/SubmissionGuidelines/PublicationCharges.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js",
-      "_Graphics-B-DkdK38.js",
-      "_ScrollReveal-Ds2CP45D.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js",
+      "_Graphics-BbpvOpm2.js",
+      "_ScrollReveal-DeLOXZwp.js"
     ]
   },
   "resources/js/Pages/SubmissionGuidelines/ReviewProcess.jsx": {
-    "file": "assets/ReviewProcess-DoZm7X-6.js",
+    "file": "assets/ReviewProcess-CJYkZ0_u.js",
     "name": "ReviewProcess",
     "src": "resources/js/Pages/SubmissionGuidelines/ReviewProcess.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js"
     ]
   },
   "resources/js/Pages/TechnicalTeam.jsx": {
-    "file": "assets/TechnicalTeam-BynQ2y2w.js",
+    "file": "assets/TechnicalTeam-7KQQCE3r.js",
     "name": "TechnicalTeam",
     "src": "resources/js/Pages/TechnicalTeam.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_PageHeader-B49GTetb.js",
-      "_MainLayout-C8wbBFkP.js"
+      "_vendor-DQ0jIspj.js",
+      "_PageHeader-DP8uAaXa.js",
+      "_MainLayout-DWqlmIMV.js"
     ]
   },
   "resources/js/Pages/TrackManuscript.jsx": {
-    "file": "assets/TrackManuscript-C36c_l4x.js",
+    "file": "assets/TrackManuscript-Dz8SG0BU.js",
     "name": "TrackManuscript",
     "src": "resources/js/Pages/TrackManuscript.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js",
-      "_MainLayout-C8wbBFkP.js",
-      "_PageHeader-B49GTetb.js"
+      "_vendor-DQ0jIspj.js",
+      "_MainLayout-DWqlmIMV.js",
+      "_PageHeader-DP8uAaXa.js"
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-yMwLC7sA.js",
+    "file": "assets/app-CdN4wQsw.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
     "imports": [
-      "_vendor-B9VemZoi.js"
+      "_vendor-DQ0jIspj.js"
     ],
     "dynamicImports": [
       "resources/js/Pages/AboutFoundation.jsx",
@@ -729,7 +729,7 @@
       "resources/js/Pages/TrackManuscript.jsx"
     ],
     "css": [
-      "assets/app-BkG79Kh5.css"
+      "assets/app-CQYc0IzC.css"
     ]
   }
 }
