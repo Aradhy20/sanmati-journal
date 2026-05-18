@@ -495,7 +495,7 @@
     ]
   },
   "resources/js/Pages/Home.jsx": {
-    "file": "assets/Home-DGCw5yts.js",
+    "file": "assets/Home-DNHZJQ7Q.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.jsx",
     "isDynamicEntry": true,
@@ -580,7 +580,7 @@
     ]
   },
   "resources/js/Pages/SubmissionGuidelines/CallForPapers.jsx": {
-    "file": "assets/CallForPapers-C9Irn0p_.js",
+    "file": "assets/CallForPapers-C7pAD2qE.js",
     "name": "CallForPapers",
     "src": "resources/js/Pages/SubmissionGuidelines/CallForPapers.jsx",
     "isDynamicEntry": true,
@@ -663,7 +663,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-C9xYeDqv.js",
+    "file": "assets/app-CTuFujfY.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,

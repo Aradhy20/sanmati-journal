@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('papers', function (Blueprint $table) {
-            $table->fullText(['title', 'abstract', 'authors'], 'ft_papers_search');
-        });
+        if (Schema::getConnection()->getDriverName() !== 'sqlite') {
+            Schema::table('papers', function (Blueprint $table) {
+                $table->fullText(['title', 'abstract', 'authors'], 'ft_papers_search');
+            });
 
-        Schema::table('books', function (Blueprint $table) {
-            $table->fullText(['title', 'author'], 'ft_books_search');
-        });
+            Schema::table('books', function (Blueprint $table) {
+                $table->fullText(['title', 'author'], 'ft_books_search');
+            });
+        }
     }
 
     /**
@@ -25,12 +27,14 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('papers', function (Blueprint $table) {
-            $table->dropFullText('ft_papers_search');
-        });
+        if (Schema::getConnection()->getDriverName() !== 'sqlite') {
+            Schema::table('papers', function (Blueprint $table) {
+                $table->dropFullText('ft_papers_search');
+            });
 
-        Schema::table('books', function (Blueprint $table) {
-            $table->dropFullText('ft_books_search');
-        });
+            Schema::table('books', function (Blueprint $table) {
+                $table->dropFullText('ft_books_search');
+            });
+        }
     }
 };

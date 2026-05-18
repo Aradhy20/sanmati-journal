@@ -242,6 +242,22 @@ export default function CallForPapers() {
                                                                 placeholder="University Name / Research Center"
                                                             />
                                                         </div>
+
+                                                        <div>
+                                                            <label className="block text-sm font-bold text-slate-700 mb-2">Primary Subject Area</label>
+                                                            <select
+                                                                value={data.subject_area}
+                                                                onChange={e => setData('subject_area', e.target.value)}
+                                                                className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none appearance-none"
+                                                            >
+                                                                <option value="">Select Domain</option>
+                                                                <option value="Arts & Humanities">Arts & Humanities</option>
+                                                                <option value="Social Sciences">Social Sciences</option>
+                                                                <option value="Commerce & Management">Commerce & Management</option>
+                                                                <option value="Science & Technology">Science & Technology</option>
+                                                                <option value="Other">Other</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
 

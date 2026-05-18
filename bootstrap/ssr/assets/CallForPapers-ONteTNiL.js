@@ -385,6 +385,25 @@ function CallForPapers() {
                       placeholder: "University Name / Research Center"
                     }
                   )
+                ] }),
+                /* @__PURE__ */ jsxs("div", { children: [
+                  /* @__PURE__ */ jsx("label", { className: "block text-sm font-bold text-slate-700 mb-2", children: "Primary Subject Area" }),
+                  /* @__PURE__ */ jsxs(
+                    "select",
+                    {
+                      value: data.subject_area,
+                      onChange: (e) => setData("subject_area", e.target.value),
+                      className: "w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none appearance-none",
+                      children: [
+                        /* @__PURE__ */ jsx("option", { value: "", children: "Select Domain" }),
+                        /* @__PURE__ */ jsx("option", { value: "Arts & Humanities", children: "Arts & Humanities" }),
+                        /* @__PURE__ */ jsx("option", { value: "Social Sciences", children: "Social Sciences" }),
+                        /* @__PURE__ */ jsx("option", { value: "Commerce & Management", children: "Commerce & Management" }),
+                        /* @__PURE__ */ jsx("option", { value: "Science & Technology", children: "Science & Technology" }),
+                        /* @__PURE__ */ jsx("option", { value: "Other", children: "Other" })
+                      ]
+                    }
+                  )
                 ] })
               ] })
             ] }),
