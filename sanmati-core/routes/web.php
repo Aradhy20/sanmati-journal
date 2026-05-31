@@ -4,9 +4,6 @@ use App\Http\Controllers\JournalController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 
-// Force debug mode temporarily to find the exact cause of the 500 error
-config(['app.debug' => true]);
-
 Route::get('/clear-cache', function () {
     Artisan::call('optimize:clear');
     Artisan::call('cache:clear');
