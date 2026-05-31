@@ -25,6 +25,9 @@ $app = Application::configure(basePath: dirname(__DIR__))
     })
     ->create();
 
+// Force debug mode temporarily to capture the production exception
+config(['app.debug' => true]);
+
 $app->usePublicPath(__DIR__.'/../../public_html');
 
 return $app;
