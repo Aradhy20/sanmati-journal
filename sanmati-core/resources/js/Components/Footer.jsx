@@ -106,9 +106,17 @@ const Footer = () => {
                                 </div>
                                 <div className="flex gap-3.5">
                                     <Mail className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
-                                    <a href="mailto:sanmatijournal@gmail.com" className="text-xs text-slate-400 hover:text-white font-semibold transition-colors">
-                                        sanmatijournal@gmail.com
-                                    </a>
+                                    <div className="space-y-1.5">
+                                        <a href="mailto:editor-in-chief@sanmatijournal.in" className="text-xs text-slate-400 hover:text-white font-semibold transition-colors block">
+                                            editor-in-chief@sanmatijournal.in
+                                        </a>
+                                        <a href="mailto:managing_editor@sanmatijournal.in" className="text-xs text-slate-400 hover:text-white font-semibold transition-colors block">
+                                            managing_editor@sanmatijournal.in
+                                        </a>
+                                        <a href="mailto:sanmatijournal@gmail.com" className="text-xs text-slate-400 hover:text-white font-semibold transition-colors block">
+                                            sanmatijournal@gmail.com
+                                        </a>
+                                    </div>
                                 </div>
                                 <div className="pt-2">
                                     <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.06]">

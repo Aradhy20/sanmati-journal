@@ -2,7 +2,7 @@ import React from 'react';
 import MainLayout from '@/Layouts/MainLayout';
 import Seo from '@/Components/Seo';
 import { motion } from 'framer-motion';
-import { BookOpen, Target, FileCheck, Users, Globe, TrendingUp } from 'lucide-react';
+import { BookOpen, Target, FileCheck, Users, Globe, TrendingUp, ExternalLink } from 'lucide-react';
 
 const Indexing = () => {
     const indexingBodies = [
@@ -11,6 +11,7 @@ const Indexing = () => {
             description: 'Sanmati Journal is indexed in Google Scholar, the world\'s largest academic search engine, ensuring broad visibility for published research.',
             icon: Globe,
             status: 'Indexed',
+            url: 'https://scholar.google.com/citations?user=16C5z8MAAAAJ&hl=en',
         },
         {
             name: 'ISSN (International Standard Serial Number)',
@@ -58,7 +59,7 @@ const Indexing = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                         className="text-center mb-16"
-                    >
+                     >
                         <h1 className="text-2xl md:text-3xl lg:text-4xl lg:text-5xl font-bold text-dark font-serif mb-4">
                             Indexing & Abstracting
                         </h1>
@@ -77,16 +78,30 @@ const Indexing = () => {
                                     initial={{ opacity: 0, y: 30 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                                    className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-slate-100"
+                                    className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-slate-100 flex flex-col justify-between"
                                 >
-                                    <div className="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center mb-4">
-                                        <Icon className="w-6 h-6 text-primary" />
+                                    <div>
+                                        <div className="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center mb-4">
+                                            <Icon className="w-6 h-6 text-primary" />
+                                        </div>
+                                        <h3 className="text-lg font-semibold text-dark mb-2">{item.name}</h3>
+                                        <p className="text-gray-600 text-sm mb-5">{item.description}</p>
                                     </div>
-                                    <h3 className="text-lg font-semibold text-dark mb-2">{item.name}</h3>
-                                    <p className="text-gray-600 text-sm mb-3">{item.description}</p>
-                                    <span className="inline-block px-3 py-1 bg-green-50 text-green-700 text-xs font-medium rounded-full">
-                                        {item.status}
-                                    </span>
+                                    <div className="flex justify-between items-center">
+                                        <span className="inline-block px-3 py-1 bg-green-50 text-green-700 text-xs font-medium rounded-full">
+                                            {item.status}
+                                        </span>
+                                        {item.url && (
+                                            <a
+                                                href={item.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-primary hover:text-primary-dark text-xs font-bold flex items-center gap-1 hover:underline"
+                                            >
+                                                View Index <ExternalLink className="w-3.5 h-3.5" />
+                                            </a>
+                                        )}
+                                    </div>
                                 </motion.div>
                             );
                         })}

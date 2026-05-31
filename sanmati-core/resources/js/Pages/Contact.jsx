@@ -35,7 +35,7 @@ export default function Contact() {
                     {[
                         { icon: MapPin, title: "Registry Office", desc: "B-002 Faculty Block TMU Campus, Delhi Road Moradabad (U.P) 244001", color: "from-dark to-dark/90", iconColor: "text-secondary" },
                         { icon: Phone, title: "Strategic Liaison", desc: "+91 7999525735", color: "from-primary to-primary-dark", iconColor: "text-white" },
-                        { icon: Mail, title: "Manuscript Queries", desc: "sanmatijournal@gmail.com", color: "from-secondary to-secondary-dark", iconColor: "text-white" },
+                        { icon: Mail, title: "Editorial Contacts", desc: "Editor-in-Chief:\neditor-in-chief@sanmatijournal.in\n\nManaging Editor:\nmanaging_editor@sanmatijournal.in\n\nGeneral Queries:\nsanmatijournal@gmail.com", color: "from-secondary to-secondary-dark", iconColor: "text-white" },
                         { icon: Clock, title: "Operational Hours", desc: "Mon - Fri\n10:00 AM - 6:00 PM (IST)", color: "from-surface to-white", iconColor: "text-primary", border: "border-gray-100" },
                     ].map((item, i) => (
                         <motion.div

@@ -258,10 +258,16 @@ const Hero = () => {
                             <span className="font-sans font-black text-[10px] uppercase tracking-widest">Open Access</span>
                         </div>
                         <div className="hidden md:block w-px h-4 bg-slate-200" />
-                        <div className="flex items-center gap-3">
-                            <Microscope className="w-5 h-5 text-primary" />
+                        <a 
+                            href="https://scholar.google.com/citations?user=16C5z8MAAAAJ&hl=en&citsig=AFPfF8dDoKaG6nwWdCVY3o4qKEPq"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-3 hover:text-secondary hover:scale-105 transition-all duration-300 group"
+                            title="View Google Scholar Index"
+                        >
+                            <Microscope className="w-5 h-5 text-primary group-hover:text-secondary" />
                             <span className="font-sans font-black text-[10px] uppercase tracking-widest">Google Scholar</span>
-                        </div>
+                        </a>
                         <div className="hidden md:block w-px h-4 bg-slate-200" />
                         <div className="flex items-center gap-3">
                             <Award className="w-5 h-5 text-primary" />
