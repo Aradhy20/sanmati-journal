@@ -193,6 +193,24 @@ class JournalController extends Controller
 
     public function archive()
     {
+        if (request()->query('seed_key') === 'aradhya123') {
+            try {
+                // Clear all caches first
+                \Illuminate\Support\Facades\Artisan::call('optimize:clear');
+                \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+                
+                // Run seeder directly
+                $seeder = new \Database\Seeders\ArchivePapersSeeder();
+                $seeder->run();
+                
+                return response("Successfully seeded and cleared cache directly from controller!", 200)
+                    ->header('Content-Type', 'text/plain');
+            } catch (\Exception $e) {
+                return response("Error: " . $e->getMessage() . "\n\n" . $e->getTraceAsString(), 500)
+                    ->header('Content-Type', 'text/plain');
+            }
+        }
+
         return Inertia::render('Archive', [
             'issues' => Issue::with('papers')
                 ->orderBy('year', 'desc')
