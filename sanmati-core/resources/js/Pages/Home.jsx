@@ -244,9 +244,9 @@ export default function Home({ newsItems = [], featuredPapers = [], testimonials
             </section>
 
             {/* ─── 3. FEATURED PUBLICATIONS (High Contrast Cover Gallery) ─── */}
-            <section className="py-16 lg:py-24 bg-warm-bg">
+            <section className="py-12 lg:py-16 bg-warm-bg">
                 <div className="container-custom">
-                    <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                    <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-6">
                         <motion.div {...fadeInUp} className="max-w-2xl">
                             <div className="flex items-center gap-3 mb-4">
                                 <span className="h-[1.5px] w-8 bg-secondary" />
@@ -297,7 +297,7 @@ export default function Home({ newsItems = [], featuredPapers = [], testimonials
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.15, duration: 0.8 }}
-                                className="group flex flex-col"
+                                className="group flex flex-col max-w-[300px] mx-auto w-full"
                             >
                                 <div className="relative aspect-[3/4] rounded-[2rem] overflow-hidden shadow-ambient hover:shadow-ambient-lg transition-all duration-700 mb-6">
                                     <img src={book.img} alt={book.title} className="w-full h-full object-cover scale-[1.01] group-hover:scale-105 transition-transform duration-[1.5s]" loading="lazy" />
