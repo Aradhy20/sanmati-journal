@@ -21,13 +21,21 @@ class ArchivePapersSeeder extends Seeder
         // Load papers from JSON
         $jsonPath = base_path('../papers.json');
         if (!file_exists($jsonPath)) {
-            $this->command->error("papers.json not found at: {$jsonPath}");
+            if ($this->command) {
+                $this->command->error("papers.json not found at: {$jsonPath}");
+            } else {
+                \Illuminate\Support\Facades\Log::error("papers.json not found at: {$jsonPath}");
+            }
             return;
         }
 
         $jsonData = json_decode(file_get_contents($jsonPath), true);
         if (!$jsonData) {
-            $this->command->error("Failed to decode papers.json");
+            if ($this->command) {
+                $this->command->error("Failed to decode papers.json");
+            } else {
+                \Illuminate\Support\Facades\Log::error("Failed to decode papers.json");
+            }
             return;
         }
 
@@ -58,7 +66,9 @@ class ArchivePapersSeeder extends Seeder
 
         foreach ($issuesConfig as $sheetName => $config) {
             if (!isset($jsonData[$sheetName])) {
-                $this->command->warn("Sheet data for '{$sheetName}' not found in JSON.");
+                if ($this->command) {
+                    $this->command->warn("Sheet data for '{$sheetName}' not found in JSON.");
+                }
                 continue;
             }
 
@@ -100,7 +110,9 @@ class ArchivePapersSeeder extends Seeder
                 $papersCount++;
             }
 
-            $this->command->info("Created issue Vol {$config['volume']} Issue {$config['number']} with {$papersCount} papers.");
+            if ($this->command) {
+                $this->command->info("Created issue Vol {$config['volume']} Issue {$config['number']} with {$papersCount} papers.");
+            }
         }
 
         // Also seed the original inaugural compilation issue/paper if not present
@@ -129,6 +141,8 @@ class ArchivePapersSeeder extends Seeder
             'meta_description' => 'Official full issue compilation of Sanmati Spectrum of Knowledge & Emerging Discourse (January-March, 2026) in Hindi & English.',
         ]);
 
-        $this->command->info("Seeded compilation issue Vol 1 Issue 1.");
+        if ($this->command) {
+            $this->command->info("Seeded compilation issue Vol 1 Issue 1.");
+        }
     }
 }
