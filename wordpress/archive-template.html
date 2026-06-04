@@ -84,28 +84,6 @@
             </div>
         </div>
 
-        <!-- Featured Spotlight Compilation -->
-        <div id="compilation-spotlight" class="bg-gradient-to-r from-[#0F4C81] to-[#1E3A8A] text-white rounded-3xl p-8 lg:p-12 shadow-xl mb-16 relative overflow-hidden group">
-            <div class="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-[80px] -mr-20 -mt-20"></div>
-            <div class="relative z-10 grid lg:grid-cols-12 gap-8 items-center">
-                <div class="lg:col-span-8">
-                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/20 border border-amber-500/30 text-[#F59E0B] text-xs font-bold uppercase tracking-wider mb-6">
-                        <i data-lucide="award" class="w-4 h-4"></i> Full Issue Compilation
-                    </div>
-                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-poppins text-white leading-tight mb-4" id="comp-title"></h2>
-                    <p class="text-blue-100 italic text-sm mb-6 leading-relaxed" id="comp-authors"></p>
-                    <p class="text-slate-300 text-sm max-w-3xl mb-8 leading-relaxed">
-                        Official complete issue book compilation containing all peer-reviewed research works in Hindi & English language.
-                    </p>
-                    <div class="flex flex-wrap gap-4">
-                        <a id="comp-view" href="" target="_blank" class="inline-flex items-center gap-2 px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold rounded-xl text-xs font-poppins uppercase tracking-wider transition-all duration-200 shadow-lg shadow-amber-500/20">
-                            <i data-lucide="book-open" class="w-4 h-4"></i> View Full Issue
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Live Search & Filtering toolbar -->
         <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 mb-12 flex flex-col lg:flex-row gap-4 items-center justify-between">
             <div class="relative w-full lg:max-w-md">
@@ -1205,20 +1183,6 @@
         "citations": 7,
         "views": 117,
         "downloads": 36
-    },
-    {
-        "id": "paper-compilation",
-        "title": "Sanmati Spectrum of Knowledge & Emerging Discourse (January-March, 2026)",
-        "authors": "Dr Namrata Jain (President & Editor-in-Chief), Dr. Ratnesh Kumar Jain (Managing Editor)",
-        "doi": "https://doi.org/10.5281/zenodo.19710093",
-        "volume": "1",
-        "issue": "1",
-        "year": "2026",
-        "months": "Jan-Mar",
-        "is_compilation": true,
-        "citations": 15,
-        "views": 250,
-        "downloads": 185
     }
 ];
 
@@ -1232,16 +1196,6 @@
         
         // Active PDF dropdown menu state tracker
         let activeDropdownId = null;
-
-        // Load compilation paper in banner
-        const compPaper = papersData.find(p => p.is_compilation);
-        if (compPaper) {
-            document.getElementById('comp-title').innerText = compPaper.title;
-            document.getElementById('comp-authors').innerText = compPaper.authors;
-            document.getElementById('comp-view').href = compPaper.doi;
-        } else {
-            document.getElementById('compilation-spotlight').style.display = 'none';
-        }
 
         // Calculate and Populate Authors Dropdown
         const populateAuthorsDropdown = () => {

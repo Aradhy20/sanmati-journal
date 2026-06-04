@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useRef, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Layers, Calendar, FileText, Award, BookOpen, Download, Search, Filter, ShieldCheck, Quote, Eye, ChevronDown } from "lucide-react";
+import { Layers, Calendar, FileText, Search, Filter, ShieldCheck, Quote, Eye, Download, ChevronDown, BookOpen } from "lucide-react";
 import { Head, Link } from "@inertiajs/react";
 import { M as MainLayout, S as Seo } from "./MainLayout-dVw2hbxA.js";
 import { P as PageHeader } from "./PageHeader-DHJj0W5D.js";
@@ -31,7 +31,7 @@ function Archive({ issues }) {
       return volB - volA;
     });
   }, [dbIssues]);
-  const compilationIssue = useMemo(() => {
+  useMemo(() => {
     return dbIssues.find((issue) => issue.volume === "1" && issue.month_range === "Jan-Mar");
   }, [dbIssues]);
   const allAuthors = useMemo(() => {
@@ -149,77 +149,6 @@ function Archive({ issues }) {
         },
         idx
       )) }),
-      compilationIssue && compilationIssue.papers && compilationIssue.papers[0] && /* @__PURE__ */ jsxs(
-        motion.div,
-        {
-          initial: { opacity: 0, y: 30 },
-          animate: { opacity: 1, y: 0 },
-          transition: { delay: 0.3, duration: 0.6 },
-          className: "bg-gradient-to-r from-[#0F4C81] to-[#1E3A8A] text-white rounded-3xl p-8 lg:p-12 shadow-xl mb-16 relative overflow-hidden group",
-          children: [
-            /* @__PURE__ */ jsx("div", { className: "absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-[80px] -mr-20 -mt-20 group-hover:bg-white/10 transition-colors duration-500" }),
-            /* @__PURE__ */ jsx("div", { className: "absolute bottom-0 left-0 w-80 h-80 bg-blue-500/10 rounded-full blur-[80px] -ml-20 -mb-20" }),
-            /* @__PURE__ */ jsxs("div", { className: "relative z-10 grid lg:grid-cols-12 gap-8 items-center", children: [
-              /* @__PURE__ */ jsxs("div", { className: "lg:col-span-8", children: [
-                /* @__PURE__ */ jsxs("div", { className: "inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/20 border border-amber-500/30 text-[#F59E0B] text-xs font-black uppercase tracking-wider mb-6", children: [
-                  /* @__PURE__ */ jsx(Award, { className: "w-4 h-4" }),
-                  " Full Issue Compilation"
-                ] }),
-                /* @__PURE__ */ jsx("h2", { className: "text-2xl md:text-3xl lg:text-4xl font-bold font-poppins text-white leading-tight mb-4", children: compilationIssue.papers[0].title }),
-                /* @__PURE__ */ jsx("p", { className: "text-blue-100 italic text-sm mb-6 leading-relaxed", children: compilationIssue.papers[0].authors }),
-                /* @__PURE__ */ jsx("p", { className: "text-slate-300 text-sm max-w-3xl mb-8 leading-relaxed", children: compilationIssue.papers[0].abstract }),
-                /* @__PURE__ */ jsxs("div", { className: "flex flex-wrap gap-4", children: [
-                  /* @__PURE__ */ jsxs(
-                    "a",
-                    {
-                      href: compilationIssue.papers[0].file_url,
-                      target: "_blank",
-                      rel: "noopener noreferrer",
-                      className: "inline-flex items-center gap-2 px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold rounded-xl text-xs font-poppins uppercase tracking-wider transition-colors duration-200 shadow-lg shadow-amber-500/20",
-                      children: [
-                        /* @__PURE__ */ jsx(BookOpen, { className: "w-4 h-4" }),
-                        " View Full Issue"
-                      ]
-                    }
-                  ),
-                  /* @__PURE__ */ jsxs(
-                    "a",
-                    {
-                      href: compilationIssue.papers[0].file_url,
-                      target: "_blank",
-                      rel: "noopener noreferrer",
-                      className: "inline-flex items-center gap-2 px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl text-xs font-poppins uppercase tracking-wider border border-white/20 transition-colors duration-200",
-                      children: [
-                        /* @__PURE__ */ jsx(Download, { className: "w-4 h-4" }),
-                        " Download Book (83MB)"
-                      ]
-                    }
-                  )
-                ] })
-              ] }),
-              /* @__PURE__ */ jsx("div", { className: "lg:col-span-4 hidden lg:flex justify-end relative", children: /* @__PURE__ */ jsxs("div", { className: "w-64 aspect-[3/4] rounded-2xl overflow-hidden bg-slate-900 shadow-2xl border border-white/10 relative transform group-hover:scale-105 transition-transform duration-500", children: [
-                /* @__PURE__ */ jsx(
-                  "img",
-                  {
-                    src: "/images/archive/vol1_official_cover.png",
-                    alt: "Official Journal Cover",
-                    className: "w-full h-full object-cover",
-                    onError: (e) => {
-                      e.target.style.display = "none";
-                      e.target.nextSibling.style.display = "flex";
-                    }
-                  }
-                ),
-                /* @__PURE__ */ jsxs("div", { className: "hidden absolute inset-0 bg-[#0F4C81] flex-col items-center justify-center p-6 text-center", children: [
-                  /* @__PURE__ */ jsx(Layers, { className: "w-12 h-12 mb-4 text-amber-500" }),
-                  /* @__PURE__ */ jsx("span", { className: "font-poppins font-bold text-lg text-white", children: "Vol. 1 Issue 1" }),
-                  /* @__PURE__ */ jsx("span", { className: "text-slate-300 text-xs mt-2 uppercase tracking-widest", children: "Compendium" })
-                ] })
-              ] }) })
-            ] })
-          ]
-        }
-      ),
       /* @__PURE__ */ jsxs("div", { className: "bg-white rounded-2xl shadow-sm border border-slate-100 p-6 mb-12 flex flex-col lg:flex-row gap-4 items-center justify-between", children: [
         /* @__PURE__ */ jsxs("div", { className: "relative w-full lg:max-w-md", children: [
           /* @__PURE__ */ jsx(Search, { className: "absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" }),
