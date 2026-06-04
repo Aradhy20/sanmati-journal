@@ -4,7 +4,7 @@ import { ChevronRight } from 'lucide-react';
 
 const PageHeader = ({ title, breadcrumb, subtitle }) => {
     return (
-        <section className="relative py-12 lg:py-24 md:py-32 overflow-hidden bg-warm-bg">
+        <section className="relative py-8 md:py-12 lg:py-16 overflow-hidden bg-warm-bg">
             {/* Sophisticated Background Layers */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-gradient-to-br from-warm-bg via-surface/80 to-primary/5" />
@@ -42,7 +42,7 @@ const PageHeader = ({ title, breadcrumb, subtitle }) => {
                     className="text-center"
                 >
                     {/* Refined Breadcrumb */}
-                    <nav className="flex items-center justify-center gap-3 text-[10px] font-black uppercase tracking-[0.3em] mb-10">
+                    <nav className="flex items-center justify-center gap-3 text-[10px] font-black uppercase tracking-[0.3em] mb-6">
                         <Link href="/" className="text-muted hover:text-secondary transition-colors">Portal</Link>
                         <span className="w-1 h-1 rounded-full bg-primary/20" />
                         {breadcrumb && (
@@ -55,12 +55,12 @@ const PageHeader = ({ title, breadcrumb, subtitle }) => {
                     </nav>
 
                     {/* Monumental Title */}
-                    <h1 className="text-3xl md:text-4xl lg:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-dark mb-6 tracking-tight">
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl md:text-5xl lg:text-6xl font-serif font-bold text-dark mb-4 tracking-tight">
                         {title}
                     </h1>
 
                     {subtitle && (
-                        <div className="flex flex-col items-center gap-6">
+                        <div className="flex flex-col items-center gap-4">
                             <span className="h-px w-12 bg-secondary/40" />
                             <p className="text-lg md:text-xl text-muted font-medium max-w-2xl italic leading-relaxed">
                                 {subtitle}
