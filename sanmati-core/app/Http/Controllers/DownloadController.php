@@ -21,10 +21,12 @@ class DownloadController extends Controller
             abort(404, 'Manuscript PDF not found.');
         }
 
-        // Assuming file_url is stored relative to the "local" or "public" disk root
-        // If it's stored via $request->file()->store('papers'), it is in storage/app/papers/
-        // We will stream it so memory isn't exhausted holding massive PDFs
         $path = $paper->file_url;
+
+        // Redirect to external URL if the file_url is a fully qualified web address (e.g. Zenodo or Google Drive)
+        if (filter_var($path, FILTER_VALIDATE_URL)) {
+            return redirect()->away($path);
+        }
 
         if (!Storage::disk('local')->exists($path) && !Storage::disk('public')->exists($path)) {
             abort(404, 'The requested file is no longer available on the server.');

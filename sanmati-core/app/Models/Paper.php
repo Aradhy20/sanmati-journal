@@ -15,6 +15,7 @@ class Paper extends Model
     protected $fillable = [
         'issue_id',
         'title',
+        'slug',
         'authors',
         'abstract',
         'keywords',
@@ -26,6 +27,37 @@ class Paper extends Model
         'meta_title',
         'meta_description',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($paper) {
+            if (empty($paper->slug)) {
+                $paper->slug = static::generateUniqueSlug($paper->title);
+            }
+        });
+    }
+
+    public static function generateUniqueSlug($title)
+    {
+        $slug = \Illuminate\Support\Str::slug($title);
+        
+        // Handle non-latin characters (like Hindi) or fallback to random string if slug is empty
+        if (empty($slug)) {
+            $slug = 'paper-' . strtolower(\Illuminate\Support\Str::random(8));
+        }
+
+        $originalSlug = $slug;
+        $count = 1;
+
+        while (static::where('slug', $slug)->exists()) {
+            $slug = $originalSlug . '-' . $count;
+            $count++;
+        }
+
+        return $slug;
+    }
 
     public function issue()
     {

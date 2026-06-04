@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal Archive | Sanmati Spectrum of Knowledge</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (via CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons (via CDN) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC;
+        }
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen">
+
+    <!-- Header Section -->
+    <header class="relative py-12 lg:py-24 bg-gradient-to-br from-[#0F4C81]/10 via-white to-[#2563EB]/5 border-b border-slate-100 overflow-hidden">
+        <div class="absolute -top-24 -right-24 w-96 h-96 bg-[#2563EB]/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-[#0F4C81]/10 rounded-full blur-[100px] pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
+            <nav class="flex items-center justify-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] mb-8 text-[#0F4C81]">
+                <span>Portal</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-[#0F4C81]/20"></span>
+                <span>Archive</span>
+            </nav>
+            <h1 class="text-4xl lg:text-6xl font-bold font-poppins text-slate-900 tracking-tight mb-6">
+                Journal Archive
+            </h1>
+            <div class="flex flex-col items-center gap-4">
+                <span class="block h-1 w-12 bg-[#2563EB] mx-auto rounded mb-4"></span>
+                <p class="text-lg md:text-xl text-slate-500 font-medium max-w-2xl mx-auto leading-relaxed">
+                    Browse all published research papers, issues and volumes of Sanmati Journal.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Statistics Section -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 flex items-center justify-between border-l-4 border-l-[#2563EB]">
+                <div>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest font-poppins">Total Volumes</p>
+                    <h4 class="text-3xl font-bold font-poppins text-slate-900 mt-1" id="stat-volumes">3</h4>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center text-[#2563EB]">
+                    <i data-lucide="layers" class="w-6 h-6"></i>
+                </div>
+            </div>
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 flex items-center justify-between border-l-4 border-l-[#F59E0B]">
+                <div>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest font-poppins">Total Issues</p>
+                    <h4 class="text-3xl font-bold font-poppins text-slate-900 mt-1" id="stat-issues">3</h4>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center text-[#F59E0B]">
+                    <i data-lucide="calendar" class="w-6 h-6"></i>
+                </div>
+            </div>
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 flex items-center justify-between border-l-4 border-l-[#0F4C81]">
+                <div>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest font-poppins">Published Papers</p>
+                    <h4 class="text-3xl font-bold font-poppins text-slate-900 mt-1" id="stat-papers">80</h4>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center text-[#0F4C81]">
+                    <i data-lucide="file-text" class="w-6 h-6"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Spotlight Compilation -->
+        <div id="compilation-spotlight" class="bg-gradient-to-r from-[#0F4C81] to-[#1E3A8A] text-white rounded-3xl p-8 lg:p-12 shadow-xl mb-16 relative overflow-hidden group">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-[80px] -mr-20 -mt-20"></div>
+            <div class="relative z-10 grid lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-8">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/20 border border-amber-500/30 text-[#F59E0B] text-xs font-bold uppercase tracking-wider mb-6">
+                        <i data-lucide="award" class="w-4 h-4"></i> Full Issue Compilation
+                    </div>
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-poppins text-white leading-tight mb-4" id="comp-title"></h2>
+                    <p class="text-blue-100 italic text-sm mb-6 leading-relaxed" id="comp-authors"></p>
+                    <p class="text-slate-300 text-sm max-w-3xl mb-8 leading-relaxed">
+                        Official complete issue book compilation containing all peer-reviewed research works in Hindi & English language.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a id="comp-view" href="" target="_blank" class="inline-flex items-center gap-2 px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold rounded-xl text-xs font-poppins uppercase tracking-wider transition-all duration-200 shadow-lg shadow-amber-500/20">
+                            <i data-lucide="book-open" class="w-4 h-4"></i> View Full Issue
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Search & Filtering toolbar -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 mb-12 flex flex-col lg:flex-row gap-4 items-center justify-between">
+            <div class="relative w-full lg:max-w-md">
+                <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"></i>
+                <input 
+                    type="text" 
+                    id="search-input"
+                    placeholder="Search by paper title, authors, or keywords..."
+                    class="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0F4C81]/20 focus:border-[#0F4C81] transition-all"
+                >
+            </div>
+
+            <div class="flex flex-wrap w-full lg:w-auto gap-4 items-center">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="filter" class="w-4 h-4 text-slate-400"></i>
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider font-poppins">Filter By:</span>
+                </div>
+
+                <select 
+                    id="filter-volume"
+                    class="px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0F4C81]/20 focus:border-[#0F4C81] transition-all cursor-pointer font-medium text-slate-700"
+                >
+                    <option value="all">All Volumes</option>
+                    <option value="03">Volume 03 (Jul-Dec 2026)</option>
+                    <option value="02">Volume 02 (Jan-Jun 2026)</option>
+                    <option value="01">Volume 01 (Jul-Dec 2025)</option>
+                </select>
+
+                <select 
+                    id="filter-author"
+                    class="px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0F4C81]/20 focus:border-[#0F4C81] transition-all cursor-pointer font-medium text-slate-700 max-w-[200px]"
+                >
+                    <option value="all">All Authors</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Volumes List Container -->
+        <div id="volumes-container" class="space-y-12">
+            <!-- Dynamically Rendered -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden text-center py-20 bg-white rounded-3xl border border-dashed border-slate-200 p-8">
+            <i data-lucide="search" class="w-12 h-12 text-slate-300 mx-auto mb-4 animate-bounce"></i>
+            <h3 class="text-lg font-bold font-poppins text-slate-800">No Research Papers Found</h3>
+            <p class="text-sm text-slate-500 max-w-sm mx-auto mt-2">
+                No papers matched your search parameters. Try resetting your filters.
+            </p>
+            <button id="btn-reset" class="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-[#0F4C81] text-white font-bold rounded-xl text-xs uppercase tracking-wider font-poppins">
+                Reset Filters
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Embedded Dynamic Data structure and Search/Filter Logic -->
+    <script>
+        // Papers Data Structure
+        const papersData = [
+    {
+        "id": "paper-01-1",
+        "title": "राष्ट्रीय शिक्षा नीति 2020 और भारतीय ज्ञान परंपरा का वैश्विक परिप्रेक्ष्य",
+        "authors": "डॉ. नम्रता जैन",
+        "doi": "https://doi.org/10.5281/zenodo.20535681",
+        "volume": "01",
+        "issue": "1",
+        "year": "2025",
+        "months": "Jul-Dec",
+        "citations": 2,
+        "views": 45,
+        "downloads": 12
+    },
+    {
+        "id": "paper-01-2",
+        "title": "राष्ट्रीय शिक्षा नीति 2020 में भारतीय भाषाओं और मातृभाषा की भूमिका : भारतीय ज्ञान परंपरा के संदर्भ में",
+        "authors": "डॉ. रत्नेश कुमार जैन",
+        "doi": "https://doi.org/10.5281/zenodo.20535716",
+        "volume": "01",
+        "issue": "1",
+        "year": "2025",
+        "months": "Jul-Dec",
+        "citations": 3,
+        "views": 57,
+        "downloads": 20
+    },
+    {
+        "id": "paper-01-3",
+        "title": "शोध लेख, आलेख, निबंध और थीसिस में अंतर",
+        "authors": "डॉ. कल्पना जैन",
+        "doi": "https://doi.org/10.5281/zenodo.20535759",
+        "volume": "01",
+        "issue": "1",
+        "year": "2025",
+        "months": "Jul-Dec",
+        "citations": 4,
+        "views": 69,
+        "downloads": 28
+    },
+    {
+        "id": "paper-01-4",
+        "title": "भारतीय दर्शन में 'धर्म' की अवधारणा और उसकी आधुनिक समाज में प्रासंगिकता।",
+        "authors": "डॉ. स्मृति कुमारी सिंह",
+        "doi": "https://doi.org/10.5281/zenodo.20535789",
+        "volume": "01",
+        "issue": "1",
+        "year": "2025",
+        "months": "Jul-Dec",
+        "citations": 5,
+        "views": 81,
+        "downloads": 36
+    },
+    {
+        "id": "paper-01-5",
+        "title": "भारतीय ज्ञान परंपरा और समकालीन सामाजिक चुनौतियाँ : अवसर और संभावनाएँ।",
+        "authors": "डॉ. डालचन्द्र गौतम।",
+        "doi": "https://doi.org/10.5281/zenodo.20535833",
+        "volume": "01",
+        "issue": "1",
+        "year": "2025",
+        "months": "Jul-Dec",
+        "citations": 6,
+        "views": 93,
+        "downloads": 44
+    },
+    {
+        "id": "paper-01-6",
+        "title": "वैदिक और लौकिक ज्ञान का समन्वय : गुरुकुल एवं प्राचीन विश्वविद्यालयों की परंपरा",
+        "authors": "डॉ. नागेंद्र सिंह यादव",
+        "doi": "https://doi.org/10.5281/zenodo.20535934",
+        "volume": "01",
+        "issue": "1",
+        "year": "2025",
+        "months": "Jul-Dec",
+        "citations": 7,
+        "views": 105,
+        "downloads": 12
+    },
+    {
+        "id": "paper-01-7",
+        "title": "राष्ट्रीय शिक्षा नीति 2020 और उच्च शिक्षा में शोध की भूमिका",
+        "authors": "डॉ. वंदना जैन",
+        "doi": "https://doi.org/10.5281/zenodo.20535967",
+        "volume": "01",
+        "issue": "1",
+        "year": "2025",
+        "months": "Jul-Dec",
+        "citations": 8,
+        "views": 117,
+        "downloads": 20
+    },
+    {
+        "id": "paper-01-8",
+        "title": "Transforming Modern Learning through Value-Based  Education and Gandhian Philosophy",
+        "authors": "Dr. Rakesh Kumar",
+        "doi": "https://doi.org/10.5281/zenodo.20536378",
+        "volume": "01",
+        "issue": "1",
+        "year": "2025",
+        "months": "Jul-Dec",
+        "citations": 2,
+        "views": 129,
+        "downloads": 28
+    },
+    {
+        "id": "paper-01-9",
+        "title": "Eco-Spiritualism and Environmental Humanism in Indian English Poetry: A Reinterpretation of  Nature through Indian Sensibility",
+        "authors": "Prithi Nirmal Kumar Jain",
+        "doi": "https://doi.org/10.5281/zenodo.20536021",
+        "volume": "01",
+        "issue": "1",
+        "year": "2025",
+        "months": "Jul-Dec",
+        "citations": 3,
+        "views": 141,
+        "downloads": 36
+    },
+    {
+        "id": "paper-01-10",
+        "title": "Saptashakti and Gender Sensitization: Educational and Social Implications of Feminine Power in the Bhagavad Gita",
+        "authors": "Dr. Amita Kumari",
+        "doi": "https://doi.org/10.5281/zenodo.20536036",
+        "volume": "01",
+        "issue": "1",
+        "year": "2025",
+        "months": "Jul-Dec",
+        "citations": 4,
+        "views": 45,
+        "downloads": 44
+    },
+    {
+        "id": "paper-01-11",
+        "title": "Research Methodology in Interdisciplinary Studies",
+        "authors": "Dr. Vipin Kumar",
+        "doi": "https://doi.org/10.5281/zenodo.20536063",
+        "volume": "01",
+        "issue": "1",
+        "year": "2025",
+        "months": "Jul-Dec",
+        "citations": 5,
+        "views": 57,
+        "downloads": 12
+    },
+    {
+        "id": "paper-01-12",
+        "title": "DOCTRINE OF SIGNATURE",
+        "authors": "Dr. Vaishali Vichare",
+        "doi": "https://doi.org/10.5281/zenodo.20536077",
+        "volume": "01",
+        "issue": "1",
+        "year": "2025",
+        "months": "Jul-Dec",
+        "citations": 6,
+        "views": 69,
+        "downloads": 20
+    },
+    {
+        "id": "paper-01-13",
+        "title": "ग्रामीण युवाओं का शहरों की ओर पलायन : रोजगार अवसरों, आय-अस्थिरता और मानसिक तनाव का अध्ययन",
+        "authors": "डॉ. ए. शशांक राव & डॉ. गोपाल राम",
+        "doi": "https://doi.org/10.5281/zenodo.20536101",
+        "volume": "01",
+        "issue": "1",
+        "year": "2025",
+        "months": "Jul-Dec",
+        "citations": 7,
+        "views": 81,
+        "downloads": 28
+    },
+    {
+        "id": "paper-01-14",
+        "title": "COVID-19 as a Global Crisis: International Response, Global Health Governance and Impact on World Order",
+        "authors": "Dr. Harishchandra Verma",
+        "doi": "https://doi.org/10.5281/zenodo.20536124",
+        "volume": "01",
+        "issue": "1",
+        "year": "2025",
+        "months": "Jul-Dec",
+        "citations": 8,
+        "views": 93,
+        "downloads": 36
+    },
+    {
+        "id": "paper-01-15",
+        "title": "भारतीय सभ्यताओं और धर्मों में पर्यावरण संरक्षण की निरंतर परंपरा",
+        "authors": "डॉ. सुशील कु मार",
+        "doi": "https://doi.org/10.5281/zenodo.20536147",
+        "volume": "01",
+        "issue": "1",
+        "year": "2025",
+        "months": "Jul-Dec",
+        "citations": 2,
+        "views": 105,
+        "downloads": 44
+    },
+    {
+        "id": "paper-01-16",
+        "title": "Environment and Jainism: A Philosophical and Ethical Perspective for Sustainable Living",
+        "authors": "Dr. Vipin Kumar Jain",
+        "doi": "https://doi.org/10.5281/zenodo.20536546",
+        "volume": "01",
+        "issue": "1",
+        "year": "2025",
+        "months": "Jul-Dec",
+        "citations": 3,
+        "views": 117,
+        "downloads": 12
+    },
+    {
+        "id": "paper-02-1",
+        "title": "EMERGING TRENDS IN MULTIDISCIPLINARY EDUCATION & KNOWLEDGE PRODUCTION",
+        "authors": "Dr. Vaishali R. Vichare",
+        "doi": "https://doi.org/10.5281/zenodo.20477219",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 2,
+        "views": 45,
+        "downloads": 12
+    },
+    {
+        "id": "paper-02-2",
+        "title": "Interrelationship of Education, Knowledge, and Information Technology in the Digital Age",
+        "authors": "Dr. Vandana Kumari",
+        "doi": "https://doi.org/10.5281/zenodo.20477323",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 3,
+        "views": 57,
+        "downloads": 20
+    },
+    {
+        "id": "paper-02-3",
+        "title": "Role of Herbal Extracts in Diabetes Management: A Study on Syzygium cumini (Jamun) in Experimental Mice",
+        "authors": "Renuka Kumari",
+        "doi": "https://doi.org/10.5281/zenodo.20477365",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 4,
+        "views": 69,
+        "downloads": 28
+    },
+    {
+        "id": "paper-02-4",
+        "title": "Impact of Cinema on Cultural Consumption Patterns in India: A Primary Research Investigation",
+        "authors": "Dr. Sapna",
+        "doi": "https://doi.org/10.5281/zenodo.20477395",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 5,
+        "views": 81,
+        "downloads": 36
+    },
+    {
+        "id": "paper-02-5",
+        "title": "Role of social media in Promoting Women Empowerment",
+        "authors": "Priyadarshani Sony",
+        "doi": "https://doi.org/10.5281/zenodo.20477407",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 6,
+        "views": 93,
+        "downloads": 44
+    },
+    {
+        "id": "paper-02-6",
+        "title": "Changing Educational Culture and the Right to Education in the Digital Era",
+        "authors": "Prema Bharti &Prof. Ratan Kumar Bhardwaj",
+        "doi": "https://doi.org/10.5281/zenodo.20477467",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 7,
+        "views": 105,
+        "downloads": 12
+    },
+    {
+        "id": "paper-02-7",
+        "title": "Changing Dimensions of Contemporary Education Systems and the Relevance of Arham Dhyan Yog: A Multidisciplinary Perspective",
+        "authors": "Priyanshi Jain & Dr. Raka Jain",
+        "doi": "https://doi.org/10.5281/zenodo.20477522",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 8,
+        "views": 117,
+        "downloads": 20
+    },
+    {
+        "id": "paper-02-8",
+        "title": "Philosophy, Morality and Contemporary Challenges: An Analytical Study",
+        "authors": "Dr. Rishika Verma",
+        "doi": "https://doi.org/10.5281/zenodo.20477555",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 2,
+        "views": 129,
+        "downloads": 28
+    },
+    {
+        "id": "paper-02-9",
+        "title": "सोशल मीिडया बनाम नैितकता",
+        "authors": "डॉ. सुनील पािटल",
+        "doi": "https://doi.org/10.5281/zenodo.20477586",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 3,
+        "views": 141,
+        "downloads": 36
+    },
+    {
+        "id": "paper-02-10",
+        "title": "दर्शन, नैतिकता और अस्मिता का विमर्श : ‘महुआचरित’ उपन्यास के आलोक में समकालीन सामाजिक चुनौतियों का अध्ययन।",
+        "authors": "रंजीता शर्मा",
+        "doi": "https://doi.org/10.5281/zenodo.20477654",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 4,
+        "views": 45,
+        "downloads": 44
+    },
+    {
+        "id": "paper-02-11",
+        "title": "लोक संस्कृति, लोक साहित्य और समकालीन समाज के अंतर्संबंधों का अध्ययन (रामदरश मिश्र और रघुवीर चौधरी के आंचलिक उपन्यासों के संदर्भ में)",
+        "authors": "विगोरा भाणजी धनजी एवं डॉ. फ़िरोज़ बेग एस. मिर्ज़ा",
+        "doi": "https://doi.org/10.5281/zenodo.20478419",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 5,
+        "views": 57,
+        "downloads": 12
+    },
+    {
+        "id": "paper-02-12",
+        "title": "भारतीय ज्ञान परंपरा और आधुनिक शिक्षा प्रणाली में अंतःक्रिया : एक व्यापक शोध प्रतिवेदन",
+        "authors": "भट्ट शीतल राजेन्द्रकुमार एवं प्रा. डॉ. गीताबहन बी. भूत",
+        "doi": "https://doi.org/10.5281/zenodo.20478437",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 6,
+        "views": 69,
+        "downloads": 20
+    },
+    {
+        "id": "paper-02-13",
+        "title": "बहुविषयी शिक्षा पद्धति और ज्ञान परंपरा के नए आयाम",
+        "authors": "रिया प्रवीन पाहुजा एवं डॉ. आभा संजीव सिंह",
+        "doi": "https://doi.org/10.5281/zenodo.20478494",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 7,
+        "views": 81,
+        "downloads": 28
+    },
+    {
+        "id": "paper-02-14",
+        "title": "वर्तमान परिप्रेक्ष्य में वैदिक कालीन शिक्षा पद्धति की उपादेयता।",
+        "authors": "अंशुल",
+        "doi": "https://doi.org/10.5281/zenodo.20478539",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 8,
+        "views": 93,
+        "downloads": 36
+    },
+    {
+        "id": "paper-02-15",
+        "title": "इतिहास, संस्कृति और राष्ट्रीय अस्मिता के निर्माण की प्रक्रिया का ऐतिहासिक अध्ययन।",
+        "authors": "डॉ. सत्य प्रकाश",
+        "doi": "https://doi.org/10.5281/zenodo.20478674",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 2,
+        "views": 105,
+        "downloads": 44
+    },
+    {
+        "id": "paper-02-16",
+        "title": "डिजिटल युग में शिक्षा, ज्ञान और सूचना एवं संचार प्रौद्योगिकी में साक्षरता",
+        "authors": "कुमारी बसुन्धरा",
+        "doi": "https://doi.org/10.5281/zenodo.20478742",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 3,
+        "views": 117,
+        "downloads": 12
+    },
+    {
+        "id": "paper-02-17",
+        "title": "शिक्षित महिलाओं की बदलती सामाजिक भूमिका",
+        "authors": "डॉ. संगीता वेदप्रताप सिंह ठा",
+        "doi": "https://doi.org/10.5281/zenodo.20478814",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 4,
+        "views": 129,
+        "downloads": 20
+    },
+    {
+        "id": "paper-02-18",
+        "title": "महिला सशक्तीकरण एवं लैंगिक समानता के विविध आयाम",
+        "authors": "डॉ. नरेश कुमार नेमा",
+        "doi": "https://doi.org/10.5281/zenodo.20478866",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 5,
+        "views": 141,
+        "downloads": 28
+    },
+    {
+        "id": "paper-02-19",
+        "title": "समकालीन समाज में नगर निगमों की भूमिका : सामाजिक न्याय, समावेशी विकास एवं डिजिटल गवर्नेंस के बदलते आयाम",
+        "authors": "श्रीमती जया गोखले, डॉ. सपना ताम्रकार एवं डॉ. डी. डी. पृष्टि",
+        "doi": "https://doi.org/10.5281/zenodo.20478890",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 6,
+        "views": 45,
+        "downloads": 36
+    },
+    {
+        "id": "paper-02-20",
+        "title": "डिजिटल और मिश्रित शिक्षा : 21वीं सदी की शैक्षिक क्रांति",
+        "authors": "डॉ. रेखा. जी",
+        "doi": "https://doi.org/10.5281/zenodo.20478924",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 7,
+        "views": 57,
+        "downloads": 44
+    },
+    {
+        "id": "paper-02-21",
+        "title": "भारतीय ज्ञान परंपरा और आधुनिक शिक्षा प्रणाली के बीच अंतःक्रिया",
+        "authors": "डॉ. वर्षा किरण",
+        "doi": "https://doi.org/10.5281/zenodo.20483101",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 8,
+        "views": 69,
+        "downloads": 12
+    },
+    {
+        "id": "paper-02-22",
+        "title": "विज्ञान, तकनीक और मानव जीवन की गुणवत्ता में सुधार",
+        "authors": "अनुपमा नेमीसागर अंबुडकर",
+        "doi": "https://doi.org/10.5281/zenodo.20483134",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 2,
+        "views": 81,
+        "downloads": 20
+    },
+    {
+        "id": "paper-02-23",
+        "title": "कला, साहित्य और संस्कृति के माध्यम से सामाजिक मूल्यों का पुनर्निर्माण",
+        "authors": "नीलकमल कुमार",
+        "doi": "https://doi.org/10.5281/zenodo.20483176",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 3,
+        "views": 93,
+        "downloads": 28
+    },
+    {
+        "id": "paper-02-24",
+        "title": "समकालीन समाज में शिक्षा, ज्ञान, विज्ञान, संस्कृति और मीडिया के बदलते आयाम : एक बहुविषयी दृष्टिकोण",
+        "authors": "डॉ. बीना",
+        "doi": "https://doi.org/10.5281/zenodo.20483219",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 4,
+        "views": 105,
+        "downloads": 36
+    },
+    {
+        "id": "paper-02-25",
+        "title": "किशोर विद्यार्थियों की अध्ययन दक्षता पर सोशल मीडिया के सकारात्मक एवं नकारात्मक प्रभाव का गुणात्मक अध्ययन",
+        "authors": "हेमलता पटेल",
+        "doi": "https://doi.org/10.5281/zenodo.20483419",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 5,
+        "views": 117,
+        "downloads": 44
+    },
+    {
+        "id": "paper-02-26",
+        "title": "डिजिटल युग में शिक्षा, ज्ञान और सूचना प्रौद्योगिकी का अंतर्संबंध",
+        "authors": "डॉ. माधुरी सिंह",
+        "doi": "https://doi.org/10.5281/zenodo.20483728",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 6,
+        "views": 129,
+        "downloads": 12
+    },
+    {
+        "id": "paper-02-27",
+        "title": "नई शिक्षा नीति 2020 के परिप्रेक्ष्य में भारतीय ज्ञान परंपरा एवं आधुनिक शिक्षा प्रणाली : समन्वय, दृष्टिकोण, सांस्कृतिक मूल्य और नवाचार का अध्ययन",
+        "authors": "श्रीमती ज्योत्स्ना झारिया",
+        "doi": "https://doi.org/10.5281/zenodo.20483762",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 7,
+        "views": 141,
+        "downloads": 20
+    },
+    {
+        "id": "paper-02-28",
+        "title": "हिंदी साहित्य में समकालीन समाज में शिक्षा की स्थिति",
+        "authors": "डॉ. धर्मशिला कुमारी",
+        "doi": "https://doi.org/10.5281/zenodo.20483849",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 8,
+        "views": 45,
+        "downloads": 28
+    },
+    {
+        "id": "paper-02-29",
+        "title": "सामाजिक न्याय, समानता और समावेशी विकास के समकालीन विमर्श",
+        "authors": "डॉ. सरिता नेमा",
+        "doi": "https://doi.org/10.5281/zenodo.20483939",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 2,
+        "views": 57,
+        "downloads": 36
+    },
+    {
+        "id": "paper-02-30",
+        "title": "भारतीय ज्ञान परंपरा में जैन साहित्य का योगदान : एक समीक्षात्मक अध्ययन",
+        "authors": "डॉ. शैलेन्द्र सिंह",
+        "doi": "https://doi.org/10.5281/zenodo.20483967",
+        "volume": "02",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Jun",
+        "citations": 3,
+        "views": 69,
+        "downloads": 44
+    },
+    {
+        "id": "paper-03-1",
+        "title": "A Study of Vocational Education in the Context of Samagra Shiksha Scheme",
+        "authors": "Pamela Ghosh Dutta",
+        "doi": "https://doi.org/10.5281/zenodo.20512539",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 2,
+        "views": 45,
+        "downloads": 12
+    },
+    {
+        "id": "paper-03-2",
+        "title": "Role And Significance of Microfinance in India",
+        "authors": "Anchal Vashistha & Dr. Rajiv Kumar Agarwal",
+        "doi": "https://doi.org/10.5281/zenodo.20512656",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 3,
+        "views": 57,
+        "downloads": 20
+    },
+    {
+        "id": "paper-03-3",
+        "title": "\"Changing Dimensions of Media in Contemporary Society\"",
+        "authors": "Dr. Sona Dhangar & Dr. Ram Prakash",
+        "doi": "https://doi.org/10.5281/zenodo.20512938",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 4,
+        "views": 69,
+        "downloads": 28
+    },
+    {
+        "id": "paper-03-4",
+        "title": "Rural Development, Local Economy and Concept of India Self-Reliance",
+        "authors": "Dr. Vinay Kumar Baitha",
+        "doi": "https://doi.org/10.5281/zenodo.20512972",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 5,
+        "views": 81,
+        "downloads": 36
+    },
+    {
+        "id": "paper-03-5",
+        "title": "Management and Sustainable Development: A Jainism Perspective",
+        "authors": "Dr. Vipin Jain",
+        "doi": "https://doi.org/10.5281/zenodo.20512992",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 6,
+        "views": 93,
+        "downloads": 44
+    },
+    {
+        "id": "paper-03-6",
+        "title": "The Changing Environment of the Bhil Tribe in the Context of Tribal Literature and Culture",
+        "authors": "Dr. Sarita Devi",
+        "doi": "https://doi.org/10.5281/zenodo.20519862",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 7,
+        "views": 105,
+        "downloads": 12
+    },
+    {
+        "id": "paper-03-7",
+        "title": "डिजिटल युग में हिंदी भाषा-साहित्य का रूपांतरण : एक अध्ययन",
+        "authors": "मनोज कुमार पटेल",
+        "doi": "https://doi.org/10.5281/zenodo.20519887",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 8,
+        "views": 117,
+        "downloads": 20
+    },
+    {
+        "id": "paper-03-8",
+        "title": "“डिजिटल युग में शिक्षक की भूमिका : एजुकेशनल टेक्नोलॉजी (Educational Technology) के संदर्भ में एक अध्ययन”",
+        "authors": "डॉ. समीना कुरैशी",
+        "doi": "https://doi.org/10.5281/zenodo.20519903",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 2,
+        "views": 129,
+        "downloads": 28
+    },
+    {
+        "id": "paper-03-9",
+        "title": "जैनेन्द्र की कहानियों में अभिव्यंजित आस्तिकता : समकालीन सामाजिक एवं दार्शनिक परिप्रेक्ष्य यदि यह शोध-प",
+        "authors": "मुक्ति प्रभात जैन",
+        "doi": "https://doi.org/10.5281/zenodo.20519919",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 3,
+        "views": 141,
+        "downloads": 36
+    },
+    {
+        "id": "paper-03-10",
+        "title": "लैंगिक समानता, महिला सशक्तीकरण एवं सामाजिक विकास में महिलाओं की भूमिका : चुनौतियाँ, अवसर और समाधान",
+        "authors": "अनुराधा",
+        "doi": "https://doi.org/10.5281/zenodo.20519987",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 4,
+        "views": 45,
+        "downloads": 44
+    },
+    {
+        "id": "paper-03-11",
+        "title": "समकालीन समाज में शिक्षा, ज्ञान, विज्ञान, संस्कृति और मीडिया के बदलते आयाम : एक बहुविषयी दृष्टिकोण",
+        "authors": "डॉ. सागर देसले",
+        "doi": "https://doi.org/10.5281/zenodo.20520398",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 5,
+        "views": 57,
+        "downloads": 12
+    },
+    {
+        "id": "paper-03-12",
+        "title": "समकालीन समाज में मीडिया की प्रमुख समस्याएँ और उनके संभावित समाधान : जैन दर्शन के संबंध-सिद्धांतों के आलोक में",
+        "authors": "ऋतु जैन & प्रो. राका जैन",
+        "doi": "https://doi.org/10.5281/zenodo.20520545",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 6,
+        "views": 69,
+        "downloads": 20
+    },
+    {
+        "id": "paper-03-13",
+        "title": "भारतीय ज्ञान परंपरा और आधुनिक शिक्षा पद्धति के बीच अंतर्संबंध",
+        "authors": "डॉ. अशोक कुमार",
+        "doi": "https://doi.org/10.5281/zenodo.20520705",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 7,
+        "views": 81,
+        "downloads": 28
+    },
+    {
+        "id": "paper-03-14",
+        "title": "भारतीय ज्ञान परंपरा और आधुनिक शिक्षा प्रणाली के बीच अंतःक्रिया",
+        "authors": "डॉ मनोरमा जैन",
+        "doi": "https://doi.org/10.5281/zenodo.20520824",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 8,
+        "views": 93,
+        "downloads": 36
+    },
+    {
+        "id": "paper-03-15",
+        "title": "“गंगा को अविरल एवं निर्मल बनाने में युवाओं की भूमिका : चुनौतियाँ, संभावनाएँ एवं समाधान — एक समीक्षात्मक अध्ययन”",
+        "authors": "डॉ मोिहत कुमार &  डॉ. विजय शर्मा  & डॉ सुशील भदूला",
+        "doi": "https://doi.org/10.5281/zenodo.20521265",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 2,
+        "views": 105,
+        "downloads": 44
+    },
+    {
+        "id": "paper-03-16",
+        "title": "डिजिटल मीडिया और वेब सीरीज़ में भाषा, लोक संस्कृति एवं सामाजिक पहचान का अंतर्संबंध",
+        "authors": "सिचन कुमार & डॉ. एस. पद्मप्रिया",
+        "doi": "https://doi.org/10.5281/zenodo.20521359",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 3,
+        "views": 117,
+        "downloads": 12
+    },
+    {
+        "id": "paper-03-17",
+        "title": "समकालीन वैश्विक परिप्रेक्ष्य में शिक्षा प्रणाली के बदलते आयाम और चुनौतियाँ",
+        "authors": "डॉ. जी. उमानरसिंहा मूर्ति",
+        "doi": "https://doi.org/10.5281/zenodo.20521408",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 4,
+        "views": 129,
+        "downloads": 20
+    },
+    {
+        "id": "paper-03-18",
+        "title": "भारतीय लोकगीत : संस्कृति, समाज, नारी चेतना एवं लोकजीवन का समग्र अध्ययन",
+        "authors": "श्रीमती कुसुम प्रजापति & प्रो. अरुण शुक्ला",
+        "doi": "https://doi.org/10.5281/zenodo.20521448",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 5,
+        "views": 141,
+        "downloads": 28
+    },
+    {
+        "id": "paper-03-19",
+        "title": "समकालीन समाज में शिक्षा का महत्व",
+        "authors": "डॉ. निवेदिता कुमारी",
+        "doi": "https://doi.org/10.5281/zenodo.20521524",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 6,
+        "views": 45,
+        "downloads": 36
+    },
+    {
+        "id": "paper-03-20",
+        "title": "लोक साहित्य में उत्तराखंड की लोक संस्कृति",
+        "authors": "डॉ. दीपिका आत्रेय",
+        "doi": "https://doi.org/10.5281/zenodo.20521565",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 7,
+        "views": 57,
+        "downloads": 44
+    },
+    {
+        "id": "paper-03-21",
+        "title": "समकालीन हिंदी एवं मराठी उपन्यासों में सांप्रदायिकता",
+        "authors": "नदाफ अजरुद्दीन सलीम & प्रो. हाशम बेग मिर्ज़ा",
+        "doi": "https://doi.org/10.5281/zenodo.20521783",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 8,
+        "views": 69,
+        "downloads": 12
+    },
+    {
+        "id": "paper-03-22",
+        "title": "समकालीन समाज में मीडिया का संस्कृति, जीवनशैली, सामाजिक मूल्यों एवं युवा चेतना पर प्रभाव : एक समग्र अध्ययन",
+        "authors": "डॉ. अल्पना शर्मा",
+        "doi": "https://doi.org/10.5281/zenodo.20521815",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 2,
+        "views": 81,
+        "downloads": 20
+    },
+    {
+        "id": "paper-03-23",
+        "title": "भारतीय ज्ञान परंपरा का गिजुभाई बधेका के शैक्षिक विचारों पर प्रभाव",
+        "authors": "विजय सिंह माली",
+        "doi": "https://doi.org/10.5281/zenodo.20521935",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 3,
+        "views": 93,
+        "downloads": 28
+    },
+    {
+        "id": "paper-03-24",
+        "title": "उच्च शिक्षा के विकास में सूचना एवं संचार प्रौद्योगिकी की भूमिका : एक विश्लेषणात्मक अध्ययन",
+        "authors": "डॉ. गोरधन जाटव",
+        "doi": "https://doi.org/10.5281/zenodo.20522056",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 4,
+        "views": 105,
+        "downloads": 36
+    },
+    {
+        "id": "paper-03-25",
+        "title": "महात्मा गांधी एवं पंडित दीनदयाल उपाध्याय के सामाजिक न्याय और समावेशी विकास संबंधी विचारों का तुलनात्मक विश्लेषण",
+        "authors": "डॉ सोनी कुमारी",
+        "doi": "https://doi.org/10.5281/zenodo.20522097",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 5,
+        "views": 117,
+        "downloads": 44
+    },
+    {
+        "id": "paper-03-26",
+        "title": "डिजिटल मीडिया, सोशल मीडिया और जनमत निर्माण की प्रक्रिया",
+        "authors": "श्रीमती रश्मि अनिल जैन",
+        "doi": "https://doi.org/10.5281/zenodo.20522129",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 6,
+        "views": 129,
+        "downloads": 12
+    },
+    {
+        "id": "paper-03-27",
+        "title": "मानव जीवन पर प्रौद्योगिकी का प्रभाव",
+        "authors": "डॉ. संगीता कुम्भारे",
+        "doi": "https://doi.org/10.5281/zenodo.20522170",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 7,
+        "views": 141,
+        "downloads": 20
+    },
+    {
+        "id": "paper-03-28",
+        "title": "कल्याणकारी राज्य की स्थापना में जैन साहित्य का योगदान : एक अध्ययन",
+        "authors": "डॉ. ज्योति गौतम",
+        "doi": "https://doi.org/10.5281/zenodo.20522217",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 8,
+        "views": 45,
+        "downloads": 28
+    },
+    {
+        "id": "paper-03-29",
+        "title": "दर्शन, नैतिकता और समकालीन सामाजिक चुनौतियाँ : भारतीय संदर्भ में",
+        "authors": "डॉ. प्रीति प्रज्ञा",
+        "doi": "https://doi.org/10.5281/zenodo.20522242",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 2,
+        "views": 57,
+        "downloads": 36
+    },
+    {
+        "id": "paper-03-30",
+        "title": "वैज्ञानिक तकनीकों से मानव विकास में योगदान एवं भविष्य आधारित दृष्टिकोण",
+        "authors": "महेंद्र सिंह राणा",
+        "doi": "https://doi.org/10.5281/zenodo.20522273",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 3,
+        "views": 69,
+        "downloads": 44
+    },
+    {
+        "id": "paper-03-31",
+        "title": "A Study of Cognitive Styles Among Secondary School Students and Their Stress Management",
+        "authors": "Dr. Riyanka Singh &  Sandhya Yadav",
+        "doi": "https://doi.org/10.5281/zenodo.20522307",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 4,
+        "views": 81,
+        "downloads": 12
+    },
+    {
+        "id": "paper-03-32",
+        "title": "Reconstruction of Social Values through Art, Literature and Cultural Discourses",
+        "authors": "Sajal Jharia & Prof. (Dr.) Vineeta K. Saluja",
+        "doi": "https://doi.org/10.5281/zenodo.20522402",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 5,
+        "views": 93,
+        "downloads": 20
+    },
+    {
+        "id": "paper-03-33",
+        "title": "Influence of Social Media Usage on Mental Health and Academic Achievement of Higher Secondary Students",
+        "authors": "Ms. Varsha Pal & Dr. Reeta",
+        "doi": "https://doi.org/10.5281/zenodo.20530044",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 6,
+        "views": 105,
+        "downloads": 28
+    },
+    {
+        "id": "paper-03-34",
+        "title": "दलित स्त्री आत्मकथाएँ : अनुभव, स्मृति और सामाजिक संघर्ष — एक दृष्टि",
+        "authors": "पी. शरण्या &  प्रो. एस. पद्मप्रिया",
+        "doi": "https://doi.org/10.5281/zenodo.20530080",
+        "volume": "03",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jul-Dec",
+        "citations": 7,
+        "views": 117,
+        "downloads": 36
+    },
+    {
+        "id": "paper-compilation",
+        "title": "Sanmati Spectrum of Knowledge & Emerging Discourse (January-March, 2026)",
+        "authors": "Dr Namrata Jain (President & Editor-in-Chief), Dr. Ratnesh Kumar Jain (Managing Editor)",
+        "doi": "https://doi.org/10.5281/zenodo.19710093",
+        "volume": "1",
+        "issue": "1",
+        "year": "2026",
+        "months": "Jan-Mar",
+        "is_compilation": true,
+        "citations": 15,
+        "views": 250,
+        "downloads": 185
+    }
+];
+
+        // UI References
+        const searchInput = document.getElementById('search-input');
+        const filterVolume = document.getElementById('filter-volume');
+        const filterAuthor = document.getElementById('filter-author');
+        const volumesContainer = document.getElementById('volumes-container');
+        const emptyState = document.getElementById('empty-state');
+        const btnReset = document.getElementById('btn-reset');
+        
+        // Active PDF dropdown menu state tracker
+        let activeDropdownId = null;
+
+        // Load compilation paper in banner
+        const compPaper = papersData.find(p => p.is_compilation);
+        if (compPaper) {
+            document.getElementById('comp-title').innerText = compPaper.title;
+            document.getElementById('comp-authors').innerText = compPaper.authors;
+            document.getElementById('comp-view').href = compPaper.doi;
+        } else {
+            document.getElementById('compilation-spotlight').style.display = 'none';
+        }
+
+        // Calculate and Populate Authors Dropdown
+        const populateAuthorsDropdown = () => {
+            const authorsSet = new Set();
+            papersData.forEach(paper => {
+                if (paper.is_compilation) return;
+                const parts = paper.authors.split(/,|&|and/i);
+                parts.forEach(part => {
+                    const name = part.trim();
+                    if (name && name.length > 2) {
+                        authorsSet.add(name);
+                    }
+                });
+            });
+            const sortedAuthors = Array.from(authorsSet).sort();
+            sortedAuthors.forEach(author => {
+                const opt = document.createElement('option');
+                opt.value = author;
+                opt.innerText = author;
+                filterAuthor.appendChild(opt);
+            });
+        };
+
+        // Render Data based on Search and Filter
+        const renderArchive = () => {
+            const query = searchInput.value.toLowerCase().trim();
+            const vol = filterVolume.value;
+            const auth = filterAuthor.value;
+
+            // Group filtered papers by volume
+            const volumes = {
+                '03': { title: 'Volume 03 (Jul-Dec 2026)', monthRange: 'Jul-Dec 2026', issue: '1', papers: [] },
+                '02': { title: 'Volume 02 (Jan-Jun 2026)', monthRange: 'Jan-Jun 2026', issue: '1', papers: [] },
+                '01': { title: 'Volume 01 (Jul-Dec 2025)', monthRange: 'Jul-Dec 2025', issue: '1', papers: [] }
+            };
+
+            let matchCount = 0;
+
+            papersData.forEach(paper => {
+                if (paper.is_compilation) return;
+
+                // Match filters
+                if (vol !== 'all' && paper.volume !== vol) return;
+                if (auth !== 'all' && !paper.authors.toLowerCase().includes(auth.toLowerCase())) return;
+
+                // Match query
+                const matchesSearch = query === '' || 
+                    paper.title.toLowerCase().includes(query) ||
+                    paper.authors.toLowerCase().includes(query) ||
+                    `volume ${paper.volume}`.includes(query);
+
+                if (!matchesSearch) return;
+
+                // Push to corresponding volume
+                if (volumes[paper.volume]) {
+                    volumes[paper.volume].papers.push(paper);
+                    matchCount++;
+                }
+            });
+
+            // Clear container
+            volumesContainer.innerHTML = '';
+
+            const activeVols = Object.keys(volumes).sort().reverse(); // Show Vol 3 first
+            let visibleVolumesCount = 0;
+
+            activeVols.forEach(key => {
+                const volume = volumes[key];
+                if (volume.papers.length === 0) return;
+
+                visibleVolumesCount++;
+                
+                // Construct volume section card
+                const volSection = document.createElement('div');
+                volSection.className = 'bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden';
+                
+                let papersRowsHtml = '';
+                let papersCardsHtml = '';
+
+                volume.papers.forEach((paper, index) => {
+                    const sNo = String(index + 1).padStart(2, '0');
+                    const doiBadgeHtml = paper.doi ? `
+                        <a href="${paper.doi}" target="_blank" class="inline-flex items-center gap-1 px-2.5 py-1 bg-[#2563EB]/5 hover:bg-[#2563EB]/10 rounded border border-[#2563EB]/15 text-[10px] font-black text-[#2563EB] uppercase tracking-wider transition-colors duration-200">
+                            <i data-lucide="shield-check" class="w-3 h-3"></i> DOI
+                        </a>
+                    ` : '';
+
+                    // Desktop row HTML
+                    papersRowsHtml += `
+                        <tr class="border-b border-slate-100 hover:bg-slate-50/40 transition-colors">
+                            <td class="py-5 px-6 text-sm font-semibold text-slate-400 font-poppins">${sNo}</td>
+                            <td class="py-5 px-6">
+                                <a href="${paper.doi}" target="_blank" class="font-bold text-[#0F4C81] hover:text-[#2563EB] transition-colors leading-relaxed text-sm mb-1 block">
+                                    ${paper.title}
+                                </a>
+                                <div class="flex flex-wrap items-center gap-3 mt-2">
+                                    ${doiBadgeHtml}
+                                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-slate-100 text-slate-500 text-[10px] font-medium border border-slate-200/50">
+                                        <i data-lucide="quote" class="w-2.5 h-2.5"></i> ${paper.citations} Citations
+                                    </span>
+                                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-slate-100 text-slate-500 text-[10px] font-medium border border-slate-200/50">
+                                        <i data-lucide="eye" class="w-2.5 h-2.5"></i> ${paper.views} Views
+                                    </span>
+                                </div>
+                            </td>
+                            <td class="py-5 px-6 text-sm text-slate-600 font-medium italic">${paper.authors}</td>
+                            <td class="py-5 px-6 text-center relative dropdown-wrapper" data-paper-id="${paper.id}">
+                                <button onclick="toggleDropdown(event, '${paper.id}')" class="inline-flex items-center justify-center gap-2 px-4 py-2 bg-slate-100 hover:bg-[#0F4C81]/10 text-slate-700 hover:text-[#0F4C81] font-bold rounded-xl text-xs uppercase tracking-wider transition-all duration-200 border border-slate-200/60">
+                                    PDF <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+                                </button>
+                                <div id="dropdown-${paper.id}" class="hidden absolute right-0 mt-2 w-48 bg-white border border-slate-100 rounded-xl shadow-lg py-2 z-50 text-left">
+                                    <a href="${paper.doi}" target="_blank" class="flex items-center gap-2.5 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-[#0F4C81] transition-colors">
+                                        <i data-lucide="book-open" class="w-4 h-4 text-slate-400"></i> View PDF
+                                    </a>
+                                    <a href="${paper.doi}" target="_blank" class="flex items-center gap-2.5 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-[#0F4C81] transition-colors">
+                                        <i data-lucide="download" class="w-4 h-4 text-slate-400"></i> Download PDF
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+
+                    // Mobile card HTML
+                    papersCardsHtml += `
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="text-xs font-bold text-slate-400 font-poppins">#${sNo}</span>
+                                <span class="w-1.5 h-1.5 rounded-full bg-slate-200"></span>
+                                <span class="text-[10px] font-black uppercase tracking-wider text-[#2563EB] bg-[#2563EB]/5 px-2 py-0.5 rounded">Research Article</span>
+                            </div>
+                            <a href="${paper.doi}" target="_blank" class="block font-bold text-[#0F4C81] leading-relaxed text-sm mb-2">${paper.title}</a>
+                            <p class="text-slate-600 text-xs font-medium italic mb-4">${paper.authors}</p>
+                            <div class="flex flex-wrap gap-2 mb-5">
+                                ${doiBadgeHtml}
+                                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-500 text-[9px] font-medium border border-slate-200/50">${paper.citations} Citations</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <a href="${paper.doi}" target="_blank" class="flex items-center justify-center gap-1.5 py-2.5 bg-slate-50 text-slate-700 font-bold rounded-lg text-[10px] uppercase tracking-wider transition-colors border border-slate-200/50">
+                                    <i data-lucide="book-open" class="w-3.5 h-3.5"></i> View
+                                </a>
+                                <a href="${paper.doi}" target="_blank" class="flex items-center justify-center gap-1.5 py-2.5 bg-[#0F4C81] text-white font-bold rounded-lg text-[10px] uppercase tracking-wider transition-colors">
+                                    <i data-lucide="download" class="w-3.5 h-3.5"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                volSection.innerHTML = `
+                    <!-- Header -->
+                    <div class="bg-slate-50 border-b border-slate-100 px-6 py-5 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+                        <div class="flex items-center gap-3">
+                            <span class="px-4 py-1.5 bg-[#0F4C81] text-white text-xs font-black uppercase tracking-widest rounded-full font-poppins">Volume ${volume.papers[0].volume}</span>
+                            <h3 class="text-lg font-bold font-poppins text-slate-900">${volume.monthRange}</h3>
+                        </div>
+                        <div class="flex items-center gap-4 text-xs font-bold text-slate-400 uppercase tracking-widest font-poppins">
+                            <span>Issue ${volume.issue}</span>
+                            <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
+                            <span>${volume.papers.length} Research Papers</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Table for Desktop -->
+                    <div class="p-0 overflow-x-auto hidden md:block">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50/50 border-b border-slate-100">
+                                    <th class="py-4 px-6 text-xs font-bold text-slate-400 uppercase tracking-widest font-poppins w-16">S.No</th>
+                                    <th class="py-4 px-6 text-xs font-bold text-slate-400 uppercase tracking-widest font-poppins">Research Paper Title</th>
+                                    <th class="py-4 px-6 text-xs font-bold text-slate-400 uppercase tracking-widest font-poppins w-72">Author(s)</th>
+                                    <th class="py-4 px-6 text-xs font-bold text-slate-400 uppercase tracking-widest font-poppins w-36 text-center">PDF</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${papersRowsHtml}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Mobile Cards List -->
+                    <div class="md:hidden divide-y divide-slate-100">
+                        ${papersCardsHtml}
+                    </div>
+                `;
+
+                volumesContainer.appendChild(volSection);
+            });
+
+            // Handle empty state display
+            if (visibleVolumesCount === 0) {
+                volumesContainer.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+            } else {
+                volumesContainer.classList.remove('hidden');
+                emptyState.classList.add('hidden');
+            }
+
+            // Re-render Lucide icons for dynamically added HTML elements
+            lucide.createIcons();
+        };
+
+        // Toggle PDF Menu Dropdown
+        const toggleDropdown = (e, paperId) => {
+            e.stopPropagation();
+            const targetDropdown = document.getElementById(`dropdown-${paperId}`);
+            const isCurrentlyHidden = targetDropdown.classList.contains('hidden');
+
+            // Close active dropdown
+            if (activeDropdownId) {
+                const activeDropdown = document.getElementById(`dropdown-${activeDropdownId}`);
+                if (activeDropdown) activeDropdown.classList.add('hidden');
+            }
+
+            // Open clicked dropdown
+            if (isCurrentlyHidden) {
+                targetDropdown.classList.remove('hidden');
+                activeDropdownId = paperId;
+            } else {
+                activeDropdownId = null;
+            }
+        };
+
+        // Click outside dropdown handler
+        window.addEventListener('click', () => {
+            if (activeDropdownId) {
+                const activeDropdown = document.getElementById(`dropdown-${activeDropdownId}`);
+                if (activeDropdown) activeDropdown.classList.add('hidden');
+                activeDropdownId = null;
+            }
+        });
+
+        // Reset Filters Button Handler
+        btnReset.addEventListener('click', () => {
+            searchInput.value = '';
+            filterVolume.value = 'all';
+            filterAuthor.value = 'all';
+            renderArchive();
+        });
+
+        // Register Inputs listeners for live search/filter
+        searchInput.addEventListener('input', renderArchive);
+        filterVolume.addEventListener('change', renderArchive);
+        filterAuthor.addEventListener('change', renderArchive);
+
+        // Initial Initialization
+        populateAuthorsDropdown();
+        renderArchive();
+    </script>
+</body>
+</html>
