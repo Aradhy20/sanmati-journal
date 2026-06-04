@@ -19,6 +19,15 @@ Route::get('/run-seeder', function () {
     return "Database migration and papers seeding completed successfully on the live server!";
 });
 
+Route::get('/show-logs', function () {
+    $path = storage_path('logs/laravel.log');
+    if (!file_exists($path)) {
+        return "Log file not found.";
+    }
+    $lines = file($path);
+    return response(implode("", array_slice($lines, -50)))->header('Content-Type', 'text/plain');
+});
+
 Route::get('/', [JournalController::class, 'index'])->name('home');
 Route::redirect('/submit', '/submission-guidelines/call-for-papers');
 Route::get('/api/search', [\App\Http\Controllers\SearchController::class, 'search'])->name('api.search');
