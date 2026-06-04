@@ -13,35 +13,6 @@ Route::get('/clear-cache', function () {
     return "All Laravel caches have been successfully cleared! You can now go back to the homepage.";
 });
 
-Route::get('/run-seeder', function () {
-    Artisan::call('migrate', ['--force' => true]);
-    Artisan::call('db:seed', ['--class' => 'ArchivePapersSeeder', '--force' => true]);
-    return "Database migration and papers seeding completed successfully on the live server!";
-});
-
-Route::get('/run-seeder-direct', function () {
-    try {
-        // Run database migrations first to add any missing columns/tables
-        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
-        
-        $seeder = new \Database\Seeders\ArchivePapersSeeder();
-        $seeder->run();
-        return "Database migrations and papers seeding completed successfully via direct execution!";
-    } catch (\Exception $e) {
-        return response($e->getMessage() . "\n\n" . $e->getTraceAsString(), 500)
-            ->header('Content-Type', 'text/plain');
-    }
-});
-
-Route::get('/show-logs', function () {
-    $path = storage_path('logs/laravel.log');
-    if (!file_exists($path)) {
-        return "Log file not found.";
-    }
-    $lines = file($path);
-    return response(implode("", array_slice($lines, -50)))->header('Content-Type', 'text/plain');
-});
-
 Route::get('/', [JournalController::class, 'index'])->name('home');
 Route::redirect('/submit', '/submission-guidelines/call-for-papers');
 Route::get('/api/search', [\App\Http\Controllers\SearchController::class, 'search'])->name('api.search');
