@@ -6,6 +6,19 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
+// Auto-create Laravel storage directories if they are missing
+$storageDirs = [
+    __DIR__ . '/../sanmati-core/storage/framework/cache/data',
+    __DIR__ . '/../sanmati-core/storage/framework/sessions',
+    __DIR__ . '/../sanmati-core/storage/framework/views',
+    __DIR__ . '/../sanmati-core/storage/app/public',
+];
+foreach ($storageDirs as $dir) {
+    if (!file_exists($dir)) {
+        @mkdir($dir, 0775, true);
+    }
+}
+
 // ONE-TIME DB FIX: Update Vol 2 Issue 2 month_range + fix paper count
 // This block runs once and then removes itself via the flag file
 $_fixFlag = __DIR__ . '/../sanmati-core/storage/framework/cache/db_fix_applied.flag';
@@ -44,10 +57,10 @@ if (!file_exists($_fixFlag)) {
             }
         }
         // Write flag so this never runs again
-        file_put_contents($_fixFlag, date('Y-m-d H:i:s'));
+        @file_put_contents($_fixFlag, date('Y-m-d H:i:s'));
     } catch (\Throwable $e) {
         // Silently fail - don't break the site
-        file_put_contents($_fixFlag, 'error: ' . $e->getMessage());
+        @file_put_contents($_fixFlag, 'error: ' . $e->getMessage());
     }
 }
 
