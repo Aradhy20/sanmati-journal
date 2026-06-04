@@ -45,7 +45,7 @@ jobs:
     name: Build Application
     runs-on: ubuntu-latest
     needs: test
-    if: github.repository == 'owner/repo' && github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.repository == 'Aradhy20/sanmati-journal' && github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -70,7 +70,7 @@ jobs:
     name: Deploy to Production
     runs-on: ubuntu-latest
     needs: build
-    if: github.repository == 'owner/repo' && github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.repository == 'Aradhy20/sanmati-journal' && github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
