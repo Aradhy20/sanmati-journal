@@ -59,7 +59,7 @@ class ArchivePapersSeeder extends Seeder
                 'volume' => '2',
                 'number' => '2',
                 'year' => 2026,
-                'month_range' => 'July – December',
+                'month_range' => 'April – June',
                 'is_current' => true, // Latest issue as current
             ],
         ];

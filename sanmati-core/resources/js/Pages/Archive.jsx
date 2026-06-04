@@ -49,17 +49,31 @@ export default function Archive({ issues }) {
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, [activePaperMenu]);
 
+    // Frontend override for month_range — ensures correct display regardless of DB value
+    const MONTH_RANGE_OVERRIDES = {
+        '1-1': 'January – March',
+        '2-1': 'April – June',
+        '2-2': 'April – June',
+    };
+
     const researchIssues = useMemo(() => {
-        return [...dbIssues].sort((a, b) => {
-            const volA = parseInt(a.volume) || 0;
-            const volB = parseInt(b.volume) || 0;
-            if (volA !== volB) {
-                return volB - volA; // Newest Volume first
-            }
-            const numA = parseInt(a.number) || 0;
-            const numB = parseInt(b.number) || 0;
-            return numB - numA; // Newest Issue first
-        });
+        return [...dbIssues]
+            .map(issue => ({
+                ...issue,
+                // Apply month_range override, filter out compilation papers from count
+                month_range: MONTH_RANGE_OVERRIDES[`${issue.volume}-${issue.number}`] || issue.month_range,
+                papers: (issue.papers || []).filter(p => p.category !== 'Complete Issue Book'),
+            }))
+            .sort((a, b) => {
+                const volA = parseInt(a.volume) || 0;
+                const volB = parseInt(b.volume) || 0;
+                if (volA !== volB) {
+                    return volB - volA; // Newest Volume first
+                }
+                const numA = parseInt(a.number) || 0;
+                const numB = parseInt(b.number) || 0;
+                return numB - numA; // Newest Issue first
+            });
     }, [dbIssues]);
 
     // Build unique volume options dynamically from the loaded issues
@@ -75,8 +89,8 @@ export default function Archive({ issues }) {
             }
         });
         
-        if (vols['1']) vols['1'].label = 'Volume 1 (Jan-Mar 2026)';
-        if (vols['2']) vols['2'].label = 'Volume 2 (Apr-Dec 2026)';
+        if (vols['1']) vols['1'].label = 'Volume 1 (Jan–Mar 2026)';
+        if (vols['2']) vols['2'].label = 'Volume 2 (Apr–Dec 2026)';
 
         return Object.values(vols).sort((a, b) => b.val.localeCompare(a.val));
     }, [researchIssues]);
@@ -114,8 +128,8 @@ export default function Archive({ issues }) {
     // Filtered Issues and Papers
     const filteredIssues = useMemo(() => {
         return researchIssues.map(issue => {
-            // Apply volume filter
-            if (selectedVolume !== 'all' && issue.volume !== selectedVolume) {
+            // Apply volume filter (convert both to string to handle integer vs string from DB)
+            if (selectedVolume !== 'all' && String(issue.volume) !== selectedVolume) {
                 return { ...issue, papers: [] };
             }
 

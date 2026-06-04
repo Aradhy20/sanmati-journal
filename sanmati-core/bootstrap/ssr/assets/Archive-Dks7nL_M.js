@@ -24,8 +24,18 @@ function Archive({ issues }) {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [activePaperMenu]);
+  const MONTH_RANGE_OVERRIDES = {
+    "1-1": "January – March",
+    "2-1": "April – June",
+    "2-2": "April – June"
+  };
   const researchIssues = useMemo(() => {
-    return [...dbIssues].sort((a, b) => {
+    return [...dbIssues].map((issue) => ({
+      ...issue,
+      // Apply month_range override, filter out compilation papers from count
+      month_range: MONTH_RANGE_OVERRIDES[`${issue.volume}-${issue.number}`] || issue.month_range,
+      papers: (issue.papers || []).filter((p) => p.category !== "Complete Issue Book")
+    })).sort((a, b) => {
       const volA = parseInt(a.volume) || 0;
       const volB = parseInt(b.volume) || 0;
       if (volA !== volB) {
@@ -47,8 +57,8 @@ function Archive({ issues }) {
         };
       }
     });
-    if (vols["1"]) vols["1"].label = "Volume 1 (Jan-Mar 2026)";
-    if (vols["2"]) vols["2"].label = "Volume 2 (Apr-Dec 2026)";
+    if (vols["1"]) vols["1"].label = "Volume 1 (Jan–Mar 2026)";
+    if (vols["2"]) vols["2"].label = "Volume 2 (Apr–Dec 2026)";
     return Object.values(vols).sort((a, b) => b.val.localeCompare(a.val));
   }, [researchIssues]);
   const allAuthors = useMemo(() => {
@@ -82,7 +92,7 @@ function Archive({ issues }) {
   }, [researchIssues]);
   const filteredIssues = useMemo(() => {
     return researchIssues.map((issue) => {
-      if (selectedVolume !== "all" && issue.volume !== selectedVolume) {
+      if (selectedVolume !== "all" && String(issue.volume) !== selectedVolume) {
         return { ...issue, papers: [] };
       }
       const filteredPapers = (issue.papers || []).filter((paper) => {
