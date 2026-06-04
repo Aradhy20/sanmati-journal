@@ -21,9 +21,12 @@ Route::get('/run-seeder', function () {
 
 Route::get('/run-seeder-direct', function () {
     try {
+        // Run database migrations first to add any missing columns/tables
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+        
         $seeder = new \Database\Seeders\ArchivePapersSeeder();
         $seeder->run();
-        return "Database papers seeding completed successfully via direct execution!";
+        return "Database migrations and papers seeding completed successfully via direct execution!";
     } catch (\Exception $e) {
         return response($e->getMessage() . "\n\n" . $e->getTraceAsString(), 500)
             ->header('Content-Type', 'text/plain');
