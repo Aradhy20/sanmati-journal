@@ -36,17 +36,12 @@ if (!file_exists($_fixFlag)) {
                     $env[trim($key)] = trim($val, " \t\n\r\0\x0B\"'");
                 }
             }
-            $dbConn = $env['DB_CONNECTION'] ?? 'sqlite';
-            if ($dbConn === 'mysql') {
-                $pdo = new PDO(
-                    "mysql:host={$env['DB_HOST']};port={$env['DB_PORT']};dbname={$env['DB_DATABASE']};charset=utf8mb4",
-                    $env['DB_USERNAME'],
-                    $env['DB_PASSWORD'] ?? ''
-                );
-            } else {
-                $dbPath = $env['DB_DATABASE'] ?? __DIR__ . '/../sanmati-core/database/database.sqlite';
-                $pdo = new PDO("sqlite:{$dbPath}");
-            }
+            // Exclusively use MySQL database connection as requested by the user
+            $pdo = new PDO(
+                "mysql:host=" . ($env['DB_HOST'] ?? '127.0.0.1') . ";port=" . ($env['DB_PORT'] ?? '3306') . ";dbname=" . ($env['DB_DATABASE'] ?? 'sanmati_journal') . ";charset=utf8mb4",
+                $env['DB_USERNAME'] ?? 'root',
+                $env['DB_PASSWORD'] ?? ''
+            );
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             // Fix Vol 2 Issue 2 month_range
             $pdo->exec("UPDATE issues SET month_range = 'April \xe2\x80\x93 June' WHERE volume = '2' AND number = '2'");
