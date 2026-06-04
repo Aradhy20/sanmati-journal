@@ -19,6 +19,17 @@ Route::get('/run-seeder', function () {
     return "Database migration and papers seeding completed successfully on the live server!";
 });
 
+Route::get('/run-seeder-direct', function () {
+    try {
+        $seeder = new \Database\Seeders\ArchivePapersSeeder();
+        $seeder->run();
+        return "Database papers seeding completed successfully via direct execution!";
+    } catch (\Exception $e) {
+        return response($e->getMessage() . "\n\n" . $e->getTraceAsString(), 500)
+            ->header('Content-Type', 'text/plain');
+    }
+});
+
 Route::get('/show-logs', function () {
     $path = storage_path('logs/laravel.log');
     if (!file_exists($path)) {
