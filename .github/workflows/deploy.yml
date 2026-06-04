@@ -83,7 +83,7 @@ jobs:
       - name: Rsync to Remote Server 
         run: |
           ssh-keyscan -H ${{ secrets.PROD_SERVER_IP }} >> ~/.ssh/known_hosts
-          rsync -azP --delete ./ ${{ secrets.PROD_USER }}@${{ secrets.PROD_SERVER_IP }}:/var/www/sanmatijournal/
+          rsync -azP --delete --exclude='.env' --exclude='storage/' --exclude='bootstrap/cache/' ./ ${{ secrets.PROD_USER }}@${{ secrets.PROD_SERVER_IP }}:/var/www/sanmatijournal/
           
       - name: Run remote commands
         run: |
