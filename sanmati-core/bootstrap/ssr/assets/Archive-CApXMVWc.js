@@ -25,15 +25,32 @@ function Archive({ issues }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [activePaperMenu]);
   const researchIssues = useMemo(() => {
-    return dbIssues.filter((issue) => issue.volume !== "1" || issue.month_range !== "Jan-Mar").sort((a, b) => {
+    return [...dbIssues].sort((a, b) => {
       const volA = parseInt(a.volume) || 0;
       const volB = parseInt(b.volume) || 0;
-      return volB - volA;
+      if (volA !== volB) {
+        return volB - volA;
+      }
+      const numA = parseInt(a.number) || 0;
+      const numB = parseInt(b.number) || 0;
+      return numB - numA;
     });
   }, [dbIssues]);
-  useMemo(() => {
-    return dbIssues.find((issue) => issue.volume === "1" && issue.month_range === "Jan-Mar");
-  }, [dbIssues]);
+  const volumeOptions = useMemo(() => {
+    const vols = {};
+    researchIssues.forEach((issue) => {
+      const vol = String(issue.volume);
+      if (!vols[vol]) {
+        vols[vol] = {
+          val: vol,
+          label: `Volume ${vol}`
+        };
+      }
+    });
+    if (vols["1"]) vols["1"].label = "Volume 1 (Jan-Mar 2026)";
+    if (vols["2"]) vols["2"].label = "Volume 2 (Apr-Dec 2026)";
+    return Object.values(vols).sort((a, b) => b.val.localeCompare(a.val));
+  }, [researchIssues]);
   const allAuthors = useMemo(() => {
     const authorsSet = /* @__PURE__ */ new Set();
     researchIssues.forEach((issue) => {
@@ -176,9 +193,7 @@ function Archive({ issues }) {
               className: "px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0F4C81]/20 focus:border-[#0F4C81] transition-all cursor-pointer font-medium text-slate-700 flex-1 sm:flex-none",
               children: [
                 /* @__PURE__ */ jsx("option", { value: "all", children: "All Volumes" }),
-                /* @__PURE__ */ jsx("option", { value: "03", children: "Volume 03 (Jul-Dec 2026)" }),
-                /* @__PURE__ */ jsx("option", { value: "02", children: "Volume 02 (Jan-Jun 2026)" }),
-                /* @__PURE__ */ jsx("option", { value: "01", children: "Volume 01 (Jul-Dec 2025)" })
+                volumeOptions.map((opt) => /* @__PURE__ */ jsx("option", { value: opt.val, children: opt.label }, opt.val))
               ]
             }
           ),
