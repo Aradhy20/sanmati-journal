@@ -42,27 +42,29 @@ class ArchivePapersSeeder extends Seeder
         // Define Issue mappings
         $issuesConfig = [
             'VOLUMN 1 ISSUE 1' => [
-                'volume' => '01',
+                'volume' => '1',
                 'number' => '1',
-                'year' => 2025,
-                'month_range' => 'Jul-Dec',
+                'year' => 2026,
+                'month_range' => 'January – March',
                 'is_current' => false,
             ],
             'VOLUMN 2 ISSUE 1' => [
-                'volume' => '02',
+                'volume' => '2',
                 'number' => '1',
                 'year' => 2026,
-                'month_range' => 'Jan-Jun',
+                'month_range' => 'April – June',
                 'is_current' => false,
             ],
             'VOLUMN 2 ISSUE 2' => [
-                'volume' => '03',
-                'number' => '1',
+                'volume' => '2',
+                'number' => '2',
                 'year' => 2026,
-                'month_range' => 'Jul-Dec',
+                'month_range' => 'July – December',
                 'is_current' => true, // Latest issue as current
             ],
         ];
+
+        $vol1IssueId = null;
 
         foreach ($issuesConfig as $sheetName => $config) {
             if (!isset($jsonData[$sheetName])) {
@@ -80,6 +82,10 @@ class ArchivePapersSeeder extends Seeder
                 'status' => 'active',
                 'is_current' => $config['is_current'],
             ]);
+
+            if ($sheetName === 'VOLUMN 1 ISSUE 1') {
+                $vol1IssueId = $issue->id;
+            }
 
             $papersCount = 0;
             foreach ($jsonData[$sheetName] as $paperData) {
@@ -116,33 +122,26 @@ class ArchivePapersSeeder extends Seeder
         }
 
         // Also seed the original inaugural compilation issue/paper if not present
-        // Since we cleared issues/papers, we seed it as a special compilation
-        $compilationIssue = Issue::create([
-            'volume' => '1',
-            'number' => '1',
-            'year' => 2026,
-            'month_range' => 'Jan-Mar',
-            'status' => 'active',
-            'is_current' => false,
-        ]);
+        // Since we cleared issues/papers, we seed it as a special compilation in Vol 1 Issue 1
+        if ($vol1IssueId) {
+            Paper::create([
+                'issue_id' => $vol1IssueId,
+                'title' => 'Sanmati Spectrum of Knowledge & Emerging Discourse (January-March, 2026)',
+                'authors' => 'Dr Namrata Jain (President & Editor-in-Chief), Dr. Ratnesh Kumar Jain (Managing Editor)',
+                'abstract' => 'The January-March 2026 issue (Vol-1, Issue-1) of Sanmati Spectrum of Knowledge & Emerging Discourse — a national peer-reviewed multidisciplinary research journal in English & Hindi.',
+                'keywords' => 'Inaugural Issue, Complete Compilation, Multidisciplinary Research Journal',
+                'file_url' => 'https://drive.google.com/file/d/1nPxKxugSA6yMcpbJyQuNuEQ7QcnrpPt2/view?usp=sharing',
+                'doi' => 'https://doi.org/10.5281/zenodo.19710093',
+                'citations' => 15,
+                'category' => 'Complete Issue Book',
+                'is_featured' => true,
+                'meta_title' => 'Inaugural Issue Vol-1 Issue-1 (Jan-Mar 2026) | Sanmati Journal',
+                'meta_description' => 'Official full issue compilation of Sanmati Spectrum of Knowledge & Emerging Discourse (January-March, 2026) in Hindi & English.',
+            ]);
 
-        Paper::create([
-            'issue_id' => $compilationIssue->id,
-            'title' => 'Sanmati Spectrum of Knowledge & Emerging Discourse (January-March, 2026)',
-            'authors' => 'Dr Namrata Jain (President & Editor-in-Chief), Dr. Ratnesh Kumar Jain (Managing Editor)',
-            'abstract' => 'The January-March 2026 issue (Vol-1, Issue-1) of Sanmati Spectrum of Knowledge & Emerging Discourse — a national peer-reviewed multidisciplinary research journal in English & Hindi.',
-            'keywords' => 'Inaugural Issue, Complete Compilation, Multidisciplinary Research Journal',
-            'file_url' => 'https://drive.google.com/file/d/1nPxKxugSA6yMcpbJyQuNuEQ7QcnrpPt2/view?usp=sharing',
-            'doi' => 'https://doi.org/10.5281/zenodo.19710093',
-            'citations' => 15,
-            'category' => 'Complete Issue Book',
-            'is_featured' => true,
-            'meta_title' => 'Inaugural Issue Vol-1 Issue-1 (Jan-Mar 2026) | Sanmati Journal',
-            'meta_description' => 'Official full issue compilation of Sanmati Spectrum of Knowledge & Emerging Discourse (January-March, 2026) in Hindi & English.',
-        ]);
-
-        if ($this->command) {
-            $this->command->info("Seeded compilation issue Vol 1 Issue 1.");
+            if ($this->command) {
+                $this->command->info("Seeded compilation paper in Vol 1 Issue 1.");
+            }
         }
     }
 }
