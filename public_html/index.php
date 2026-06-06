@@ -19,9 +19,9 @@ foreach ($storageDirs as $dir) {
     }
 }
 
-// ONE-TIME DB FIX: Update Vol 2 Issue 2 month_range + fix paper count
+// ONE-TIME DB FIX: Update Vol 2 Issue 2 month_range + fix paper count + author spelling
 // This block runs once and then removes itself via the flag file
-$_fixFlag = __DIR__ . '/../sanmati-core/storage/framework/cache/db_fix_applied.flag';
+$_fixFlag = __DIR__ . '/../sanmati-core/storage/framework/cache/db_fix_applied_v3.flag';
 if (!file_exists($_fixFlag)) {
     try {
         // Load env to get DB credentials
@@ -50,6 +50,8 @@ if (!file_exists($_fixFlag)) {
             if ($count > 80) {
                 $pdo->exec("DELETE FROM papers WHERE category = 'Complete Issue Book'");
             }
+            // Fix author name spelling from सिचन कुमार to सचिन कुमार
+            $pdo->exec("UPDATE papers SET authors = 'सचिन कुमार & डॉ. एस. पद्मप्रिया' WHERE authors LIKE '%सिचन कुमार%'");
         }
         // Write flag so this never runs again
         @file_put_contents($_fixFlag, date('Y-m-d H:i:s'));
