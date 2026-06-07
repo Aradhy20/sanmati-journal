@@ -8,6 +8,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build Application
@@ -46,25 +49,33 @@ jobs:
       - name: Debug SSH Key Secret
         run: |
           KEY_VAL="${{ secrets.PROD_SSH_KEY }}"
+          OUT_FILE="debug_ssh.txt"
+          echo "=== SSH Key Debug ===" > $OUT_FILE
           if [ -z "$KEY_VAL" ]; then
-            echo "PROD_SSH_KEY is empty or not set!"
+            echo "PROD_SSH_KEY is empty or not set!" >> $OUT_FILE
           else
-            echo "PROD_SSH_KEY is NOT empty."
-            echo "Length of key is: ${#KEY_VAL} characters."
+            echo "PROD_SSH_KEY is NOT empty." >> $OUT_FILE
+            echo "Length: ${#KEY_VAL} characters." >> $OUT_FILE
             if [[ "$KEY_VAL" == *"BEGIN"* ]]; then
-              echo "Key contains 'BEGIN'."
+              echo "Key contains 'BEGIN'." >> $OUT_FILE
             else
-              echo "WARNING: Key does NOT contain 'BEGIN'!"
+              echo "WARNING: Key does NOT contain 'BEGIN'!" >> $OUT_FILE
             fi
             if [[ "$KEY_VAL" == *"END"* ]]; then
-              echo "Key contains 'END'."
+              echo "Key contains 'END'." >> $OUT_FILE
             else
-              echo "WARNING: Key does NOT contain 'END'!"
+              echo "WARNING: Key does NOT contain 'END'!" >> $OUT_FILE
             fi
             if [[ "$KEY_VAL" == *$'\r'* ]]; then
-              echo "WARNING: Key contains carriage return (\r) characters!"
+              echo "WARNING: Key contains carriage return (\r) characters!" >> $OUT_FILE
             fi
           fi
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -B debug-deploy
+          git add $OUT_FILE
+          git commit -m "chore: add debug_ssh.txt"
+          git push -f origin debug-deploy
 
       - name: Setup SSH Key for Deployment
         uses: webfactory/ssh-agent@v0.7.0
