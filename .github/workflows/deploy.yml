@@ -48,28 +48,34 @@ jobs:
 
       - name: Debug SSH Key Secret
         run: |
-          KEY_VAL="${{ secrets.PROD_SSH_KEY }}"
           OUT_FILE="debug_ssh.txt"
-          echo "=== SSH Key Debug ===" > $OUT_FILE
-          if [ -z "$KEY_VAL" ]; then
-            echo "PROD_SSH_KEY is empty or not set!" >> $OUT_FILE
-          else
-            echo "PROD_SSH_KEY is NOT empty." >> $OUT_FILE
-            echo "Length: ${#KEY_VAL} characters." >> $OUT_FILE
-            if [[ "$KEY_VAL" == *"BEGIN"* ]]; then
-              echo "Key contains 'BEGIN'." >> $OUT_FILE
+          echo "=== SSH Key & Deployment Secrets Debug ===" > $OUT_FILE
+          
+          check_secret() {
+            local name=$1
+            local val=$2
+            if [ -z "$val" ]; then
+              echo "$name: is empty or not set" >> $OUT_FILE
             else
-              echo "WARNING: Key does NOT contain 'BEGIN'!" >> $OUT_FILE
+              echo "$name: is set (length: ${#val})" >> $OUT_FILE
+              if [[ "$val" == *"BEGIN"* ]]; then
+                echo "  - Contains 'BEGIN'" >> $OUT_FILE
+              fi
+              if [[ "$val" == *"END"* ]]; then
+                echo "  - Contains 'END'" >> $OUT_FILE
+              fi
             fi
-            if [[ "$KEY_VAL" == *"END"* ]]; then
-              echo "Key contains 'END'." >> $OUT_FILE
-            else
-              echo "WARNING: Key does NOT contain 'END'!" >> $OUT_FILE
-            fi
-            if [[ "$KEY_VAL" == *$'\r'* ]]; then
-              echo "WARNING: Key contains carriage return (\r) characters!" >> $OUT_FILE
-            fi
-          fi
+          }
+          
+          check_secret "PROD_SSH_KEY" "${{ secrets.PROD_SSH_KEY }}"
+          check_secret "SSH_PRIVATE_KEY" "${{ secrets.SSH_PRIVATE_KEY }}"
+          check_secret "SSH_KEY" "${{ secrets.SSH_KEY }}"
+          check_secret "DEPLOY_KEY" "${{ secrets.DEPLOY_KEY }}"
+          check_secret "PROD_SERVER_IP" "${{ secrets.PROD_SERVER_IP }}"
+          check_secret "PROD_USER" "${{ secrets.PROD_USER }}"
+          check_secret "SERVER_IP" "${{ secrets.SERVER_IP }}"
+          check_secret "SERVER_USER" "${{ secrets.SERVER_USER }}"
+          
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -B debug-deploy
