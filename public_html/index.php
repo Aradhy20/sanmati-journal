@@ -19,6 +19,46 @@ foreach ($storageDirs as $dir) {
     }
 }
 
+// DEBUG ROUTE: Check DB status and flag files
+if (isset($_GET['debug_db'])) {
+    try {
+        $envFile = __DIR__ . '/../sanmati-core/.env';
+        $env = [];
+        if (file_exists($envFile)) {
+            $envLines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+            foreach ($envLines as $line) {
+                if (strpos(trim($line), '#') === 0) continue;
+                if (strpos($line, '=') !== false) {
+                    [$key, $val] = explode('=', $line, 2);
+                    $env[trim($key)] = trim($val, " \t\n\r\0\x0B\"'");
+                }
+            }
+        }
+        $pdo = new PDO(
+            "mysql:host=" . ($env['DB_HOST'] ?? '127.0.0.1') . ";port=" . ($env['DB_PORT'] ?? '3306') . ";dbname=" . ($env['DB_DATABASE'] ?? 'sanmati_journal') . ";charset=utf8mb4",
+            $env['DB_USERNAME'] ?? 'root',
+            $env['DB_PASSWORD'] ?? ''
+        );
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        // Let's also run the update query directly here in case it hasn't run!
+        $updated = $pdo->exec("UPDATE papers SET authors = 'सचिन कुमार & डॉ. एस. पद्मप्रिया' WHERE authors LIKE '%सिचन कुमार%'");
+        
+        $stmt = $pdo->query("SELECT id, title, authors FROM papers WHERE authors LIKE '%पद्मप्रिया%' OR authors LIKE '%सिचन%' OR authors LIKE '%सचिन%'");
+        $papers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        $_fixFlag = __DIR__ . '/../sanmati-core/storage/framework/cache/db_fix_applied_v3.flag';
+        $flagContent = file_exists($_fixFlag) ? file_get_contents($_fixFlag) : 'NOT_EXISTS';
+        
+        echo "<h3>MySQL Update Result:</h3><pre>Updated {$updated} row(s).</pre>";
+        echo "<h3>Flag file content:</h3><pre>{$flagContent}</pre>";
+        echo "<h3>Matching papers:</h3><pre>" . print_r($papers, true) . "</pre>";
+    } catch (\Throwable $e) {
+        echo "<h3>Error:</h3><pre>" . $e->getMessage() . "</pre>";
+    }
+    exit;
+}
+
 // ONE-TIME DB FIX: Update Vol 2 Issue 2 month_range + fix paper count + author spelling
 // This block runs once and then removes itself via the flag file
 $_fixFlag = __DIR__ . '/../sanmati-core/storage/framework/cache/db_fix_applied_v3.flag';
