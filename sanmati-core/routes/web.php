@@ -15,6 +15,9 @@ Route::get('/clear-cache', function () {
         \App\Models\Paper::where('category', 'Complete Issue Book')->delete();
     }
 
+    // Fix author name spelling from सिचन कुमार to सचिन कुमार
+    \App\Models\Paper::where('authors', 'like', '%सिचन कुमार%')->update(['authors' => 'सचिन कुमार & डॉ. एस. पद्मप्रिया']);
+
     Artisan::call('optimize:clear');
     Artisan::call('cache:clear');
     Artisan::call('route:clear');
@@ -34,6 +37,15 @@ Route::get('/clear-cache', function () {
 // TEMPORARY FIX ROUTE - Remove after running once
 Route::get('/fix-vol2-issue2-date', function () {
     $updated = \App\Models\Issue::where('volume', '2')->where('number', '2')->update(['month_range' => 'April – June']);
+    
+    // Fix author name spelling from सिचन कुमार to सचिन कुमार
+    \App\Models\Paper::where('authors', 'like', '%सिचन कुमार%')->update(['authors' => 'सचिन कुमार & डॉ. एस. पद्मप्रिया']);
+    
+    // Fix paper count: remove the extra compilation paper if total > 80
+    if (\App\Models\Paper::count() > 80) {
+        \App\Models\Paper::where('category', 'Complete Issue Book')->delete();
+    }
+
     \Illuminate\Support\Facades\Artisan::call('cache:clear');
     $issues = \App\Models\Issue::orderBy('volume')->orderBy('number')->get(['volume','number','month_range']);
     $result = "Updated {$updated} row(s).\n\nCurrent issues:\n";
