@@ -24,7 +24,12 @@ if (isset($_GET['debug_db'])) {
     try {
         $envFile = __DIR__ . '/../sanmati-core/.env';
         $env = [];
+        echo "<h3>Environment File Debug:</h3>";
+        echo "Path: " . realpath($envFile) . "<br>";
+        echo "Exists: " . (file_exists($envFile) ? 'YES' : 'NO') . "<br>";
+        echo "Readable: " . (is_readable($envFile) ? 'YES' : 'NO') . "<br>";
         if (file_exists($envFile)) {
+            echo "Filesize: " . filesize($envFile) . " bytes<br>";
             $envLines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
             foreach ($envLines as $line) {
                 if (strpos(trim($line), '#') === 0) continue;
@@ -33,6 +38,10 @@ if (isset($_GET['debug_db'])) {
                     $env[trim($key)] = trim($val, " \t\n\r\0\x0B\"'");
                 }
             }
+            echo "Parsed Keys: " . implode(', ', array_keys($env)) . "<br>";
+            echo "DB_HOST: " . ($env['DB_HOST'] ?? 'NOT SET') . "<br>";
+            echo "DB_USERNAME: " . ($env['DB_USERNAME'] ?? 'NOT SET') . "<br>";
+            echo "DB_DATABASE: " . ($env['DB_DATABASE'] ?? 'NOT SET') . "<br>";
         }
         $pdo = new PDO(
             "mysql:host=" . ($env['DB_HOST'] ?? '127.0.0.1') . ";port=" . ($env['DB_PORT'] ?? '3306') . ";dbname=" . ($env['DB_DATABASE'] ?? 'sanmati_journal') . ";charset=utf8mb4",
