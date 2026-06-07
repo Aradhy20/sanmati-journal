@@ -43,6 +43,29 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Debug SSH Key Secret
+        run: |
+          KEY_VAL="${{ secrets.PROD_SSH_KEY }}"
+          if [ -z "$KEY_VAL" ]; then
+            echo "PROD_SSH_KEY is empty or not set!"
+          else
+            echo "PROD_SSH_KEY is NOT empty."
+            echo "Length of key is: ${#KEY_VAL} characters."
+            if [[ "$KEY_VAL" == *"BEGIN"* ]]; then
+              echo "Key contains 'BEGIN'."
+            else
+              echo "WARNING: Key does NOT contain 'BEGIN'!"
+            fi
+            if [[ "$KEY_VAL" == *"END"* ]]; then
+              echo "Key contains 'END'."
+            else
+              echo "WARNING: Key does NOT contain 'END'!"
+            fi
+            if [[ "$KEY_VAL" == *$'\r'* ]]; then
+              echo "WARNING: Key contains carriage return (\r) characters!"
+            fi
+          fi
+
       - name: Setup SSH Key for Deployment
         uses: webfactory/ssh-agent@v0.7.0
         with:
