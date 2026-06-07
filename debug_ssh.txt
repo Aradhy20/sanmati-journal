@@ -1,2 +1,9 @@
-=== SSH Key Debug ===
-PROD_SSH_KEY is empty or not set!
+=== SSH Key & Deployment Secrets Debug ===
+PROD_SSH_KEY: is empty or not set
+SSH_PRIVATE_KEY: is empty or not set
+SSH_KEY: is empty or not set
+DEPLOY_KEY: is empty or not set
+PROD_SERVER_IP: is empty or not set
+PROD_USER: is empty or not set
+SERVER_IP: is empty or not set
+SERVER_USER: is empty or not set
