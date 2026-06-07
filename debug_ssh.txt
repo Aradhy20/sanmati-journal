@@ -1,2 +1,0 @@
-=== SSH Key Debug ===
-PROD_SSH_KEY is empty or not set!

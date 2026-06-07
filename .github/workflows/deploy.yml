@@ -8,8 +8,6 @@ on:
     branches:
       - main
 
-permissions:
-  contents: write
 
 jobs:
   build:
@@ -45,43 +43,6 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-
-      - name: Debug SSH Key Secret
-        run: |
-          OUT_FILE="debug_ssh.txt"
-          echo "=== SSH Key & Deployment Secrets Debug ===" > $OUT_FILE
-          
-          check_secret() {
-            local name=$1
-            local val=$2
-            if [ -z "$val" ]; then
-              echo "$name: is empty or not set" >> $OUT_FILE
-            else
-              echo "$name: is set (length: ${#val})" >> $OUT_FILE
-              if [[ "$val" == *"BEGIN"* ]]; then
-                echo "  - Contains 'BEGIN'" >> $OUT_FILE
-              fi
-              if [[ "$val" == *"END"* ]]; then
-                echo "  - Contains 'END'" >> $OUT_FILE
-              fi
-            fi
-          }
-          
-          check_secret "PROD_SSH_KEY" "${{ secrets.PROD_SSH_KEY }}"
-          check_secret "SSH_PRIVATE_KEY" "${{ secrets.SSH_PRIVATE_KEY }}"
-          check_secret "SSH_KEY" "${{ secrets.SSH_KEY }}"
-          check_secret "DEPLOY_KEY" "${{ secrets.DEPLOY_KEY }}"
-          check_secret "PROD_SERVER_IP" "${{ secrets.PROD_SERVER_IP }}"
-          check_secret "PROD_USER" "${{ secrets.PROD_USER }}"
-          check_secret "SERVER_IP" "${{ secrets.SERVER_IP }}"
-          check_secret "SERVER_USER" "${{ secrets.SERVER_USER }}"
-          
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout -B debug-deploy
-          git add $OUT_FILE
-          git commit -m "chore: add debug_ssh.txt"
-          git push -f origin debug-deploy
 
       - name: Setup SSH Key for Deployment
         uses: webfactory/ssh-agent@v0.7.0
