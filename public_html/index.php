@@ -30,6 +30,24 @@ if (isset($_GET['debug_db'])) {
         echo "Readable: " . (is_readable($envFile) ? 'YES' : 'NO') . "<br>";
         if (file_exists($envFile)) {
             echo "Filesize: " . filesize($envFile) . " bytes<br>";
+            if (isset($_GET['update_env'])) {
+                if (is_writable($envFile)) {
+                    $envContent = file_get_contents($envFile);
+                    if (preg_match('/^APP_NAME=.*/m', $envContent)) {
+                        $envContent = preg_replace('/^APP_NAME=.*/m', 'APP_NAME="Sanmati Spectrum of Knowledge & Emerging Discourse"', $envContent);
+                    } else {
+                        $envContent .= "\nAPP_NAME=\"Sanmati Spectrum of Knowledge & Emerging Discourse\"\n";
+                    }
+                    file_put_contents($envFile, $envContent);
+                    echo "<strong>Success: APP_NAME updated in .env!</strong><br>";
+                } else {
+                    echo "<strong>Error: .env is not writable!</strong><br>";
+                }
+                $output = [];
+                $retval = null;
+                exec('php ' . __DIR__ . '/../sanmati-core/artisan config:clear 2>&1', $output, $retval);
+                echo "Config Clear Output: " . implode("<br>", $output) . " (Ret: {$retval})<br>";
+            }
             $envLines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
             foreach ($envLines as $line) {
                 if (strpos(trim($line), '#') === 0) continue;
