@@ -28,14 +28,21 @@ if (isset($_GET['debug_db'])) {
             echo "Realpath __DIR__: " . realpath(__DIR__) . "<br>";
             echo "Realpath __DIR__/..: " . realpath(__DIR__ . '/..') . "<br>";
             echo "Realpath __DIR__/../..: " . realpath(__DIR__ . '/../..') . "<br>";
-            echo "<h3>App Directory Listing (sanmati-core):</h3><pre>";
-            foreach (glob(__DIR__ . '/../sanmati-core/{.,}*', GLOB_BRACE) as $file) {
-                echo basename($file) . (is_dir($file) ? '/' : '') . "\n";
-            }
-            echo "</pre>";
-            echo "<h3>Root Directory Listing:</h3><pre>";
-            foreach (glob(__DIR__ . '/../../{.,}*', GLOB_BRACE) as $file) {
-                echo basename($file) . (is_dir($file) ? '/' : '') . "\n";
+            echo "<h3>Checking potential .env locations:</h3><pre>";
+            $pathsToCheck = [
+                __DIR__ . '/.env',
+                __DIR__ . '/../.env',
+                __DIR__ . '/../../.env',
+                __DIR__ . '/../sanmati-core/.env',
+                __DIR__ . '/../../../.env',
+            ];
+            foreach ($pathsToCheck as $p) {
+                $rp = realpath($p);
+                echo "Path: {$p}\n";
+                echo "Realpath: " . ($rp ? $rp : 'NO_REALPATH') . "\n";
+                echo "Exists: " . (file_exists($p) ? 'YES' : 'NO') . "\n";
+                echo "Readable: " . (is_readable($p) ? 'YES' : 'NO') . "\n";
+                echo "Writable: " . (is_writable($p) ? 'YES' : 'NO') . "\n\n";
             }
             echo "</pre>";
         }
