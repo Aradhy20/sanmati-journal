@@ -29,7 +29,7 @@ if (isset($_GET['debug_db'])) {
             }
             echo "</pre>";
             echo "<h3>Root Directory Listing:</h3><pre>";
-            foreach (glob(__DIR__ . '/../..{.,}*', GLOB_BRACE) as $file) {
+            foreach (glob(__DIR__ . '/../../{.,}*', GLOB_BRACE) as $file) {
                 echo basename($file) . (is_dir($file) ? '/' : '') . "\n";
             }
             echo "</pre>";
