@@ -6,12 +6,15 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
+// Resolve sanmati-core path dynamically
+$corePath = realpath(__DIR__ . '/../sanmati-core') ?: realpath(__DIR__ . '/../../sanmati-core') ?: realpath(__DIR__ . '/../../../sanmati-core') ?: __DIR__ . '/../sanmati-core';
+
 // Auto-create Laravel storage directories if they are missing
 $storageDirs = [
-    __DIR__ . '/../sanmati-core/storage/framework/cache/data',
-    __DIR__ . '/../sanmati-core/storage/framework/sessions',
-    __DIR__ . '/../sanmati-core/storage/framework/views',
-    __DIR__ . '/../sanmati-core/storage/app/public',
+    $corePath . '/storage/framework/cache/data',
+    $corePath . '/storage/framework/sessions',
+    $corePath . '/storage/framework/views',
+    $corePath . '/storage/app/public',
 ];
 foreach ($storageDirs as $dir) {
     if (!file_exists($dir)) {
@@ -46,7 +49,7 @@ if (isset($_GET['debug_db'])) {
             }
             echo "</pre>";
         }
-        $envFile = __DIR__ . '/../sanmati-core/.env';
+        $envFile = $corePath . '/.env';
         $env = [];
         echo "<h3>Environment File Debug:</h3>";
         echo "Path: " . realpath($envFile) . "<br>";
@@ -69,7 +72,7 @@ if (isset($_GET['debug_db'])) {
                 }
                 $output = [];
                 $retval = null;
-                exec('php ' . __DIR__ . '/../sanmati-core/artisan config:clear 2>&1', $output, $retval);
+                exec('php ' . escapeshellarg($corePath . '/artisan') . ' config:clear 2>&1', $output, $retval);
                 echo "Config Clear Output: " . implode("<br>", $output) . " (Ret: {$retval})<br>";
             }
             $envLines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -98,7 +101,7 @@ if (isset($_GET['debug_db'])) {
         $stmt = $pdo->query("SELECT id, title, authors FROM papers WHERE authors LIKE '%पद्मप्रिया%' OR authors LIKE '%सिचन%' OR authors LIKE '%सचिन%'");
         $papers = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
-        $_fixFlag = __DIR__ . '/../sanmati-core/storage/framework/cache/db_fix_applied_v3.flag';
+        $_fixFlag = $corePath . '/storage/framework/cache/db_fix_applied_v3.flag';
         $flagContent = file_exists($_fixFlag) ? file_get_contents($_fixFlag) : 'NOT_EXISTS';
         
         echo "<h3>MySQL Update Result:</h3><pre>Updated {$updated} row(s).</pre>";
@@ -112,11 +115,11 @@ if (isset($_GET['debug_db'])) {
 
 // ONE-TIME DB FIX: Update Vol 2 Issue 2 month_range + fix paper count + author spelling
 // This block runs once and then removes itself via the flag file
-$_fixFlag = __DIR__ . '/../sanmati-core/storage/framework/cache/db_fix_applied_v3.flag';
+$_fixFlag = $corePath . '/storage/framework/cache/db_fix_applied_v3.flag';
 if (!file_exists($_fixFlag)) {
     try {
         // Load env to get DB credentials
-        $envFile = __DIR__ . '/../sanmati-core/.env';
+        $envFile = $corePath . '/.env';
         if (file_exists($envFile)) {
             $envLines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
             $env = [];
@@ -153,13 +156,13 @@ if (!file_exists($_fixFlag)) {
 }
 
 // Determine if the application is in maintenance mode...
-if (file_exists($maintenance = __DIR__.'/../sanmati-core/storage/framework/maintenance.php')) {
+if (file_exists($maintenance = $corePath.'/storage/framework/maintenance.php')) {
     require $maintenance;
 }
 
 // Register the Composer autoloader...
-require __DIR__.'/../sanmati-core/vendor/autoload.php';
+require $corePath.'/vendor/autoload.php';
 
 // Bootstrap the application and handle the request...
-(require_once __DIR__.'/../sanmati-core/bootstrap/app.php')
+(require_once $corePath.'/bootstrap/app.php')
     ->handleRequest(Request::capture());
