@@ -72,7 +72,7 @@ if (isset($_GET['debug_db'])) {
                 }
                 $output = [];
                 $retval = null;
-                exec('php ' . escapeshellarg($corePath . '/artisan') . ' config:clear 2>&1', $output, $retval);
+                exec('php "' . $corePath . '/artisan" config:clear 2>&1', $output, $retval);
                 echo "Config Clear Output: " . implode("<br>", $output) . " (Ret: {$retval})<br>";
             }
             $envLines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
