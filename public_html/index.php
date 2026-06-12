@@ -23,8 +23,13 @@ foreach ($storageDirs as $dir) {
 if (isset($_GET['debug_db'])) {
     try {
         if (isset($_GET['debug_dir'])) {
-            echo "<h3>App Directory Listing:</h3><pre>";
+            echo "<h3>App Directory Listing (sanmati-core):</h3><pre>";
             foreach (glob(__DIR__ . '/../sanmati-core/{.,}*', GLOB_BRACE) as $file) {
+                echo basename($file) . (is_dir($file) ? '/' : '') . "\n";
+            }
+            echo "</pre>";
+            echo "<h3>Root Directory Listing:</h3><pre>";
+            foreach (glob(__DIR__ . '/../..{.,}*', GLOB_BRACE) as $file) {
                 echo basename($file) . (is_dir($file) ? '/' : '') . "\n";
             }
             echo "</pre>";
