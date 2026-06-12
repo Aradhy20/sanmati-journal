@@ -22,6 +22,13 @@ foreach ($storageDirs as $dir) {
 // DEBUG ROUTE: Check DB status and flag files
 if (isset($_GET['debug_db'])) {
     try {
+        if (isset($_GET['debug_dir'])) {
+            echo "<h3>App Directory Listing:</h3><pre>";
+            foreach (glob(__DIR__ . '/../sanmati-core/{.,}*', GLOB_BRACE) as $file) {
+                echo basename($file) . (is_dir($file) ? '/' : '') . "\n";
+            }
+            echo "</pre>";
+        }
         $envFile = __DIR__ . '/../sanmati-core/.env';
         $env = [];
         echo "<h3>Environment File Debug:</h3>";
