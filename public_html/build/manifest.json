@@ -57,12 +57,12 @@
     "name": "vendor"
   },
   "resources/css/app.css": {
-    "file": "assets/app-DNRzxiZO.css",
+    "file": "assets/app-DqK_Bg-y.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/Components/Hero.jsx": {
-    "file": "assets/Hero-7twIsuWQ.js",
+    "file": "assets/Hero-CihpgaG7.js",
     "name": "Hero",
     "src": "resources/js/Components/Hero.jsx",
     "isDynamicEntry": true,
@@ -500,7 +500,7 @@
     ]
   },
   "resources/js/Pages/Home.jsx": {
-    "file": "assets/Home-DZF40C02.js",
+    "file": "assets/Home-Di7cQUPJ.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.jsx",
     "isDynamicEntry": true,
@@ -516,7 +516,7 @@
       "resources/js/Components/NewsletterSection.jsx"
     ],
     "css": [
-      "assets/app-DNRzxiZO.css"
+      "assets/app-DqK_Bg-y.css"
     ]
   },
   "resources/js/Pages/PublicationPolicy/Ethics.jsx": {
@@ -669,7 +669,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-Rmu5CaSB.js",
+    "file": "assets/app-Dr35L5F4.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
@@ -729,7 +729,7 @@
       "resources/js/Pages/TrackManuscript.jsx"
     ],
     "css": [
-      "assets/app-DNRzxiZO.css"
+      "assets/app-DqK_Bg-y.css"
     ]
   }
 }
