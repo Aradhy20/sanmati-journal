@@ -96,7 +96,7 @@ if (isset($_GET['debug_db'])) {
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
         // Let's also run the update query directly here in case it hasn't run!
-        $updated = $pdo->exec("UPDATE papers SET authors = 'सचिन कुमार & डॉ. एस. पद्मप्रिया' WHERE authors LIKE '%सिचन कुमार%'");
+        $updated = $pdo->exec("UPDATE papers SET authors = 'सचिन कुमार & डॉ. एस. पद्मप्रिया' WHERE id = 63");
         
         $stmt = $pdo->query("SELECT id, title, authors FROM papers WHERE authors LIKE '%पद्मप्रिया%' OR authors LIKE '%सिचन%' OR authors LIKE '%सचिन%'");
         $papers = $stmt->fetchAll(PDO::FETCH_ASSOC);
