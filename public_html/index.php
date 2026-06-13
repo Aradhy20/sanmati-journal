@@ -101,7 +101,7 @@ if (isset($_GET['debug_db'])) {
         $stmt = $pdo->query("SELECT id, title, authors FROM papers WHERE authors LIKE '%पद्मप्रिया%' OR authors LIKE '%सिचन%' OR authors LIKE '%सचिन%'");
         $papers = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
-        $_fixFlag = $corePath . '/storage/framework/cache/db_fix_applied_v3.flag';
+        $_fixFlag = $corePath . '/storage/framework/cache/db_fix_applied_v4.flag';
         $flagContent = file_exists($_fixFlag) ? file_get_contents($_fixFlag) : 'NOT_EXISTS';
         
         echo "<h3>MySQL Update Result:</h3><pre>Updated {$updated} row(s).</pre>";
@@ -115,7 +115,7 @@ if (isset($_GET['debug_db'])) {
 
 // ONE-TIME DB FIX: Update Vol 2 Issue 2 month_range + fix paper count + author spelling
 // This block runs once and then removes itself via the flag file
-$_fixFlag = $corePath . '/storage/framework/cache/db_fix_applied_v3.flag';
+$_fixFlag = $corePath . '/storage/framework/cache/db_fix_applied_v4.flag';
 if (!file_exists($_fixFlag)) {
     try {
         // Load env to get DB credentials
