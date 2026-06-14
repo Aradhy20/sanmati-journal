@@ -103,12 +103,12 @@ const Hero = () => {
               motion.h1,
               {
                 variants: itemVariants,
-                className: "text-4xl md:text-6xl lg:text-7xl xl:text-[5.2rem] font-serif font-bold leading-[1.1] text-primary tracking-tight",
+                className: "text-4xl md:text-5xl lg:text-6xl xl:text-[4rem] font-serif font-bold leading-[1.2] text-primary tracking-tight",
                 children: [
                   "Sanmati Spectrum ",
                   /* @__PURE__ */ jsx("br", { className: "hidden md:block" }),
-                  /* @__PURE__ */ jsxs("span", { className: "text-secondary relative inline-block italic", children: [
-                    "of Knowledge",
+                  /* @__PURE__ */ jsxs("span", { className: "text-secondary relative inline-block italic mt-2", children: [
+                    "of Knowledge & Emerging Discourse",
                     /* @__PURE__ */ jsx("svg", { className: "absolute -bottom-2 left-0 w-full h-3 text-secondary/30 pointer-events-none", viewBox: "0 0 100 10", preserveAspectRatio: "none", children: /* @__PURE__ */ jsx("path", { d: "M0,5 Q50,10 100,5", stroke: "currentColor", strokeWidth: "4", fill: "none", strokeLinecap: "round" }) })
                   ] })
                 ]

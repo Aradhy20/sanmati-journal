@@ -5,7 +5,7 @@ import { motion, useInView, animate } from "framer-motion";
 import { Link } from "@inertiajs/react";
 import { Globe, ArrowRight, ShieldCheck, Award, Star, FileText, Users, Heart, ArrowUpRight, Microscope, Palette, Calculator, Scale, GraduationCap, Cpu, Feather, Quote, ChevronRight } from "lucide-react";
 import "react-hot-toast";
-const Hero = React.lazy(() => import("./Hero-OBVNyKOa.js"));
+const Hero = React.lazy(() => import("./Hero-w-BhDc-d.js"));
 const Testimonials = React.lazy(() => import("./Testimonials-vT9yqXyt.js"));
 const PipelineSection = React.lazy(() => import("./PipelineSection-odGSs9_P.js"));
 const NewsletterSection = React.lazy(() => import("./NewsletterSection-F6ZClJX7.js"));
