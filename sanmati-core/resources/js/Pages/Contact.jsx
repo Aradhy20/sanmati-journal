@@ -31,32 +31,71 @@ export default function Contact() {
 
             {/* ─── CONTACT INFO CARDS (Direct Access) ─── */}
             <section className="max-w-7xl mx-auto px-6 -mt-16 relative z-20 mb-10 lg:mb-20">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
                     {[
                         { icon: MapPin, title: "Registry Office", desc: "B-002 Faculty Block TMU Campus, Delhi Road Moradabad (U.P) 244001", color: "from-dark to-dark/90", iconColor: "text-secondary" },
-                        { icon: Phone, title: "Strategic Liaison", desc: "+91 7999525735", color: "from-primary to-primary-dark", iconColor: "text-white" },
-                        { icon: Mail, title: "Editorial Contacts", desc: "Editor-in-Chief:\neditor-in-chief@sanmatijournal.in\n\nManaging Editor:\nmanaging_editor@sanmatijournal.in\n\nGeneral Queries:\nsanmatijournal@gmail.com", color: "from-secondary to-secondary-dark", iconColor: "text-white" },
+                        { icon: Phone, title: "Strategic Liaison", desc: "+91 7999525735\n+91 8979782949", color: "from-primary to-primary-dark", iconColor: "text-white", link: "tel:+917999525735" },
+                        { icon: Mail, title: "Editorial Contacts", desc: "Editor-in-Chief:\neditor-in-chief@sanmatijournal.in\n\nGeneral Queries:\nsanmatijournal@gmail.com", color: "from-secondary to-secondary-dark", iconColor: "text-white", link: "mailto:sanmatijournal@gmail.com" },
                         { icon: Clock, title: "Operational Hours", desc: "Mon - Fri\n10:00 AM - 6:00 PM (IST)", color: "from-surface to-white", iconColor: "text-primary", border: "border-gray-100" },
-                    ].map((item, i) => (
-                        <motion.div
-                            key={i}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.1 }}
-                            className={`relative p-8 rounded-[2rem] shadow-xl group overflow-hidden bg-gradient-to-br ${item.color} ${item.border || ''}`}
-                        >
-                            <div className="absolute top-0 right-0 p-6 opacity-[0.05] group-hover:scale-110 transition-transform duration-700">
-                                <item.icon className="w-20 h-20" />
-                            </div>
-                            <div className={`w-12 h-12 mb-6 rounded-xl flex items-center justify-center ${item.color === 'from-surface to-white' ? 'bg-primary/10' : 'bg-white/10'}`}>
-                                <item.icon className={`w-6 h-6 ${item.iconColor}`} />
-                            </div>
-                            <h3 className={`text-sm font-black uppercase tracking-widest mb-3 ${item.color === 'from-surface to-white' ? 'text-dark' : 'text-white'}`}>{item.title}</h3>
-                            <p className={`text-xs font-medium leading-relaxed whitespace-pre-line ${item.color === 'from-surface to-white' ? 'text-muted' : 'text-white/60'}`}>{item.desc}</p>
-                        </motion.div>
-                    ))}
+                    ].map((item, i) => {
+                        const CardContent = () => (
+                            <>
+                                <div className="absolute top-0 right-0 p-6 opacity-[0.05] group-hover:scale-110 transition-transform duration-700">
+                                    <item.icon className="w-20 h-20" />
+                                </div>
+                                <div className={`w-12 h-12 mb-6 rounded-xl flex items-center justify-center ${item.color === 'from-surface to-white' ? 'bg-primary/10' : 'bg-white/10'}`}>
+                                    <item.icon className={`w-6 h-6 ${item.iconColor}`} />
+                                </div>
+                                <h3 className={`text-sm font-black uppercase tracking-widest mb-3 ${item.color === 'from-surface to-white' ? 'text-dark' : 'text-white'}`}>{item.title}</h3>
+                                <p className={`text-xs font-medium leading-relaxed whitespace-pre-line ${item.color === 'from-surface to-white' ? 'text-muted' : 'text-white/60'}`}>{item.desc}</p>
+                            </>
+                        );
+
+                        return item.link ? (
+                            <motion.a 
+                                href={item.link}
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                                className={`relative p-8 rounded-[2rem] shadow-xl group overflow-hidden bg-gradient-to-br ${item.color} ${item.border || ''} block cursor-pointer`}
+                            >
+                                <CardContent />
+                            </motion.a>
+                        ) : (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                                className={`relative p-8 rounded-[2rem] shadow-xl group overflow-hidden bg-gradient-to-br ${item.color} ${item.border || ''}`}
+                            >
+                                <CardContent />
+                            </motion.div>
+                        );
+                    })}
                 </div>
+
+                {/* Google Maps Integration */}
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="w-full h-[400px] rounded-[2rem] overflow-hidden shadow-xl border border-gray-100"
+                >
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3493.595991873136!2d78.69466571500361!3d28.880650982322305!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390afb0a0bb53147%3A0xc3f12461b2bfa674!2sTeerthanker%20Mahaveer%20University!5e0!3m2!1sen!2sin!4v1708453459174!5m2!1sen!2sin" 
+                        width="100%" 
+                        height="100%" 
+                        style={{ border: 0 }} 
+                        allowFullScreen="" 
+                        loading="lazy" 
+                        referrerPolicy="no-referrer-when-downgrade"
+                        title="Registry Office Location"
+                    ></iframe>
+                </motion.div>
             </section>
 
             {/* ─── CONTACT FORM & VISUALS (The Dialogue) ─── */}
@@ -130,6 +169,23 @@ function ContactForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        
+        // Client-side validation
+        if (!data.firstName.trim() || !data.lastName.trim()) {
+            toast.error('Please provide both your given and family names.');
+            return;
+        }
+        
+        if (!data.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+            toast.error('Please provide a valid email address.');
+            return;
+        }
+        
+        if (!data.message.trim() || data.message.trim().length < 10) {
+            toast.error('Please provide a more detailed message (min 10 characters).');
+            return;
+        }
+
         post('/contact', {
             onSuccess: () => {
                 reset();

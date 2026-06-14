@@ -32,6 +32,7 @@ export default function Archive({ issues }) {
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedVolume, setSelectedVolume] = useState('all');
     const [selectedAuthor, setSelectedAuthor] = useState('all');
+    const [selectedCategory, setSelectedCategory] = useState('all');
     const [activePaperMenu, setActivePaperMenu] = useState(null); // stores paper.id
     const [citationPaper, setCitationPaper] = useState(null);
 
@@ -114,6 +115,19 @@ export default function Archive({ issues }) {
         return Array.from(authorsSet).sort();
     }, [researchIssues]);
 
+    // Get all unique categories for the filter dropdown
+    const allCategories = useMemo(() => {
+        const categoriesSet = new Set();
+        researchIssues.forEach(issue => {
+            (issue.papers || []).forEach(paper => {
+                if (paper.category && paper.category !== 'Complete Issue Book') {
+                    categoriesSet.add(paper.category);
+                }
+            });
+        });
+        return Array.from(categoriesSet).sort();
+    }, [researchIssues]);
+
     // Stats calculations
     const stats = useMemo(() => {
         const vols = new Set(researchIssues.map(i => i.volume));
@@ -146,12 +160,16 @@ export default function Archive({ issues }) {
                 const matchesAuthor = selectedAuthor === 'all' || 
                     (paper.authors && paper.authors.toLowerCase().includes(selectedAuthor.toLowerCase()));
 
-                return matchesSearch && matchesAuthor;
+                // Apply Category filter
+                const matchesCategory = selectedCategory === 'all' ||
+                    (paper.category && paper.category === selectedCategory);
+
+                return matchesSearch && matchesAuthor && matchesCategory;
             });
 
             return { ...issue, papers: filteredPapers };
         }).filter(issue => issue.papers && issue.papers.length > 0);
-    }, [researchIssues, searchQuery, selectedVolume, selectedAuthor]);
+    }, [researchIssues, searchQuery, selectedVolume, selectedAuthor, selectedCategory]);
 
     // Metadata & Schema.org JSON-LD
     const scholarlySchema = useMemo(() => {
@@ -211,6 +229,19 @@ export default function Archive({ issues }) {
             <div className="min-h-screen bg-[#F8FAFC] py-12 lg:py-20 font-inter text-slate-800">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+                        <div>
+                            <h2 className="text-2xl font-serif font-bold text-[#0F4C81]">Research Analytics</h2>
+                            <p className="text-sm text-slate-500 mt-1">Real-time statistics of published volumes and papers.</p>
+                        </div>
+                        <Link 
+                            href="/submission-guidelines/call-for-papers"
+                            className="inline-flex items-center gap-2 px-6 py-3 bg-[#0F4C81] text-white font-bold rounded-xl text-xs uppercase tracking-widest hover:bg-[#2563EB] transition-colors shadow-lg shadow-[#0F4C81]/20"
+                        >
+                            <FileText className="w-4 h-4" /> Submit Paper
+                        </Link>
+                    </div>
+
                     {/* Animated Statistics Cards Section */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
                         {[
@@ -279,6 +310,18 @@ export default function Archive({ issues }) {
                                     <option key={index} value={author}>{author}</option>
                                 ))}
                             </select>
+
+                            {/* Category Filter Dropdown */}
+                            <select 
+                                value={selectedCategory}
+                                onChange={(e) => setSelectedCategory(e.target.value)}
+                                className="px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0F4C81]/20 focus:border-[#0F4C81] transition-all cursor-pointer font-medium text-slate-700 flex-1 sm:flex-none max-w-[200px]"
+                            >
+                                <option value="all">All Categories</option>
+                                {allCategories.map((category, index) => (
+                                    <option key={index} value={category}>{category}</option>
+                                ))}
+                            </select>
                         </div>
                     </div>
 
@@ -310,172 +353,76 @@ export default function Archive({ issues }) {
                                         </div>
                                     </div>
 
-                                    {/* Papers Table */}
-                                    <div className="p-0 overflow-x-auto">
-                                        
-                                        {/* Desktop & Tablet Table Layout */}
-                                        <table className="w-full text-left border-collapse hidden md:table">
-                                            <thead>
-                                                <tr className="bg-slate-50/50 border-b border-slate-100">
-                                                    <th className="py-4 px-6 text-xs font-black text-slate-400 uppercase tracking-widest font-poppins w-16">S.No</th>
-                                                    <th className="py-4 px-6 text-xs font-black text-slate-400 uppercase tracking-widest font-poppins">Research Paper Title</th>
-                                                    <th className="py-4 px-6 text-xs font-black text-slate-400 uppercase tracking-widest font-poppins w-72">Author(s)</th>
-                                                    <th className="py-4 px-6 text-xs font-black text-slate-400 uppercase tracking-widest font-poppins w-36 text-center">PDF</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {issue.papers.map((paper, index) => (
-                                                    <tr 
-                                                        key={paper.id}
-                                                        className="border-b border-slate-100 hover:bg-slate-50/40 transition-colors"
-                                                    >
-                                                        <td className="py-5 px-6 text-sm font-semibold text-slate-400 font-poppins">
-                                                            {String(index + 1).padStart(2, '0')}
-                                                        </td>
-                                                        <td className="py-5 px-6">
-                                                            <Link 
-                                                                href={`/article/${paper.id}`}
-                                                                className="block font-bold text-[#0F4C81] hover:text-[#2563EB] transition-colors leading-relaxed text-sm mb-2"
-                                                            >
-                                                                {paper.title}
-                                                            </Link>
-                                                            
-                                                            {/* Metadata & Badges */}
-                                                            <div className="flex flex-wrap items-center gap-3 mt-3">
-                                                                {paper.doi && (
-                                                                    <a 
-                                                                        href={paper.doi} 
-                                                                        target="_blank" 
-                                                                        rel="noopener noreferrer"
-                                                                        className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#2563EB]/5 hover:bg-[#2563EB]/10 rounded border border-[#2563EB]/15 text-[10px] font-black text-[#2563EB] uppercase tracking-wider transition-colors duration-200"
-                                                                    >
-                                                                        <ShieldCheck className="w-3 h-3" /> DOI Badge
-                                                                    </a>
-                                                                )}
-                                                                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-slate-100 text-slate-500 text-[10px] font-medium border border-slate-200/50">
-                                                                    <Quote className="w-2.5 h-2.5" /> {paper.citations || 0} Citations
-                                                                </span>
-                                                                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-slate-100 text-slate-500 text-[10px] font-medium border border-slate-200/50">
-                                                                    <Eye className="w-2.5 h-2.5" /> {10 + (paper.id % 7) * 20} Views
-                                                                </span>
-                                                                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-slate-100 text-slate-500 text-[10px] font-medium border border-slate-200/50">
-                                                                    <Download className="w-2.5 h-2.5" /> {(paper.id % 5) * 15 + 5} Downloads
-                                                                </span>
-                                                            </div>
-                                                        </td>
-                                                        <td className="py-5 px-6 text-sm text-slate-600 font-medium italic">
-                                                            {paper.authors}
-                                                        </td>
-                                                        <td className="py-5 px-6 text-center relative pdf-dropdown-container">
-                                                            <div className="relative inline-block">
-                                                                <button
-                                                                    onClick={() => setActivePaperMenu(activePaperMenu === paper.id ? null : paper.id)}
-                                                                    className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-slate-100 hover:bg-[#0F4C81]/10 text-slate-700 hover:text-[#0F4C81] font-bold rounded-xl text-xs uppercase tracking-wider transition-all duration-200 border border-slate-200/60"
-                                                                >
-                                                                    PDF <ChevronDown className="w-3.5 h-3.5" />
-                                                                </button>
-                                                                
-                                                                <AnimatePresence>
-                                                                    {activePaperMenu === paper.id && (
-                                                                        <motion.div
-                                                                            initial={{ opacity: 0, scale: 0.95, y: 5 }}
-                                                                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                                                                            exit={{ opacity: 0, scale: 0.95, y: 5 }}
-                                                                            transition={{ duration: 0.15 }}
-                                                                            className="absolute right-0 mt-2 w-48 bg-white border border-slate-100 rounded-xl shadow-lg py-2 z-50 text-left"
-                                                                        >
-                                                                            <a
-                                                                                href={paper.doi || '#'}
-                                                                                target="_blank"
-                                                                                rel="noopener noreferrer"
-                                                                                className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-[#0F4C81] transition-colors"
-                                                                                onClick={() => setActivePaperMenu(null)}
-                                                                            >
-                                                                                <BookOpen className="w-4 h-4 text-slate-400" /> View PDF
-                                                                            </a>
-                                                                            <a
-                                                                                href={`/download/paper/${paper.id}`}
-                                                                                className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-[#0F4C81] transition-colors"
-                                                                                onClick={() => setActivePaperMenu(null)}
-                                                                            >
-                                                                                <Download className="w-4 h-4 text-slate-400" /> Download PDF
-                                                                            </a>
-                                                                            <button
-                                                                                onClick={() => {
-                                                                                    setCitationPaper(paper);
-                                                                                    setActivePaperMenu(null);
-                                                                                }}
-                                                                                className="w-full flex items-center gap-2.5 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-[#0F4C81] transition-colors"
-                                                                            >
-                                                                                <Quote className="w-4 h-4 text-slate-400" /> Cite Paper
-                                                                            </button>
-                                                                        </motion.div>
-                                                                    )}
-                                                                </AnimatePresence>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
-
-                                        {/* Mobile Cards Layout (Collapses tables into nice vertical cards on small screens) */}
-                                        <div className="md:hidden divide-y divide-slate-100">
+                                    {/* Responsive Cards Grid Layout */}
+                                    <div className="p-6 bg-slate-50/30">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                                             {issue.papers.map((paper, index) => (
-                                                <div key={paper.id} className="p-6">
-                                                    <div className="flex items-center gap-2 mb-3">
-                                                        <span className="text-xs font-bold text-slate-400 font-poppins">#{String(index + 1).padStart(2, '0')}</span>
-                                                        <span className="w-1.5 h-1.5 rounded-full bg-slate-200" />
-                                                        <span className="text-[10px] font-black uppercase tracking-wider text-[#2563EB] bg-[#2563EB]/5 px-2 py-0.5 rounded">Research Article</span>
+                                                <div 
+                                                    key={paper.id} 
+                                                    className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-ambient hover:-translate-y-1 transition-all duration-300 flex flex-col h-full relative"
+                                                >
+                                                    {/* Decorative top border */}
+                                                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0F4C81] to-[#2563EB] rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                                                    <div className="flex items-center justify-between gap-2 mb-4">
+                                                        <div className="flex items-center gap-2">
+                                                            <span className="text-xs font-bold text-slate-400 font-poppins">#{String(index + 1).padStart(2, '0')}</span>
+                                                            <span className="w-1 h-1 rounded-full bg-slate-300" />
+                                                            <span className="text-[9px] font-black uppercase tracking-wider text-[#2563EB] bg-[#2563EB]/5 px-2 py-1 rounded border border-[#2563EB]/10">{paper.category || 'Research Article'}</span>
+                                                        </div>
+                                                        <span className="inline-flex items-center gap-1 text-[10px] font-bold text-slate-400">
+                                                            <Eye className="w-3 h-3" /> {10 + (paper.id % 7) * 20}
+                                                        </span>
                                                     </div>
 
                                                     <Link 
                                                         href={`/article/${paper.id}`}
-                                                        className="block font-bold text-[#0F4C81] leading-relaxed text-sm mb-2"
+                                                        className="block font-bold text-lg text-slate-900 hover:text-[#2563EB] transition-colors leading-snug mb-3 line-clamp-3 font-poppins"
                                                     >
                                                         {paper.title}
                                                     </Link>
 
-                                                    <p className="text-slate-600 text-xs font-medium italic mb-4">
+                                                    <p className="text-slate-600 text-xs font-medium leading-relaxed mb-6 flex-grow line-clamp-2">
                                                         {paper.authors}
                                                     </p>
 
-                                                    {/* Badges */}
-                                                    <div className="flex flex-wrap gap-2 mb-5">
+                                                    {/* Badges / Metrics */}
+                                                    <div className="flex flex-wrap gap-2 mb-6">
                                                         {paper.doi && (
                                                             <a 
                                                                 href={paper.doi} 
                                                                 target="_blank" 
                                                                 rel="noopener noreferrer"
-                                                                className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-blue-50 text-[9px] font-black text-blue-600 uppercase border border-blue-100"
+                                                                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-blue-50 text-[10px] font-black text-blue-600 uppercase border border-blue-100 hover:bg-blue-100 transition-colors"
                                                             >
-                                                                DOI
+                                                                <ShieldCheck className="w-3 h-3" /> DOI
                                                             </a>
                                                         )}
-                                                        <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-500 text-[9px] font-medium border border-slate-200/50">
-                                                            {paper.citations || 0} Citations
+                                                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 text-[10px] font-bold border border-slate-200">
+                                                            <Quote className="w-3 h-3 text-slate-400" /> {paper.citations || 0}
+                                                        </span>
+                                                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 text-[10px] font-bold border border-slate-200">
+                                                            <Download className="w-3 h-3 text-slate-400" /> {(paper.id % 5) * 15 + 5}
                                                         </span>
                                                     </div>
 
-                                                    {/* View & Download Buttons */}
-                                                    <div className="grid grid-cols-3 gap-2">
-                                                        <a
-                                                            href={paper.doi || '#'}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            className="flex items-center justify-center gap-1.5 py-2.5 bg-slate-50 hover:bg-[#0F4C81]/10 text-slate-700 font-bold rounded-lg text-[10px] uppercase tracking-wider transition-colors border border-slate-200/50"
+                                                    {/* Actions */}
+                                                    <div className="grid grid-cols-3 gap-3 pt-4 border-t border-slate-100 mt-auto">
+                                                        <Link
+                                                            href={`/article/${paper.id}`}
+                                                            className="flex items-center justify-center gap-1.5 py-2.5 bg-slate-50 hover:bg-[#0F4C81]/10 text-slate-700 font-bold rounded-xl text-[10px] uppercase tracking-wider transition-colors border border-slate-200/60"
                                                         >
                                                             <BookOpen className="w-3.5 h-3.5" /> View
-                                                        </a>
+                                                        </Link>
                                                         <a
                                                             href={`/download/paper/${paper.id}`}
-                                                            className="flex items-center justify-center gap-1.5 py-2.5 bg-[#0F4C81] hover:bg-[#0F4C81]/90 text-white font-bold rounded-lg text-[10px] uppercase tracking-wider transition-colors"
+                                                            className="flex items-center justify-center gap-1.5 py-2.5 bg-[#0F4C81] hover:bg-[#0F4C81]/90 text-white font-bold rounded-xl text-[10px] uppercase tracking-wider transition-colors shadow-sm"
                                                         >
                                                             <Download className="w-3.5 h-3.5" /> PDF
                                                         </a>
                                                         <button
                                                             onClick={() => setCitationPaper(paper)}
-                                                            className="flex items-center justify-center gap-1.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-lg text-[10px] uppercase tracking-wider transition-colors border border-slate-200/50"
+                                                            className="flex items-center justify-center gap-1.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-[10px] uppercase tracking-wider transition-colors border border-slate-200/60"
                                                         >
                                                             <Quote className="w-3.5 h-3.5" /> Cite
                                                         </button>
@@ -483,6 +430,7 @@ export default function Archive({ issues }) {
                                                 </div>
                                             ))}
                                         </div>
+                                    </div>
 
                                     </div>
                                 </motion.div>

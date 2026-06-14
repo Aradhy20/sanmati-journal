@@ -98,6 +98,34 @@ export default function Home({ newsItems = [], featuredPapers = [], testimonials
                 <Hero />
             </Suspense>
 
+            {/* ─── INDEXING & TRUST BANNER ─── */}
+            <section className="py-8 bg-white border-b border-slate-100">
+                <div className="container-custom">
+                    <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12 opacity-70">
+                        <div className="flex items-center gap-2">
+                            <ShieldCheck className="w-5 h-5 text-secondary" />
+                            <span className="font-bold text-xs uppercase tracking-widest text-primary">Peer-Reviewed</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <BookOpen className="w-5 h-5 text-secondary" />
+                            <span className="font-bold text-xs uppercase tracking-widest text-primary">UGC-CARE (Proposed)</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <Globe className="w-5 h-5 text-secondary" />
+                            <span className="font-bold text-xs uppercase tracking-widest text-primary">CrossRef DOI Indexed</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <Award className="w-5 h-5 text-secondary" />
+                            <span className="font-bold text-xs uppercase tracking-widest text-primary">COPE Ethics Compliant</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <FileText className="w-5 h-5 text-secondary" />
+                            <span className="font-bold text-xs uppercase tracking-widest text-primary">ISSN 3108-1819</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* ─── 1. CORE MISSION ─── */}
             <section className="py-16 lg:py-24 relative overflow-hidden bg-white">
                 {/* High-end radial light touch */}
