@@ -39,7 +39,7 @@ Route::get('/fix-vol2-issue2-date', function () {
     $updated = \App\Models\Issue::where('volume', '2')->where('number', '2')->update(['month_range' => 'April – June']);
     
     // Fix author name spelling from सिचन कुमार to सचिन कुमार
-    \App\Models\Paper::where('authors', 'like', '%सिचन कुमार%')->update(['authors' => 'सचिन कुमार & डॉ. एस. पद्मप्रिया']);
+    $updatedAuthors = \App\Models\Paper::where('id', 63)->update(['authors' => 'सचिन कुमार & डॉ. एस. पद्मप्रिया']);
     
     // Fix paper count: remove the extra compilation paper if total > 80
     if (\App\Models\Paper::count() > 80) {
@@ -48,7 +48,7 @@ Route::get('/fix-vol2-issue2-date', function () {
 
     \Illuminate\Support\Facades\Artisan::call('cache:clear');
     $issues = \App\Models\Issue::orderBy('volume')->orderBy('number')->get(['volume','number','month_range']);
-    $result = "Updated {$updated} row(s).\n\nCurrent issues:\n";
+    $result = "Updated {$updated} row(s) for dates. Updated {$updatedAuthors} row(s) for Authors.\n\nCurrent issues:\n";
     foreach ($issues as $i) {
         $result .= "Vol {$i->volume} Issue {$i->number}: {$i->month_range}\n";
     }
