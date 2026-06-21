@@ -57,12 +57,12 @@
     "name": "vendor"
   },
   "resources/css/app.css": {
-    "file": "assets/app-BmfIKvSi.css",
+    "file": "assets/app-omzmVC4A.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/Components/Hero.jsx": {
-    "file": "assets/Hero-JP6zr-zX.js",
+    "file": "assets/Hero-CqKxkW2w.js",
     "name": "Hero",
     "src": "resources/js/Components/Hero.jsx",
     "isDynamicEntry": true,
@@ -71,7 +71,7 @@
     ]
   },
   "resources/js/Components/HomeFAQ.jsx": {
-    "file": "assets/HomeFAQ-BTyEKqsE.js",
+    "file": "assets/HomeFAQ-zLvbxleX.js",
     "name": "HomeFAQ",
     "src": "resources/js/Components/HomeFAQ.jsx",
     "isDynamicEntry": true,
@@ -434,7 +434,7 @@
     ]
   },
   "resources/js/Pages/EditorialBoard.jsx": {
-    "file": "assets/EditorialBoard-oAo3QcrK.js",
+    "file": "assets/EditorialBoard-DbMa2RLb.js",
     "name": "EditorialBoard",
     "src": "resources/js/Pages/EditorialBoard.jsx",
     "isDynamicEntry": true,
@@ -456,7 +456,7 @@
     ]
   },
   "resources/js/Pages/Editors.jsx": {
-    "file": "assets/Editors-BH2OjS5N.js",
+    "file": "assets/Editors-KZWEjLZu.js",
     "name": "Editors",
     "src": "resources/js/Pages/Editors.jsx",
     "isDynamicEntry": true,
@@ -510,7 +510,7 @@
     ]
   },
   "resources/js/Pages/Home.jsx": {
-    "file": "assets/Home-BW0KGmh_.js",
+    "file": "assets/Home-CjR_9MWG.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.jsx",
     "isDynamicEntry": true,
@@ -527,7 +527,7 @@
       "resources/js/Components/HomeFAQ.jsx"
     ],
     "css": [
-      "assets/app-BmfIKvSi.css"
+      "assets/app-omzmVC4A.css"
     ]
   },
   "resources/js/Pages/PublicationPolicy/Ethics.jsx": {
@@ -680,7 +680,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-Bnv0BUFP.js",
+    "file": "assets/app-BEjnJFDg.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
@@ -740,7 +740,7 @@
       "resources/js/Pages/TrackManuscript.jsx"
     ],
     "css": [
-      "assets/app-BmfIKvSi.css"
+      "assets/app-omzmVC4A.css"
     ]
   }
 }

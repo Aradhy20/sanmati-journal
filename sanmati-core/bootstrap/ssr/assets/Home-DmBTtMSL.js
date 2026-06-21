@@ -5,11 +5,11 @@ import { motion, useInView, animate } from "framer-motion";
 import { Link } from "@inertiajs/react";
 import { Globe, ShieldCheck, BookOpen, Award, FileText, ExternalLink, Clock, CheckCircle, BarChart2, BookMarked, Search, Database, ArrowRight, Star, Users, Heart, ArrowUpRight, Microscope, Palette, Calculator, Scale, GraduationCap, Cpu, Feather, Quote, ChevronRight } from "lucide-react";
 import "react-hot-toast";
-const Hero = React.lazy(() => import("./Hero-w-BhDc-d.js"));
+const Hero = React.lazy(() => import("./Hero-AyOSbcq9.js"));
 const Testimonials = React.lazy(() => import("./Testimonials-vT9yqXyt.js"));
 const PipelineSection = React.lazy(() => import("./PipelineSection-odGSs9_P.js"));
 const NewsletterSection = React.lazy(() => import("./NewsletterSection-F6ZClJX7.js"));
-const HomeFAQ = React.lazy(() => import("./HomeFAQ-CFdDXYsr.js"));
+const HomeFAQ = React.lazy(() => import("./HomeFAQ-CXhxTWVH.js"));
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
@@ -484,7 +484,10 @@ function Home({ newsItems = [], featuredPapers = [], testimonials = [], currentI
             ] }),
             /* @__PURE__ */ jsxs("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto", children: [
               /* @__PURE__ */ jsxs(motion.div, { ...fadeInUp, className: "group bg-slate-50 rounded-[2.5rem] p-8 border border-slate-100 flex flex-col sm:flex-row gap-8 items-center sm:items-start hover:bg-white hover:shadow-ambient-lg transition-all duration-700", children: [
-                /* @__PURE__ */ jsx("div", { className: "w-32 h-32 rounded-[2rem] overflow-hidden shadow-lg shrink-0 border-4 border-white", children: /* @__PURE__ */ jsx("img", { src: "/mam.jpeg", alt: "Dr Namrata Jain", className: "w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-1000" }) }),
+                /* @__PURE__ */ jsx("div", { className: "w-32 h-32 rounded-[2rem] overflow-hidden shadow-lg shrink-0 border-4 border-white", children: /* @__PURE__ */ jsxs("picture", { children: [
+                  /* @__PURE__ */ jsx("source", { srcSet: "/mam.webp", type: "image/webp" }),
+                  /* @__PURE__ */ jsx("img", { src: "/mam.jpeg", alt: "Dr Namrata Jain", className: "w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-1000" })
+                ] }) }),
                 /* @__PURE__ */ jsxs("div", { className: "flex-1 text-center sm:text-left", children: [
                   /* @__PURE__ */ jsxs("div", { className: "flex items-center justify-center sm:justify-start gap-2 mb-2 text-secondary", children: [
                     /* @__PURE__ */ jsx(Quote, { className: "w-3 h-3 fill-secondary opacity-50" }),
@@ -499,7 +502,10 @@ function Home({ newsItems = [], featuredPapers = [], testimonials = [], currentI
                 ] })
               ] }),
               /* @__PURE__ */ jsxs(motion.div, { ...fadeInUp, transition: { delay: 0.15 }, className: "group bg-slate-50 rounded-[2.5rem] p-8 border border-slate-100 flex flex-col sm:flex-row gap-8 items-center sm:items-start hover:bg-white hover:shadow-ambient-lg transition-all duration-700", children: [
-                /* @__PURE__ */ jsx("div", { className: "w-32 h-32 rounded-[2rem] overflow-hidden shadow-lg shrink-0 border-4 border-white", children: /* @__PURE__ */ jsx("img", { src: "/sir.jpeg", alt: "Dr. Ratnesh Kumar Jain", className: "w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-1000" }) }),
+                /* @__PURE__ */ jsx("div", { className: "w-32 h-32 rounded-[2rem] overflow-hidden shadow-lg shrink-0 border-4 border-white", children: /* @__PURE__ */ jsxs("picture", { children: [
+                  /* @__PURE__ */ jsx("source", { srcSet: "/sir.webp", type: "image/webp" }),
+                  /* @__PURE__ */ jsx("img", { src: "/sir.jpeg", alt: "Dr. Ratnesh Kumar Jain", className: "w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-1000" })
+                ] }) }),
                 /* @__PURE__ */ jsxs("div", { className: "flex-1 text-center sm:text-left", children: [
                   /* @__PURE__ */ jsxs("div", { className: "flex items-center justify-center sm:justify-start gap-2 mb-2 text-secondary", children: [
                     /* @__PURE__ */ jsx(Quote, { className: "w-3 h-3 fill-secondary opacity-50" }),

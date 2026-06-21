@@ -580,7 +580,10 @@ export default function Home({ newsItems = [], featuredPapers = [], testimonials
                         {/* Member 1 */}
                         <motion.div {...fadeInUp} className="group bg-slate-50 rounded-[2.5rem] p-8 border border-slate-100 flex flex-col sm:flex-row gap-8 items-center sm:items-start hover:bg-white hover:shadow-ambient-lg transition-all duration-700">
                             <div className="w-32 h-32 rounded-[2rem] overflow-hidden shadow-lg shrink-0 border-4 border-white">
-                                <img src="/mam.jpeg" alt="Dr Namrata Jain" className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-1000" />
+                                <picture>
+                                    <source srcSet="/mam.webp" type="image/webp" />
+                                    <img src="/mam.jpeg" alt="Dr Namrata Jain" className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-1000" />
+                                </picture>
                             </div>
                             <div className="flex-1 text-center sm:text-left">
                                 <div className="flex items-center justify-center sm:justify-start gap-2 mb-2 text-secondary">
@@ -598,7 +601,10 @@ export default function Home({ newsItems = [], featuredPapers = [], testimonials
                         {/* Member 2 */}
                         <motion.div {...fadeInUp} transition={{ delay: 0.15 }} className="group bg-slate-50 rounded-[2.5rem] p-8 border border-slate-100 flex flex-col sm:flex-row gap-8 items-center sm:items-start hover:bg-white hover:shadow-ambient-lg transition-all duration-700">
                             <div className="w-32 h-32 rounded-[2rem] overflow-hidden shadow-lg shrink-0 border-4 border-white">
-                                <img src="/sir.jpeg" alt="Dr. Ratnesh Kumar Jain" className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-1000" />
+                                <picture>
+                                    <source srcSet="/sir.webp" type="image/webp" />
+                                    <img src="/sir.jpeg" alt="Dr. Ratnesh Kumar Jain" className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-1000" />
+                                </picture>
                             </div>
                             <div className="flex-1 text-center sm:text-left">
                                 <div className="flex items-center justify-center sm:justify-start gap-2 mb-2 text-secondary">

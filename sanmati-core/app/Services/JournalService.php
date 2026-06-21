@@ -29,13 +29,19 @@ class JournalService
      */
     public function getFeaturedPapers(int $limit = 3)
     {
-        $featured = Paper::where('is_featured', true)
+        $selectFields = ['id', 'title', 'authors', 'doi', 'citations', 'category', 'is_featured', 'created_at'];
+
+        $featured = Paper::select($selectFields)
+            ->where('is_featured', true)
             ->orderBy('created_at', 'desc')
             ->take($limit)
             ->get();
 
         if ($featured->isEmpty()) {
-            return Paper::orderBy('created_at', 'desc')->take($limit)->get();
+            return Paper::select($selectFields)
+                ->orderBy('created_at', 'desc')
+                ->take($limit)
+                ->get();
         }
 
         return $featured;

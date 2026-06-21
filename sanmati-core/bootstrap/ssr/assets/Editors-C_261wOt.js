@@ -46,15 +46,18 @@ const BioModal = ({ member, isOpen, onClose }) => {
         onClick: (e) => e.stopPropagation(),
         children: [
           /* @__PURE__ */ jsx("div", { className: "md:w-2/5 md:shrink-0 relative bg-dark", children: /* @__PURE__ */ jsxs("div", { className: "md:absolute inset-0 aspect-square md:aspect-auto", children: [
-            /* @__PURE__ */ jsx(
-              "img",
-              {
-                loading: "lazy",
-                src: member.image,
-                alt: member.name,
-                className: "w-full h-full object-cover object-top opacity-80"
-              }
-            ),
+            /* @__PURE__ */ jsxs("picture", { children: [
+              /* @__PURE__ */ jsx("source", { srcSet: member.image ? member.image.replace(/\.(jpeg|jpg|png)$/i, ".webp") : "", type: "image/webp" }),
+              /* @__PURE__ */ jsx(
+                "img",
+                {
+                  loading: "lazy",
+                  src: member.image,
+                  alt: member.name,
+                  className: "w-full h-full object-cover object-top opacity-80"
+                }
+              )
+            ] }),
             /* @__PURE__ */ jsx("div", { className: "absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent" }),
             /* @__PURE__ */ jsxs("div", { className: "absolute bottom-6 left-6 right-6", children: [
               /* @__PURE__ */ jsx("span", { className: "inline-block px-4 py-1.5 bg-secondary/90 backdrop-blur-md rounded-full text-[10px] text-white font-black tracking-widest uppercase mb-4 shadow-xl", children: member.role }),
@@ -150,15 +153,18 @@ const ExecutiveMember = ({ member, index }) => {
         children: [
           /* @__PURE__ */ jsx("div", { className: "absolute top-0 right-0 p-8 opacity-5 pointer-events-none transition-opacity duration-500 group-hover:opacity-10", children: /* @__PURE__ */ jsx(Icon, { className: "w-32 h-32 text-primary rotate-12" }) }),
           /* @__PURE__ */ jsxs("div", { className: "p-8 pb-6 flex flex-col sm:flex-row gap-6 items-start relative z-10 border-b border-gray-50 bg-gradient-to-b from-surface/50 to-white", children: [
-            /* @__PURE__ */ jsx("div", { className: "w-28 h-28 sm:w-32 sm:h-32 shrink-0 rounded-[1.5rem] overflow-hidden shadow-md border-2 border-white ring-1 ring-gray-100 relative", children: /* @__PURE__ */ jsx(
-              "img",
-              {
-                src: member.image,
-                alt: member.name,
-                className: "w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700",
-                loading: "lazy"
-              }
-            ) }),
+            /* @__PURE__ */ jsx("div", { className: "w-28 h-28 sm:w-32 sm:h-32 shrink-0 rounded-[1.5rem] overflow-hidden shadow-md border-2 border-white ring-1 ring-gray-100 relative", children: /* @__PURE__ */ jsxs("picture", { children: [
+              /* @__PURE__ */ jsx("source", { srcSet: member.image ? member.image.replace(/\.(jpeg|jpg|png)$/i, ".webp") : "", type: "image/webp" }),
+              /* @__PURE__ */ jsx(
+                "img",
+                {
+                  src: member.image,
+                  alt: member.name,
+                  className: "w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700",
+                  loading: "lazy"
+                }
+              )
+            ] }) }),
             /* @__PURE__ */ jsx("div", { className: "flex-1", children: /* @__PURE__ */ jsx("h3", { className: "text-3xl sm:text-4xl font-serif font-bold text-dark leading-tight group-hover:text-primary transition-colors", children: member.name }) })
           ] }),
           /* @__PURE__ */ jsxs("div", { className: "p-8 pt-6 flex-1 flex flex-col bg-white relative z-10", children: [

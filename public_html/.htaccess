@@ -94,4 +94,7 @@
 
     # Referrer policy
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # HSTS (Strict-Transport-Security) for HTTPS enforcement
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
 </IfModule>

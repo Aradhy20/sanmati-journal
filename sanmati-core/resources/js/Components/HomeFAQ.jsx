@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ScrollReveal, revealVariants } from './ScrollReveal';
 import { Plus, Minus, HelpCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Head } from '@inertiajs/react';
 
 const FAQItem = ({ question, answer, isOpen, onClick }) => {
     return (
@@ -63,8 +64,26 @@ export default function HomeFAQ() {
         }
     ];
 
+    const faqJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqs.map(faq => ({
+            "@type": "Question",
+            "name": faq.q,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.a
+            }
+        }))
+    };
+
     return (
         <section className="py-24 bg-white relative">
+            <Head>
+                <script type="application/ld+json">
+                    {JSON.stringify(faqJsonLd)}
+                </script>
+            </Head>
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <ScrollReveal>
                     <div className="text-center mb-16">

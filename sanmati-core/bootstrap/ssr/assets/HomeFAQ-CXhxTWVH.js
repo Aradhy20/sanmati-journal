@@ -1,8 +1,9 @@
-import { jsx, jsxs } from "react/jsx-runtime";
+import { jsxs, jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { S as ScrollReveal, r as revealVariants } from "./ScrollReveal-1c_Su25q.js";
 import { HelpCircle, Minus, Plus } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import { Head } from "@inertiajs/react";
 const FAQItem = ({ question, answer, isOpen, onClick }) => {
   return /* @__PURE__ */ jsxs("div", { className: "border-b border-gray-200 last:border-0", children: [
     /* @__PURE__ */ jsxs(
@@ -54,26 +55,41 @@ function HomeFAQ() {
       a: "Once you submit, you will receive login credentials for our Author Dashboard, where you can see real-time updates on your manuscript's status."
     }
   ];
-  return /* @__PURE__ */ jsx("section", { className: "py-24 bg-white relative", children: /* @__PURE__ */ jsxs("div", { className: "max-w-4xl mx-auto px-4 sm:px-6 lg:px-8", children: [
-    /* @__PURE__ */ jsx(ScrollReveal, { children: /* @__PURE__ */ jsxs("div", { className: "text-center mb-16", children: [
-      /* @__PURE__ */ jsxs("span", { className: "inline-flex items-center gap-2 px-3 py-1 bg-primary/5 text-purple-700 rounded-full text-sm font-bold uppercase tracking-widest mb-4", children: [
-        /* @__PURE__ */ jsx(HelpCircle, { className: "w-4 h-4" }),
-        " Need Help?"
-      ] }),
-      /* @__PURE__ */ jsx("h2", { className: "text-4xl font-serif font-bold text-dark mb-4", children: "Frequently Asked Questions" }),
-      /* @__PURE__ */ jsx("p", { className: "text-gray-600", children: "Got questions? We've got answers." })
-    ] }) }),
-    /* @__PURE__ */ jsx(ScrollReveal, { delay: 0.2, variants: revealVariants.fadeUp, children: /* @__PURE__ */ jsx("div", { className: "bg-white rounded-2xl shadow-xl border border-slate-100 p-6 md:p-8", children: faqs.map((faq, i) => /* @__PURE__ */ jsx(
-      FAQItem,
-      {
-        question: faq.q,
-        answer: faq.a,
-        isOpen: openIndex === i,
-        onClick: () => setOpenIndex(openIndex === i ? null : i)
-      },
-      i
-    )) }) })
-  ] }) });
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.a
+      }
+    }))
+  };
+  return /* @__PURE__ */ jsxs("section", { className: "py-24 bg-white relative", children: [
+    /* @__PURE__ */ jsx(Head, { children: /* @__PURE__ */ jsx("script", { type: "application/ld+json", children: JSON.stringify(faqJsonLd) }) }),
+    /* @__PURE__ */ jsxs("div", { className: "max-w-4xl mx-auto px-4 sm:px-6 lg:px-8", children: [
+      /* @__PURE__ */ jsx(ScrollReveal, { children: /* @__PURE__ */ jsxs("div", { className: "text-center mb-16", children: [
+        /* @__PURE__ */ jsxs("span", { className: "inline-flex items-center gap-2 px-3 py-1 bg-primary/5 text-purple-700 rounded-full text-sm font-bold uppercase tracking-widest mb-4", children: [
+          /* @__PURE__ */ jsx(HelpCircle, { className: "w-4 h-4" }),
+          " Need Help?"
+        ] }),
+        /* @__PURE__ */ jsx("h2", { className: "text-4xl font-serif font-bold text-dark mb-4", children: "Frequently Asked Questions" }),
+        /* @__PURE__ */ jsx("p", { className: "text-gray-600", children: "Got questions? We've got answers." })
+      ] }) }),
+      /* @__PURE__ */ jsx(ScrollReveal, { delay: 0.2, variants: revealVariants.fadeUp, children: /* @__PURE__ */ jsx("div", { className: "bg-white rounded-2xl shadow-xl border border-slate-100 p-6 md:p-8", children: faqs.map((faq, i) => /* @__PURE__ */ jsx(
+        FAQItem,
+        {
+          question: faq.q,
+          answer: faq.a,
+          isOpen: openIndex === i,
+          onClick: () => setOpenIndex(openIndex === i ? null : i)
+        },
+        i
+      )) }) })
+    ] })
+  ] });
 }
 export {
   HomeFAQ as default

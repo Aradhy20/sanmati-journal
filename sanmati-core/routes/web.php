@@ -86,6 +86,10 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'destroy'])->name('logout')->middleware('auth');
 
+Route::middleware('auth')->group(function () {
+    Route::get('/author/dashboard', [JournalController::class, 'authorDashboard'])->name('author.dashboard');
+});
+
 // Admin Routes (Protected with auth + admin role check + rate limiting)
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:60,1'])->group(function () {
     Route::get('/', [\App\Http\Controllers\AdminController::class, 'index'])->name('dashboard');

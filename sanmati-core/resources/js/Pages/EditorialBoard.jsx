@@ -27,13 +27,16 @@ const BoardMember = ({ name, title, affiliation, email, phone, profileUrl, image
             <div className="flex items-center gap-5 mb-6 relative z-10">
                 <div className="w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-[1.5rem] overflow-hidden shadow-md border-2 border-white ring-1 ring-gray-50 relative bg-surface flex items-center justify-center">
                     {image && !imgError ? (
-                        <img 
-                            src={image} 
-                            alt={name}
-                            className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700"
-                            loading="lazy"
-                            onError={() => setImgError(true)}
-                        />
+                        <picture>
+                            <source srcSet={image.replace(/\.(jpeg|jpg|png)$/i, '.webp')} type="image/webp" />
+                            <img 
+                                src={image} 
+                                alt={name}
+                                className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700"
+                                loading="lazy"
+                                onError={() => setImgError(true)}
+                            />
+                        </picture>
                     ) : (
                         <UserCircle2 className="w-12 h-12 text-primary/30" />
                     )}

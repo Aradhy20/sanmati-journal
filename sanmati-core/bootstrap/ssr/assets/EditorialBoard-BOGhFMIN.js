@@ -23,16 +23,19 @@ const BoardMember = ({ name, title, affiliation, email, phone, profileUrl, image
       children: [
         /* @__PURE__ */ jsx("div", { className: "absolute top-0 right-0 p-6 opacity-5 pointer-events-none transition-opacity duration-500 group-hover:opacity-10", children: /* @__PURE__ */ jsx(Award, { className: "w-24 h-24 text-primary rotate-12" }) }),
         /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-5 mb-6 relative z-10", children: [
-          /* @__PURE__ */ jsx("div", { className: "w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-[1.5rem] overflow-hidden shadow-md border-2 border-white ring-1 ring-gray-50 relative bg-surface flex items-center justify-center", children: image && !imgError ? /* @__PURE__ */ jsx(
-            "img",
-            {
-              src: image,
-              alt: name,
-              className: "w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700",
-              loading: "lazy",
-              onError: () => setImgError(true)
-            }
-          ) : /* @__PURE__ */ jsx(UserCircle2, { className: "w-12 h-12 text-primary/30" }) }),
+          /* @__PURE__ */ jsx("div", { className: "w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-[1.5rem] overflow-hidden shadow-md border-2 border-white ring-1 ring-gray-50 relative bg-surface flex items-center justify-center", children: image && !imgError ? /* @__PURE__ */ jsxs("picture", { children: [
+            /* @__PURE__ */ jsx("source", { srcSet: image.replace(/\.(jpeg|jpg|png)$/i, ".webp"), type: "image/webp" }),
+            /* @__PURE__ */ jsx(
+              "img",
+              {
+                src: image,
+                alt: name,
+                className: "w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700",
+                loading: "lazy",
+                onError: () => setImgError(true)
+              }
+            )
+          ] }) : /* @__PURE__ */ jsx(UserCircle2, { className: "w-12 h-12 text-primary/30" }) }),
           /* @__PURE__ */ jsxs("div", { children: [
             /* @__PURE__ */ jsx("span", { className: "inline-block px-3 py-1 bg-gradient-to-r from-primary/10 to-secondary/10 text-primary text-[9px] font-black uppercase tracking-widest rounded-full mb-2 border border-primary/10", children: title }),
             /* @__PURE__ */ jsx("h3", { className: "text-xl font-serif font-bold text-dark leading-tight group-hover:text-primary transition-colors", children: name })

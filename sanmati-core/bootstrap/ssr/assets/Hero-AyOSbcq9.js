@@ -192,14 +192,19 @@ const Hero = () => {
                 className: "relative w-[85%] h-[85%] sm:w-4/5 sm:h-4/5 rounded-[3rem] overflow-hidden shadow-2xl group border-4 border-white bg-white",
                 children: [
                   /* @__PURE__ */ jsx("div", { className: "absolute inset-0 bg-gradient-to-b from-transparent to-primary/10 z-10 pointer-events-none" }),
-                  /* @__PURE__ */ jsx(
-                    "img",
-                    {
-                      src: "/images/saraswati.jpeg",
-                      alt: "Academic Heritage",
-                      className: "w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-[2s]"
-                    }
-                  ),
+                  /* @__PURE__ */ jsxs("picture", { children: [
+                    /* @__PURE__ */ jsx("source", { srcSet: "/images/saraswati.webp", type: "image/webp" }),
+                    /* @__PURE__ */ jsx(
+                      "img",
+                      {
+                        src: "/images/saraswati.jpeg",
+                        alt: "Academic Heritage",
+                        className: "w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-[2s]",
+                        fetchpriority: "high",
+                        loading: "eager"
+                      }
+                    )
+                  ] }),
                   /* @__PURE__ */ jsxs("div", { className: "absolute bottom-4 sm:bottom-6 inset-x-4 sm:inset-x-6 p-2.5 sm:p-4 bg-white/80 backdrop-blur-md border border-white/50 rounded-2xl shadow-lg z-20 text-center", children: [
                     /* @__PURE__ */ jsx("span", { className: "block text-[8px] sm:text-[9px] font-black uppercase tracking-widest text-secondary mb-0.5 sm:mb-1", children: "Global Recognition" }),
                     /* @__PURE__ */ jsx("span", { className: "text-primary font-bold text-[10px] sm:text-xs leading-tight inline-block", children: "Double-Blind Peer Reviewed Journal" })

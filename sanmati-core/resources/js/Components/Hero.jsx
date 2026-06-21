@@ -194,11 +194,16 @@ const Hero = () => {
                                 className="relative w-[85%] h-[85%] sm:w-4/5 sm:h-4/5 rounded-[3rem] overflow-hidden shadow-2xl group border-4 border-white bg-white"
                             >
                                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary/10 z-10 pointer-events-none" />
-                                <img 
-                                    src="/images/saraswati.jpeg" 
-                                    alt="Academic Heritage" 
-                                    className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-[2s]"
-                                />
+                                <picture>
+                                    <source srcSet="/images/saraswati.webp" type="image/webp" />
+                                    <img 
+                                        src="/images/saraswati.jpeg" 
+                                        alt="Academic Heritage" 
+                                        className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-[2s]"
+                                        fetchpriority="high"
+                                        loading="eager"
+                                    />
+                                </picture>
                                 {/* Frosted Floating Indicator inside */}
                                 <div className="absolute bottom-4 sm:bottom-6 inset-x-4 sm:inset-x-6 p-2.5 sm:p-4 bg-white/80 backdrop-blur-md border border-white/50 rounded-2xl shadow-lg z-20 text-center">
                                     <span className="block text-[8px] sm:text-[9px] font-black uppercase tracking-widest text-secondary mb-0.5 sm:mb-1">Global Recognition</span>

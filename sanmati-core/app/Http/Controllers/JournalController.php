@@ -52,7 +52,9 @@ class JournalController extends Controller
 
     public function editors()
     {
-        $editors = TeamMember::whereIn('role', ['Editor-in-Chief', 'Co-Editor-in-Chief', 'Editor'])->get();
+        $editors = Cache::remember('editors_members', 3600, function () {
+            return TeamMember::whereIn('role', ['Editor-in-Chief', 'Co-Editor-in-Chief', 'Editor'])->orderBy('display_order', 'asc')->get();
+        });
         return Inertia::render('Editors', [
             'editors' => $editors
         ]);
@@ -60,7 +62,9 @@ class JournalController extends Controller
 
     public function editorialBoard()
     {
-        $board = TeamMember::where('role', 'Member')->get();
+        $board = Cache::remember('editorial_board_members', 3600, function () {
+            return TeamMember::where('role', 'Member')->orderBy('display_order', 'asc')->get();
+        });
         return Inertia::render('EditorialBoard', [
             'board' => $board
         ]);
@@ -267,5 +271,19 @@ class JournalController extends Controller
         }
 
         return Redirect::back()->with('success', 'Your inquiry has been submitted successfully.');
+    }
+
+    public function authorDashboard()
+    {
+        $submissions = [];
+        if (auth()->check()) {
+            $submissions = \App\Models\Submission::where('user_id', auth()->id())
+                ->orderBy('created_at', 'desc')
+                ->get();
+        }
+
+        return Inertia::render('Author/Dashboard', [
+            'submissions' => $submissions
+        ]);
     }
 }

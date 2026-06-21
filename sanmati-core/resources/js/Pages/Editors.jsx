@@ -50,11 +50,14 @@ const BioModal = ({ member, isOpen, onClose }) => {
                                 {/* Modal Image Column (Desktop) / Header (Mobile) */}
                                 <div className="md:w-2/5 md:shrink-0 relative bg-dark">
                                     <div className="md:absolute inset-0 aspect-square md:aspect-auto">
-                                        <img loading="lazy"
-                                            src={member.image}
-                                            alt={member.name}
-                                            className="w-full h-full object-cover object-top opacity-80"
-                                        />
+                                        <picture>
+                                            <source srcSet={member.image ? member.image.replace(/\.(jpeg|jpg|png)$/i, '.webp') : ''} type="image/webp" />
+                                            <img loading="lazy"
+                                                src={member.image}
+                                                alt={member.name}
+                                                className="w-full h-full object-cover object-top opacity-80"
+                                            />
+                                        </picture>
                                         <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent" />
 
                                         <div className="absolute bottom-6 left-6 right-6">
@@ -196,12 +199,15 @@ const ExecutiveMember = ({ member, index }) => {
                 {/* Top Area: Image & Name */}
                 <div className="p-8 pb-6 flex flex-col sm:flex-row gap-6 items-start relative z-10 border-b border-gray-50 bg-gradient-to-b from-surface/50 to-white">
                     <div className="w-28 h-28 sm:w-32 sm:h-32 shrink-0 rounded-[1.5rem] overflow-hidden shadow-md border-2 border-white ring-1 ring-gray-100 relative">
-                        <img
-                            src={member.image}
-                            alt={member.name}
-                            className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700"
-                            loading="lazy"
-                        />
+                        <picture>
+                            <source srcSet={member.image ? member.image.replace(/\.(jpeg|jpg|png)$/i, '.webp') : ''} type="image/webp" />
+                            <img
+                                src={member.image}
+                                alt={member.name}
+                                className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700"
+                                loading="lazy"
+                            />
+                        </picture>
                     </div>
                     <div className="flex-1">
                         <h3 className="text-3xl sm:text-4xl font-serif font-bold text-dark leading-tight group-hover:text-primary transition-colors">
