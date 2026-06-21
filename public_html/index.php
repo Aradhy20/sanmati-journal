@@ -113,9 +113,9 @@ if (isset($_GET['debug_db'])) {
     exit;
 }
 
-// ONE-TIME DB FIX: Update Vol 2 Issue 2 month_range + fix paper count + author spelling
-// This block runs once and then removes itself via the flag file
-$_fixFlag = $corePath . '/storage/framework/cache/db_fix_applied_v6.flag';
+// ONE-TIME DB FIX v7: Fix author name spelling using title-based matching (not fragile ID-based)
+// v7 also undoes the corruption caused by v5/v6 which wrongly updated id=63
+$_fixFlag = $corePath . '/storage/framework/cache/db_fix_applied_v7.flag';
 if (!file_exists($_fixFlag)) {
     try {
         // Load env to get DB credentials
@@ -130,22 +130,39 @@ if (!file_exists($_fixFlag)) {
                     $env[trim($key)] = trim($val, " \t\n\r\0\x0B\"'");
                 }
             }
-            // Exclusively use MySQL database connection as requested by the user
             $pdo = new PDO(
                 "mysql:host=" . ($env['DB_HOST'] ?? '127.0.0.1') . ";port=" . ($env['DB_PORT'] ?? '3306') . ";dbname=" . ($env['DB_DATABASE'] ?? 'sanmati_journal') . ";charset=utf8mb4",
                 $env['DB_USERNAME'] ?? 'root',
                 $env['DB_PASSWORD'] ?? ''
             );
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
             // Fix Vol 2 Issue 2 month_range
             $pdo->exec("UPDATE issues SET month_range = 'April \xe2\x80\x93 June' WHERE volume = '2' AND number = '2'");
+
             // Fix paper count: remove compilation paper if total > 80
             $count = $pdo->query("SELECT COUNT(*) FROM papers")->fetchColumn();
             if ($count > 80) {
                 $pdo->exec("DELETE FROM papers WHERE category = 'Complete Issue Book'");
             }
-            // Fix author name spelling from सिचन कुमार to सचिन कुमार
-            $pdo->exec("UPDATE papers SET authors = 'सचिन कुमार & डॉ. एस. पद्मप्रिया' WHERE id = 63");
+
+            // FIX 1: Correct the misspelled author "सिचन" → "सचिन" on the Digital Media paper
+            // Use title-based match so this works regardless of which ID it has on any server
+            $stmt = $pdo->prepare(
+                "UPDATE papers SET authors = 'सचिन कुमार & डॉ. एस. पद्मप्रिया'
+                 WHERE title LIKE '%डिजिटल मीडिया और वेब सीरीज़%'
+                   AND authors LIKE '%सिचन%'"
+            );
+            $stmt->execute();
+
+            // FIX 2: Undo corruption from v5/v6 — previous fix wrongly set authors on the
+            // "समकालीन वैश्विक परिप्रेक्ष्य" paper. Restore its correct author.
+            $stmt2 = $pdo->prepare(
+                "UPDATE papers SET authors = 'डॉ. जी. उमानरसिंहा मूर्ति'
+                 WHERE title LIKE '%समकालीन वैश्विक परिप्रेक्ष्य%'
+                   AND authors LIKE '%सचिन कुमार%'"
+            );
+            $stmt2->execute();
         }
         // Write flag so this never runs again
         @file_put_contents($_fixFlag, date('Y-m-d H:i:s'));
