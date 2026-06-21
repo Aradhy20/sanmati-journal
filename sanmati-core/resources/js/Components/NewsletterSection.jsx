@@ -132,21 +132,31 @@ export default function NewsletterSection() {
                         <form onSubmit={handleSubmit} className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-8">
                             <div className="flex flex-col gap-3">
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                    <input
-                                        type="text"
-                                        value={name}
-                                        onChange={(e) => setName(e.target.value)}
-                                        placeholder="Name (Optional)"
-                                        className="px-5 py-3.5 bg-white/10 border border-white/15 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-secondary/60 focus:bg-white/15 transition-all font-medium text-xs"
-                                    />
-                                    <input
-                                        type="email"
-                                        value={email}
-                                        onChange={(e) => { setEmail(e.target.value); if (status !== 'idle') setStatus('idle'); }}
-                                        placeholder="Email Address *"
-                                        required
-                                        className="px-5 py-3.5 bg-white/10 border border-white/15 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-secondary/60 focus:bg-white/15 transition-all font-medium text-xs"
-                                    />
+                                    <div className="relative w-full">
+                                        <label htmlFor="newsletter-name" className="sr-only">Name (Optional)</label>
+                                        <input
+                                            type="text"
+                                            id="newsletter-name"
+                                            name="newsletter-name"
+                                            value={name}
+                                            onChange={(e) => setName(e.target.value)}
+                                            placeholder="Name (Optional)"
+                                            className="w-full px-5 py-3.5 bg-white/10 border border-white/15 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-secondary/60 focus:bg-white/15 transition-all font-medium text-xs"
+                                        />
+                                    </div>
+                                    <div className="relative w-full">
+                                        <label htmlFor="newsletter-email" className="sr-only">Email Address *</label>
+                                        <input
+                                            type="email"
+                                            id="newsletter-email"
+                                            name="newsletter-email"
+                                            value={email}
+                                            onChange={(e) => { setEmail(e.target.value); if (status !== 'idle') setStatus('idle'); }}
+                                            placeholder="Email Address *"
+                                            required
+                                            className="w-full px-5 py-3.5 bg-white/10 border border-white/15 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-secondary/60 focus:bg-white/15 transition-all font-medium text-xs"
+                                        />
+                                    </div>
                                 </div>
                                 <button
                                     type="submit"

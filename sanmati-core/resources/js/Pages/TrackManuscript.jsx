@@ -65,9 +65,11 @@ export default function TrackManuscript() {
 
                     <form onSubmit={handleTrack} className="space-y-5">
                         <div>
-                            <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">Tracking ID *</label>
+                            <label htmlFor="trackingId" className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">Tracking ID *</label>
                             <input
                                 type="text"
+                                id="trackingId"
+                                name="trackingId"
                                 value={trackingId}
                                 onChange={e => setTrackingId(e.target.value)}
                                 placeholder="e.g. SJ-123456"
@@ -76,9 +78,11 @@ export default function TrackManuscript() {
                             />
                         </div>
                         <div>
-                            <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">Registered Email *</label>
+                            <label htmlFor="email" className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">Registered Email *</label>
                             <input
                                 type="email"
+                                id="email"
+                                name="email"
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
                                 placeholder="author@institute.edu"

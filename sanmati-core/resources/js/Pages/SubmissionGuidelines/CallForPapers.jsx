@@ -182,9 +182,11 @@ export default function CallForPapers() {
                                                         </div>
 
                                                         <div>
-                                                            <label className="block text-sm font-bold text-slate-700 mb-2">Full Research Title *</label>
+                                                            <label htmlFor="title" className="block text-sm font-bold text-slate-700 mb-2">Full Research Title *</label>
                                                             <input 
                                                                 type="text" 
+                                                                id="title"
+                                                                name="title"
                                                                 value={data.title}
                                                                 onChange={e => setData('title', e.target.value)}
                                                                 className={`w-full px-5 py-4 rounded-xl border ${errors.title ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-slate-50'} focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none`}
@@ -195,8 +197,10 @@ export default function CallForPapers() {
                                                         </div>
 
                                                         <div>
-                                                            <label className="block text-sm font-bold text-slate-700 mb-2">Summary of your work *</label>
+                                                            <label htmlFor="abstract" className="block text-sm font-bold text-slate-700 mb-2">Summary of your work *</label>
                                                             <textarea 
+                                                                id="abstract"
+                                                                name="abstract"
                                                                 value={data.abstract}
                                                                 onChange={e => setData('abstract', e.target.value)}
                                                                 rows="7"
@@ -208,9 +212,11 @@ export default function CallForPapers() {
                                                         </div>
 
                                                         <div>
-                                                            <label className="block text-sm font-bold text-slate-700 mb-2">Index Keywords</label>
+                                                            <label htmlFor="keywords" className="block text-sm font-bold text-slate-700 mb-2">Index Keywords</label>
                                                             <input 
                                                                 type="text" 
+                                                                id="keywords"
+                                                                name="keywords"
                                                                 value={data.keywords}
                                                                 onChange={e => setData('keywords', e.target.value)}
                                                                 className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none"
@@ -227,9 +233,11 @@ export default function CallForPapers() {
                                                         </div>
 
                                                         <div>
-                                                            <label className="block text-sm font-bold text-slate-700 mb-2">Full Legal Name *</label>
+                                                            <label htmlFor="author_name" className="block text-sm font-bold text-slate-700 mb-2">Full Legal Name *</label>
                                                             <input 
                                                                 type="text" 
+                                                                id="author_name"
+                                                                name="author_name"
                                                                 value={data.author_name}
                                                                 onChange={e => setData('author_name', e.target.value)}
                                                                 className={`w-full px-5 py-4 rounded-xl border ${errors.author_name ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-slate-50'} focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none`}
@@ -240,9 +248,11 @@ export default function CallForPapers() {
                                                         </div>
 
                                                         <div>
-                                                            <label className="block text-sm font-bold text-slate-700 mb-2">Official Email ID *</label>
+                                                            <label htmlFor="author_email" className="block text-sm font-bold text-slate-700 mb-2">Official Email ID *</label>
                                                             <input 
                                                                 type="email" 
+                                                                id="author_email"
+                                                                name="author_email"
                                                                 value={data.author_email}
                                                                 onChange={e => setData('author_email', e.target.value)}
                                                                 className={`w-full px-5 py-4 rounded-xl border ${errors.author_email ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-slate-50'} focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none`}
@@ -253,9 +263,11 @@ export default function CallForPapers() {
                                                         </div>
 
                                                         <div>
-                                                            <label className="block text-sm font-bold text-slate-700 mb-2">Contact Number</label>
+                                                            <label htmlFor="author_phone" className="block text-sm font-bold text-slate-700 mb-2">Contact Number</label>
                                                             <input 
                                                                 type="text" 
+                                                                id="author_phone"
+                                                                name="author_phone"
                                                                 value={data.author_phone}
                                                                 onChange={e => setData('author_phone', e.target.value)}
                                                                 className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none"
@@ -264,9 +276,11 @@ export default function CallForPapers() {
                                                         </div>
 
                                                         <div>
-                                                            <label className="block text-sm font-bold text-slate-700 mb-2">Affiliated Institution</label>
+                                                            <label htmlFor="institution" className="block text-sm font-bold text-slate-700 mb-2">Affiliated Institution</label>
                                                             <input 
                                                                 type="text" 
+                                                                id="institution"
+                                                                name="institution"
                                                                 value={data.institution}
                                                                 onChange={e => setData('institution', e.target.value)}
                                                                 className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none"
@@ -275,8 +289,11 @@ export default function CallForPapers() {
                                                         </div>
 
                                                         <div>
-                                                            <label className="block text-sm font-bold text-slate-700 mb-2">Primary Subject Area</label>
+                                                            <label htmlFor="subject_area" className="block text-sm font-bold text-slate-700 mb-2">Primary Subject Area</label>
                                                             <select
+                                                                id="subject_area"
+                                                                name="subject_area"
+                                                                title="Subject Area"
                                                                 value={data.subject_area}
                                                                 onChange={e => setData('subject_area', e.target.value)}
                                                                 className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none appearance-none"
@@ -373,10 +390,12 @@ export default function CallForPapers() {
                                                 </div>
 
                                                 <div className="bg-secondary/5 border border-secondary/10 rounded-2xl p-6 mb-10">
-                                                    <label className="flex items-start gap-4 cursor-pointer">
+                                                    <label htmlFor="consent" className="flex items-start gap-4 cursor-pointer">
                                                         <div className="pt-1">
                                                             <input 
                                                                 type="checkbox" 
+                                                                id="consent"
+                                                                name="consent"
                                                                 checked={data.consent}
                                                                 onChange={e => setData('consent', e.target.checked)}
                                                                 className="w-5 h-5 rounded border-gray-300 text-secondary focus:ring-secondary"
