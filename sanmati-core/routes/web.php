@@ -12,6 +12,18 @@ use Illuminate\Support\Facades\Artisan;
 
 
 Route::get('/', [JournalController::class, 'index'])->name('home');
+
+Route::get('/fix-sachin-name', function () {
+    \Illuminate\Support\Facades\DB::table('papers')
+        ->where('authors', 'like', '%सिचन कुमार%')
+        ->orWhere('authors', 'like', '%सिंचन कुमार%')
+        ->update(['authors' => 'सचिन कुमार & डॉ. एस. पद्मप्रिया']);
+    
+    \Illuminate\Support\Facades\Artisan::call('optimize:clear');
+    
+    return 'Fixed! The author name has been updated to सचिन कुमार (Sachin Kumar) and the cache has been cleared. You can now check the archive page.';
+});
+
 Route::redirect('/submit', '/submission-guidelines/call-for-papers');
 Route::get('/api/search', [\App\Http\Controllers\SearchController::class, 'search'])->name('api.search');
 Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
