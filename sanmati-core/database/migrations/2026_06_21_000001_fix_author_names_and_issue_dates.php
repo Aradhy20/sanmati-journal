@@ -14,11 +14,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Fix 1: Correct misspelled author name (सिचन → सचिन)
-        // Targets: paper about डिजिटल मीडिया, authored by सचिन कुमार & डॉ. एस. पद्मप्रिया
+        // Fix 1: Correct misspelled author name (सिचन → सिंचन)
+        // Targets: paper about डिजिटल मीडिया, authored by सिंचन कुमार & डॉ. एस. पद्मप्रिया
         DB::table('papers')
             ->where('authors', 'like', '%सिचन कुमार%')
-            ->update(['authors' => 'सचिन कुमार & डॉ. एस. पद्मप्रिया']);
+            ->update(['authors' => 'सिंचन कुमार & डॉ. एस. पद्मप्रिया']);
 
         // Fix 2: Fix issue date — Vol 2, Issue 2 should be April–June
         DB::table('issues')
