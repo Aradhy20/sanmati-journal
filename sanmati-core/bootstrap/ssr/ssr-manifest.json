@@ -22,7 +22,7 @@
     "/build/assets/MainLayout-XQ29xp9e.js"
   ],
   "resources/js/Components/NewsletterSection.jsx": [
-    "/build/assets/NewsletterSection-F6ZClJX7.js"
+    "/build/assets/NewsletterSection-BUBB_euJ.js"
   ],
   "resources/js/Components/PageHeader.jsx": [
     "/build/assets/PageHeader-DKpFkYbo.js"
@@ -46,13 +46,13 @@
     "/build/assets/EditorialTeam-CiozbCtN.js"
   ],
   "resources/js/Components/Testimonials.jsx": [
-    "/build/assets/Testimonials-vT9yqXyt.js"
+    "/build/assets/Testimonials-DMgrH-n5.js"
   ],
   "resources/js/Components/ui/CitationGenerator.jsx": [
     "/build/assets/CitationGenerator-DOIbYQyu.js"
   ],
   "resources/js/Components/ui/DropZone.jsx": [
-    "/build/assets/CallForPapers-DVG0Uvwv.js"
+    "/build/assets/CallForPapers-DSc9qAxY.js"
   ],
   "resources/js/Components/ui/FloatInput.jsx": [
     "/build/assets/Contact-Ge71K95j.js"
@@ -178,7 +178,7 @@
     "/build/assets/Photo-BWiopC8n.js"
   ],
   "resources/js/Pages/Home.jsx": [
-    "/build/assets/Home-DmBTtMSL.js"
+    "/build/assets/Home-BCiFzc8d.js"
   ],
   "resources/js/Pages/PublicationPolicy/Ethics.jsx": [
     "/build/assets/Ethics-DcXsaN6V.js"
@@ -196,7 +196,7 @@
     "/build/assets/Areas-VptFr-l5.js"
   ],
   "resources/js/Pages/SubmissionGuidelines/CallForPapers.jsx": [
-    "/build/assets/CallForPapers-DVG0Uvwv.js"
+    "/build/assets/CallForPapers-DSc9qAxY.js"
   ],
   "resources/js/Pages/SubmissionGuidelines/ImportantInfo.jsx": [
     "/build/assets/ImportantInfo-D_KMkNph.js"
@@ -214,7 +214,7 @@
     "/build/assets/TechnicalTeam-DMr_j3RW.js"
   ],
   "resources/js/Pages/TrackManuscript.jsx": [
-    "/build/assets/TrackManuscript-CM9gcgDa.js"
+    "/build/assets/TrackManuscript-Dlqx93Xk.js"
   ],
   "resources/js/ssr.jsx": []
 }

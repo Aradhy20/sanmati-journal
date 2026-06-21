@@ -391,7 +391,7 @@ export default function Home({ newsItems = [], featuredPapers = [], testimonials
                                 className="group flex flex-col max-w-[300px] mx-auto w-full"
                             >
                                 <div className="relative aspect-[3/4] rounded-[2rem] overflow-hidden shadow-ambient hover:shadow-ambient-lg transition-all duration-700 mb-6">
-                                    <img src={book.img} alt={book.title} className="w-full h-full object-cover scale-[1.01] group-hover:scale-105 transition-transform duration-[1.5s]" loading="lazy" />
+                                    <img src={book.img} alt={book.title} className="w-full h-full object-cover scale-[1.01] group-hover:scale-105 transition-transform duration-[1.5s]" loading="lazy" decoding="async" />
                                     <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                     
                                     <span className="absolute top-5 left-5 bg-white/90 backdrop-blur-md text-primary text-[9px] font-black uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-lg border border-white/50">
@@ -582,7 +582,7 @@ export default function Home({ newsItems = [], featuredPapers = [], testimonials
                             <div className="w-32 h-32 rounded-[2rem] overflow-hidden shadow-lg shrink-0 border-4 border-white">
                                 <picture>
                                     <source srcSet="/mam.webp" type="image/webp" />
-                                    <img src="/mam.jpeg" alt="Dr Namrata Jain" className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-1000" />
+                                    <img src="/mam.jpeg" alt="Dr Namrata Jain" className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-1000" loading="lazy" decoding="async" />
                                 </picture>
                             </div>
                             <div className="flex-1 text-center sm:text-left">
@@ -603,7 +603,7 @@ export default function Home({ newsItems = [], featuredPapers = [], testimonials
                             <div className="w-32 h-32 rounded-[2rem] overflow-hidden shadow-lg shrink-0 border-4 border-white">
                                 <picture>
                                     <source srcSet="/sir.webp" type="image/webp" />
-                                    <img src="/sir.jpeg" alt="Dr. Ratnesh Kumar Jain" className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-1000" />
+                                    <img src="/sir.jpeg" alt="Dr. Ratnesh Kumar Jain" className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-1000" loading="lazy" decoding="async" />
                                 </picture>
                             </div>
                             <div className="flex-1 text-center sm:text-left">

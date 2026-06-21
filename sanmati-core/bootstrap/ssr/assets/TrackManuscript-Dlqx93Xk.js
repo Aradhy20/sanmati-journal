@@ -61,11 +61,13 @@ function TrackManuscript() {
             ] }),
             /* @__PURE__ */ jsxs("form", { onSubmit: handleTrack, className: "space-y-5", children: [
               /* @__PURE__ */ jsxs("div", { children: [
-                /* @__PURE__ */ jsx("label", { className: "block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2", children: "Tracking ID *" }),
+                /* @__PURE__ */ jsx("label", { htmlFor: "trackingId", className: "block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2", children: "Tracking ID *" }),
                 /* @__PURE__ */ jsx(
                   "input",
                   {
                     type: "text",
+                    id: "trackingId",
+                    name: "trackingId",
                     value: trackingId,
                     onChange: (e) => setTrackingId(e.target.value),
                     placeholder: "e.g. SJ-123456",
@@ -75,11 +77,13 @@ function TrackManuscript() {
                 )
               ] }),
               /* @__PURE__ */ jsxs("div", { children: [
-                /* @__PURE__ */ jsx("label", { className: "block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2", children: "Registered Email *" }),
+                /* @__PURE__ */ jsx("label", { htmlFor: "email", className: "block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2", children: "Registered Email *" }),
                 /* @__PURE__ */ jsx(
                   "input",
                   {
                     type: "email",
+                    id: "email",
+                    name: "email",
                     value: email,
                     onChange: (e) => setEmail(e.target.value),
                     placeholder: "author@institute.edu",

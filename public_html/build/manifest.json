@@ -81,7 +81,7 @@
     ]
   },
   "resources/js/Components/NewsletterSection.jsx": {
-    "file": "assets/NewsletterSection-DzrObpSV.js",
+    "file": "assets/NewsletterSection-Bs-6RWp4.js",
     "name": "NewsletterSection",
     "src": "resources/js/Components/NewsletterSection.jsx",
     "isDynamicEntry": true,
@@ -100,7 +100,7 @@
     ]
   },
   "resources/js/Components/Testimonials.jsx": {
-    "file": "assets/Testimonials-Wyj2ziR4.js",
+    "file": "assets/Testimonials-DBCVJA8r.js",
     "name": "Testimonials",
     "src": "resources/js/Components/Testimonials.jsx",
     "isDynamicEntry": true,
@@ -510,7 +510,7 @@
     ]
   },
   "resources/js/Pages/Home.jsx": {
-    "file": "assets/Home-CjR_9MWG.js",
+    "file": "assets/Home-YVJhBS9-.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.jsx",
     "isDynamicEntry": true,
@@ -596,7 +596,7 @@
     ]
   },
   "resources/js/Pages/SubmissionGuidelines/CallForPapers.jsx": {
-    "file": "assets/CallForPapers-DzXNtWFO.js",
+    "file": "assets/CallForPapers-CuPR2p0N.js",
     "name": "CallForPapers",
     "src": "resources/js/Pages/SubmissionGuidelines/CallForPapers.jsx",
     "isDynamicEntry": true,
@@ -669,7 +669,7 @@
     ]
   },
   "resources/js/Pages/TrackManuscript.jsx": {
-    "file": "assets/TrackManuscript-C4pYRPXU.js",
+    "file": "assets/TrackManuscript-BXD_ZnEC.js",
     "name": "TrackManuscript",
     "src": "resources/js/Pages/TrackManuscript.jsx",
     "isDynamicEntry": true,
@@ -680,7 +680,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-BEjnJFDg.js",
+    "file": "assets/app-DGJ1Mq9c.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,

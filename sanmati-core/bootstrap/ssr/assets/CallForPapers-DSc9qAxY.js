@@ -313,11 +313,13 @@ function CallForPapers() {
                     /* @__PURE__ */ jsx("p", { className: "text-slate-500", children: "Provide the core metadata for your research paper." })
                   ] }),
                   /* @__PURE__ */ jsxs("div", { children: [
-                    /* @__PURE__ */ jsx("label", { className: "block text-sm font-bold text-slate-700 mb-2", children: "Full Research Title *" }),
+                    /* @__PURE__ */ jsx("label", { htmlFor: "title", className: "block text-sm font-bold text-slate-700 mb-2", children: "Full Research Title *" }),
                     /* @__PURE__ */ jsx(
                       "input",
                       {
                         type: "text",
+                        id: "title",
+                        name: "title",
                         value: data.title,
                         onChange: (e) => setData("title", e.target.value),
                         className: `w-full px-5 py-4 rounded-xl border ${errors.title ? "border-red-300 bg-red-50" : "border-gray-200 bg-slate-50"} focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none`,
@@ -328,10 +330,12 @@ function CallForPapers() {
                     errors.title && /* @__PURE__ */ jsx("p", { className: "text-red-500 text-xs mt-2 font-medium", children: errors.title })
                   ] }),
                   /* @__PURE__ */ jsxs("div", { children: [
-                    /* @__PURE__ */ jsx("label", { className: "block text-sm font-bold text-slate-700 mb-2", children: "Summary of your work *" }),
+                    /* @__PURE__ */ jsx("label", { htmlFor: "abstract", className: "block text-sm font-bold text-slate-700 mb-2", children: "Summary of your work *" }),
                     /* @__PURE__ */ jsx(
                       "textarea",
                       {
+                        id: "abstract",
+                        name: "abstract",
                         value: data.abstract,
                         onChange: (e) => setData("abstract", e.target.value),
                         rows: "7",
@@ -343,11 +347,13 @@ function CallForPapers() {
                     errors.abstract && /* @__PURE__ */ jsx("p", { className: "text-red-500 text-xs mt-2 font-medium", children: errors.abstract })
                   ] }),
                   /* @__PURE__ */ jsxs("div", { children: [
-                    /* @__PURE__ */ jsx("label", { className: "block text-sm font-bold text-slate-700 mb-2", children: "Index Keywords" }),
+                    /* @__PURE__ */ jsx("label", { htmlFor: "keywords", className: "block text-sm font-bold text-slate-700 mb-2", children: "Index Keywords" }),
                     /* @__PURE__ */ jsx(
                       "input",
                       {
                         type: "text",
+                        id: "keywords",
+                        name: "keywords",
                         value: data.keywords,
                         onChange: (e) => setData("keywords", e.target.value),
                         className: "w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none",
@@ -362,11 +368,13 @@ function CallForPapers() {
                     /* @__PURE__ */ jsx("p", { className: "text-slate-500", children: "Who should we contact regarding this manuscript?" })
                   ] }),
                   /* @__PURE__ */ jsxs("div", { children: [
-                    /* @__PURE__ */ jsx("label", { className: "block text-sm font-bold text-slate-700 mb-2", children: "Full Legal Name *" }),
+                    /* @__PURE__ */ jsx("label", { htmlFor: "author_name", className: "block text-sm font-bold text-slate-700 mb-2", children: "Full Legal Name *" }),
                     /* @__PURE__ */ jsx(
                       "input",
                       {
                         type: "text",
+                        id: "author_name",
+                        name: "author_name",
                         value: data.author_name,
                         onChange: (e) => setData("author_name", e.target.value),
                         className: `w-full px-5 py-4 rounded-xl border ${errors.author_name ? "border-red-300 bg-red-50" : "border-gray-200 bg-slate-50"} focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none`,
@@ -377,11 +385,13 @@ function CallForPapers() {
                     errors.author_name && /* @__PURE__ */ jsx("p", { className: "text-red-500 text-xs mt-2 font-medium", children: errors.author_name })
                   ] }),
                   /* @__PURE__ */ jsxs("div", { children: [
-                    /* @__PURE__ */ jsx("label", { className: "block text-sm font-bold text-slate-700 mb-2", children: "Official Email ID *" }),
+                    /* @__PURE__ */ jsx("label", { htmlFor: "author_email", className: "block text-sm font-bold text-slate-700 mb-2", children: "Official Email ID *" }),
                     /* @__PURE__ */ jsx(
                       "input",
                       {
                         type: "email",
+                        id: "author_email",
+                        name: "author_email",
                         value: data.author_email,
                         onChange: (e) => setData("author_email", e.target.value),
                         className: `w-full px-5 py-4 rounded-xl border ${errors.author_email ? "border-red-300 bg-red-50" : "border-gray-200 bg-slate-50"} focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none`,
@@ -392,11 +402,13 @@ function CallForPapers() {
                     errors.author_email && /* @__PURE__ */ jsx("p", { className: "text-red-500 text-xs mt-2 font-medium", children: errors.author_email })
                   ] }),
                   /* @__PURE__ */ jsxs("div", { children: [
-                    /* @__PURE__ */ jsx("label", { className: "block text-sm font-bold text-slate-700 mb-2", children: "Contact Number" }),
+                    /* @__PURE__ */ jsx("label", { htmlFor: "author_phone", className: "block text-sm font-bold text-slate-700 mb-2", children: "Contact Number" }),
                     /* @__PURE__ */ jsx(
                       "input",
                       {
                         type: "text",
+                        id: "author_phone",
+                        name: "author_phone",
                         value: data.author_phone,
                         onChange: (e) => setData("author_phone", e.target.value),
                         className: "w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none",
@@ -405,11 +417,13 @@ function CallForPapers() {
                     )
                   ] }),
                   /* @__PURE__ */ jsxs("div", { children: [
-                    /* @__PURE__ */ jsx("label", { className: "block text-sm font-bold text-slate-700 mb-2", children: "Affiliated Institution" }),
+                    /* @__PURE__ */ jsx("label", { htmlFor: "institution", className: "block text-sm font-bold text-slate-700 mb-2", children: "Affiliated Institution" }),
                     /* @__PURE__ */ jsx(
                       "input",
                       {
                         type: "text",
+                        id: "institution",
+                        name: "institution",
                         value: data.institution,
                         onChange: (e) => setData("institution", e.target.value),
                         className: "w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none",
@@ -418,10 +432,13 @@ function CallForPapers() {
                     )
                   ] }),
                   /* @__PURE__ */ jsxs("div", { children: [
-                    /* @__PURE__ */ jsx("label", { className: "block text-sm font-bold text-slate-700 mb-2", children: "Primary Subject Area" }),
+                    /* @__PURE__ */ jsx("label", { htmlFor: "subject_area", className: "block text-sm font-bold text-slate-700 mb-2", children: "Primary Subject Area" }),
                     /* @__PURE__ */ jsxs(
                       "select",
                       {
+                        id: "subject_area",
+                        name: "subject_area",
+                        title: "Subject Area",
                         value: data.subject_area,
                         onChange: (e) => setData("subject_area", e.target.value),
                         className: "w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none appearance-none",
@@ -504,11 +521,13 @@ function CallForPapers() {
                   ] })
                 ] })
               ] }) }),
-              /* @__PURE__ */ jsx("div", { className: "bg-secondary/5 border border-secondary/10 rounded-2xl p-6 mb-10", children: /* @__PURE__ */ jsxs("label", { className: "flex items-start gap-4 cursor-pointer", children: [
+              /* @__PURE__ */ jsx("div", { className: "bg-secondary/5 border border-secondary/10 rounded-2xl p-6 mb-10", children: /* @__PURE__ */ jsxs("label", { htmlFor: "consent", className: "flex items-start gap-4 cursor-pointer", children: [
                 /* @__PURE__ */ jsx("div", { className: "pt-1", children: /* @__PURE__ */ jsx(
                   "input",
                   {
                     type: "checkbox",
+                    id: "consent",
+                    name: "consent",
                     checked: data.consent,
                     onChange: (e) => setData("consent", e.target.checked),
                     className: "w-5 h-5 rounded border-gray-300 text-secondary focus:ring-secondary",

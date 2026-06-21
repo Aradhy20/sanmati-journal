@@ -6,9 +6,9 @@ import { Link } from "@inertiajs/react";
 import { Globe, ShieldCheck, BookOpen, Award, FileText, ExternalLink, Clock, CheckCircle, BarChart2, BookMarked, Search, Database, ArrowRight, Star, Users, Heart, ArrowUpRight, Microscope, Palette, Calculator, Scale, GraduationCap, Cpu, Feather, Quote, ChevronRight } from "lucide-react";
 import "react-hot-toast";
 const Hero = React.lazy(() => import("./Hero-AyOSbcq9.js"));
-const Testimonials = React.lazy(() => import("./Testimonials-vT9yqXyt.js"));
+const Testimonials = React.lazy(() => import("./Testimonials-DMgrH-n5.js"));
 const PipelineSection = React.lazy(() => import("./PipelineSection-odGSs9_P.js"));
-const NewsletterSection = React.lazy(() => import("./NewsletterSection-F6ZClJX7.js"));
+const NewsletterSection = React.lazy(() => import("./NewsletterSection-BUBB_euJ.js"));
 const HomeFAQ = React.lazy(() => import("./HomeFAQ-CXhxTWVH.js"));
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
