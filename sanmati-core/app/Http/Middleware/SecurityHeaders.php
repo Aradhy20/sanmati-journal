@@ -32,13 +32,13 @@ class SecurityHeaders
         // Content Security Policy
         $scriptSrc = "'self' 'nonce-{$nonce}' https://www.googletagmanager.com https://www.google-analytics.com";
         $styleSrc = "'self' 'unsafe-inline' https://fonts.googleapis.com"; // unsafe-inline often needed for dynamic styles in React
-        $connectSrc = "'self' https://www.google-analytics.com";
+        $connectSrc = "'self' https://www.google-analytics.com https://analytics.google.com https://www.google.com";
         $fontSrc = "'self' data: https://fonts.gstatic.com";
 
         if (app()->environment('local')) {
-            $scriptSrc .= " 'unsafe-eval' http://localhost:5173"; // Vite needs unsafe-eval in dev
-            $styleSrc .= " http://localhost:5173";
-            $connectSrc .= " http://localhost:5173 ws://localhost:5173";
+            $scriptSrc .= " 'unsafe-eval' http://localhost:5173 http://127.0.0.1:5173"; // Vite needs unsafe-eval in dev
+            $styleSrc .= " http://localhost:5173 http://127.0.0.1:5173";
+            $connectSrc .= " http://localhost:5173 ws://localhost:5173 http://127.0.0.1:5173 ws://127.0.0.1:5173";
         }
 
         $csp = "default-src 'self'; " .
