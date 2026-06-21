@@ -48,17 +48,17 @@ const Testimonials = ({ testimonials: dbTestimonials = [] }) => {
     const prev = () => setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 
     return (
-        <section className="py-16 bg-dark text-white overflow-hidden relative">
+        <section className="py-12 bg-dark text-white overflow-hidden relative">
             {/* Background Texture - Using radial gradient */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:40px_40px]" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <ScrollReveal>
-                    <div className="text-center mb-16">
-                        <Quote className="w-12 h-12 text-primary mx-auto mb-6 opacity-50" />
-                        <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">Voice of Researchers</h2>
+                    <div className="text-center mb-10">
+                        <Quote className="w-10 h-10 text-primary mx-auto mb-4 opacity-50" />
+                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold mb-3">Voice of Researchers</h2>
                         <div className="flex justify-center gap-1">
-                            {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" />)}
+                            {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />)}
                         </div>
                     </div>
                 </ScrollReveal>
@@ -73,20 +73,20 @@ const Testimonials = ({ testimonials: dbTestimonials = [] }) => {
                             transition={{ duration: 0.5 }}
                             className="text-center"
                         >
-                            <p className="text-xl md:text-3xl font-light italic leading-relaxed mb-12 text-slate-300">
+                            <p className="text-lg md:text-xl lg:text-2xl font-light italic leading-relaxed mb-8 text-slate-300">
                                 &ldquo;{testimonials[current].quote}&rdquo;
                             </p>
 
                             <div className="flex flex-col items-center">
-                                <div className="w-20 h-20 rounded-full border-2 border-primary/30 p-1 mb-6 relative overflow-hidden">
+                                <div className="w-16 h-16 rounded-full border-2 border-primary/30 p-1 mb-4 relative overflow-hidden">
                                     <img loading="lazy"
                                         src={testimonials[current].image}
                                         alt={testimonials[current].name}
                                         className="object-cover rounded-full w-full h-full"
                                     />
                                 </div>
-                                <h3 className="text-xl font-bold text-white mb-1">{testimonials[current].name}</h3>
-                                <p className="text-primary-light font-medium text-sm tracking-wide">{testimonials[current].role}</p>
+                                <h3 className="text-lg font-bold text-white mb-1">{testimonials[current].name}</h3>
+                                <p className="text-primary-light font-medium text-xs tracking-wide">{testimonials[current].role}</p>
                             </div>
                         </motion.div>
                     </AnimatePresence>
