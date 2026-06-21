@@ -431,10 +431,9 @@ export default function Archive({ issues }) {
                                             ))}
                                         </div>
                                     </div>
-
-                                    </div>
                                 </motion.div>
                             ))}
+
                         </div>
                     ) : (
                         <div className="text-center py-20 bg-white rounded-3xl border border-dashed border-slate-200 p-8">

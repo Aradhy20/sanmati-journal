@@ -4,13 +4,15 @@ const Hero = React.lazy(() => import('../Components/Hero'));
 const Testimonials = React.lazy(() => import('../Components/Testimonials'));
 const PipelineSection = React.lazy(() => import('../Components/PipelineSection'));
 const NewsletterSection = React.lazy(() => import('../Components/NewsletterSection'));
+const HomeFAQ = React.lazy(() => import('../Components/HomeFAQ'));
 import { motion, useInView, animate } from 'framer-motion';
 import { Link } from '@inertiajs/react';
 import {
     ArrowRight, BookOpen, Users, Globe, Award, FileText, Star, Trophy,
     Lightbulb, GraduationCap, Microscope, Scale, Palette, Calculator, Cpu,
     ChevronRight, ArrowUpRight, Feather,
-    Heart, Share2, Bookmark, ShieldCheck, Quote
+    Heart, Share2, Bookmark, ShieldCheck, Quote, Clock, CheckCircle, BarChart2,
+    Database, Search, BookMarked, ExternalLink
 } from 'lucide-react';
 
 // Sophisticated Animations for 2026 Cinematic Feel
@@ -44,7 +46,7 @@ const AnimatedCounter = ({ from, to, duration = 2.5 }) => {
     return <span ref={nodeRef}>{from}</span>;
 };
 
-export default function Home({ newsItems = [], featuredPapers = [], testimonials = [] }) {
+export default function Home({ newsItems = [], featuredPapers = [], testimonials = [], currentIssue = null }) {
     const [savedPapers, setSavedPapers] = useState({});
 
     const toggleSavePaper = (idx) => {
@@ -122,6 +124,67 @@ export default function Home({ newsItems = [], featuredPapers = [], testimonials
                             <FileText className="w-5 h-5 text-secondary" />
                             <span className="font-bold text-xs uppercase tracking-widest text-primary">ISSN 3108-1819</span>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ─── JOURNAL TRUST SIGNALS (Like Springer/Elsevier) ─── */}
+            <section className="py-10 bg-slate-50 border-b border-slate-100">
+                <div className="container-custom">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                        {[
+                            { icon: FileText, label: 'ISSN (Online)', value: '3108-1819', color: 'text-blue-600', bg: 'bg-blue-50' },
+                            { icon: ExternalLink, label: 'DOI Provider', value: 'CrossRef', color: 'text-green-600', bg: 'bg-green-50' },
+                            { icon: Clock, label: 'Avg. Review', value: '14–21 Days', color: 'text-orange-600', bg: 'bg-orange-50' },
+                            { icon: CheckCircle, label: 'Ethics Standard', value: 'COPE Compliant', color: 'text-emerald-600', bg: 'bg-emerald-50' },
+                            { icon: BarChart2, label: 'Acceptance Rate', value: '~35%', color: 'text-purple-600', bg: 'bg-purple-50' },
+                            { icon: BookMarked, label: 'Open Access', value: '100% Free Read', color: 'text-secondary', bg: 'bg-secondary/5' },
+                        ].map((item, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 10 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.07, duration: 0.5 }}
+                                className="flex flex-col items-center text-center p-4 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-ambient hover:-translate-y-1 transition-all duration-300"
+                            >
+                                <div className={`w-10 h-10 rounded-xl ${item.bg} flex items-center justify-center mb-3`}>
+                                    <item.icon className={`w-5 h-5 ${item.color}`} />
+                                </div>
+                                <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-1">{item.label}</p>
+                                <p className={`font-bold text-sm ${item.color} leading-snug`}>{item.value}</p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ─── INDEXING BADGES (Like MDPI) ─── */}
+            <section className="py-8 bg-white border-b border-slate-100">
+                <div className="container-custom">
+                    <div className="text-center mb-6">
+                        <p className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-400">Indexed & Abstracted In</p>
+                    </div>
+                    <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8">
+                        {[
+                            { name: 'Google Scholar', href: 'https://scholar.google.com', icon: Search },
+                            { name: 'CrossRef', href: 'https://www.crossref.org', icon: Database },
+                            { name: 'BASE', href: 'https://www.base-search.net', icon: Globe },
+                            { name: 'ROAD', href: 'https://road.issn.org', icon: BookOpen },
+                            { name: 'ISSN Portal', href: 'https://portal.issn.org', icon: FileText },
+                        ].map((db, i) => (
+                            <a
+                                key={i}
+                                href={db.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2 px-5 py-3 bg-slate-50 hover:bg-white border border-slate-200 hover:border-secondary/30 hover:shadow-ambient rounded-xl transition-all duration-300 group"
+                                aria-label={`View ${db.name} indexing`}
+                            >
+                                <db.icon className="w-4 h-4 text-slate-400 group-hover:text-secondary transition-colors" />
+                                <span className="text-xs font-black uppercase tracking-wider text-slate-600 group-hover:text-primary transition-colors">{db.name}</span>
+                            </a>
+                        ))}
                     </div>
                 </div>
             </section>
@@ -358,7 +421,7 @@ export default function Home({ newsItems = [], featuredPapers = [], testimonials
                 </div>
             </section>
 
-            {/* ─── 4. TRENDING RESEARCH SECTION (Premium Paper Cards) ─── */}
+            {/* ─── 4. TRENDING RESEARCH SECTION (Real DB Data) ─── */}
             <section className="py-16 lg:py-24 bg-white relative border-y border-slate-100">
                 <div className="container-custom">
                     <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
@@ -379,13 +442,13 @@ export default function Home({ newsItems = [], featuredPapers = [], testimonials
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        {[
-                            { rank: '01', field: 'Multidisciplinary', title: 'Sanmati Spectrum of Knowledge: Volume 37 Overview & Impact Strategies', authors: 'Dr. Namrata Jain, Dr. Ratnesh Kumar Jain', doi: 'https://doi.org/10.5281/zenodo.19710093', stats: '1.8k Views', tag: 'Featured' },
-                            { rank: '02', field: 'Commerce', title: 'Strategic Analysis of Digital Rural Pedagogies and Transformation Factors', authors: 'Dr. Ravi Sharma, Prof. Anita Gupta', stats: '1.2k Views', tag: 'Trending' },
-                            { rank: '03', field: 'Humanities', title: 'The Historical Interlink Between Tradition and Modern Epistemologies', authors: 'Dr. Priya Kumari, Prof. Alok Jain', stats: '940 Views', tag: 'Recommended' },
-                        ].map((paper, i) => (
+                        {(featuredPapers.length > 0 ? featuredPapers.slice(0, 3) : [
+                            { id: null, rank: '01', field: 'Multidisciplinary', title: 'Sanmati Spectrum of Knowledge: Volume 37 Overview & Impact Strategies', authors: 'Dr. Namrata Jain, Dr. Ratnesh Kumar Jain', doi: 'https://doi.org/10.5281/zenodo.19710093', tag: 'Featured' },
+                            { id: null, rank: '02', field: 'Commerce', title: 'Strategic Analysis of Digital Rural Pedagogies and Transformation Factors', authors: 'Dr. Ravi Sharma, Prof. Anita Gupta', tag: 'Trending' },
+                            { id: null, rank: '03', field: 'Humanities', title: 'The Historical Interlink Between Tradition and Modern Epistemologies', authors: 'Dr. Priya Kumari, Prof. Alok Jain', tag: 'Recommended' },
+                        ]).map((paper, i) => (
                             <motion.div
-                                key={i}
+                                key={paper.id || i}
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
@@ -393,9 +456,11 @@ export default function Home({ newsItems = [], featuredPapers = [], testimonials
                                 className="card-glass p-8 flex flex-col hover:-translate-y-2 group cursor-pointer"
                             >
                                 <div className="flex justify-between items-start mb-8">
-                                    <span className="font-serif text-4xl font-black text-slate-100 group-hover:text-secondary/10 transition-colors duration-500">{paper.rank}</span>
+                                    <span className="font-serif text-4xl font-black text-slate-100 group-hover:text-secondary/10 transition-colors duration-500">{String(i + 1).padStart(2, '0')}</span>
                                     <div className="flex items-center gap-2">
-                                        <span className="px-2 py-1 rounded-md bg-slate-50 border border-slate-100 text-[9px] font-black text-slate-500 uppercase tracking-wider">{paper.tag}</span>
+                                        <span className="px-2 py-1 rounded-md bg-slate-50 border border-slate-100 text-[9px] font-black text-slate-500 uppercase tracking-wider">
+                                            {paper.tag || (i === 0 ? 'Featured' : i === 1 ? 'Trending' : 'Recommended')}
+                                        </span>
                                         <button 
                                             onClick={(e) => { e.preventDefault(); toggleSavePaper(i); }}
                                             className="w-7 h-7 rounded-full bg-white flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors border border-slate-100"
@@ -406,18 +471,40 @@ export default function Home({ newsItems = [], featuredPapers = [], testimonials
                                     </div>
                                 </div>
                                 
-                                <span className="text-[9px] font-black uppercase tracking-widest text-secondary mb-3">{paper.field}</span>
-                                <h3 className="font-serif font-bold text-lg text-primary leading-snug mb-4 group-hover:text-secondary transition-colors line-clamp-3">{paper.title}</h3>
+                                <span className="text-[9px] font-black uppercase tracking-widest text-secondary mb-3">
+                                    {paper.category || paper.field || 'Research'}
+                                </span>
+                                <h3 className="font-serif font-bold text-lg text-primary leading-snug mb-4 group-hover:text-secondary transition-colors line-clamp-3">
+                                    {paper.title}
+                                </h3>
                                 <p className="text-slate-500 text-xs font-medium mb-6 line-clamp-1">{paper.authors}</p>
 
                                 <div className="mt-auto pt-5 border-t border-slate-100 flex items-center justify-between">
-                                    <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-400">
-                                        <FileText className="w-3 h-3" />
-                                        {paper.stats}
-                                    </div>
-                                    <Link href="/archive" className="text-[10px] font-black uppercase tracking-widest text-primary flex items-center gap-1 group/arrow">
-                                        Read <ArrowUpRight className="w-3 h-3 group-hover/arrow:translate-x-0.5 transition-transform" />
-                                    </Link>
+                                    {paper.doi ? (
+                                        <a
+                                            href={paper.doi.startsWith('http') ? paper.doi : `https://doi.org/${paper.doi}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 hover:text-secondary transition-colors"
+                                        >
+                                            <FileText className="w-3 h-3" />
+                                            DOI
+                                        </a>
+                                    ) : (
+                                        <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-400">
+                                            <FileText className="w-3 h-3" />
+                                            Open Access
+                                        </div>
+                                    )}
+                                    {paper.id ? (
+                                        <Link href={`/article/${paper.id}`} className="text-[10px] font-black uppercase tracking-widest text-primary flex items-center gap-1 group/arrow">
+                                            Read <ArrowUpRight className="w-3 h-3 group-hover/arrow:translate-x-0.5 transition-transform" />
+                                        </Link>
+                                    ) : (
+                                        <Link href="/archive" className="text-[10px] font-black uppercase tracking-widest text-primary flex items-center gap-1 group/arrow">
+                                            Browse <ArrowUpRight className="w-3 h-3 group-hover/arrow:translate-x-0.5 transition-transform" />
+                                        </Link>
+                                    )}
                                 </div>
                             </motion.div>
                         ))}
@@ -529,7 +616,54 @@ export default function Home({ newsItems = [], featuredPapers = [], testimonials
                 </div>
             </section>
 
-            {/* ─── 7. PIPELINE ─── */}
+            {/* ─── 7. CURRENT ISSUE HIGHLIGHT ─── */}
+            {currentIssue && (
+                <section className="py-12 bg-slate-50 border-y border-slate-100">
+                    <div className="container-custom">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.7 }}
+                            className="flex flex-col md:flex-row items-center justify-between gap-8 bg-white rounded-3xl px-8 py-8 shadow-ambient border border-secondary/10"
+                        >
+                            <div className="flex items-start gap-6">
+                                <div className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center shrink-0">
+                                    <BookOpen className="w-7 h-7 text-secondary" />
+                                </div>
+                                <div>
+                                    <span className="inline-block px-3 py-1 bg-secondary/10 text-secondary text-[9px] font-black uppercase tracking-widest rounded-full mb-2">Current Issue</span>
+                                    <h3 className="text-xl font-serif font-bold text-primary leading-snug">
+                                        Volume {currentIssue.volume}, Issue {currentIssue.number}
+                                        {currentIssue.month_range && ` · ${currentIssue.month_range}`}
+                                        {currentIssue.year && ` ${currentIssue.year}`}
+                                    </h3>
+                                    <p className="text-slate-500 text-sm font-medium mt-1">
+                                        {currentIssue.papers?.length || 0} Research Papers · Open Access · DOI Registered
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="flex gap-3 shrink-0">
+                                <Link
+                                    href="/archive"
+                                    className="inline-flex items-center gap-2 px-6 py-3.5 bg-white border border-slate-200 text-primary font-black text-[10px] uppercase tracking-widest rounded-2xl hover:border-primary transition-all"
+                                >
+                                    All Issues
+                                </Link>
+                                <Link
+                                    href="/archive"
+                                    className="shrink-0 inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-white font-black text-[10px] uppercase tracking-widest rounded-2xl hover:bg-primary/90 transition-all shadow-lg"
+                                >
+                                    Read Issue <ArrowRight className="w-4 h-4" />
+                                </Link>
+                            </div>
+                        </motion.div>
+                    </div>
+                </section>
+            )}
+
+            {/* ─── 7b. PIPELINE ─── */}
+
             <Suspense fallback={<div className="h-40 bg-warm-bg" />}>
                 <PipelineSection />
             </Suspense>
@@ -537,6 +671,11 @@ export default function Home({ newsItems = [], featuredPapers = [], testimonials
             {/* ─── 8. REVIEWS ─── */}
             <Suspense fallback={<div className="h-40 bg-dark" />}>
                 <Testimonials testimonials={testimonials} />
+            </Suspense>
+
+            {/* ─── 8b. FAQ SECTION ─── */}
+            <Suspense fallback={<div className="h-48 bg-white" />}>
+                <HomeFAQ />
             </Suspense>
 
             {/* ─── 9. FINAL CALL TO ACTION ─── */}

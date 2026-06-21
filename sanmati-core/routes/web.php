@@ -4,56 +4,12 @@ use App\Http\Controllers\JournalController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 
-Route::get('/clear-cache', function () {
-    // Fix Vol 2 Issue 2 month_range to April – June
-    \App\Models\Issue::where('volume', '2')->where('number', '2')->update(['month_range' => 'April – June']);
+// NOTE: Public debug routes removed for security (Phase 1 hardening).
+// Cache clearing and data fixes are now handled via:
+//   - php artisan optimize:clear  (CLI)
+//   - Database migrations (permanent data fixes)
 
-    // Fix paper count: remove the extra compilation paper if total > 80
-    $total = \App\Models\Paper::count();
-    if ($total > 80) {
-        // Remove the extra compilation paper (category = 'Complete Issue Book')
-        \App\Models\Paper::where('category', 'Complete Issue Book')->delete();
-    }
 
-    // Fix author name spelling from सिचन कुमार to सचिन कुमार
-    \App\Models\Paper::where('authors', 'like', '%सिचन कुमार%')->update(['authors' => 'सचिन कुमार & डॉ. एस. पद्मप्रिया']);
-
-    Artisan::call('optimize:clear');
-    Artisan::call('cache:clear');
-    Artisan::call('route:clear');
-    Artisan::call('view:clear');
-    Artisan::call('config:clear');
-
-    $issues = \App\Models\Issue::orderBy('volume')->orderBy('number')->get(['volume','number','month_range']);
-    $paperCount = \App\Models\Paper::count();
-    $result = "✅ All fixes applied!\n\nIssues:\n";
-    foreach ($issues as $i) {
-        $result .= "Vol {$i->volume} Issue {$i->number}: {$i->month_range}\n";
-    }
-    $result .= "\nTotal papers: {$paperCount}\n\nAll caches cleared. Go back to the homepage.";
-    return nl2br($result);
-});
-
-// TEMPORARY FIX ROUTE - Remove after running once
-Route::get('/fix-vol2-issue2-date', function () {
-    $updated = \App\Models\Issue::where('volume', '2')->where('number', '2')->update(['month_range' => 'April – June']);
-    
-    // Fix author name spelling from सिचन कुमार to सचिन कुमार
-    $updatedAuthors = \App\Models\Paper::where('id', 63)->update(['authors' => 'सचिन कुमार & डॉ. एस. पद्मप्रिया']);
-    
-    // Fix paper count: remove the extra compilation paper if total > 80
-    if (\App\Models\Paper::count() > 80) {
-        \App\Models\Paper::where('category', 'Complete Issue Book')->delete();
-    }
-
-    \Illuminate\Support\Facades\Artisan::call('cache:clear');
-    $issues = \App\Models\Issue::orderBy('volume')->orderBy('number')->get(['volume','number','month_range']);
-    $result = "Updated {$updated} row(s) for dates. Updated {$updatedAuthors} row(s) for Authors.\n\nCurrent issues:\n";
-    foreach ($issues as $i) {
-        $result .= "Vol {$i->volume} Issue {$i->number}: {$i->month_range}\n";
-    }
-    return nl2br($result) . "<br><br><strong style='color:red'>DONE! Now visit <a href='/archive'>/archive</a> to verify, then ask your developer to remove this route.</strong>";
-});
 
 Route::get('/', [JournalController::class, 'index'])->name('home');
 Route::redirect('/submit', '/submission-guidelines/call-for-papers');

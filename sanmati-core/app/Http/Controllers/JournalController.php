@@ -25,10 +25,18 @@ class JournalController extends Controller
 
     public function index()
     {
+        $currentIssue = Issue::with(['papers' => function ($q) {
+            $q->select('id', 'issue_id', 'title', 'authors', 'doi', 'category');
+        }])
+        ->orderBy('year', 'desc')
+        ->orderBy('number', 'desc')
+        ->first();
+
         return Inertia::render('Home', [
-            'newsItems' => $this->journalService->getActiveNews(),
+            'newsItems'     => $this->journalService->getActiveNews(),
             'featuredPapers' => $this->journalService->getFeaturedPapers(),
-            'testimonials' => $this->journalService->getActiveTestimonials()
+            'testimonials'  => $this->journalService->getActiveTestimonials(),
+            'currentIssue'  => $currentIssue,
         ]);
     }
 

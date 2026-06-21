@@ -24,7 +24,8 @@ export default function CallForPapers() {
         institution: '',
         subject_area: '',
         manuscript: null,
-        consent: false
+        consent: false,
+        website: '', // Honeypot: should always be empty
     });
 
     // Scroll to top when step changes
@@ -154,6 +155,19 @@ export default function CallForPapers() {
                             {/* STEPS 1-3 */}
                             {step < 4 && (
                                 <form onSubmit={handleSubmit} encType="multipart/form-data">
+                                    {/* Honeypot field - visually hidden, bots fill it */}
+                                    <div style={{ position: 'absolute', left: '-9999px', top: '-9999px', opacity: 0, pointerEvents: 'none' }} aria-hidden="true" tabIndex="-1">
+                                        <label htmlFor="website_hp">Website (leave blank)</label>
+                                        <input
+                                            type="text"
+                                            id="website_hp"
+                                            name="website"
+                                            value={data.website || ''}
+                                            onChange={e => setData('website', e.target.value)}
+                                            autoComplete="off"
+                                            tabIndex="-1"
+                                        />
+                                    </div>
                                     <AnimatePresence mode="wait">
                                         
                                         {/* STEP 1: METADATA */}

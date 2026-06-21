@@ -18,6 +18,14 @@ class SubmissionController extends Controller
 
     public function store(Request $request)
     {
+        // Honeypot spam protection: bots fill hidden fields, humans don't
+        if ($request->filled('website')) {
+            // Return a fake success to confuse bots without revealing detection
+            return $request->header('X-Inertia')
+                ? redirect()->back()->with('success', ['message' => 'Manuscript submitted successfully.', 'tracking_id' => 'SJ-BOT000'])
+                : response()->json(['message' => 'Manuscript submitted successfully.', 'tracking_id' => 'SJ-BOT000'], 201);
+        }
+
         $validator = \Illuminate\Support\Facades\Validator::make($request->all(), [
             'title'        => 'required|string|max:255',
             'abstract'     => 'required|string',
@@ -28,6 +36,7 @@ class SubmissionController extends Controller
             'institution'  => 'nullable|string|max:255',
             'subject_area' => 'nullable|string|max:150',
             'manuscript'   => 'required|file|mimes:pdf,doc,docx|max:20480', // 20 MB
+            'website'      => 'max:0', // Honeypot: must be empty
         ]);
 
         if ($validator->fails()) {
