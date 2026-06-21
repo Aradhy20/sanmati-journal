@@ -47,7 +47,7 @@ class SecurityHeaders
                "img-src 'self' data: https:; " .
                "font-src $fontSrc; " .
                "connect-src $connectSrc; " .
-               "frame-src 'self' https://www.googletagmanager.com;";
+               "frame-src 'self' https://www.googletagmanager.com https://www.google.com;";
         
         $response->headers->set('Content-Security-Policy', $csp);
 
