@@ -2,7 +2,7 @@ import React from 'react';
 import MainLayout from '@/Layouts/MainLayout';
 import Seo from '@/Components/Seo';
 import { motion } from 'framer-motion';
-import { BookOpen, Target, FileCheck, Users, Globe, TrendingUp, ExternalLink } from 'lucide-react';
+import { BookOpen, Target, FileCheck, Users, Globe, TrendingUp, ExternalLink, Award } from 'lucide-react';
 
 const Indexing = () => {
     const indexingBodies = [
@@ -42,6 +42,12 @@ const Indexing = () => {
             description: 'All articles are published under an open access model, ensuring research is freely available to readers worldwide without subscription barriers.',
             icon: Users,
             status: 'Full Open Access',
+        },
+        {
+            name: 'Journal Impact Factor (JIF)',
+            description: 'Sanmati Journal has achieved a Journal Impact Factor of 5.3, reflecting the high citation frequency of our peer-reviewed publications.',
+            icon: Award,
+            status: 'Impact Factor: 5.3',
         },
     ];
 

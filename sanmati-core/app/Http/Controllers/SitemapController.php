@@ -61,8 +61,18 @@ class SitemapController extends Controller
                 ['loc' => $baseUrl . '/track-manuscript',                              'priority' => '0.6', 'changefreq' => 'monthly', 'lastmod' => $static_updated],
                 ['loc' => $baseUrl . '/gallery/photo',                                 'priority' => '0.5', 'changefreq' => 'monthly', 'lastmod' => $static_updated],
                 ['loc' => $baseUrl . '/media-news',                                    'priority' => '0.5', 'changefreq' => 'weekly',  'lastmod' => $static_updated],
-                ['loc' => $baseUrl . '/contact',                                       'priority' => '0.6', 'changefreq' => 'yearly',  'lastmod' => $static_updated],
             ];
+
+            // Programmatic Subject Areas
+            $subject_slugs = ['science-technology', 'social-sciences', 'arts-humanities', 'management-commerce', 'law-governance', 'education', 'philosophy'];
+            foreach ($subject_slugs as $slug) {
+                $urls[] = [
+                    'loc' => $baseUrl . '/submission-guidelines/areas/' . $slug,
+                    'priority' => '0.7',
+                    'changefreq' => 'monthly',
+                    'lastmod' => $static_updated,
+                ];
+            }
 
 
             // Dynamic paper pages (Wait, we will map them using their ID since we don't have slugs)

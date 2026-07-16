@@ -87,9 +87,10 @@ export default function Home({ newsItems = [], featuredPapers = [], testimonials
     return (
         <MainLayout
             title="Sanmati Spectrum of Knowledge | National Multidisciplinary Research Journal"
-            description="Sanmati Spectrum is India's leading multidisciplinary peer-reviewed academic journal. Publishing high-quality research papers, thesis, and hardcover books across science, arts, commerce, and law."
-            keywords="multidisciplinary journal india, peer-reviewed research, academic book publication, sanmati spectrum of knowledge, ugc care listed journal, publish book from thesis, national research journal"
+            description="Sanmati Spectrum is India's leading multidisciplinary peer-reviewed academic journal (Impact Factor 5.3). Publishing high-quality research papers, thesis, and hardcover books across science, arts, commerce, and law."
+            keywords="multidisciplinary journal india, peer-reviewed research, academic book publication, sanmati spectrum of knowledge, publish book from thesis, national research journal"
             jsonLd={faqSchema}
+            aiSummary="Sanmati Spectrum of Knowledge & Emerging Discourse is a national multidisciplinary peer-reviewed quarterly academic journal (ISSN 3108-1819, Impact Factor 5.3) published by Sanmati Publication. The journal accepts original, peer-reviewed research articles and book publications in English and Hindi across Science, Humanities, Law, Education, and Commerce."
         >
             <Suspense fallback={
                 <div className="min-h-[95vh] flex flex-col gap-4 items-center justify-center text-primary font-bold bg-warm-bg">
@@ -110,7 +111,7 @@ export default function Home({ newsItems = [], featuredPapers = [], testimonials
                         </div>
                         <div className="flex items-center gap-2">
                             <BookOpen className="w-5 h-5 text-secondary" />
-                            <span className="font-bold text-xs uppercase tracking-widest text-primary">UGC-CARE (Proposed)</span>
+                            <span className="font-bold text-xs uppercase tracking-widest text-primary">Google Scholar Indexed</span>
                         </div>
                         <div className="flex items-center gap-2">
                             <Globe className="w-5 h-5 text-secondary" />
@@ -137,7 +138,7 @@ export default function Home({ newsItems = [], featuredPapers = [], testimonials
                             { icon: ExternalLink, label: 'DOI Provider', value: 'CrossRef', color: 'text-green-600', bg: 'bg-green-50' },
                             { icon: Clock, label: 'Avg. Review', value: '14–21 Days', color: 'text-orange-600', bg: 'bg-orange-50' },
                             { icon: CheckCircle, label: 'Ethics Standard', value: 'COPE Compliant', color: 'text-emerald-600', bg: 'bg-emerald-50' },
-                            { icon: BarChart2, label: 'Acceptance Rate', value: '~35%', color: 'text-purple-600', bg: 'bg-purple-50' },
+                            { icon: Award, label: 'Impact Factor', value: '5.3', color: 'text-purple-600', bg: 'bg-purple-50' },
                             { icon: BookMarked, label: 'Open Access', value: '100% Free Read', color: 'text-secondary', bg: 'bg-secondary/5' },
                         ].map((item, i) => (
                             <motion.div
@@ -388,9 +389,9 @@ export default function Home({ newsItems = [], featuredPapers = [], testimonials
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.15, duration: 0.8 }}
-                                className="group flex flex-col max-w-[300px] mx-auto w-full"
+                                className="group flex flex-col max-w-[300px] mx-auto w-full h-full"
                             >
-                                <div className="relative aspect-[3/4] rounded-[2rem] overflow-hidden shadow-ambient hover:shadow-ambient-lg transition-all duration-700 mb-6">
+                                <div className="relative aspect-[3/4] rounded-[2rem] overflow-hidden shadow-ambient hover:shadow-ambient-lg transition-all duration-700 mb-6 shrink-0">
                                     <img src={book.img} alt={book.title} className="w-full h-full object-cover scale-[1.01] group-hover:scale-105 transition-transform duration-[1.5s]" loading="lazy" decoding="async" />
                                     <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                     
@@ -405,7 +406,7 @@ export default function Home({ newsItems = [], featuredPapers = [], testimonials
                                     </div>
                                 </div>
                                 
-                                <div className="px-2">
+                                <div className="px-2 flex-grow flex flex-col">
                                     <div className="flex items-center justify-between mb-2">
                                         <span className="text-secondary font-black text-[9px] tracking-[0.2em] uppercase">{book.genre}</span>
                                         <span className="text-slate-400 text-[10px] font-bold">{book.format}</span>
@@ -413,7 +414,7 @@ export default function Home({ newsItems = [], featuredPapers = [], testimonials
                                     <h3 className="text-xl font-serif font-bold text-primary mb-3 group-hover:text-secondary transition-colors leading-tight">
                                         {book.title}
                                     </h3>
-                                    <p className="text-slate-500 text-[13px] leading-relaxed line-clamp-2">{book.excerpt}</p>
+                                    <p className="text-slate-500 text-[13px] leading-relaxed line-clamp-2 mt-auto">{book.excerpt}</p>
                                 </div>
                             </motion.div>
                         ))}
@@ -453,7 +454,7 @@ export default function Home({ newsItems = [], featuredPapers = [], testimonials
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.1, duration: 0.7 }}
-                                className="card-glass p-8 flex flex-col hover:-translate-y-2 group cursor-pointer"
+                                className="card-glass p-8 flex flex-col hover:-translate-y-2 group cursor-pointer h-full"
                             >
                                 <div className="flex justify-between items-start mb-8">
                                     <span className="font-serif text-4xl font-black text-slate-100 group-hover:text-secondary/10 transition-colors duration-500">{String(i + 1).padStart(2, '0')}</span>
@@ -545,6 +546,7 @@ export default function Home({ newsItems = [], featuredPapers = [], testimonials
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: idx * 0.05, duration: 0.5 }}
+                                className="h-full"
                             >
                                 <Link 
                                     href={`/submission-guidelines/areas/${cat.slug}`}
@@ -578,7 +580,7 @@ export default function Home({ newsItems = [], featuredPapers = [], testimonials
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
                         {/* Member 1 */}
-                        <motion.div {...fadeInUp} className="group bg-slate-50 rounded-[2.5rem] p-8 border border-slate-100 flex flex-col sm:flex-row gap-8 items-center sm:items-start hover:bg-white hover:shadow-ambient-lg transition-all duration-700">
+                        <motion.div {...fadeInUp} className="group bg-slate-50 rounded-[2.5rem] p-8 border border-slate-100 flex flex-col sm:flex-row gap-8 items-center sm:items-start hover:bg-white hover:shadow-ambient-lg transition-all duration-700 h-full">
                             <div className="w-32 h-32 rounded-[2rem] overflow-hidden shadow-lg shrink-0 border-4 border-white">
                                 <picture>
                                     <source srcSet="/mam.webp" type="image/webp" />
@@ -599,7 +601,7 @@ export default function Home({ newsItems = [], featuredPapers = [], testimonials
                         </motion.div>
 
                         {/* Member 2 */}
-                        <motion.div {...fadeInUp} transition={{ delay: 0.15 }} className="group bg-slate-50 rounded-[2.5rem] p-8 border border-slate-100 flex flex-col sm:flex-row gap-8 items-center sm:items-start hover:bg-white hover:shadow-ambient-lg transition-all duration-700">
+                        <motion.div {...fadeInUp} transition={{ delay: 0.15 }} className="group bg-slate-50 rounded-[2.5rem] p-8 border border-slate-100 flex flex-col sm:flex-row gap-8 items-center sm:items-start hover:bg-white hover:shadow-ambient-lg transition-all duration-700 h-full">
                             <div className="w-32 h-32 rounded-[2rem] overflow-hidden shadow-lg shrink-0 border-4 border-white">
                                 <picture>
                                     <source srcSet="/sir.webp" type="image/webp" />

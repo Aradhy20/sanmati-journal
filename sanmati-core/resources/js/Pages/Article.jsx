@@ -14,6 +14,8 @@ export default function Article({ paper }) {
         ? `${paper.issue.month_range ? paper.issue.month_range + ' ' : ''}${paper.issue.year}`
         : new Date(paper.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
+    const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://sanmatijournal.in';
+
     const scholarlyArticleJsonLd = {
         schema: {
             "@context": "https://schema.org",
@@ -27,11 +29,11 @@ export default function Article({ paper }) {
             "datePublished": paper.issue?.year ? String(paper.issue.year) : new Date(paper.created_at).toISOString().split('T')[0],
             "isPartOf": {
                 "@type": "Periodical",
-                "name": "Sanmati Journal",
+                "name": "Sanmati Spectrum of Knowledge & Emerging Discourse",
                 "issn": "3108-1819"
             },
             "identifier": paper.doi ? { "@type": "PropertyValue", "propertyID": "DOI", "value": paper.doi } : undefined,
-            "url": `${window.location.origin}/download/paper/${paper.id}`
+            "url": `${baseUrl}/download/paper/${paper.id}`
         },
         breadcrumb: [
             { name: 'Home', url: '/' },
@@ -41,7 +43,7 @@ export default function Article({ paper }) {
     };
 
     return (
-        <MainLayout jsonLd={scholarlyArticleJsonLd}>
+        <MainLayout jsonLd={scholarlyArticleJsonLd} aiSummary={paper.abstract}>
             <Head>
                 <title>{`${paper.title} | Sanmati Journal`}</title>
                 <meta name="description" content={paper.meta_description || paper.abstract.substring(0, 160)} />
@@ -49,8 +51,17 @@ export default function Article({ paper }) {
                 <meta name="citation_title" content={paper.title} />
                 <meta name="citation_author" content={paper.authors} />
                 <meta name="citation_publication_date" content={pubDate} />
-                <meta name="citation_journal_title" content="Sanmati Journal" />
-                <meta name="citation_pdf_url" content={`${window.location.origin}/download/paper/${paper.id}`} />
+                <meta name="citation_journal_title" content="Sanmati Spectrum of Knowledge & Emerging Discourse" />
+                <meta name="citation_pdf_url" content={`${baseUrl}/download/paper/${paper.id}`} />
+
+                {/* Dublin Core Metatags for Academic AI Agents */}
+                <meta name="DC.title" content={paper.title} />
+                <meta name="DC.creator" content={paper.authors} />
+                <meta name="DC.date" content={pubDate} />
+                <meta name="DC.publisher" content="Sanmati Spectrum of Knowledge & Emerging Discourse" />
+                <meta name="DC.format" content="application/pdf" />
+                <meta name="DC.language" content="en" />
+                {paper.doi && <meta name="DC.identifier" content={paper.doi} />}
             </Head>
 
             <PageHeader 

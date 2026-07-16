@@ -153,7 +153,7 @@ export default function SearchModal({ isOpen, onClose }) {
                                                     >
                                                         {book.cover_image && (
                                                             <div className="w-10 h-12 rounded border border-gray-100 overflow-hidden flex-shrink-0">
-                                                                <img src={"/storage/" + book.cover_image} className="w-full h-full object-cover" loading="lazy"/>
+                                                                <img src={"/storage/" + book.cover_image} alt={book.title} className="w-full h-full object-cover" loading="lazy"/>
                                                             </div>
                                                         )}
                                                         <div className="flex-1 min-w-0">

@@ -221,8 +221,8 @@ const Hero = () => {
                                     <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5" />
                                 </div>
                                 <div>
-                                    <p className="text-[11px] sm:text-sm font-black text-primary leading-none">UGC CARE</p>
-                                    <p className="text-[8px] sm:text-[9px] font-bold text-slate-500 mt-0.5 sm:mt-1 uppercase">Indexed</p>
+                                    <p className="text-[11px] sm:text-sm font-black text-primary leading-none">Crossref</p>
+                                    <p className="text-[8px] sm:text-[9px] font-bold text-slate-500 mt-0.5 sm:mt-1 uppercase">DOI Indexed</p>
                                 </div>
                             </motion.div>
 
@@ -236,8 +236,8 @@ const Hero = () => {
                                     <Trophy className="w-4 h-4 sm:w-5 sm:h-5" />
                                 </div>
                                 <div>
-                                    <p className="text-[11px] sm:text-sm font-black text-primary leading-none">High Impact</p>
-                                    <p className="text-[8px] sm:text-[9px] font-bold text-slate-500 mt-0.5 sm:mt-1 uppercase">Rating</p>
+                                    <p className="text-[11px] sm:text-sm font-black text-primary leading-none">5.3 Impact Factor</p>
+                                    <p className="text-[8px] sm:text-[9px] font-bold text-slate-500 mt-0.5 sm:mt-1 uppercase">CrossRef Evaluation</p>
                                 </div>
                             </motion.div>
 

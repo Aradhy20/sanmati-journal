@@ -5,11 +5,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const MobileNavDropdown = ({ item, isActive, setIsOpen }) => {
     const [isExpanded, setIsExpanded] = useState(false);
+    const hasActiveChild = item.dropdown && item.dropdown.some(subItem => isActive(subItem.href));
     return (
         <div className="space-y-1">
             <button 
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="w-full flex items-center justify-between px-4 min-h-[48px] text-sm font-bold text-dark hover:text-primary hover:bg-primary/5 rounded-xl transition-colors"
+                className={`w-full flex items-center justify-between px-4 min-h-[48px] text-sm font-bold rounded-xl transition-colors font-sans uppercase tracking-wider ${hasActiveChild
+                    ? 'text-primary bg-primary/5'
+                    : 'text-dark hover:text-primary hover:bg-primary/5'
+                    }`}
                 aria-expanded={isExpanded}
             >
                 {item.name}
@@ -156,6 +160,14 @@ const Navbar = ({ onOpenSearch }) => {
         return url.startsWith(href);
     };
 
+    const isParentActive = (item) => {
+        if (item.href !== '#' && isActive(item.href)) return true;
+        if (item.dropdown) {
+            return item.dropdown.some(subItem => isActive(subItem.href));
+        }
+        return false;
+    };
+
     return (
         <>
         <header className="sticky top-0 z-50 flex flex-col w-full overflow-x-visible">
@@ -202,7 +214,7 @@ const Navbar = ({ onOpenSearch }) => {
                                         <button
                                             aria-haspopup="true"
                                             aria-expanded={activeDropdown === item.name}
-                                            className={`relative group/nav flex items-center gap-1 text-[10px] 2xl:text-[11px] font-black uppercase tracking-wider 2xl:tracking-[0.15em] px-1.5 2xl:px-3 py-2 rounded-lg transition-all duration-300 font-sans ${activeDropdown === item.name || isActive(item.href)
+                                            className={`relative group/nav flex items-center gap-1 text-[10px] 2xl:text-[11px] font-black uppercase tracking-wider 2xl:tracking-[0.15em] px-1.5 2xl:px-3 py-2 rounded-lg transition-all duration-300 font-sans ${activeDropdown === item.name || isParentActive(item)
                                                 ? 'text-primary'
                                                 : 'text-slate-600 hover:text-primary'
                                                 }`}
@@ -211,7 +223,7 @@ const Navbar = ({ onOpenSearch }) => {
                                             {item.dropdown && (
                                                 <ChevronDown className={`w-3 h-3 transition-transform duration-500 ${activeDropdown === item.name ? 'rotate-180 text-secondary' : 'text-slate-400 group-hover/nav:text-secondary'}`} />
                                             )}
-                                            <span className={`absolute bottom-0 left-3 right-3 h-0.5 bg-secondary rounded-full origin-left transition-transform duration-500 scale-x-0 ${activeDropdown === item.name ? 'scale-x-100' : 'group-hover/nav:scale-x-100'}`} />
+                                            <span className={`absolute bottom-0 left-3 right-3 h-0.5 bg-secondary rounded-full origin-left transition-transform duration-500 scale-x-0 ${activeDropdown === item.name || isParentActive(item) ? 'scale-x-100' : 'group-hover/nav:scale-x-100'}`} />
                                         </button>
                                     ) : (
                                         <Link

@@ -23,6 +23,10 @@ export default function JournalInfo() {
                                 <td className="py-6 px-8 text-dark/80 font-mono text-primary-dark bg-primary/5/30">3108-1819</td>
                             </tr>
                             <tr className="hover:bg-warm-bg transition-colors">
+                                <th className="py-6 px-8 text-dark font-bold bg-warm-bg/50 border-r border-slate-100">Journal Impact Factor</th>
+                                <td className="py-6 px-8 text-dark/80 font-bold text-secondary">5.3 (CrossRef Indexed)</td>
+                            </tr>
+                            <tr className="hover:bg-warm-bg transition-colors">
                                 <th className="py-6 px-8 text-dark font-bold bg-warm-bg/50 border-r border-slate-100">Publication Format</th>
                                 <td className="py-6 px-8 text-dark/80">Print (Offline)</td>
                             </tr>

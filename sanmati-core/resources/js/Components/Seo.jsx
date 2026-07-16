@@ -1,15 +1,15 @@
 import { Head, usePage } from '@inertiajs/react';
 
-export default function Seo({ title, description, keywords, image, type = 'website', author, publishedTime, jsonLd }) {
+export default function Seo({ title, description, keywords, image, type = 'website', author, publishedTime, jsonLd, aiSummary }) {
     const siteName = "Sanmati Spectrum of Knowledge";
-    const defaultDescription = "Top-ranking research journal in India. Publish your research paper fast. A high-authority, peer-reviewed, UGC-approved (proposed) multidisciplinary academic journal indexing high-quality research and books.";
-    const defaultKeywords = "UGC CARE listed journal, peer reviewed journal India, multidisciplinary research journal, publish research paper India, international journal India, sanmati spectrum of knowledge, academic publishing, open access journal";
+    const defaultDescription = "Top-ranking research journal in India (Impact Factor 5.3). Publish your research paper fast. A high-authority, peer-reviewed multidisciplinary academic journal indexing high-quality research and books.";
+    const defaultKeywords = "peer reviewed journal India, multidisciplinary research journal, publish research paper India, international journal India, sanmati spectrum of knowledge, academic publishing, open access journal";
     const defaultImage = "/logo.jpg";
     const siteUrl = "https://sanmatijournal.in";
 
     const { url } = usePage();
     const fullTitle = title ? `${title} | ${siteName}` : siteName;
-    const finalDescription = description || defaultDescription;
+    const finalDescription = description || aiSummary || defaultDescription;
     const finalKeywords = keywords || defaultKeywords;
     const finalImage = image ? (image.startsWith('http') ? image : `${siteUrl}${image}`) : `${siteUrl}${defaultImage}`;
     const canonicalUrl = `${siteUrl}${url}`;
@@ -48,6 +48,8 @@ export default function Seo({ title, description, keywords, image, type = 'websi
         <Head>
             {/* Standard Metadata */}
             <title>{fullTitle}</title>
+            {aiSummary && <meta name="ai-agent-summary" content={aiSummary} />}
+            {aiSummary && <meta name="summary" content={aiSummary} />}
             <meta name="description" content={finalDescription} />
             <meta name="keywords" content={finalKeywords} />
             <meta name="author" content={author || "Sanmati Journal"} />

@@ -291,7 +291,7 @@ export default function Archive({ issues }) {
                             <select 
                                 value={selectedVolume}
                                 onChange={(e) => setSelectedVolume(e.target.value)}
-                                className="px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0F4C81]/20 focus:border-[#0F4C81] transition-all cursor-pointer font-medium text-slate-700 flex-1 sm:flex-none"
+                                className="px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0F4C81]/20 focus:border-[#0F4C81] transition-all cursor-pointer font-medium text-slate-700 w-full sm:w-[180px]"
                             >
                                 <option value="all">All Volumes</option>
                                 {volumeOptions.map(opt => (
@@ -303,7 +303,7 @@ export default function Archive({ issues }) {
                             <select 
                                 value={selectedAuthor}
                                 onChange={(e) => setSelectedAuthor(e.target.value)}
-                                className="px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0F4C81]/20 focus:border-[#0F4C81] transition-all cursor-pointer font-medium text-slate-700 flex-1 sm:flex-none max-w-[200px]"
+                                className="px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0F4C81]/20 focus:border-[#0F4C81] transition-all cursor-pointer font-medium text-slate-700 w-full sm:w-[180px]"
                             >
                                 <option value="all">All Authors</option>
                                 {allAuthors.map((author, index) => (
@@ -315,7 +315,7 @@ export default function Archive({ issues }) {
                             <select 
                                 value={selectedCategory}
                                 onChange={(e) => setSelectedCategory(e.target.value)}
-                                className="px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0F4C81]/20 focus:border-[#0F4C81] transition-all cursor-pointer font-medium text-slate-700 flex-1 sm:flex-none max-w-[200px]"
+                                className="px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0F4C81]/20 focus:border-[#0F4C81] transition-all cursor-pointer font-medium text-slate-700 w-full sm:w-[180px]"
                             >
                                 <option value="all">All Categories</option>
                                 {allCategories.map((category, index) => (

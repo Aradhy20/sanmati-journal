@@ -209,6 +209,7 @@ function ContactForm() {
                     onChange={e => setData('firstName', e.target.value)}
                     error={errors.firstName}
                     disabled={processing}
+                    autoComplete="given-name"
                     required
                 />
                 <FloatInput
@@ -220,6 +221,7 @@ function ContactForm() {
                     onChange={e => setData('lastName', e.target.value)}
                     error={errors.lastName}
                     disabled={processing}
+                    autoComplete="family-name"
                     required
                 />
             </div>
@@ -234,6 +236,7 @@ function ContactForm() {
                     onChange={e => setData('email', e.target.value)}
                     error={errors.email}
                     disabled={processing}
+                    autoComplete="email"
                     required
                 />
                 <div className="relative">

@@ -10,7 +10,7 @@ import { Link } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 import SearchModal from '../Components/SearchModal';
 
-export default function MainLayout({ children, title, description, keywords, jsonLd }) {
+export default function MainLayout({ children, title, description, keywords, jsonLd, aiSummary }) {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
 
     const [isScrolled, setIsScrolled] = useState(false);
@@ -42,7 +42,7 @@ export default function MainLayout({ children, title, description, keywords, jso
         <div className="min-h-screen flex flex-col bg-warm-bg font-sans antialiased relative overflow-x-hidden selection:bg-primary/10 selection:text-primary">
             {/* Scroll Progress Bar */}
             <motion.div style={{ scaleX }} className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-accent origin-left z-[110]" />
-            <Seo title={title} description={description} keywords={keywords} jsonLd={jsonLd} />
+            <Seo title={title} description={description} keywords={keywords} jsonLd={jsonLd} aiSummary={aiSummary} />
             <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-6 focus:py-3 focus:bg-primary focus:text-white focus:rounded-xl focus:shadow-xl font-bold">
                 Skip to main content
             </a>
