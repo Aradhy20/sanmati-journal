@@ -1,167 +1,236 @@
 import { Link } from '@inertiajs/react';
-import { Mail, Phone, MapPin, Linkedin, Facebook, Twitter, ArrowRight, Send, Globe, ShieldCheck, BookOpen, Award } from 'lucide-react';
+import { useState } from 'react';
+import {
+    Mail, Phone, MapPin, ExternalLink, ArrowRight, BookOpen,
+    FileText, Users, Shield, Award, Rss, ChevronRight,
+    Globe, SendHorizonal, Heart, Star
+} from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const Footer = () => {
-    return (
-        <footer className="bg-primary text-slate-300 pt-20 pb-8 relative overflow-hidden">
-            {/* Premium Lighting Emitters */}
-            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-secondary/10 rounded-full blur-[140px] translate-x-1/3 -translate-y-1/3 pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] -translate-x-1/3 translate-y-1/3 pointer-events-none" />
-            
-            <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+const FOOTER_LINKS = {
+    journal: {
+        title: 'The Journal',
+        links: [
+            { name: 'About Journal',     href: '/basic-info/about-journal' },
+            { name: 'Vision & Mission',  href: '/basic-info/vision-mission' },
+            { name: 'Objective & Scope', href: '/basic-info/objective-scope' },
+            { name: 'Journal Info',      href: '/basic-info/journal-info' },
+            { name: 'Indexing',          href: '/basic-info/indexing' },
+            { name: 'About Foundation',  href: '/about-foundation' },
+        ],
+    },
+    editorial: {
+        title: 'Editorial',
+        links: [
+            { name: 'Editors',         href: '/editorial-team/editors' },
+            { name: 'Editorial Board', href: '/editorial-team/editorial-board' },
+            { name: 'Advisory Board',  href: '/editorial-team/advisory-board' },
+            { name: 'Technical Team',  href: '/editorial-team/technical-team' },
+        ],
+    },
+    authors: {
+        title: 'For Authors',
+        links: [
+            { name: 'Call for Papers',       href: '/submission-guidelines/call-for-papers' },
+            { name: 'Author Guidelines',     href: '/submission-guidelines' },
+            { name: 'Research Areas',        href: '/submission-guidelines/areas' },
+            { name: 'Publication Charges',   href: '/submission-guidelines/publication-charges' },
+            { name: 'Review Process',        href: '/submission-guidelines/review-process' },
+            { name: 'Track Manuscript',      href: '/track-manuscript' },
+        ],
+    },
+    policy: {
+        title: 'Policies',
+        links: [
+            { name: 'Publication Ethics', href: '/publication-policy/ethics' },
+            { name: 'Plagiarism Policy',  href: '/publication-policy/plagiarism' },
+            { name: 'Peer Review',        href: '/publication-policy/peer-review' },
+            { name: 'Compliance',         href: '/compliance' },
+            { name: 'Awards',             href: '/awards' },
+            { name: 'Contact Us',         href: '/contact' },
+        ],
+    },
+};
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b border-white/5">
-                    {/* Brand Section */}
-                    <div className="lg:col-span-4 space-y-8">
-                        <Link href="/" className="inline-block group">
-                            <div className="flex items-center gap-4 mb-2">
-                                <div className="w-14 h-14 rounded-2xl bg-white p-1.5 shadow-[0_8px_30px_rgb(0,0,0,0.3)] group-hover:scale-105 transition-transform duration-500">
-                                    <img loading="lazy" src="/logo.jpg" alt="Sanmati Logo" className="w-full h-full object-contain" />
-                                </div>
+const INDEXING_BADGES = [
+    { name: 'CrossRef DOI', color: 'bg-orange-100 text-orange-700 border-orange-200' },
+    { name: 'Google Scholar', color: 'bg-blue-100 text-blue-700 border-blue-200' },
+    { name: 'ISSN Portal', color: 'bg-purple-100 text-purple-700 border-purple-200' },
+    { name: 'ResearchGate', color: 'bg-teal-100 text-teal-700 border-teal-200' },
+    { name: 'Academia.edu', color: 'bg-slate-100 text-slate-700 border-slate-200' },
+    { name: 'Open Access', color: 'bg-emerald-100 text-emerald-700 border-emerald-200' },
+];
+
+export default function Footer() {
+    const [email, setEmail] = useState('');
+    const [status, setStatus] = useState('idle'); // idle | loading | success | error
+    const year = new Date().getFullYear();
+
+    const handleSubscribe = async (e) => {
+        e.preventDefault();
+        if (!email || status === 'loading') return;
+        setStatus('loading');
+        try {
+            const res = await fetch('/api/newsletter/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content },
+                body: JSON.stringify({ email }),
+            });
+            setStatus(res.ok ? 'success' : 'error');
+            if (res.ok) setEmail('');
+        } catch {
+            setStatus('error');
+        }
+        setTimeout(() => setStatus('idle'), 4000);
+    };
+
+    return (
+        <footer className="relative bg-slate-900 text-white overflow-hidden" role="contentinfo">
+            {/* Decorative gradient top */}
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-secondary via-accent to-emerald" aria-hidden="true" />
+            <div className="absolute -top-40 -right-40 w-96 h-96 bg-secondary/5 rounded-full blur-[100px] pointer-events-none" aria-hidden="true" />
+            <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-accent/5 rounded-full blur-[100px] pointer-events-none" aria-hidden="true" />
+
+            <div className="relative z-10">
+                {/* ── Top Section ── */}
+                <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8">
+
+                        {/* Brand Column (wider) */}
+                        <div className="lg:col-span-4 space-y-6">
+                            <Link href="/" className="flex items-center gap-3 group w-fit">
+                                <img
+                                    src="/logo.jpg"
+                                    alt="Sanmati Spectrum Journal"
+                                    className="h-12 w-12 rounded-xl object-cover border-2 border-white/10 group-hover:border-secondary/50 transition-colors duration-300"
+                                />
                                 <div>
-                                    <h3 className="text-2xl font-serif font-bold text-white tracking-tight leading-none mb-1">Sanmati Spectrum</h3>
-                                    <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#C8A96B]">ISSN: 3108-1819</span>
+                                    <div className="text-base font-black text-white leading-tight">Sanmati Spectrum</div>
+                                    <div className="text-xs text-white/50 leading-tight">of Knowledge & Emerging Discourse</div>
+                                </div>
+                            </Link>
+
+                            <p className="text-sm text-white/60 leading-relaxed max-w-xs">
+                                A national multidisciplinary peer-reviewed quarterly research journal dedicated to advancing scholarly discourse across disciplines.
+                            </p>
+
+                            {/* Key Badges */}
+                            <div className="flex flex-wrap gap-2">
+                                <span className="badge-issn text-[10px]">ISSN 3108-1819</span>
+                                <span className="badge-open text-[10px]">Open Access</span>
+                                <span className="inline-flex items-center gap-1 px-2.5 py-1 text-[10px] font-bold bg-amber-900/30 text-amber-400 border border-amber-800/40 rounded-md">
+                                    <Star className="w-2.5 h-2.5" />IF 5.3
+                                </span>
+                            </div>
+
+                            {/* Contact */}
+                            <div className="space-y-2.5 text-sm text-white/60">
+                                <a href="mailto:sanmatijournal@gmail.com" className="flex items-center gap-2.5 hover:text-white transition-colors">
+                                    <Mail className="w-3.5 h-3.5 text-secondary flex-shrink-0" />
+                                    sanmatijournal@gmail.com
+                                </a>
+                                <a href="tel:+918979782949" className="flex items-center gap-2.5 hover:text-white transition-colors">
+                                    <Phone className="w-3.5 h-3.5 text-secondary flex-shrink-0" />
+                                    +91 89797 82949
+                                </a>
+                                <div className="flex items-start gap-2.5">
+                                    <MapPin className="w-3.5 h-3.5 text-secondary flex-shrink-0 mt-0.5" />
+                                    <span>Patel Nagar, Haridwar, Uttarakhand 249401, India</span>
                                 </div>
                             </div>
-                        </Link>
-                        <p className="text-sm leading-relaxed max-w-sm font-medium text-slate-400/90">
-                            A premier multidisciplinary research archive dedicated to the relentless pursuit of truth, scientific innovation, and cultural advancement.
-                        </p>
-                        <div className="flex items-center gap-3">
-                            {[
-                                { icon: Linkedin, href: "https://www.linkedin.com/company/sanamti-journal/", label: "LinkedIn" },
-                                { icon: Facebook, href: "https://www.facebook.com/profile.php?id=61584411285548", label: "Facebook" },
-                                { icon: Twitter, href: "#", label: "Twitter" }
-                            ].map((social, i) => (
-                                <a
-                                    key={i}
-                                    href={social.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label={social.label}
-                                    className="size-10 rounded-xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center text-slate-400 hover:text-secondary hover:bg-white/[0.06] hover:border-secondary/30 transition-all duration-300 group"
-                                >
-                                    <social.icon className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
-                                </a>
-                            ))}
+
+                            {/* Newsletter */}
+                            <div className="space-y-3">
+                                <div className="text-xs font-black uppercase tracking-widest text-white/40">Stay Updated</div>
+                                <form onSubmit={handleSubscribe} className="flex gap-2">
+                                    <input
+                                        type="email"
+                                        value={email}
+                                        onChange={e => setEmail(e.target.value)}
+                                        placeholder="Your email address"
+                                        className="flex-1 px-3.5 py-2.5 rounded-xl bg-white/10 border border-white/10 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-secondary/50 focus:bg-white/15 transition-all duration-200"
+                                        required
+                                        disabled={status === 'loading' || status === 'success'}
+                                    />
+                                    <button
+                                        type="submit"
+                                        disabled={status === 'loading' || status === 'success'}
+                                        className="px-4 py-2.5 rounded-xl bg-secondary hover:bg-secondary-dark disabled:opacity-50 transition-all duration-200 flex-shrink-0"
+                                        aria-label="Subscribe"
+                                    >
+                                        <SendHorizonal className="w-4 h-4 text-white" />
+                                    </button>
+                                </form>
+                                {status === 'success' && <p className="text-xs text-emerald-400">✓ Subscribed successfully!</p>}
+                                {status === 'error'   && <p className="text-xs text-red-400">Something went wrong. Try again.</p>}
+                            </div>
                         </div>
+
+                        {/* Link Columns */}
+                        {Object.values(FOOTER_LINKS).map((section) => (
+                            <div key={section.title} className="lg:col-span-2 space-y-4">
+                                <h3 className="text-xs font-black uppercase tracking-[0.2em] text-white/40">
+                                    {section.title}
+                                </h3>
+                                <ul className="space-y-2">
+                                    {section.links.map(link => (
+                                        <li key={link.href}>
+                                            <Link
+                                                href={link.href}
+                                                className="group flex items-center gap-1.5 text-sm text-white/60 hover:text-white transition-colors duration-200"
+                                            >
+                                                <ChevronRight className="w-3 h-3 text-secondary/60 group-hover:text-secondary transition-colors flex-shrink-0 -ml-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-200" />
+                                                {link.name}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
                     </div>
+                </div>
 
-                    {/* Link Groups */}
-                    <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-12">
-                        <div>
-                            <h4 className="text-sm font-bold text-white mb-6 font-serif flex items-center gap-2">
-                                <span className="w-1 h-4 bg-secondary rounded-full block"></span>
-                                Navigation
-                            </h4>
-                            <ul className="space-y-3.5">
-                                {[
-                                    { name: 'Home Archive', href: '/archive' },
-                                    { name: 'Call for Papers', href: '/submission-guidelines/call-for-papers' },
-                                    { name: 'Aim & Scope', href: '/about/aim-scope' },
-                                    { name: 'Indexing', href: '/indexing' },
-                                ].map((link, i) => (
-                                    <li key={i}>
-                                        <Link href={link.href} className="text-[13px] font-medium text-slate-400 hover:text-white hover:translate-x-1 transition-all duration-300 flex items-center gap-2 inline-flex">
-                                            {link.name}
-                                        </Link>
-                                    </li>
+                {/* ── Indexing Strip ── */}
+                <div className="border-t border-white/8 py-6">
+                    <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="flex flex-col sm:flex-row items-center gap-4">
+                            <span className="text-[10px] font-black uppercase tracking-widest text-white/30 flex-shrink-0">
+                                Indexed & Abstracted In
+                            </span>
+                            <div className="flex flex-wrap items-center gap-2">
+                                {INDEXING_BADGES.map(b => (
+                                    <span
+                                        key={b.name}
+                                        className={`inline-flex items-center px-2.5 py-1 rounded-lg text-[10px] font-bold border ${b.color} opacity-80 hover:opacity-100 transition-opacity`}
+                                    >
+                                        {b.name}
+                                    </span>
                                 ))}
-                            </ul>
-                        </div>
-
-                        <div>
-                            <h4 className="text-sm font-bold text-white mb-6 font-serif flex items-center gap-2">
-                                <span className="w-1 h-4 bg-secondary rounded-full block"></span>
-                                Governance
-                            </h4>
-                            <ul className="space-y-3.5">
-                                {[
-                                    { name: 'Editorial Board', href: '/editorial-team/editorial-board' },
-                                    { name: 'Advisory Board', href: '/editorial-team/advisory-board' },
-                                    { name: 'Peer Review Policy', href: '/publication-policy/peer-review' },
-                                    { name: 'Ethics Statement', href: '/publication-policy/ethics' },
-                                ].map((link, i) => (
-                                    <li key={i}>
-                                        <Link href={link.href} className="text-[13px] font-medium text-slate-400 hover:text-white hover:translate-x-1 transition-all duration-300 flex items-center gap-2 inline-flex">
-                                            {link.name}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        <div>
-                            <h4 className="text-sm font-bold text-white mb-6 font-serif flex items-center gap-2">
-                                <span className="w-1 h-4 bg-secondary rounded-full block"></span>
-                                Editorial Contact
-                            </h4>
-                            <div className="space-y-5">
-                                <div className="flex gap-3.5">
-                                    <MapPin className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
-                                    <div className="text-xs text-slate-400 font-medium leading-relaxed">
-                                        Sanmati Publication<br />Moradabad – 244001, Bharat
-                                    </div>
-                                </div>
-                                <div className="flex gap-3.5">
-                                    <Mail className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
-                                    <div className="space-y-1.5">
-                                        <a href="mailto:editor-in-chief@sanmatijournal.in" className="text-xs text-slate-400 hover:text-white font-semibold transition-colors block">
-                                            editor-in-chief@sanmatijournal.in
-                                        </a>
-                                        <a href="mailto:managing_editor@sanmatijournal.in" className="text-xs text-slate-400 hover:text-white font-semibold transition-colors block">
-                                            managing_editor@sanmatijournal.in
-                                        </a>
-                                        <a href="mailto:sanmatijournal@gmail.com" className="text-xs text-slate-400 hover:text-white font-semibold transition-colors block">
-                                            sanmatijournal@gmail.com
-                                        </a>
-                                    </div>
-                                </div>
-                                <div className="pt-2">
-                                    <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-                                        <div className="flex justify-between items-center mb-1">
-                                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Chief Editor</span>
-                                            <span className="text-[11px] font-semibold text-slate-300">+91 9870713912</span>
-                                        </div>
-                                        <div className="flex justify-between items-center">
-                                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Managing</span>
-                                            <span className="text-[11px] font-semibold text-slate-300">+91 7999525735</span>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {/* Bottom Credentials */}
-                <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-                        <p className="text-[12px] font-medium text-slate-400">
-                            © {new Date().getFullYear()} Sanmati Spectrum. All rights reserved.
-                        </p>
-                        <div className="flex items-center gap-2 text-[11px] font-semibold text-slate-400">
-                            <Link href="/privacy" className="px-3 py-1.5 rounded-lg bg-white/[0.02] hover:bg-white/[0.06] hover:text-white transition-all duration-300">Privacy</Link>
-                            <Link href="/terms" className="px-3 py-1.5 rounded-lg bg-white/[0.02] hover:bg-white/[0.06] hover:text-white transition-all duration-300">Terms</Link>
-                            <Link href="/compliance" className="px-3 py-1.5 rounded-lg bg-white/[0.02] hover:bg-white/[0.06] hover:text-white transition-all duration-300">Compliance</Link>
-                        </div>
-                    </div>
-                    <div className="flex gap-3">
-                        <div className="flex items-center gap-2 px-3 py-1.5 bg-white/[0.03] rounded-lg border border-white/[0.05]">
-                            <ShieldCheck className="w-3.5 h-3.5 text-secondary/70" />
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-300">COPE MEMBER</span>
-                        </div>
-                        <div className="flex items-center gap-2 px-3 py-1.5 bg-white/[0.03] rounded-lg border border-white/[0.05]">
-                            <Award className="w-3.5 h-3.5 text-emerald-400/70" />
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-300">PEER REVIEWED</span>
+                {/* ── Bottom Bar ── */}
+                <div className="border-t border-white/8 py-5">
+                    <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-white/30">
+                            <p>
+                                © {year} Sanmati Spectrum of Knowledge & Emerging Discourse. All rights reserved.
+                            </p>
+                            <div className="flex items-center gap-1">
+                                Made with <Heart className="w-3 h-3 text-red-400 mx-0.5 fill-red-400" aria-label="love" /> for researchers across India
+                            </div>
+                            <div className="flex items-center gap-4">
+                                <Link href="/publication-policy/ethics"     className="hover:text-white transition-colors">Ethics</Link>
+                                <Link href="/publication-policy/plagiarism" className="hover:text-white transition-colors">Plagiarism</Link>
+                                <Link href="/compliance"                    className="hover:text-white transition-colors">Compliance</Link>
+                                <Link href="/contact"                       className="hover:text-white transition-colors">Contact</Link>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </footer>
     );
-};
-
-export default Footer;
-
+}
