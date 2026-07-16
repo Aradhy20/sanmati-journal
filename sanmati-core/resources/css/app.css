@@ -734,3 +734,57 @@
   body { background: white !important; }
   .card-modern, .card-premium { box-shadow: none !important; border: 1px solid #e2e8f0 !important; }
 }
+
+/* ── Theme Custom Property Overrides ── */
+html[data-theme="emerald"] {
+  --color-primary: #064E3B;
+  --color-primary-dark: #022C22;
+  --color-primary-light: #0f766e;
+  --color-secondary: #c9973d;
+  --color-secondary-dark: #8b6c30;
+  --color-secondary-light: #f0c060;
+  --color-accent: #10B981;
+}
+
+html[data-theme="crimson"] {
+  --color-primary: #4C0519;
+  --color-primary-dark: #27000B;
+  --color-primary-light: #881337;
+  --color-secondary: #c9973d;
+  --color-secondary-dark: #8b6c30;
+  --color-secondary-light: #f0c060;
+  --color-accent: #E11D48;
+}
+
+html[data-theme="dark"] {
+  --color-primary: #0A0F1D;
+  --color-primary-dark: #020408;
+  --color-primary-light: #161F38;
+  --color-secondary: #c9973d;
+  --color-secondary-dark: #8b6c30;
+  --color-secondary-light: #f0c060;
+  --color-accent: #3B82F6;
+  --color-warm-bg: #090D16;
+  --color-surface: #111827;
+  --color-dark: #F8FAFC;
+  --color-dark-light: #E2E8F0;
+  --color-muted: #94A3B8;
+  --color-muted-2: #64748B;
+  --color-slate-50: #090D16;
+  --color-slate-100: #1F2937;
+  --color-slate-200: #374151;
+  --color-slate-300: #4B5563;
+  --color-slate-400: #9CA3AF;
+  --color-slate-500: #6B7280;
+  --color-slate-600: #4B5563;
+  --color-slate-700: #374151;
+  --color-slate-800: #1F2937;
+  --color-slate-900: #111827;
+}
+
+/* Ensure background of body shifts with theme */
+body {
+  background-color: var(--color-warm-bg);
+  color: var(--color-dark);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

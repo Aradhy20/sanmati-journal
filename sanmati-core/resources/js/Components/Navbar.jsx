@@ -4,7 +4,7 @@ import {
     Menu, X, ChevronDown, Search, BookOpen, Users, FileText, Award,
     Globe, Mail, Phone, ExternalLink, Sparkles, ArrowRight, Shield,
     GraduationCap, FlaskConical, Scale, Briefcase, Landmark, Heart,
-    Atom, BookMarked, SendHorizonal
+    Atom, BookMarked, SendHorizonal, Palette
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -181,6 +181,16 @@ const Navbar = ({ onOpenSearch }) => {
     const timeoutRef = useRef(null);
     const { url } = usePage();
 
+    // Theme Switcher State
+    const [theme, setTheme] = useState(() => {
+        if (typeof window !== 'undefined') {
+            return localStorage.getItem('site-theme') || 'classic';
+        }
+        return 'classic';
+    });
+    const [isThemeOpen, setIsThemeOpen] = useState(false);
+    const themeRef = useRef(null);
+
     const isActive = useCallback((href) => {
         if (!href) return false;
         return url === href || url.startsWith(href + '/') || url.startsWith(href + '?');
@@ -213,6 +223,41 @@ const Navbar = ({ onOpenSearch }) => {
     const openDropdown  = (name) => { clearTimeout(timeoutRef.current); setActiveDropdown(name); };
     const closeDropdown = ()     => { timeoutRef.current = setTimeout(() => setActiveDropdown(null), 120); };
     const stayOpen      = ()     => { clearTimeout(timeoutRef.current); };
+
+    // Apply theme
+    const handleThemeChange = (newTheme) => {
+        setTheme(newTheme);
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('site-theme', newTheme);
+            if (newTheme === 'classic') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', newTheme);
+            }
+        }
+        setIsThemeOpen(false);
+    };
+
+    // Close theme dropdown on click outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (themeRef.current && !themeRef.current.contains(event.target)) {
+                setIsThemeOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
+    // Initial theme load sync
+    useEffect(() => {
+        const savedTheme = localStorage.getItem('site-theme') || 'classic';
+        if (savedTheme === 'classic') {
+            document.documentElement.removeAttribute('data-theme');
+        } else {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+    }, []);
 
     return (
         <>
@@ -336,6 +381,51 @@ const Navbar = ({ onOpenSearch }) => {
                                 </span>
                             </button>
 
+                            {/* Theme Selector */}
+                            <div className="relative" ref={themeRef}>
+                                <button
+                                    onClick={() => setIsThemeOpen(!isThemeOpen)}
+                                    aria-label="Change theme"
+                                    title="Choose color theme"
+                                    className="flex items-center justify-center w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-primary transition-all duration-200"
+                                >
+                                    <Palette className="w-4 h-4" />
+                                </button>
+                                <AnimatePresence>
+                                    {isThemeOpen && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: 10 }}
+                                            className="absolute right-0 mt-2 w-48 bg-white border border-slate-100 rounded-2xl shadow-xl z-[150] p-2"
+                                        >
+                                            <div className="text-[10px] font-black uppercase tracking-wider text-muted px-3 py-1.5 border-b border-slate-50 mb-1">
+                                                Select Theme
+                                            </div>
+                                            {[
+                                                { id: 'classic', label: 'Classic Navy', color: 'bg-[#0B1F3A]' },
+                                                { id: 'emerald', label: 'Forest Emerald', color: 'bg-[#064E3B]' },
+                                                { id: 'crimson', label: 'Deep Crimson', color: 'bg-[#4C0519]' },
+                                                { id: 'dark', label: 'Scholarly Dark', color: 'bg-[#0A0F1D]' },
+                                            ].map((t) => (
+                                                <button
+                                                    key={t.id}
+                                                    onClick={() => handleThemeChange(t.id)}
+                                                    className={`flex items-center gap-3 w-full px-3 py-2 text-xs font-bold rounded-xl transition-all ${
+                                                        theme === t.id
+                                                            ? 'bg-slate-100 text-primary'
+                                                            : 'text-slate-600 hover:bg-slate-50 hover:text-primary'
+                                                    }`}
+                                                >
+                                                    <span className={`w-3.5 h-3.5 rounded-full ${t.color} border border-slate-200/50 flex-shrink-0`} />
+                                                    {t.label}
+                                                </button>
+                                            ))}
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
+
                             {/* Submit CTA */}
                             <Link
                                 href="/submission-guidelines/call-for-papers"
@@ -367,11 +457,11 @@ const Navbar = ({ onOpenSearch }) => {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: '100%' }}
                         transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-                        className="fixed inset-0 z-[99] lg:hidden"
+                        className="fixed inset-0 z-[99] lg:hidden flex flex-col"
                         style={{ background: 'linear-gradient(160deg, #0B1F3A 0%, #1a3560 50%, #0B2D5E 100%)' }}
                     >
                         {/* Header */}
-                        <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
+                        <div className="flex items-center justify-between px-5 py-4 border-b border-white/10 flex-shrink-0">
                             <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-3">
                                 <img src="/logo.jpg" alt="Sanmati" className="h-9 w-9 rounded-xl object-cover" />
                                 <div>
@@ -389,7 +479,7 @@ const Navbar = ({ onOpenSearch }) => {
                         </div>
 
                         {/* Scrollable Nav */}
-                        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1 max-h-[calc(100vh-180px)]">
+                        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1">
                             {NAV_ITEMS.map(item => (
                                 <MobileNavItem
                                     key={item.name}
@@ -401,7 +491,29 @@ const Navbar = ({ onOpenSearch }) => {
                         </div>
 
                         {/* Footer Strip */}
-                        <div className="px-5 py-5 border-t border-white/10 space-y-3">
+                        <div className="px-5 py-5 border-t border-white/10 space-y-3 flex-shrink-0">
+                            {/* Mobile Theme Selector */}
+                            <div className="flex items-center justify-between px-1 mb-2">
+                                <span className="text-[11px] font-black uppercase text-white/50 tracking-wider">Select Theme</span>
+                                <div className="flex gap-2">
+                                    {[
+                                        { id: 'classic', color: 'bg-[#0B1F3A]', title: 'Classic' },
+                                        { id: 'emerald', color: 'bg-[#064E3B]', title: 'Emerald' },
+                                        { id: 'crimson', color: 'bg-[#4C0519]', title: 'Crimson' },
+                                        { id: 'dark', color: 'bg-[#0A0F1D]', title: 'Dark' },
+                                    ].map((t) => (
+                                        <button
+                                            key={t.id}
+                                            onClick={() => handleThemeChange(t.id)}
+                                            title={t.title}
+                                            className={`w-7 h-7 rounded-full ${t.color} border-2 transition-all flex items-center justify-center ${
+                                                theme === t.id ? 'border-white scale-110' : 'border-white/20'
+                                            }`}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+
                             <Link
                                 href="/submission-guidelines/call-for-papers"
                                 onClick={() => setIsOpen(false)}
