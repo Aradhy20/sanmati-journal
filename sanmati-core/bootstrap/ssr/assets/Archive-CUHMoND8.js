@@ -171,14 +171,14 @@ function Archive({ issues }) {
     /* @__PURE__ */ jsx("div", { className: "min-h-screen bg-[#F8FAFC] py-12 lg:py-20 font-inter text-slate-800", children: /* @__PURE__ */ jsxs("div", { className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8", children: [
       /* @__PURE__ */ jsxs("div", { className: "flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4", children: [
         /* @__PURE__ */ jsxs("div", { children: [
-          /* @__PURE__ */ jsx("h2", { className: "text-2xl font-serif font-bold text-[#0F4C81]", children: "Research Analytics" }),
+          /* @__PURE__ */ jsx("h2", { className: "text-2xl font-serif font-bold text-primary", children: "Research Analytics" }),
           /* @__PURE__ */ jsx("p", { className: "text-sm text-slate-500 mt-1", children: "Real-time statistics of published volumes and papers." })
         ] }),
         /* @__PURE__ */ jsxs(
           Link,
           {
             href: "/submission-guidelines/call-for-papers",
-            className: "inline-flex items-center gap-2 px-6 py-3 bg-[#0F4C81] text-white font-bold rounded-xl text-xs uppercase tracking-widest hover:bg-[#2563EB] transition-colors shadow-lg shadow-[#0F4C81]/20",
+            className: "inline-flex items-center gap-2 px-6 py-3 bg-secondary text-white font-bold rounded-xl text-xs uppercase tracking-widest hover:bg-secondary-dark transition-colors shadow-lg shadow-secondary/20",
             children: [
               /* @__PURE__ */ jsx(FileText, { className: "w-4 h-4" }),
               " Submit Paper"
@@ -187,9 +187,9 @@ function Archive({ issues }) {
         )
       ] }),
       /* @__PURE__ */ jsx("div", { className: "grid grid-cols-1 md:grid-cols-3 gap-6 mb-16", children: [
-        { label: "Total Volumes", value: stats.volumes, icon: /* @__PURE__ */ jsx(Layers, { className: "w-6 h-6 text-[#2563EB]" }), border: "border-l-4 border-l-[#2563EB]" },
-        { label: "Total Issues", value: stats.issues, icon: /* @__PURE__ */ jsx(Calendar, { className: "w-6 h-6 text-[#F59E0B]" }), border: "border-l-4 border-l-[#F59E0B]" },
-        { label: "Published Papers", value: stats.papers, icon: /* @__PURE__ */ jsx(FileText, { className: "w-6 h-6 text-[#0F4C81]" }), border: "border-l-4 border-l-[#0F4C81]" }
+        { label: "Total Volumes", value: stats.volumes, icon: /* @__PURE__ */ jsx(Layers, { className: "w-6 h-6 text-accent" }), border: "border-l-4 border-l-accent" },
+        { label: "Total Issues", value: stats.issues, icon: /* @__PURE__ */ jsx(Calendar, { className: "w-6 h-6 text-secondary" }), border: "border-l-4 border-l-secondary" },
+        { label: "Published Papers", value: stats.papers, icon: /* @__PURE__ */ jsx(FileText, { className: "w-6 h-6 text-primary" }), border: "border-l-4 border-l-primary" }
       ].map((stat, idx) => /* @__PURE__ */ jsxs(
         motion.div,
         {
@@ -217,7 +217,7 @@ function Archive({ issues }) {
               placeholder: "Search by paper title, authors, or keywords...",
               value: searchQuery,
               onChange: (e) => setSearchQuery(e.target.value),
-              className: "w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0F4C81]/20 focus:border-[#0F4C81] transition-all"
+              className: "w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
             }
           )
         ] }),
@@ -231,7 +231,7 @@ function Archive({ issues }) {
             {
               value: selectedVolume,
               onChange: (e) => setSelectedVolume(e.target.value),
-              className: "px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0F4C81]/20 focus:border-[#0F4C81] transition-all cursor-pointer font-medium text-slate-700 w-full sm:w-[180px]",
+              className: "px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all cursor-pointer font-medium text-slate-700 w-full sm:w-[180px]",
               children: [
                 /* @__PURE__ */ jsx("option", { value: "all", children: "All Volumes" }),
                 volumeOptions.map((opt) => /* @__PURE__ */ jsx("option", { value: opt.val, children: opt.label }, opt.val))
@@ -243,7 +243,7 @@ function Archive({ issues }) {
             {
               value: selectedAuthor,
               onChange: (e) => setSelectedAuthor(e.target.value),
-              className: "px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0F4C81]/20 focus:border-[#0F4C81] transition-all cursor-pointer font-medium text-slate-700 w-full sm:w-[180px]",
+              className: "px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all cursor-pointer font-medium text-slate-700 w-full sm:w-[180px]",
               children: [
                 /* @__PURE__ */ jsx("option", { value: "all", children: "All Authors" }),
                 allAuthors.map((author, index) => /* @__PURE__ */ jsx("option", { value: author, children: author }, index))
@@ -255,7 +255,7 @@ function Archive({ issues }) {
             {
               value: selectedCategory,
               onChange: (e) => setSelectedCategory(e.target.value),
-              className: "px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0F4C81]/20 focus:border-[#0F4C81] transition-all cursor-pointer font-medium text-slate-700 w-full sm:w-[180px]",
+              className: "px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all cursor-pointer font-medium text-slate-700 w-full sm:w-[180px]",
               children: [
                 /* @__PURE__ */ jsx("option", { value: "all", children: "All Categories" }),
                 allCategories.map((category, index) => /* @__PURE__ */ jsx("option", { value: category, children: category }, index))
@@ -276,7 +276,7 @@ function Archive({ issues }) {
             children: [
               /* @__PURE__ */ jsxs("div", { className: "bg-slate-50 border-b border-slate-100 px-6 py-5 flex flex-col sm:flex-row justify-between sm:items-center gap-4", children: [
                 /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-3", children: [
-                  /* @__PURE__ */ jsxs("span", { className: "px-4 py-1.5 bg-[#0F4C81] text-white text-xs font-black uppercase tracking-widest rounded-full font-poppins", children: [
+                  /* @__PURE__ */ jsxs("span", { className: "px-4 py-1.5 bg-primary text-white text-xs font-black uppercase tracking-widest rounded-full font-poppins", children: [
                     "Volume ",
                     issue.volume
                   ] }),
@@ -302,7 +302,7 @@ function Archive({ issues }) {
                 {
                   className: "bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-ambient hover:-translate-y-1 transition-all duration-300 flex flex-col h-full relative",
                   children: [
-                    /* @__PURE__ */ jsx("div", { className: "absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0F4C81] to-[#2563EB] rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity" }),
+                    /* @__PURE__ */ jsx("div", { className: "absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-secondary to-accent rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity" }),
                     /* @__PURE__ */ jsxs("div", { className: "flex items-center justify-between gap-2 mb-4", children: [
                       /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-2", children: [
                         /* @__PURE__ */ jsxs("span", { className: "text-xs font-bold text-slate-400 font-poppins", children: [
@@ -310,7 +310,7 @@ function Archive({ issues }) {
                           String(index + 1).padStart(2, "0")
                         ] }),
                         /* @__PURE__ */ jsx("span", { className: "w-1 h-1 rounded-full bg-slate-300" }),
-                        /* @__PURE__ */ jsx("span", { className: "text-[9px] font-black uppercase tracking-wider text-[#2563EB] bg-[#2563EB]/5 px-2 py-1 rounded border border-[#2563EB]/10", children: paper.category || "Research Article" })
+                        /* @__PURE__ */ jsx("span", { className: "text-[9px] font-black uppercase tracking-wider text-secondary-dark bg-secondary/10 px-2 py-1 rounded border border-secondary/20", children: paper.category || "Research Article" })
                       ] }),
                       /* @__PURE__ */ jsxs("span", { className: "inline-flex items-center gap-1 text-[10px] font-bold text-slate-400", children: [
                         /* @__PURE__ */ jsx(Eye, { className: "w-3 h-3" }),
@@ -322,7 +322,7 @@ function Archive({ issues }) {
                       Link,
                       {
                         href: `/article/${paper.id}`,
-                        className: "block font-bold text-lg text-slate-900 hover:text-[#2563EB] transition-colors leading-snug mb-3 line-clamp-3 font-poppins",
+                        className: "block font-bold text-lg text-slate-900 hover:text-accent transition-colors leading-snug mb-3 line-clamp-3 font-poppins",
                         children: paper.title
                       }
                     ),
@@ -357,7 +357,7 @@ function Archive({ issues }) {
                         Link,
                         {
                           href: `/article/${paper.id}`,
-                          className: "flex items-center justify-center gap-1.5 py-2.5 bg-slate-50 hover:bg-[#0F4C81]/10 text-slate-700 font-bold rounded-xl text-[10px] uppercase tracking-wider transition-colors border border-slate-200/60",
+                          className: "flex items-center justify-center gap-1.5 py-2.5 bg-slate-50 hover:bg-primary/10 text-slate-700 font-bold rounded-xl text-[10px] uppercase tracking-wider transition-colors border border-slate-200/60",
                           children: [
                             /* @__PURE__ */ jsx(BookOpen, { className: "w-3.5 h-3.5" }),
                             " View"
@@ -368,7 +368,7 @@ function Archive({ issues }) {
                         "a",
                         {
                           href: `/download/paper/${paper.id}`,
-                          className: "flex items-center justify-center gap-1.5 py-2.5 bg-[#0F4C81] hover:bg-[#0F4C81]/90 text-white font-bold rounded-xl text-[10px] uppercase tracking-wider transition-colors shadow-sm",
+                          className: "flex items-center justify-center gap-1.5 py-2.5 bg-primary hover:bg-primary-light text-white font-bold rounded-xl text-[10px] uppercase tracking-wider transition-colors shadow-sm",
                           children: [
                             /* @__PURE__ */ jsx(Download, { className: "w-3.5 h-3.5" }),
                             " PDF"
@@ -407,7 +407,7 @@ function Archive({ issues }) {
               setSelectedVolume("all");
               setSelectedAuthor("all");
             },
-            className: "mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-[#0F4C81] hover:bg-[#0F4C81]/90 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition-colors font-poppins",
+            className: "mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-primary hover:bg-primary-light text-white font-bold rounded-xl text-xs uppercase tracking-wider transition-colors font-poppins",
             children: "Reset All Filters"
           }
         )
