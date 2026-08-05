@@ -1,59 +1,131 @@
+import { useRef } from 'react';
+import { useInView } from 'framer-motion';
 import { motion } from 'framer-motion';
-import { BookOpen, Users, Globe, Award, Download, Clock, Star, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { FileText, Users, Globe, Clock, BookOpen, Award } from 'lucide-react';
+import { useState, useEffect } from 'react';
+
+function Counter({ end, suffix = '', prefix = '', duration = 2000 }) {
+    const [count, setCount] = useState(0);
+    const ref = useRef(null);
+    const inView = useInView(ref, { once: true, margin: '-60px' });
+
+    useEffect(() => {
+        if (!inView) return;
+        let start = 0;
+        const step = end / (duration / 16);
+        const timer = setInterval(() => {
+            start += step;
+            if (start >= end) { setCount(end); clearInterval(timer); }
+            else setCount(Math.floor(start));
+        }, 16);
+        return () => clearInterval(timer);
+    }, [inView, end, duration]);
+
+    return <span ref={ref}>{prefix}{count.toLocaleString()}{suffix}</span>;
+}
+
+const STATS = [
+    {
+        icon: FileText,
+        value: 93, suffix: '+',
+        label: 'Published Papers',
+        desc: 'Research articles published across all volumes',
+        color: 'from-blue-500 to-blue-600',
+        bg: 'bg-blue-50',
+        text: 'text-blue-600',
+    },
+    {
+        icon: Users,
+        value: 200, suffix: '+',
+        label: 'Authors & Scholars',
+        desc: 'Researchers who have published with us',
+        color: 'from-indigo-500 to-indigo-600',
+        bg: 'bg-indigo-50',
+        text: 'text-indigo-600',
+    },
+    {
+        icon: Globe,
+        value: 15, suffix: '+',
+        label: 'Countries Reached',
+        desc: 'Global reach across multiple continents',
+        color: 'from-cyan-500 to-cyan-600',
+        bg: 'bg-cyan-50',
+        text: 'text-cyan-600',
+    },
+    {
+        icon: Clock,
+        value: 30, suffix: ' Days',
+        label: 'Max Review Time',
+        desc: 'Fast 15–30 day peer review turnaround',
+        color: 'from-emerald-500 to-emerald-600',
+        bg: 'bg-emerald-50',
+        text: 'text-emerald-600',
+    },
+    {
+        icon: BookOpen,
+        value: 2, suffix: '',
+        label: 'Volumes Published',
+        desc: 'Consistent publication since inception',
+        color: 'from-violet-500 to-violet-600',
+        bg: 'bg-violet-50',
+        text: 'text-violet-600',
+    },
+    {
+        icon: Award,
+        value: 100, suffix: '%',
+        label: 'Open Access',
+        desc: 'All research freely accessible worldwide',
+        color: 'from-amber-500 to-amber-600',
+        bg: 'bg-amber-50',
+        text: 'text-amber-600',
+    },
+];
 
 export default function LiveStats() {
-    const stats = [
-        { label: 'Published Papers', val: '500+', desc: 'Across 10+ multidisciplinary areas', icon: BookOpen, color: 'text-blue-600', bg: 'bg-blue-50' },
-        { label: 'Global Researchers', val: '1,200+', desc: 'Academic authors & scholars', icon: Users, color: 'text-indigo-600', bg: 'bg-indigo-50' },
-        { label: 'Countries Represented', val: '25+', desc: 'International contribution', icon: Globe, color: 'text-cyan-600', bg: 'bg-cyan-50' },
-        { label: 'Executive Editors', val: '18+', desc: 'Distinguished university professors', icon: Award, color: 'text-purple-600', bg: 'bg-purple-50' },
-        { label: 'Article Downloads', val: '25,000+', desc: 'Global reader engagement', icon: Download, color: 'text-emerald-600', bg: 'bg-emerald-50' },
-        { label: 'Avg Peer Review', val: '15–30 Days', desc: 'Fast double-blind review', icon: Clock, color: 'text-amber-600', bg: 'bg-amber-50' },
-    ];
-
     return (
-        <section className="py-16 md:py-20 bg-slate-900 text-white relative overflow-hidden">
-            {/* Background Glow Orbs */}
-            <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none" />
+        <section className="py-16 lg:py-20 bg-gradient-to-b from-white to-slate-50 border-b border-slate-200/60" aria-labelledby="stats-heading">
+            <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
 
-            <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="text-center max-w-2xl mx-auto mb-12">
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-400/20 text-cyan-300 text-xs font-bold uppercase tracking-wider mb-3">
-                        <Star className="w-3.5 h-3.5 fill-current text-cyan-300" /> Platform Impact Metrics
-                    </div>
-                    <h2 className="text-2xl md:text-4xl font-serif font-bold text-white tracking-tight">
-                        Empowering Global Academic Excellence
+                {/* Section header */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-60px' }}
+                    transition={{ duration: 0.5 }}
+                    className="text-center mb-12"
+                >
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-[11px] font-bold uppercase tracking-widest mb-4">
+                        Live Platform Stats
+                    </span>
+                    <h2 id="stats-heading" className="text-3xl sm:text-4xl font-heading font-bold text-slate-900 mb-3">
+                        Growing Research Community
                     </h2>
-                    <p className="text-sm text-slate-400 font-medium mt-2">
-                        Sanmati Spectrum of Knowledge (ISSN 3108-1819) delivers verifiable reach and high citation visibility.
+                    <p className="text-slate-500 text-base max-w-xl mx-auto">
+                        Real-time numbers reflecting our commitment to accelerating global research and knowledge dissemination.
                     </p>
-                </div>
+                </motion.div>
 
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
-                    {stats.map((item, idx) => {
-                        const Icon = item.icon;
+                {/* Stats grid */}
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                    {STATS.map((stat, i) => {
+                        const Icon = stat.icon;
                         return (
                             <motion.div
-                                key={idx}
-                                initial={{ opacity: 0, y: 20 }}
+                                key={i}
+                                initial={{ opacity: 0, y: 24 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: idx * 0.08 }}
-                                className="bg-slate-800/80 backdrop-blur-xl border border-slate-700/60 p-5 rounded-2xl text-center group hover:border-blue-500/50 hover:bg-slate-800 transition-all duration-300 shadow-xl"
+                                viewport={{ once: true, margin: '-40px' }}
+                                transition={{ duration: 0.5, delay: i * 0.07 }}
+                                className="group p-5 bg-white border border-slate-100 rounded-2xl hover:border-slate-200 hover:shadow-lg hover:shadow-slate-100/80 hover:-translate-y-1 transition-all duration-300 text-center"
                             >
-                                <div className={`w-10 h-10 mx-auto mb-3 rounded-xl ${item.bg} flex items-center justify-center ${item.color} group-hover:scale-110 transition-transform duration-300`}>
-                                    <Icon className="w-5 h-5" />
+                                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-2xl ${stat.bg} ${stat.text} mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                                    <Icon className="w-6 h-6" />
                                 </div>
-                                <div className="text-xl md:text-2xl font-serif font-bold text-white tracking-tight">
-                                    {item.val}
+                                <div className={`text-3xl font-heading font-bold ${stat.text} leading-none mb-1.5`}>
+                                    <Counter end={stat.value} suffix={stat.suffix} />
                                 </div>
-                                <div className="text-xs font-bold text-slate-200 mt-1">
-                                    {item.label}
-                                </div>
-                                <div className="text-[10px] text-slate-400 font-medium mt-1">
-                                    {item.desc}
-                                </div>
+                                <div className="text-sm font-bold text-slate-800 mb-1">{stat.label}</div>
+                                <div className="text-[11px] text-slate-400 leading-snug">{stat.desc}</div>
                             </motion.div>
                         );
                     })}

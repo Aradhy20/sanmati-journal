@@ -38,13 +38,13 @@ export default function MainLayout({ children, title, description, keywords, jso
     };
 
     return (
-        <div className="min-h-screen flex flex-col bg-warm-bg font-sans antialiased relative overflow-x-hidden selection:bg-primary/10 selection:text-primary">
+        <div className="min-h-screen flex flex-col bg-white font-body antialiased relative overflow-x-hidden selection:bg-blue-100 selection:text-blue-700">
             {/* Scroll Progress Bar */}
-            <motion.div style={{ scaleX }} className="fixed top-0 left-0 right-0 h-0.5 bg-blue-600 origin-left z-[110]" />
+            <motion.div style={{ scaleX }} className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 origin-left z-[110]" />
             
             <Seo title={title} description={description} keywords={keywords} jsonLd={jsonLd} aiSummary={aiSummary} />
             
-            <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-6 focus:py-3 focus:bg-blue-600 focus:text-white focus:rounded-lg focus:shadow-md font-bold">
+            <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-6 focus:py-3 focus:bg-blue-600 focus:text-white focus:rounded-xl focus:shadow-xl font-bold text-sm">
                 Skip to main content
             </a>
             
@@ -54,7 +54,6 @@ export default function MainLayout({ children, title, description, keywords, jso
             }} />
             
             <CustomCursor />
-            <Preloader />
             
             <header role="banner" className="overflow-x-visible">
                 <Navbar onOpenSearch={() => setIsSearchOpen(true)} />
@@ -80,15 +79,15 @@ export default function MainLayout({ children, title, description, keywords, jso
                 <Footer />
             </footer>
 
-            {/* WhatsApp Contact Action */}
+            {/* WhatsApp Contact FAB */}
             <motion.a
                 href="https://wa.me/918979782949"
                 target="_blank"
-                rel="noreferrer"
-                whileHover={{ scale: 1.05, translateY: -3 }}
+                rel="noreferrer noopener"
+                whileHover={{ scale: 1.08, y: -3 }}
                 whileTap={{ scale: 0.95 }}
-                className="fixed bottom-6 right-6 lg:bottom-10 lg:right-10 w-12 h-12 bg-primary text-white rounded-full shadow-md flex items-center justify-center z-[60] border border-white/20 focus:outline-none"
-                aria-label="Contact on WhatsApp"
+                className="fixed bottom-6 right-6 lg:bottom-10 lg:right-10 w-12 h-12 bg-[#25D366] text-white rounded-full shadow-lg shadow-green-500/30 flex items-center justify-center z-[60] border-2 border-white/30 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2"
+                aria-label="Chat with us on WhatsApp"
             >
                 <MessageCircle className="w-6 h-6" />
             </motion.a>
@@ -103,10 +102,10 @@ export default function MainLayout({ children, title, description, keywords, jso
                         whileHover={{ scale: 1.05, translateY: -3 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={scrollToTop}
-                        className="fixed bottom-22 right-6 lg:bottom-26 lg:right-10 w-10 h-10 bg-slate-100 border border-slate-200 text-dark rounded-full shadow-md flex items-center justify-center z-[60] focus:outline-none"
-                        aria-label="Scroll to top"
+                        className="fixed bottom-20 right-6 lg:bottom-24 lg:right-10 w-10 h-10 bg-white border border-slate-200 text-slate-600 rounded-full shadow-md flex items-center justify-center z-[60] focus:outline-none hover:bg-blue-50 hover:border-blue-200 hover:text-blue-600 transition-colors"
+                        aria-label="Scroll to top of page"
                     >
-                        <ArrowUp className="w-5 h-5 text-dark" />
+                        <ArrowUp className="w-4.5 h-4.5" />
                     </motion.button>
                 )}
             </AnimatePresence>

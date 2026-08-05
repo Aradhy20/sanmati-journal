@@ -8,7 +8,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-/* ─── Navigation Data ──────────────────────────────────────── */
+/* ─── Navigation Data ─────────────────────────────────────── */
 const NAV_ITEMS = [
     {
         name: 'Journal',
@@ -18,52 +18,81 @@ const NAV_ITEMS = [
             { name: 'Objective & Scope', href: '/basic-info/objective-scope', icon: Globe,       desc: 'Research domains we cover' },
             { name: 'Journal Info',      href: '/basic-info/journal-info',    icon: FileText,    desc: 'ISSN, frequency, language & details' },
             { name: 'Indexing',          href: '/basic-info/indexing',        icon: Award,       desc: 'CrossRef, Google Scholar & more' },
-            { name: 'About Foundation',  href: '/about-foundation',           icon: Landmark,    desc: 'Sanmati Publication trust' },
+            { name: 'About Foundation',  href: '/about-foundation',           icon: Landmark,    desc: 'Sanmati Publication Trust' },
         ],
     },
     {
         name: 'Editorial',
         dropdown: [
-            { name: 'Editors',           href: '/editorial-team/editors',         icon: Users,    desc: 'Chief & associate editors' },
+            { name: 'Editors',           href: '/editorial-team/editors',         icon: Users,      desc: 'Chief & associate editors' },
             { name: 'Editorial Board',   href: '/editorial-team/editorial-board', icon: BookMarked, desc: 'Subject expert reviewers' },
-            { name: 'Advisory Board',    href: '/editorial-team/advisory-board',  icon: Shield,   desc: 'Senior academic advisors' },
-            { name: 'Technical Team',    href: '/editorial-team/technical-team',  icon: Atom,     desc: 'Publishing & production team' },
+            { name: 'Advisory Board',    href: '/editorial-team/advisory-board',  icon: Shield,     desc: 'Senior academic advisors' },
+            { name: 'Technical Team',    href: '/editorial-team/technical-team',  icon: Atom,       desc: 'Publishing & production team' },
         ],
     },
     {
         name: 'Authors',
         dropdown: [
-            { name: 'Call for Papers',        href: '/submission-guidelines/call-for-papers',      icon: SendHorizonal, desc: 'Submit your research now' },
-            { name: 'Submission Guidelines',  href: '/submission-guidelines',                       icon: FileText,      desc: 'Formatting & manuscript rules' },
-            { name: 'Research Areas',         href: '/submission-guidelines/areas',                 icon: FlaskConical,  desc: 'Disciplines we accept' },
-            { name: 'Publication Charges',    href: '/submission-guidelines/publication-charges',   icon: Briefcase,     desc: 'APC & fee waivers' },
-            { name: 'Review Process',         href: '/submission-guidelines/review-process',        icon: Shield,        desc: 'Double-blind peer review' },
-            { name: 'Important Info',         href: '/submission-guidelines/important-info',        icon: BookOpen,      desc: 'Deadlines & key dates' },
-            { name: 'Track Manuscript',       href: '/track-manuscript',                            icon: Search,        desc: 'Check your submission status' },
+            { name: 'Call for Papers',       href: '/submission-guidelines/call-for-papers',    icon: SendHorizonal, desc: 'Submit your research now' },
+            { name: 'Submission Guidelines', href: '/submission-guidelines',                      icon: FileText,      desc: 'Formatting & manuscript rules' },
+            { name: 'Research Areas',        href: '/submission-guidelines/areas',                icon: FlaskConical,  desc: 'Disciplines we accept' },
+            { name: 'Publication Charges',   href: '/submission-guidelines/publication-charges',  icon: Briefcase,     desc: 'APC & fee waivers' },
+            { name: 'Review Process',        href: '/submission-guidelines/review-process',       icon: Shield,        desc: 'Double-blind peer review' },
+            { name: 'Important Info',        href: '/submission-guidelines/important-info',       icon: BookOpen,      desc: 'Deadlines & key dates' },
+            { name: 'Track Manuscript',      href: '/track-manuscript',                           icon: Search,        desc: 'Check your submission status' },
         ],
     },
     {
         name: 'Policy',
         dropdown: [
-            { name: 'Publication Ethics', href: '/publication-policy/ethics',      icon: Scale,          desc: 'COPE-aligned editorial standards' },
-            { name: 'Plagiarism Policy',  href: '/publication-policy/plagiarism',  icon: Shield,         desc: 'Originality & screening policy' },
-            { name: 'Peer Review',        href: '/publication-policy/peer-review', icon: GraduationCap,  desc: 'Review methodology & criteria' },
-            { name: 'Compliance',         href: '/compliance',                      icon: Award,          desc: 'Legal & regulatory compliance' },
+            { name: 'Publication Ethics', href: '/publication-policy/ethics',      icon: Scale,         desc: 'COPE-aligned editorial standards' },
+            { name: 'Plagiarism Policy',  href: '/publication-policy/plagiarism',  icon: Shield,        desc: 'Originality & screening policy' },
+            { name: 'Peer Review',        href: '/publication-policy/peer-review', icon: GraduationCap, desc: 'Review methodology & criteria' },
+            { name: 'Compliance',         href: '/compliance',                      icon: Award,         desc: 'Legal & regulatory compliance' },
         ],
     },
     { name: 'Archive', href: '/archive' },
     { name: 'Contact', href: '/contact' },
 ];
 
-/* ─── Quick Stats Strip ───────────────────────────────────── */
-const QUICK_STATS = [
-    { label: 'ISSN (Online)', value: '3108-1819' },
-    { label: 'Impact Factor', value: '5.3' },
-    { label: 'Open Access',   value: '100%' },
-];
+/* ─── Dropdown Menu ───────────────────────────────────────── */
+function DropdownMenu({ items }) {
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 8, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 8, scale: 0.97 }}
+            transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 bg-white/95 backdrop-blur-xl border border-slate-200/80 rounded-2xl shadow-2xl shadow-slate-900/10 overflow-hidden z-50 ring-1 ring-slate-900/5"
+        >
+            {/* Top accent line */}
+            <div className="h-0.5 w-full bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500" />
+            <div className="p-2">
+                {items.map((item, i) => {
+                    const Icon = item.icon;
+                    return (
+                        <Link
+                            key={i}
+                            href={item.href}
+                            className="flex items-start gap-3 p-3 rounded-xl hover:bg-blue-50/80 transition-colors duration-150 group"
+                        >
+                            <span className="mt-0.5 flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-lg bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-150">
+                                <Icon className="w-4 h-4" />
+                            </span>
+                            <span className="flex flex-col min-w-0">
+                                <span className="text-sm font-bold text-slate-800 group-hover:text-blue-700 transition-colors leading-tight">{item.name}</span>
+                                <span className="text-[11px] text-slate-500 mt-0.5 leading-snug">{item.desc}</span>
+                            </span>
+                        </Link>
+                    );
+                })}
+            </div>
+        </motion.div>
+    );
+}
 
 /* ─── Mobile Nav Item ─────────────────────────────────────── */
-const MobileNavItem = ({ item, isActive, closeMenu }) => {
+function MobileNavItem({ item, isActive, closeMenu }) {
     const [open, setOpen] = useState(false);
     const hasChild = item.dropdown?.length > 0;
 
@@ -72,14 +101,14 @@ const MobileNavItem = ({ item, isActive, closeMenu }) => {
             <Link
                 href={item.href}
                 onClick={closeMenu}
-                className={`flex items-center justify-between w-full px-5 py-3.5 rounded-xl text-sm font-bold transition-all duration-200 ${
+                className={`flex items-center justify-between w-full px-4 py-3.5 rounded-xl text-sm font-bold transition-all duration-200 ${
                     isActive(item.href)
-                        ? 'bg-primary/10 text-primary'
-                        : 'text-dark/90 hover:bg-slate-100'
+                        ? 'bg-blue-50 text-blue-700'
+                        : 'text-slate-800 hover:bg-slate-100'
                 }`}
             >
                 {item.name}
-                <ArrowRight className="w-4 h-4 opacity-40 text-primary" />
+                {isActive(item.href) && <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />}
             </Link>
         );
     }
@@ -87,342 +116,365 @@ const MobileNavItem = ({ item, isActive, closeMenu }) => {
     return (
         <div>
             <button
-                onClick={() => setOpen(!open)}
-                className="flex items-center justify-between w-full px-5 py-3.5 rounded-xl text-sm font-bold text-dark/90 hover:bg-slate-100 transition-all duration-200"
+                onClick={() => setOpen(p => !p)}
+                className={`flex items-center justify-between w-full px-4 py-3.5 rounded-xl text-sm font-bold transition-all duration-200 ${
+                    open ? 'bg-blue-50 text-blue-700' : 'text-slate-800 hover:bg-slate-100'
+                }`}
                 aria-expanded={open}
             >
                 {item.name}
-                <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${open ? 'rotate-180 text-primary' : 'opacity-40'}`} />
+                <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                    <ChevronDown className="w-4 h-4 opacity-60" />
+                </motion.span>
             </button>
-            <AnimatePresence initial={false}>
+            <AnimatePresence>
                 {open && (
                     <motion.div
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+                        transition={{ duration: 0.22 }}
                         className="overflow-hidden"
                     >
-                        <div className="ml-4 mt-1 mb-2 border-l border-slate-200 pl-4 space-y-0.5">
-                            {item.dropdown.map(sub => (
-                                <Link
-                                    key={sub.href}
-                                    href={sub.href}
-                                    onClick={closeMenu}
-                                    className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm transition-all duration-200 ${
-                                        isActive(sub.href)
-                                            ? 'bg-primary/10 text-primary font-bold'
-                                            : 'text-dark/70 hover:text-primary hover:bg-slate-100 font-medium'
-                                    }`}
-                                >
-                                    {sub.icon && <sub.icon className="w-4 h-4 flex-shrink-0 opacity-70" />}
-                                    {sub.name}
-                                </Link>
-                            ))}
+                        <div className="pl-4 pr-2 py-1.5 space-y-0.5">
+                            {item.dropdown.map((sub, i) => {
+                                const Icon = sub.icon;
+                                return (
+                                    <Link
+                                        key={i}
+                                        href={sub.href}
+                                        onClick={closeMenu}
+                                        className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                                    >
+                                        <Icon className="w-4 h-4 text-blue-500 shrink-0" />
+                                        {sub.name}
+                                    </Link>
+                                );
+                            })}
                         </div>
                     </motion.div>
                 )}
             </AnimatePresence>
         </div>
     );
-};
+}
 
-/* ─── Desktop Mega Menu ────────────────────────────────────── */
-const MegaMenu = ({ item, isActive }) => (
-    <motion.div
-        initial={{ opacity: 0, y: 12, scale: 0.98 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 8, scale: 0.98 }}
-        transition={{ duration: 0.18, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className="absolute top-full left-1/2 -translate-x-1/2 mt-3 z-50"
-        style={{ minWidth: '500px' }}
-    >
-        <div className="bg-white border border-slate-200 rounded-2xl shadow-card overflow-hidden">
-            <div className="p-2 grid grid-cols-2 gap-0.5">
-                {item.dropdown.map(sub => (
-                    <Link
-                        key={sub.href}
-                        href={sub.href}
-                        className={`group flex items-start gap-3 px-4 py-3.5 rounded-xl transition-all duration-200 ${
-                            isActive(sub.href)
-                                ? 'bg-primary/8 text-primary'
-                                : 'hover:bg-slate-100 text-dark hover:text-primary'
-                        }`}
-                    >
-                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 transition-all duration-200 ${
-                            isActive(sub.href)
-                                ? 'bg-primary text-white'
-                                : 'bg-slate-100 text-slate-500 group-hover:bg-primary/10 group-hover:text-primary'
-                        }`}>
-                            {sub.icon && <sub.icon className="w-4 h-4" />}
-                        </div>
-                        <div>
-                            <div className="text-xs font-bold leading-tight">{sub.name}</div>
-                            {sub.desc && (
-                                <div className="text-[10px] text-slate-400 mt-0.5 leading-tight line-clamp-1">{sub.desc}</div>
-                            )}
-                        </div>
-                    </Link>
-                ))}
-            </div>
-            <div className="px-4 py-3 bg-slate-100 border-t border-slate-200 flex items-center justify-between">
-                <span className="text-[10px] text-slate-400 font-medium">Sanmati Spectrum of Knowledge</span>
-                <span className="text-[10px] font-bold text-primary px-2.5 py-0.5 bg-primary/10 rounded-full">ISSN 3108-1819</span>
-            </div>
-        </div>
-    </motion.div>
-);
-
-/* ─── Main Navbar ──────────────────────────────────────────── */
-const Navbar = ({ onOpenSearch }) => {
-    const [isOpen, setIsOpen] = useState(false);
+/* ─── Main Navbar ─────────────────────────────────────────── */
+export default function Navbar({ onOpenSearch }) {
+    const { url } = usePage();
+    const [mobileOpen, setMobileOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState(null);
     const [scrolled, setScrolled] = useState(false);
+    const [userMenuOpen, setUserMenuOpen] = useState(false);
+    const navRef = useRef(null);
     const timeoutRef = useRef(null);
-    const { url } = usePage();
+
+    const { auth } = usePage().props;
+    const user = auth?.user;
 
     const isActive = useCallback((href) => {
-        if (!href) return false;
-        return url === href || url.startsWith(href + '/') || url.startsWith(href + '?');
+        if (href === '/') return url === '/';
+        return url.startsWith(href);
     }, [url]);
 
-    const isGroupActive = useCallback((item) => {
-        if (item.href) return isActive(item.href);
-        return item.dropdown?.some(sub => isActive(sub.href));
-    }, [isActive]);
-
     useEffect(() => {
-        let last = false;
-        const onScroll = () => {
-            const next = window.scrollY > 20;
-            if (next !== last) { last = next; setScrolled(next); }
-        };
-        window.addEventListener('scroll', onScroll, { passive: true });
-        return () => window.removeEventListener('scroll', onScroll);
+        const handleScroll = () => setScrolled(window.scrollY > 16);
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Close mobile menu on route change
-    useEffect(() => { setIsOpen(false); }, [url]);
-
-    // Lock body scroll when mobile menu open
     useEffect(() => {
-        document.body.style.overflow = isOpen ? 'hidden' : '';
-        return () => { document.body.style.overflow = ''; };
-    }, [isOpen]);
+        const handleKey = (e) => { if (e.key === 'Escape') { setMobileOpen(false); setActiveDropdown(null); } };
+        const handleClick = (e) => {
+            if (navRef.current && !navRef.current.contains(e.target)) {
+                setActiveDropdown(null);
+                setUserMenuOpen(false);
+            }
+        };
+        document.addEventListener('keydown', handleKey);
+        document.addEventListener('mousedown', handleClick);
+        return () => { document.removeEventListener('keydown', handleKey); document.removeEventListener('mousedown', handleClick); };
+    }, []);
 
-    const openDropdown  = (name) => { clearTimeout(timeoutRef.current); setActiveDropdown(name); };
-    const closeDropdown = ()     => { timeoutRef.current = setTimeout(() => setActiveDropdown(null), 120); };
-    const stayOpen      = ()     => { clearTimeout(timeoutRef.current); };
+    // Prevent body scroll when mobile menu open
+    useEffect(() => {
+        document.body.style.overflow = mobileOpen ? 'hidden' : '';
+        return () => { document.body.style.overflow = ''; };
+    }, [mobileOpen]);
+
+    const openDropdown = (name) => {
+        clearTimeout(timeoutRef.current);
+        setActiveDropdown(name);
+    };
+    const closeDropdown = () => {
+        timeoutRef.current = setTimeout(() => setActiveDropdown(null), 120);
+    };
+
+    const getDashboardLink = () => {
+        if (!user) return '/login';
+        const role = user.role;
+        if (role === 'admin') return '/admin/dashboard';
+        if (role === 'editor') return '/editor/dashboard';
+        if (role === 'reviewer') return '/reviewer/dashboard';
+        return '/author/dashboard';
+    };
 
     return (
         <>
-            {/* ── Announcement Strip ── */}
-            <div className="bg-primary text-white py-2 px-4 text-center hidden md:flex items-center justify-center gap-6">
-                <div className="flex items-center gap-4 text-[11px] font-medium text-white/80">
-                    {QUICK_STATS.map((s, i) => (
-                        <span key={i} className="flex items-center gap-2">
-                            <span className="text-secondary font-black">{s.value}</span>
-                            <span>{s.label}</span>
-                            {i < QUICK_STATS.length - 1 && <span className="w-1 h-1 rounded-full bg-white/30 ml-2" />}
-                        </span>
-                    ))}
-                </div>
-                <div className="ml-auto flex items-center gap-4 text-[11px] text-white/70">
-                    <a href="mailto:sanmatijournal@gmail.com" className="flex items-center gap-1.5 hover:text-secondary transition-colors">
-                        <Mail className="w-3 h-3 text-secondary" />
-                        sanmatijournal@gmail.com
-                    </a>
-                    <a href="tel:+919870713912" className="flex items-center gap-1.5 hover:text-secondary transition-colors">
-                        <Phone className="w-3 h-3 text-secondary" />
-                        +91 9870713912 / +91 8979782949
-                    </a>
-                </div>
+            {/* ── Announcement Bar ── */}
+            <div className="bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-600 text-white text-center py-2 px-4 text-xs font-bold tracking-wide">
+                <span className="opacity-90">📢 Call for Papers — Volume 2, Issue 3 is now open.</span>{' '}
+                <Link href="/submission-guidelines/call-for-papers" className="underline underline-offset-2 hover:no-underline ml-1 font-bold">
+                    Submit Your Research →
+                </Link>
             </div>
 
             {/* ── Main Header ── */}
-            <nav
-                role="navigation"
-                aria-label="Main navigation"
+            <header
+                ref={navRef}
                 className={`sticky top-0 z-[100] w-full transition-all duration-300 ${
                     scrolled
-                        ? 'bg-white/90 backdrop-blur-xl shadow-md border-b border-slate-200/80'
-                        : 'bg-white/95 backdrop-blur-md border-b border-slate-200/60'
+                        ? 'bg-white/95 backdrop-blur-xl shadow-sm border-b border-slate-200/70'
+                        : 'bg-white border-b border-slate-200/50'
                 }`}
             >
-                <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between h-16 lg:h-18">
+                <nav className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
+                    <div className="flex items-center justify-between h-16 lg:h-[68px]">
 
-                        {/* Logo */}
-                        <Link href="/" className="flex items-center gap-3 flex-shrink-0 group">
-                            <div className="relative">
-                                <img
-                                    src="/logo.webp"
-                                    alt="Sanmati Spectrum of Knowledge - Peer Reviewed Multidisciplinary ISSN Journal Logo"
-                                    width="40"
-                                    height="40"
-                                    loading="eager"
-                                    fetchpriority="high"
-                                    className="h-10 w-10 rounded-xl object-cover border border-slate-200 shadow-xs group-hover:scale-105 transition-transform"
-                                />
+                        {/* ── Logo ── */}
+                        <Link href="/" className="flex items-center gap-3 group shrink-0" aria-label="Sanmati Journal home">
+                            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
+                                <BookOpen className="w-5 h-5 text-white" />
                             </div>
                             <div className="hidden sm:block">
-                                <div className="text-[15px] font-serif font-bold text-slate-900 leading-tight tracking-tight">
-                                    Sanmati Spectrum
-                                </div>
-                                <div className="text-[9px] text-blue-600 font-bold uppercase tracking-wider leading-tight">
-                                    of Knowledge & Emerging Discourse
-                                </div>
+                                <div className="text-base font-heading font-bold text-slate-900 leading-tight">Sanmati Spectrum</div>
+                                <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">of Knowledge</div>
                             </div>
                         </Link>
 
-                        {/* Desktop Nav */}
+                        {/* ── Desktop Nav ── */}
                         <div className="hidden lg:flex items-center gap-1">
                             {NAV_ITEMS.map((item) => (
-                                item.dropdown ? (
-                                    <div
-                                        key={item.name}
-                                        className="relative"
-                                        onMouseEnter={() => openDropdown(item.name)}
-                                        onMouseLeave={closeDropdown}
-                                    >
+                                <div
+                                    key={item.name}
+                                    className="relative"
+                                    onMouseEnter={() => item.dropdown && openDropdown(item.name)}
+                                    onMouseLeave={() => item.dropdown && closeDropdown()}
+                                >
+                                    {item.href ? (
+                                        <Link
+                                            href={item.href}
+                                            className={`flex items-center gap-1 px-3.5 py-2 rounded-xl text-sm font-bold transition-all duration-150 ${
+                                                isActive(item.href)
+                                                    ? 'bg-blue-50 text-blue-700'
+                                                    : 'text-slate-700 hover:text-slate-900 hover:bg-slate-100'
+                                            }`}
+                                        >
+                                            {item.name}
+                                        </Link>
+                                    ) : (
                                         <button
-                                            onFocus={() => openDropdown(item.name)}
-                                            onBlur={closeDropdown}
-                                            className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
-                                                isGroupActive(item)
-                                                    ? 'text-blue-600 bg-blue-50'
-                                                    : 'text-slate-700 hover:text-blue-600 hover:bg-slate-100'
+                                            className={`flex items-center gap-1 px-3.5 py-2 rounded-xl text-sm font-bold transition-all duration-150 ${
+                                                activeDropdown === item.name
+                                                    ? 'bg-blue-50 text-blue-700'
+                                                    : 'text-slate-700 hover:text-slate-900 hover:bg-slate-100'
                                             }`}
                                             aria-haspopup="true"
                                             aria-expanded={activeDropdown === item.name}
                                         >
                                             {item.name}
-                                            <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeDropdown === item.name ? 'rotate-180 text-blue-600' : ''}`} />
+                                            <motion.span
+                                                animate={{ rotate: activeDropdown === item.name ? 180 : 0 }}
+                                                transition={{ duration: 0.2 }}
+                                            >
+                                                <ChevronDown className="w-3.5 h-3.5 opacity-60" />
+                                            </motion.span>
                                         </button>
-                                        <AnimatePresence>
-                                            {activeDropdown === item.name && (
-                                                <div onMouseEnter={stayOpen} onMouseLeave={closeDropdown}>
-                                                    <MegaMenu item={item} isActive={isActive} />
-                                                </div>
-                                            )}
-                                        </AnimatePresence>
-                                    </div>
-                                ) : (
-                                    <Link
-                                        key={item.name}
-                                        href={item.href}
-                                        className={`px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
-                                            isActive(item.href)
-                                                ? 'text-blue-600 bg-blue-50'
-                                                : 'text-slate-700 hover:text-blue-600 hover:bg-slate-100'
-                                        }`}
-                                    >
-                                        {item.name}
-                                    </Link>
-                                )
+                                    )}
+
+                                    <AnimatePresence>
+                                        {activeDropdown === item.name && item.dropdown && (
+                                            <DropdownMenu items={item.dropdown} />
+                                        )}
+                                    </AnimatePresence>
+                                </div>
                             ))}
                         </div>
 
-                        {/* Right Actions */}
+                        {/* ── Right Actions ── */}
                         <div className="flex items-center gap-2">
-                            {/* Search Button */}
+                            {/* Search */}
                             <button
                                 onClick={onOpenSearch}
-                                aria-label="Search articles (Ctrl+K)"
-                                title="Search (Ctrl+K)"
-                                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition-all duration-200"
+                                className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-bold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all duration-150"
+                                aria-label="Open search"
                             >
-                                <Search className="w-4 h-4 text-blue-600" />
-                                <span className="hidden md:flex items-center gap-1.5 text-xs text-slate-600">
-                                    Search
-                                    <kbd className="px-1.5 py-0.5 bg-white rounded text-[10px] border border-slate-200 font-mono shadow-2xs">⌘K</kbd>
-                                </span>
+                                <Search className="w-4.5 h-4.5" />
+                                <span className="hidden xl:inline text-slate-400 text-xs font-normal">Search...</span>
+                                <kbd className="hidden xl:inline px-1.5 py-0.5 text-[10px] font-bold bg-slate-100 text-slate-500 rounded-md border border-slate-200">⌘K</kbd>
                             </button>
 
-                            {/* Submit CTA */}
-                            <Link
-                                href="/submission-guidelines/call-for-papers"
-                                className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold uppercase tracking-wider shadow-md shadow-blue-600/20 active:scale-95 transition-all duration-200"
-                            >
-                                <SendHorizonal className="w-3.5 h-3.5" />
-                                Submit Paper
-                            </Link>
+                            {/* Auth buttons */}
+                            {user ? (
+                                <div className="relative" ref={null}>
+                                    <button
+                                        onClick={() => setUserMenuOpen(p => !p)}
+                                        className="flex items-center gap-2 px-3 py-2 rounded-xl bg-blue-50 border border-blue-100 text-sm font-bold text-blue-700 hover:bg-blue-100 transition-all"
+                                    >
+                                        <span className="w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center">
+                                            {user.name?.charAt(0)?.toUpperCase()}
+                                        </span>
+                                        <span className="hidden sm:inline max-w-24 truncate">{user.name?.split(' ')[0]}</span>
+                                        <ChevronDown className="w-3.5 h-3.5 opacity-60" />
+                                    </button>
+                                    <AnimatePresence>
+                                        {userMenuOpen && (
+                                            <motion.div
+                                                initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                                                animate={{ opacity: 1, y: 0, scale: 1 }}
+                                                exit={{ opacity: 0, y: 8, scale: 0.97 }}
+                                                className="absolute right-0 top-full mt-2 w-52 bg-white border border-slate-200 rounded-2xl shadow-2xl p-2 z-50"
+                                            >
+                                                <Link href={getDashboardLink()} className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-bold text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                                                    <GraduationCap className="w-4 h-4 text-blue-500" /> Dashboard
+                                                </Link>
+                                                <Link href="/settings" className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-bold text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                                                    <Award className="w-4 h-4 text-blue-500" /> Profile Settings
+                                                </Link>
+                                                <div className="my-1 border-t border-slate-100" />
+                                                <Link
+                                                    href="/logout"
+                                                    method="post"
+                                                    as="button"
+                                                    className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-bold text-red-600 hover:bg-red-50 transition-colors w-full text-left"
+                                                >
+                                                    <X className="w-4 h-4" /> Sign Out
+                                                </Link>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
+                            ) : (
+                                <div className="hidden sm:flex items-center gap-2">
+                                    <Link
+                                        href="/login"
+                                        className="px-4 py-2 rounded-xl text-sm font-bold text-slate-700 hover:bg-slate-100 transition-colors"
+                                    >
+                                        Sign In
+                                    </Link>
+                                    <Link
+                                        href="/submission-guidelines/call-for-papers"
+                                        className="px-4 py-2 rounded-xl text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-sm shadow-blue-600/30 hover:-translate-y-0.5 transition-all duration-200"
+                                    >
+                                        Submit Paper
+                                    </Link>
+                                </div>
+                            )}
 
-                            {/* Mobile Menu Toggle */}
+                            {/* Mobile menu toggle */}
                             <button
-                                onClick={() => setIsOpen(!isOpen)}
-                                className="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 transition-all duration-200"
-                                aria-label={isOpen ? 'Close menu' : 'Open menu'}
-                                aria-expanded={isOpen}
+                                onClick={() => setMobileOpen(p => !p)}
+                                className="lg:hidden flex items-center justify-center w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors"
+                                aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+                                aria-expanded={mobileOpen}
                             >
-                                {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                                <AnimatePresence mode="wait">
+                                    {mobileOpen
+                                        ? <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}><X className="w-5 h-5" /></motion.span>
+                                        : <motion.span key="m" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}><Menu className="w-5 h-5" /></motion.span>
+                                    }
+                                </AnimatePresence>
                             </button>
                         </div>
                     </div>
-                </div>
-            </nav>
+                </nav>
+            </header>
 
-            {/* ── Mobile Fullscreen Menu ── */}
+            {/* ── Mobile Drawer ── */}
             <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, x: '100%' }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: '100%' }}
-                        transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
-                        className="fixed inset-y-0 right-0 w-full max-w-sm z-[999] lg:hidden flex flex-col bg-white border-l border-slate-200 shadow-2xl"
-                    >
-                        {/* Header */}
-                        <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 flex-shrink-0 bg-slate-50">
-                            <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-3">
-                                <img src="/logo.jpg" alt="Sanmati Journal Logo" className="h-9 w-9 rounded-lg object-cover" />
+                {mobileOpen && (
+                    <>
+                        {/* Backdrop */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="fixed inset-0 z-[90] bg-slate-900/50 backdrop-blur-sm lg:hidden"
+                            onClick={() => setMobileOpen(false)}
+                            aria-hidden="true"
+                        />
+                        {/* Drawer */}
+                        <motion.div
+                            initial={{ x: '100%' }}
+                            animate={{ x: 0 }}
+                            exit={{ x: '100%' }}
+                            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                            className="fixed top-0 right-0 bottom-0 z-[95] w-80 max-w-[90vw] bg-white shadow-2xl lg:hidden flex flex-col overflow-hidden"
+                        >
+                            {/* Drawer header */}
+                            <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100">
                                 <div>
-                                    <div className="text-sm font-serif font-black text-primary">Sanmati Spectrum</div>
-                                    <div className="text-[9px] text-slate-500 font-bold uppercase tracking-wider">of Knowledge</div>
+                                    <div className="text-sm font-heading font-bold text-slate-900">Sanmati Spectrum</div>
+                                    <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">ISSN 3108-1819</div>
                                 </div>
-                            </Link>
-                            <button
-                                onClick={() => setIsOpen(false)}
-                                className="w-10 h-10 rounded-lg bg-slate-200/50 flex items-center justify-center text-dark hover:bg-slate-200 transition-colors"
-                                aria-label="Close menu"
-                            >
-                                <X className="w-5 h-5" />
-                            </button>
-                        </div>
-
-                        {/* Scrollable Nav */}
-                        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1">
-                            {NAV_ITEMS.map(item => (
-                                <MobileNavItem
-                                    key={item.name}
-                                    item={item}
-                                    isActive={isActive}
-                                    closeMenu={() => setIsOpen(false)}
-                                />
-                            ))}
-                        </div>
-
-                        {/* Footer Strip */}
-                        <div className="px-5 py-5 border-t border-slate-200 space-y-3 flex-shrink-0 bg-slate-50">
-                            <Link
-                                href="/submission-guidelines/call-for-papers"
-                                onClick={() => setIsOpen(false)}
-                                className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-primary text-white font-bold text-sm hover:bg-primary-dark transition-colors"
-                            >
-                                <SendHorizonal className="w-4 h-4" />
-                                Submit Your Manuscript
-                            </Link>
-                            <div className="flex items-center justify-center gap-4 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
-                                <span>ISSN: 3108-1819</span>
-                                <span className="w-1 h-1 rounded-full bg-slate-300" />
-                                <span>Impact Factor: 5.3</span>
+                                <button
+                                    onClick={() => setMobileOpen(false)}
+                                    className="w-8 h-8 flex items-center justify-center rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors"
+                                    aria-label="Close menu"
+                                >
+                                    <X className="w-4 h-4" />
+                                </button>
                             </div>
-                        </div>
-                    </motion.div>
+
+                            {/* Drawer body */}
+                            <div className="flex-1 overflow-y-auto p-4 space-y-1">
+                                {NAV_ITEMS.map(item => (
+                                    <MobileNavItem key={item.name} item={item} isActive={isActive} closeMenu={() => setMobileOpen(false)} />
+                                ))}
+                            </div>
+
+                            {/* Drawer footer CTAs */}
+                            <div className="p-4 border-t border-slate-100 space-y-2.5">
+                                {user ? (
+                                    <Link
+                                        href={getDashboardLink()}
+                                        onClick={() => setMobileOpen(false)}
+                                        className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-blue-600 text-white text-sm font-bold hover:bg-blue-700 transition-colors"
+                                    >
+                                        <GraduationCap className="w-4 h-4" /> Go to Dashboard
+                                    </Link>
+                                ) : (
+                                    <>
+                                        <Link
+                                            href="/submission-guidelines/call-for-papers"
+                                            onClick={() => setMobileOpen(false)}
+                                            className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-blue-600 text-white text-sm font-bold hover:bg-blue-700 transition-colors"
+                                        >
+                                            <SendHorizonal className="w-4 h-4" /> Submit Paper
+                                        </Link>
+                                        <Link
+                                            href="/login"
+                                            onClick={() => setMobileOpen(false)}
+                                            className="flex items-center justify-center gap-2 w-full py-3 rounded-xl border border-slate-200 text-slate-700 text-sm font-bold hover:bg-slate-50 transition-colors"
+                                        >
+                                            Sign In to Dashboard
+                                        </Link>
+                                    </>
+                                )}
+                                <div className="flex items-center justify-center gap-4 pt-1">
+                                    <a href="tel:+918979782949" className="flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-blue-600 transition-colors">
+                                        <Phone className="w-3.5 h-3.5" /> +91 89797 82949
+                                    </a>
+                                    <button onClick={onOpenSearch} className="flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-blue-600 transition-colors">
+                                        <Search className="w-3.5 h-3.5" /> Search
+                                    </button>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </>
                 )}
             </AnimatePresence>
         </>
     );
-};
-
-export default Navbar;
+}

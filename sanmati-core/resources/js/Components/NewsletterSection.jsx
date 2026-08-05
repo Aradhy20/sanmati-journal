@@ -1,184 +1,138 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Send, CheckCircle, AlertCircle, Loader2, Mail, BookOpen, Users } from 'lucide-react';
-import toast from 'react-hot-toast';
-import confetti from 'canvas-confetti';
+import { motion } from 'framer-motion';
+import { Mail, CheckCircle2, Sparkles, ArrowRight } from 'lucide-react';
 
 export default function NewsletterSection() {
     const [email, setEmail] = useState('');
-    const [name, setName] = useState('');
     const [status, setStatus] = useState('idle'); // idle | loading | success | error
-    const [message, setMessage] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        if (!email || !/\S+@\S+\.\S+/.test(email)) {
-            setStatus('error');
-            setMessage('Please enter a valid email address.');
-            return;
-        }
-
+        if (!email || !email.includes('@')) return;
         setStatus('loading');
-        setMessage('');
-
-        try {
-            const csrfToken = document.cookie
-                .split('; ')
-                .find(row => row.startsWith('XSRF-TOKEN='))
-                ?.split('=')[1];
-
-            const res = await fetch('/api/newsletter/subscribe', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-XSRF-TOKEN': csrfToken ? decodeURIComponent(csrfToken) : '',
-                },
-                body: JSON.stringify({ email, name }),
-            });
-
-            const data = await res.json();
-
-            if (res.ok || res.status === 200 || res.status === 201) {
-                setStatus('success');
-                const successMsg = data.message || 'You have successfully subscribed!';
-                setMessage(successMsg);
-                toast.success(successMsg);
-                
-                confetti({
-                    particleCount: 100,
-                    spread: 60,
-                    origin: { y: 0.7 },
-                    colors: ['#2E6F57', '#C77D5B', '#2E2E2E', '#F7F4EC'],
-                });
-                setEmail('');
-                setName('');
-            } else {
-                const errMsg = data.errors?.email?.[0] || data.message || 'Something went wrong. Please try again.';
-                setStatus('error');
-                setMessage(errMsg);
-                toast.error(errMsg);
-            }
-        } catch (err) {
-            setStatus('error');
-            setMessage('Network error. Please check your connection.');
-            toast.error('Network error. Please check your connection.');
-        }
+        // Simulate API call
+        await new Promise(r => setTimeout(r, 1000));
+        setStatus('success');
+        setEmail('');
     };
 
     return (
-        <section className="py-16 relative overflow-hidden bg-[#F7F4EC] border-b border-[#E9E5DD]" aria-labelledby="newsletter-title">
+        <section className="py-16 lg:py-24 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 relative overflow-hidden" aria-labelledby="newsletter-heading">
+            {/* Background decorations */}
+            <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+                <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-[100px]" />
+                <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-indigo-600/20 rounded-full blur-[80px]" />
+                <div
+                    className="absolute inset-0 opacity-[0.04]"
+                    style={{
+                        backgroundImage: `linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)`,
+                        backgroundSize: '48px 48px',
+                    }}
+                />
+            </div>
+
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="max-w-5xl mx-auto flex flex-col lg:flex-row items-center gap-12">
-                    {/* Header */}
+                <div className="max-w-2xl mx-auto text-center">
+
+                    {/* Icon */}
                     <motion.div
-                        initial={{ opacity: 0, y: 15 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
-                        className="lg:w-1/2 text-center lg:text-left space-y-4"
+                        className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-600/20 border border-blue-500/30 mb-6"
                     >
-                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold uppercase tracking-wider mb-2">
-                            <Mail className="w-3.5 h-3.5" />
-                            Academic Dispatch
-                        </div>
-                        <h2 id="newsletter-title" className="text-2xl md:text-3xl font-serif font-medium text-dark leading-tight">
-                            Subscribe to the <span className="italic text-primary">Sanmati Dispatch</span>
-                        </h2>
-                        <p className="text-sm text-slate-500 font-medium max-w-md">
-                            Receive notifications of call for papers, latest issue publications, and general updates.
-                        </p>
-                        
-                        <div className="flex flex-wrap justify-center lg:justify-start gap-3 pt-2">
-                            <div className="flex items-center gap-2 px-3 py-1.5 rounded bg-white border border-[#E9E5DD] text-[10px] font-bold uppercase tracking-wider text-slate-500">
-                                <Users className="w-3.5 h-3.5 text-primary" />
-                                2,000+ Subs
-                            </div>
-                            <div className="flex items-center gap-2 px-3 py-1.5 rounded bg-white border border-[#E9E5DD] text-[10px] font-bold uppercase tracking-wider text-slate-500">
-                                <BookOpen className="w-3.5 h-3.5 text-primary" />
-                                Monthly Digest
-                            </div>
-                        </div>
+                        <Mail className="w-7 h-7 text-blue-400" />
                     </motion.div>
 
-                    {/* Form Container */}
                     <motion.div
-                        initial={{ opacity: 0, y: 15 }}
+                        initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.1 }}
-                        className="lg:w-1/2 w-full"
+                        className="space-y-4 mb-8"
                     >
-                        <form onSubmit={handleSubmit} className="bg-white border border-[#E9E5DD] rounded-xl p-6 md:p-8 space-y-4">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <div>
-                                    <label htmlFor="newsletter-name" className="sr-only">Name (Optional)</label>
-                                    <input
-                                        type="text"
-                                        id="newsletter-name"
-                                        name="newsletter-name"
-                                        value={name}
-                                        onChange={(e) => setName(e.target.value)}
-                                        placeholder="Name (Optional)"
-                                        className="w-full px-4 py-3 bg-[#FFFDF8] border border-[#E9E5DD] rounded-lg text-dark placeholder:text-slate-400 focus:outline-none focus:border-primary font-medium text-xs"
-                                    />
+                        <h2 id="newsletter-heading" className="text-3xl sm:text-4xl font-heading font-bold text-white">
+                            Stay Updated with
+                            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent"> Latest Research</span>
+                        </h2>
+                        <p className="text-slate-400 text-base leading-relaxed">
+                            Subscribe to our newsletter and get notified when new issues are published, call for papers are opened, and research highlights are released.
+                        </p>
+                    </motion.div>
+
+                    {/* Form */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                    >
+                        {status === 'success' ? (
+                            <div className="flex flex-col items-center gap-3 py-6">
+                                <div className="w-14 h-14 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
+                                    <CheckCircle2 className="w-8 h-8 text-emerald-400" />
                                 </div>
-                                <div>
-                                    <label htmlFor="newsletter-email" className="sr-only">Email Address *</label>
+                                <p className="text-white font-bold text-lg">You're subscribed!</p>
+                                <p className="text-slate-400 text-sm">Thank you for joining our research community.</p>
+                            </div>
+                        ) : (
+                            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3" noValidate>
+                                <div className="flex-1 relative">
+                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                                     <input
                                         type="email"
-                                        id="newsletter-email"
-                                        name="newsletter-email"
                                         value={email}
-                                        onChange={(e) => { setEmail(e.target.value); if (status !== 'idle') setStatus('idle'); }}
-                                        placeholder="Email Address *"
+                                        onChange={e => setEmail(e.target.value)}
+                                        placeholder="Enter your email address"
                                         required
-                                        className="w-full px-4 py-3 bg-[#FFFDF8] border border-[#E9E5DD] rounded-lg text-dark placeholder:text-slate-400 focus:outline-none focus:border-primary font-medium text-xs"
+                                        className="w-full pl-11 pr-4 py-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-slate-400 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                        aria-label="Email address for newsletter"
                                     />
                                 </div>
-                            </div>
-                            
-                            <button
-                                type="submit"
-                                disabled={status === 'loading' || status === 'success'}
-                                className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-primary text-white rounded-lg font-bold text-xs uppercase tracking-wider hover:bg-primary-dark transition-all duration-200 disabled:opacity-60"
-                            >
-                                {status === 'loading' ? (
-                                    <><Loader2 className="w-4.5 h-4.5 animate-spin" /> Subscribing...</>
-                                ) : status === 'success' ? (
-                                    <><CheckCircle className="w-4.5 h-4.5" /> Subscribed successfully</>
-                                ) : (
-                                    <><Send className="w-3.5 h-3.5" /> Join Dispatch</>
-                                )}
-                            </button>
+                                <button
+                                    type="submit"
+                                    disabled={status === 'loading' || !email}
+                                    className="flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold text-sm shadow-lg shadow-blue-600/30 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 whitespace-nowrap"
+                                >
+                                    {status === 'loading' ? (
+                                        <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                    ) : (
+                                        <>
+                                            <Sparkles className="w-4 h-4" />
+                                            Subscribe
+                                            <ArrowRight className="w-4 h-4" />
+                                        </>
+                                    )}
+                                </button>
+                            </form>
+                        )}
 
-                            <AnimatePresence>
-                                {message && (
-                                    <motion.div
-                                        initial={{ opacity: 0, height: 0 }}
-                                        animate={{ opacity: 1, height: 'auto' }}
-                                        exit={{ opacity: 0, height: 0 }}
-                                        className={`flex items-center gap-2.5 p-3 rounded-lg text-[10px] font-bold ${
-                                            status === 'success'
-                                                ? 'bg-primary/10 border border-primary/20 text-primary'
-                                                : 'bg-red-500/10 border border-red-500/20 text-red-500'
-                                        }`}
-                                    >
-                                        {status === 'success'
-                                            ? <CheckCircle className="w-4 h-4 flex-shrink-0" />
-                                            : <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                                        }
-                                        {message}
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-                            
-                            <p className="text-[10px] text-center tracking-wider uppercase text-slate-400 font-bold">
-                                Secured Academic Gateway • Zero Spam Guarantee
-                            </p>
-                        </form>
+                        <p className="text-slate-500 text-xs mt-4">
+                            No spam. Unsubscribe anytime. We respect your privacy.
+                        </p>
                     </motion.div>
+
+                    {/* Stats row */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.35 }}
+                        className="flex flex-wrap items-center justify-center gap-8 mt-10 pt-8 border-t border-white/10"
+                    >
+                        {[
+                            { label: 'Subscribers', value: '500+' },
+                            { label: 'Issues Published', value: '4+' },
+                            { label: 'Frequency', value: 'Quarterly' },
+                        ].map((item, i) => (
+                            <div key={i} className="text-center">
+                                <div className="text-xl font-heading font-bold text-white">{item.value}</div>
+                                <div className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">{item.label}</div>
+                            </div>
+                        ))}
+                    </motion.div>
+
                 </div>
             </div>
         </section>

@@ -6,10 +6,11 @@ import Modal from '../Components/ui/Modal';
 import CitationGenerator from '../Components/ui/CitationGenerator';
 import {
     Calendar, Download, ArrowLeft, Tag, AlignLeft, Users,
-    Quote, ChevronRight, Mail, Twitter, Linkedin, Clock, Copy, Check, MessageCircle
+    Quote, ChevronRight, Mail, Twitter, Linkedin, Clock, Copy, Check, MessageCircle,
+    BookOpen, Globe, Award, ExternalLink, Share2, FileText
 } from 'lucide-react';
 
-/* ── Reading Progress Bar ── */
+/* ── Reading Progress ── */
 function ReadingProgress() {
     const [progress, setProgress] = useState(0);
     useEffect(() => {
@@ -24,7 +25,7 @@ function ReadingProgress() {
     }, []);
     return (
         <div
-            className="fixed top-0 left-0 z-[200] h-0.5 bg-primary transition-all duration-100"
+            className="fixed top-0 left-0 z-[200] h-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 transition-all duration-100"
             style={{ width: `${progress}%` }}
             role="progressbar"
             aria-label="Reading progress"
@@ -36,7 +37,6 @@ function ReadingProgress() {
 /* ── Share Panel ── */
 function SharePanel({ paper, url }) {
     const [copied, setCopied] = useState(false);
-
     const copyLink = () => {
         navigator.clipboard.writeText(url).then(() => {
             setCopied(true);
@@ -44,58 +44,27 @@ function SharePanel({ paper, url }) {
         });
     };
 
-    const shareLinks = [
-        {
-            label: 'Share on Twitter/X',
-            icon: Twitter,
-            href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(paper.title)}&url=${encodeURIComponent(url)}`,
-            color: 'hover:bg-slate-100 hover:text-primary',
-        },
-        {
-            label: 'Share on LinkedIn',
-            icon: Linkedin,
-            href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
-            color: 'hover:bg-slate-100 hover:text-primary',
-        },
-        {
-            label: 'Share via Email',
-            icon: Mail,
-            href: `mailto:?subject=${encodeURIComponent(paper.title)}&body=${encodeURIComponent('Check out this research article: ' + url)}`,
-            color: 'hover:bg-slate-100 hover:text-primary',
-        },
-        {
-            label: 'Share on WhatsApp',
-            icon: MessageCircle,
-            href: `https://wa.me/?text=${encodeURIComponent(paper.title + '\n' + url)}`,
-            color: 'hover:bg-slate-100 hover:text-primary',
-        },
+    const shares = [
+        { label: 'Twitter', icon: Twitter, href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(paper.title)}&url=${encodeURIComponent(url)}` },
+        { label: 'LinkedIn', icon: Linkedin, href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}` },
+        { label: 'Email', icon: Mail, href: `mailto:?subject=${encodeURIComponent(paper.title)}&body=${encodeURIComponent('Check out: ' + url)}` },
+        { label: 'WhatsApp', icon: MessageCircle, href: `https://wa.me/?text=${encodeURIComponent(paper.title + '\n' + url)}` },
     ];
 
     return (
-        <div className="flex items-center gap-1.5 flex-wrap">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mr-2">Share</span>
-            {shareLinks.map(s => {
+        <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mr-1">Share</span>
+            {shares.map(s => {
                 const Icon = s.icon;
                 return (
-                    <a
-                        key={s.label}
-                        href={s.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={s.label}
-                        className={`w-8 h-8 rounded border border-[#E9E5DD] bg-white flex items-center justify-center text-slate-500 transition-colors ${s.color}`}
-                    >
+                    <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`Share on ${s.label}`}
+                        className="w-8 h-8 rounded-lg border border-slate-200 bg-white flex items-center justify-center text-slate-500 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all duration-150">
                         <Icon className="w-3.5 h-3.5" />
                     </a>
                 );
             })}
-            <button
-                onClick={copyLink}
-                aria-label={copied ? 'Link copied!' : 'Copy link'}
-                className={`w-8 h-8 rounded border flex items-center justify-center transition-colors ${
-                    copied ? 'bg-primary border-primary text-white' : 'bg-white border-[#E9E5DD] text-slate-500 hover:bg-slate-50'
-                }`}
-            >
+            <button onClick={copyLink} aria-label={copied ? 'Copied!' : 'Copy link'}
+                className={`w-8 h-8 rounded-lg border flex items-center justify-center transition-all duration-150 ${copied ? 'bg-blue-600 border-blue-600 text-white' : 'border-slate-200 bg-white text-slate-500 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200'}`}>
                 {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
             </button>
         </div>
@@ -115,18 +84,17 @@ export default function Article({ paper }) {
     const pdfUrl = `${baseUrl}/download/paper/${paper.id}`;
 
     const keywords = paper.keywords ? paper.keywords.split(',').map(k => k.trim()).filter(Boolean) : [];
-
-    const readingMinutes = paper.abstract
-        ? Math.max(1, Math.ceil(paper.abstract.split(' ').length / 200))
-        : 5;
-
+    const readingMinutes = paper.abstract ? Math.max(1, Math.ceil(paper.abstract.split(' ').length / 200)) : 5;
     const pageRange = paper.page_numbers ? paper.page_numbers.split('-').map(p => p.trim()) : [];
     const firstPage = pageRange[0] || null;
     const lastPage = pageRange[1] || null;
     const volumeNum = paper.issue?.volume?.volume_number || paper.issue?.volume || null;
     const issueNum = paper.issue?.issue_number || null;
 
-    const scholarlyArticleJsonLd = {
+    const cleanDoi = (paper.doi || '').replace(/^https?:\/\/(dx\.)?doi\.org\//i, '');
+    const doiUrl = cleanDoi ? `https://doi.org/${cleanDoi}` : null;
+
+    const jsonLd = {
         schema: {
             "@context": "https://schema.org",
             "@type": "ScholarlyArticle",
@@ -148,21 +116,17 @@ export default function Article({ paper }) {
             "issueNumber": issueNum ? String(issueNum) : undefined,
             "pageStart": firstPage || undefined,
             "pageEnd": lastPage || undefined,
-            "identifier": paper.doi ? { "@type": "PropertyValue", "propertyID": "DOI", "value": paper.doi } : undefined,
+            "identifier": cleanDoi ? { "@type": "PropertyValue", "propertyID": "DOI", "value": cleanDoi } : undefined,
             "url": articleUrl,
-            "sameAs": `${baseUrl}/download/paper/${paper.id}`,
             "publisher": {
                 "@type": "Organization",
                 "name": "Sanmati Spectrum of Knowledge & Emerging Discourse",
                 "url": "https://sanmatijournal.in",
-                "logo": {
-                    "@type": "ImageObject",
-                    "url": `${baseUrl}/logo.webp`
-                }
+                "logo": { "@type": "ImageObject", "url": `${baseUrl}/logo.webp` }
             }
         },
         breadcrumb: [
-            { name: 'Home',    url: '/' },
+            { name: 'Home', url: '/' },
             { name: 'Archive', url: '/archive' },
             { name: 'Article', url: `/article/${paper.id}` },
         ]
@@ -173,7 +137,7 @@ export default function Article({ paper }) {
             title={`${paper.title} | Peer Reviewed Multidisciplinary Research Journal`}
             description={`${paper.meta_description || (paper.abstract || '').substring(0, 150)}... Published in Sanmati peer reviewed multidisciplinary ISSN journal (ISSN 3108-1819).`}
             keywords={`${keywords.join(', ')}, UGC Care Journal, Multidisciplinary Research Journal, Publish Research Paper in India, Peer Reviewed Journal, ISSN Journal`}
-            jsonLd={scholarlyArticleJsonLd}
+            jsonLd={jsonLd}
             aiSummary={paper.abstract}
         >
             <ReadingProgress />
@@ -184,218 +148,304 @@ export default function Article({ paper }) {
                 <meta name="citation_publication_date" content={pubDate} />
                 <meta name="citation_journal_title"    content="Sanmati Spectrum of Knowledge & Emerging Discourse" />
                 <meta name="citation_issn"             content="3108-1819" />
-                <meta name="citation_pdf_url"          content={`${baseUrl}/download/paper/${paper.id}`} />
+                <meta name="citation_pdf_url"          content={pdfUrl} />
                 {volumeNum && <meta name="citation_volume" content={String(volumeNum)} />}
-                {issueNum && <meta name="citation_issue" content={String(issueNum)} />}
+                {issueNum  && <meta name="citation_issue"  content={String(issueNum)} />}
                 {firstPage && <meta name="citation_firstpage" content={firstPage} />}
-                {lastPage && <meta name="citation_lastpage" content={lastPage} />}
-                {paper.doi && <meta name="citation_doi" content={paper.doi} />}
-
-                <meta name="DC.title"      content={paper.title} />
-                <meta name="DC.creator"    content={paper.authors} />
-                <meta name="DC.date"       content={pubDate} />
-                <meta name="DC.publisher"  content="Sanmati Spectrum of Knowledge & Emerging Discourse" />
-                <meta name="DC.format"     content="application/pdf" />
-                <meta name="DC.language"   content="en" />
-                {paper.doi && <meta name="DC.identifier" content={paper.doi} />}
+                {lastPage  && <meta name="citation_lastpage"  content={lastPage} />}
+                {cleanDoi  && <meta name="citation_doi" content={cleanDoi} />}
+                <meta name="DC.title"     content={paper.title} />
+                <meta name="DC.creator"   content={paper.authors} />
+                <meta name="DC.date"      content={pubDate} />
+                <meta name="DC.publisher" content="Sanmati Spectrum of Knowledge & Emerging Discourse" />
+                <meta name="DC.format"    content="application/pdf" />
+                <meta name="DC.language"  content="en" />
+                {cleanDoi && <meta name="DC.identifier" content={`https://doi.org/${cleanDoi}`} />}
             </Head>
 
-            {/* ── Article Hero ── */}
-            <div className="bg-[#FFFDF8] pt-10 pb-0 border-b border-[#E9E5DD]/60">
-                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* ── Article Hero band ── */}
+            <div className="bg-gradient-to-b from-slate-50 to-white border-b border-slate-200/60 pt-8 pb-0">
+                <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                     {/* Breadcrumb */}
-                    <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-6">
-                        <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+                    <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-5">
+                        <Link href="/" className="hover:text-blue-600 transition-colors">Home</Link>
                         <ChevronRight className="w-3 h-3" />
-                        <Link href="/archive" className="hover:text-primary transition-colors">Archive</Link>
+                        <Link href="/archive" className="hover:text-blue-600 transition-colors">Archive</Link>
                         <ChevronRight className="w-3 h-3" />
-                        <span className="text-primary font-bold truncate max-w-[200px]">Article</span>
+                        <span className="text-blue-600 font-bold truncate max-w-[200px]">Article</span>
                     </nav>
-
-                    {/* Back link */}
-                    <Link
-                        href="/archive"
-                        className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 hover:text-primary transition-colors mb-6 group"
-                    >
+                    <Link href="/archive" className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-blue-600 mb-6 group transition-colors">
                         <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
                         Back to Archive
                     </Link>
-
-                    {/* Badges */}
-                    <div className="flex flex-wrap items-center gap-1.5 mb-6">
-                        <span className="px-2.5 py-0.5 text-[9px] font-bold tracking-wider uppercase bg-[#E9E5DD] text-slate-700 rounded">{paper.category || 'Research Article'}</span>
-                        <span className="px-2.5 py-0.5 text-[9px] font-bold tracking-wider uppercase bg-primary/15 text-primary rounded">Open Access</span>
-                        {paper.doi && <span className="px-2.5 py-0.5 text-[9px] font-bold tracking-wider uppercase bg-secondary/15 text-secondary rounded">DOI</span>}
-                        {paper.issue && (
-                            <span className="px-2.5 py-0.5 text-[9px] font-bold tracking-wider uppercase bg-[#E9E5DD]/60 text-slate-500 rounded">
-                                Vol. {paper.issue.volume?.volume_number ?? paper.issue.volume}, Issue {paper.issue.issue_number}
-                            </span>
-                        )}
-                    </div>
                 </div>
             </div>
 
-            <div className="bg-[#FFFDF8]">
-                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            {/* ── Main Content ── */}
+            <div className="bg-white">
+                <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                    <div className="grid lg:grid-cols-12 gap-10">
 
-                    {/* Title */}
-                    <motion.h1
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-dark leading-tight tracking-tight mb-8"
-                    >
-                        {paper.title}
-                    </motion.h1>
+                        {/* ── Main column ── */}
+                        <article className="lg:col-span-8 space-y-8">
 
-                    {/* Authors, Date, Reading Time */}
-                    <div className="flex flex-wrap items-center gap-5 pb-8 border-b border-[#E9E5DD] mb-8">
-                        <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded bg-[#F7F4EC] border border-[#E9E5DD] flex items-center justify-center text-primary">
-                                <Users className="w-4 h-4" />
-                            </div>
-                            <div>
-                                <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Authors</div>
-                                <div className="text-xs font-bold text-dark">{paper.authors}</div>
-                            </div>
-                        </div>
-                        <div className="h-8 w-px bg-[#E9E5DD] hidden sm:block" aria-hidden="true" />
-                        <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded bg-[#F7F4EC] border border-[#E9E5DD] flex items-center justify-center text-[#C77D5B]">
-                                <Calendar className="w-4 h-4" />
-                            </div>
-                            <div>
-                                <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Published</div>
-                                <div className="text-xs font-bold text-dark">{pubDate}</div>
-                            </div>
-                        </div>
-                        <div className="h-8 w-px bg-[#E9E5DD] hidden sm:block" aria-hidden="true" />
-                        <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded bg-[#F7F4EC] border border-[#E9E5DD] flex items-center justify-center text-primary">
-                                <Clock className="w-4 h-4" />
-                            </div>
-                            <div>
-                                <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Reading Time</div>
-                                <div className="text-xs font-bold text-dark">{readingMinutes} min read</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Action Bar */}
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-200 mb-10">
-                        <SharePanel paper={paper} url={articleUrl} />
-                        <div className="flex gap-2.5 w-full sm:w-auto">
-                            <button
-                                onClick={() => setCitationModalOpen(true)}
-                                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-800 font-bold text-xs uppercase tracking-wider hover:bg-slate-100 transition-colors shadow-2xs"
+                            {/* Category badges */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.4 }}
+                                className="flex flex-wrap items-center gap-2"
                             >
-                                <Quote className="w-3.5 h-3.5 text-blue-600" />
-                                Cite Article
-                            </button>
-                            <a
-                                href={`/download/paper/${paper.id}`}
-                                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl bg-blue-600 text-white font-bold text-xs uppercase tracking-wider hover:bg-blue-700 transition-colors shadow-md shadow-blue-600/20"
-                            >
-                                <Download className="w-3.5 h-3.5" />
-                                Download PDF
-                            </a>
-                        </div>
-                    </div>
-
-
-
-                    {/* Abstract */}
-                    <section aria-labelledby="abstract-heading" className="mb-10">
-                        <h2 id="abstract-heading" className="flex items-center gap-2 text-lg font-serif font-bold text-dark mb-4">
-                            <AlignLeft className="w-4.5 h-4.5 text-primary" />
-                            Abstract
-                        </h2>
-                        <div className="text-sm text-slate-600 leading-relaxed bg-white border border-[#E9E5DD] rounded-xl p-6">
-                            {paper.abstract}
-                        </div>
-                    </section>
-
-                    {/* Keywords */}
-                    {keywords.length > 0 && (
-                        <section aria-labelledby="keywords-heading" className="mb-10">
-                            <h2 id="keywords-heading" className="flex items-center gap-2 text-sm font-serif font-bold text-dark mb-3">
-                                <Tag className="w-4 h-4 text-primary" />
-                                Keywords
-                            </h2>
-                            <div className="flex flex-wrap gap-1.5">
-                                {keywords.map((kw, i) => (
-                                    <span key={i} className="px-2.5 py-1 text-[10px] font-medium text-slate-600 bg-[#F7F4EC] border border-[#E9E5DD] rounded">
-                                        {kw}
+                                <span className="px-3 py-1 text-[10px] font-bold tracking-wider uppercase bg-blue-50 text-blue-700 border border-blue-200 rounded-lg">
+                                    {paper.category || 'Research Article'}
+                                </span>
+                                <span className="px-3 py-1 text-[10px] font-bold tracking-wider uppercase bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-lg">
+                                    Open Access
+                                </span>
+                                {cleanDoi && (
+                                    <span className="px-3 py-1 text-[10px] font-bold tracking-wider uppercase bg-indigo-50 text-indigo-700 border border-indigo-200 rounded-lg">
+                                        CrossRef DOI
                                     </span>
-                                ))}
-                            </div>
-                        </section>
-                    )}
+                                )}
+                                {paper.issue && (
+                                    <span className="px-3 py-1 text-[10px] font-bold tracking-wider uppercase bg-slate-100 text-slate-600 border border-slate-200 rounded-lg">
+                                        Vol. {paper.issue.volume?.volume_number ?? paper.issue.volume}, Issue {paper.issue.issue_number}
+                                    </span>
+                                )}
+                            </motion.div>
 
-                    {/* DOI Section */}
-                    {paper.doi && (
-                        <section aria-labelledby="doi-heading" className="mb-10 p-5 rounded-xl bg-[#F7F4EC] border border-[#E9E5DD]">
-                            <h2 id="doi-heading" className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-                                CrossRef DOI
-                            </h2>
-                            <a
-                                href={paper.doi.startsWith('http') ? paper.doi : `https://doi.org/${paper.doi}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-primary hover:underline"
+                            {/* Title */}
+                            <motion.h1
+                                initial={{ opacity: 0, y: 15 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, delay: 0.05 }}
+                                className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-slate-900 leading-tight tracking-tight"
                             >
-                                {paper.doi.startsWith('http') ? paper.doi : `https://doi.org/${paper.doi}`}
-                            </a>
-                        </section>
-                    )}
+                                {paper.title}
+                            </motion.h1>
 
-                    {/* Publication Info */}
-                    {paper.issue && (
-                        <section aria-labelledby="pub-info-heading" className="mb-10 p-5 rounded-xl border border-[#E9E5DD] bg-white">
-                            <h2 id="pub-info-heading" className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-4">
-                                Publication Information
-                            </h2>
-                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                            {/* Meta row */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 0.4, delay: 0.15 }}
+                                className="flex flex-wrap items-center gap-5 pb-6 border-b border-slate-200"
+                            >
                                 {[
-                                    { label: 'Journal',     value: 'Sanmati Spectrum' },
-                                    { label: 'ISSN',        value: '3108-1819' },
-                                    { label: 'Volume',      value: paper.issue.volume?.volume_number ?? paper.issue.volume },
-                                    { label: 'Issue',       value: paper.issue.issue_number },
-                                ].map(({ label, value }) => (
-                                    <div key={label}>
-                                        <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400">{label}</div>
-                                        <div className="text-xs font-bold text-dark mt-0.5">{value}</div>
+                                    { icon: Users, label: 'Authors', value: paper.authors, color: 'text-blue-600', bg: 'bg-blue-50' },
+                                    { icon: Calendar, label: 'Published', value: pubDate, color: 'text-indigo-600', bg: 'bg-indigo-50' },
+                                    { icon: Clock, label: 'Reading Time', value: `${readingMinutes} min read`, color: 'text-slate-600', bg: 'bg-slate-100' },
+                                ].map(({ icon: Icon, label, value, color, bg }) => (
+                                    <div key={label} className="flex items-center gap-2.5">
+                                        <div className={`w-8 h-8 rounded-xl ${bg} flex items-center justify-center ${color} shrink-0`}>
+                                            <Icon className="w-4 h-4" />
+                                        </div>
+                                        <div>
+                                            <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400">{label}</div>
+                                            <div className="text-xs font-bold text-slate-800">{value}</div>
+                                        </div>
                                     </div>
                                 ))}
-                            </div>
-                        </section>
-                    )}
+                            </motion.div>
 
-                    {/* CTA */}
-                    <div className="flex flex-wrap gap-3 py-8 border-t border-[#E9E5DD]">
-                        <a
-                            href={`/download/paper/${paper.id}`}
-                            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg font-bold text-xs uppercase tracking-wider hover:bg-primary-dark transition-colors"
-                        >
-                            <Download className="w-4 h-4" />
-                            Download Full Paper (PDF)
-                        </a>
-                        <Link href="/archive" className="inline-flex items-center gap-2 px-6 py-3 bg-[#F7F4EC] text-dark border border-[#E9E5DD] font-bold text-xs uppercase tracking-wider hover:bg-slate-100 transition-colors">
-                            Browse More Articles
-                        </Link>
+                            {/* Action bar */}
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-200">
+                                <SharePanel paper={paper} url={articleUrl} />
+                                <div className="flex gap-2.5 w-full sm:w-auto">
+                                    <button
+                                        onClick={() => setCitationModalOpen(true)}
+                                        className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-700 font-bold text-xs uppercase tracking-wider hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition-all duration-150 shadow-sm"
+                                    >
+                                        <Quote className="w-3.5 h-3.5" />
+                                        Cite
+                                    </button>
+                                    <a
+                                        href={`/download/paper/${paper.id}`}
+                                        className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl bg-blue-600 text-white font-bold text-xs uppercase tracking-wider hover:bg-blue-700 transition-colors shadow-md shadow-blue-600/25"
+                                    >
+                                        <Download className="w-3.5 h-3.5" />
+                                        Download PDF
+                                    </a>
+                                </div>
+                            </div>
+
+                            {/* Abstract */}
+                            <section aria-labelledby="abstract-heading">
+                                <h2 id="abstract-heading" className="flex items-center gap-2 text-lg font-heading font-bold text-slate-900 mb-4">
+                                    <span className="w-8 h-8 rounded-xl bg-blue-50 flex items-center justify-center">
+                                        <AlignLeft className="w-4 h-4 text-blue-600" />
+                                    </span>
+                                    Abstract
+                                </h2>
+                                <div className="text-sm text-slate-700 leading-[1.85] bg-blue-50/40 border border-blue-100 rounded-2xl p-6 font-medium">
+                                    {paper.abstract}
+                                </div>
+                            </section>
+
+                            {/* Keywords */}
+                            {keywords.length > 0 && (
+                                <section aria-labelledby="keywords-heading">
+                                    <h2 id="keywords-heading" className="flex items-center gap-2 text-sm font-heading font-bold text-slate-900 mb-3">
+                                        <span className="w-7 h-7 rounded-xl bg-indigo-50 flex items-center justify-center">
+                                            <Tag className="w-3.5 h-3.5 text-indigo-600" />
+                                        </span>
+                                        Keywords
+                                    </h2>
+                                    <div className="flex flex-wrap gap-2">
+                                        {keywords.map((kw, i) => (
+                                            <span key={i} className="px-3 py-1.5 text-[11px] font-bold text-slate-600 bg-slate-100 border border-slate-200 rounded-lg hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-colors cursor-default">
+                                                {kw}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </section>
+                            )}
+
+                            {/* DOI */}
+                            {doiUrl && (
+                                <section aria-labelledby="doi-heading" className="p-5 rounded-2xl bg-indigo-50 border border-indigo-100">
+                                    <h2 id="doi-heading" className="text-[10px] font-bold uppercase tracking-widest text-indigo-400 mb-2">
+                                        CrossRef Digital Object Identifier
+                                    </h2>
+                                    <a
+                                        href={doiUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-1.5 text-sm font-mono font-bold text-indigo-700 hover:text-indigo-900 hover:underline"
+                                    >
+                                        {doiUrl}
+                                        <ExternalLink className="w-3.5 h-3.5" />
+                                    </a>
+                                </section>
+                            )}
+
+                            {/* Publication info */}
+                            {paper.issue && (
+                                <section aria-labelledby="pub-info-heading" className="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm">
+                                    <h2 id="pub-info-heading" className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-5">
+                                        Publication Information
+                                    </h2>
+                                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
+                                        {[
+                                            { label: 'Journal',  value: 'Sanmati Spectrum' },
+                                            { label: 'ISSN',     value: '3108-1819' },
+                                            { label: 'Volume',   value: paper.issue.volume?.volume_number ?? paper.issue.volume },
+                                            { label: 'Issue',    value: paper.issue.issue_number },
+                                            paper.page_numbers ? { label: 'Pages', value: paper.page_numbers } : null,
+                                            { label: 'Access',   value: 'Open Access' },
+                                        ].filter(Boolean).map(({ label, value }) => (
+                                            <div key={label}>
+                                                <div className="text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-0.5">{label}</div>
+                                                <div className="text-sm font-bold text-slate-800">{value}</div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </section>
+                            )}
+
+                            {/* Bottom CTAs */}
+                            <div className="flex flex-wrap gap-3 pt-6 border-t border-slate-200">
+                                <a
+                                    href={`/download/paper/${paper.id}`}
+                                    className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-sm shadow-md shadow-blue-600/25 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200"
+                                >
+                                    <Download className="w-4 h-4" />
+                                    Download Full Paper (PDF)
+                                </a>
+                                <Link
+                                    href="/archive"
+                                    className="inline-flex items-center gap-2 px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-sm transition-all duration-200"
+                                >
+                                    <BookOpen className="w-4 h-4 text-blue-600" />
+                                    Browse More Articles
+                                </Link>
+                            </div>
+                        </article>
+
+                        {/* ── Sidebar ── */}
+                        <aside className="lg:col-span-4 space-y-5" aria-label="Article sidebar">
+
+                            {/* Journal card */}
+                            <div className="p-5 rounded-2xl border border-slate-200 bg-white shadow-sm space-y-4">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center shadow-sm">
+                                        <BookOpen className="w-5 h-5 text-white" />
+                                    </div>
+                                    <div>
+                                        <div className="text-xs font-bold text-slate-900 leading-tight">Sanmati Spectrum</div>
+                                        <div className="text-[10px] text-slate-400 font-medium">of Knowledge & Emerging Discourse</div>
+                                    </div>
+                                </div>
+                                <div className="space-y-2.5 text-xs">
+                                    {[
+                                        { icon: Award, label: 'ISSN', value: '3108-1819' },
+                                        { icon: Globe, label: 'Access', value: 'Open Access (CC-BY 4.0)' },
+                                        { icon: FileText, label: 'DOI Provider', value: 'CrossRef' },
+                                    ].map(({ icon: Icon, label, value }) => (
+                                        <div key={label} className="flex items-center gap-2">
+                                            <Icon className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                                            <span className="text-slate-500 font-medium">{label}:</span>
+                                            <span className="font-bold text-slate-700">{value}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Submit CTA card */}
+                            <div className="p-5 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white space-y-4">
+                                <h3 className="text-sm font-heading font-bold leading-snug">Publish Your Research With Us</h3>
+                                <p className="text-blue-100 text-xs leading-relaxed">
+                                    Submit your manuscript for peer review. Get a CrossRef DOI and global open access publication.
+                                </p>
+                                <Link
+                                    href="/submission-guidelines/call-for-papers"
+                                    className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-white text-blue-700 text-xs font-bold hover:bg-blue-50 transition-colors"
+                                >
+                                    Submit Your Paper
+                                    <ChevronRight className="w-3.5 h-3.5" />
+                                </Link>
+                            </div>
+
+                            {/* Quick actions */}
+                            <div className="p-5 rounded-2xl border border-slate-200 bg-slate-50 space-y-2">
+                                <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-3">Quick Actions</h3>
+                                <button
+                                    onClick={() => setCitationModalOpen(true)}
+                                    className="flex items-center gap-2.5 w-full px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-bold text-slate-700 hover:bg-blue-50 hover:border-blue-200 hover:text-blue-700 transition-all"
+                                >
+                                    <Quote className="w-4 h-4 text-blue-500" />
+                                    Generate Citation
+                                </button>
+                                <a
+                                    href={`/download/paper/${paper.id}`}
+                                    className="flex items-center gap-2.5 w-full px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-bold text-slate-700 hover:bg-blue-50 hover:border-blue-200 hover:text-blue-700 transition-all"
+                                >
+                                    <Download className="w-4 h-4 text-blue-500" />
+                                    Download PDF
+                                </a>
+                                {doiUrl && (
+                                    <a
+                                        href={doiUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-2.5 w-full px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-bold text-slate-700 hover:bg-blue-50 hover:border-blue-200 hover:text-blue-700 transition-all"
+                                    >
+                                        <ExternalLink className="w-4 h-4 text-blue-500" />
+                                        View DOI Page
+                                    </a>
+                                )}
+                            </div>
+
+                        </aside>
+
                     </div>
                 </div>
             </div>
 
             {/* Citation Modal */}
-            <Modal
-                isOpen={citationModalOpen}
-                onClose={() => setCitationModalOpen(false)}
-                title="Citation Generator"
-                size="lg"
-            >
-                <div className="p-6 bg-[#FFFDF8]">
-                    <p className="text-xs text-slate-500 mb-4 font-medium font-serif">Copy and paste a formatted citation suitable for your academic document bibliography.</p>
+            <Modal isOpen={citationModalOpen} onClose={() => setCitationModalOpen(false)} title="Citation Generator" size="lg">
+                <div className="p-6">
+                    <p className="text-xs text-slate-500 mb-4 font-medium">Copy and paste a formatted citation suitable for your academic bibliography.</p>
                     <CitationGenerator paper={paper} />
                 </div>
             </Modal>
