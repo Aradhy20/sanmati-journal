@@ -3,7 +3,7 @@ import { Link, usePage } from '@inertiajs/react';
 import {
     Menu, X, ChevronDown, Search, BookOpen, Users, FileText, Award,
     Globe, Mail, Phone, ExternalLink, Sparkles, ArrowRight, Shield,
-    GraduationCap, FlaskConical, Scale, Briefcase, Landmark, Heart,
+    GraduationCap, FlaskConical, Scale, Briefcase, Landmark,
     Atom, BookMarked, SendHorizonal
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -72,14 +72,14 @@ const MobileNavItem = ({ item, isActive, closeMenu }) => {
             <Link
                 href={item.href}
                 onClick={closeMenu}
-                className={`flex items-center justify-between w-full px-5 py-3.5 rounded-2xl text-sm font-bold transition-all duration-200 ${
+                className={`flex items-center justify-between w-full px-5 py-3.5 rounded-xl text-sm font-bold transition-all duration-200 ${
                     isActive(item.href)
-                        ? 'bg-secondary/10 text-secondary'
-                        : 'text-white/90 hover:bg-white/10'
+                        ? 'bg-primary/10 text-primary'
+                        : 'text-dark/90 hover:bg-slate-100'
                 }`}
             >
                 {item.name}
-                <ArrowRight className="w-4 h-4 opacity-40" />
+                <ArrowRight className="w-4 h-4 opacity-40 text-primary" />
             </Link>
         );
     }
@@ -88,11 +88,11 @@ const MobileNavItem = ({ item, isActive, closeMenu }) => {
         <div>
             <button
                 onClick={() => setOpen(!open)}
-                className="flex items-center justify-between w-full px-5 py-3.5 rounded-2xl text-sm font-bold text-white/90 hover:bg-white/10 transition-all duration-200"
+                className="flex items-center justify-between w-full px-5 py-3.5 rounded-xl text-sm font-bold text-dark/90 hover:bg-slate-100 transition-all duration-200"
                 aria-expanded={open}
             >
                 {item.name}
-                <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${open ? 'rotate-180 text-secondary' : 'opacity-40'}`} />
+                <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${open ? 'rotate-180 text-primary' : 'opacity-40'}`} />
             </button>
             <AnimatePresence initial={false}>
                 {open && (
@@ -103,16 +103,16 @@ const MobileNavItem = ({ item, isActive, closeMenu }) => {
                         transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
                         className="overflow-hidden"
                     >
-                        <div className="ml-4 mt-1 mb-2 border-l border-white/15 pl-4 space-y-0.5">
+                        <div className="ml-4 mt-1 mb-2 border-l border-slate-200 pl-4 space-y-0.5">
                             {item.dropdown.map(sub => (
                                 <Link
                                     key={sub.href}
                                     href={sub.href}
                                     onClick={closeMenu}
-                                    className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all duration-200 ${
+                                    className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm transition-all duration-200 ${
                                         isActive(sub.href)
-                                            ? 'bg-secondary/15 text-secondary font-bold'
-                                            : 'text-white/70 hover:text-white hover:bg-white/10 font-medium'
+                                            ? 'bg-primary/10 text-primary font-bold'
+                                            : 'text-dark/70 hover:text-primary hover:bg-slate-100 font-medium'
                                     }`}
                                 >
                                     {sub.icon && <sub.icon className="w-4 h-4 flex-shrink-0 opacity-70" />}
@@ -135,9 +135,9 @@ const MegaMenu = ({ item, isActive }) => (
         exit={{ opacity: 0, y: 8, scale: 0.98 }}
         transition={{ duration: 0.18, ease: [0.25, 0.46, 0.45, 0.94] }}
         className="absolute top-full left-1/2 -translate-x-1/2 mt-3 z-50"
-        style={{ minWidth: '520px' }}
+        style={{ minWidth: '500px' }}
     >
-        <div className="bg-white/95 backdrop-blur-2xl border border-slate-200/80 rounded-2xl shadow-[0_24px_60px_-8px_rgba(11,31,58,0.20)] overflow-hidden">
+        <div className="bg-white border border-slate-200 rounded-2xl shadow-card overflow-hidden">
             <div className="p-2 grid grid-cols-2 gap-0.5">
                 {item.dropdown.map(sub => (
                     <Link
@@ -146,7 +146,7 @@ const MegaMenu = ({ item, isActive }) => (
                         className={`group flex items-start gap-3 px-4 py-3.5 rounded-xl transition-all duration-200 ${
                             isActive(sub.href)
                                 ? 'bg-primary/8 text-primary'
-                                : 'hover:bg-slate-50 text-slate-700 hover:text-primary'
+                                : 'hover:bg-slate-100 text-dark hover:text-primary'
                         }`}
                     >
                         <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 transition-all duration-200 ${
@@ -157,17 +157,17 @@ const MegaMenu = ({ item, isActive }) => (
                             {sub.icon && <sub.icon className="w-4 h-4" />}
                         </div>
                         <div>
-                            <div className="text-sm font-bold leading-tight">{sub.name}</div>
+                            <div className="text-xs font-bold leading-tight">{sub.name}</div>
                             {sub.desc && (
-                                <div className="text-[11px] text-slate-400 mt-0.5 leading-tight line-clamp-1">{sub.desc}</div>
+                                <div className="text-[10px] text-slate-400 mt-0.5 leading-tight line-clamp-1">{sub.desc}</div>
                             )}
                         </div>
                     </Link>
                 ))}
             </div>
-            <div className="px-4 py-3 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between">
-                <span className="text-[11px] text-slate-400 font-medium">Sanmati Spectrum of Knowledge</span>
-                <span className="ds-badge-accent">ISSN 3108-1819</span>
+            <div className="px-4 py-3 bg-slate-100 border-t border-slate-200 flex items-center justify-between">
+                <span className="text-[10px] text-slate-400 font-medium">Sanmati Spectrum of Knowledge</span>
+                <span className="text-[10px] font-bold text-primary px-2.5 py-0.5 bg-primary/10 rounded-full">ISSN 3108-1819</span>
             </div>
         </div>
     </motion.div>
@@ -214,14 +214,6 @@ const Navbar = ({ onOpenSearch }) => {
     const closeDropdown = ()     => { timeoutRef.current = setTimeout(() => setActiveDropdown(null), 120); };
     const stayOpen      = ()     => { clearTimeout(timeoutRef.current); };
 
-    // Clean any residual themes on HTML element just in case
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            document.documentElement.removeAttribute('data-theme');
-            localStorage.removeItem('site-theme');
-        }
-    }, []);
-
     return (
         <>
             {/* ── Announcement Strip ── */}
@@ -236,13 +228,13 @@ const Navbar = ({ onOpenSearch }) => {
                     ))}
                 </div>
                 <div className="ml-auto flex items-center gap-4 text-[11px] text-white/70">
-                    <a href="mailto:sanmatijournal@gmail.com" className="flex items-center gap-1.5 hover:text-white transition-colors">
-                        <Mail className="w-3 h-3" />
+                    <a href="mailto:sanmatijournal@gmail.com" className="flex items-center gap-1.5 hover:text-secondary transition-colors">
+                        <Mail className="w-3 h-3 text-secondary" />
                         sanmatijournal@gmail.com
                     </a>
-                    <a href="tel:+918979782949" className="flex items-center gap-1.5 hover:text-white transition-colors">
-                        <Phone className="w-3 h-3" />
-                        +91 89797 82949
+                    <a href="tel:+919870713912" className="flex items-center gap-1.5 hover:text-secondary transition-colors">
+                        <Phone className="w-3 h-3 text-secondary" />
+                        +91 9870713912 / +91 8979782949
                     </a>
                 </div>
             </div>
@@ -253,8 +245,8 @@ const Navbar = ({ onOpenSearch }) => {
                 aria-label="Main navigation"
                 className={`sticky top-0 z-[100] w-full transition-all duration-300 ${
                     scrolled
-                        ? 'bg-white/95 backdrop-blur-2xl shadow-[0_4px_24px_rgba(11,31,58,0.10)] border-b border-slate-200/60'
-                        : 'bg-white border-b border-slate-100'
+                        ? 'bg-white/90 backdrop-blur-xl shadow-md border-b border-slate-200/80'
+                        : 'bg-white/95 backdrop-blur-md border-b border-slate-200/60'
                 }`}
             >
                 <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -264,24 +256,27 @@ const Navbar = ({ onOpenSearch }) => {
                         <Link href="/" className="flex items-center gap-3 flex-shrink-0 group">
                             <div className="relative">
                                 <img
-                                    src="/logo.jpg"
-                                    alt="Sanmati Journal"
-                                    className="h-10 w-10 rounded-xl object-cover shadow-sm group-hover:shadow-md transition-shadow duration-300"
+                                    src="/logo.webp"
+                                    alt="Sanmati Spectrum of Knowledge - Peer Reviewed Multidisciplinary ISSN Journal Logo"
+                                    width="40"
+                                    height="40"
+                                    loading="eager"
+                                    fetchpriority="high"
+                                    className="h-10 w-10 rounded-xl object-cover border border-slate-200 shadow-xs group-hover:scale-105 transition-transform"
                                 />
-                                <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 rounded-full border-2 border-white" aria-hidden="true" />
                             </div>
                             <div className="hidden sm:block">
-                                <div className="text-[13px] font-black text-primary leading-tight tracking-tight">
+                                <div className="text-[15px] font-serif font-bold text-slate-900 leading-tight tracking-tight">
                                     Sanmati Spectrum
                                 </div>
-                                <div className="text-[10px] text-muted font-medium leading-tight">
+                                <div className="text-[9px] text-blue-600 font-bold uppercase tracking-wider leading-tight">
                                     of Knowledge & Emerging Discourse
                                 </div>
                             </div>
                         </Link>
 
                         {/* Desktop Nav */}
-                        <div className="hidden lg:flex items-center gap-0.5">
+                        <div className="hidden lg:flex items-center gap-1">
                             {NAV_ITEMS.map((item) => (
                                 item.dropdown ? (
                                     <div
@@ -293,16 +288,16 @@ const Navbar = ({ onOpenSearch }) => {
                                         <button
                                             onFocus={() => openDropdown(item.name)}
                                             onBlur={closeDropdown}
-                                            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-[13px] font-bold transition-all duration-200 ${
+                                            className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
                                                 isGroupActive(item)
-                                                    ? 'text-primary bg-primary/8'
-                                                    : 'text-slate-600 hover:text-primary hover:bg-slate-50'
+                                                    ? 'text-blue-600 bg-blue-50'
+                                                    : 'text-slate-700 hover:text-blue-600 hover:bg-slate-100'
                                             }`}
                                             aria-haspopup="true"
                                             aria-expanded={activeDropdown === item.name}
                                         >
                                             {item.name}
-                                            <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeDropdown === item.name ? 'rotate-180 text-secondary' : ''}`} />
+                                            <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeDropdown === item.name ? 'rotate-180 text-blue-600' : ''}`} />
                                         </button>
                                         <AnimatePresence>
                                             {activeDropdown === item.name && (
@@ -316,10 +311,10 @@ const Navbar = ({ onOpenSearch }) => {
                                     <Link
                                         key={item.name}
                                         href={item.href}
-                                        className={`px-3.5 py-2 rounded-xl text-[13px] font-bold transition-all duration-200 ${
+                                        className={`px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
                                             isActive(item.href)
-                                                ? 'text-primary bg-primary/8'
-                                                : 'text-slate-600 hover:text-primary hover:bg-slate-50'
+                                                ? 'text-blue-600 bg-blue-50'
+                                                : 'text-slate-700 hover:text-blue-600 hover:bg-slate-100'
                                         }`}
                                     >
                                         {item.name}
@@ -330,24 +325,24 @@ const Navbar = ({ onOpenSearch }) => {
 
                         {/* Right Actions */}
                         <div className="flex items-center gap-2">
-                            {/* Search */}
+                            {/* Search Button */}
                             <button
                                 onClick={onOpenSearch}
                                 aria-label="Search articles (Ctrl+K)"
                                 title="Search (Ctrl+K)"
-                                className="flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-primary transition-all duration-200"
+                                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition-all duration-200"
                             >
-                                <Search className="w-4 h-4" />
-                                <span className="hidden md:flex items-center gap-1.5 text-xs text-slate-400">
+                                <Search className="w-4 h-4 text-blue-600" />
+                                <span className="hidden md:flex items-center gap-1.5 text-xs text-slate-600">
                                     Search
-                                    <kbd className="px-1.5 py-0.5 bg-white rounded text-[10px] border border-slate-200 font-mono">⌘K</kbd>
+                                    <kbd className="px-1.5 py-0.5 bg-white rounded text-[10px] border border-slate-200 font-mono shadow-2xs">⌘K</kbd>
                                 </span>
                             </button>
 
                             {/* Submit CTA */}
                             <Link
                                 href="/submission-guidelines/call-for-papers"
-                                className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-secondary text-white text-xs font-black uppercase tracking-wider hover:bg-secondary-dark transition-all duration-200 shadow-md hover:shadow-[0_8px_20px_rgba(139,108,48,0.35)]"
+                                className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold uppercase tracking-wider shadow-md shadow-blue-600/20 active:scale-95 transition-all duration-200"
                             >
                                 <SendHorizonal className="w-3.5 h-3.5" />
                                 Submit Paper
@@ -356,7 +351,7 @@ const Navbar = ({ onOpenSearch }) => {
                             {/* Mobile Menu Toggle */}
                             <button
                                 onClick={() => setIsOpen(!isOpen)}
-                                className="lg:hidden flex items-center justify-center w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-all duration-200"
+                                className="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 transition-all duration-200"
                                 aria-label={isOpen ? 'Close menu' : 'Open menu'}
                                 aria-expanded={isOpen}
                             >
@@ -374,22 +369,21 @@ const Navbar = ({ onOpenSearch }) => {
                         initial={{ opacity: 0, x: '100%' }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: '100%' }}
-                        transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-                        className="fixed inset-0 z-[99] lg:hidden flex flex-col"
-                        style={{ background: 'linear-gradient(160deg, #0B1F3A 0%, #1a3560 50%, #0B2D5E 100%)' }}
+                        transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+                        className="fixed inset-y-0 right-0 w-full max-w-sm z-[999] lg:hidden flex flex-col bg-white border-l border-slate-200 shadow-2xl"
                     >
                         {/* Header */}
-                        <div className="flex items-center justify-between px-5 py-4 border-b border-white/10 flex-shrink-0">
+                        <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 flex-shrink-0 bg-slate-50">
                             <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-3">
-                                <img src="/logo.jpg" alt="Sanmati" className="h-9 w-9 rounded-xl object-cover" />
+                                <img src="/logo.jpg" alt="Sanmati Journal Logo" className="h-9 w-9 rounded-lg object-cover" />
                                 <div>
-                                    <div className="text-sm font-black text-white">Sanmati Spectrum</div>
-                                    <div className="text-[10px] text-white/50">of Knowledge</div>
+                                    <div className="text-sm font-serif font-black text-primary">Sanmati Spectrum</div>
+                                    <div className="text-[9px] text-slate-500 font-bold uppercase tracking-wider">of Knowledge</div>
                                 </div>
                             </Link>
                             <button
                                 onClick={() => setIsOpen(false)}
-                                className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+                                className="w-10 h-10 rounded-lg bg-slate-200/50 flex items-center justify-center text-dark hover:bg-slate-200 transition-colors"
                                 aria-label="Close menu"
                             >
                                 <X className="w-5 h-5" />
@@ -409,21 +403,19 @@ const Navbar = ({ onOpenSearch }) => {
                         </div>
 
                         {/* Footer Strip */}
-                        <div className="px-5 py-5 border-t border-white/10 space-y-3 flex-shrink-0">
+                        <div className="px-5 py-5 border-t border-slate-200 space-y-3 flex-shrink-0 bg-slate-50">
                             <Link
                                 href="/submission-guidelines/call-for-papers"
                                 onClick={() => setIsOpen(false)}
-                                className="flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl bg-secondary text-white font-black text-sm hover:bg-secondary-dark transition-colors"
+                                className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-primary text-white font-bold text-sm hover:bg-primary-dark transition-colors"
                             >
                                 <SendHorizonal className="w-4 h-4" />
-                                Submit Your Research Paper
+                                Submit Your Manuscript
                             </Link>
-                            <div className="flex items-center justify-center gap-6 text-[11px] text-white/40">
+                            <div className="flex items-center justify-center gap-4 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
                                 <span>ISSN: 3108-1819</span>
-                                <span className="w-1 h-1 rounded-full bg-white/30" />
+                                <span className="w-1 h-1 rounded-full bg-slate-300" />
                                 <span>Impact Factor: 5.3</span>
-                                <span className="w-1 h-1 rounded-full bg-white/30" />
-                                <span>Open Access</span>
                             </div>
                         </div>
                     </motion.div>

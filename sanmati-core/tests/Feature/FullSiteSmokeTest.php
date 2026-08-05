@@ -19,7 +19,6 @@ class FullSiteSmokeTest extends TestCase
             '/basic-info/vision-mission',
             '/basic-info/objective-scope',
             '/basic-info/journal-info',
-            '/editorial-team',
             '/editorial-team/editors',
             '/editorial-team/editorial-board',
             '/submission-guidelines',
@@ -41,7 +40,8 @@ class FullSiteSmokeTest extends TestCase
             '/contact',
             '/gallery-view',
             '/gallery/photo',
-            '/gallery/news',
+            '/media-news',
+            '/antigravity-sandbox',
             '/login',
         ];
 
@@ -58,5 +58,11 @@ class FullSiteSmokeTest extends TestCase
     {
         $response = $this->get('/login');
         $response->assertStatus(200);
+    }
+
+    public function test_invalid_route_returns_404(): void
+    {
+        $response = $this->get('/invalid-route-that-does-not-exist');
+        $response->assertStatus(404);
     }
 }

@@ -28,12 +28,28 @@ const stats = [
 ];
 
 export default function TechnicalTeam() {
+    const jsonLd = {
+        schema: {
+            "@context": "https://schema.org",
+            "@type": "AboutPage",
+            "name": "Technical Team - Sanmati Journal Platform Engineering",
+            "url": "https://sanmatijournal.in/editorial-team/technical-team",
+            "description": "Meet the developers and technical architects powering the Sanmati Spectrum platform."
+        },
+        breadcrumb: [
+            { name: 'Home', url: '/' },
+            { name: 'Editorial Team', url: '/editorial-team/editors' },
+            { name: 'Technical Team', url: '/editorial-team/technical-team' }
+        ]
+    };
+
     return (
-        <MainLayout>
-            <Seo
-                title="Technical Team"
-                description="Meet the technical team behind the Sanmati Journal platform — the developers and engineers powering seamless academic publishing."
-            />
+        <MainLayout
+            title="Technical & Engineering Team | Sanmati Journal"
+            description="Meet the software engineers and technical team behind the Sanmati Spectrum digital publishing platform and infrastructure."
+            keywords="technical team, web developer, software engineering, sanmati journal developers, publishing infrastructure"
+            jsonLd={jsonLd}
+        >
 
             <PageHeader
                 title="Technical Team"

@@ -213,6 +213,22 @@ class JournalController extends Controller
         ]);
     }
 
+    public function currentIssue()
+    {
+        $latestIssue = Issue::with('papers')
+            ->orderBy('year', 'desc')
+            ->orderBy('number', 'desc')
+            ->first();
+
+        return Inertia::render('Archive', [
+            'issues' => Issue::with('papers')
+                ->orderBy('year', 'desc')
+                ->orderBy('number', 'desc')
+                ->paginate(12),
+            'currentIssueOnly' => $latestIssue
+        ]);
+    }
+
     public function gallery()
     {
         $galleryItems = \App\Models\Gallery::orderBy('created_at', 'desc')->paginate(24);
@@ -285,5 +301,10 @@ class JournalController extends Controller
         return Inertia::render('Author/Dashboard', [
             'submissions' => $submissions
         ]);
+    }
+
+    public function antigravitySandbox()
+    {
+        return Inertia::render('AntigravitySandbox');
     }
 }

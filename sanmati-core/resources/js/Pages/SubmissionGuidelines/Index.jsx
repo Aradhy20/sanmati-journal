@@ -9,6 +9,20 @@ import { DotPattern, GridPattern, FloatingGraphic } from '../../Components/Graph
 import { revealVariants, ScrollReveal } from '../../Components/ScrollReveal';
 
 export default function SubmissionGuidelines() {
+    const jsonLd = {
+        schema: {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Author Guidelines & Submission Portal",
+            "url": "https://sanmatijournal.in/submission-guidelines",
+            "description": "Comprehensive guidelines for authors preparing research manuscripts for submission to Sanmati Spectrum of Knowledge."
+        },
+        breadcrumb: [
+            { name: 'Home', url: '/' },
+            { name: 'Submission Guidelines', url: '/submission-guidelines' }
+        ]
+    };
+
     const sections = [
         {
             title: "Call for Papers",
@@ -55,12 +69,17 @@ export default function SubmissionGuidelines() {
     ];
 
     return (
-        <MainLayout>
+        <MainLayout
+            title="Author Guidelines & Submission Portal | Sanmati Journal"
+            description="Author guidelines, paper submission rules, APC fees, and review timelines to publish research paper in India with Sanmati peer reviewed multidisciplinary ISSN journal."
+            keywords="UGC Care Journal, Multidisciplinary Research Journal, Publish Research Paper in India, Peer Reviewed Journal, ISSN Journal, Author Guidelines"
+            jsonLd={jsonLd}
+        >
             <div className="bg-warm-bg min-h-screen">
                 <PageHeader
-                    title="Submission Guidelines"
+                    title="Author Guidelines & Submission Portal"
                     breadcrumb="Guidelines"
-                    subtitle="Complete framework for authors and researchers"
+                    subtitle="UGC Care Aligned & Peer Reviewed Multidisciplinary Journal Author Framework"
                 />
 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-24">

@@ -37,12 +37,27 @@ export default function Awards() {
         }
     ];
 
+    const jsonLd = {
+        schema: {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Academic Awards & Honors",
+            "url": "https://sanmatijournal.in/awards",
+            "description": "Annual academic awards and honors awarded to researchers by Sanmati Spectrum."
+        },
+        breadcrumb: [
+            { name: 'Home', url: '/' },
+            { name: 'Awards', url: '/awards' }
+        ]
+    };
+
     return (
-        <MainLayout>
-            <Seo 
-                title="Scholarship Awards" 
-                description="Sanmati Journal honors academic excellence through prestigious annual awards for researchers and authors."
-            />
+        <MainLayout
+            title="Academic Awards & Honors | Sanmati Journal"
+            description="Sanmati Spectrum Journal honors research excellence, outstanding authors, and lifetime academic achievements through annual scholarly awards."
+            keywords="academic awards, research excellence award, researcher of the decade, sanmati journal awards, author honors"
+            jsonLd={jsonLd}
+        >
 
             <PageHeader
                 title="Journal Awards"

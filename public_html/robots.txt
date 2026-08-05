@@ -7,7 +7,27 @@ Disallow: /forgot-password
 Disallow: /reset-password
 Allow: /
 Allow: /archive
+Allow: /article/
 Allow: /download/
+Allow: /submission-guidelines/
+Allow: /basic-info/
+Allow: /editorial-team/
+Allow: /publication-policy/
+Allow: /academic-events/
+Allow: /gallery/
+Allow: /media-news
+
+# Assets & Static files
+Allow: /build/
+Allow: /images/
+Allow: /pdfs/
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.webp$
+Allow: /*.svg$
 
 # Sitemaps
 Sitemap: https://sanmatijournal.in/sitemap.xml

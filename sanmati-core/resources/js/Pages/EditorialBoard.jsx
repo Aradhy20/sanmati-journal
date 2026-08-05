@@ -1,40 +1,33 @@
 import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-    Award, 
     GraduationCap, 
     ChevronRight, 
     BookOpen, 
     Quote, 
     Sparkles, 
     Mail, 
-    Phone, 
     ExternalLink, 
     UserCircle2, 
     Search, 
     Filter, 
     RefreshCw, 
-    X, 
     Landmark, 
     MapPin, 
-    Globe,
-    Calendar,
-    Briefcase
+    Globe
 } from 'lucide-react';
 import PageHeader from '../Components/PageHeader';
 import MainLayout from '../Layouts/MainLayout';
 import Seo from '../Components/Seo';
 import Modal from '../Components/ui/Modal';
 
-// fadeInUp animation presets
 const fadeInUp = {
-    initial: { opacity: 0, y: 30 },
+    initial: { opacity: 0, y: 15 },
     animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: 30 },
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
+    exit: { opacity: 0, y: 15 },
+    transition: { duration: 0.4, ease: 'easeOut' }
 };
 
-// Rich Structured Board Members Data
 const BOARD_MEMBERS = [
     {
         name: "Prof. Pralhad Joshi",
@@ -206,39 +199,36 @@ const BOARD_MEMBERS = [
     }
 ];
 
-// Skeleton Card Loader Component
 const SkeletonCard = () => (
-    <div className="bg-white rounded-[20px] border border-slate-100 p-6 sm:p-8 flex flex-col h-full animate-pulse shadow-sm">
-        <div className="flex items-center gap-5 mb-6">
-            <div className="w-[90px] h-[90px] rounded-full bg-slate-100 shrink-0 shadow-sm" />
-            <div className="space-y-3 flex-1">
-                <div className="h-4 bg-slate-100 rounded-full w-20" />
-                <div className="h-6 bg-slate-100 rounded-full w-3/4" />
+    <div className="bg-white rounded-xl border border-[#E9E5DD] p-6 animate-pulse">
+        <div className="flex items-center gap-4 mb-5">
+            <div className="w-16 h-16 rounded-full bg-slate-100 shrink-0" />
+            <div className="space-y-2 flex-1">
+                <div className="h-3 bg-slate-100 rounded w-16" />
+                <div className="h-4 bg-slate-100 rounded w-3/4" />
             </div>
         </div>
-        <div className="space-y-4 flex-grow mb-6">
-            <div className="h-3.5 bg-slate-100 rounded-full w-5/6" />
-            <div className="h-3.5 bg-slate-100 rounded-full w-2/3" />
-            <div className="h-3.5 bg-slate-100 rounded-full w-1/2" />
+        <div className="space-y-3 mb-5">
+            <div className="h-3 bg-slate-100 rounded w-5/6" />
+            <div className="h-3 bg-slate-100 rounded w-2/3" />
         </div>
-        <div className="h-10 bg-slate-100 rounded-xl w-full mt-auto" />
+        <div className="h-8 bg-slate-100 rounded w-full" />
     </div>
 );
 
-// Premium BoardMemberCard
-const BoardMemberCard = ({ member, onSelect, index }) => {
+const BoardMemberCard = ({ member, onSelect }) => {
     const [imgError, setImgError] = useState(false);
     
-    let badgeClass = "bg-primary/5 text-primary border border-primary/10";
+    let badgeClass = "bg-primary/10 text-primary";
     if (member.title === "Chief Board Member") {
-        badgeClass = "bg-amber-50 text-amber-800 border border-amber-200 shadow-sm";
+        badgeClass = "bg-[#C77D5B]/15 text-[#C77D5B]";
     }
 
     return (
         <motion.div 
             variants={fadeInUp}
             onClick={() => onSelect(member)}
-            className="bg-white rounded-[20px] border border-slate-100 p-6 sm:p-8 flex flex-col hover:shadow-xl hover:shadow-primary/5 hover:border-slate-200 hover:-translate-y-2 transition-all duration-300 group cursor-pointer h-full relative focus-within:ring-2 focus-within:ring-secondary focus-within:outline-none"
+            className="bg-white rounded-xl border border-[#E9E5DD] p-6 flex flex-col hover:border-primary hover:shadow-card transition-all duration-200 group cursor-pointer h-full relative focus-within:ring-2 focus-within:ring-primary focus-within:outline-none"
             tabIndex="0"
             role="button"
             aria-label={`View academic profile of ${member.name}`}
@@ -249,54 +239,54 @@ const BoardMemberCard = ({ member, onSelect, index }) => {
                 }
             }}
         >
-            <div className="flex items-center gap-5 mb-6">
-                <div className="w-[90px] h-[90px] sm:w-[100px] sm:h-[100px] shrink-0 rounded-full overflow-hidden shadow-md border-2 border-white ring-2 ring-slate-100 relative bg-slate-50 flex items-center justify-center">
+            <div className="flex items-center gap-4 mb-5">
+                <div className="w-16 h-16 shrink-0 rounded-full overflow-hidden border border-[#E9E5DD] relative bg-[#F7F4EC] flex items-center justify-center">
                     {member.image && !imgError ? (
                         <picture>
                             <source srcSet={member.image.replace(/\.(jpeg|jpg|png)$/i, '.webp')} type="image/webp" />
                             <img 
                                 src={member.image} 
                                 alt={member.name}
-                                className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-300"
+                                className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
                                 loading="lazy"
                                 onError={() => setImgError(true)}
                             />
                         </picture>
                     ) : (
-                        <UserCircle2 className="w-14 h-14 text-slate-300" />
+                        <UserCircle2 className="w-10 h-10 text-slate-300" />
                     )}
                 </div>
                 <div>
-                    <span className={`inline-block px-3 py-1 text-[9px] font-black uppercase tracking-wider rounded-full mb-2 ${badgeClass}`}>
+                    <span className={`inline-block px-2.5 py-0.5 text-[8px] font-bold uppercase tracking-wider rounded mb-1.5 ${badgeClass}`}>
                         {member.title}
                     </span>
-                    <h3 className="text-xl sm:text-2xl font-serif font-bold text-slate-900 group-hover:text-primary transition-colors leading-tight">
+                    <h3 className="text-base font-serif font-bold text-dark group-hover:text-primary transition-colors leading-tight">
                         {member.name}
                     </h3>
                 </div>
             </div>
 
-            <div className="space-y-3.5 flex-grow mb-6 text-sm text-slate-600">
+            <div className="space-y-2.5 flex-grow mb-5 text-xs text-slate-600 font-medium">
                 {member.designation && (
-                    <div className="flex items-start gap-2.5">
-                        <GraduationCap className="w-5 h-5 text-secondary shrink-0 mt-0.5" />
-                        <span className="font-semibold text-slate-800 leading-snug">{member.designation}</span>
+                    <div className="flex items-start gap-2">
+                        <GraduationCap className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                        <span className="font-bold text-dark leading-snug">{member.designation}</span>
                     </div>
                 )}
                 {member.department && (
-                    <div className="flex items-start gap-2.5">
-                        <BookOpen className="w-5 h-5 text-secondary shrink-0 mt-0.5" />
+                    <div className="flex items-start gap-2">
+                        <BookOpen className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                         <span className="leading-snug">Department of {member.department}</span>
                     </div>
                 )}
                 {member.institution && (
-                    <div className="flex items-start gap-2.5">
-                        <Landmark className="w-5 h-5 text-slate-400 shrink-0 mt-0.5" />
-                        <span className="font-medium text-slate-700 leading-snug">{member.institution}</span>
+                    <div className="flex items-start gap-2">
+                        <Landmark className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
+                        <span className="text-slate-600 leading-snug">{member.institution}</span>
                     </div>
                 )}
-                <div className="flex items-start gap-2.5 text-xs text-slate-500 mt-2">
-                    <MapPin className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
+                <div className="flex items-start gap-2 text-[10px] text-slate-400 mt-1">
+                    <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0 mt-0.5" />
                     <span>
                         {member.city && `${member.city}, `}
                         {member.state && `${member.state}, `}
@@ -305,20 +295,20 @@ const BoardMemberCard = ({ member, onSelect, index }) => {
                 </div>
             </div>
 
-            <div className="pt-4 border-t border-slate-100 mt-auto flex flex-wrap gap-2 items-center justify-between">
+            <div className="pt-4 border-t border-[#E9E5DD]/60 mt-auto flex flex-wrap gap-2 items-center justify-between">
                 {member.email ? (
                     <a 
                         href={`mailto:${member.email}`} 
                         onClick={(e) => e.stopPropagation()} 
-                        className="text-xs text-slate-500 hover:text-primary transition-colors flex items-center gap-1.5 truncate max-w-[150px] font-sans"
+                        className="text-[10px] text-slate-500 hover:text-primary transition-colors flex items-center gap-1 truncate max-w-[150px] font-sans"
                     >
                         <Mail className="w-3.5 h-3.5" />
                         <span className="truncate">{member.email}</span>
                     </a>
                 ) : (
-                    <span className="text-[11px] text-slate-400 font-sans">Registry Verified</span>
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400 font-sans">Verified Registry</span>
                 )}
-                <span className="text-[10px] font-black uppercase tracking-widest text-primary group-hover:text-secondary transition-colors inline-flex items-center gap-1">
+                <span className="text-[9px] font-bold uppercase tracking-wider text-primary group-hover:text-primary-dark transition-colors inline-flex items-center gap-1">
                     Profile <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                 </span>
             </div>
@@ -326,7 +316,6 @@ const BoardMemberCard = ({ member, onSelect, index }) => {
     );
 };
 
-// Detailed Profile Modal
 const MemberDetailModal = ({ member, onClose }) => {
     if (!member) return null;
     
@@ -334,12 +323,12 @@ const MemberDetailModal = ({ member, onClose }) => {
         <Modal
             isOpen={!!member}
             onClose={onClose}
-            title={`${member.name} - Profile Details`}
+            title="Academic Profile"
             size="lg"
         >
-            <div className="p-2 sm:p-4 space-y-6">
-                <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start text-center sm:text-left pb-6 border-b border-slate-100">
-                    <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden shadow-md border-4 border-white ring-4 ring-slate-100 relative bg-slate-50 flex items-center justify-center shrink-0">
+            <div className="p-4 space-y-6 bg-[#FFFDF8]">
+                <div className="flex flex-col sm:flex-row gap-5 items-center sm:items-start text-center sm:text-left pb-5 border-b border-[#E9E5DD]">
+                    <div className="w-20 h-20 rounded-full overflow-hidden border border-[#E9E5DD] relative bg-[#F7F4EC] flex items-center justify-center shrink-0">
                         <img 
                             src={member.image} 
                             alt={member.name}
@@ -347,38 +336,38 @@ const MemberDetailModal = ({ member, onClose }) => {
                             onError={(e) => { e.target.src = ''; }}
                         />
                     </div>
-                    <div className="flex-1 space-y-2">
-                        <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-[10px] font-black uppercase tracking-wider rounded-full border border-primary/20">
+                    <div className="flex-1 space-y-1.5">
+                        <span className="inline-block px-2 py-0.5 bg-primary/10 text-primary text-[9px] font-bold uppercase tracking-wider rounded">
                             {member.title}
                         </span>
-                        <h3 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900 leading-tight">
+                        <h3 className="text-xl font-serif font-bold text-dark leading-tight">
                             {member.name}
                         </h3>
-                        <p className="text-sm font-semibold text-secondary">{member.designation}</p>
-                        <p className="text-xs text-slate-500 font-medium leading-relaxed">
+                        <p className="text-xs font-bold text-[#C77D5B]">{member.designation}</p>
+                        <p className="text-xs text-slate-500 font-medium">
                             {member.institution} {member.department && `· Dept. of ${member.department}`}
                         </p>
-                        <p className="text-xs text-slate-400">
+                        <p className="text-[10px] text-slate-400">
                             {member.city && `${member.city}, `}{member.state && `${member.state}, `}{member.country}
                         </p>
                     </div>
                 </div>
 
                 {member.biography && (
-                    <div className="space-y-2">
-                        <h4 className="text-xs font-black uppercase tracking-wider text-slate-400 font-poppins">Biography</h4>
-                        <p className="text-sm text-slate-600 leading-relaxed font-medium">
+                    <div className="space-y-1.5">
+                        <h4 className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Biography</h4>
+                        <p className="text-xs text-slate-600 leading-relaxed font-medium">
                             {member.biography}
                         </p>
                     </div>
                 )}
 
                 {member.researchInterests && member.researchInterests.length > 0 && (
-                    <div className="space-y-3">
-                        <h4 className="text-xs font-black uppercase tracking-wider text-slate-400 font-poppins">Research Interests</h4>
-                        <div className="flex flex-wrap gap-2">
+                    <div className="space-y-2">
+                        <h4 className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Research Interests</h4>
+                        <div className="flex flex-wrap gap-1.5">
                             {member.researchInterests.map((interest, i) => (
-                                <span key={i} className="px-3 py-1 rounded-full bg-slate-50 border border-slate-200 text-slate-600 text-xs font-semibold">
+                                <span key={i} className="px-2.5 py-0.5 rounded bg-[#F7F4EC] border border-[#E9E5DD] text-slate-600 text-[10px] font-bold">
                                     {interest}
                                 </span>
                             ))}
@@ -386,14 +375,14 @@ const MemberDetailModal = ({ member, onClose }) => {
                     </div>
                 )}
 
-                <div className="pt-6 border-t border-slate-100 flex flex-wrap gap-4 items-center justify-between">
-                    <div className="flex flex-wrap gap-3">
+                <div className="pt-5 border-t border-[#E9E5DD] flex flex-wrap gap-3 items-center justify-between">
+                    <div className="flex flex-wrap gap-2">
                         {member.email && (
                             <a 
                                 href={`mailto:${member.email}`}
-                                className="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-50 hover:bg-primary/5 text-slate-700 text-xs font-bold rounded-xl border border-slate-200 hover:border-primary/20 transition-all font-sans"
+                                className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#F7F4EC] hover:bg-[#E9E5DD] text-dark text-xs font-bold rounded border border-[#E9E5DD] transition-colors"
                             >
-                                <Mail className="w-4 h-4 text-primary" /> Email Member
+                                <Mail className="w-4 h-4 text-primary" /> Email
                             </a>
                         )}
                         {member.profileUrl && (
@@ -401,27 +390,17 @@ const MemberDetailModal = ({ member, onClose }) => {
                                 href={member.profileUrl}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-50 hover:bg-primary/5 text-slate-700 text-xs font-bold rounded-xl border border-slate-200 hover:border-primary/20 transition-all font-sans"
+                                className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-white hover:bg-slate-50 text-dark text-xs font-bold rounded border border-[#E9E5DD] transition-colors"
                             >
-                                <Globe className="w-4 h-4 text-primary" /> Scholar Profile <ExternalLink className="w-3.5 h-3.5" />
-                            </a>
-                        )}
-                        {member.researchGate && (
-                            <a 
-                                href={member.researchGate}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-50 hover:bg-primary/5 text-slate-700 text-xs font-bold rounded-xl border border-slate-200 hover:border-primary/20 transition-all font-sans"
-                            >
-                                <BookOpen className="w-4 h-4 text-primary" /> ResearchGate <ExternalLink className="w-3.5 h-3.5" />
+                                <Globe className="w-4 h-4 text-primary" /> Profile <ExternalLink className="w-3 h-3" />
                             </a>
                         )}
                     </div>
                     <button 
                         onClick={onClose}
-                        className="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-md font-sans"
+                        className="px-4 py-2 bg-primary hover:bg-primary-dark text-white text-xs font-bold uppercase tracking-wider rounded transition-colors"
                     >
-                        Close Profile
+                        Close
                     </button>
                 </div>
             </div>
@@ -430,7 +409,6 @@ const MemberDetailModal = ({ member, onClose }) => {
 };
 
 export default function EditorialBoard() {
-    // State Management
     const [searchQuery, setSearchQuery] = useState('');
     const [designationFilter, setDesignationFilter] = useState('all');
     const [departmentFilter, setDepartmentFilter] = useState('all');
@@ -438,14 +416,12 @@ export default function EditorialBoard() {
     const [selectedMember, setSelectedMember] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    // Simulate skeleton loading on filter changes
     useEffect(() => {
         setIsLoading(true);
-        const timer = setTimeout(() => setIsLoading(false), 450);
+        const timer = setTimeout(() => setIsLoading(false), 200);
         return () => clearTimeout(timer);
     }, [searchQuery, designationFilter, departmentFilter, stateFilter]);
 
-    // Unique Filter Options Extraction
     const filterOptions = useMemo(() => {
         const designations = new Set();
         const departments = new Set();
@@ -464,7 +440,6 @@ export default function EditorialBoard() {
         };
     }, []);
 
-    // Filter Logic
     const filteredMembers = useMemo(() => {
         return BOARD_MEMBERS.filter(m => {
             const matchesSearch = searchQuery === '' || 
@@ -489,69 +464,62 @@ export default function EditorialBoard() {
         setStateFilter('all');
     };
 
-    const boardSchema = {
-        "@context": "https://schema.org",
-        "@type": "AboutPage",
-        "about": {
-            "@type": "Organization",
-            "name": "Sanmati Spectrum of Knowledge",
-            "employee": BOARD_MEMBERS.map(m => ({
-                "@type": "Person",
-                "name": m.name,
-                "jobTitle": m.title,
-                "affiliation": m.institution
-            }))
-        }
+    const boardJsonLd = {
+        schema: boardSchema,
+        breadcrumb: [
+            { name: 'Home', url: '/' },
+            { name: 'Editorial Team', url: '/editorial-team/editors' },
+            { name: 'Editorial Board', url: '/editorial-team/editorial-board' }
+        ]
     };
 
     return (
-        <MainLayout>
-            <Seo 
-                title="Editorial Board | Sanmati Spectrum of Knowledge" 
-                description="Our distinguished board members are the guardians of scholarly excellence at Sanmati Journal."
-                jsonLd={boardSchema}
-            />
+        <MainLayout
+            title="Editorial Board & Peer Reviewers | UGC Care Aligned Journal"
+            description="Meet the international Editorial Board of Sanmati Spectrum — a peer reviewed multidisciplinary ISSN journal (ISSN 3108-1819) committed to quality research publishing in India."
+            keywords="UGC Care Journal, Multidisciplinary Research Journal, Publish Research Paper in India, Peer Reviewed Journal, ISSN Journal, Editorial Board"
+            jsonLd={boardJsonLd}
+        >
             
             <PageHeader 
-                title="Editorial Board"
+                title="Editorial Board & Peer Review Directorate"
                 breadcrumb="Leadership"
-                subtitle="The intellectual architects guiding our multidisciplinary peer-review framework."
+                subtitle="UGC Care Aligned & Peer Reviewed Multidisciplinary Journal Reviewers"
             />
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 relative">
+            <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 bg-[#FFFDF8] text-[#2E2E2E]">
                 
-                {/* ─── INTRO SECTION (The Strategic Vision) ─── */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center mb-16 lg:mb-24">
+                {/* ─── INTRO SECTION ─── */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center mb-16">
                     <motion.div 
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 15 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="lg:col-span-12 xl:col-span-7"
+                        transition={{ duration: 0.5 }}
+                        className="lg:col-span-12 xl:col-span-7 space-y-6"
                     >
-                        <div className="flex items-center gap-4 mb-6">
-                            <span className="h-px w-10 bg-secondary" />
-                            <span className="text-secondary font-black text-[11px] uppercase tracking-[0.4em]">Governance</span>
+                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold uppercase tracking-wider">
+                            <Sparkles className="w-3.5 h-3.5" />
+                            Governance
                         </div>
-                        <h2 className="text-3xl md:text-5xl font-serif font-bold text-dark mb-6 leading-tight">
-                            The Vanguard of <br />
-                            <span className="text-primary italic">Academic Rigor</span>
+                        <h2 className="text-2xl md:text-4xl font-serif font-medium text-dark leading-tight">
+                            The Vanguard of <span className="text-primary italic">Academic Rigor</span>
                         </h2>
-                        <p className="text-lg text-dark/70 font-medium leading-relaxed mb-8 border-l-4 border-primary/20 pl-6">
-                            Our editorial governance model is built on transparency, diversity, and an unwavering commitment to empirical excellence.
+                        <p className="text-sm text-slate-500 font-medium leading-relaxed">
+                            Our editorial governance framework is built on absolute transparency, double-blind peer-review integrity, and multidisciplinary scientific excellence.
                         </p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {[
-                                { title: "Intellectual Integrity", text: "Upholding the highest standards of peer-review precision." },
-                                { title: "Global Perspective", text: "Bridging international discourse across multidisciplinary nodes." }
+                                { title: "Intellectual Integrity", text: "Upholding double-blind peer-review objectivity." },
+                                { title: "Global Scope", text: "Bridging diverse academic disciplines and research nodes." }
                             ].map((feat, i) => (
-                                <div key={i} className="flex gap-4 p-5 bg-white rounded-2xl border border-slate-100 shadow-sm">
-                                    <div className="w-10 h-10 rounded-xl bg-primary/5 flex items-center justify-center shrink-0">
-                                        <Sparkles className="w-5 h-5 text-primary" />
+                                <div key={i} className="flex gap-3.5 p-4 bg-[#F7F4EC] border border-[#E9E5DD] rounded-xl">
+                                    <div className="w-8 h-8 rounded bg-white border border-[#E9E5DD] flex items-center justify-center shrink-0 text-primary">
+                                        <Sparkles className="w-4 h-4" />
                                     </div>
                                     <div>
-                                        <h4 className="font-bold text-dark text-sm mb-1">{feat.title}</h4>
-                                        <p className="text-muted text-xs leading-relaxed">{feat.text}</p>
+                                        <h4 className="font-bold text-dark text-xs mb-0.5">{feat.title}</h4>
+                                        <p className="text-slate-500 text-[10px] leading-relaxed font-medium">{feat.text}</p>
                                     </div>
                                 </div>
                             ))}
@@ -559,20 +527,19 @@ export default function EditorialBoard() {
                     </motion.div>
 
                     <motion.div 
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
+                        initial={{ opacity: 0, y: 15 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
+                        transition={{ duration: 0.5 }}
                         className="lg:col-span-12 xl:col-span-5 relative group"
                     >
-                        <div className="absolute -inset-4 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 rounded-[3rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-                        <div className="relative aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl bg-dark">
-                            <img loading="lazy" src="/fistudy-assets/resources/about-journal-2.png" alt="Board" className="w-full h-full object-cover opacity-60" />
-                            <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-transparent" />
-                            <div className="absolute inset-x-0 bottom-0 p-8 text-center">
-                                <Quote className="w-10 h-10 text-secondary mx-auto mb-4 opacity-50" />
-                                <p className="text-white text-base font-serif italic font-medium leading-relaxed">
-                                    "Scholarship is most transformative when guided by the collective wisdom of diverse academic leaders."
+                        <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-[#E9E5DD] bg-slate-900">
+                            <img loading="lazy" src="/fistudy-assets/resources/about-journal-2.png" alt="Editorial Board Assembly" className="w-full h-full object-cover opacity-60" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                            <div className="absolute inset-x-0 bottom-0 p-6 text-center">
+                                <Quote className="w-8 h-8 text-primary mx-auto mb-2 opacity-60" />
+                                <p className="text-white text-xs font-serif italic leading-relaxed">
+                                    "Scholarly research is most transformative when guided by the collective governance of rigorous academic leaders."
                                 </p>
                             </div>
                         </div>
@@ -580,32 +547,32 @@ export default function EditorialBoard() {
                 </div>
 
                 {/* ─── SEARCH & FILTER TOOLBAR ─── */}
-                <div className="bg-white rounded-3xl border border-slate-100 shadow-sm p-6 mb-12 space-y-4">
+                <div className="bg-[#F7F4EC] border border-[#E9E5DD] rounded-xl p-5 mb-10 space-y-4">
                     <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
                         {/* Live Search */}
                         <div className="relative w-full lg:max-w-md">
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                             <input 
                                 type="text"
                                 placeholder="Search board members by name, university..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all font-sans"
+                                className="w-full pl-10 pr-4 py-2.5 bg-white border border-[#E9E5DD] rounded-lg text-xs focus:outline-none focus:border-primary transition-all font-medium"
                             />
                         </div>
 
                         {/* Multi-Filters */}
-                        <div className="flex flex-wrap w-full lg:w-auto gap-3 items-center justify-end">
-                            <div className="flex items-center gap-1.5 text-slate-400 font-sans">
-                                <Filter className="w-4 h-4" />
-                                <span className="text-xs font-bold uppercase tracking-wider">Filters:</span>
+                        <div className="flex flex-wrap w-full lg:w-auto gap-2.5 items-center justify-end">
+                            <div className="flex items-center gap-1 text-slate-400">
+                                <Filter className="w-3.5 h-3.5" />
+                                <span className="text-[10px] font-bold uppercase tracking-wider">Filters:</span>
                             </div>
 
                             {/* Designation */}
                             <select
                                 value={designationFilter}
                                 onChange={(e) => setDesignationFilter(e.target.value)}
-                                className="px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-secondary/25 transition-all cursor-pointer w-full sm:w-[160px] font-sans"
+                                className="px-2.5 py-2 bg-white border border-[#E9E5DD] rounded-lg text-xs font-medium text-slate-700 focus:outline-none focus:border-primary cursor-pointer w-full sm:w-[150px]"
                             >
                                 <option value="all">Designations (All)</option>
                                 {filterOptions.designations.map((d, i) => (
@@ -617,7 +584,7 @@ export default function EditorialBoard() {
                             <select
                                 value={departmentFilter}
                                 onChange={(e) => setDepartmentFilter(e.target.value)}
-                                className="px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-secondary/25 transition-all cursor-pointer w-full sm:w-[160px] font-sans"
+                                className="px-2.5 py-2 bg-white border border-[#E9E5DD] rounded-lg text-xs font-medium text-slate-700 focus:outline-none focus:border-primary cursor-pointer w-full sm:w-[150px]"
                             >
                                 <option value="all">Departments (All)</option>
                                 {filterOptions.departments.map((d, i) => (
@@ -629,7 +596,7 @@ export default function EditorialBoard() {
                             <select
                                 value={stateFilter}
                                 onChange={(e) => setStateFilter(e.target.value)}
-                                className="px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-secondary/25 transition-all cursor-pointer w-full sm:w-[160px] font-sans"
+                                className="px-2.5 py-2 bg-white border border-[#E9E5DD] rounded-lg text-xs font-medium text-slate-700 focus:outline-none focus:border-primary cursor-pointer w-full sm:w-[150px]"
                             >
                                 <option value="all">States (All)</option>
                                 {filterOptions.states.map((s, i) => (
@@ -641,9 +608,9 @@ export default function EditorialBoard() {
                             {hasActiveFilters && (
                                 <button 
                                     onClick={resetFilters}
-                                    className="p-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl transition-colors font-semibold flex items-center justify-center gap-1.5 text-xs w-full sm:w-auto font-sans"
+                                    className="p-2 bg-white hover:bg-slate-50 text-slate-600 rounded-lg border border-[#E9E5DD] transition-colors font-bold flex items-center justify-center gap-1 text-xs w-full sm:w-auto"
                                 >
-                                    <RefreshCw className="w-3.5 h-3.5" /> Reset
+                                    <RefreshCw className="w-3 h-3" /> Reset
                                 </button>
                             )}
                         </div>
@@ -652,10 +619,10 @@ export default function EditorialBoard() {
 
                 {/* ─── THE REGISTRY GRID ─── */}
                 <div className="relative">
-                    <div className="flex flex-col items-center text-center mb-10">
-                        <span className="text-secondary font-black text-[10px] uppercase tracking-[0.4em] mb-3">Registry</span>
-                        <h2 className="text-3xl font-serif font-bold text-dark mb-4">Board Members</h2>
-                        <div className="h-1 w-12 bg-primary rounded-full" />
+                    <div className="flex flex-col items-center text-center mb-8">
+                        <span className="text-primary font-bold text-[9px] uppercase tracking-wider mb-2">Member Directory</span>
+                        <h2 className="text-xl font-serif font-bold text-dark">Board Registry</h2>
+                        <div className="h-0.5 w-8 bg-primary rounded-full mt-2" />
                     </div>
 
                     <AnimatePresence mode="wait">
@@ -665,7 +632,7 @@ export default function EditorialBoard() {
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
-                                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                             >
                                 {Array.from({ length: 6 }).map((_, i) => (
                                     <SkeletonCard key={i} />
@@ -677,13 +644,12 @@ export default function EditorialBoard() {
                                 initial="initial"
                                 animate="animate"
                                 exit="exit"
-                                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                             >
-                                {filteredMembers.map((m, i) => (
+                                {filteredMembers.map((m) => (
                                     <BoardMemberCard 
                                         key={m.name} 
                                         member={m} 
-                                        index={i} 
                                         onSelect={setSelectedMember} 
                                     />
                                 ))}
@@ -694,16 +660,16 @@ export default function EditorialBoard() {
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.95 }}
-                                className="text-center py-20 bg-white rounded-3xl border border-dashed border-slate-200 p-8"
+                                className="text-center py-16 bg-white rounded-xl border border-dashed border-[#E9E5DD] p-6"
                             >
-                                <Search className="w-12 h-12 text-slate-350 mx-auto mb-4 animate-pulse" />
-                                <h3 className="text-lg font-bold text-slate-800 font-serif">No Editorial Board Members Found</h3>
-                                <p className="text-sm text-slate-500 max-w-sm mx-auto mt-2 leading-relaxed font-sans">
-                                    No board members matched your filter inputs. Try adjusting filters or resetting query options.
+                                <Search className="w-10 h-10 text-slate-300 mx-auto mb-3 animate-pulse" />
+                                <h3 className="text-sm font-bold text-dark font-serif">No Board Members Found</h3>
+                                <p className="text-xs text-slate-500 max-w-sm mx-auto mt-2 leading-relaxed font-medium">
+                                    No board members matched your filter selections. Try resetting the options.
                                 </p>
                                 <button
                                     onClick={resetFilters}
-                                    className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl text-xs uppercase tracking-wider transition-colors font-sans"
+                                    className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 bg-primary hover:bg-primary-dark text-white font-bold rounded-lg text-xs uppercase tracking-wider transition-colors"
                                 >
                                     Reset Filters
                                 </button>

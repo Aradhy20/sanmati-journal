@@ -2,131 +2,125 @@ import PageHeader from '../../Components/PageHeader';
 import MainLayout from '../../Layouts/MainLayout';
 import { Banknote, CreditCard, Users, Mail, CheckCircle2, ArrowRight } from 'lucide-react';
 import { Link } from '@inertiajs/react';
-import { GridPattern, DotPattern } from '../../Components/Graphics';
-import { ScrollReveal, revealVariants, ScaleOnHover } from '../../Components/ScrollReveal';
+import { ScrollReveal } from '../../Components/ScrollReveal';
 
 export default function PublicationCharges() {
+    const jsonLd = {
+        schema: {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Publication Charges & APC",
+            "url": "https://sanmatijournal.in/submission-guidelines/publication-charges",
+            "description": "Article Processing Charges (APC) and open access publication fee details for Sanmati Spectrum of Knowledge."
+        },
+        breadcrumb: [
+            { name: 'Home', url: '/' },
+            { name: 'Submission Guidelines', url: '/submission-guidelines' },
+            { name: 'Publication Charges', url: '/submission-guidelines/publication-charges' }
+        ]
+    };
+
     return (
-        <MainLayout>
-            <div className="bg-warm-bg min-h-screen">
+        <MainLayout
+            title="Publish Research Paper in India — Fee & APC Details | Sanmati Journal"
+            description="Transparent APC fees to publish research paper in India with Sanmati peer reviewed journal (ISSN 3108-1819). Open access publishing, CrossRef DOI, and UGC Care quality compliance."
+            keywords="UGC Care Journal, Multidisciplinary Research Journal, Publish Research Paper in India, Peer Reviewed Journal, ISSN Journal, APC fee India"
+            jsonLd={jsonLd}
+        >
+            <div className="bg-[#FFFDF8] min-h-screen">
                 <PageHeader
-                    title="Publication Charges"
+                    title="Publish Research Paper in India — Fee & APC Details"
                     breadcrumb="Submission"
-                    subtitle="Processing Fee & Payment Details"
+                    subtitle="UGC Care Aligned Peer Reviewed Multidisciplinary ISSN Journal Fees"
                 />
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-24 relative overflow-hidden">
-                    <DotPattern className="opacity-10" />
-                    <div className="max-w-4xl mx-auto mt-12 relative z-10">
-                        <ScrollReveal variants={revealVariants.zoom}>
-                            <div className="bg-white p-8 md:p-12 rounded-3xl border border-gray-200 shadow-sm relative overflow-hidden">
-                                <GridPattern className="opacity-5" />
-                                <div className="absolute top-0 right-0 p-8 opacity-5">
-                                    <Banknote className="w-32 h-32" />
+                <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-16 relative">
+                    <div className="max-w-3xl mx-auto mt-10">
+                        <ScrollReveal>
+                            <div className="bg-white p-6 md:p-10 rounded-xl border border-[#E9E5DD]">
+                                <div className="absolute top-0 right-0 p-6 opacity-5">
+                                    <Banknote className="w-24 h-24 text-primary" />
                                 </div>
 
-                                <div className="relative z-10">
-                                    <h2 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-8">Publication Fees</h2>
+                                <div className="relative z-10 space-y-8">
+                                    <h2 className="text-xl font-serif font-bold text-dark border-b border-[#E9E5DD] pb-3">Publication Fees</h2>
 
-                                    <div className="flex flex-col md:flex-row gap-6 lg:gap-12 items-stretch">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
                                         {/* Pricing Card */}
-                                        <ScrollReveal variants={revealVariants.left} className="w-full md:w-1/2">
-                                            <div className="h-full p-10 bg-blue-900 text-white rounded-3xl shadow-xl shadow-blue-900/20 flex flex-col justify-between relative overflow-hidden group">
-                                                <GridPattern className="opacity-20 group-hover:scale-110 transition-transform duration-1000" />
-                                                <div className="relative z-10">
-                                                    <p className="text-blue-300 text-sm font-bold uppercase tracking-widest mb-4">Registration Fee</p>
-                                                    <div className="flex items-baseline gap-2 mb-8">
-                                                        <span className="text-4xl lg:text-6xl font-black italic">₹1200</span>
-                                                        <span className="text-primary-light text-lg font-medium">/ Per Issue</span>
-                                                    </div>
-                                                    <div className="space-y-4">
-                                                        {[
-                                                            "Online open-access publication",
-                                                            "Detailed peer review process",
-                                                            "DOI and Indexing services",
-                                                            "Certificate of Publication"
-                                                        ].map((item, i) => (
-                                                            <div key={i} className="flex items-center gap-3 text-sm">
-                                                                <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
-                                                                <span className="opacity-90">{item}</span>
-                                                            </div>
-                                                        ))}
-                                                    </div>
+                                        <div className="h-full p-6 bg-[#F7F4EC] border border-[#E9E5DD] rounded-xl flex flex-col justify-between">
+                                            <div className="space-y-4">
+                                                <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Processing Fee</p>
+                                                <div className="flex items-baseline gap-1.5">
+                                                    <span className="text-4xl font-serif font-bold text-dark">₹1,200</span>
+                                                    <span className="text-slate-400 text-xs font-bold uppercase tracking-wider">/ Per Article</span>
                                                 </div>
-
-                                                <div className="relative z-10 mt-12 p-5 bg-blue-800/50 rounded-2xl border border-blue-700/50">
-                                                    <p className="text-xs text-blue-200 uppercase font-bold mb-1">Status</p>
-                                                    <div className="flex items-center gap-2">
-                                                        <div className="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse"></div>
-                                                        <span className="font-bold">Active for Vol 1, Issue 1</span>
-                                                    </div>
+                                                <div className="space-y-2.5 pt-2 border-t border-[#E9E5DD]/60">
+                                                    {[
+                                                        "Online open-access publication",
+                                                        "Blind peer review coordinator fee",
+                                                        "CrossRef DOI & Metadata registry",
+                                                        "Digital credentials certificate"
+                                                    ].map((item, i) => (
+                                                        <div key={i} className="flex items-center gap-2 text-xs font-medium text-slate-600">
+                                                            <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                                                            <span>{item}</span>
+                                                        </div>
+                                                    ))}
                                                 </div>
                                             </div>
-                                        </ScrollReveal>
+
+                                            <div className="mt-6 p-3 bg-white rounded border border-[#E9E5DD] flex items-center gap-2">
+                                                <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                                                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Active for Current Call</span>
+                                            </div>
+                                        </div>
 
                                         {/* Payment Info */}
-                                        <ScrollReveal variants={revealVariants.right} className="w-full md:w-1/2 space-y-10 py-4">
-                                            <div>
-                                                <h4 className="flex items-center gap-3 text-xl font-bold text-dark mb-4">
-                                                    <div className="p-2 bg-primary/10 rounded-lg text-primary">
-                                                        <CreditCard className="w-6 h-6" />
-                                                    </div>
-                                                    Payment Mode
+                                        <div className="space-y-6 py-2">
+                                            <div className="space-y-2">
+                                                <h4 className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-dark">
+                                                    <CreditCard className="w-4 h-4 text-primary" />
+                                                    Payment Channels
                                                 </h4>
-                                                <div className="space-y-3 pl-14">
-                                                    <p className="text-dark/80 flex items-center gap-3">
-                                                        <span className="w-2 h-2 bg-primary rounded-full"></span>
-                                                        <span className="font-bold">PhonePe</span>
-                                                    </p>
-                                                    <p className="text-dark/80 flex items-center gap-3">
-                                                        <span className="w-2 h-2 bg-primary rounded-full"></span>
-                                                        <span className="font-bold">Google Pay</span>
-                                                    </p>
-                                                </div>
+                                                <ul className="space-y-1.5 pl-6 list-disc text-xs text-slate-500 font-medium">
+                                                    <li>PhonePe QR / Handle</li>
+                                                    <li>Google Pay</li>
+                                                    <li>IMPS/UPI Bank Transfer</li>
+                                                </ul>
                                             </div>
 
-                                            <div>
-                                                <h4 className="flex items-center gap-3 text-xl font-bold text-dark mb-4">
-                                                    <div className="p-2 bg-primary/10 rounded-lg text-primary">
-                                                        <Users className="w-6 h-6" />
-                                                    </div>
-                                                    In the name of
+                                            <div className="space-y-2">
+                                                <h4 className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-dark">
+                                                    <Users className="w-4 h-4 text-primary" />
+                                                    Beneficiary Account
                                                 </h4>
-                                                <div className="pl-14">
-                                                    <p className="text-xl md:text-2xl lg:text-3xl font-black italic text-dark leading-none">NAMRATA</p>
-                                                    <div className="mt-6 p-4 bg-amber-50 rounded-2xl border border-amber-100 flex items-start gap-3 relative overflow-hidden">
-                                                        <GridPattern className="opacity-5" />
-                                                        <Mail className="w-5 h-5 text-amber-600 shrink-0 mt-0.5 relative z-10" />
-                                                        <p className="text-xs text-amber-800 leading-relaxed font-medium relative z-10">
-                                                            After payment, please send the transaction screenshot along with your manuscript to <strong className="text-amber-900">sanmatijournal@gmail.com</strong>
+                                                <div className="pl-6 space-y-3">
+                                                    <p className="text-lg font-serif font-bold text-dark">NAMRATA JAIN</p>
+                                                    
+                                                    <div className="p-3 bg-[#F7F4EC] border border-[#E9E5DD] rounded flex items-start gap-2.5">
+                                                        <Mail className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                                                        <p className="text-[10px] text-slate-500 leading-relaxed font-bold">
+                                                            Please send transaction confirmation screenshot with paper ID reference to <span className="text-primary hover:underline">sanmatijournal@gmail.com</span>
                                                         </p>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </ScrollReveal>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </ScrollReveal>
 
                         {/* Navigation Footer */}
-                        <div className="mt-12 flex justify-between items-center px-4">
-                            <ScaleOnHover>
-                                <Link href="/submission-guidelines/important-info" className="flex items-center gap-2 text-gray-500 hover:text-dark font-bold transition-all group">
-                                    <div className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center group-hover:border-blue-900">
-                                        <ArrowRight className="w-4 h-4 rotate-180" />
-                                    </div>
-                                    Important Info
-                                </Link>
-                            </ScaleOnHover>
-                            <ScaleOnHover>
-                                <Link href="/contact" className="flex items-center gap-2 text-gray-500 hover:text-dark font-bold transition-all group">
-                                    Contact Us
-                                    <div className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center group-hover:border-blue-900">
-                                        <ArrowRight className="w-4 h-4" />
-                                    </div>
-                                </Link>
-                            </ScaleOnHover>
+                        <div className="mt-8 flex justify-between items-center text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                            <Link href="/submission-guidelines/important-info" className="flex items-center gap-1.5 hover:text-primary transition-colors">
+                                <ArrowRight className="w-3.5 h-3.5 rotate-180" />
+                                Important Info
+                            </Link>
+                            <Link href="/contact" className="flex items-center gap-1.5 hover:text-primary transition-colors">
+                                Contact Us
+                                <ArrowRight className="w-3.5 h-3.5" />
+                            </Link>
                         </div>
                     </div>
                 </div>

@@ -1,143 +1,132 @@
-import { useEffect } from 'react';
-import { Head, Link, useForm } from '@inertiajs/react';
-import { GridPattern, DotPattern } from '../../Components/DecorativeElements';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Mail, Lock, Eye, EyeOff, ShieldCheck, ArrowRight, BookOpen, KeyRound } from 'lucide-react';
+import MainLayout from '../../Layouts/MainLayout';
+import { Link } from '@inertiajs/react';
 
-export default function Login({ status, canResetPassword }) {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        email: '',
-        password: '',
-        remember: false,
-    });
+export default function Login() {
+    const [showPassword, setShowPassword] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [remember, setRemember] = useState(false);
 
-    useEffect(() => {
-        return () => {
-            reset('password');
-        };
-    }, []);
-
-    const submit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        post('/login');
+        window.location.href = '/dashboard/author';
     };
 
     return (
-        <div className="min-h-screen bg-warm-bg flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden transition-colors duration-300">
-            <Head title="Admin Login" />
-
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <GridPattern className="opacity-[0.03]" />
-                <DotPattern className="opacity-[0.05]" />
-            </div>
-
-            <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
-                <div className="flex justify-center mb-6">
-                    <div className="w-20 h-20 rounded-xl overflow-hidden shadow-lg bg-white p-2 border border-slate-100">
-                        <img loading="lazy"
-                            src="/logo.jpg"
-                            alt="Sanmati Journal Logo"
-                            className="object-contain w-full h-full"
-                        />
+        <MainLayout title="Researcher Sign In | Sanmati Spectrum Journal" description="Sign in to your Sanmati Spectrum author, reviewer, or editor portal to manage submissions and peer reviews.">
+            <div className="py-12 bg-slate-50 min-h-[85vh] flex items-center justify-center">
+                <div className="max-w-md w-full mx-auto px-4 space-y-6">
+                    
+                    {/* Header */}
+                    <div className="text-center space-y-2">
+                        <div className="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center mx-auto shadow-md shadow-blue-600/20">
+                            <BookOpen className="w-6 h-6" />
+                        </div>
+                        <h1 className="text-2xl font-serif font-bold text-slate-900">Sign In to Sanmati Journal</h1>
+                        <p className="text-xs text-slate-600 font-medium">Access your author portal, reviewer workspace, or editorial queue.</p>
                     </div>
-                </div>
-                <h2 className="text-center text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark">
-                    Admin Portal
-                </h2>
-                <p className="mt-2 text-center text-sm text-gray-600">
-                    Sign in to manage the journal
-                </p>
-            </div>
 
-            <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md relative z-10">
-                <div className="bg-white py-8 px-4 shadow-xl sm:rounded-2xl sm:px-10 border border-slate-100">
-                    {status && (
-                        <div className="mb-4 font-medium text-sm text-green-600">
-                            {status}
-                        </div>
-                    )}
-
-                    <form className="space-y-6" onSubmit={submit}>
-                        <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-dark/80">
-                                Email address
-                            </label>
-                            <div className="mt-1">
-                                <input
-                                    id="email"
-                                    type="email"
-                                    name="email"
-                                    value={data.email}
-                                    onChange={(e) => setData('email', e.target.value)}
-                                    autoComplete="email"
-                                    required
-                                    className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-blue-500 focus:border-primary bg-white text-dark sm:text-sm"
-                                />
-                                {errors.email && (
-                                    <p className="mt-2 text-sm text-red-600">{errors.email}</p>
-                                )}
+                    {/* Auth Form Card */}
+                    <div className="bg-white border border-slate-200/80 rounded-3xl p-8 shadow-sm space-y-6">
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                            
+                            <div className="space-y-1.5">
+                                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">Academic Email</label>
+                                <div className="relative flex items-center">
+                                    <Mail className="w-4 h-4 text-slate-400 absolute left-3.5" />
+                                    <input
+                                        type="email"
+                                        required
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        placeholder="author@university.edu"
+                                        className="w-full bg-slate-50 border border-slate-200 pl-10 pr-4 py-3 rounded-xl text-sm font-medium text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all"
+                                    />
+                                </div>
                             </div>
-                        </div>
 
-                        <div>
-                            <label htmlFor="password" className="block text-sm font-medium text-dark/80">
-                                Password
-                            </label>
-                            <div className="mt-1">
-                                <input
-                                    id="password"
-                                    type="password"
-                                    name="password"
-                                    value={data.password}
-                                    onChange={(e) => setData('password', e.target.value)}
-                                    autoComplete="current-password"
-                                    required
-                                    className="appearance-none block w-full px-3 py-2 border border-slate-300 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-blue-500 focus:border-primary bg-white text-dark sm:text-sm"
-                                />
-                                {errors.password && (
-                                    <p className="mt-2 text-sm text-red-600">{errors.password}</p>
-                                )}
+                            <div className="space-y-1.5">
+                                <div className="flex items-center justify-between">
+                                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">Password</label>
+                                    <Link href="/forgot-password" className="text-xs font-bold text-blue-600 hover:underline">
+                                        Forgot Password?
+                                    </Link>
+                                </div>
+                                <div className="relative flex items-center">
+                                    <Lock className="w-4 h-4 text-slate-400 absolute left-3.5" />
+                                    <input
+                                        type={showPassword ? 'text' : 'password'}
+                                        required
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        placeholder="••••••••••••"
+                                        className="w-full bg-slate-50 border border-slate-200 pl-10 pr-10 py-3 rounded-xl text-sm font-medium text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all"
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        className="absolute right-3.5 text-slate-400 hover:text-slate-600"
+                                    >
+                                        {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                                    </button>
+                                </div>
                             </div>
-                        </div>
 
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                                <input
-                                    id="remember-me"
-                                    name="remember-me"
-                                    type="checkbox"
-                                    checked={data.remember}
-                                    onChange={(e) => setData('remember', e.target.checked)}
-                                    className="h-4 w-4 text-primary focus:ring-blue-500 border-slate-300 rounded"
-                                />
-                                <label htmlFor="remember-me" className="ml-2 block text-sm text-dark">
-                                    Remember me
+                            <div className="flex items-center justify-between pt-1">
+                                <label className="flex items-center gap-2 cursor-pointer text-xs font-medium text-slate-600 select-none">
+                                    <input
+                                        type="checkbox"
+                                        checked={remember}
+                                        onChange={(e) => setRemember(e.target.checked)}
+                                        className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-600"
+                                    />
+                                    Keep me signed in
                                 </label>
                             </div>
 
-                            <div className="text-sm">
-                                <Link href="/forgot-password" className="font-medium text-primary hover:text-primary">
-                                    Forgot your password?
-                                </Link>
-                            </div>
-                        </div>
-
-                        <div>
                             <button
                                 type="submit"
-                                disabled={processing}
-                                className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-blue-900 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg shadow-blue-600/20 transition-all flex items-center justify-center gap-2"
                             >
-                                {processing ? 'Signing in...' : 'Sign in'}
+                                Sign In to Portal <ArrowRight className="w-4 h-4" />
+                            </button>
+                        </form>
+
+                        <div className="relative flex items-center justify-center my-4">
+                            <div className="border-t border-slate-200 w-full" />
+                            <span className="bg-white px-3 text-[10px] font-bold uppercase tracking-wider text-slate-400 absolute">
+                                OR OAUTH SIGN IN
+                            </span>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-3">
+                            <button className="p-3 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 flex items-center justify-center gap-2 transition-all">
+                                <span>Google</span>
+                            </button>
+                            <button className="p-3 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 flex items-center justify-center gap-2 transition-all">
+                                <span>ORCID iD</span>
                             </button>
                         </div>
-                    </form>
-                </div>
+                    </div>
 
-                <div className="mt-6 text-center">
-                    <Link href="/" className="text-gray-500 hover:text-dark text-sm font-medium transition-colors">
-                        ← Back to Website
-                    </Link>
+                    {/* Footer Links */}
+                    <div className="text-center space-y-2">
+                        <p className="text-xs text-slate-600 font-medium">
+                            Don't have an author account?{' '}
+                            <Link href="/register" className="font-bold text-blue-600 hover:underline">
+                                Register as Author / Reviewer
+                            </Link>
+                        </p>
+                        <div className="flex items-center justify-center gap-1 text-[11px] text-emerald-700 font-medium">
+                            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" /> 256-Bit SSL Encrypted Academic Security
+                        </div>
+                    </div>
+
                 </div>
             </div>
-        </div>
+        </MainLayout>
     );
 }

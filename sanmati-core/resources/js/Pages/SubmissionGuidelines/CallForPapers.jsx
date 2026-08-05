@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PageHeader from '../../Components/PageHeader';
 import MainLayout from '../../Layouts/MainLayout';
-import { Calendar, FileText, ArrowRight, UploadCloud, CheckCircle, ShieldCheck, User } from 'lucide-react';
+import { FileText, ArrowRight, UploadCloud, CheckCircle, ShieldCheck } from 'lucide-react';
 import { useForm, usePage } from '@inertiajs/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
@@ -14,7 +14,7 @@ export default function CallForPapers() {
     const [step, setStep] = useState(1);
     const [trackingId, setTrackingId] = useState(null);
     
-    const { data, setData, post, processing, errors, reset, setError, clearErrors } = useForm({
+    const { data, setData, post, processing, errors, reset, clearErrors } = useForm({
         title: '',
         abstract: '',
         keywords: '',
@@ -28,12 +28,10 @@ export default function CallForPapers() {
         website: '', // Honeypot: should always be empty
     });
 
-    // Scroll to top when step changes
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }, [step]);
 
-    // Handle tracking ID from flash message if using Inertia redirects
     useEffect(() => {
         if (flash?.success?.tracking_id) {
             setTrackingId(flash.success.tracking_id);
@@ -64,19 +62,18 @@ export default function CallForPapers() {
                         reset();
                         setStep(4);
                         
-                        // Fire Confetti
                         confetti({
-                            particleCount: 150,
-                            spread: 70,
-                            origin: { y: 0.6 }
+                            particleCount: 120,
+                            spread: 60,
+                            origin: { y: 0.7 },
+                            colors: ['#2E6F57', '#C77D5B', '#2E2E2E', '#F7F4EC']
                         });
 
-                        // Show Big Visible Popup
                         Swal.fire({
                             title: 'Submission Successful!',
                             html: `Your manuscript has been securely routed.<br><br><b>Tracking ID: ${successData.tracking_id}</b>`,
                             icon: 'success',
-                            confirmButtonColor: '#0b2038',
+                            confirmButtonColor: '#2E6F57',
                             confirmButtonText: 'Great, thanks!'
                         });
                     }
@@ -99,64 +96,83 @@ export default function CallForPapers() {
         }
     };
 
+    const jsonLd = {
+        schema: {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Call for Papers - Submit Research Paper",
+            "url": "https://sanmatijournal.in/submission-guidelines/call-for-papers",
+            "description": "Submit your research manuscript for publication in Sanmati Spectrum of Knowledge with CrossRef DOI and double-blind peer review."
+        },
+        breadcrumb: [
+            { name: 'Home', url: '/' },
+            { name: 'Submission Guidelines', url: '/submission-guidelines' },
+            { name: 'Call for Papers', url: '/submission-guidelines/call-for-papers' }
+        ]
+    };
+
     return (
-        <MainLayout>
-            <div className="bg-slate-50 min-h-screen">
+        <MainLayout
+            title="Publish Research Paper in India | Peer Reviewed ISSN Journal"
+            description="Looking to publish research paper in India? Submit your manuscript to Sanmati Journal — a UGC Care aligned, peer reviewed multidisciplinary ISSN journal (ISSN 3108-1819) with CrossRef DOI indexing."
+            keywords="UGC Care Journal, Multidisciplinary Research Journal, Publish Research Paper in India, Peer Reviewed Journal, ISSN Journal, ISSN 3108-1819"
+            jsonLd={jsonLd}
+        >
+            <div className="bg-[#FFFDF8] min-h-screen">
                 <PageHeader
-                    title="Manuscript Submission System"
+                    title="Publish Research Paper in India — Online Submission"
                     breadcrumb="Submission Portal"
-                    subtitle="Secure End-to-End Peer Review Processing"
+                    subtitle="UGC Care Aligned & Peer Reviewed Multidisciplinary ISSN Journal"
                 />
 
-                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-24 relative">
+                <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 text-[#2E2E2E]">
                     
                     {/* Stepper Wizard Header */}
                     {step < 4 && (
-                        <div className="flex flex-col sm:flex-row justify-between items-center gap-6 sm:gap-0 mb-12 relative z-0">
-                            <div className="hidden sm:block absolute top-1/2 left-0 w-full h-1 bg-slate-200 -z-10 -translate-y-1/2 rounded-full"></div>
-                            <div className="hidden sm:block absolute top-1/2 left-0 h-1 bg-secondary -z-10 -translate-y-1/2 rounded-full transition-all duration-500" style={{ width: `${(step - 1) * 50}%` }}></div>
+                        <div className="max-w-xl mx-auto flex justify-between items-center mb-12 relative">
+                            <div className="absolute top-1/2 left-0 w-full h-[1px] bg-[#E9E5DD] -z-10 -translate-y-1/2 rounded-full"></div>
                             
                             {[
                                 { num: 1, label: 'Metadata', icon: FileText },
                                 { num: 2, label: 'Upload PDF', icon: UploadCloud },
                                 { num: 3, label: 'Final Review', icon: ShieldCheck }
                             ].map((s) => (
-                                <div key={s.num} className="flex flex-col items-center">
-                                    <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg mb-3 shadow-md transition-colors duration-500 ${step >= s.num ? 'bg-secondary text-white border-4 border-secondary/20' : 'bg-white text-gray-400 border-4 border-gray-100'}`}>
-                                        <s.icon className="w-5 h-5" />
+                                <div key={s.num} className="flex flex-col items-center bg-[#FFFDF8] px-4">
+                                    <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs border transition-colors duration-300 ${step >= s.num ? 'bg-primary border-primary text-white' : 'bg-[#F7F4EC] text-slate-400 border-[#E9E5DD]'}`}>
+                                        <s.icon className="w-4 h-4" />
                                     </div>
-                                    <span className={`text-[11px] uppercase tracking-widest font-black ${step >= s.num ? 'text-primary' : 'text-gray-400'}`}>{s.label}</span>
+                                    <span className={`text-[9px] font-bold uppercase tracking-wider mt-2 ${step >= s.num ? 'text-primary' : 'text-slate-400'}`}>{s.label}</span>
                                 </div>
                             ))}
                         </div>
                     )}
 
-                    <div className="bg-white rounded-[2rem] shadow-xl border border-slate-100 relative">
-                        <div className="p-8 md:p-12">
+                    <div className="bg-white rounded-xl border border-[#E9E5DD] max-w-3xl mx-auto">
+                        <div className="p-6 md:p-10">
                             
                             {/* STEP 4: SUCCESS */}
                             {step === 4 && (
-                                <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-12">
-                                    <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8">
-                                        <CheckCircle className="w-12 h-12 text-green-600" />
+                                <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-8 space-y-6">
+                                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto text-primary">
+                                        <CheckCircle className="w-8 h-8" />
                                     </div>
-                                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-slate-900 mb-4">Submission Successful!</h2>
-                                    <p className="text-slate-600 text-lg max-w-lg mx-auto mb-10">
+                                    <h2 className="text-xl sm:text-2xl font-serif font-bold text-dark mb-2">Submission Successful</h2>
+                                    <p className="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed font-medium">
                                         Your manuscript has been securely encrypted and routed to our editorial board. You will receive an email confirmation shortly.
                                     </p>
-                                    <div className="bg-slate-50 border border-slate-100 rounded-2xl p-6 mb-8 max-w-sm mx-auto text-left">
-                                        <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Tracking ID</p>
-                                        <p className="font-mono text-slate-900 font-bold text-lg">{trackingId || 'SJ-PENDING'}</p>
+                                    <div className="bg-[#F7F4EC] border border-[#E9E5DD] rounded-lg p-5 max-w-xs mx-auto text-left">
+                                        <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">Tracking ID</p>
+                                        <p className="font-mono text-dark font-bold text-base">{trackingId || 'SJ-PENDING'}</p>
                                     </div>
-                                    <button onClick={() => { setStep(1); setTrackingId(null); clearErrors(); }} className="text-secondary font-bold hover:underline">Submit another paper</button>
+                                    <button onClick={() => { setStep(1); setTrackingId(null); clearErrors(); }} className="text-xs font-bold uppercase tracking-wider text-primary hover:underline">Submit another paper</button>
                                 </motion.div>
                             )}
 
                             {/* STEPS 1-3 */}
                             {step < 4 && (
                                 <form onSubmit={handleSubmit} encType="multipart/form-data">
-                                    {/* Honeypot field - visually hidden, bots fill it */}
-                                    <div style={{ position: 'absolute', left: '-9999px', top: '-9999px', opacity: 0, pointerEvents: 'none' }} aria-hidden="true" tabIndex="-1">
+                                    {/* Honeypot field */}
+                                    <div style={{ display: 'none', visibility: 'hidden', position: 'absolute', left: '-9999px', top: '-9999px', opacity: 0, pointerEvents: 'none' }} aria-hidden="true" tabIndex="-1">
                                         <label htmlFor="website_hp">Website (leave blank)</label>
                                         <input
                                             type="text"
@@ -172,131 +188,131 @@ export default function CallForPapers() {
                                         
                                         {/* STEP 1: METADATA */}
                                         {step === 1 && (
-                                            <motion.div key="step1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-                                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                                            <motion.div key="step1" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-6">
+                                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                                     {/* Column 1: Manuscript Details */}
-                                                    <div className="space-y-6">
-                                                        <div className="mb-10">
-                                                            <h3 className="text-2xl font-serif font-bold text-slate-900 mb-2">Manuscript Details</h3>
-                                                            <p className="text-slate-500">Provide the core metadata for your research paper.</p>
+                                                    <div className="space-y-4">
+                                                        <div className="border-b border-[#E9E5DD]/60 pb-3">
+                                                            <h3 className="text-base font-serif font-bold text-dark mb-0.5">Manuscript Details</h3>
+                                                            <p className="text-[10px] text-slate-500 font-medium">Core metadata for indexing your research paper.</p>
                                                         </div>
 
                                                         <div>
-                                                            <label htmlFor="title" className="block text-sm font-bold text-slate-700 mb-2">Full Research Title *</label>
+                                                            <label htmlFor="title" className="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1.5">Full Research Title *</label>
                                                             <input 
                                                                 type="text" 
                                                                 id="title"
                                                                 name="title"
                                                                 value={data.title}
                                                                 onChange={e => setData('title', e.target.value)}
-                                                                className={`w-full px-5 py-4 rounded-xl border ${errors.title ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-slate-50'} focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none`}
-                                                                placeholder="Example: Teaching with AI"
+                                                                className={`w-full px-4 py-2.5 rounded-lg border text-xs focus:outline-none focus:border-primary font-medium ${errors.title ? 'border-red-300 bg-red-50' : 'border-[#E9E5DD] bg-[#FFFDF8]'}`}
+                                                                placeholder="Enter title of research paper"
                                                                 required
                                                             />
-                                                            {errors.title && <p className="text-red-500 text-xs mt-2 font-medium">{errors.title}</p>}
+                                                            {errors.title && <p className="text-red-500 text-[10px] mt-1 font-bold">{errors.title}</p>}
                                                         </div>
 
                                                         <div>
-                                                            <label htmlFor="abstract" className="block text-sm font-bold text-slate-700 mb-2">Summary of your work *</label>
+                                                            <label htmlFor="abstract" className="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1.5">Summary / Abstract *</label>
                                                             <textarea 
                                                                 id="abstract"
                                                                 name="abstract"
                                                                 value={data.abstract}
                                                                 onChange={e => setData('abstract', e.target.value)}
                                                                 rows="7"
-                                                                className={`w-full px-5 py-4 rounded-xl border ${errors.abstract ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-slate-50'} focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none resize-none`}
-                                                                placeholder="Provide a 200-300 word summary of methodology and findings."
+                                                                className={`w-full px-4 py-2.5 rounded-lg border text-xs focus:outline-none focus:border-primary font-medium resize-none ${errors.abstract ? 'border-red-300 bg-red-50' : 'border-[#E9E5DD] bg-[#FFFDF8]'}`}
+                                                                placeholder="Provide a 200-300 word summary of scope, methodology, and findings."
                                                                 required
                                                             ></textarea>
-                                                            {errors.abstract && <p className="text-red-500 text-xs mt-2 font-medium">{errors.abstract}</p>}
+                                                            {errors.abstract && <p className="text-red-500 text-[10px] mt-1 font-bold">{errors.abstract}</p>}
                                                         </div>
 
                                                         <div>
-                                                            <label htmlFor="keywords" className="block text-sm font-bold text-slate-700 mb-2">Index Keywords</label>
+                                                            <label htmlFor="keywords" className="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1.5">Index Keywords</label>
                                                             <input 
                                                                 type="text" 
                                                                 id="keywords"
                                                                 name="keywords"
                                                                 value={data.keywords}
                                                                 onChange={e => setData('keywords', e.target.value)}
-                                                                className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none"
+                                                                className="w-full px-4 py-2.5 rounded-lg border border-[#E9E5DD] bg-[#FFFDF8] text-xs focus:outline-none focus:border-primary font-medium"
                                                                 placeholder="Comma separated: Education, AI, Pedagogy"
                                                             />
                                                         </div>
                                                     </div>
 
                                                     {/* Column 2: Author Details */}
-                                                    <div className="space-y-6">
-                                                        <div className="mb-10">
-                                                            <h3 className="text-2xl font-serif font-bold text-slate-900 mb-2">Primary Author Identity</h3>
-                                                            <p className="text-slate-500">Who should we contact regarding this manuscript?</p>
+                                                    <div className="space-y-4">
+                                                        <div className="border-b border-[#E9E5DD]/60 pb-3">
+                                                            <h3 className="text-base font-serif font-bold text-dark mb-0.5">Primary Author Identity</h3>
+                                                            <p className="text-[10px] text-slate-500 font-medium">Registry contact details for corresponding peer review.</p>
                                                         </div>
 
                                                         <div>
-                                                            <label htmlFor="author_name" className="block text-sm font-bold text-slate-700 mb-2">Full Legal Name *</label>
+                                                            <label htmlFor="author_name" className="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1.5">Full Legal Name *</label>
                                                             <input 
                                                                 type="text" 
                                                                 id="author_name"
                                                                 name="author_name"
                                                                 value={data.author_name}
                                                                 onChange={e => setData('author_name', e.target.value)}
-                                                                className={`w-full px-5 py-4 rounded-xl border ${errors.author_name ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-slate-50'} focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none`}
+                                                                className={`w-full px-4 py-2.5 rounded-lg border text-xs focus:outline-none focus:border-primary font-medium ${errors.author_name ? 'border-red-300 bg-red-50' : 'border-[#E9E5DD] bg-[#FFFDF8]'}`}
                                                                 placeholder="Dr. Aradhya Jain"
                                                                 required
                                                             />
-                                                            {errors.author_name && <p className="text-red-500 text-xs mt-2 font-medium">{errors.author_name}</p>}
+                                                            {errors.author_name && <p className="text-red-500 text-[10px] mt-1 font-bold">{errors.author_name}</p>}
                                                         </div>
 
                                                         <div>
-                                                            <label htmlFor="author_email" className="block text-sm font-bold text-slate-700 mb-2">Official Email ID *</label>
+                                                            <label htmlFor="author_email" className="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1.5">Official Email ID *</label>
                                                             <input 
                                                                 type="email" 
                                                                 id="author_email"
                                                                 name="author_email"
                                                                 value={data.author_email}
                                                                 onChange={e => setData('author_email', e.target.value)}
-                                                                className={`w-full px-5 py-4 rounded-xl border ${errors.author_email ? 'border-red-300 bg-red-50' : 'border-gray-200 bg-slate-50'} focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none`}
+                                                                className={`w-full px-4 py-2.5 rounded-lg border text-xs focus:outline-none focus:border-primary font-medium ${errors.author_email ? 'border-red-300 bg-red-50' : 'border-[#E9E5DD] bg-[#FFFDF8]'}`}
                                                                 placeholder="aradhya@university.edu"
                                                                 required
                                                             />
-                                                            {errors.author_email && <p className="text-red-500 text-xs mt-2 font-medium">{errors.author_email}</p>}
+                                                            {errors.author_email && <p className="text-red-500 text-[10px] mt-1 font-bold">{errors.author_email}</p>}
                                                         </div>
 
                                                         <div>
-                                                            <label htmlFor="author_phone" className="block text-sm font-bold text-slate-700 mb-2">Contact Number</label>
+                                                            <label htmlFor="author_phone" className="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1.5">Contact Number</label>
                                                             <input 
                                                                 type="text" 
                                                                 id="author_phone"
                                                                 name="author_phone"
                                                                 value={data.author_phone}
                                                                 onChange={e => setData('author_phone', e.target.value)}
-                                                                className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none"
+                                                                className="w-full px-4 py-2.5 rounded-lg border border-[#E9E5DD] bg-[#FFFDF8] text-xs focus:outline-none focus:border-primary font-medium"
                                                                 placeholder="+91 XXXXXXXXXX"
                                                             />
                                                         </div>
 
                                                         <div>
-                                                            <label htmlFor="institution" className="block text-sm font-bold text-slate-700 mb-2">Affiliated Institution</label>
+                                                            <label htmlFor="institution" className="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1.5">Affiliated Institution</label>
                                                             <input 
                                                                 type="text" 
                                                                 id="institution"
                                                                 name="institution"
                                                                 value={data.institution}
                                                                 onChange={e => setData('institution', e.target.value)}
-                                                                className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none"
-                                                                placeholder="University Name / Research Center"
+                                                                className="w-full px-4 py-2.5 rounded-lg border border-[#E9E5DD] bg-[#FFFDF8] text-xs focus:outline-none focus:border-primary font-medium"
+                                                                placeholder="University / Organization"
                                                             />
                                                         </div>
 
                                                         <div>
-                                                            <label htmlFor="subject_area" className="block text-sm font-bold text-slate-700 mb-2">Primary Subject Area</label>
+                                                            <label htmlFor="subject_area" className="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1.5">Primary Subject Area</label>
                                                             <select
                                                                 id="subject_area"
                                                                 name="subject_area"
                                                                 title="Subject Area"
                                                                 value={data.subject_area}
                                                                 onChange={e => setData('subject_area', e.target.value)}
-                                                                className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all outline-none appearance-none"
+                                                                className="w-full px-4 py-2.5 rounded-lg border border-[#E9E5DD] bg-[#FFFDF8] text-xs focus:outline-none focus:border-primary font-medium cursor-pointer"
                                                             >
                                                                 <option value="">Select Domain</option>
                                                                 <option value="Arts & Humanities">Arts & Humanities</option>
@@ -309,9 +325,9 @@ export default function CallForPapers() {
                                                     </div>
                                                 </div>
 
-                                                <div className="mt-12 flex justify-end border-t border-slate-100 pt-8">
-                                                    <button type="submit" disabled={!data.title || !data.abstract || !data.author_name || !data.author_email} className="px-10 py-5 bg-primary text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-secondary transition-all flex items-center gap-4 group disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-secondary/20">
-                                                        Proceed to Upload <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                                <div className="mt-8 flex justify-end border-t border-[#E9E5DD]/60 pt-6">
+                                                    <button type="submit" disabled={!data.title || !data.abstract || !data.author_name || !data.author_email} className="px-6 py-3 bg-primary text-white font-bold uppercase tracking-wider text-xs rounded-lg hover:bg-primary-dark transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                                                        Proceed to Upload <ArrowRight className="w-4 h-4" />
                                                     </button>
                                                 </div>
                                             </motion.div>
@@ -319,10 +335,10 @@ export default function CallForPapers() {
 
                                         {/* STEP 2: FILE UPLOAD */}
                                         {step === 2 && (
-                                            <motion.div key="step2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-                                                <div className="mb-10">
-                                                    <h3 className="text-2xl font-serif font-bold text-slate-900 mb-2">Secure File Transfer</h3>
-                                                    <p className="text-slate-500">Upload your blinded manuscript (PDF format only, max 10MB).</p>
+                                            <motion.div key="step2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-6">
+                                                <div className="border-b border-[#E9E5DD]/60 pb-3">
+                                                    <h3 className="text-base font-serif font-bold text-dark mb-0.5">Secure File Transfer</h3>
+                                                    <p className="text-[10px] text-slate-500 font-medium">Upload your blinded manuscript (PDF format only, max 10MB).</p>
                                                 </div>
 
                                                 <DropZone
@@ -335,12 +351,12 @@ export default function CallForPapers() {
                                                     error={errors.manuscript}
                                                 />
 
-                                                <div className="mt-10 flex flex-col-reverse sm:flex-row justify-between gap-4">
-                                                    <button type="button" onClick={() => setStep(1)} className="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 border border-gray-200 font-bold rounded-xl hover:bg-slate-50 transition-colors">
+                                                <div className="mt-6 flex flex-col-reverse sm:flex-row justify-between gap-3">
+                                                    <button type="button" onClick={() => setStep(1)} className="w-full sm:w-auto px-5 py-2.5 bg-white text-dark border border-[#E9E5DD] font-bold text-xs uppercase tracking-wider rounded-lg hover:bg-slate-50 transition-colors">
                                                         Back
                                                     </button>
-                                                    <button type="submit" disabled={!data.manuscript} className="w-full sm:w-auto px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-secondary transition-colors flex justify-center items-center gap-2 group disabled:opacity-50">
-                                                        Final Step <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                                    <button type="submit" disabled={!data.manuscript} className="w-full sm:w-auto px-5 py-2.5 bg-primary text-white font-bold text-xs uppercase tracking-wider rounded-lg hover:bg-primary-dark transition-colors flex justify-center items-center gap-1.5 disabled:opacity-50">
+                                                        Final Review <ArrowRight className="w-4 h-4" />
                                                     </button>
                                                 </div>
                                             </motion.div>
@@ -348,39 +364,39 @@ export default function CallForPapers() {
 
                                         {/* STEP 3: FINAL REVIEW */}
                                         {step === 3 && (
-                                            <motion.div key="step3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-                                                <div className="mb-10">
-                                                    <h3 className="text-2xl font-serif font-bold text-slate-900 mb-2">Final Verification</h3>
-                                                    <p className="text-slate-500">Please review your submission and agree to our academic integrity policies.</p>
+                                            <motion.div key="step3" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-6">
+                                                <div className="border-b border-[#E9E5DD]/60 pb-3">
+                                                    <h3 className="text-base font-serif font-bold text-dark mb-0.5">Final Verification</h3>
+                                                    <p className="text-[10px] text-slate-500 font-medium">Please review details and sign originality consent statements.</p>
                                                 </div>
 
-                                                <div className="bg-slate-50 rounded-2xl p-8 mb-8 border border-slate-100">
-                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12">
+                                                <div className="bg-[#F7F4EC] rounded-lg p-5 border border-[#E9E5DD]">
+                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-6">
                                                         <div className="md:col-span-2">
-                                                            <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Manuscript Title</p>
-                                                            <p className="font-medium text-slate-900 leading-relaxed">{data.title}</p>
+                                                            <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-1">Manuscript Title</p>
+                                                            <p className="text-xs font-bold text-dark leading-snug">{data.title}</p>
                                                         </div>
                                                         <div>
-                                                            <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Corresponding Author</p>
-                                                            <p className="font-medium text-slate-900">{data.author_name}</p>
-                                                            <p className="text-xs text-slate-500 mt-1">{data.author_email}</p>
+                                                            <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-1">Corresponding Author</p>
+                                                            <p className="text-xs font-bold text-dark">{data.author_name}</p>
+                                                            <p className="text-[10px] text-slate-400 mt-0.5">{data.author_email}</p>
                                                         </div>
                                                         <div>
-                                                            <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Institution</p>
-                                                            <p className="font-medium text-slate-900">{data.institution || 'Not Specified'}</p>
+                                                            <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-1">Institution</p>
+                                                            <p className="text-xs font-bold text-dark">{data.institution || 'Not Specified'}</p>
                                                         </div>
                                                         {data.manuscript && (
                                                             <>
                                                                 <div>
-                                                                    <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Attached File</p>
-                                                                    <p className="font-medium text-secondary flex items-center gap-2">
-                                                                        <FileText className="w-4 h-4"/> 
-                                                                        <span className="truncate max-w-[200px]">{data.manuscript?.name}</span>
+                                                                    <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-1">Attached File</p>
+                                                                    <p className="text-xs font-bold text-primary flex items-center gap-1.5 truncate max-w-[200px]">
+                                                                        <FileText className="w-3.5 h-3.5"/> 
+                                                                        <span>{data.manuscript?.name}</span>
                                                                     </p>
                                                                 </div>
                                                                 <div>
-                                                                    <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2">File Size</p>
-                                                                    <p className="font-medium text-slate-900">
+                                                                    <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-1">File Size</p>
+                                                                    <p className="text-xs font-bold text-dark">
                                                                         {data.manuscript?.size ? (data.manuscript.size / (1024 * 1024)).toFixed(2) : '0.00'} MB
                                                                     </p>
                                                                 </div>
@@ -389,38 +405,36 @@ export default function CallForPapers() {
                                                     </div>
                                                 </div>
 
-                                                <div className="bg-secondary/5 border border-secondary/10 rounded-2xl p-6 mb-10">
-                                                    <label htmlFor="consent" className="flex items-start gap-4 cursor-pointer">
-                                                        <div className="pt-1">
+                                                <div className="bg-[#FFFDF8] border border-[#E9E5DD] rounded-lg p-5">
+                                                    <label htmlFor="consent" className="flex items-start gap-3 cursor-pointer">
+                                                        <div className="pt-0.5">
                                                             <input 
                                                                 type="checkbox" 
                                                                 id="consent"
                                                                 name="consent"
                                                                 checked={data.consent}
                                                                 onChange={e => setData('consent', e.target.checked)}
-                                                                className="w-5 h-5 rounded border-gray-300 text-secondary focus:ring-secondary"
+                                                                className="w-4 h-4 rounded border-[#E9E5DD] text-primary focus:ring-primary"
                                                                 required
                                                             />
                                                         </div>
                                                         <div>
-                                                            <p className="font-bold text-slate-900 mb-1">Declaration of Originality</p>
-                                                            <p className="text-sm text-slate-600 leading-relaxed">I certify that this manuscript is my original work, has not been published previously, and is not pending publication elsewhere. I agree to the Journal's open-access policies.</p>
+                                                            <p className="text-xs font-bold text-dark mb-0.5">Declaration of Originality</p>
+                                                            <p className="text-[10px] text-slate-500 leading-relaxed font-medium">I certify that this manuscript is my original work, has not been published previously, and is not pending publication elsewhere. I agree to the Journal's open-access policies.</p>
                                                         </div>
                                                     </label>
                                                 </div>
 
-                                                {/* ReCAPTCHA UI visual simulation for trust */}
-                                                <div className="flex items-center justify-end gap-3 mb-8">
-                                                    <ShieldCheck className="w-5 h-5 text-green-600" />
-                                                    <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Protected by Secure Gate</span>
+                                                <div className="flex items-center justify-end gap-2 text-slate-400">
+                                                    <ShieldCheck className="w-4 h-4 text-primary" />
+                                                    <span className="text-[9px] font-bold uppercase tracking-wider">Secure Academic Gateway</span>
                                                 </div>
 
-                                                <div className="flex flex-col sm:flex-row justify-between gap-4 border-t border-slate-100 pt-8 mt-8">
-                                                    <button type="button" onClick={() => setStep(2)} disabled={processing} className="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 border border-gray-200 font-bold rounded-xl hover:bg-slate-50 transition-colors disabled:opacity-50">
+                                                <div className="flex flex-col sm:flex-row justify-between gap-3 border-t border-[#E9E5DD]/60 pt-6">
+                                                    <button type="button" onClick={() => setStep(2)} disabled={processing} className="w-full sm:w-auto px-5 py-2.5 bg-white text-dark border border-[#E9E5DD] font-bold text-xs uppercase tracking-wider rounded-lg hover:bg-slate-50 transition-colors">
                                                         Back
                                                     </button>
-                                                    <button type="submit" disabled={processing || !data.consent} className="w-full sm:w-auto px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-secondary transition-colors flex justify-center items-center gap-2 group disabled:opacity-50 relative overflow-hidden">
-                                                        <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                                                    <button type="submit" disabled={processing || !data.consent} className="w-full sm:w-auto px-5 py-2.5 bg-primary text-white font-bold text-xs uppercase tracking-wider rounded-lg hover:bg-primary-dark transition-colors flex justify-center items-center gap-1.5">
                                                         {processing ? 'Submitting...' : 'Submit Manuscript Officially'}
                                                     </button>
                                                 </div>

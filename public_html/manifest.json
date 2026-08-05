@@ -1,0 +1,25 @@
+{
+  "name": "Sanmati Spectrum of Knowledge & Emerging Discourse",
+  "short_name": "Sanmati Journal",
+  "description": "Peer-reviewed multidisciplinary academic research journal indexed with CrossRef DOI and ISSN 3108-1819.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFDF8",
+  "theme_color": "#8B1538",
+  "orientation": "portrait-primary",
+  "categories": ["education", "research", "academic", "publishing"],
+  "icons": [
+    {
+      "src": "/logo.webp",
+      "sizes": "192x192 512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.jpg",
+      "sizes": "192x192 512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}

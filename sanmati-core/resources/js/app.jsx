@@ -15,10 +15,8 @@ window.addEventListener('error', (e) => {
     }
 }, true);
 
-const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
-
 createInertiaApp({
-    title: (title) => `${title} - ${appName}`,
+    title: (title) => title ? (title.includes('Sanmati') ? title : `${title} | Sanmati Spectrum of Knowledge`) : 'Sanmati Spectrum of Knowledge',
     resolve: (name) => resolvePageComponent(`./Pages/${name}.jsx`, import.meta.glob('./Pages/**/*.jsx')),
     setup({ el, App, props }) {
         const root = createRoot(el);

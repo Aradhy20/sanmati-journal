@@ -13,14 +13,17 @@ class SitemapController extends Controller
         // Cache the sitemap for 24 hours to prevent DB spam
         $content = Cache::remember('sitemap.xml', 86400, function () {
             $papers = Paper::latest()->get();
-            $baseUrl = config('app.url');
+            $baseUrl = rtrim(config('app.url', 'https://sanmatijournal.in'), '/');
 
             // Static pages
             $static_updated = now()->toAtomString();
             $urls = [
                 // Core
                 ['loc' => $baseUrl . '/',                                              'priority' => '1.0', 'changefreq' => 'daily',   'lastmod' => $static_updated],
+                ['loc' => $baseUrl . '/about-journal',                                 'priority' => '0.9', 'changefreq' => 'monthly', 'lastmod' => $static_updated],
                 ['loc' => $baseUrl . '/archive',                                       'priority' => '0.9', 'changefreq' => 'weekly',  'lastmod' => $static_updated],
+                ['loc' => $baseUrl . '/current-issue',                                 'priority' => '0.9', 'changefreq' => 'weekly',  'lastmod' => $static_updated],
+                ['loc' => $baseUrl . '/contact',                                       'priority' => '0.8', 'changefreq' => 'monthly', 'lastmod' => $static_updated],
                 ['loc' => $baseUrl . '/submission-guidelines/call-for-papers',         'priority' => '0.9', 'changefreq' => 'weekly',  'lastmod' => $static_updated],
 
                 // About
@@ -59,9 +62,16 @@ class SitemapController extends Controller
                 ['loc' => $baseUrl . '/awards',                                        'priority' => '0.6', 'changefreq' => 'monthly', 'lastmod' => $static_updated],
                 ['loc' => $baseUrl . '/compliance',                                    'priority' => '0.5', 'changefreq' => 'yearly',  'lastmod' => $static_updated],
                 ['loc' => $baseUrl . '/track-manuscript',                              'priority' => '0.6', 'changefreq' => 'monthly', 'lastmod' => $static_updated],
-                ['loc' => $baseUrl . '/gallery/photo',                                 'priority' => '0.5', 'changefreq' => 'monthly', 'lastmod' => $static_updated],
-                ['loc' => $baseUrl . '/media-news',                                    'priority' => '0.5', 'changefreq' => 'weekly',  'lastmod' => $static_updated],
             ];
+
+            try {
+                if (\App\Models\Gallery::exists() && \App\Models\Gallery::count() > 0) {
+                    $urls[] = ['loc' => $baseUrl . '/gallery/photo',                                 'priority' => '0.5', 'changefreq' => 'monthly', 'lastmod' => $static_updated];
+                    $urls[] = ['loc' => $baseUrl . '/media-news',                                    'priority' => '0.5', 'changefreq' => 'weekly',  'lastmod' => $static_updated];
+                }
+            } catch (\Exception $e) {
+                // Table may not exist yet
+            }
 
             // Programmatic Subject Areas
             $subject_slugs = ['science-technology', 'social-sciences', 'arts-humanities', 'management-commerce', 'law-governance', 'education', 'philosophy'];

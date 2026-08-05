@@ -5,19 +5,19 @@ import { ScrollReveal } from './ScrollReveal';
 
 const defaultTestimonials = [
     {
-        quote: "The peer-review process at Sanmati Spectrum was incredibly rigorous yet efficient. The feedback from reviewers significantly improved my paper.",
+        quote: "The peer-review process at Sanmati Spectrum was rigorous, fast, and constructive. The reviewers offered valuable suggestions that significantly elevated the quality of our case study.",
         name: "Dr. Elena Rossi",
         role: "Associate Professor, University of Milan",
         image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
-        quote: "A truly multidisciplinary platform. It's rare to find a journal that values cross-domain dialogue with such academic integrity.",
+        quote: "A truly multidisciplinary academic platform. It is refreshing to find a journal that prioritizes scholarly integrity, open-access visibility, and fast turnaround times.",
         name: "Prof. James Chen",
         role: "Head of Research, Global Tech Institute",
         image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
-        quote: "Publishing my case study here gave me visibility I hadn't seen elsewhere. The open-access policy is a game changer for researchers in developing countries.",
+        quote: "Publishing my recent methodology paper here was a seamless experience. The editorial board was communicative, and the assigned CrossRef DOI was indexed quickly.",
         name: "Dr. Amina Mansour",
         role: "Academic Researcher, Cairo University",
         image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=150&h=150"
@@ -42,51 +42,48 @@ const Testimonials = ({ testimonials: dbTestimonials = [] }) => {
             setCurrent((prev) => (prev + 1) % testimonials.length);
         }, 8000);
         return () => clearInterval(timer);
-    }, []);
+    }, [testimonials.length]);
 
     const next = () => setCurrent((prev) => (prev + 1) % testimonials.length);
     const prev = () => setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 
     return (
-        <section className="py-12 bg-dark text-white overflow-hidden relative">
-            {/* Background Texture - Using radial gradient */}
-            <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:40px_40px]" />
-
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <section className="py-16 bg-[#FFFDF8] border-b border-[#E9E5DD] overflow-hidden relative">
+            <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <ScrollReveal>
                     <div className="text-center mb-10">
-                        <Quote className="w-10 h-10 text-primary mx-auto mb-4 opacity-50" />
-                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold mb-3">Voice of Researchers</h2>
+                        <Quote className="w-8 h-8 text-primary/30 mx-auto mb-4" />
+                        <h2 className="text-2xl md:text-3xl font-serif font-medium text-dark mb-3">Author Testimonials</h2>
                         <div className="flex justify-center gap-1">
-                            {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />)}
+                            {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-[#C77D5B] text-[#C77D5B]" />)}
                         </div>
                     </div>
                 </ScrollReveal>
 
-                <div className="max-w-4xl mx-auto relative px-12">
+                <div className="max-w-3xl mx-auto relative px-12">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={current}
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -20 }}
-                            transition={{ duration: 0.5 }}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.4 }}
                             className="text-center"
                         >
-                            <p className="text-lg md:text-xl lg:text-2xl font-light italic leading-relaxed mb-8 text-slate-300">
+                            <p className="text-base md:text-lg font-serif italic leading-relaxed mb-6 text-slate-600">
                                 &ldquo;{testimonials[current].quote}&rdquo;
                             </p>
 
                             <div className="flex flex-col items-center">
-                                <div className="w-16 h-16 rounded-full border-2 border-primary/30 p-1 mb-4 relative overflow-hidden">
+                                <div className="w-14 h-14 rounded-full border border-[#E9E5DD] p-0.5 mb-3 overflow-hidden bg-white">
                                     <img loading="lazy"
                                         src={testimonials[current].image}
                                         alt={testimonials[current].name}
                                         className="object-cover rounded-full w-full h-full"
                                     />
                                 </div>
-                                <h3 className="text-lg font-bold text-white mb-1">{testimonials[current].name}</h3>
-                                <p className="text-primary-light font-medium text-xs tracking-wide">{testimonials[current].role}</p>
+                                <h3 className="text-sm font-bold text-dark mb-0.5">{testimonials[current].name}</h3>
+                                <p className="text-primary font-bold text-[10px] uppercase tracking-wider">{testimonials[current].role}</p>
                             </div>
                         </motion.div>
                     </AnimatePresence>
@@ -94,31 +91,31 @@ const Testimonials = ({ testimonials: dbTestimonials = [] }) => {
                     {/* Navigation Buttons */}
                     <button
                         onClick={prev}
-                        className="absolute left-0 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/5 hover:bg-white/10 transition-colors border border-white/10"
+                        className="absolute left-0 top-1/2 -translate-y-1/2 p-2 rounded-lg bg-[#F7F4EC] hover:bg-slate-100 border border-[#E9E5DD] text-dark transition-colors"
                         aria-label="Previous testimonial"
                     >
-                        <ChevronLeft className="w-6 h-6" />
+                        <ChevronLeft className="w-4 h-4" />
                     </button>
                     <button
                         onClick={next}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/5 hover:bg-white/10 transition-colors border border-white/10"
+                        className="absolute right-0 top-1/2 -translate-y-1/2 p-2 rounded-lg bg-[#F7F4EC] hover:bg-slate-100 border border-[#E9E5DD] text-dark transition-colors"
                         aria-label="Next testimonial"
                     >
-                        <ChevronRight className="w-6 h-6" />
+                        <ChevronRight className="w-4 h-4" />
                     </button>
                 </div>
 
                 {/* Progress Indicators */}
-                <div className="flex justify-center gap-3 mt-16">
+                <div className="flex justify-center gap-2 mt-12">
                     {testimonials.map((_, i) => (
                         <button
                             key={i}
                             onClick={() => setCurrent(i)}
                             title={`Go to slide ${i + 1}`}
-                            className="group py-3 px-2 -my-3 -mx-2 transition-all duration-200 cursor-pointer outline-none"
+                            className="group p-1"
                             aria-label={`Go to slide ${i + 1}`}
                         >
-                            <div className={`h-1.5 transition-all duration-500 rounded-full ${i === current ? 'w-8 bg-primary' : 'w-2 bg-slate-700 group-hover:bg-slate-500'}`} />
+                            <div className={`h-1.5 transition-all duration-350 rounded-full ${i === current ? 'w-6 bg-primary' : 'w-1.5 bg-[#E9E5DD] group-hover:bg-slate-400'}`} />
                         </button>
                     ))}
                 </div>

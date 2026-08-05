@@ -41,13 +41,27 @@ const PolicyCard = ({ icon: Icon, title, desc, colorClass, delay }) => (
 );
 
 export default function Compliance() {
+    const jsonLd = {
+        schema: {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Legal & Ethics Compliance",
+            "url": "https://sanmatijournal.in/compliance",
+            "description": "Compliance, publication ethics, copyright policies, and regulatory alignment of Sanmati Spectrum."
+        },
+        breadcrumb: [
+            { name: 'Home', url: '/' },
+            { name: 'Compliance', url: '/compliance' }
+        ]
+    };
+
     return (
-        <MainLayout>
-            <Seo 
-                title="Legal & Compliance Registry" 
-                description="Our commitment to ethical scholarly dissemination, including Open Access, Copyright, and Plagiarism policies."
-            />
-            
+        <MainLayout
+            title="Legal & Regulatory Compliance | Sanmati Journal"
+            description="Compliance standards, publication ethics, COPE guidelines alignment, and open-access copyright terms of Sanmati Spectrum Journal."
+            keywords="journal compliance, COPE alignment, publication ethics, open access license, copyright policy, sanmati journal ethics"
+            jsonLd={jsonLd}
+        >
             <PageHeader
                 title="Legal Registry"
                 breadcrumb="Compliance"

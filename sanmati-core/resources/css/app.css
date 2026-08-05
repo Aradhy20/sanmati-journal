@@ -1,13 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap');
 
 /* Dark mode strategy: class-based */
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Playfair Display", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Space Grotesk", "Inter", sans-serif;
   --font-body: "Inter", sans-serif;
+  --font-heading: "Space Grotesk", sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
 
   /* ── Layout ── */
@@ -17,44 +18,44 @@
   --space-lg: 32px;
   --radius: 12px;
 
-  /* ── Sanmati Premium Brand Palette ── */
-  --color-primary:       #0B1F3A;
-  --color-primary-dark:  #051225;
-  --color-primary-light: #1a3560;
-  --color-primary-50:    #EFF3F9;
-  --color-primary-100:   #D6E0EF;
+  /* ── World-Class Academic Platform Color Palette ── */
+  --color-primary:       #2563EB; /* Royal Blue */
+  --color-primary-dark:  #1D4ED8;
+  --color-primary-light: #3B82F6;
+  --color-primary-50:    #EFF6FF;
+  --color-primary-100:   #DBEAFE;
 
-  --color-secondary:       #8b6c30;
-  --color-secondary-dark:  #6e5525;
-  --color-secondary-light: #b08c45;
-  --color-secondary-50:    #FBF7EF;
-  --color-secondary-100:   #F3E8CC;
+  --color-secondary:       #4F46E5; /* Indigo */
+  --color-secondary-dark:  #4338CA;
+  --color-secondary-light: #6366F1;
+  --color-secondary-50:    #EEF2FF;
+  --color-secondary-100:   #E0E7FF;
 
-  --color-accent:          #1565C0;
-  --color-accent-light:    #1976D2;
-  --color-accent-50:       #E3F0FF;
+  --color-accent:          #06B6D4; /* Cyan */
+  --color-accent-light:    #22D3EE;
+  --color-accent-50:       #ECFEFF;
 
-  --color-emerald:         #059669;
-  --color-emerald-light:   #10B981;
+  --color-emerald:         #10B981;
+  --color-emerald-light:   #34D399;
   --color-emerald-50:      #ECFDF5;
 
-  --color-success:  #059669;
-  --color-warning:  #D97706;
-  --color-error:    #DC2626;
-  --color-info:     #0284C7;
+  --color-success:  #10B981;
+  --color-warning:  #F59E0B;
+  --color-error:    #EF4444;
+  --color-info:     #2563EB;
 
-  --color-dark:       #0F172A;
-  --color-dark-light: #1E293B;
+  --color-dark:       #0F172A; /* Slate 900 */
+  --color-dark-light: #334155;
 
-  --color-warm-bg:  #F8FAFC;
-  --color-surface:  #ffffff;
-  --color-muted:    #64748B;
+  --color-warm-bg:  #FFFFFF; /* Pure White */
+  --color-surface:  #F8FAFC; /* Slate 50 */
+  --color-muted:    #475569; /* Slate 600 */
   --color-muted-2:  #94A3B8;
 
   /* Glassmorphic */
   --color-glass:        rgba(255,255,255,0.85);
-  --color-glass-border: rgba(255,255,255,0.6);
-  --color-glass-dark:   rgba(11,31,58,0.85);
+  --color-glass-border: rgba(226,232,240,0.8);
+  --color-glass-dark:   rgba(15,23,42,0.92);
 
   /* Slate Scale */
   --color-slate-950: #020617;
@@ -65,20 +66,20 @@
   --color-slate-500: #64748B;
   --color-slate-400: #94A3B8;
   --color-slate-300: #CBD5E1;
-  --color-slate-200: #E2E8F0;
+  --color-slate-200: #E2E8F0; /* Borders */
   --color-slate-100: #F1F5F9;
   --color-slate-50:  #F8FAFC;
 
   /* ── Shadows ── */
-  --shadow:            0 4px 20px rgba(0,0,0,0.05);
-  --shadow-card:       0 2px 8px -1px rgba(11,31,58,0.06), 0 4px 16px -2px rgba(11,31,58,0.04);
-  --shadow-card-hover: 0 8px 30px -4px rgba(11,31,58,0.14), 0 4px 12px -2px rgba(11,31,58,0.08);
-  --shadow-lg:         0 20px 50px -10px rgba(11,31,58,0.18);
-  --shadow-xl:         0 32px 64px -12px rgba(11,31,58,0.22);
-  --shadow-glow-gold:  0 0 30px rgba(139,108,48,0.25);
-  --shadow-glow-blue:  0 0 30px rgba(21,101,192,0.25);
-  --shadow-floating:   0 24px 48px -8px rgba(11,31,58,0.20), 0 0 0 1px rgba(11,31,58,0.04);
-  --shadow-inset:      inset 0 2px 8px rgba(11,31,58,0.06);
+  --shadow:            0 4px 20px rgba(46,46,46,0.02);
+  --shadow-card:       0 2px 12px rgba(46,46,46,0.02);
+  --shadow-card-hover: 0 8px 30px rgba(46,46,46,0.05);
+  --shadow-lg:         0 20px 50px rgba(46,46,46,0.05);
+  --shadow-xl:         0 32px 64px rgba(46,46,46,0.08);
+  --shadow-glow-gold:  0 0 30px rgba(199,125,91,0.06);
+  --shadow-glow-blue:  0 0 30px rgba(46,111,87,0.06);
+  --shadow-floating:   0 24px 48px rgba(46,46,46,0.06);
+  --shadow-inset:      inset 0 2px 8px rgba(46,46,46,0.02);
 
   /* ── Radii ── */
   --radius-xs:      4px;
@@ -88,9 +89,9 @@
   --radius-xl:      16px;
   --radius-2xl:     20px;
   --radius-3xl:     24px;
-  --radius-card:    16px;
-  --radius-card-lg: 20px;
-  --radius-btn:     10px;
+  --radius-card:    12px;
+  --radius-card-lg: 16px;
+  --radius-btn:     8px;
   --radius-pill:    9999px;
 
   /* ── Typography ── */
@@ -101,19 +102,19 @@
   --line-height-prose: 1.75;
 
   /* ── Gradients ── */
-  --gradient-hero:     linear-gradient(135deg, #0B1F3A 0%, #1a3560 50%, #0B2D5E 100%);
-  --gradient-gold:     linear-gradient(135deg, #8b6c30 0%, #c9973d 100%);
-  --gradient-accent:   linear-gradient(135deg, #1565C0 0%, #1976D2 100%);
-  --gradient-surface:  linear-gradient(180deg, #ffffff 0%, #F8FAFC 100%);
-  --gradient-card:     linear-gradient(145deg, #ffffff 0%, #F1F5F9 100%);
+  --gradient-hero:     linear-gradient(135deg, #FFFDF8 0%, #F7F4EC 100%);
+  --gradient-gold:     linear-gradient(135deg, #C77D5B 0%, #E09A7A 100%);
+  --gradient-accent:   linear-gradient(135deg, #2E6F57 0%, #428B70 100%);
+  --gradient-surface:  linear-gradient(180deg, #FFFDF8 0%, #F7F4EC 100%);
+  --gradient-card:     linear-gradient(145deg, #FFFDF8 0%, #F7F4EC 100%);
 
   /* ── Semantic Aliases ── */
-  --color-ds-accent:     var(--color-secondary);
+  --color-ds-accent:     var(--color-primary);
   --color-ds-text:       var(--color-dark);
   --color-ds-text-muted: var(--color-muted);
-  --color-ds-surface:    #ffffff;
+  --color-ds-surface:    var(--color-surface);
   --color-ds-bg:         var(--color-warm-bg);
-  --color-ds-border:     rgba(0,0,0,0.06);
+  --color-ds-border:     var(--color-slate-200);
 
   /* ── Animations ── */
   --animate-blob:         blob 10s infinite;

@@ -9,19 +9,34 @@ import Seo from '../Components/Seo';
 import FloatInput from '../Components/ui/FloatInput';
 
 const fadeInUp = {
-    initial: { opacity: 0, y: 30 },
+    initial: { opacity: 0, y: 15 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true },
-    transition: { duration: 0.6 }
+    transition: { duration: 0.5 }
 };
 
 export default function Contact() {
+    const jsonLd = {
+        schema: {
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            "name": "Contact Editorial Office - Sanmati Journal",
+            "url": "https://sanmatijournal.in/contact",
+            "description": "Contact Sanmati Spectrum of Knowledge editorial board and registry office for manuscript submissions and inquiries."
+        },
+        breadcrumb: [
+            { name: 'Home', url: '/' },
+            { name: 'Contact', url: '/contact' }
+        ]
+    };
+
     return (
-        <MainLayout>
-            <Seo
-                title="Contact Us"
-                description="Get in touch with the Sanmati Journal Editorial Office for submissions and queries."
-            />
+        <MainLayout
+            title="Contact Editorial Office | Sanmati Journal"
+            description="Contact Sanmati Spectrum of Knowledge Editorial Office in TMU Campus, Moradabad (UP), India. Email: sanmatijournal@gmail.com, Phone: +91-8979782949."
+            keywords="contact sanmati journal, editorial office contact, journal helpline, paper submission inquiry, Moradabad journal office"
+            jsonLd={jsonLd}
+        >
 
             <PageHeader
                 title="Contact Us"
@@ -30,24 +45,24 @@ export default function Contact() {
             />
 
             {/* ─── CONTACT INFO CARDS (Direct Access) ─── */}
-            <section className="max-w-7xl mx-auto px-6 -mt-16 relative z-20 mb-10 lg:mb-20">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 text-[#2E2E2E]">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
                     {[
-                        { icon: MapPin, title: "Registry Office", desc: "B-002 Faculty Block TMU Campus, Delhi Road Moradabad (U.P) 244001", color: "from-dark to-dark/90", iconColor: "text-secondary" },
-                        { icon: Phone, title: "Strategic Liaison", desc: "+91 7999525735\n+91 8979782949", color: "from-primary to-primary-dark", iconColor: "text-white", link: "tel:+917999525735" },
-                        { icon: Mail, title: "Editorial Contacts", desc: "Editor-in-Chief:\neditor-in-chief@sanmatijournal.in\n\nGeneral Queries:\nsanmatijournal@gmail.com", color: "from-secondary to-secondary-dark", iconColor: "text-white", link: "mailto:sanmatijournal@gmail.com" },
-                        { icon: Clock, title: "Operational Hours", desc: "Mon - Fri\n10:00 AM - 6:00 PM (IST)", color: "from-surface to-white", iconColor: "text-primary", border: "border-gray-100" },
+                        { icon: MapPin, title: "Registry Office", desc: "B-002 Faculty Block TMU Campus, Delhi Road Moradabad (U.P) 244001", bg: "bg-white", iconColor: "text-primary" },
+                        { icon: Phone, title: "Strategic Liaison", desc: "+91 7999525735\n+91 8979782949", bg: "bg-white", iconColor: "text-secondary", link: "tel:+917999525735" },
+                        { icon: Mail, title: "Editorial Contacts", desc: "General & Submission Queries:\nsanmatijournal@gmail.com", bg: "bg-white", iconColor: "text-primary", link: "mailto:sanmatijournal@gmail.com" },
+                        { icon: Clock, title: "Operational Hours", desc: "Mon - Fri\n10:00 AM - 6:00 PM (IST)", bg: "bg-[#F7F4EC]/40", iconColor: "text-slate-400" },
                     ].map((item, i) => {
                         const CardContent = () => (
                             <>
-                                <div className="absolute top-0 right-0 p-6 opacity-[0.05] group-hover:scale-110 transition-transform duration-700">
-                                    <item.icon className="w-20 h-20" />
+                                <div className="absolute top-0 right-0 p-4 opacity-5">
+                                    <item.icon className="w-16 h-16 text-primary" />
                                 </div>
-                                <div className={`w-12 h-12 mb-6 rounded-xl flex items-center justify-center ${item.color === 'from-surface to-white' ? 'bg-primary/10' : 'bg-white/10'}`}>
-                                    <item.icon className={`w-6 h-6 ${item.iconColor}`} />
+                                <div className="w-8 h-8 mb-4 rounded bg-[#F7F4EC] border border-[#E9E5DD] flex items-center justify-center text-primary">
+                                    <item.icon className={`w-4 h-4 ${item.iconColor}`} />
                                 </div>
-                                <h3 className={`text-sm font-black uppercase tracking-widest mb-3 ${item.color === 'from-surface to-white' ? 'text-dark' : 'text-white'}`}>{item.title}</h3>
-                                <p className={`text-xs font-medium leading-relaxed whitespace-pre-line ${item.color === 'from-surface to-white' ? 'text-muted' : 'text-white/60'}`}>{item.desc}</p>
+                                <h3 className="text-[10px] font-bold uppercase tracking-wider text-dark mb-2">{item.title}</h3>
+                                <p className="text-xs text-slate-500 font-medium leading-relaxed whitespace-pre-line">{item.desc}</p>
                             </>
                         );
 
@@ -55,22 +70,22 @@ export default function Contact() {
                             <motion.a 
                                 href={item.link}
                                 key={i}
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={{ opacity: 0, y: 15 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                                className={`relative p-8 rounded-[2rem] shadow-xl group overflow-hidden bg-gradient-to-br ${item.color} ${item.border || ''} block cursor-pointer`}
+                                transition={{ delay: i * 0.05 }}
+                                className={`relative p-6 rounded-xl border border-[#E9E5DD] overflow-hidden ${item.bg} block hover:border-primary transition-colors`}
                             >
                                 <CardContent />
                             </motion.a>
                         ) : (
                             <motion.div
                                 key={i}
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={{ opacity: 0, y: 15 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                                className={`relative p-8 rounded-[2rem] shadow-xl group overflow-hidden bg-gradient-to-br ${item.color} ${item.border || ''}`}
+                                transition={{ delay: i * 0.05 }}
+                                className={`relative p-6 rounded-xl border border-[#E9E5DD] overflow-hidden ${item.bg}`}
                             >
                                 <CardContent />
                             </motion.div>
@@ -80,10 +95,10 @@ export default function Contact() {
 
                 {/* Google Maps Integration */}
                 <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 15 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="w-full h-[400px] rounded-[2rem] overflow-hidden shadow-xl border border-gray-100"
+                    className="w-full h-[320px] rounded-xl overflow-hidden border border-[#E9E5DD]"
                 >
                     <iframe 
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3493.595991873136!2d78.69466571500361!3d28.880650982322305!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390afb0a0bb53147%3A0xc3f12461b2bfa674!2sTeerthanker%20Mahaveer%20University!5e0!3m2!1sen!2sin!4v1708453459174!5m2!1sen!2sin" 
@@ -99,33 +114,29 @@ export default function Contact() {
             </section>
 
             {/* ─── CONTACT FORM & VISUALS (The Dialogue) ─── */}
-            <div className="max-w-7xl mx-auto px-6 lg:px-8 pb-32">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+            <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pb-16 text-[#2E2E2E]">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start max-w-4xl mx-auto">
                     {/* Visual Section */}
-                    <motion.div {...fadeInUp} className="lg:col-span-12 xl:col-span-5 relative group">
-                        <div className="absolute -inset-4 bg-gradient-to-br from-secondary/10 via-transparent to-primary/10 rounded-[3rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-                        <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl bg-dark">
+                    <motion.div {...fadeInUp} className="lg:col-span-5 relative group hidden lg:block">
+                        <div className="relative rounded-xl overflow-hidden border border-[#E9E5DD] bg-[#F7F4EC]">
                             <img loading="lazy"
                                 src="/images/contact/editorial_office.png"
                                 alt="Editorial Office"
-                                className="w-full h-full object-cover min-h-[500px] lg:min-h-[600px] opacity-80 group-hover:opacity-70 transition-opacity duration-700"
+                                className="w-full h-full object-cover min-h-[380px] opacity-70"
                             />
-                            <div className="absolute inset-x-0 bottom-0 p-10 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent">
-                                <div className="flex items-center gap-4 mb-4">
-                                    <span className="h-px w-8 bg-secondary" />
-                                    <span className="text-secondary font-black text-[10px] uppercase tracking-[0.4em]">Administration</span>
-                                </div>
-                                <h3 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-white mb-4">The Editorial Office</h3>
-                                <p className="text-white/40 text-sm leading-relaxed mb-6 font-medium italic">
-                                    "Transparent communication is the cornerstone of scholarly integrity. Our team is dedicated to supporting authors at every stage of the peer-review journey."
+                            <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-white via-white/80 to-transparent border-t border-[#E9E5DD]/20">
+                                <span className="text-[9px] font-bold uppercase tracking-wider text-primary mb-1 block">Editorial Directorate</span>
+                                <h3 className="text-base font-serif font-bold text-dark mb-2">Office of the Secretariat</h3>
+                                <p className="text-[11px] text-slate-500 font-medium leading-relaxed italic mb-4">
+                                    "Rigorous academic dialogue begins with clear, dedicated correspondence. Our support team responds to peer-review tracking and registration questions daily."
                                 </p>
-                                <div className="flex items-center gap-4">
-                                    <div className="w-10 h-10 rounded-full border border-white/10 overflow-hidden">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-8 h-8 rounded-full border border-[#E9E5DD] overflow-hidden bg-white">
                                         <img loading="lazy" src="/images/contact/dr_namrta_jain_avatar.png" alt="Dr Namrata Jain" className="w-full h-full object-cover" />
                                     </div>
                                     <div>
-                                        <p className="text-white font-bold text-sm leading-none mb-1">Dr Namrata Jain</p>
-                                        <p className="text-white/30 text-[10px] uppercase font-black tracking-widest leading-none">President & Editor-in-Chief</p>
+                                        <p className="text-dark font-bold text-xs leading-none mb-1">Dr Namrata Jain</p>
+                                        <p className="text-slate-400 text-[8px] uppercase font-bold tracking-wider leading-none">Editor-in-Chief</p>
                                     </div>
                                 </div>
                             </div>
@@ -133,21 +144,21 @@ export default function Contact() {
                     </motion.div>
 
                     {/* Form Section */}
-                    <motion.div {...fadeInUp} transition={{ delay: 0.1 }} className="lg:col-span-12 xl:col-span-7">
-                        <div className="relative">
-                            <div className="flex items-center gap-4 mb-8">
-                                <span className="h-px w-10 bg-primary" />
-                                <span className="text-primary font-black text-[11px] uppercase tracking-[0.4em]">Inquiry Protocol</span>
+                    <motion.div {...fadeInUp} transition={{ delay: 0.05 }} className="lg:col-span-7">
+                        <div className="space-y-6">
+                            <div>
+                                <span className="inline-block px-2.5 py-0.5 bg-primary/10 text-primary text-[8px] font-bold uppercase tracking-wider rounded mb-2">
+                                    Inquiry Channel
+                                </span>
+                                <h2 className="text-xl font-serif font-bold text-dark mb-2">
+                                    Start a Scholarly Inquiry
+                                </h2>
+                                <p className="text-xs text-slate-500 font-medium max-w-md leading-relaxed">
+                                    For manuscript submissions, peer-review tracking status, or journal permissions, send a message to the registrar.
+                                </p>
                             </div>
-                            
-                            <h2 className="text-2xl md:text-3xl lg:text-4xl md:text-5xl font-serif font-bold text-dark mb-4 leading-tight">
-                                Start a <span className="text-secondary italic">Scholarly Dialogue</span>
-                            </h2>
-                            <p className="text-muted text-lg mb-12 max-w-xl">
-                                For manuscript submissions, institutional subscriptions, or editorial inquiries, please utilize the secure channel below.
-                            </p>
 
-                            <div className="bg-white/50 backdrop-blur-sm border border-gray-100 p-8 md:p-12 rounded-[3rem] shadow-sm">
+                            <div className="bg-white border border-[#E9E5DD] p-6 rounded-xl">
                                 <ContactForm />
                             </div>
                         </div>
@@ -159,7 +170,7 @@ export default function Contact() {
 }
 
 function ContactForm() {
-    const { data, setData, post, processing, errors, reset, recentlySuccessful } = useForm({
+    const { data, setData, post, processing, errors, reset } = useForm({
         firstName: '',
         lastName: '',
         email: '',
@@ -170,7 +181,6 @@ function ContactForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
         
-        // Client-side validation
         if (!data.firstName.trim() || !data.lastName.trim()) {
             toast.error('Please provide both your given and family names.');
             return;
@@ -189,17 +199,17 @@ function ContactForm() {
         post('/contact', {
             onSuccess: () => {
                 reset();
-                toast.success('Protocol Engaged: Your message has been transmitted successfully.');
+                toast.success('Your message has been transmitted successfully.');
             },
             onError: () => {
-                toast.error('Transmission Failed: Please check your inputs and try again.');
+                toast.error('Transmission failed. Please verify form details.');
             }
         });
     };
 
     return (
-        <form className="space-y-6" onSubmit={handleSubmit}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <form className="space-y-5" onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <FloatInput
                     id="firstName"
                     name="firstName"
@@ -226,7 +236,7 @@ function ContactForm() {
                 />
             </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <FloatInput
                     id="email"
                     name="email"
@@ -244,21 +254,20 @@ function ContactForm() {
                         id="subject" 
                         name="subject" 
                         title="Subject" 
-                        className="block w-full px-4 h-14 bg-white border border-slate-300 rounded-xl text-slate-900 text-base focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all duration-300 disabled:opacity-50"
-                        style={{ backgroundColor: '#ffffff', color: '#0f172a' }}
+                        className="block w-full px-3 h-12 bg-white border border-[#E9E5DD] rounded text-dark text-xs focus:outline-none focus:border-primary transition-colors disabled:opacity-50"
                         value={data.subject} 
                         onChange={e => setData('subject', e.target.value)} 
                         disabled={processing}
                     >
-                        <option style={{ backgroundColor: '#ffffff', color: '#0f172a' }}>General Inquiry</option>
-                        <option style={{ backgroundColor: '#ffffff', color: '#0f172a' }}>Submission Query</option>
-                        <option style={{ backgroundColor: '#ffffff', color: '#0f172a' }}>Payment Issue</option>
-                        <option style={{ backgroundColor: '#ffffff', color: '#0f172a' }}>Technical Support</option>
+                        <option>General Inquiry</option>
+                        <option>Submission Query</option>
+                        <option>Payment Issue</option>
+                        <option>Technical Support</option>
                     </select>
-                    <label htmlFor="subject" className="absolute left-4 -top-2.5 bg-white px-1 text-xs font-bold text-slate-500" style={{ backgroundColor: '#ffffff' }}>
-                        Inquiry Node
+                    <label htmlFor="subject" className="absolute left-3 -top-2 bg-white px-1 text-[9px] font-bold text-slate-400 uppercase tracking-wider">
+                        Inquiry Topic
                     </label>
-                    {errors.subject && <div className="text-red-500 text-xs mt-1.5 ml-1 font-medium">{errors.subject}</div>}
+                    {errors.subject && <div className="text-red-500 text-[10px] mt-1 ml-1 font-bold">{errors.subject}</div>}
                 </div>
             </div>
 
@@ -266,8 +275,8 @@ function ContactForm() {
                 id="message"
                 name="message"
                 textarea
-                rows={5}
-                label="Discourse Content"
+                rows={4}
+                label="Message Text"
                 value={data.message}
                 onChange={e => setData('message', e.target.value)}
                 error={errors.message}
@@ -277,11 +286,11 @@ function ContactForm() {
 
             <button
                 type="submit"
-                className="w-full py-5 bg-dark dark:bg-primary-dark text-white font-black uppercase tracking-[0.2em] rounded-2xl hover:bg-secondary dark:hover:bg-primary transition-all flex items-center justify-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed text-xs shadow-2xl hover:-translate-y-1"
+                className="w-full py-2.5 bg-primary text-white font-bold text-xs uppercase tracking-wider rounded hover:bg-primary-dark transition-colors flex items-center justify-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={processing}
             >
-                {processing ? 'Transmitting...' : 'Dispatch Inquiry'} 
-                <Send className={`w-4 h-4 transition-transform duration-500 ${processing ? 'translate-x-12 opacity-0' : ''}`} />
+                {processing ? 'Transmitting...' : 'Send Message'} 
+                <Send className="w-3.5 h-3.5" />
             </button>
         </form>
     );

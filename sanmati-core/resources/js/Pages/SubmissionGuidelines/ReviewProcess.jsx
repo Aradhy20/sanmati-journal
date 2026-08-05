@@ -5,108 +5,115 @@ import {
     RefreshCcw, BookOpen, Clock, ArrowRight
 } from 'lucide-react';
 import { Link } from '@inertiajs/react';
-import { ScrollReveal, revealVariants, ScaleOnHover } from '../../Components/ScrollReveal';
+import { ScrollReveal } from '../../Components/ScrollReveal';
 
 export default function ReviewProcess() {
+    const jsonLd = {
+        schema: {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Peer Review Process",
+            "url": "https://sanmatijournal.in/submission-guidelines/review-process",
+            "description": "Double-blind peer review policy and evaluation workflow of Sanmati Spectrum of Knowledge."
+        },
+        breadcrumb: [
+            { name: 'Home', url: '/' },
+            { name: 'Submission Guidelines', url: '/submission-guidelines' },
+            { name: 'Review Process', url: '/submission-guidelines/review-process' }
+        ]
+    };
+
     const steps = [
         {
             title: "Submission Process",
-            desc: "Manuscripts are submitted via email to sanmatijournal@gmail.com. Initial screening is conducted for scope, format, and plagiarism.",
-            icon: <Send className="w-6 h-6" />
+            desc: "Manuscripts are submitted via email to sanmatijournal@gmail.com. Initial screening is conducted for scope compliance, formatting, and plagiarism check.",
+            icon: <Send className="w-4 h-4" />
         },
         {
             title: "Editorial Screening",
-            desc: "The Editor-in-Chief and Editors assess manuscripts for relevance, originality, and academic quality. Manuscripts not meeting basic criteria may be rejected at this stage.",
-            icon: <FileSearch className="w-6 h-6" />
+            desc: "The Editor-in-Chief and section editors assess submissions for academic relevance, originality, and writing quality. Papers not meeting baseline criteria may be desk rejected.",
+            icon: <FileSearch className="w-4 h-4" />
         },
         {
-            title: "Peer Review Process",
-            desc: "Suitable manuscripts undergo Double-Blind Peer Review, ensuring anonymity of authors and reviewers. Reviewers evaluate originality, methodology, clarity, relevance, and contribution to knowledge.",
-            icon: <ShieldCheck className="w-6 h-6" />
+            title: "Double-Blind Peer Review",
+            desc: "Suitable manuscripts undergo double-blind peer review, safeguarding the anonymity of both authors and reviewers. Reviewers evaluate methodology, rigor, and scholarly contribution.",
+            icon: <ShieldCheck className="w-4 h-4" />
         },
         {
             title: "Editorial Decision",
-            desc: "Based on reviewers’ reports, manuscripts may be: Accepted, Accepted with minor revisions, Accepted with major revisions, or Rejected.",
-            icon: <CheckCircle2 className="w-6 h-6" />
+            desc: "Based on referee reports, the editorial board decides to Accept, Accept with minor revisions, Request major revisions, or Decline publication.",
+            icon: <CheckCircle2 className="w-4 h-4" />
         },
         {
-            title: "Revision & Acceptance",
-            desc: "Revised manuscripts must be submitted within the stipulated timeframe. Final acceptance is granted after satisfactory compliance with reviewer comments.",
-            icon: <RefreshCcw className="w-6 h-6" />
+            title: "Revision & Finalization",
+            desc: "Revised papers must address reviewer comments. Final acceptance is confirmed after verifying revisions satisfy the referee comments.",
+            icon: <RefreshCcw className="w-4 h-4" />
         },
         {
-            title: "Publication",
-            desc: "Accepted manuscripts are scheduled for publication in the forthcoming issue. Authors are informed of publication details via email.",
-            icon: <BookOpen className="w-6 h-6" />
+            title: "Metadata & Indexing",
+            desc: "Accepted papers are assigned a CrossRef DOI, indexed online, and published in the forthcoming volume issue.",
+            icon: <BookOpen className="w-4 h-4" />
         }
     ];
 
     return (
-        <MainLayout>
-            <div className="bg-warm-bg min-h-screen">
+        <MainLayout
+            title="Double Blind Peer Reviewed Journal Process | Sanmati Journal"
+            description="Double-blind peer review process of Sanmati multidisciplinary research journal (ISSN 3108-1819). Aligned with UGC Care quality standards to publish research paper in India."
+            keywords="UGC Care Journal, Multidisciplinary Research Journal, Publish Research Paper in India, Peer Reviewed Journal, ISSN Journal, double blind review"
+            jsonLd={jsonLd}
+        >
+            <div className="bg-[#FFFDF8] min-h-screen">
                 <PageHeader
-                    title="Editorial & Peer Review"
+                    title="Double-Blind Peer Reviewed Journal Workflow"
                     breadcrumb="Submission"
-                    subtitle="Transparent, systematic, and rigorous standard"
+                    subtitle="UGC Care Aligned & Transparent Academic Evaluation Standards"
                 />
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-24">
-                    <div className="max-w-4xl mx-auto mt-12">
+                <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-16 text-[#2E2E2E]">
+                    <div className="max-w-3xl mx-auto mt-10">
 
-                        <div className="bg-white p-8 md:p-12 rounded-3xl border border-gray-200 shadow-sm relative overflow-hidden">
-                            <div className="absolute top-0 right-0 p-8 opacity-5">
-                                <ShieldCheck className="w-32 h-32" />
-                            </div>
+                        <ScrollReveal>
+                            <div className="bg-white p-6 md:p-10 rounded-xl border border-[#E9E5DD]">
+                                <div className="space-y-6">
+                                    <h2 className="text-xl font-serif font-bold text-dark border-b border-[#E9E5DD] pb-3">Peer Review Standards</h2>
+                                    <p className="text-xs text-slate-500 font-medium leading-relaxed max-w-2xl">
+                                        Sanmati Spectrum follows a transparent, systematic, and double-blind peer review process to ensure high-impact multidisciplinary scientific rigor.
+                                    </p>
 
-                            <div className="relative z-10">
-                                <h2 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-dark mb-6">Our Review Standards</h2>
-                                <p className="text-dark/80 text-lg leading-relaxed mb-16 max-w-2xl">
-                                    Sanmati Spectrum of Knowledge & Emerging Discourse follows a transparent, systematic, and rigorous editorial and peer review process to maintain high academic standards.
-                                </p>
-
-                                <div className="space-y-12 relative before:absolute before:inset-0 before:ml-6 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-blue-200 before:to-transparent">
-                                    {steps.map((step, i) => (
-                                        <div key={i} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-                                            <div className="flex items-center justify-center w-12 h-12 rounded-2xl border border-white bg-blue-900 text-white shadow-lg shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 group-hover:scale-110 transition-transform duration-300">
-                                                {step.icon}
-                                            </div>
-                                            <div className="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] p-8 rounded-3xl bg-warm-bg border border-slate-100 shadow-sm hover:shadow-xl hover:border-primary/20 transition-all duration-300 group">
-                                                <div className="flex items-center gap-2 mb-2">
-                                                    <span className="text-xs font-black text-primary uppercase tracking-widest">Step {i + 1}</span>
+                                    {/* Timeline */}
+                                    <div className="space-y-6 relative before:absolute before:inset-y-0 before:left-4 before:w-[1px] before:bg-[#E9E5DD]">
+                                        {steps.map((step, i) => (
+                                            <div key={i} className="flex gap-4 relative">
+                                                <div className="w-8 h-8 rounded border border-[#E9E5DD] bg-[#F7F4EC] text-primary flex items-center justify-center shrink-0 z-10">
+                                                    {step.icon}
                                                 </div>
-                                                <h4 className="text-xl font-bold text-dark mb-3 group-hover:text-dark transition-colors">{step.title}</h4>
-                                                <p className="text-sm text-gray-600 leading-relaxed">{step.desc}</p>
+                                                <div className="bg-[#F7F4EC]/50 border border-[#E9E5DD]/70 rounded-lg p-5 flex-1 space-y-1.5">
+                                                    <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Step 0{i + 1}</span>
+                                                    <h4 className="text-xs font-bold uppercase tracking-wider text-dark">{step.title}</h4>
+                                                    <p className="text-[11px] text-slate-500 font-medium leading-relaxed">{step.desc}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    ))}
-                                </div>
+                                        ))}
+                                    </div>
 
-                                <div className="mt-20 p-8 bg-dark text-white rounded-3xl text-center relative overflow-hidden">
-                                    <div className="absolute inset-0 bg-primary/10 animate-pulse"></div>
-                                    <div className="relative z-10">
-                                        <p className="text-lg font-serif italic mb-6">"Ensuring fairness, confidentiality, and academic integrity at every stage."</p>
-                                        <div className="flex justify-center gap-6 text-sm opacity-70">
-                                            <div className="flex items-center gap-2">
-                                                <ShieldCheck className="w-4 h-4" /> Double-Blind
-                                            </div>
-                                            <div className="flex items-center gap-2">
-                                                <Clock className="w-4 h-4" /> Systematic
-                                            </div>
-                                            <div className="flex items-center gap-2">
-                                                <CheckCircle2 className="w-4 h-4" /> Rigorous
-                                            </div>
+                                    {/* Integrity Box */}
+                                    <div className="p-6 bg-[#F7F4EC] border border-[#E9E5DD] rounded-xl text-center space-y-4">
+                                        <p className="text-sm font-serif italic text-dark">"Ensuring absolute fairness, review confidentiality, and academic integrity."</p>
+                                        <div className="flex justify-center gap-5 text-[9px] font-bold uppercase tracking-wider text-slate-400">
+                                            <span className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-primary" /> Double-Blind</span>
+                                            <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5 text-primary" /> Systematic</span>
+                                            <span className="flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5 text-primary" /> COPE Guidelines</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </ScrollReveal>
 
-                        {/* Nav */}
-                        <div className="mt-12 flex justify-start">
-                            <Link href="/submission-guidelines/publication-charges" className="flex items-center gap-2 text-gray-500 hover:text-dark font-bold transition-all group">
-                                <div className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center group-hover:border-blue-900">
-                                    <ArrowRight className="w-4 h-4 rotate-180" />
-                                </div>
+                        {/* Navigation Footer */}
+                        <div className="mt-8 flex justify-start text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                            <Link href="/submission-guidelines/publication-charges" className="flex items-center gap-1.5 hover:text-primary transition-colors">
+                                <ArrowRight className="w-3.5 h-3.5 rotate-180" />
                                 Publication Charges
                             </Link>
                         </div>

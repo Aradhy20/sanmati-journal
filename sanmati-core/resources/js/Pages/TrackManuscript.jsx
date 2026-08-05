@@ -20,6 +20,20 @@ export default function TrackManuscript() {
     const [searched, setSearched] = useState(false);
     const [loading, setLoading] = useState(false);
 
+    const jsonLd = {
+        schema: {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Track Manuscript Status",
+            "url": "https://sanmatijournal.in/track-manuscript",
+            "description": "Real-time manuscript tracking portal for authors submitting to Sanmati Spectrum of Knowledge."
+        },
+        breadcrumb: [
+            { name: 'Home', url: '/' },
+            { name: 'Track Manuscript', url: '/track-manuscript' }
+        ]
+    };
+
     const handleTrack = (e) => {
         e.preventDefault();
         if (!trackingId.trim() || !email.trim()) return;
@@ -32,11 +46,12 @@ export default function TrackManuscript() {
     };
 
     return (
-        <MainLayout>
-            <Seo
-                title="Track Your Manuscript"
-                description="Check the real-time status of your manuscript submission to Sanmati Journal."
-            />
+        <MainLayout
+            title="Track Manuscript Status | Sanmati Journal"
+            description="Track your research manuscript review and publication status in real-time on Sanmati Spectrum of Knowledge portal."
+            keywords="track manuscript, submission status, paper review tracking, author status portal, sanmati journal tracking"
+            jsonLd={jsonLd}
+        >
 
             <PageHeader
                 title="Track Your Manuscript"
@@ -120,7 +135,7 @@ export default function TrackManuscript() {
                             <div>
                                 <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Status for {trackingId.toUpperCase()}</p>
                                 <h3 className="text-xl font-serif font-bold text-primary">Currently Under Review</h3>
-                                <p className="text-xs font-bold text-amber-500 uppercase tracking-widest mt-1">Estimated: 4–6 weeks from submission</p>
+                                <p className="text-xs font-bold text-amber-500 uppercase tracking-widest mt-1">Estimated: 15–30 days from submission</p>
                             </div>
                         </div>
 
@@ -167,7 +182,7 @@ export default function TrackManuscript() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
                     {[
                         { icon: Send, title: 'Acknowledge', desc: 'Confirmation email sent within 24 hours of submission.', color: 'text-secondary', bg: 'bg-secondary/10' },
-                        { icon: Clock, title: 'Review Time', desc: 'Double-blind peer review takes 4–6 weeks on average.', color: 'text-amber-500', bg: 'bg-amber-50' },
+                        { icon: Clock, title: 'Review Time', desc: 'Double-blind peer review takes 15–30 days on average.', color: 'text-amber-500', bg: 'bg-amber-50' },
                         { icon: CheckCircle, title: 'Decision', desc: 'Accept/revise/reject decision mailed to author directly.', color: 'text-emerald-600', bg: 'bg-emerald-50' },
                     ].map((card, i) => (
                         <motion.div

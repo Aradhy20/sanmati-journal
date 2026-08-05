@@ -2,54 +2,25 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
+
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- Dark mode init: read localStorage before first paint to avoid FOUC -->
         <script nonce="{{ Vite::cspNonce() }}">
             try { localStorage.removeItem('theme'); document.documentElement.classList.remove('dark'); } catch(e) {}
         </script>
-        <link rel="icon" type="image/jpeg" href="/logo.jpg">
+        <!-- Favicon & Web Manifest -->
+        <link rel="manifest" href="/manifest.json">
+        <meta name="theme-color" content="#8B1538">
+        <link rel="icon" type="image/webp" href="/logo.webp">
+        <link rel="shortcut icon" href="/logo.jpg">
+        <link rel="apple-touch-icon" href="/logo.webp">
 
-        <title inertia>{{ config('app.name', 'Sanmati Journal') }} | Spectrum of Knowledge</title>
+        <title inertia>Sanmati Spectrum of Knowledge</title>
 
-        @if(isset($page['props']['meta']))
-            <meta name="description" content="{{ $page['props']['meta']['description'] ?? 'Top-ranking research journal in India. Publish your research paper fast. A high-authority, peer-reviewed multidisciplinary academic journal indexing high-quality research and books.' }}">
-            <meta name="robots" content="index, follow, max-image-preview:large">
-            <link rel="canonical" href="{{ url()->current() }}">
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
-            {{-- Open Graph --}}
-            <meta property="og:title" content="{{ $page['props']['meta']['title'] ?? 'Sanmati Journal | Spectrum of Knowledge' }}">
-            <meta property="og:description" content="{{ $page['props']['meta']['description'] ?? 'Top-ranking research journal in India. Publish your research paper fast. A high-authority, peer-reviewed multidisciplinary academic journal indexing high-quality research and books.' }}">
-            <meta property="og:image" content="{{ $page['props']['meta']['image'] ?? url('/logo.jpg') }}">
-            <meta property="og:type" content="{{ $page['props']['meta']['type'] ?? 'website' }}">
-            <meta property="og:url" content="{{ url()->current() }}">
-            <meta property="og:site_name" content="Sanmati Journal">
-            <meta property="og:locale" content="en_IN">
-
-            {{-- Twitter / X --}}
-            <meta name="twitter:card" content="summary_large_image">
-            <meta name="twitter:title" content="{{ $page['props']['meta']['title'] ?? 'Sanmati Journal | Spectrum of Knowledge' }}">
-            <meta name="twitter:description" content="{{ $page['props']['meta']['description'] ?? 'Top-ranking research journal in India. Publish your research paper fast. A high-authority, peer-reviewed multidisciplinary academic journal indexing high-quality research and books.' }}">
-            <meta name="twitter:image" content="{{ $page['props']['meta']['image'] ?? url('/logo.jpg') }}">
-        @else
-            <meta name="description" content="Top-ranking research journal in India. Publish your research paper fast. A high-authority, peer-reviewed multidisciplinary academic journal indexing high-quality research and books.">
-            <meta name="robots" content="index, follow, max-image-preview:large">
-            <link rel="canonical" href="{{ url()->current() }}">
-
-            <meta property="og:title" content="Sanmati Journal | Spectrum of Knowledge">
-            <meta property="og:description" content="Top-ranking research journal in India. Publish your research paper fast. A high-authority, peer-reviewed multidisciplinary academic journal indexing high-quality research and books.">
-            <meta property="og:image" content="{{ url('/logo.jpg') }}">
-            <meta property="og:type" content="website">
-            <meta property="og:url" content="{{ url()->current() }}">
-            <meta property="og:site_name" content="Sanmati Journal">
-            <meta property="og:locale" content="en_IN">
-            <meta name="twitter:card" content="summary_large_image">
-            <meta name="twitter:title" content="Sanmati Journal | Spectrum of Knowledge">
-            <meta name="twitter:description" content="Top-ranking research journal in India. Publish your research paper fast. A high-authority, peer-reviewed multidisciplinary academic journal indexing high-quality research and books.">
-            <meta name="twitter:image" content="{{ url('/logo.jpg') }}">
-        @endif
-
-        {{-- Sitewide Base Schema: Organization + WebSite + Periodical (on every page) --}}
+        {{-- Sitewide Base Schema: Organization + WebSite + Periodical + AcademicJournal --}}
         <script type="application/ld+json" nonce="{{ Vite::cspNonce() }}">
         {
             "@context": "https://schema.org",
@@ -58,15 +29,28 @@
                     "@type": "Organization",
                     "@id": "https://sanmatijournal.in/#organization",
                     "name": "Sanmati Spectrum of Knowledge & Emerging Discourse",
-                    "alternateName": "Sanmati Journal",
+                    "alternateName": ["Sanmati Journal", "Sanmati Spectrum"],
                     "url": "https://sanmatijournal.in",
                     "logo": {
                         "@type": "ImageObject",
-                        "url": "https://sanmatijournal.in/logo.jpg"
+                        "url": "https://sanmatijournal.in/logo.webp",
+                        "width": 512,
+                        "height": 512,
+                        "caption": "Sanmati Journal Logo"
                     },
                     "email": "sanmatijournal@gmail.com",
-                    "description": "A peer-reviewed national multidisciplinary research journal indexed with CrossRef DOI and compliant with COPE publication ethics.",
-                    "areaServed": "IN"
+                    "description": "A high-authority, peer-reviewed national multidisciplinary research journal indexed with CrossRef DOI (ISSN 3108-1819) and compliant with COPE publication ethics.",
+                    "areaServed": "IN",
+                    "sameAs": [
+                        "https://sanmatijournal.in"
+                    ],
+                    "contactPoint": {
+                        "@type": "ContactPoint",
+                        "contactType": "editorial",
+                        "email": "sanmatijournal@gmail.com",
+                        "telephone": "+91-8979782949",
+                        "availableLanguage": ["English", "Hindi"]
+                    }
                 },
                 {
                     "@type": "WebSite",
@@ -97,14 +81,14 @@
         }
         </script>
 
-        <!-- Performance: DNS prefetch for external domains -->
+        <!-- Performance: DNS prefetch & preconnect for external domains -->
         <link rel="dns-prefetch" href="//fonts.googleapis.com">
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link rel="dns-prefetch" href="//www.googletagmanager.com">
         <link rel="dns-prefetch" href="//www.google-analytics.com">
 
-        <!-- LCP Preload: Logo is the Largest Contentful Paint element -->
-        <link rel="preload" as="image" href="/logo.jpg" fetchpriority="high">
+        <!-- LCP Preload: Logo WebP format for fast paint -->
+        <link rel="preload" as="image" href="/logo.webp" type="image/webp" fetchpriority="high">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">

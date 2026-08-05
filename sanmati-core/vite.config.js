@@ -16,6 +16,10 @@ export default defineConfig({
         tailwindcss(),
     ],
     build: {
+        minify: 'esbuild',
+        cssMinify: true,
+        cssCodeSplit: true,
+        assetsInlineLimit: 4096,
         rollupOptions: {
             output: {
                 manualChunks(id) {
@@ -25,6 +29,9 @@ export default defineConfig({
                         }
                         if (id.includes('lucide-react')) {
                             return 'ui';
+                        }
+                        if (id.includes('sweetalert2') || id.includes('canvas-confetti') || id.includes('react-hot-toast')) {
+                            return 'plugins';
                         }
                     }
                 }

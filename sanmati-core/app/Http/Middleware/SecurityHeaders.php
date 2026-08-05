@@ -49,7 +49,9 @@ class SecurityHeaders
                "connect-src $connectSrc; " .
                "frame-src 'self' https://www.googletagmanager.com https://www.google.com;";
         
-        $response->headers->set('Content-Security-Policy', $csp);
+        if (!app()->environment('local')) {
+            $response->headers->set('Content-Security-Policy', $csp);
+        }
 
         return $response;
     }

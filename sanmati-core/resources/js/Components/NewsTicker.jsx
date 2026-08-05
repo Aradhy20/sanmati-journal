@@ -4,7 +4,7 @@ export default function NewsTicker({ items = [] }) {
     const displayItems = items.length > 0 ? items : [
         { id: 0, content: "Call for Papers: Volume 1, Issue 1 (Jan-Mar 2026)", type: "info" },
         { id: -1, content: "Submission Deadline: 25th February 2026", type: "urgent" },
-        { id: -2, content: "Peer Review Process: Fast-Track (4-6 Weeks)", type: "info" }
+        { id: -2, content: "Peer Review Process: Fast-Track (15-30 Days)", type: "info" }
     ];
 
     return (

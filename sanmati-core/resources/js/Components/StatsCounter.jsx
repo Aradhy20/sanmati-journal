@@ -9,7 +9,7 @@ function CounterCard({ value, label, suffix = "", icon: Icon, gradient, delay })
     const isInView = useInView(ref, { once: true, margin: "-100px" });
     const springValue = useSpring(0, { stiffness: 50, damping: 20, duration: 2 });
     const displayValue = useTransform(springValue, (current) => Math.round(current));
-    const [display, setDisplay] = useState(0);
+    const [display, setDisplay] = useState(value);
 
     useEffect(() => {
         if (isInView) {

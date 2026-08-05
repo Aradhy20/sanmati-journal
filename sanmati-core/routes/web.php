@@ -40,12 +40,38 @@ Route::get('/gallery-view', [JournalController::class, 'gallery'])->name('galler
 Route::get('/gallery/photo', [JournalController::class, 'galleryPhoto'])->name('gallery.photo');
 Route::get('/media-news', [JournalController::class, 'galleryNews'])->name('gallery.news');
 Route::get('/archive', [JournalController::class, 'archive'])->name('archive');
+Route::get('/current-issue', [JournalController::class, 'currentIssue'])->name('current-issue');
 Route::get('/about-foundation', [JournalController::class, 'aboutFoundation'])->name('about-foundation');
 Route::get('/article/{id}', [JournalController::class, 'article'])->name('article.show');
 Route::get('/download/paper/{id}', [\App\Http\Controllers\DownloadController::class, 'paper'])->name('paper.download');
 Route::get('/contact', [JournalController::class, 'contact'])->name('contact');
 
 Route::post('/contact', [JournalController::class, 'contactStore'])->name('contact.store')->middleware('throttle:3,1');
+
+// Portals & Enterprise Dashboards
+Route::get('/dashboard/author', function () { return \Inertia\Inertia::render('Author/Dashboard'); })->name('author.dashboard');
+Route::get('/dashboard/editor', function () { return \Inertia\Inertia::render('Editor/Dashboard'); })->name('editor.dashboard');
+Route::get('/dashboard/reviewer', function () { return \Inertia\Inertia::render('Reviewer/Dashboard'); })->name('reviewer.dashboard');
+Route::get('/author/{id?}', function () { return \Inertia\Inertia::render('Author/Profile'); })->name('author.profile');
+
+// Academic Blog & Knowledge Base Engine
+Route::get('/blog', function () { return \Inertia\Inertia::render('Blog/Index'); })->name('blog.index');
+Route::get('/blog/topic/{slug}', function ($slug) { return \Inertia\Inertia::render('TopicHub', ['topic' => $slug]); })->name('blog.topic');
+Route::get('/blog/{slug}', function () { return \Inertia\Inertia::render('Blog/Show'); })->name('blog.show');
+Route::get('/resources', function () { return \Inertia\Inertia::render('ResourceCenter'); })->name('resources.index');
+
+// Digital Research Library Routes
+Route::get('/search', function () { return \Inertia\Inertia::render('SearchPage'); })->name('search');
+Route::get('/institution/{id?}', function () { return \Inertia\Inertia::render('Institution/Profile'); })->name('institution.profile');
+Route::get('/citation/{id?}', function () { return \Inertia\Inertia::render('CitationPage'); })->name('citation.export');
+Route::get('/downloads', function () { return \Inertia\Inertia::render('DownloadsPage'); })->name('downloads.index');
+
+// Authentication & Settings Routes
+Route::get('/login', function () { return \Inertia\Inertia::render('Auth/Login'); })->name('login');
+Route::get('/register', function () { return \Inertia\Inertia::render('Auth/Register'); })->name('register');
+Route::get('/role-selection', function () { return \Inertia\Inertia::render('Auth/RoleSelection'); })->name('role-selection');
+Route::get('/forgot-password', function () { return \Inertia\Inertia::render('Auth/ForgotPassword'); })->name('password.request');
+Route::get('/settings', function () { return \Inertia\Inertia::render('Settings/Index'); })->name('settings');
 
 // Basic info routes
 Route::get('/basic-info/vision-mission', [JournalController::class, 'visionMission'])->name('vision-mission');
@@ -81,9 +107,12 @@ Route::get('/compliance', [JournalController::class, 'compliance'])->name('compl
 Route::get('/track-manuscript', [JournalController::class, 'trackManuscript'])->name('track-manuscript');
 
 
-// Catch-all 404 — renders the React custom 404 page
+
+Route::get('/antigravity-sandbox', [JournalController::class, 'antigravitySandbox'])->name('antigravity-sandbox');
+
+// Catch-all 404 — renders the React custom 404 page with 404 status code
 Route::fallback(function () {
-    return \Inertia\Inertia::render('Error404');
+    return \Inertia\Inertia::render('Error404')->toResponse(request())->setStatusCode(404);
 });
 
 // Authentication Routes

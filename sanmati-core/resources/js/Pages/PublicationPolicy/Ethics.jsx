@@ -5,8 +5,28 @@ import { GridPattern } from '../../Components/Graphics';
 import { ScrollReveal, revealVariants } from '../../Components/ScrollReveal';
 
 export default function Ethics() {
+    const jsonLd = {
+        schema: {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Publication Ethics & COPE Compliance",
+            "url": "https://sanmatijournal.in/publication-policy/ethics",
+            "description": "Publication ethics and research integrity standards enforced by Sanmati Spectrum of Knowledge in compliance with COPE guidelines."
+        },
+        breadcrumb: [
+            { name: 'Home', url: '/' },
+            { name: 'Publication Policy', url: '/publication-policy/ethics' },
+            { name: 'Publication Ethics', url: '/publication-policy/ethics' }
+        ]
+    };
+
     return (
-        <MainLayout>
+        <MainLayout
+            title="Publication Ethics & COPE Policy | Sanmati Journal"
+            description="Publication ethics and research integrity policy of Sanmati Spectrum (ISSN 3108-1819). Adheres strictly to COPE guidelines, anti-plagiarism standards, and double-blind peer review."
+            keywords="UGC Care Journal, Multidisciplinary Research Journal, Publish Research Paper in India, Peer Reviewed Journal, ISSN Journal, COPE ethics"
+            jsonLd={jsonLd}
+        >
             <div className="bg-warm-bg min-h-screen relative">
                 <div className="absolute top-0 left-0 opacity-10 pointer-events-none">
                     <GridPattern className="w-[600px] h-[600px]" />

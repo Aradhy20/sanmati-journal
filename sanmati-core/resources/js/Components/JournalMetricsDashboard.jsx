@@ -2,10 +2,10 @@ import { useRef } from 'react';
 import { useInView } from 'framer-motion';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { FileText, Users, Globe, Clock, CheckCircle, TrendingUp, BookOpen, Star } from 'lucide-react';
+import { FileText, Users, Globe, Clock, CheckCircle, TrendingUp, Star } from 'lucide-react';
 
 function CountUp({ end, suffix = '', duration = 2000, decimal = false }) {
-    const [val, setVal] = useState(0);
+    const [val, setVal] = useState(end);
     const ref = useRef(null);
     const inView = useInView(ref, { once: true, margin: '-60px' });
 
@@ -31,68 +31,68 @@ const METRICS = [
         icon: FileText,
         label: 'Papers Published',
         value: 93, suffix: '+',
-        desc: 'Peer-reviewed articles across all disciplines',
-        color: 'from-blue-500/10 to-blue-600/5 border-blue-200/60',
-        iconBg: 'bg-blue-100 text-blue-600',
+        desc: 'Peer-reviewed research manuscripts.',
+        color: 'bg-white border-[#E9E5DD] hover:border-primary',
+        iconBg: 'bg-[#F7F4EC] text-primary',
     },
     {
         icon: Users,
         label: 'Contributing Authors',
         value: 200, suffix: '+',
-        desc: 'Scholars from institutions across India',
-        color: 'from-secondary/10 to-secondary/5 border-secondary/20',
-        iconBg: 'bg-amber-100 text-amber-700',
+        desc: 'Scholars from leading institutions.',
+        color: 'bg-white border-[#E9E5DD] hover:border-primary',
+        iconBg: 'bg-[#F7F4EC] text-[#C77D5B]',
     },
     {
         icon: Clock,
-        label: 'Days Avg. Review',
-        value: 21, suffix: '',
-        desc: 'Fast double-blind peer review process',
-        color: 'from-purple-500/10 to-purple-600/5 border-purple-200/60',
-        iconBg: 'bg-purple-100 text-purple-600',
+        label: 'Avg. Review Time',
+        value: 21, suffix: ' Days',
+        desc: 'Rigorous peer review timeline.',
+        color: 'bg-white border-[#E9E5DD] hover:border-primary',
+        iconBg: 'bg-[#F7F4EC] text-primary',
     },
     {
         icon: Globe,
         label: 'States Represented',
         value: 15, suffix: '+',
-        desc: 'Authors from across India',
-        color: 'from-teal-500/10 to-teal-600/5 border-teal-200/60',
-        iconBg: 'bg-teal-100 text-teal-600',
+        desc: 'National and regional coverage.',
+        color: 'bg-white border-[#E9E5DD] hover:border-primary',
+        iconBg: 'bg-[#F7F4EC] text-primary',
     },
     {
         icon: Star,
         label: 'Impact Factor',
         value: 5.3, suffix: '',
         decimal: true,
-        desc: 'Recognised academic impact score',
-        color: 'from-orange-500/10 to-orange-600/5 border-orange-200/60',
-        iconBg: 'bg-orange-100 text-orange-600',
+        desc: 'Indexed academic citation score.',
+        color: 'bg-white border-[#E9E5DD] hover:border-primary',
+        iconBg: 'bg-[#F7F4EC] text-[#C77D5B]',
     },
     {
         icon: CheckCircle,
         label: 'Acceptance Rate',
         value: 42, suffix: '%',
-        desc: 'Quality-focused selective acceptance',
-        color: 'from-emerald-500/10 to-emerald-600/5 border-emerald-200/60',
-        iconBg: 'bg-emerald-100 text-emerald-600',
+        desc: 'Rigorously vetted submission process.',
+        color: 'bg-white border-[#E9E5DD] hover:border-primary',
+        iconBg: 'bg-[#F7F4EC] text-primary',
     },
 ];
 
 export default function JournalMetricsDashboard() {
     return (
-        <section className="section-py bg-white" aria-labelledby="metrics-title">
-            <div className="container-custom">
+        <section className="py-16 bg-[#FFFDF8] border-b border-[#E9E5DD]" aria-labelledby="metrics-title">
+            <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-12 max-w-2xl mx-auto">
-                    <div className="section-tagline-blue mx-auto w-fit">
-                        <TrendingUp className="w-3 h-3" />
-                        Journal Impact Dashboard
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold uppercase tracking-wider mb-3 mx-auto">
+                        <TrendingUp className="w-3.5 h-3.5" />
+                        Key Metrics
                     </div>
-                    <h2 id="metrics-title" className="section-title mb-4">
-                        Research Metrics That Matter
+                    <h2 id="metrics-title" className="text-2xl md:text-3xl font-serif font-medium text-dark mb-4">
+                        Publishing Impact Dashboard
                     </h2>
-                    <p className="section-subtitle mx-auto">
-                        Transparent publishing metrics that reflect our commitment to quality, speed, and academic rigor.
+                    <p className="text-sm text-slate-500 font-medium max-w-md mx-auto">
+                        Transparent, ethical publishing performance indicators showing speed, reach, and rigor.
                     </p>
                 </div>
 
@@ -103,20 +103,20 @@ export default function JournalMetricsDashboard() {
                         return (
                             <motion.div
                                 key={m.label}
-                                initial={{ opacity: 0, y: 24 }}
+                                initial={{ opacity: 0, y: 15 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: '-40px' }}
-                                transition={{ duration: 0.5, delay: i * 0.07 }}
-                                className={`rounded-2xl border bg-gradient-to-br p-5 ${m.color} hover:-translate-y-1 transition-transform duration-300`}
+                                transition={{ duration: 0.4, delay: i * 0.05 }}
+                                className={`rounded-xl border p-5 ${m.color} hover:-translate-y-0.5 transition-all duration-200`}
                             >
-                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 ${m.iconBg}`}>
-                                    <Icon className="w-5 h-5" />
+                                <div className={`w-8 h-8 rounded border border-[#E9E5DD] flex items-center justify-center mb-4 text-xs font-bold ${m.iconBg}`}>
+                                    <Icon className="w-4 h-4" />
                                 </div>
-                                <div className="text-3xl font-black text-primary font-serif leading-none mb-1">
+                                <div className="text-2xl font-serif font-bold text-dark leading-none mb-2">
                                     <CountUp end={m.value} suffix={m.suffix} decimal={m.decimal} />
                                 </div>
-                                <div className="text-[11px] font-black uppercase tracking-wider text-slate-500 mb-1">{m.label}</div>
-                                <div className="text-[11px] text-slate-400 leading-snug">{m.desc}</div>
+                                <div className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1.5 leading-snug">{m.label}</div>
+                                <p className="text-[10px] text-slate-400 font-medium leading-relaxed">{m.desc}</p>
                             </motion.div>
                         );
                     })}

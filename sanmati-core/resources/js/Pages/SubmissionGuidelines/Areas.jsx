@@ -237,13 +237,28 @@ const areas = [
 ];
 
 export default function AreasOfSubmission() {
+    const jsonLd = {
+        schema: {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Research Areas & Disciplines",
+            "url": "https://sanmatijournal.in/submission-guidelines/areas",
+            "description": "Explore multidisciplinary research submission domains at Sanmati Spectrum of Knowledge including Science, Humanities, Law, Education, Commerce, and Indian Knowledge Systems."
+        },
+        breadcrumb: [
+            { name: 'Home', url: '/' },
+            { name: 'Submission Guidelines', url: '/submission-guidelines' },
+            { name: 'Research Areas', url: '/submission-guidelines/areas' }
+        ]
+    };
+
     return (
-        <MainLayout>
-            <Seo
-                title="Areas of Submission"
-                description="Explore 10+ multidisciplinary research areas at Sanmati Journal covering Arts, Science, Law, Health, Education, and more."
-                keywords="research areas, submission topics, multidisciplinary journal, academic publishing"
-            />
+        <MainLayout
+            title="Research Areas & Disciplines | Sanmati Journal"
+            description="Explore multidisciplinary research areas at Sanmati Spectrum Journal: Arts, Science, Social Sciences, Law, Education, Health, Commerce, and Indian Knowledge Systems."
+            keywords="research areas, submission topics, multidisciplinary journal, academic publishing, science, law, humanities, commerce"
+            jsonLd={jsonLd}
+        >
 
             <div className="bg-warm-bg min-h-screen font-sans">
                 <PageHeader

@@ -1,19 +1,18 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Award, GraduationCap, ChevronRight, BookOpen, Quote, Sparkles, X, Medal, BookMarked, Building2, ExternalLink, Mail, Phone, Trophy, Users, Shield } from 'lucide-react';
+import { Award, GraduationCap, ChevronRight, BookOpen, Quote, Sparkles, X, Medal, BookMarked, Building2, ExternalLink, Mail, Phone, Trophy, Users } from 'lucide-react';
 import PageHeader from '../Components/PageHeader';
 import MainLayout from '../Layouts/MainLayout';
 import Seo from '../Components/Seo';
 
 const fadeInUp = {
-    initial: { opacity: 0, y: 30 },
+    initial: { opacity: 0, y: 15 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true },
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+    transition: { duration: 0.5, ease: 'easeOut' }
 };
 
 const BioModal = ({ member, isOpen, onClose }) => {
-    // Lock body scroll when modal is open
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = 'hidden';
@@ -33,22 +32,22 @@ const BioModal = ({ member, isOpen, onClose }) => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="fixed inset-0 bg-dark/80 backdrop-blur-sm z-[100]"
+                        transition={{ duration: 0.25 }}
+                        className="fixed inset-0 bg-[#2E2E2E]/40 backdrop-blur-sm z-[100]"
                         onClick={onClose}
                     />
                     <div className="fixed inset-0 z-[101] overflow-y-auto w-full">
-                        <div className="flex min-h-full items-center justify-center p-4 py-12 sm:p-6 lg:p-8">
+                        <div className="flex min-h-full items-center justify-center p-4 py-8 sm:p-6 lg:p-8">
                             <motion.div
-                                initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                                initial={{ opacity: 0, y: 15, scale: 0.98 }}
                                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                                className="relative w-full max-w-4xl bg-white rounded-[2rem] lg:rounded-[3rem] shadow-[0_30px_60px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col md:flex-row border border-gray-100"
+                                exit={{ opacity: 0, scale: 0.98, y: 10 }}
+                                transition={{ duration: 0.3 }}
+                                className="relative w-full max-w-4xl bg-[#FFFDF8] rounded-xl shadow-card overflow-hidden flex flex-col md:flex-row border border-[#E9E5DD]"
                                 onClick={(e) => e.stopPropagation()}
                             >
-                                {/* Modal Image Column (Desktop) / Header (Mobile) */}
-                                <div className="md:w-2/5 md:shrink-0 relative bg-dark">
+                                {/* Modal Image Column */}
+                                <div className="md:w-2/5 md:shrink-0 relative bg-slate-900">
                                     <div className="md:absolute inset-0 aspect-square md:aspect-auto">
                                         <picture>
                                             <source srcSet={member.image ? member.image.replace(/\.(jpeg|jpg|png)$/i, '.webp') : ''} type="image/webp" />
@@ -58,18 +57,18 @@ const BioModal = ({ member, isOpen, onClose }) => {
                                                 className="w-full h-full object-cover object-top opacity-80"
                                             />
                                         </picture>
-                                        <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent" />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/30 to-transparent" />
 
                                         <div className="absolute bottom-6 left-6 right-6">
-                                            <span className="inline-block px-4 py-1.5 bg-secondary/90 backdrop-blur-md rounded-full text-[10px] text-white font-black tracking-widest uppercase mb-4 shadow-xl">
+                                            <span className="inline-block px-2.5 py-0.5 bg-secondary text-white text-[8px] font-bold tracking-wider uppercase mb-3 rounded">
                                                 {member.role}
                                             </span>
-                                            <h2 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-white leading-tight mb-2">
+                                            <h2 className="text-xl font-serif font-bold text-white leading-tight mb-2">
                                                 {member.name}
                                             </h2>
                                             <a
                                                 href={member.email ? `mailto:${member.email}` : '#'}
-                                                className="text-white/70 text-[11px] font-bold tracking-widest uppercase hover:text-white transition-colors"
+                                                className="text-white/80 text-[10px] font-mono hover:underline"
                                             >
                                                 {member.email}
                                             </a>
@@ -78,80 +77,78 @@ const BioModal = ({ member, isOpen, onClose }) => {
                                 </div>
 
                                 {/* Modal Content Area */}
-                                <div className="md:w-3/5 p-8 md:p-12 lg:p-16 relative bg-warm-bg flex flex-col max-h-[85vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+                                <div className="md:w-3/5 p-6 md:p-8 lg:p-10 relative bg-[#FFFDF8] flex flex-col max-h-[80vh] overflow-y-auto">
                                     <button
                                         onClick={onClose}
-                                        className="absolute top-6 right-6 lg:top-8 lg:right-8 w-12 h-12 bg-white rounded-full flex items-center justify-center text-dark/50 hover:text-dark hover:bg-gray-100 transition-all shadow-sm border border-gray-100 z-10"
+                                        className="absolute top-5 right-5 w-8 h-8 bg-white rounded border border-[#E9E5DD] flex items-center justify-center text-slate-500 hover:text-dark transition-all z-10"
                                     >
-                                        <X className="w-5 h-5" />
+                                        <X className="w-4 h-4" />
                                     </button>
 
-                                    <div className="space-y-10 pb-8">
+                                    <div className="space-y-6 pb-6">
                                         {/* Introduction */}
-                                        <div className="prose prose-sm prose-p:leading-relaxed prose-p:text-muted max-w-none prose-p:font-medium">
-                                            <p className="text-base text-dark drop-shadow-sm/20 first-letter:text-5xl first-letter:font-serif first-letter:font-bold first-letter:text-primary first-letter:float-left first-letter:mr-3 first-letter:-mt-1">
-                                                {member.bio.intro}
-                                            </p>
-                                        </div>
+                                        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+                                            {member.bio.intro}
+                                        </p>
 
                                         {/* Academic Information Grid */}
-                                        <div className="grid grid-cols-1 gap-8 pt-8 border-t border-gray-100">
+                                        <div className="space-y-4 pt-6 border-t border-[#E9E5DD]">
                                             {member.bio.qualifications && (
-                                                <div className="flex gap-4">
-                                                    <div className="w-10 h-10 rounded-xl bg-white text-secondary flex items-center justify-center shrink-0 shadow-sm border border-gray-50">
-                                                        <GraduationCap className="w-5 h-5" />
+                                                <div className="flex gap-3">
+                                                    <div className="w-8 h-8 rounded bg-[#F7F4EC] border border-[#E9E5DD] text-primary flex items-center justify-center shrink-0">
+                                                        <GraduationCap className="w-4 h-4" />
                                                     </div>
                                                     <div>
-                                                        <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted mb-2">Educational Qualifications</h4>
-                                                        <p className="text-sm font-bold text-dark leading-relaxed">{member.bio.qualifications}</p>
+                                                        <h4 className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-1">Educational Qualifications</h4>
+                                                        <p className="text-xs font-bold text-dark leading-relaxed">{member.bio.qualifications}</p>
                                                     </div>
                                                 </div>
                                             )}
 
                                             {member.bio.books && (
-                                                <div className="flex gap-4">
-                                                    <div className="w-10 h-10 rounded-xl bg-white text-secondary flex items-center justify-center shrink-0 shadow-sm border border-gray-50">
-                                                        <BookOpen className="w-5 h-5" />
+                                                <div className="flex gap-3">
+                                                    <div className="w-8 h-8 rounded bg-[#F7F4EC] border border-[#E9E5DD] text-primary flex items-center justify-center shrink-0">
+                                                        <BookOpen className="w-4 h-4" />
                                                     </div>
                                                     <div>
-                                                        <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted mb-2">Books Published as Author</h4>
-                                                        <p className="text-[13px] font-medium text-dark/80 leading-relaxed">{member.bio.books}</p>
+                                                        <h4 className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-1">Books Published as Author</h4>
+                                                        <p className="text-xs font-medium text-slate-600 leading-relaxed">{member.bio.books}</p>
                                                     </div>
                                                 </div>
                                             )}
 
                                             {member.bio.edited && (
-                                                <div className="flex gap-4">
-                                                    <div className="w-10 h-10 rounded-xl bg-white text-secondary flex items-center justify-center shrink-0 shadow-sm border border-gray-50">
-                                                        <BookMarked className="w-5 h-5" />
+                                                <div className="flex gap-3">
+                                                    <div className="w-8 h-8 rounded bg-[#F7F4EC] border border-[#E9E5DD] text-primary flex items-center justify-center shrink-0">
+                                                        <BookMarked className="w-4 h-4" />
                                                     </div>
                                                     <div>
-                                                        <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted mb-2">Edited Volumes & Publications</h4>
-                                                        <p className="text-[13px] font-medium text-dark/80 leading-relaxed">{member.bio.edited}</p>
+                                                        <h4 className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-1">Edited Volumes & Publications</h4>
+                                                        <p className="text-xs font-medium text-slate-600 leading-relaxed">{member.bio.edited}</p>
                                                     </div>
                                                 </div>
                                             )}
 
                                             {member.bio.awards && (
-                                                <div className="flex gap-4">
-                                                    <div className="w-10 h-10 rounded-xl bg-white text-secondary flex items-center justify-center shrink-0 shadow-sm border border-gray-50">
-                                                        <Medal className="w-5 h-5" />
+                                                <div className="flex gap-3">
+                                                    <div className="w-8 h-8 rounded bg-[#F7F4EC] border border-[#E9E5DD] text-primary flex items-center justify-center shrink-0">
+                                                        <Medal className="w-4 h-4" />
                                                     </div>
                                                     <div>
-                                                        <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted mb-2">Major Honors & Awards</h4>
-                                                        <p className="text-[13px] font-medium text-dark/80 leading-relaxed">{member.bio.awards}</p>
+                                                        <h4 className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-1">Major Honors & Awards</h4>
+                                                        <p className="text-xs font-medium text-slate-600 leading-relaxed">{member.bio.awards}</p>
                                                     </div>
                                                 </div>
                                             )}
 
                                             {member.bio.memberships && (
-                                                <div className="flex gap-4">
-                                                    <div className="w-10 h-10 rounded-xl bg-white text-secondary flex items-center justify-center shrink-0 shadow-sm border border-gray-50">
-                                                        <Building2 className="w-5 h-5" />
+                                                <div className="flex gap-3">
+                                                    <div className="w-8 h-8 rounded bg-[#F7F4EC] border border-[#E9E5DD] text-primary flex items-center justify-center shrink-0">
+                                                        <Building2 className="w-4 h-4" />
                                                     </div>
                                                     <div>
-                                                        <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted mb-2">Memberships & Affiliations</h4>
-                                                        <p className="text-[13px] font-medium text-dark/80 leading-relaxed">{member.bio.memberships}</p>
+                                                        <h4 className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-1">Memberships & Affiliations</h4>
+                                                        <p className="text-xs font-medium text-slate-600 leading-relaxed">{member.bio.memberships}</p>
                                                     </div>
                                                 </div>
                                             )}
@@ -159,14 +156,14 @@ const BioModal = ({ member, isOpen, onClose }) => {
 
                                         {/* Bottom Actions */}
                                         {member.profileUrl && (
-                                            <div className="pt-8 border-t border-gray-100 flex justify-end">
+                                            <div className="pt-6 border-t border-[#E9E5DD] flex justify-end">
                                                 <a
                                                     href={member.profileUrl}
                                                     target="_blank"
                                                     rel="noreferrer"
-                                                    className="inline-flex items-center gap-3 px-6 py-3 bg-dark text-white text-[11px] font-black uppercase tracking-widest rounded-xl hover:bg-primary transition-colors shadow-lg shadow-dark/10"
+                                                    className="inline-flex items-center gap-1.5 px-4 py-2 bg-primary text-white text-[10px] font-bold uppercase tracking-wider rounded hover:bg-primary-dark transition-colors"
                                                 >
-                                                    <ExternalLink className="w-4 h-4" /> Verify Credentials
+                                                    <ExternalLink className="w-3.5 h-3.5" /> Verify Credentials
                                                 </a>
                                             </div>
                                         )}
@@ -189,71 +186,70 @@ const ExecutiveMember = ({ member, index }) => {
         <>
             <motion.div
                 {...fadeInUp}
-                transition={{ delay: index * 0.1 }}
-                className={`group flex flex-col h-full bg-white rounded-[2rem] border ${index === 0 ? 'border-primary/20 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_40px_rgba(var(--primary),0.12)]' : 'border-gray-100 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:border-gray-200'} transition-all duration-500 overflow-hidden relative`}
+                transition={{ delay: index * 0.05 }}
+                className="group flex flex-col h-full bg-white rounded-xl border border-[#E9E5DD] hover:border-primary hover:shadow-card transition-all duration-300 overflow-hidden relative"
             >
-                <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none transition-opacity duration-500 group-hover:opacity-10">
-                    <Icon className="w-32 h-32 text-primary rotate-12" />
-                </div>
-
                 {/* Top Area: Image & Name */}
-                <div className="p-8 pb-6 flex flex-col sm:flex-row gap-6 items-start relative z-10 border-b border-gray-50 bg-gradient-to-b from-surface/50 to-white">
-                    <div className="w-28 h-28 sm:w-32 sm:h-32 shrink-0 rounded-[1.5rem] overflow-hidden shadow-md border-2 border-white ring-1 ring-gray-100 relative">
+                <div className="p-6 pb-4 flex flex-col sm:flex-row gap-5 items-center sm:items-start relative z-10 border-b border-[#E9E5DD]/60 bg-[#F7F4EC]/30">
+                    <div className="w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-full overflow-hidden border border-[#E9E5DD] relative bg-[#F7F4EC]">
                         <picture>
                             <source srcSet={member.image ? member.image.replace(/\.(jpeg|jpg|png)$/i, '.webp') : ''} type="image/webp" />
                             <img
                                 src={member.image}
                                 alt={member.name}
-                                className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700"
+                                className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-350"
                                 loading="lazy"
                             />
                         </picture>
                     </div>
-                    <div className="flex-1">
-                        <h3 className="text-3xl sm:text-4xl font-serif font-bold text-dark leading-tight group-hover:text-primary transition-colors">
+                    <div className="flex-1 text-center sm:text-left space-y-1">
+                        <span className="inline-block px-2.5 py-0.5 bg-primary/10 text-primary text-[8px] font-bold uppercase tracking-wider rounded">
+                            {member.role}
+                        </span>
+                        <h3 className="text-xl font-serif font-bold text-dark leading-tight group-hover:text-primary transition-colors">
                             {member.name}
                         </h3>
                     </div>
                 </div>
 
                 {/* Content Area */}
-                <div className="p-8 pt-6 flex-1 flex flex-col bg-white relative z-10">
-                    <div className="text-dark/80 font-bold text-sm leading-relaxed mb-8 flex-1 whitespace-pre-line">
+                <div className="p-6 pt-4 flex-1 flex flex-col bg-white relative z-10 space-y-4">
+                    <div className="text-xs text-slate-500 font-medium leading-relaxed flex-grow whitespace-pre-line">
                         {member.title}
                     </div>
 
-                    <div className="w-full rounded-2xl p-5 mb-8 border border-gray-100 bg-surface/50 text-xs">
+                    <div className="w-full rounded-lg p-4 border border-[#E9E5DD] bg-[#F7F4EC]/40 text-[11px] font-medium text-slate-600">
                         {member.email && (
-                            <p className="flex justify-between items-center border-b border-gray-200/50 pb-3 mb-3">
-                                <span className="text-muted uppercase tracking-widest font-black text-[9px] flex items-center gap-2"><Mail className="w-3.5 h-3.5" /> Email</span>
-                                <a href={`mailto:${member.email}`} className="font-bold text-dark hover:text-primary transition-colors truncate ml-4">{member.email}</a>
+                            <p className="flex justify-between items-center border-b border-[#E9E5DD]/60 pb-2 mb-2">
+                                <span className="text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1.5"><Mail className="w-3.5 h-3.5" /> Email</span>
+                                <a href={`mailto:${member.email}`} className="font-bold text-dark hover:underline truncate ml-4">{member.email}</a>
                             </p>
                         )}
                         {member.phone && (
                             <p className="flex justify-between items-center">
-                                <span className="text-muted uppercase tracking-widest font-black text-[9px] flex items-center gap-2"><Phone className="w-3.5 h-3.5" /> Mob</span>
+                                <span className="text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1.5"><Phone className="w-3.5 h-3.5" /> Contact</span>
                                 <span className="font-bold text-dark text-right">{member.phone}</span>
                             </p>
                         )}
                     </div>
 
-                    <div className="flex flex-col gap-3 mt-auto">
+                    <div className="flex flex-col gap-2 mt-auto">
                         {member.bio && (
                             <button
                                 onClick={() => setIsBioOpen(true)}
-                                className="w-full py-3.5 bg-dark text-white rounded-xl text-[11px] font-black uppercase tracking-widest shadow-lg shadow-dark/10 hover:bg-primary transition-all duration-300 flex items-center justify-center gap-2 group/btn"
+                                className="w-full py-2.5 bg-primary text-white rounded font-bold text-xs uppercase tracking-wider hover:bg-primary-dark transition-colors flex items-center justify-center gap-1.5"
                             >
-                                Read Full Biography <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                                Biography Details <ChevronRight className="w-4.5 h-4.5" />
                             </button>
                         )}
 
                         {member.profileUrl ? (
-                            <a href={member.profileUrl} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 w-full py-3.5 bg-white text-dark rounded-xl text-[11px] font-black uppercase tracking-widest border border-gray-200 hover:border-primary/30 hover:bg-primary/5 transition-all duration-300 group/link">
-                                Official Profile <ExternalLink className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform text-muted group-hover/link:text-primary" />
+                            <a href={member.profileUrl} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-1.5 w-full py-2.5 bg-white text-dark rounded text-xs font-bold uppercase tracking-wider border border-[#E9E5DD] hover:bg-slate-50 transition-colors">
+                                Academic Profile <ExternalLink className="w-3.5 h-3.5" />
                             </a>
                         ) : (
-                            <div className="flex items-center justify-center gap-2 w-full py-3.5 bg-surface text-dark/30 rounded-xl text-[11px] font-black uppercase tracking-widest border border-gray-100">
-                                Sanmati Affiliate <ChevronRight className="w-3.5 h-3.5 opacity-50" />
+                            <div className="flex items-center justify-center gap-1 w-full py-2.5 bg-slate-50 text-slate-400 rounded text-xs font-bold uppercase tracking-wider border border-dashed border-[#E9E5DD]">
+                                Affiliated Director
                             </div>
                         )}
                     </div>
@@ -277,12 +273,11 @@ export default function Editors() {
             name: "Dr Namrata Jain",
             role: "President & Editor-in-Chief",
             title: "President\nSanmati Education & Research Foundation Of India\n\nEditor-in-Chief\nSanmati Spectrum of Knowledge & Emerging Discourse",
-            email: "editor-in-chief@sanmatijournal.in",
+            email: "sanmatijournal@gmail.com",
             phone: "+91 9870713912",
             profileUrl: "https://scholar.google.com/citations?user=YzXafxwAAAAJ&hl=en",
             image: "/images/team/mam.jpeg",
             icon: Trophy,
-            colorClass: "bg-secondary text-white border-transparent",
             bio: {
                 intro: "डा. नम्रता जैन हिंदी एवं भारतीय ज्ञान परंपरा से आधारित पुस्तकों की समीक्षा, समालोचना एवं संपादन एवं लेखन कला में दक्ष विदुषी हैं। वर्तमान में तीर्थंकर महावीर विश्वविद्यालय, मुरादाबाद (उ.प्र.) के कॉलेज ऑफ लॉ एंड लीगल स्टडीज में सहा. प्राध्यापिका के पद पर कार्यरत हैं। उन्हें शिक्षा के क्षेत्र में 17 वर्षों का समृद्ध अनुभव प्राप्त है। आपने विभिन्न राष्ट्रीय एवं अंतर्राष्ट्रीय कार्यशालाओं, वेबिनारों एवं संगोष्ठियों का आयोजन किया है तथा उनमें सक्रिय सहभागिता भी की है। डा. नम्रता जैन Sanmati Spectrum of Knowledge & Emerging Discourse की मुख्य संपादक की भूमिका का निर्बाहन कर रही है ।",
                 qualifications: "एम.ए. (हिंदी, संस्कृत, योग, दर्शनशास्त्र), एम.एड., यूजीसी-नेट (हिंदी एवं शिक्षाशास्त्र), पीएच.डी. (हिंदी एवं शिक्षाशास्त्र)",
@@ -294,14 +289,13 @@ export default function Editors() {
         },
         {
             name: "Dr. Ratnesh Kumar Jain",
-            role: "Secretary  & Managing Editor",
-            title: "Secretary \nSanmati Education & Research Foundation Of India\n\nManaging Editor\nSanmati Spectrum of Knowledge & Emerging Discourse",
-            email: "managing_editor@sanmatijournal.in",
+            role: "Secretary & Managing Editor",
+            title: "Secretary\nSanmati Education & Research Foundation Of India\n\nManaging Editor\nSanmati Spectrum of Knowledge & Emerging Discourse",
+            email: "sanmatijournal@gmail.com",
             phone: "+91 7999525735",
             profileUrl: "https://www.tmu.ac.in/nss-coordinator-desk",
             image: "/images/team/sir.jpeg",
             icon: Users,
-            colorClass: "bg-white/90 text-dark border border-white/20",
             bio: {
                 intro: "Dr. Ratnesh Kumar Jain is currently serving at Teerthanker Mahaveer University, Moradabad (U.P.) as Assistant Dean – Student Welfare and University Coordinator – National Service Scheme (NSS). He is an Associate Professor in the Faculty of Humanities & Social Sciences, Centre for Jain Studies, and also serves as the Managing Editor of Sanmati Spectrum of Knowledge & Emerging Discourse. He has over 20 years of rich experience in the field of education. He has organized and actively participated in several national and international workshops, seminars, conferences, and webinars. A number of his research articles have been published in reputed journals.",
                 qualifications: "M.Sc. (Botany & IT), M.A. (English, Hindi & Yoga), M.Ed., Ph.D. (Philosophy & Education), UGC-NET, PGDCA.",
@@ -313,36 +307,49 @@ export default function Editors() {
         }
     ];
 
+    const jsonLd = {
+        schema: {
+            "@context": "https://schema.org",
+            "@type": "AboutPage",
+            "name": "Editorial Leadership - Editors",
+            "url": "https://sanmatijournal.in/editorial-team/editors",
+            "description": "Meet the Chief Editors and Founding Executive Directorate of Sanmati Spectrum of Knowledge & Emerging Discourse."
+        },
+        breadcrumb: [
+            { name: 'Home', url: '/' },
+            { name: 'Editorial Team', url: '/editorial-team/editors' },
+            { name: 'Editors', url: '/editorial-team/editors' }
+        ]
+    };
+
     return (
-        <MainLayout>
-            <Seo
-                title="Executive Editors"
-                description="The supreme academic leadership and founding editors guiding the multidisciplinary vision of Sanmati Journal."
-            />
-
+        <MainLayout
+            title="Executive Editors & Peer Review Directorate | UGC Care Aligned Journal"
+            description="Meet the Editor-in-Chief and executive editors of Sanmati Spectrum — a double-blind peer reviewed multidisciplinary ISSN journal (ISSN 3108-1819) committed to quality research publishing in India."
+            keywords="UGC Care Journal, Multidisciplinary Research Journal, Publish Research Paper in India, Peer Reviewed Journal, ISSN Journal, Editor in Chief"
+            jsonLd={jsonLd}
+        >
             <PageHeader
-                title="Executive Editors"
+                title="Executive Editors & Peer Review Directorate"
                 breadcrumb="Leadership"
-                subtitle="The architects of our empirical standards and global scholarly narrative."
+                subtitle="UGC Care Aligned & Peer Reviewed Multidisciplinary Journal Governance"
             />
 
-            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-24 relative">
+            <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 bg-[#FFFDF8] text-[#2E2E2E]">
 
-                <div className="flex flex-col items-center text-center mb-12 lg:mb-24">
-                    <motion.div {...fadeInUp} className="flex items-center gap-4 mb-6">
-                        <span className="h-px w-10 bg-secondary" />
-                        <span className="text-secondary font-black text-[11px] uppercase tracking-[0.4em]">Supreme Leadership</span>
-                        <span className="h-px w-10 bg-secondary" />
+                <div className="flex flex-col items-center text-center mb-12">
+                    <motion.div {...fadeInUp} className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold uppercase tracking-wider mb-3 mx-auto">
+                        <Sparkles className="w-3.5 h-3.5" /> Executive Directorate
                     </motion.div>
-                    <motion.h2 {...fadeInUp} transition={{ delay: 0.1 }} className="text-2xl md:text-3xl lg:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-dark mb-6 leading-tight">
-                        The Founding <span className="text-primary italic">Visionaries</span>
+                    <motion.h2 {...fadeInUp} transition={{ delay: 0.1 }} className="text-2xl md:text-4xl font-serif font-medium text-dark mb-4">
+                        The Founding Editors
                     </motion.h2>
-                    <motion.p {...fadeInUp} transition={{ delay: 0.2 }} className="text-xl text-muted font-medium max-w-2xl leading-relaxed">
-                        Pioneering the strategic evolution, operational brilliance, and peer-reviewed excellence across our global academic platform.
+                    <motion.p {...fadeInUp} transition={{ delay: 0.2 }} className="text-sm text-slate-500 font-medium max-w-xl mx-auto leading-relaxed">
+                        Pioneering the strategic governance and peer-reviewed excellence across our global academic platform.
                     </motion.p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12 max-w-5xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
                     {executiveMembers.map((m, i) => (
                         <ExecutiveMember key={i} member={m} index={i} />
                     ))}

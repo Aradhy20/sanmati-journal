@@ -1,22 +1,16 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { 
     Search, 
     Filter, 
     BookOpen, 
     Download, 
     FileText, 
-    ChevronDown, 
-    Award, 
     Calendar, 
-    BarChart2, 
-    Hash, 
     Layers, 
     ShieldCheck, 
     Quote, 
-    ExternalLink,
-    Eye,
-    TrendingUp
+    Eye
 } from 'lucide-react';
 import { Link, Head } from '@inertiajs/react';
 import MainLayout from '../Layouts/MainLayout';
@@ -33,24 +27,9 @@ export default function Archive({ issues }) {
     const [selectedVolume, setSelectedVolume] = useState('all');
     const [selectedAuthor, setSelectedAuthor] = useState('all');
     const [selectedCategory, setSelectedCategory] = useState('all');
-    const [activePaperMenu, setActivePaperMenu] = useState(null); // stores paper.id
     const [citationPaper, setCitationPaper] = useState(null);
 
-    // Refs
-    const menuRef = useRef({});
-
-    // Close PDF menu on clicking outside
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (activePaperMenu && !event.target.closest('.pdf-dropdown-container')) {
-                setActivePaperMenu(null);
-            }
-        };
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, [activePaperMenu]);
-
-    // Frontend override for month_range — ensures correct display regardless of DB value
+    // Frontend override for month_range
     const MONTH_RANGE_OVERRIDES = {
         '1-1': 'January – March',
         '2-1': 'April – June',
@@ -61,7 +40,6 @@ export default function Archive({ issues }) {
         return [...dbIssues]
             .map(issue => ({
                 ...issue,
-                // Apply month_range override, filter out compilation papers from count
                 month_range: MONTH_RANGE_OVERRIDES[`${issue.volume}-${issue.number}`] || issue.month_range,
                 papers: (issue.papers || []).filter(p => p.category !== 'Complete Issue Book'),
             }))
@@ -69,34 +47,29 @@ export default function Archive({ issues }) {
                 const volA = parseInt(a.volume) || 0;
                 const volB = parseInt(b.volume) || 0;
                 if (volA !== volB) {
-                    return volB - volA; // Newest Volume first
+                    return volB - volA;
                 }
                 const numA = parseInt(a.number) || 0;
                 const numB = parseInt(b.number) || 0;
-                return numB - numA; // Newest Issue first
+                return numB - numA;
             });
     }, [dbIssues]);
 
-    // Build unique volume options dynamically from the loaded issues
+    // Volume options
     const volumeOptions = useMemo(() => {
         const vols = {};
         researchIssues.forEach(issue => {
             const vol = String(issue.volume);
             if (!vols[vol]) {
-                vols[vol] = {
-                    val: vol,
-                    label: `Volume ${vol}`
-                };
+                vols[vol] = { val: vol, label: `Volume ${vol}` };
             }
         });
-        
         if (vols['1']) vols['1'].label = 'Volume 1 (Jan–Mar 2026)';
         if (vols['2']) vols['2'].label = 'Volume 2 (Apr–Jun 2026)';
-
         return Object.values(vols).sort((a, b) => b.val.localeCompare(a.val));
     }, [researchIssues]);
 
-    // Get all unique authors for the filter dropdown
+    // Unique authors
     const allAuthors = useMemo(() => {
         const authorsSet = new Set();
         researchIssues.forEach(issue => {
@@ -115,7 +88,7 @@ export default function Archive({ issues }) {
         return Array.from(authorsSet).sort();
     }, [researchIssues]);
 
-    // Get all unique categories for the filter dropdown
+    // Unique categories
     const allCategories = useMemo(() => {
         const categoriesSet = new Set();
         researchIssues.forEach(issue => {
@@ -128,7 +101,7 @@ export default function Archive({ issues }) {
         return Array.from(categoriesSet).sort();
     }, [researchIssues]);
 
-    // Stats calculations
+    // Stats
     const stats = useMemo(() => {
         const vols = new Set(researchIssues.map(i => i.volume));
         const papersCount = researchIssues.reduce((acc, issue) => acc + (issue.papers?.length || 0), 0);
@@ -139,16 +112,14 @@ export default function Archive({ issues }) {
         };
     }, [researchIssues]);
 
-    // Filtered Issues and Papers
+    // Filtering
     const filteredIssues = useMemo(() => {
         return researchIssues.map(issue => {
-            // Apply volume filter (convert both to string to handle integer vs string from DB)
             if (selectedVolume !== 'all' && String(issue.volume) !== selectedVolume) {
                 return { ...issue, papers: [] };
             }
 
             const filteredPapers = (issue.papers || []).filter(paper => {
-                // Apply Search query
                 const matchesSearch = searchQuery === '' || 
                     paper.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
                     paper.authors?.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -156,11 +127,9 @@ export default function Archive({ issues }) {
                     `volume ${issue.volume}`.includes(searchQuery.toLowerCase()) ||
                     `vol ${issue.volume}`.includes(searchQuery.toLowerCase());
 
-                // Apply Author filter
                 const matchesAuthor = selectedAuthor === 'all' || 
                     (paper.authors && paper.authors.toLowerCase().includes(selectedAuthor.toLowerCase()));
 
-                // Apply Category filter
                 const matchesCategory = selectedCategory === 'all' ||
                     (paper.category && paper.category === selectedCategory);
 
@@ -171,7 +140,6 @@ export default function Archive({ issues }) {
         }).filter(issue => issue.papers && issue.papers.length > 0);
     }, [researchIssues, searchQuery, selectedVolume, selectedAuthor, selectedCategory]);
 
-    // Metadata & Schema.org JSON-LD
     const scholarlySchema = useMemo(() => {
         return researchIssues.flatMap(issue => 
             (issue.papers || []).map(paper => ({
@@ -185,7 +153,7 @@ export default function Archive({ issues }) {
                 "url": paper.doi || `https://sanmatijournal.in/article/${paper.id}`,
                 "publisher": {
                     "@type": "Organization",
-                    "name": "Sanmati Journal",
+                    "name": "Sanmati Spectrum Journal",
                     "logo": "https://sanmatijournal.in/logo.jpg"
                 },
                 "issueNumber": issue.number,
@@ -204,94 +172,84 @@ export default function Archive({ issues }) {
     };
 
     return (
-        <MainLayout>
-            <Seo 
-                title="Journal Archive | Sanmati Spectrum of Knowledge" 
-                description="Browse through the academic archive of Sanmati Journal. Read peer-reviewed multidisciplinary research articles, scholarly papers, and official issue compilations."
-                jsonLd={seoData}
-            />
+        <MainLayout
+            title="Peer Reviewed Multidisciplinary Research Journal Archive | Sanmati Journal"
+            description="Access published papers in our peer reviewed multidisciplinary research journal. Search ISSN journal volumes (ISSN 3108-1819), CrossRef DOI articles, and UGC Care aligned archives."
+            keywords="UGC Care Journal, Multidisciplinary Research Journal, Publish Research Paper in India, Peer Reviewed Journal, ISSN Journal, ISSN 3108-1819"
+            jsonLd={seoData}
+        >
 
-            {/* Custom Google Fonts Import Inline for Safety */}
-            <Head>
-                <style>{`
-                    .font-poppins { font-family: 'Poppins', sans-serif; }
-                    .font-inter { font-family: 'Inter', sans-serif; }
-                `}</style>
-            </Head>
-
-            {/* Premium Archive Page Header */}
             <PageHeader
-                title="Journal Archive"
+                title="Peer Reviewed Multidisciplinary Research Journal Archive"
                 breadcrumb="Archives"
-                subtitle="Explore our digital repository of peer-reviewed multi-disciplinary scientific papers, research articles, and volumes."
+                subtitle="UGC Care Aligned & Registered ISSN Journal Volume Collections in India"
             />
 
-            <div className="min-h-screen bg-[#F8FAFC] py-12 lg:py-20 font-inter text-slate-800">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="min-h-screen bg-[#FFFDF8] py-12 lg:py-16 text-[#2E2E2E]">
+                <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
                     
-                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 border-b border-[#E9E5DD] pb-5">
                         <div>
-                            <h2 className="text-2xl font-serif font-bold text-primary">Research Analytics</h2>
-                            <p className="text-sm text-slate-500 mt-1">Real-time statistics of published volumes and papers.</p>
+                            <h2 className="text-xl font-serif font-medium text-dark">Research Analytics</h2>
+                            <p className="text-xs text-slate-500 font-medium">Real-time statistics of published volumes and papers.</p>
                         </div>
                         <Link 
                             href="/submission-guidelines/call-for-papers"
-                            className="inline-flex items-center gap-2 px-6 py-3 bg-secondary text-white font-bold rounded-xl text-xs uppercase tracking-widest hover:bg-secondary-dark transition-colors shadow-lg shadow-secondary/20"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white font-bold rounded-lg text-xs uppercase tracking-wider hover:bg-primary-dark transition-colors"
                         >
                             <FileText className="w-4 h-4" /> Submit Paper
                         </Link>
                     </div>
 
-                    {/* Animated Statistics Cards Section */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+                    {/* Statistics Cards */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
                         {[
-                            { label: "Total Volumes", value: stats.volumes, icon: <Layers className="w-6 h-6 text-accent" />, border: "border-l-4 border-l-accent" },
-                            { label: "Total Issues", value: stats.issues, icon: <Calendar className="w-6 h-6 text-secondary" />, border: "border-l-4 border-l-secondary" },
-                            { label: "Published Papers", value: stats.papers, icon: <FileText className="w-6 h-6 text-primary" />, border: "border-l-4 border-l-primary" }
+                            { label: "Total Volumes", value: stats.volumes, icon: <Layers className="w-5 h-5 text-primary" /> },
+                            { label: "Total Issues", value: stats.issues, icon: <Calendar className="w-5 h-5 text-primary" /> },
+                            { label: "Published Papers", value: stats.papers, icon: <FileText className="w-5 h-5 text-[#C77D5B]" /> }
                         ].map((stat, idx) => (
                             <motion.div
                                 key={idx}
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={{ opacity: 0, y: 15 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: idx * 0.1, duration: 0.5 }}
-                                className={`bg-white rounded-2xl shadow-sm p-6 flex items-center justify-between hover:shadow-md transition-all duration-300 ${stat.border}`}
+                                transition={{ delay: idx * 0.05 }}
+                                className="bg-[#F7F4EC] border border-[#E9E5DD] rounded-xl p-5 flex items-center justify-between"
                             >
                                 <div>
-                                    <p className="text-xs font-bold text-slate-400 uppercase tracking-widest font-poppins">{stat.label}</p>
-                                    <h4 className="text-3xl font-bold font-poppins text-slate-900 mt-1">{stat.value}</h4>
+                                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{stat.label}</p>
+                                    <h4 className="text-2xl font-serif font-bold text-dark mt-1">{stat.value}</h4>
                                 </div>
-                                <div className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center">
+                                <div className="w-10 h-10 rounded border border-[#E9E5DD] bg-white flex items-center justify-center text-primary">
                                     {stat.icon}
                                 </div>
                             </motion.div>
                         ))}
                     </div>
 
-
                     {/* Filter & Live Search Toolbar */}
-                    <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 mb-12 flex flex-col lg:flex-row gap-4 items-center justify-between">
+                    <div className="bg-[#F7F4EC] border border-[#E9E5DD] rounded-xl p-5 mb-10 flex flex-col lg:flex-row gap-4 items-center justify-between">
                         <div className="relative w-full lg:max-w-md">
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                             <input 
                                 type="text"
-                                placeholder="Search by paper title, authors, or keywords..."
+                                placeholder="Search title, authors, or keywords..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                                className="w-full pl-10 pr-4 py-2.5 bg-white border border-[#E9E5DD] rounded-lg text-xs focus:outline-none focus:border-primary transition-all font-medium"
                             />
                         </div>
 
-                        <div className="flex flex-wrap w-full lg:w-auto gap-4 items-center">
-                            <div className="flex items-center gap-2 flex-1 sm:flex-none">
-                                <Filter className="w-4 h-4 text-slate-400" />
-                                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider font-poppins">Filter By:</span>
+                        <div className="flex flex-wrap w-full lg:w-auto gap-3 items-center">
+                            <div className="flex items-center gap-1.5 flex-1 sm:flex-none">
+                                <Filter className="w-3.5 h-3.5 text-slate-400" />
+                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Filter By:</span>
                             </div>
 
                             {/* Volumes Filter Dropdown */}
                             <select 
                                 value={selectedVolume}
                                 onChange={(e) => setSelectedVolume(e.target.value)}
-                                className="px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all cursor-pointer font-medium text-slate-700 w-full sm:w-[180px]"
+                                className="px-3 py-2 bg-white border border-[#E9E5DD] rounded-lg text-xs focus:outline-none focus:border-primary cursor-pointer font-medium text-slate-700 w-full sm:w-[160px]"
                             >
                                 <option value="all">All Volumes</option>
                                 {volumeOptions.map(opt => (
@@ -303,7 +261,7 @@ export default function Archive({ issues }) {
                             <select 
                                 value={selectedAuthor}
                                 onChange={(e) => setSelectedAuthor(e.target.value)}
-                                className="px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all cursor-pointer font-medium text-slate-700 w-full sm:w-[180px]"
+                                className="px-3 py-2 bg-white border border-[#E9E5DD] rounded-lg text-xs focus:outline-none focus:border-primary cursor-pointer font-medium text-slate-700 w-full sm:w-[160px]"
                             >
                                 <option value="all">All Authors</option>
                                 {allAuthors.map((author, index) => (
@@ -315,7 +273,7 @@ export default function Archive({ issues }) {
                             <select 
                                 value={selectedCategory}
                                 onChange={(e) => setSelectedCategory(e.target.value)}
-                                className="px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all cursor-pointer font-medium text-slate-700 w-full sm:w-[180px]"
+                                className="px-3 py-2 bg-white border border-[#E9E5DD] rounded-lg text-xs focus:outline-none focus:border-primary cursor-pointer font-medium text-slate-700 w-full sm:w-[160px]"
                             >
                                 <option value="all">All Categories</option>
                                 {allCategories.map((category, index) => (
@@ -327,102 +285,96 @@ export default function Archive({ issues }) {
 
                     {/* Volumes Section */}
                     {filteredIssues.length > 0 ? (
-                        <div className="space-y-12">
+                        <div className="space-y-10">
                             {filteredIssues.map((issue) => (
                                 <motion.div
                                     key={issue.id}
-                                    initial={{ opacity: 0, y: 30 }}
+                                    initial={{ opacity: 0, y: 15 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.6 }}
-                                    className="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-shadow duration-300"
+                                    transition={{ duration: 0.5 }}
+                                    className="bg-white rounded-xl border border-[#E9E5DD] overflow-hidden"
                                 >
                                     {/* Volume Card Header */}
-                                    <div className="bg-slate-50 border-b border-slate-100 px-6 py-5 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+                                    <div className="bg-[#F7F4EC] border-b border-[#E9E5DD] px-6 py-4 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
                                         <div className="flex items-center gap-3">
-                                            <span className="px-4 py-1.5 bg-primary text-white text-xs font-black uppercase tracking-widest rounded-full font-poppins">
+                                            <span className="px-3 py-1 bg-primary text-white text-[9px] font-bold uppercase tracking-wider rounded">
                                                 Volume {issue.volume}
                                             </span>
-                                            <h3 className="text-lg font-bold font-poppins text-slate-900">
+                                            <h3 className="text-sm font-serif font-bold text-dark">
                                                 {issue.month_range ? `${issue.month_range} ` : ''}{issue.year}
                                             </h3>
                                         </div>
-                                        <div className="flex items-center gap-4 text-xs font-bold text-slate-400 uppercase tracking-widest font-poppins">
+                                        <div className="flex items-center gap-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
                                             <span>Issue {issue.number}</span>
-                                            <span className="w-1.5 h-1.5 rounded-full bg-slate-300" />
-                                            <span>{issue.papers?.length || 0} Research Papers</span>
+                                            <span className="w-1 h-1 rounded-full bg-slate-300" />
+                                            <span>{issue.papers?.length || 0} Papers</span>
                                         </div>
                                     </div>
 
-                                    {/* Responsive Cards Grid Layout */}
-                                    <div className="p-6 bg-slate-50/30">
-                                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                                    {/* Papers Grid */}
+                                    <div className="p-6 bg-[#FFFDF8]/20">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
                                             {issue.papers.map((paper, index) => (
                                                 <div 
                                                     key={paper.id} 
-                                                    className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-ambient hover:-translate-y-1 transition-all duration-300 flex flex-col h-full relative"
+                                                    className="bg-white rounded-xl p-5 border border-[#E9E5DD] hover:border-primary hover:shadow-card transition-all duration-200 flex flex-col h-full relative"
                                                 >
-                                                    {/* Decorative top border */}
-                                                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-secondary to-accent rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-
-                                                    <div className="flex items-center justify-between gap-2 mb-4">
+                                                    <div className="flex items-center justify-between gap-2 mb-3">
                                                         <div className="flex items-center gap-2">
-                                                            <span className="text-xs font-bold text-slate-400 font-poppins">#{String(index + 1).padStart(2, '0')}</span>
-                                                            <span className="w-1 h-1 rounded-full bg-slate-300" />
-                                                            <span className="text-[9px] font-black uppercase tracking-wider text-secondary-dark bg-secondary/10 px-2 py-1 rounded border border-secondary/20">{paper.category || 'Research Article'}</span>
+                                                            <span className="text-[10px] font-bold text-slate-400">#{String(index + 1).padStart(2, '0')}</span>
+                                                            <span className="w-1 h-1 rounded-full bg-slate-200" />
+                                                            <span className="text-[9px] font-bold uppercase tracking-wider text-slate-600 bg-[#F7F4EC] px-2 py-0.5 rounded border border-[#E9E5DD]">{paper.category || 'Research Article'}</span>
                                                         </div>
-                                                        <span className="inline-flex items-center gap-1 text-[10px] font-bold text-slate-400">
-                                                            <Eye className="w-3 h-3" /> {10 + (paper.id % 7) * 20}
+                                                        <span className="inline-flex items-center gap-1 text-[9px] font-bold text-slate-400">
+                                                            <Eye className="w-3.5 h-3.5" /> {10 + (paper.id % 7) * 20}
                                                         </span>
                                                     </div>
 
                                                     <Link 
                                                         href={`/article/${paper.id}`}
-                                                        className="block font-bold text-lg text-slate-900 hover:text-accent transition-colors leading-snug mb-3 line-clamp-3 font-poppins"
+                                                        className="block font-serif font-bold text-sm text-dark hover:text-primary transition-colors leading-snug mb-2 line-clamp-3"
                                                     >
                                                         {paper.title}
                                                     </Link>
 
-                                                    <p className="text-slate-600 text-xs font-medium leading-relaxed mb-6 flex-grow line-clamp-2">
+                                                    <p className="text-slate-500 text-[11px] font-medium leading-relaxed mb-4 flex-grow line-clamp-2">
                                                         {paper.authors}
                                                     </p>
 
-                                                    {/* Badges / Metrics */}
-                                                    <div className="flex flex-wrap gap-2 mb-6">
+                                                    {/* Badges */}
+                                                    <div className="flex flex-wrap gap-1.5 mb-4">
                                                         {paper.doi && (
                                                             <a 
-                                                                href={paper.doi} 
+                                                                href={paper.doi.startsWith('http') ? paper.doi : `https://doi.org/${paper.doi}`} 
                                                                 target="_blank" 
                                                                 rel="noopener noreferrer"
-                                                                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-blue-50 text-[10px] font-black text-blue-600 uppercase border border-blue-100 hover:bg-blue-100 transition-colors"
+                                                                className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-primary/10 text-[9px] font-bold text-primary uppercase border border-primary/20 hover:bg-primary hover:text-white transition-colors"
                                                             >
                                                                 <ShieldCheck className="w-3 h-3" /> DOI
                                                             </a>
                                                         )}
-                                                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 text-[10px] font-bold border border-slate-200">
+                                                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#F7F4EC] text-slate-600 text-[9px] font-bold border border-[#E9E5DD]">
                                                             <Quote className="w-3 h-3 text-slate-400" /> {paper.citations || 0}
-                                                        </span>
-                                                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 text-[10px] font-bold border border-slate-200">
-                                                            <Download className="w-3 h-3 text-slate-400" /> {(paper.id % 5) * 15 + 5}
                                                         </span>
                                                     </div>
 
                                                     {/* Actions */}
-                                                    <div className="grid grid-cols-3 gap-3 pt-4 border-t border-slate-100 mt-auto">
+                                                    <div className="grid grid-cols-3 gap-2 pt-3 border-t border-[#E9E5DD]/60 mt-auto">
                                                         <Link
                                                             href={`/article/${paper.id}`}
-                                                            className="flex items-center justify-center gap-1.5 py-2.5 bg-slate-50 hover:bg-primary/10 text-slate-700 font-bold rounded-xl text-[10px] uppercase tracking-wider transition-colors border border-slate-200/60"
+                                                            className="flex items-center justify-center gap-1 py-1.5 bg-[#F7F4EC] hover:bg-slate-100 text-dark border border-[#E9E5DD] font-bold rounded text-[9px] uppercase tracking-wider transition-colors"
                                                         >
-                                                            <BookOpen className="w-3.5 h-3.5" /> View
+                                                            <BookOpen className="w-3 h-3" /> View
                                                         </Link>
                                                         <a
                                                             href={`/download/paper/${paper.id}`}
-                                                            className="flex items-center justify-center gap-1.5 py-2.5 bg-primary hover:bg-primary-light text-white font-bold rounded-xl text-[10px] uppercase tracking-wider transition-colors shadow-sm"
+                                                            className="flex items-center justify-center gap-1 py-1.5 bg-primary hover:bg-primary-dark text-white font-bold rounded text-[9px] uppercase tracking-wider transition-colors"
                                                         >
-                                                            <Download className="w-3.5 h-3.5" /> PDF
+                                                            <Download className="w-3 h-3" /> PDF
                                                         </a>
                                                         <button
                                                             onClick={() => setCitationPaper(paper)}
-                                                            className="flex items-center justify-center gap-1.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-[10px] uppercase tracking-wider transition-colors border border-slate-200/60"
+                                                            className="flex items-center justify-center gap-1 py-1.5 bg-white hover:bg-slate-50 text-dark border border-[#E9E5DD] font-bold rounded text-[9px] uppercase tracking-wider transition-colors"
                                                         >
                                                             <Quote className="w-3.5 h-3.5" /> Cite
                                                         </button>
@@ -433,22 +385,22 @@ export default function Archive({ issues }) {
                                     </div>
                                 </motion.div>
                             ))}
-
                         </div>
                     ) : (
-                        <div className="text-center py-20 bg-white rounded-3xl border border-dashed border-slate-200 p-8">
-                            <Search className="w-12 h-12 text-slate-300 mx-auto mb-4 animate-pulse" />
-                            <h3 className="text-lg font-bold font-poppins text-slate-800">No Research Papers Found</h3>
-                            <p className="text-sm text-slate-500 max-w-sm mx-auto mt-2 leading-relaxed">
-                                No papers matched your search query or filters. Try adjusting your search term or selecting another volume/author.
+                        <div className="text-center py-16 bg-white rounded-xl border border-dashed border-[#E9E5DD] p-6">
+                            <Search className="w-10 h-10 text-slate-300 mx-auto mb-3 animate-pulse" />
+                            <h3 className="text-sm font-bold text-dark uppercase tracking-wider">No Papers Found</h3>
+                            <p className="text-xs text-slate-500 max-w-sm mx-auto mt-2 leading-relaxed font-medium">
+                                We couldn't find any papers matching your search query or filters. Try resetting the options.
                             </p>
                             <button
                                 onClick={() => {
                                     setSearchQuery('');
                                     setSelectedVolume('all');
                                     setSelectedAuthor('all');
+                                    setSelectedCategory('all');
                                 }}
-                                className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-primary hover:bg-primary-light text-white font-bold rounded-xl text-xs uppercase tracking-wider transition-colors font-poppins"
+                                className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 bg-primary hover:bg-primary-dark text-white font-bold rounded-lg text-xs uppercase tracking-wider transition-colors"
                             >
                                 Reset All Filters
                             </button>
@@ -466,8 +418,8 @@ export default function Archive({ issues }) {
                 size="lg"
             >
                 {citationPaper && (
-                    <div className="p-6">
-                        <p className="text-slate-500 mb-6 text-sm">Use the provided formats to cite this research paper accurately in your bibliography or papers.</p>
+                    <div className="p-6 bg-[#FFFDF8]">
+                        <p className="text-slate-500 mb-4 text-xs font-medium">Select and copy the citation standard suitable for your research document bibliography.</p>
                         <CitationGenerator paper={citationPaper} />
                     </div>
                 )}

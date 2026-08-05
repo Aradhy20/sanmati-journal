@@ -325,12 +325,27 @@ export default function BookPublication({ books }) {
 
     const displayBooks = dbBooks.length > 0 ? dbBooks : hardcodedBooks;
 
+    const jsonLd = {
+        schema: {
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "name": "Book Publications & Academic Monographs",
+            "url": "https://sanmatijournal.in/book-publication",
+            "description": "Scholarly volumes, edited treatises, and research compilations published by Sanmati Spectrum."
+        },
+        breadcrumb: [
+            { name: 'Home', url: '/' },
+            { name: 'Book Publication', url: '/book-publication' }
+        ]
+    };
+
     return (
-        <MainLayout>
-            <Seo
-                title="Book Publications"
-                description="Explore the expansive library of academic books, treatises, and emerging discourse volumes published by Sanmati Journal."
-            />
+        <MainLayout
+            title="Book Publications & Academic Monographs | Sanmati Journal"
+            description="Explore the collection of scholarly books, academic treatises, and edited volumes published by Sanmati Spectrum of Knowledge."
+            keywords="book publication, academic monographs, research books, edited volumes, sanmati publications"
+            jsonLd={jsonLd}
+        >
 
             <PageHeader
                 title="Monographs & Books"
