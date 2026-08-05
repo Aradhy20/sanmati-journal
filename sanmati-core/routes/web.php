@@ -27,6 +27,8 @@ Route::get('/fix-sachin-name', function () {
 Route::redirect('/submit', '/submission-guidelines/call-for-papers');
 Route::get('/api/search', [\App\Http\Controllers\SearchController::class, 'search'])->name('api.search');
 Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
+Route::get('/rss.xml', [\App\Http\Controllers\RssController::class, 'feed'])->name('rss');
+Route::get('/feed', [\App\Http\Controllers\RssController::class, 'feed']);
 
 Route::post('/api/newsletter/subscribe', [\App\Http\Controllers\NewsletterController::class, 'subscribe'])->name('newsletter.subscribe')->middleware('throttle:5,1');
 Route::get('/api/newsletter/unsubscribe/{email}', [\App\Http\Controllers\NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe')->middleware('signed');
@@ -49,9 +51,9 @@ Route::get('/contact', [JournalController::class, 'contact'])->name('contact');
 Route::post('/contact', [JournalController::class, 'contactStore'])->name('contact.store')->middleware('throttle:3,1');
 
 // Portals & Enterprise Dashboards
-Route::get('/dashboard/author', function () { return \Inertia\Inertia::render('Author/Dashboard'); })->name('author.dashboard');
-Route::get('/dashboard/editor', function () { return \Inertia\Inertia::render('Editor/Dashboard'); })->name('editor.dashboard');
-Route::get('/dashboard/reviewer', function () { return \Inertia\Inertia::render('Reviewer/Dashboard'); })->name('reviewer.dashboard');
+Route::get('/dashboard/author', function () { return \Inertia\Inertia::render('Author/Dashboard'); })->name('author.dashboard.guest');
+Route::get('/dashboard/editor', function () { return \Inertia\Inertia::render('Editor/Dashboard'); })->name('editor.dashboard.guest');
+Route::get('/dashboard/reviewer', function () { return \Inertia\Inertia::render('Reviewer/Dashboard'); })->name('reviewer.dashboard.guest');
 Route::get('/author/{id?}', function () { return \Inertia\Inertia::render('Author/Profile'); })->name('author.profile');
 
 // Academic Blog & Knowledge Base Engine
@@ -99,6 +101,8 @@ Route::get('/academic-events/workshop', [JournalController::class, 'workshop'])-
 Route::get('/publication-policy/ethics', [JournalController::class, 'ethics'])->name('publication-policy.ethics');
 Route::get('/publication-policy/plagiarism', [JournalController::class, 'plagiarism'])->name('publication-policy.plagiarism');
 Route::get('/publication-policy/peer-review', [JournalController::class, 'peerReview'])->name('publication-policy.peer-review');
+Route::get('/publication-policy/copyright', [JournalController::class, 'copyrightPolicy'])->name('publication-policy.copyright');
+Route::get('/reviewer-guidelines', [JournalController::class, 'reviewerGuidelines'])->name('reviewer-guidelines');
 
 // Other specialized pages
 Route::get('/awards', [JournalController::class, 'awards'])->name('awards');

@@ -1,0 +1,24 @@
+# Sanmati Spectrum of Knowledge & Emerging Discourse (ISSN 3108-1819)
+# https://sanmatijournal.in/robots.txt
+
+User-agent: *
+Allow: /
+Allow: /article/
+Allow: /archive
+Allow: /current-issue
+Allow: /submission-guidelines/
+Allow: /basic-info/
+Allow: /editorial-team/
+Allow: /publication-policy/
+Allow: /sitemap.xml
+Allow: /rss.xml
+
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /api/
+Disallow: /login
+Disallow: /register
+Disallow: /forgot-password
+Disallow: /reset-password
+
+Sitemap: https://sanmatijournal.in/sitemap.xml

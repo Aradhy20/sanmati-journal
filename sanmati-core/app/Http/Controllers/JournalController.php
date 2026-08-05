@@ -307,4 +307,14 @@ class JournalController extends Controller
     {
         return Inertia::render('AntigravitySandbox');
     }
+
+    public function copyrightPolicy()
+    {
+        return Inertia::render('PublicationPolicy/Copyright');
+    }
+
+    public function reviewerGuidelines()
+    {
+        return Inertia::render('ReviewerGuidelines');
+    }
 }

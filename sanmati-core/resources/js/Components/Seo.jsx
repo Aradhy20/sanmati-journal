@@ -1,41 +1,85 @@
 import { Head, usePage } from '@inertiajs/react';
 
-export default function Seo({ title, description, keywords, image, type = 'website', author, publishedTime, jsonLd, aiSummary }) {
-    const siteName = "Sanmati Spectrum of Knowledge";
-    const defaultDescription = "Top-ranking peer-reviewed multidisciplinary research journal in India (Impact Factor 5.3). Publish research papers fast with CrossRef DOI indexing and COPE publication ethics.";
-    const defaultKeywords = "peer reviewed journal India, multidisciplinary research journal, publish research paper India, international journal India, sanmati spectrum of knowledge, academic publishing, open access journal, CrossRef DOI, UGC CARE aligned journal";
+export default function Seo({
+    title,
+    description,
+    keywords,
+    image,
+    type = 'website',
+    author,
+    publishedTime,
+    jsonLd,
+    aiSummary
+}) {
+    const siteName = "Sanmati Spectrum of Knowledge & Emerging Discourse";
+    const defaultDescription = "International peer-reviewed multidisciplinary research journal (ISSN 3108-1819). Publish research papers fast in India with CrossRef DOI indexing, open access, and COPE publication ethics.";
+    const defaultKeywords = "UGC Care Journal, Multidisciplinary Research Journal, Publish Research Paper in India, Peer Reviewed Journal, ISSN Journal 3108-1819, Open Access Journal, Research Publication, Academic Journal, International Journal, Research Paper Publication";
     const defaultImage = "/logo.webp";
     const siteUrl = "https://sanmatijournal.in";
 
     const { url } = usePage();
-    const fullTitle = title ? `${title} | ${siteName}` : siteName;
+    const fullTitle = title ? `${title} | Sanmati Spectrum` : siteName;
     const finalDescription = description || aiSummary || defaultDescription;
-    const finalKeywords = keywords || defaultKeywords;
+    const finalKeywords = keywords ? `${keywords}, ${defaultKeywords}` : defaultKeywords;
     const finalImage = image ? (image.startsWith('http') ? image : `${siteUrl}${image}`) : `${siteUrl}${defaultImage}`;
     const canonicalUrl = `${siteUrl}${url.split('?')[0]}`;
 
-    // Default JSON-LD for Organization / Journal
-    const defaultJsonLd = {
+    // 1. Organization Schema
+    const organizationJsonLd = {
         "@context": "https://schema.org",
-        "@type": "AcademicJournal",
-        "name": siteName,
-        "alternateName": "Sanmati Journal",
+        "@type": "Organization",
+        "name": "Sanmati Spectrum of Knowledge & Emerging Discourse",
         "url": siteUrl,
-        "description": defaultDescription,
-        "issn": "3108-1819",
-        "publisher": {
-            "@type": "Organization",
-            "name": "Sanmati Spectrum of Knowledge & Emerging Discourse",
-            "logo": {
-                "@type": "ImageObject",
-                "url": `${siteUrl}/logo.webp`,
-                "width": 512,
-                "height": 512
-            }
+        "logo": {
+            "@type": "ImageObject",
+            "url": `${siteUrl}/logo.webp`,
+            "width": 512,
+            "height": 512
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+91-8979782949",
+            "contactType": "editorial office",
+            "email": "sanmatispectrum@gmail.com",
+            "availableLanguage": ["English", "Hindi"]
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Saket Colony",
+            "addressLocality": "Moradabad",
+            "addressRegion": "Uttar Pradesh",
+            "postalCode": "244001",
+            "addressCountry": "IN"
         }
     };
 
-    // Breadcrumb Schema
+    // 2. WebSite Schema with SearchAction
+    const websiteJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Sanmati Journal",
+        "alternateName": "Sanmati Spectrum of Knowledge",
+        "url": siteUrl,
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": `${siteUrl}/search?q={search_term_string}`,
+            "query-input": "required name=search_term_string"
+        }
+    };
+
+    // 3. AcademicJournal Schema
+    const journalJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "AcademicJournal",
+        "name": siteName,
+        "alternateName": "Sanmati Spectrum Journal",
+        "url": siteUrl,
+        "description": defaultDescription,
+        "issn": "3108-1819",
+        "publisher": organizationJsonLd
+    };
+
+    // 4. Breadcrumb Schema
     const breadcrumbJsonLd = jsonLd?.breadcrumb ? {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
@@ -57,6 +101,7 @@ export default function Seo({ title, description, keywords, image, type = 'websi
             <meta name="keywords" content={finalKeywords} />
             <meta name="author" content={author || "Sanmati Spectrum of Knowledge"} />
             <link rel="canonical" href={canonicalUrl} />
+            <link rel="alternate" type="application/rss+xml" title="Sanmati Spectrum Research Feed" href={`${siteUrl}/rss.xml`} />
 
             {/* Open Graph / Facebook / WhatsApp */}
             <meta property="og:type" content={type} />
@@ -78,12 +123,18 @@ export default function Seo({ title, description, keywords, image, type = 'websi
             <meta name="twitter:image" content={finalImage} />
             <meta name="twitter:image:alt" content={title || siteName} />
 
-            {/* Article Specific (for Google Scholar) */}
+            {/* Google Scholar Metadata */}
             {publishedTime && <meta property="article:published_time" content={publishedTime} />}
 
-            {/* JSON-LD Structured Data */}
+            {/* JSON-LD Schemas */}
             <script type="application/ld+json">
-                {JSON.stringify(jsonLd?.schema || (jsonLd && !jsonLd.breadcrumb ? jsonLd : defaultJsonLd))}
+                {JSON.stringify(organizationJsonLd)}
+            </script>
+            <script type="application/ld+json">
+                {JSON.stringify(websiteJsonLd)}
+            </script>
+            <script type="application/ld+json">
+                {JSON.stringify(jsonLd?.schema || journalJsonLd)}
             </script>
             {breadcrumbJsonLd && (
                 <script type="application/ld+json">
