@@ -16,7 +16,60 @@
         <link rel="shortcut icon" href="/logo.jpg">
         <link rel="apple-touch-icon" href="/logo.webp">
 
-        <title inertia>Sanmati Spectrum of Knowledge</title>
+        @php
+            $metaTitle = $meta['title'] ?? 'Sanmati Spectrum of Knowledge & Emerging Discourse (ISSN 3108-1819)';
+            $metaDescription = $meta['description'] ?? 'International peer-reviewed multidisciplinary research journal (ISSN 3108-1819). Publish research papers fast in India with CrossRef DOI indexing, open access, and COPE publication ethics.';
+            $metaKeywords = $meta['keywords'] ?? 'UGC Care Journal, Multidisciplinary Research Journal, Publish Research Paper in India, Peer Reviewed Journal, ISSN Journal 3108-1819, Open Access Journal, Academic Journal';
+            $metaImage = $meta['image'] ?? 'https://sanmatijournal.in/logo.webp';
+            $rawCanonical = $meta['canonical'] ?? url()->current();
+            $canonicalUrl = preg_replace('/^https?:\/\/[^\/]+/', 'https://sanmatijournal.in', $rawCanonical);
+        @endphp
+
+        <title inertia>{{ $metaTitle }}</title>
+        <meta name="description" content="{{ $metaDescription }}">
+        <meta name="keywords" content="{{ $metaKeywords }}">
+        <meta name="author" content="Sanmati Spectrum of Knowledge">
+        <link rel="canonical" href="{{ $canonicalUrl }}">
+
+        <!-- Open Graph / Facebook / WhatsApp -->
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="{{ $metaTitle }}">
+        <meta property="og:description" content="{{ $metaDescription }}">
+        <meta property="og:image" content="{{ $metaImage }}">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        <meta property="og:url" content="{{ $canonicalUrl }}">
+        <meta property="og:site_name" content="Sanmati Spectrum of Knowledge & Emerging Discourse">
+        <meta property="og:locale" content="en_IN">
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="{{ $metaTitle }}">
+        <meta name="twitter:description" content="{{ $metaDescription }}">
+        <meta name="twitter:image" content="{{ $metaImage }}">
+
+        <!-- Google Scholar Academic Citation Metadata -->
+        @if(isset($paper))
+            <meta name="citation_title" content="{{ $paper->title }}">
+            @foreach(preg_split('/[,&|]| and /i', $paper->authors) as $authorName)
+                @if(trim($authorName))
+                    <meta name="citation_author" content="{{ trim($authorName) }}">
+                @endif
+            @endforeach
+            <meta name="citation_journal_title" content="Sanmati Spectrum of Knowledge & Emerging Discourse">
+            <meta name="citation_issn" content="3108-1819">
+            <meta name="citation_publication_date" content="{{ $paper->created_at ? $paper->created_at->format('Y/m/d') : date('Y/m/d') }}">
+            <meta name="citation_pdf_url" content="https://sanmatijournal.in/download/paper/{{ $paper->id }}">
+            @if(!empty($paper->doi))
+                <meta name="citation_doi" content="{{ $paper->doi }}">
+            @endif
+            @if(!empty($paper->keywords))
+                <meta name="citation_keywords" content="{{ $paper->keywords }}">
+            @endif
+            <meta name="DC.title" content="{{ $paper->title }}">
+            <meta name="DC.creator" content="{{ $paper->authors }}">
+            <meta name="DC.publisher" content="Sanmati Spectrum of Knowledge & Emerging Discourse">
+        @endif
 
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
@@ -80,6 +133,41 @@
             ]
         }
         </script>
+
+        @if(isset($paper))
+        <script type="application/ld+json" nonce="{{ Vite::cspNonce() }}">
+        {
+            "@context": "https://schema.org",
+            "@type": "ScholarlyArticle",
+            "headline": {!! json_encode($paper->title) !!},
+            "name": {!! json_encode($paper->title) !!},
+            "abstract": {!! json_encode($paper->abstract ?? '') !!},
+            "description": {!! json_encode(\Illuminate\Support\Str::limit(strip_tags($paper->abstract ?? $paper->title), 160)) !!},
+            "datePublished": {!! json_encode($paper->created_at ? $paper->created_at->toISOString() : now()->toISOString()) !!},
+            "inLanguage": ["en", "hi"],
+            "isAccessibleForFree": true,
+            "license": "https://creativecommons.org/licenses/by/4.0/",
+            "isPartOf": {
+                "@type": "Periodical",
+                "name": "Sanmati Spectrum of Knowledge & Emerging Discourse",
+                "issn": "3108-1819"
+            },
+            @if(!empty($paper->doi))
+            "sameAs": {!! json_encode($paper->doi) !!},
+            @endif
+            "url": {!! json_encode("https://sanmatijournal.in/article/" . $paper->id) !!},
+            "publisher": {
+                "@type": "Organization",
+                "name": "Sanmati Spectrum of Knowledge & Emerging Discourse",
+                "url": "https://sanmatijournal.in",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://sanmatijournal.in/logo.webp"
+                }
+            }
+        }
+        </script>
+        @endif
 
         <!-- Performance: DNS prefetch & preconnect for external domains -->
         <link rel="dns-prefetch" href="//fonts.googleapis.com">

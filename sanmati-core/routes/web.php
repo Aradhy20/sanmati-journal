@@ -24,15 +24,17 @@ Route::get('/fix-sachin-name', function () {
     return 'Fixed! The author name has been updated to सचिन कुमार (Sachin Kumar) and the cache has been cleared. You can now check the archive page.';
 });
 
-Route::redirect('/submit', '/submission-guidelines/call-for-papers');
 Route::get('/api/search', [\App\Http\Controllers\SearchController::class, 'search'])->name('api.search');
 Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
 Route::get('/rss.xml', [\App\Http\Controllers\RssController::class, 'feed'])->name('rss');
 Route::get('/feed', [\App\Http\Controllers\RssController::class, 'feed']);
-
 Route::post('/api/newsletter/subscribe', [\App\Http\Controllers\NewsletterController::class, 'subscribe'])->name('newsletter.subscribe')->middleware('throttle:5,1');
 Route::get('/api/newsletter/unsubscribe/{email}', [\App\Http\Controllers\NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe')->middleware('signed');
-// Route removed: Route::get('/editorial-team', [JournalController::class, 'editorialTeam'])->name('editorial-team');
+Route::post('/api/submission/precheck', [\App\Http\Controllers\Api\AiPrecheckController::class, 'precheck'])->name('api.submission.precheck')->middleware('throttle:10,1');
+
+Route::redirect('/submit', '/submission-guidelines/call-for-papers', 301);
+Route::redirect('/editorial-team', '/editorial-team/editors', 301);
+Route::redirect('/basic-info/about-journal', '/about-journal', 301);
 Route::get('/editorial-team/editors', [JournalController::class, 'editors'])->name('editorial-team.editors');
 Route::get('/editorial-team/editorial-board', [JournalController::class, 'editorialBoard'])->name('editorial-team.board');
 Route::get('/editorial-team/advisory-board', [JournalController::class, 'advisoryBoard'])->name('editorial-team.advisory');
@@ -79,7 +81,7 @@ Route::get('/settings', function () { return \Inertia\Inertia::render('Settings/
 Route::get('/basic-info/vision-mission', [JournalController::class, 'visionMission'])->name('vision-mission');
 Route::get('/basic-info/objective-scope', [JournalController::class, 'objectiveScope'])->name('objective-scope');
 Route::get('/basic-info/journal-info', [JournalController::class, 'journalInfo'])->name('journal-info');
-Route::get('/basic-info/about-journal', [JournalController::class, 'aboutJournal'])->name('basic-info.about-journal');
+Route::redirect('/basic-info/about-journal', '/about-journal', 301);
 Route::get('/basic-info/indexing', [JournalController::class, 'indexing'])->name('basic-info.indexing');
 
 // Submission guidelines
@@ -132,7 +134,38 @@ Route::middleware('guest')->group(function () {
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'destroy'])->name('logout')->middleware('auth');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/author/dashboard', [JournalController::class, 'authorDashboard'])->name('author.dashboard');
+    Route::get('/author/dashboard', [\App\Http\Controllers\AuthorController::class, 'dashboard'])->name('author.dashboard');
+    Route::get('/author/submissions', [\App\Http\Controllers\AuthorController::class, 'dashboard'])->name('author.submissions');
+    Route::get('/author/submissions/{submission}', [\App\Http\Controllers\AuthorController::class, 'show'])->name('author.submissions.show');
+});
+
+// Editor Routes (Protected with auth + editor role check)
+Route::prefix('editor')->name('editor.')->middleware(['auth', 'editor'])->group(function () {
+    Route::get('/dashboard', [\App\Http\Controllers\EditorController::class, 'dashboard'])->name('dashboard');
+    Route::get('/submissions/{submission}', [\App\Http\Controllers\EditorController::class, 'show'])->name('submissions.show');
+    Route::post('/submissions/{submission}/claim', [\App\Http\Controllers\EditorController::class, 'claim'])->name('submissions.claim');
+    Route::post('/submissions/{submission}/transition-status', [\App\Http\Controllers\EditorController::class, 'transitionStatus'])->name('submissions.transition-status');
+    Route::post('/submissions/{submission}/editorial-notes', [\App\Http\Controllers\EditorController::class, 'storeEditorialNote'])->name('submissions.editorial-notes');
+    Route::post('/submissions/{submission}/reviewers', [\App\Http\Controllers\EditorController::class, 'assignReviewer'])->name('submissions.reviewers.store');
+    Route::get('/reviews/{review}/evaluation', [\App\Http\Controllers\EditorController::class, 'showReviewEvaluation'])->name('reviews.evaluation');
+    Route::post('/reviews/{review}/due-date', [\App\Http\Controllers\EditorController::class, 'updateDueDate'])->name('reviews.due-date');
+    Route::post('/reviews/{review}/resolve-conflict', [\App\Http\Controllers\EditorController::class, 'resolveConflict'])->name('reviews.resolve-conflict');
+    Route::post('/reviews/{review}/send-reminder', [\App\Http\Controllers\EditorController::class, 'sendReminder'])->name('reviews.send-reminder');
+    Route::post('/reviews/{review}/notifications/{log}/retry', [\App\Http\Controllers\EditorController::class, 'retryNotification'])->name('reviews.notifications.retry');
+    Route::delete('/reviews/{review}', [\App\Http\Controllers\EditorController::class, 'cancelReviewAssignment'])->name('reviews.cancel');
+});
+
+// Reviewer Routes (Protected with auth + reviewer role check)
+Route::prefix('reviewer')->name('reviewer.')->middleware(['auth', 'reviewer'])->group(function () {
+    Route::get('/dashboard', [\App\Http\Controllers\ReviewerController::class, 'dashboard'])->name('dashboard');
+    Route::get('/reviews/{review}', [\App\Http\Controllers\ReviewerController::class, 'show'])->name('reviews.show');
+    Route::get('/reviews/{review}/manuscript', [\App\Http\Controllers\ReviewerController::class, 'downloadManuscript'])->name('reviews.manuscript');
+    Route::get('/reviews/{review}/evaluation', [\App\Http\Controllers\ReviewerController::class, 'editEvaluation'])->name('reviews.evaluation');
+    Route::post('/reviews/{review}/draft', [\App\Http\Controllers\ReviewerController::class, 'storeDraft'])->name('reviews.draft');
+    Route::post('/reviews/{review}/submit', [\App\Http\Controllers\ReviewerController::class, 'submitEvaluation'])->name('reviews.submit');
+    Route::post('/reviews/{review}/accept', [\App\Http\Controllers\ReviewerController::class, 'acceptInvitation'])->name('reviews.accept');
+    Route::post('/reviews/{review}/decline', [\App\Http\Controllers\ReviewerController::class, 'declineInvitation'])->name('reviews.decline');
+    Route::post('/reviews/{review}/conflict', [\App\Http\Controllers\ReviewerController::class, 'declareConflict'])->name('reviews.conflict');
 });
 
 // Admin Routes (Protected with auth + admin role check + rate limiting)
@@ -143,6 +176,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:6
 
     Route::get('/submissions', [\App\Http\Controllers\AdminController::class, 'submissions'])->name('submissions');
     Route::get('/submissions/{submission}/download', [\App\Http\Controllers\AdminController::class, 'downloadSubmission'])->name('submissions.download');
+    Route::post('/submissions/{submission}/assign-editor', [\App\Http\Controllers\AdminController::class, 'assignEditor'])->name('submissions.assign-editor');
 
     Route::get('/news', [\App\Http\Controllers\AdminController::class, 'news'])->name('news');
     Route::post('/news', [\App\Http\Controllers\AdminController::class, 'storeNews'])->name('news.store');

@@ -374,9 +374,10 @@ export default function Navbar({ onOpenSearch }) {
                             {/* Mobile menu toggle */}
                             <button
                                 onClick={() => setMobileOpen(p => !p)}
-                                className="lg:hidden flex items-center justify-center w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors"
-                                aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+                                className="lg:hidden flex items-center justify-center w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+                                aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
                                 aria-expanded={mobileOpen}
+                                aria-controls="mobile-menu"
                             >
                                 <AnimatePresence mode="wait">
                                     {mobileOpen
@@ -406,6 +407,10 @@ export default function Navbar({ onOpenSearch }) {
                         />
                         {/* Drawer */}
                         <motion.div
+                            id="mobile-menu"
+                            role="dialog"
+                            aria-modal="true"
+                            aria-label="Mobile navigation"
                             initial={{ x: '100%' }}
                             animate={{ x: 0 }}
                             exit={{ x: '100%' }}

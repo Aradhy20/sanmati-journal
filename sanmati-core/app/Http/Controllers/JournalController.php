@@ -264,6 +264,15 @@ class JournalController extends Controller
         
         return Inertia::render('Article', [
             'paper' => $paper
+        ])->withViewData([
+            'paper' => $paper,
+            'meta' => [
+                'title' => $paper->title . ' | Sanmati Journal',
+                'description' => \Illuminate\Support\Str::limit(strip_tags($paper->abstract ?? $paper->title), 160),
+                'keywords' => $paper->keywords ?? 'Research Paper, Academic Journal',
+                'image' => 'https://sanmatijournal.in/logo.webp',
+                'canonical' => 'https://sanmatijournal.in/article/' . $paper->id,
+            ]
         ]);
     }
 

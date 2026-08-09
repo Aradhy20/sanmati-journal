@@ -10,10 +10,15 @@ class SitemapController extends Controller
 {
     public function index()
     {
+        // Clear stale cached sitemap if purge requested or if cached sitemap contains localhost references
+        if (request()->has('purge') || (Cache::has('sitemap.xml') && str_contains(Cache::get('sitemap.xml'), 'localhost'))) {
+            Cache::forget('sitemap.xml');
+        }
+
         // Cache the sitemap for 24 hours to prevent DB spam
         $content = Cache::remember('sitemap.xml', 86400, function () {
             $papers = Paper::latest()->get();
-            $baseUrl = rtrim(config('app.url', 'https://sanmatijournal.in'), '/');
+            $baseUrl = 'https://sanmatijournal.in';
 
             // Static pages
             $static_updated = now()->toAtomString();
@@ -84,20 +89,20 @@ class SitemapController extends Controller
                 ];
             }
 
-
-            // Dynamic paper pages (Wait, we will map them using their ID since we don't have slugs)
+            // Dynamic paper pages
             foreach ($papers as $paper) {
                 $urls[] = [
                     'loc' => $baseUrl . '/article/' . $paper->id,
+                    'title' => $paper->title,
                     'priority' => '0.8',
                     'changefreq' => 'monthly',
-                    'lastmod' => $paper->updated_at->toAtomString(),
+                    'lastmod' => $paper->updated_at ? $paper->updated_at->toAtomString() : $static_updated,
                 ];
             }
 
-            // Generate XML
+            // Generate XML with Image namespace
             $xml = '<?xml version="1.0" encoding="UTF-8"?>';
-            $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+            $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">';
 
             foreach ($urls as $url) {
                 $xml .= '<url>';
@@ -107,6 +112,7 @@ class SitemapController extends Controller
                 }
                 $xml .= '<changefreq>' . $url['changefreq'] . '</changefreq>';
                 $xml .= '<priority>' . $url['priority'] . '</priority>';
+                $xml .= '<image:image><image:loc>https://sanmatijournal.in/logo.webp</image:loc><image:title>' . htmlspecialchars($url['title'] ?? 'Sanmati Spectrum of Knowledge') . '</image:title></image:image>';
                 $xml .= '</url>';
             }
 

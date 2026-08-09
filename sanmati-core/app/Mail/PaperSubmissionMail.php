@@ -12,7 +12,12 @@ use Illuminate\Queue\SerializesModels;
 
 class PaperSubmissionMail extends Mailable implements ShouldQueue
 {
-    use SerializesModels;
+    use Queueable, SerializesModels;
+
+    /** Retry policy for queue worker */
+    public int $tries = 3;
+    public array $backoff = [10, 30, 90];
+    public int $timeout = 60;
 
     public function __construct(
         public string $paperTitle,

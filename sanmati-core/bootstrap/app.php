@@ -12,12 +12,19 @@ $app = Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->redirectGuestsTo('/login');
+        $middleware->validateCsrfTokens(except: [
+            'api/submission/precheck',
+            'api/newsletter/subscribe',
+        ]);
         $middleware->web(append: [
             \App\Http\Middleware\HandleInertiaRequests::class,
         ]);
         $middleware->append(\App\Http\Middleware\SecurityHeaders::class);
         $middleware->alias([
-            'admin' => \App\Http\Middleware\EnsureUserIsAdmin::class,
+            'admin'    => \App\Http\Middleware\EnsureUserIsAdmin::class,
+            'editor'   => \App\Http\Middleware\EnsureUserIsEditor::class,
+            'reviewer' => \App\Http\Middleware\EnsureUserIsReviewer::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

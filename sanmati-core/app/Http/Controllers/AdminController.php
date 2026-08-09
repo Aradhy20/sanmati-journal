@@ -196,6 +196,35 @@ class AdminController extends Controller
         return back()->with('error', 'Manuscript file not found on disk.');
     }
 
+    public function assignEditor(Request $request, \App\Models\Submission $submission)
+    {
+        if (! $request->user() || $request->user()->role !== 'admin') {
+            abort(403, 'Unauthorized action. Only administrators can assign or reassign editors.');
+        }
+
+        $validated = $request->validate([
+            'editor_id' => ['nullable', 'exists:users,id', function ($attribute, $value, $fail) {
+                if ($value !== null) {
+                    $user = \App\Models\User::find($value);
+                    if (!$user || !in_array($user->role, ['editor', 'admin'])) {
+                        $fail('The selected user is not eligible for editorial assignment.');
+                    }
+                }
+            }],
+        ]);
+
+        $submission->update(['editor_id' => $validated['editor_id'] ?? null]);
+
+        if ($request->header('X-Inertia')) {
+            return redirect()->back()->with('success', 'Editor assigned successfully.');
+        }
+
+        return response()->json([
+            'message' => 'Editor assigned successfully.',
+            'editor_id' => $submission->editor_id,
+        ]);
+    }
+
     // --- Gallery ---
     public function gallery()
     {

@@ -53,6 +53,11 @@ class SecurityHeaders
             $response->headers->set('Content-Security-Policy', $csp);
         }
 
+        // Cache-Control optimization for public GET routes to enable LiteSpeed / Edge CDN caching
+        if ($request->isMethod('GET') && !auth()->check() && !$request->is('admin*') && !$request->is('dashboard*')) {
+            $response->headers->set('Cache-Control', 'public, max-age=3600, s-maxage=86400');
+        }
+
         return $response;
     }
 }

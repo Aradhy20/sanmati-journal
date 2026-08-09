@@ -21,5 +21,20 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function submissions()
+    {
+        return $this->hasMany(Submission::class, 'user_id');
+    }
+
+    public function assignedSubmissions()
+    {
+        return $this->hasMany(Submission::class, 'editor_id');
+    }
+
+    public function assignedReviews()
+    {
+        return $this->hasMany(SubmissionReview::class, 'reviewer_id');
+    }
 }
 

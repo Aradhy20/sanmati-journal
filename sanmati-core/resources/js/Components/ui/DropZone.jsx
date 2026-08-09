@@ -4,9 +4,10 @@ import { UploadCloud, FileText, X, AlertCircle, CheckCircle } from 'lucide-react
 
 export default function DropZone({
     id,
-    label = 'Upload Manuscript PDF',
-    accept = '.pdf,application/pdf',
-    maxSizeMB = 10,
+    label = 'Upload Manuscript Document',
+    accept = '.pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    maxSizeMB = 20,
+    required = true,
     file,
     onFileSelect,
     error,
@@ -34,8 +35,12 @@ export default function DropZone({
         setLocalError(null);
         if (!selectedFile) return false;
 
-        if (selectedFile.type !== 'application/pdf' && !selectedFile.name.toLowerCase().endsWith('.pdf')) {
-            setLocalError('Please upload a valid PDF file.');
+        const nameLower = selectedFile.name.toLowerCase();
+        const validExts = ['.pdf', '.doc', '.docx'];
+        const isValidExt = validExts.some(ext => nameLower.endsWith(ext));
+
+        if (!isValidExt) {
+            setLocalError('Accepted formats: DOC, DOCX, PDF.');
             return false;
         }
 
@@ -68,7 +73,7 @@ export default function DropZone({
     return (
         <div className={`w-full ${className}`}>
             <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
-                {label} <span className="text-red-500">*</span>
+                {label} {required && <span className="text-red-500">*</span>}
             </label>
 
             <motion.div
@@ -109,10 +114,10 @@ export default function DropZone({
                                 <UploadCloud className="w-8 h-8" />
                             </div>
                             <h4 className="text-base font-bold text-slate-700 dark:text-slate-200 mb-1">
-                                Drag & drop your manuscript here
+                                Drag & drop your file here, or click to browse
                             </h4>
                             <p className="text-xs text-slate-500 dark:text-slate-400">
-                                PDF format only. Maximum file size {maxSizeMB}MB.
+                                Accepted formats: DOC, DOCX, PDF. Max file size: {maxSizeMB}MB.
                             </p>
                         </motion.div>
                     ) : (
@@ -131,24 +136,40 @@ export default function DropZone({
                                     <p className="text-sm font-bold text-slate-900 dark:text-white truncate">
                                         {file.name}
                                     </p>
-                                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                                        {(file.size / (1024 * 1024)).toFixed(2)} MB
+                                    <p className="text-xs text-emerald-700 dark:text-emerald-300 font-semibold mt-0.5 flex items-center gap-2">
+                                        <span>{(file.size / (1024 * 1024)).toFixed(2)} MB</span>
+                                        <span>•</span>
+                                        <span className="uppercase text-[10px] bg-emerald-200 text-emerald-800 px-1.5 py-0.5 rounded font-bold">{file.name.split('.').pop()}</span>
+                                        <span>•</span>
+                                        <span className="text-emerald-600 font-bold">Ready to submit</span>
                                     </p>
                                 </div>
                                 <CheckCircle className="w-5 h-5 text-emerald-500 hidden sm:block flex-shrink-0" />
                             </div>
                             
-                            <button
-                                type="button"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    onFileSelect(null);
-                                    if(fileInputRef.current) fileInputRef.current.value = '';
-                                }}
-                                className="px-4 py-2 text-xs font-bold text-red-600 hover:bg-red-100 rounded-lg transition-colors flex items-center gap-1 flex-shrink-0"
-                            >
-                                <X className="w-3.5 h-3.5" /> Remove
-                            </button>
+                            <div className="flex items-center gap-2 flex-shrink-0">
+                                <button
+                                    type="button"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        fileInputRef.current?.click();
+                                    }}
+                                    className="px-3 py-1.5 text-xs font-bold text-blue-600 hover:bg-blue-100 rounded-lg transition-colors"
+                                >
+                                    Replace
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        onFileSelect(null);
+                                        if(fileInputRef.current) fileInputRef.current.value = '';
+                                    }}
+                                    className="px-3 py-1.5 text-xs font-bold text-red-600 hover:bg-red-100 rounded-lg transition-colors flex items-center gap-1"
+                                >
+                                    <X className="w-3.5 h-3.5" /> Remove
+                                </button>
+                            </div>
                         </motion.div>
                     )}
                 </AnimatePresence>

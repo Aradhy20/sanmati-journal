@@ -15,7 +15,7 @@ class FullSiteSmokeTest extends TestCase
     {
         $routes = [
             '/',
-            '/basic-info/about-journal',
+            '/about-journal',
             '/basic-info/vision-mission',
             '/basic-info/objective-scope',
             '/basic-info/journal-info',
