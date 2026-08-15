@@ -1,59 +1,50 @@
-name: CI/CD Pipeline
+name: Deploy to Production
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
-
 
 jobs:
-  build:
-    name: Build Application
-    runs-on: ubuntu-latest
-    if: github.repository == 'Aradhy20/sanmati-journal' && github.event_name == 'push' && github.ref == 'refs/heads/main'
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - name: Install Frontend Dependencies
-        working-directory: ./frontend
-        run: npm ci
-
-      - name: Build Next.js
-        working-directory: ./frontend
-        run: npm run build
-
-      - name: Build Laravel Backend
-        working-directory: ./sanmati-core
-        run: composer install --no-dev --optimize-autoloader
-
   deploy:
-    name: Deploy to Production
+    name: Deploy to Hostinger
     runs-on: ubuntu-latest
-    needs: build
     if: github.repository == 'Aradhy20/sanmati-journal' && github.event_name == 'push' && github.ref == 'refs/heads/main'
+
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Setup SSH Key for Deployment
-        uses: webfactory/ssh-agent@v0.7.0
+      - name: Setup SSH Key
+        uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.PROD_SSH_KEY }}
 
-      - name: Rsync to Remote Server 
+      - name: Add server to known hosts
+        run: ssh-keyscan -H ${{ secrets.PROD_SERVER_IP }} >> ~/.ssh/known_hosts
+
+      - name: Rsync repository to production
+        # Built assets (public_html/build/, bootstrap/ssr/) are committed — no npm build needed here.
+        # Excludes: .env (server keeps its own), user storage, logs, build cache, node_modules, vendor.
         run: |
-          ssh-keyscan -H ${{ secrets.PROD_SERVER_IP }} >> ~/.ssh/known_hosts
-          rsync -azP --delete --exclude='.env' --exclude='storage/' --exclude='bootstrap/cache/' ./ ${{ secrets.PROD_USER }}@${{ secrets.PROD_SERVER_IP }}:/var/www/sanmatijournal/
-          
-      - name: Run remote commands
+          rsync -azP --delete \
+            --exclude='.env' \
+            --exclude='sanmati-core/storage/app/private/' \
+            --exclude='sanmati-core/storage/logs/' \
+            --exclude='sanmati-core/bootstrap/cache/' \
+            --exclude='sanmati-core/node_modules/' \
+            --exclude='sanmati-core/vendor/' \
+            --exclude='.git/' \
+            ./ ${{ secrets.PROD_USER }}@${{ secrets.PROD_SERVER_IP }}:${{ secrets.PROD_PATH }}/
+
+      - name: Run post-deploy commands on production
         run: |
-          ssh ${{ secrets.PROD_USER }}@${{ secrets.PROD_SERVER_IP }} "cd /var/www/sanmatijournal/sanmati-core && php artisan migrate --force && php artisan config:cache"
+          ssh ${{ secrets.PROD_USER }}@${{ secrets.PROD_SERVER_IP }} "
+            cd ${{ secrets.PROD_PATH }}/sanmati-core &&
+            php artisan migrate --force &&
+            php artisan optimize:clear &&
+            php artisan config:cache &&
+            php artisan route:cache &&
+            php artisan view:cache &&
+            echo 'Deploy complete'
+          "
