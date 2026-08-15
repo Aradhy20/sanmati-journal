@@ -37,6 +37,7 @@ class JournalController extends Controller
             'featuredPapers' => $this->journalService->getFeaturedPapers(),
             'testimonials'  => $this->journalService->getActiveTestimonials(),
             'currentIssue'  => $currentIssue,
+            'metrics'       => $this->journalService->getJournalStats(),
         ]);
     }
 

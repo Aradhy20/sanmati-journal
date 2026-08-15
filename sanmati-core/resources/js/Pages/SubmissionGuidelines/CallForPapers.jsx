@@ -10,8 +10,6 @@ import { useForm, usePage } from '@inertiajs/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
 import DropZone from '../../Components/ui/DropZone';
-import Swal from 'sweetalert2';
-import confetti from 'canvas-confetti';
 import axios from 'axios';
 
 /* ── Country List ── */
@@ -210,19 +208,29 @@ export default function CallForPapers() {
                 setStep(5);
                 trackEvent('submission_completed', { tracking_id: finalTrackingId });
 
-                confetti({
-                    particleCount: 120,
-                    spread: 60,
-                    origin: { y: 0.7 },
-                    colors: ['#2E6F57', '#C77D5B', '#2E2E2E', '#F7F4EC']
-                });
+                Promise.all([
+                    import('canvas-confetti'),
+                    import('sweetalert2')
+                ]).then(([confettiModule, SwalModule]) => {
+                    const confetti = confettiModule.default || confettiModule;
+                    const Swal = SwalModule.default || SwalModule;
 
-                Swal.fire({
-                    title: 'Manuscript Submitted Successfully!',
-                    html: `Your manuscript has been securely registered.<br><br><b>Tracking ID: ${finalTrackingId}</b><br><small class="text-slate-500">Status: Submitted — Awaiting Editorial Screening</small>`,
-                    icon: 'success',
-                    confirmButtonColor: '#8B1538',
-                    confirmButtonText: 'View Submission Details'
+                    confetti({
+                        particleCount: 120,
+                        spread: 60,
+                        origin: { y: 0.7 },
+                        colors: ['#2E6F57', '#C77D5B', '#2E2E2E', '#F7F4EC']
+                    });
+
+                    Swal.fire({
+                        title: 'Manuscript Submitted Successfully!',
+                        html: `Your manuscript has been securely registered.<br><br><b>Tracking ID: ${finalTrackingId}</b><br><small class="text-slate-500">Status: Submitted — Awaiting Editorial Screening</small>`,
+                        icon: 'success',
+                        confirmButtonColor: '#8B1538',
+                        confirmButtonText: 'View Submission Details'
+                    });
+                }).catch(() => {
+                    toast.success(`Manuscript submitted! Tracking ID: ${finalTrackingId}`);
                 });
             },
             onError: (errs) => {

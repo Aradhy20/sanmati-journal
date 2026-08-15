@@ -55,11 +55,11 @@ function MeshBackground() {
     );
 }
 
-export default function Hero({ papers = [], currentIssue = null }) {
+export default function Hero({ papers = [], currentIssue = null, metrics = null }) {
     const stats = [
-        { label: 'Published Papers', value: 93, suffix: '+', icon: FileText, color: 'text-blue-600', bg: 'bg-blue-50' },
-        { label: 'Authors & Scholars', value: 200, suffix: '+', icon: Users, color: 'text-indigo-600', bg: 'bg-indigo-50' },
-        { label: 'Countries Reached', value: 15, suffix: '+', icon: Globe, color: 'text-cyan-600', bg: 'bg-cyan-50' },
+        { label: 'Published Papers', value: metrics?.papers ?? 0, suffix: metrics?.papers > 0 ? '+' : '', icon: FileText, color: 'text-blue-600', bg: 'bg-blue-50' },
+        { label: 'Authors & Scholars', value: metrics?.authors ?? 0, suffix: metrics?.authors > 0 ? '+' : '', icon: Users, color: 'text-indigo-600', bg: 'bg-indigo-50' },
+        { label: 'Countries Reached', value: metrics?.papers > 0 ? 15 : 0, suffix: metrics?.papers > 0 ? '+' : '', icon: Globe, color: 'text-cyan-600', bg: 'bg-cyan-50' },
         { label: 'Max Review Days', value: 30, suffix: '', icon: Star, color: 'text-emerald-600', bg: 'bg-emerald-50' },
     ];
 
@@ -84,11 +84,7 @@ export default function Hero({ papers = [], currentIssue = null }) {
                     <div className="lg:col-span-7 space-y-8">
 
                         {/* Announcement Pill */}
-                        <motion.div
-                            initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5 }}
-                        >
+                        <div>
                             <Link
                                 href="/submission-guidelines/call-for-papers"
                                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600/10 border border-blue-200 text-blue-700 text-xs font-bold hover:bg-blue-600/15 transition-colors group"
@@ -97,15 +93,10 @@ export default function Hero({ papers = [], currentIssue = null }) {
                                 Now accepting submissions — Volume 2, Issue 3
                                 <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                             </Link>
-                        </motion.div>
+                        </div>
 
-                        {/* H1 */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.1 }}
-                            className="space-y-5"
-                        >
+                        {/* H1 - Rendered immediately for optimal LCP/FCP */}
+                        <div className="space-y-5">
                             <h1 className="text-4xl sm:text-5xl lg:text-[58px] xl:text-[64px] font-heading font-bold text-slate-900 leading-[1.08] tracking-tight">
                                 Publish Research That
                                 <br />
@@ -113,26 +104,16 @@ export default function Hero({ papers = [], currentIssue = null }) {
                                     <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 bg-clip-text text-transparent">
                                         Creates Global Impact
                                     </span>
-                                    <motion.span
-                                        className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full"
-                                        initial={{ width: 0 }}
-                                        animate={{ width: '100%' }}
-                                        transition={{ delay: 0.8, duration: 0.8, ease: 'easeOut' }}
-                                    />
+                                    <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full" />
                                 </span>
                             </h1>
                             <p className="text-lg sm:text-xl text-slate-600 font-medium leading-relaxed max-w-xl">
                                 Join researchers, academicians, and professionals publishing high-quality multidisciplinary research through a transparent, rigorous peer-review process.
                             </p>
-                        </motion.div>
+                        </div>
 
                         {/* Trust Badges */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.5, delay: 0.3 }}
-                            className="flex flex-wrap gap-2"
-                        >
+                        <div className="flex flex-wrap gap-2">
                             {badges.map((badge, i) => {
                                 const Icon = badge.icon;
                                 return (
@@ -145,15 +126,10 @@ export default function Hero({ papers = [], currentIssue = null }) {
                                     </span>
                                 );
                             })}
-                        </motion.div>
+                        </div>
 
                         {/* CTAs */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 15 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.4 }}
-                            className="flex flex-wrap gap-4"
-                        >
+                        <div className="flex flex-wrap gap-4">
                             <Link
                                 href="/submission-guidelines/call-for-papers"
                                 className="inline-flex items-center gap-2.5 px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm tracking-wide shadow-lg shadow-blue-600/30 hover:shadow-blue-700/35 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 group"
@@ -169,15 +145,10 @@ export default function Hero({ papers = [], currentIssue = null }) {
                                 <BookOpen className="w-4 h-4 text-blue-600" />
                                 Explore Current Issue
                             </Link>
-                        </motion.div>
+                        </div>
 
                         {/* Live Counters */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.55 }}
-                            className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2 border-t border-slate-100"
-                        >
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2 border-t border-slate-100">
                             {stats.map((stat, i) => {
                                 const Icon = stat.icon;
                                 return (
@@ -192,17 +163,12 @@ export default function Hero({ papers = [], currentIssue = null }) {
                                     </div>
                                 );
                             })}
-                        </motion.div>
+                        </div>
                     </div>
 
                     {/* ── Right: Glassmorphism Journal Card ── */}
                     <div className="lg:col-span-5">
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.93, y: 20 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                            className="relative"
-                        >
+                        <div className="relative">
                             {/* Outer glow */}
                             <div className="absolute -inset-4 bg-gradient-to-br from-blue-600/12 via-indigo-600/8 to-cyan-500/8 rounded-[36px] blur-2xl" />
 
@@ -232,7 +198,7 @@ export default function Hero({ papers = [], currentIssue = null }) {
                                     {[
                                         { label: 'Online ISSN', value: '3108-1819', color: 'text-blue-600' },
                                         { label: 'Peer Review Time', value: '15–30 Days', color: 'text-indigo-600' },
-                                        { label: 'Published Papers', value: '93+', color: 'text-cyan-600' },
+                                        { label: 'Published Papers', value: (metrics?.papers ? `${metrics.papers}+` : '0+'), color: 'text-cyan-600' },
                                         { label: 'DOI Provider', value: 'CrossRef', color: 'text-emerald-600' },
                                     ].map((item, i) => (
                                         <div key={i} className="p-3.5 bg-slate-50/80 border border-slate-100 rounded-2xl hover:bg-white hover:border-slate-200 hover:shadow-sm transition-all duration-200">
@@ -285,7 +251,7 @@ export default function Hero({ papers = [], currentIssue = null }) {
                                 <Download className="w-4 h-4 text-blue-600" />
                                 Download Author Template
                             </motion.a>
-                        </motion.div>
+                        </div>
                     </div>
 
                 </div>

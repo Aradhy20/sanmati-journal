@@ -11,11 +11,29 @@ $uri = urldecode(
     parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)
 );
 
-// This file allows us to emulate Apache's "mod_rewrite" functionality from the
-// built-in PHP web server. This provides a convenient way to test a Laravel
-// application without having installed a "real" web server software here.
-if ($uri !== '/' && file_exists(__DIR__.'/../public_html'.$uri)) {
-    return false;
+$publicPath = __DIR__ . '/../public_html';
+if ($uri !== '/' && is_file($publicPath . $uri)) {
+    $filePath = $publicPath . $uri;
+    $ext = pathinfo($filePath, PATHINFO_EXTENSION);
+    $mimeTypes = [
+        'css'  => 'text/css',
+        'js'   => 'application/javascript',
+        'json' => 'application/json',
+        'txt'  => 'text/plain',
+        'xml'  => 'application/xml',
+        'webp' => 'image/webp',
+        'jpg'  => 'image/jpeg',
+        'jpeg' => 'image/jpeg',
+        'png'  => 'image/png',
+        'svg'  => 'image/svg+xml',
+        'pdf'  => 'application/pdf',
+        'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    ];
+    $contentType = $mimeTypes[strtolower($ext)] ?? mime_content_type($filePath);
+    header("Content-Type: $contentType");
+    header("Content-Length: " . filesize($filePath));
+    readfile($filePath);
+    exit;
 }
 
 require_once __DIR__.'/../public_html/index.php';

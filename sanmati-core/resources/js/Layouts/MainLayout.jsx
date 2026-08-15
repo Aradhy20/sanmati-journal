@@ -3,7 +3,6 @@ import Footer from '../Components/Footer';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 import Seo from '../Components/Seo';
 import CustomCursor from '../Components/CustomCursor';
-import Preloader from '../Components/Preloader';
 import { Toaster } from 'react-hot-toast';
 import { MessageCircle, ArrowUp } from 'lucide-react';
 import { useState, useEffect } from 'react';
@@ -62,17 +61,7 @@ export default function MainLayout({ children, title, description, keywords, jso
             <SmartSearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
             
             <main id="main-content" className="flex-grow relative z-10">
-                <AnimatePresence mode="wait">
-                    <motion.div
-                        key={title}
-                        initial={{ opacity: 0, y: 5 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -5 }}
-                        transition={{ duration: 0.3, ease: 'easeOut' }}
-                    >
-                        {children}
-                    </motion.div>
-                </AnimatePresence>
+                {children}
             </main>
             
             <footer role="contentinfo">

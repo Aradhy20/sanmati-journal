@@ -8,6 +8,7 @@ use App\Models\Book;
 use App\Models\Testimonial;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
+use App\Models\Issue;
 
 class JournalService
 {
@@ -177,5 +178,44 @@ class JournalService
             ['name' => 'Prof. Ritu Verma', 'role' => 'Researcher, JNU', 'text' => "The multidisciplinary focus and premium hardcover quality make their publications stand out. I'd recommend to every academic author.", 'image_url' => '/fistudy-assets/team/team-2-1.jpg', 'stars' => 5],
             ['name' => 'Dr. Pradeep Kumar', 'role' => 'Associate Professor, BHU', 'text' => "From manuscript to final book, the journey was smooth and professional. The global distribution is a huge plus for visibility.", 'image_url' => '/fistudy-assets/team/team-2-2.jpg', 'stars' => 5]
         ]);
+    }
+
+    /**
+     * Get live statistics of the journal dynamically calculated from database.
+     * Cached for 24 hours to optimize performance.
+     */
+    public function getJournalStats()
+    {
+        return Cache::remember('journal_stats', 86400, function () {
+            $papersCount = Paper::count();
+            if ($papersCount === 0) {
+                return [
+                    'papers' => 0,
+                    'authors' => 0,
+                    'volumes' => 0,
+                    'issues' => 0,
+                ];
+            }
+
+            // Inexpensive extraction of unique authors
+            $authorsList = Paper::pluck('authors')->toArray();
+            $uniqueAuthors = [];
+            foreach ($authorsList as $authors) {
+                $parts = preg_split('/(,\s*|\s*&\s*|\s+and\s+)/i', $authors);
+                foreach ($parts as $part) {
+                    $author = trim($part);
+                    if (strlen($author) > 2) {
+                        $uniqueAuthors[$author] = true;
+                    }
+                }
+            }
+
+            return [
+                'papers' => $papersCount,
+                'authors' => count($uniqueAuthors),
+                'volumes' => Issue::distinct('volume')->count(),
+                'issues' => Issue::count(),
+            ];
+        });
     }
 }

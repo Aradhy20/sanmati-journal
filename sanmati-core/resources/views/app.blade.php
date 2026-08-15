@@ -175,13 +175,14 @@
         <link rel="dns-prefetch" href="//www.googletagmanager.com">
         <link rel="dns-prefetch" href="//www.google-analytics.com">
 
-        <!-- LCP Preload: Logo WebP format for fast paint -->
-        <link rel="preload" as="image" href="/logo.webp" type="image/webp" fetchpriority="high">
-
-        <!-- Fonts -->
+        <!-- Fonts: Space Grotesk (Headings) & Inter (Body) loaded asynchronously to eliminate render-blocking -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+        <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+        <noscript>
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+        </noscript>
 
         <!-- Delayed initialization for third party trackers -->
         <script nonce="{{ Vite::cspNonce() }}">

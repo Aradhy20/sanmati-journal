@@ -24,14 +24,14 @@ export default defineConfig({
             output: {
                 manualChunks(id) {
                     if (id.includes('node_modules')) {
-                        if (id.includes('react') || id.includes('framer-motion') || id.includes('@inertiajs')) {
+                        if (id.includes('react-dom') || id.includes('react/') || id.includes('@inertiajs')) {
                             return 'vendor';
+                        }
+                        if (id.includes('framer-motion')) {
+                            return 'motion';
                         }
                         if (id.includes('lucide-react')) {
                             return 'ui';
-                        }
-                        if (id.includes('sweetalert2') || id.includes('canvas-confetti') || id.includes('react-hot-toast')) {
-                            return 'plugins';
                         }
                     }
                 }

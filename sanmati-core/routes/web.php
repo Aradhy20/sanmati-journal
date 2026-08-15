@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\JournalController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
+
 
 // NOTE: Public debug routes removed for security (Phase 1 hardening).
 // Cache clearing and data fixes are now handled via:
@@ -13,19 +13,15 @@ use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', [JournalController::class, 'index'])->name('home');
 
-Route::get('/fix-sachin-name', function () {
-    \Illuminate\Support\Facades\DB::table('papers')
-        ->where('authors', 'like', '%सिचन कुमार%')
-        ->orWhere('authors', 'like', '%सिंचन कुमार%')
-        ->update(['authors' => 'सचिन कुमार & डॉ. एस. पद्मप्रिया']);
-    
-    \Illuminate\Support\Facades\Artisan::call('optimize:clear');
-    
-    return 'Fixed! The author name has been updated to सचिन कुमार (Sachin Kumar) and the cache has been cleared. You can now check the archive page.';
-});
+// Data fix applied permanently via migration 2026_06_21_000003_fix_author_name_sachin.
+// The /fix-sachin-name debug route has been removed for security.
 
 Route::get('/api/search', [\App\Http\Controllers\SearchController::class, 'search'])->name('api.search');
 Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
+Route::get('/robots.txt', function () {
+    $robots = "User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /editor\nDisallow: /reviewer\nDisallow: /dashboard\n\nSitemap: https://sanmatijournal.in/sitemap.xml\n";
+    return response($robots, 200, ['Content-Type' => 'text/plain']);
+});
 Route::get('/rss.xml', [\App\Http\Controllers\RssController::class, 'feed'])->name('rss');
 Route::get('/feed', [\App\Http\Controllers\RssController::class, 'feed']);
 Route::post('/api/newsletter/subscribe', [\App\Http\Controllers\NewsletterController::class, 'subscribe'])->name('newsletter.subscribe')->middleware('throttle:5,1');
@@ -48,6 +44,11 @@ Route::get('/current-issue', [JournalController::class, 'currentIssue'])->name('
 Route::get('/about-foundation', [JournalController::class, 'aboutFoundation'])->name('about-foundation');
 Route::get('/article/{id}', [JournalController::class, 'article'])->name('article.show');
 Route::get('/download/paper/{id}', [\App\Http\Controllers\DownloadController::class, 'paper'])->name('paper.download');
+Route::get('/download/author-guidelines-template', [\App\Http\Controllers\DownloadController::class, 'downloadGuidelinesTemplate'])->name('download.guidelines-template');
+Route::get('/download/copyright-form', [\App\Http\Controllers\DownloadController::class, 'downloadCopyrightForm'])->name('download.copyright-form');
+Route::get('/download/issue/vol1-issue1', [\App\Http\Controllers\DownloadController::class, 'downloadVol1Issue1'])->name('download.vol1-issue1');
+Route::get('/download/submission-checklist', [\App\Http\Controllers\DownloadController::class, 'downloadSubmissionChecklist'])->name('download.submission-checklist');
+Route::get('/download/citation-guide', [\App\Http\Controllers\DownloadController::class, 'downloadCitationGuide'])->name('download.citation-guide');
 Route::get('/contact', [JournalController::class, 'contact'])->name('contact');
 
 Route::post('/contact', [JournalController::class, 'contactStore'])->name('contact.store')->middleware('throttle:3,1');
@@ -59,9 +60,21 @@ Route::get('/dashboard/reviewer', function () { return \Inertia\Inertia::render(
 Route::get('/author/{id?}', function () { return \Inertia\Inertia::render('Author/Profile'); })->name('author.profile');
 
 // Academic Blog & Knowledge Base Engine
-Route::get('/blog', function () { return \Inertia\Inertia::render('Blog/Index'); })->name('blog.index');
+Route::get('/blog', function () {
+    return \Inertia\Inertia::render('Blog/Index', [
+        'posts' => \App\Services\BlogService::getPosts()
+    ]);
+})->name('blog.index');
 Route::get('/blog/topic/{slug}', function ($slug) { return \Inertia\Inertia::render('TopicHub', ['topic' => $slug]); })->name('blog.topic');
-Route::get('/blog/{slug}', function () { return \Inertia\Inertia::render('Blog/Show'); })->name('blog.show');
+Route::get('/blog/{slug}', function ($slug) {
+    $post = \App\Services\BlogService::getPostBySlug($slug);
+    if (!$post) {
+        abort(404);
+    }
+    return \Inertia\Inertia::render('Blog/Show', [
+        'post' => $post
+    ]);
+})->name('blog.show');
 Route::get('/resources', function () { return \Inertia\Inertia::render('ResourceCenter'); })->name('resources.index');
 
 // Digital Research Library Routes

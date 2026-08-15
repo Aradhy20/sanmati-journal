@@ -24,64 +24,63 @@ function Counter({ end, suffix = '', prefix = '', duration = 2000 }) {
     return <span ref={ref}>{prefix}{count.toLocaleString()}{suffix}</span>;
 }
 
-const STATS = [
-    {
-        icon: FileText,
-        value: 93, suffix: '+',
-        label: 'Published Papers',
-        desc: 'Research articles published across all volumes',
-        color: 'from-blue-500 to-blue-600',
-        bg: 'bg-blue-50',
-        text: 'text-blue-600',
-    },
-    {
-        icon: Users,
-        value: 200, suffix: '+',
-        label: 'Authors & Scholars',
-        desc: 'Researchers who have published with us',
-        color: 'from-indigo-500 to-indigo-600',
-        bg: 'bg-indigo-50',
-        text: 'text-indigo-600',
-    },
-    {
-        icon: Globe,
-        value: 15, suffix: '+',
-        label: 'Countries Reached',
-        desc: 'Global reach across multiple continents',
-        color: 'from-cyan-500 to-cyan-600',
-        bg: 'bg-cyan-50',
-        text: 'text-cyan-600',
-    },
-    {
-        icon: Clock,
-        value: 30, suffix: ' Days',
-        label: 'Max Review Time',
-        desc: 'Fast 15–30 day peer review turnaround',
-        color: 'from-emerald-500 to-emerald-600',
-        bg: 'bg-emerald-50',
-        text: 'text-emerald-600',
-    },
-    {
-        icon: BookOpen,
-        value: 2, suffix: '',
-        label: 'Volumes Published',
-        desc: 'Consistent publication since inception',
-        color: 'from-violet-500 to-violet-600',
-        bg: 'bg-violet-50',
-        text: 'text-violet-600',
-    },
-    {
-        icon: Award,
-        value: 100, suffix: '%',
-        label: 'Open Access',
-        desc: 'All research freely accessible worldwide',
-        color: 'from-amber-500 to-amber-600',
-        bg: 'bg-amber-50',
-        text: 'text-amber-600',
-    },
-];
-
-export default function LiveStats() {
+export default function LiveStats({ metrics = null }) {
+    const STATS = [
+        {
+            icon: FileText,
+            value: metrics?.papers ?? 0, suffix: metrics?.papers > 0 ? '+' : '',
+            label: 'Published Papers',
+            desc: 'Research articles published across all volumes',
+            color: 'from-blue-500 to-blue-600',
+            bg: 'bg-blue-50',
+            text: 'text-blue-600',
+        },
+        {
+            icon: Users,
+            value: metrics?.authors ?? 0, suffix: metrics?.authors > 0 ? '+' : '',
+            label: 'Authors & Scholars',
+            desc: 'Researchers who have published with us',
+            color: 'from-indigo-500 to-indigo-600',
+            bg: 'bg-indigo-50',
+            text: 'text-indigo-600',
+        },
+        {
+            icon: Globe,
+            value: metrics?.papers > 0 ? 15 : 0, suffix: metrics?.papers > 0 ? '+' : '',
+            label: 'Countries Reached',
+            desc: 'Global reach across multiple continents',
+            color: 'from-cyan-500 to-cyan-600',
+            bg: 'bg-cyan-50',
+            text: 'text-cyan-600',
+        },
+        {
+            icon: Clock,
+            value: 30, suffix: ' Days',
+            label: 'Max Review Time',
+            desc: 'Fast 15–30 day peer review turnaround',
+            color: 'from-emerald-500 to-emerald-600',
+            bg: 'bg-emerald-50',
+            text: 'text-emerald-600',
+        },
+        {
+            icon: BookOpen,
+            value: metrics?.volumes ?? 0, suffix: '',
+            label: 'Volumes Published',
+            desc: 'Consistent publication since inception',
+            color: 'from-violet-500 to-violet-600',
+            bg: 'bg-violet-50',
+            text: 'text-violet-600',
+        },
+        {
+            icon: Award,
+            value: 100, suffix: '%',
+            label: 'Open Access',
+            desc: 'All research freely accessible worldwide',
+            color: 'from-amber-500 to-amber-600',
+            bg: 'bg-amber-50',
+            text: 'text-amber-600',
+        },
+    ];
     return (
         <section className="py-16 lg:py-20 bg-gradient-to-b from-white to-slate-50 border-b border-slate-200/60" aria-labelledby="stats-heading">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
