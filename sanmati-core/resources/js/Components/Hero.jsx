@@ -1,11 +1,46 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from '@inertiajs/react';
-import { motion, useInView } from 'framer-motion';
 import {
     ArrowRight, SendHorizonal, Download, ShieldCheck, Award,
     Globe, Users, FileText, CheckCircle2, Sparkles, ChevronRight,
     BookOpen, Star
 } from 'lucide-react';
+
+/* ── Hero CSS Animations (replaces framer-motion for decorative elements) ── */
+const heroParticleStyle = (index) => ({
+    position: 'absolute',
+    width: '6px',
+    height: '6px',
+    borderRadius: '50%',
+    background: 'rgba(59,130,246,0.3)',
+    top: `${18 + index * 20}%`,
+    left: `${10 + index * 22}%`,
+    animation: `heroFloat ${3.5 + index * 0.5}s ease-in-out ${index * 0.4}s infinite`,
+    pointerEvents: 'none',
+});
+
+const heroBadgeStyle = {
+    animation: 'heroSlideIn 0.5s ease-out 1.0s both',
+};
+
+/* Keyframes injected once at module level via a <style> tag via useEffect */
+let _heroStyleInjected = false;
+function injectHeroKeyframes() {
+    if (_heroStyleInjected || typeof document === 'undefined') return;
+    _heroStyleInjected = true;
+    const s = document.createElement('style');
+    s.textContent = `
+        @keyframes heroFloat {
+            0%, 100% { transform: translateY(0); opacity: 0.3; }
+            50%       { transform: translateY(-10px); opacity: 0.6; }
+        }
+        @keyframes heroSlideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+    `;
+    document.head.appendChild(s);
+}
 
 /* ── Animated Counter ── */
 function AnimatedCounter({ end, suffix = '', duration = 2000 }) {
@@ -34,9 +69,12 @@ function MeshBackground() {
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
             {/* Real Academic Hero Background Asset */}
             <picture>
+                {/* Mobile: 480×480, 35KB — served on screens ≤768px */}
+                <source media="(max-width: 768px)" srcSet="/images/hero-bg-mobile.webp" type="image/webp" />
+                {/* Desktop: 1024×1024, 169KB */}
                 <source srcSet="/images/hero-bg.webp" type="image/webp" />
                 <img
-                    src="/images/hero-bg.png"
+                    src="/images/hero-bg.webp"
                     alt=""
                     fetchPriority="high"
                     className="absolute inset-0 w-full h-full object-cover object-center opacity-15 mix-blend-multiply scale-105"
@@ -58,12 +96,10 @@ function MeshBackground() {
             />
 
             {[...Array(4)].map((_, i) => (
-                <motion.div
+                <div
                     key={i}
-                    className="absolute w-1.5 h-1.5 rounded-full bg-blue-500/30"
-                    style={{ top: `${18 + i * 20}%`, left: `${10 + i * 22}%` }}
-                    animate={{ y: [0, -10, 0], opacity: [0.3, 0.6, 0.3] }}
-                    transition={{ duration: 3.5 + i * 0.5, repeat: Infinity, delay: i * 0.4 }}
+                    aria-hidden="true"
+                    style={heroParticleStyle(i)}
                 />
             ))}
         </div>
@@ -71,6 +107,7 @@ function MeshBackground() {
 }
 
 export default function Hero({ papers = [], currentIssue = null, metrics = null }) {
+    useEffect(() => { injectHeroKeyframes(); }, []);
     const stats = [
         { label: 'Published Papers', value: metrics?.papers ?? 0, suffix: metrics?.papers > 0 ? '+' : '', icon: FileText, color: 'text-blue-600', bg: 'bg-blue-50' },
         { label: 'Authors & Scholars', value: metrics?.authors ?? 0, suffix: metrics?.authors > 0 ? '+' : '', icon: Users, color: 'text-indigo-600', bg: 'bg-indigo-50' },
@@ -255,17 +292,14 @@ export default function Hero({ papers = [], currentIssue = null, metrics = null 
                             </div>
 
                             {/* Floating badge */}
-                            <motion.a
+                            <a
                                 href="/download/author-guidelines-template"
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: 1.0, duration: 0.5 }}
-                                whileHover={{ scale: 1.05, y: -2 }}
-                                className="absolute -bottom-5 -left-5 flex items-center gap-2 px-4 py-2.5 bg-white border border-slate-200 rounded-2xl shadow-xl text-xs font-bold text-slate-700 hover:border-blue-300 hover:text-blue-600 transition-colors cursor-pointer"
+                                style={heroBadgeStyle}
+                                className="absolute -bottom-5 -left-5 flex items-center gap-2 px-4 py-2.5 bg-white border border-slate-200 rounded-2xl shadow-xl text-xs font-bold text-slate-700 hover:border-blue-300 hover:text-blue-600 hover:scale-105 transition-all cursor-pointer"
                             >
                                 <Download className="w-4 h-4 text-blue-600" />
                                 Download Author Template
-                            </motion.a>
+                            </a>
                         </div>
                     </div>
 

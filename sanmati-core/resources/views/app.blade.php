@@ -227,13 +227,35 @@
         </script>
         @endif
 
-        <!-- Performance: DNS prefetch & preconnect for external domains -->
+        {{-- ============================================================ --}}
+        {{-- PERFORMANCE: CRITICAL RESOURCE PRELOADS                      --}}
+        {{-- ============================================================ --}}
+
+        {{-- Preload hero background image on homepage only.               --}}
+        {{-- The <picture> tag is inside a React component — the browser   --}}
+        {{-- preload scanner cannot discover it. This hint makes the       --}}
+        {{-- browser fetch the image in parallel with CSS/JS parsing.      --}}
+        @if($currentPath === '')
+        {{-- Mobile (≤768px): preload the 35KB variant; desktop: preload the full 169KB --}}
+        <link rel="preload" as="image" href="/images/hero-bg-mobile.webp" type="image/webp"
+              imagesrcset="/images/hero-bg-mobile.webp 480w, /images/hero-bg.webp 1024w"
+              imagesizes="100vw" fetchpriority="high">
+        @endif
+
+        {{-- Direct preload of Space Grotesk 700 latin WOFF2.             --}}
+        {{-- Skips the 2-RTT Google Fonts chain (fonts.googleapis.com CSS  --}}
+        {{-- → fonts.gstatic.com WOFF2). H1 is the LCP element and uses   --}}
+        {{-- this exact font weight. Only the latin subset is needed.      --}}
+        <link rel="preload" as="font" type="font/woff2" crossorigin
+              href="https://fonts.gstatic.com/s/spacegrotesk/v22/V8mQoQDjQSkFtoMM3T6r8E7mF71Q-gOoraIAEj4PVnskPMBBTyJL.woff2">
+
+        {{-- Performance: DNS prefetch & preconnect for external domains --}}
         <link rel="dns-prefetch" href="//fonts.googleapis.com">
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link rel="dns-prefetch" href="//www.googletagmanager.com">
         <link rel="dns-prefetch" href="//www.google-analytics.com">
 
-        <!-- Fonts: Space Grotesk (Headings) & Inter (Body) loaded asynchronously to eliminate render-blocking -->
+        {{-- Fonts: Space Grotesk (Headings) & Inter (Body) loaded asynchronously --}}
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap">
@@ -241,6 +263,7 @@
         <noscript>
             <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
         </noscript>
+
 
         <!-- Delayed initialization for third party trackers -->
         <script nonce="{{ Vite::cspNonce() }}">
