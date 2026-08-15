@@ -19,7 +19,30 @@ Route::get('/', [JournalController::class, 'index'])->name('home');
 Route::get('/api/search', [\App\Http\Controllers\SearchController::class, 'search'])->name('api.search');
 Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
 Route::get('/robots.txt', function () {
-    $robots = "User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /editor\nDisallow: /reviewer\nDisallow: /dashboard\n\nSitemap: https://sanmatijournal.in/sitemap.xml\n";
+    $robots = "User-agent: *\n"
+        . "Disallow: /admin/\n"
+        . "Disallow: /api/\n"
+        . "Disallow: /reviewer/\n"
+        . "Disallow: /editor/\n"
+        . "Disallow: /dashboard/\n"
+        . "Disallow: /login\n"
+        . "Disallow: /forgot-password\n"
+        . "Disallow: /reset-password\n"
+        . "Allow: /\n"
+        . "Allow: /archive\n"
+        . "Allow: /article/\n"
+        . "Allow: /download/\n"
+        . "Allow: /submission-guidelines/\n"
+        . "Allow: /basic-info/\n"
+        . "Allow: /editorial-team/\n"
+        . "Allow: /publication-policy/\n"
+        . "Allow: /academic-events/\n"
+        . "Allow: /gallery/\n"
+        . "Allow: /media-news\n"
+        . "Allow: /build/\n"
+        . "Allow: /images/\n"
+        . "Allow: /pdfs/\n\n"
+        . "Sitemap: https://sanmatijournal.in/sitemap.xml\n";
     return response($robots, 200, ['Content-Type' => 'text/plain']);
 });
 Route::get('/rss.xml', [\App\Http\Controllers\RssController::class, 'feed'])->name('rss');

@@ -32,7 +32,6 @@ class SitemapController extends Controller
                 ['loc' => $baseUrl . '/submission-guidelines/call-for-papers',         'priority' => '0.9', 'changefreq' => 'weekly',  'lastmod' => $static_updated],
 
                 // About
-                ['loc' => $baseUrl . '/basic-info/about-journal',                      'priority' => '0.8', 'changefreq' => 'monthly', 'lastmod' => $static_updated],
                 ['loc' => $baseUrl . '/basic-info/vision-mission',                     'priority' => '0.7', 'changefreq' => 'monthly', 'lastmod' => $static_updated],
                 ['loc' => $baseUrl . '/basic-info/objective-scope',                    'priority' => '0.7', 'changefreq' => 'monthly', 'lastmod' => $static_updated],
                 ['loc' => $baseUrl . '/basic-info/journal-info',                       'priority' => '0.7', 'changefreq' => 'monthly', 'lastmod' => $static_updated],

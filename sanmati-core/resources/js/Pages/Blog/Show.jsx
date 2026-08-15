@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
-import { Clock, User, ArrowLeft, Share2, Bookmark, BookOpen, CheckCircle2 } from 'lucide-react';
+import { Clock, User, ArrowLeft, Share2, Bookmark, BookOpen, CheckCircle2, FileText, SendHorizonal, Download } from 'lucide-react';
 import MainLayout from '../../Layouts/MainLayout';
 import { Link } from '@inertiajs/react';
+import SEOBreadcrumb from '../../Components/SEOBreadcrumb';
 
 export default function BlogShow({ post = null }) {
     const articleData = post || {
@@ -10,6 +11,7 @@ export default function BlogShow({ post = null }) {
         readTime: "6 min read",
         author: "Sanmati Editorial Directorate",
         date: "February 2026",
+        excerpt: "Comprehensive guide for Indian scholars on manuscript formatting, UGC CARE parameters, anti-plagiarism screening, and double-blind peer review.",
         content: `
             <h3>1. Understanding Peer Reviewed Multidisciplinary Research Journals</h3>
             <p>Publishing an academic research paper in India requires careful alignment with international academic standards and UGC CARE guidelines. Research authors must ensure their manuscript presents original empirical evidence, valid statistical analysis, and ethical citations.</p>
@@ -26,18 +28,63 @@ export default function BlogShow({ post = null }) {
         `
     };
 
+    const cleanExcerpt = articleData.excerpt || (articleData.content ? articleData.content.replace(/<[^>]+>/g, '').substring(0, 160).trim() : articleData.title);
+    const postUrl = `https://sanmatijournal.in/blog/${articleData.slug || 'how-to-publish-research-paper-in-india'}`;
+    const imageUrl = articleData.image ? (articleData.image.startsWith('http') ? articleData.image : `https://sanmatijournal.in${articleData.image}`) : 'https://sanmatijournal.in/images/seo/sanmati-journal-og.webp';
+
+    const blogPostingSchema = {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": articleData.title,
+        "description": cleanExcerpt,
+        "image": imageUrl,
+        "author": {
+            "@type": "Organization",
+            "name": articleData.author || "Sanmati Editorial Directorate",
+            "url": "https://sanmatijournal.in"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Sanmati Spectrum of Knowledge & Emerging Discourse",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://sanmatijournal.in/logo.webp"
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": postUrl
+        },
+        "inLanguage": "en-IN"
+    };
+
+    const breadcrumbs = [
+        { name: 'Home', href: '/' },
+        { name: 'Research Blog', href: '/blog' },
+        { name: articleData.title, href: '#' }
+    ];
+
     return (
         <MainLayout
             title={`${articleData.title} | Sanmati Spectrum Blog`}
-            description={articleData.title}
+            description={cleanExcerpt}
             image={articleData.image}
         >
-            <div className="py-12 bg-white min-h-[85vh]">
-                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            {/* Inject BlogPosting Schema */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}
+            />
+
+            <div className="py-10 bg-white min-h-[85vh]">
+                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
                     
-                    <Link href="/blog" className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:underline">
-                        <ArrowLeft className="w-4 h-4" /> Back to Knowledge Base
-                    </Link>
+                    <div className="flex items-center justify-between">
+                        <SEOBreadcrumb items={breadcrumbs} />
+                        <Link href="/blog" className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:underline">
+                            <ArrowLeft className="w-3.5 h-3.5" /> All Guides
+                        </Link>
+                    </div>
 
                     {/* Article Header */}
                     <div className="space-y-4 border-b border-slate-100 pb-6">
@@ -76,8 +123,40 @@ export default function BlogShow({ post = null }) {
                         dangerouslySetInnerHTML={{ __html: articleData.content }}
                     />
 
+                    {/* Author Next Steps Callout */}
+                    <div className="mt-12 p-6 rounded-2xl bg-gradient-to-br from-slate-50 to-blue-50/50 border border-blue-100 space-y-4">
+                        <div className="flex items-center gap-2 text-sm font-bold text-slate-900">
+                            <BookOpen className="w-4 h-4 text-blue-600" />
+                            Academic Publishing with Sanmati Journal
+                        </div>
+                        <p className="text-xs text-slate-600 leading-relaxed font-medium">
+                            Sanmati Spectrum of Knowledge (ISSN 3108-1819) welcomes original empirical and review manuscripts across science, technology, arts, commerce, and law for double-blind peer review.
+                        </p>
+                        <div className="flex flex-wrap gap-3 pt-1">
+                            <Link
+                                href="/submission-guidelines/call-for-papers"
+                                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold hover:bg-blue-700 transition-colors shadow-xs"
+                            >
+                                <SendHorizonal className="w-3.5 h-3.5" /> Submit Manuscript
+                            </Link>
+                            <Link
+                                href="/submission-guidelines"
+                                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-slate-200 text-slate-700 text-xs font-bold hover:bg-slate-50 transition-colors"
+                            >
+                                <FileText className="w-3.5 h-3.5 text-blue-600" /> Author Guidelines
+                            </Link>
+                            <Link
+                                href="/downloads"
+                                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-slate-200 text-slate-700 text-xs font-bold hover:bg-slate-50 transition-colors"
+                            >
+                                <Download className="w-3.5 h-3.5 text-emerald-600" /> Download Templates
+                            </Link>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </MainLayout>
     );
 }
+

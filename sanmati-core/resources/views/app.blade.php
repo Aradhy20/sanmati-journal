@@ -47,25 +47,33 @@
             } else {
                 $routeTitles = [
                     'about-journal' => ['About the Journal | Sanmati Spectrum', 'Comprehensive overview of Sanmati Spectrum of Knowledge & Emerging Discourse, an international peer-reviewed multidisciplinary research journal.'],
-                    'basic-info/about-journal' => ['About the Journal | Sanmati Spectrum', 'Comprehensive overview of Sanmati Spectrum of Knowledge & Emerging Discourse.'],
                     'basic-info/vision-mission' => ['Vision & Mission | Sanmati Spectrum', 'Our vision to foster cross-disciplinary discourse and empirical inquiry across humanities, sciences, and law.'],
                     'basic-info/objective-scope' => ['Objective & Scope | Sanmati Spectrum', 'Aims and scope covering multidisciplinary research in arts, sciences, commerce, technology, and jurisprudence.'],
                     'basic-info/journal-info' => ['Journal Information | Sanmati Spectrum', 'Key journal metrics, frequency, peer review policy, and open access parameters (ISSN 3108-1819).'],
+                    'basic-info/indexing' => ['Journal Indexing & CrossRef Registry | Sanmati Spectrum', 'Official indexing parameters, CrossRef DOI integration, and Google Scholar citation indexing (ISSN 3108-1819).'],
+                    'about-foundation' => ['About Sanmati Educational & Welfare Foundation | Sanmati Spectrum', 'Educational foundation backing Sanmati Spectrum of Knowledge and academic discourse in India.'],
                     'editorial-team/editors' => ['Editorial Leadership & Editors-in-Chief | Sanmati Spectrum', 'Distinguished academic editors and editorial leadership guiding Sanmati Spectrum.'],
                     'editorial-team/editorial-board' => ['Editorial Board & Peer Reviewers | Sanmati Spectrum', 'Meet the international Editorial Board ensuring rigorous double-blind peer review.'],
                     'editorial-team/advisory-board' => ['Advisory Board | Sanmati Spectrum', 'Eminent scholars and visionaries guiding the strategic governance of Sanmati Spectrum.'],
+                    'editorial-team/technical-team' => ['Technical Team & Systems | Sanmati Spectrum', 'Technical directorate maintaining digital publishing, DOI resolution, and archival systems.'],
                     'submission-guidelines' => ['Author Submission Guidelines | Sanmati Spectrum', 'Complete author guidelines for preparing and submitting manuscripts for double-blind peer review.'],
-                    'submission-guidelines/call-for-papers' => ['Call for Papers 2026 | Sanmati Spectrum', 'Call for original multidisciplinary research papers, review articles, and short communications.'],
-                    'submission-guidelines/review-process' => ['Peer Review Process | Sanmati Spectrum', 'Transparent double-blind peer review workflow ensuring scholarly rigor and ethics.'],
-                    'submission-guidelines/areas' => ['Research Areas & Disciplines | Sanmati Spectrum', 'Multidisciplinary research domains eligible for publication in Sanmati Spectrum.'],
+                    'submission-guidelines/call-for-papers' => ['Call for Papers 2026 | Submit Research Paper | Sanmati Spectrum', 'Call for original multidisciplinary research papers, review articles, and short communications with fast peer review.'],
+                    'submission-guidelines/review-process' => ['Peer Review Process | Sanmati Spectrum', 'Transparent double-blind peer review workflow ensuring scholarly rigor and ethics within 15–30 days.'],
+                    'submission-guidelines/areas' => ['Research Areas & Disciplines | Sanmati Spectrum', 'Multidisciplinary research domains eligible for publication across sciences, humanities, commerce, and law.'],
+                    'submission-guidelines/publication-charges' => ['Publication Charges & APC Policy | Sanmati Spectrum', 'Transparent Article Processing Charges (APC) and waiver policies for open access research publication.'],
+                    'submission-guidelines/important-info' => ['Important Information for Authors | Sanmati Spectrum', 'Essential manuscript guidelines, file formats, ethics criteria, and author responsibilities.'],
                     'publication-policy/ethics' => ['Publication Ethics & COPE Compliance | Sanmati Spectrum', 'Strict publication ethics and malpractice statements aligned with COPE guidelines.'],
-                    'publication-policy/plagiarism' => ['Plagiarism Policy | Sanmati Spectrum', 'Zero tolerance plagiarism guidelines, similarity index thresholds, and verification procedures.'],
+                    'publication-policy/plagiarism' => ['Plagiarism Policy & Similarity Screening | Sanmati Spectrum', 'Zero tolerance plagiarism guidelines, similarity index thresholds under 10%, and verification procedures.'],
                     'publication-policy/copyright' => ['Copyright & Open Access Policy | Sanmati Spectrum', 'Creative Commons Attribution (CC-BY 4.0) open access license terms for published research.'],
-                    'reviewer-guidelines' => ['Reviewer Guidelines | Sanmati Spectrum', 'Standards and evaluation criteria for double-blind peer reviewers.'],
+                    'publication-policy/peer-review' => ['Peer Review Policy & Integrity | Sanmati Spectrum', 'Rigorous double-blind peer review evaluation criteria and ethical code of conduct.'],
+                    'reviewer-guidelines' => ['Reviewer Guidelines & Evaluation Criteria | Sanmati Spectrum', 'Standards, evaluation rubrics, and confidentiality requirements for double-blind peer reviewers.'],
                     'archive' => ['Research Archive & Published Issues | Sanmati Spectrum', 'Browse all published volumes, issues, and peer-reviewed articles of Sanmati Spectrum.'],
+                    'current-issue' => ['Current Published Issue | Sanmati Spectrum', 'Read the latest peer-reviewed research papers published in Volume 2, Issue 2 of Sanmati Spectrum.'],
                     'blog' => ['Academic Research Blog & Guides | Sanmati Spectrum', 'Guides on manuscript submission, UGC CARE ethics, APA/IEEE citations, and publishing in India.'],
                     'downloads' => ['Author Toolkit & Document Downloads | Sanmati Spectrum', 'Download official manuscript templates, copyright assignment forms, and submission checklists.'],
-                    'contact' => ['Contact Editorial Directorate | Sanmati Spectrum', 'Get in touch with the editorial team and administrative secretariat of Sanmati Spectrum.']
+                    'contact' => ['Contact Editorial Directorate | Sanmati Spectrum', 'Get in touch with the editorial team and administrative secretariat of Sanmati Spectrum.'],
+                    'book-publication' => ['Academic Book & Monograph Publication | Sanmati Spectrum', 'Publish academic edited volumes, conference proceedings, and scholarly monographs with ISBN.'],
+                    'track-manuscript' => ['Track Manuscript Status | Sanmati Spectrum', 'Track real-time peer review status and editorial lifecycle of your submitted manuscript.']
                 ];
 
                 if (isset($routeTitles[$currentPath])) {

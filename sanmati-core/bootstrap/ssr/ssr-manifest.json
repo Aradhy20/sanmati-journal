@@ -51,6 +51,9 @@
   "resources/js/Components/ResearchBlogSection.jsx": [
     "/build/assets/ResearchBlogSection-Ch4BCCRi.js"
   ],
+  "resources/js/Components/SEOBreadcrumb.jsx": [
+    "/build/assets/SEOBreadcrumb-Cq_FA3Vr.js"
+  ],
   "resources/js/Components/ScrollReveal.jsx": [
     "/build/assets/ScrollReveal-CC5ihyc1.js"
   ],
@@ -190,10 +193,10 @@
     "/build/assets/VisionMission-XnM0i54y.js"
   ],
   "resources/js/Pages/Blog/Index.jsx": [
-    "/build/assets/Index-CBfMHxQ-.js"
+    "/build/assets/Index-BpjQZwkY.js"
   ],
   "resources/js/Pages/Blog/Show.jsx": [
-    "/build/assets/Show-DV9QgZnP.js"
+    "/build/assets/Show-BbMBoOPd.js"
   ],
   "resources/js/Pages/BookPublication.jsx": [
     "/build/assets/BookPublication-DKf5AMNL.js"
@@ -208,7 +211,7 @@
     "/build/assets/Contact-DhnEk1Ur.js"
   ],
   "resources/js/Pages/DownloadsPage.jsx": [
-    "/build/assets/DownloadsPage-ByFjFBnI.js"
+    "/build/assets/DownloadsPage-CBW744Am.js"
   ],
   "resources/js/Pages/Editor/Dashboard.jsx": [
     "/build/assets/Dashboard-C9PDSWAS.js"
@@ -250,10 +253,10 @@
     "/build/assets/Ethics-DwprIq3b.js"
   ],
   "resources/js/Pages/PublicationPolicy/PeerReview.jsx": [
-    "/build/assets/PeerReview-CEVcTeyd.js"
+    "/build/assets/PeerReview-C9gA3IUq.js"
   ],
   "resources/js/Pages/PublicationPolicy/Plagiarism.jsx": [
-    "/build/assets/Plagiarism-DTQ4srhu.js"
+    "/build/assets/Plagiarism-C8Te22Ry.js"
   ],
   "resources/js/Pages/ResourceCenter.jsx": [
     "/build/assets/ResourceCenter-CMisUZWw.js"
@@ -265,7 +268,7 @@
     "/build/assets/Evaluation-BzbINyy_.js"
   ],
   "resources/js/Pages/ReviewerGuidelines.jsx": [
-    "/build/assets/ReviewerGuidelines-b2sRcHhR.js"
+    "/build/assets/ReviewerGuidelines-CZjD240o.js"
   ],
   "resources/js/Pages/SearchPage.jsx": [
     "/build/assets/SearchPage-Cs0nVUW9.js"

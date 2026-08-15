@@ -5,12 +5,33 @@ import { ShieldCheck, CheckCircle2, FileText, ChevronRight, Scale, Clock, Award 
 import { Link } from '@inertiajs/react';
 
 export default function ReviewerGuidelines() {
+    const breadcrumbs = [
+        { name: 'Home', href: '/' },
+        { name: 'Reviewer Guidelines', href: '/reviewer-guidelines' }
+    ];
+
+    const breadcrumbJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": breadcrumbs.map((crumb, i) => ({
+            "@type": "ListItem",
+            "position": i + 1,
+            "name": crumb.name,
+            "item": `https://sanmatijournal.in${crumb.href}`
+        }))
+    };
+
     return (
         <MainLayout
-            title="Reviewer Guidelines | Peer Review Standards | Sanmati Journal"
-            description="Official peer reviewer guidelines and evaluation methodology for Sanmati Spectrum of Knowledge (ISSN 3108-1819)."
+            title="Reviewer Guidelines & Evaluation Criteria | Sanmati Journal"
+            description="Official peer reviewer guidelines, evaluation rubrics, confidentiality requirements, and ethical code of conduct for Sanmati Spectrum of Knowledge."
             keywords="Reviewer guidelines, Peer review guidelines, Reviewer ethics, Academic peer review criteria, Sanmati journal reviewer"
         >
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+            />
+
             <div className="bg-gradient-to-b from-slate-50 to-white py-12 lg:py-20 border-b border-slate-200/60">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                     <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-6">

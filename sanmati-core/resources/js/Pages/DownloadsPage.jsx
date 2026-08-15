@@ -2,8 +2,14 @@ import { motion } from 'framer-motion';
 import { Download, FileText, Award, FileSpreadsheet, CheckCircle2, ArrowRight } from 'lucide-react';
 import MainLayout from '../Layouts/MainLayout';
 import { Link } from '@inertiajs/react';
+import SEOBreadcrumb from '../Components/SEOBreadcrumb';
 
 export default function DownloadsPage() {
+    const breadcrumbs = [
+        { name: 'Home', href: '/' },
+        { name: 'Downloads & Author Toolkit', href: '/downloads' }
+    ];
+
     const downloads = [
         {
             title: "Author Manuscript Formatting Template (MS Word)",
@@ -29,10 +35,12 @@ export default function DownloadsPage() {
     ];
 
     return (
-        <MainLayout title="Downloads & Author Templates | Sanmati Spectrum Journal" description="Download author manuscript Word templates, copyright declaration forms, and complete journal volume issues.">
-            <div className="py-12 bg-slate-50 min-h-[85vh]">
-                <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <MainLayout title="Author Toolkit & Document Downloads | Sanmati Spectrum Journal" description="Download official manuscript templates, copyright assignment forms, and submission checklists for Sanmati Spectrum of Knowledge.">
+            <div className="py-10 bg-slate-50 min-h-[85vh]">
+                <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
                     
+                    <SEOBreadcrumb items={breadcrumbs} />
+
                     <div className="bg-slate-900 text-white rounded-3xl p-8 shadow-xl space-y-2">
                         <span className="px-3 py-1 bg-blue-500/20 text-cyan-300 border border-blue-400/30 text-[10px] font-bold uppercase tracking-wider rounded-full">
                             Downloads & Templates Hub

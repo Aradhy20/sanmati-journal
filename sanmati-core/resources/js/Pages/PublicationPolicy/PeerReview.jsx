@@ -1,12 +1,32 @@
 import PageHeader from '../../Components/PageHeader';
 import MainLayout from '../../Layouts/MainLayout';
+import Seo from '../../Components/Seo';
 import { CheckCircle2, FileSearch, Send, ShieldCheck } from 'lucide-react';
 import { GridPattern } from '../../Components/Graphics';
 import { ScrollReveal, revealVariants } from '../../Components/ScrollReveal';
 
 export default function PeerReview() {
+    const seoData = {
+        breadcrumb: [
+            { name: "Home", url: "/" },
+            { name: "Publication Policy", url: "/publication-policy/ethics" },
+            { name: "Peer Review Policy", url: "/publication-policy/peer-review" }
+        ],
+        schema: {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Peer Review Policy & Integrity | Sanmati Spectrum",
+            "description": "Transparent, systematic, and rigorous double-blind peer review policy ensuring academic rigor, ethical compliance, and scholarly integrity."
+        }
+    };
+
     return (
         <MainLayout>
+            <Seo
+                title="Peer Review Policy & Academic Integrity | Sanmati Journal"
+                description="Rigorous double-blind peer review evaluation criteria, reviewer code of conduct, and publication integrity standards at Sanmati Spectrum of Knowledge."
+                jsonLd={seoData}
+            />
             <div className="bg-warm-bg min-h-screen relative">
                 <div className="absolute top-0 right-0 opacity-10 pointer-events-none">
                     <GridPattern className="w-[600px] h-[600px]" />

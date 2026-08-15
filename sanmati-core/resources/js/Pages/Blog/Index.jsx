@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { BookOpen, Clock, User, ArrowRight, Tag, Search, Sparkles } from 'lucide-react';
 import MainLayout from '../../Layouts/MainLayout';
 import { Link } from '@inertiajs/react';
+import SEOBreadcrumb from '../../Components/SEOBreadcrumb';
 
 export default function BlogIndex({ posts = [] }) {
     const defaultPosts = posts.length > 0 ? posts : [
@@ -44,13 +45,48 @@ export default function BlogIndex({ posts = [] }) {
         }
     ];
 
+    const collectionSchema = {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Research Blog & Author Resource Guides | Sanmati Spectrum Journal",
+        "description": "Practical author guides, UGC CARE parameters, academic citation standards, and peer-review workflows for researchers in India and worldwide.",
+        "url": "https://sanmatijournal.in/blog",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Sanmati Spectrum of Knowledge & Emerging Discourse",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://sanmatijournal.in/logo.webp"
+            }
+        },
+        "hasPart": defaultPosts.map(p => ({
+            "@type": "BlogPosting",
+            "headline": p.title,
+            "url": `https://sanmatijournal.in/blog/${p.slug}`,
+            "description": p.excerpt
+        }))
+    };
+
+    const breadcrumbs = [
+        { name: 'Home', href: '/' },
+        { name: 'Academic Knowledge Base', href: '/blog' }
+    ];
+
     return (
         <MainLayout title="Research Blog & Author Resource Guides | Sanmati Spectrum Journal" description="Expert articles on academic writing, UGC CARE standards, citation formatting, APA 7th edition, and research methodology.">
-            <div className="py-12 bg-slate-50 min-h-[85vh]">
-                <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Inject CollectionPage JSON-LD */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
+            />
+
+            <div className="py-10 bg-slate-50 min-h-[85vh]">
+                <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
                     
+                    <SEOBreadcrumb items={breadcrumbs} />
+
                     {/* Header */}
-                    <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
+                    <div className="text-center max-w-2xl mx-auto mb-10 space-y-3">
                         <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-100 border border-blue-200 text-blue-800 text-xs font-bold uppercase tracking-wider">
                             <BookOpen className="w-4 h-4 text-blue-600" /> Academic Knowledge Base
                         </div>

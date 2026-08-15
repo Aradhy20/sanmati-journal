@@ -55,6 +55,13 @@
       "_motion-Cagi22kj.js"
     ]
   },
+  "_SEOBreadcrumb-BlbqdT5g.js": {
+    "file": "assets/SEOBreadcrumb-BlbqdT5g.js",
+    "name": "SEOBreadcrumb",
+    "imports": [
+      "_vendor-6ptUVQj6.js"
+    ]
+  },
   "_ScrollReveal-CNmaIdcA.js": {
     "file": "assets/ScrollReveal-CNmaIdcA.js",
     "name": "ScrollReveal",
@@ -86,7 +93,7 @@
     "isDynamicEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app-B8mRj2Ss.css",
+    "file": "assets/app-2S7D6Lun.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -554,24 +561,26 @@
     ]
   },
   "resources/js/Pages/Blog/Index.jsx": {
-    "file": "assets/Index-BuJfhZI8.js",
+    "file": "assets/Index-ClwLGrL_.js",
     "name": "Index",
     "src": "resources/js/Pages/Blog/Index.jsx",
     "isDynamicEntry": true,
     "imports": [
       "_vendor-6ptUVQj6.js",
       "_MainLayout-BJh_uqeZ.js",
+      "_SEOBreadcrumb-BlbqdT5g.js",
       "_motion-Cagi22kj.js"
     ]
   },
   "resources/js/Pages/Blog/Show.jsx": {
-    "file": "assets/Show-DvqCubfZ.js",
+    "file": "assets/Show-pfVhvbRb.js",
     "name": "Show",
     "src": "resources/js/Pages/Blog/Show.jsx",
     "isDynamicEntry": true,
     "imports": [
       "_vendor-6ptUVQj6.js",
       "_MainLayout-BJh_uqeZ.js",
+      "_SEOBreadcrumb-BlbqdT5g.js",
       "_motion-Cagi22kj.js"
     ]
   },
@@ -623,13 +632,14 @@
     ]
   },
   "resources/js/Pages/DownloadsPage.jsx": {
-    "file": "assets/DownloadsPage-XrEfSk7k.js",
+    "file": "assets/DownloadsPage-BWHMLYkO.js",
     "name": "DownloadsPage",
     "src": "resources/js/Pages/DownloadsPage.jsx",
     "isDynamicEntry": true,
     "imports": [
       "_vendor-6ptUVQj6.js",
       "_MainLayout-BJh_uqeZ.js",
+      "_SEOBreadcrumb-BlbqdT5g.js",
       "_motion-Cagi22kj.js"
     ]
   },
@@ -740,7 +750,7 @@
     ]
   },
   "resources/js/Pages/Home.jsx": {
-    "file": "assets/Home-86pzvN-D.js",
+    "file": "assets/Home-heQmHBxu.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.jsx",
     "isDynamicEntry": true,
@@ -763,7 +773,7 @@
       "resources/js/Components/HomeFAQ.jsx"
     ],
     "css": [
-      "assets/app-B8mRj2Ss.css"
+      "assets/app-2S7D6Lun.css"
     ]
   },
   "resources/js/Pages/Institution/Profile.jsx": {
@@ -803,7 +813,7 @@
     ]
   },
   "resources/js/Pages/PublicationPolicy/PeerReview.jsx": {
-    "file": "assets/PeerReview-rEr0VfCN.js",
+    "file": "assets/PeerReview-CFnKXwXs.js",
     "name": "PeerReview",
     "src": "resources/js/Pages/PublicationPolicy/PeerReview.jsx",
     "isDynamicEntry": true,
@@ -817,7 +827,7 @@
     ]
   },
   "resources/js/Pages/PublicationPolicy/Plagiarism.jsx": {
-    "file": "assets/Plagiarism-grPIIcSh.js",
+    "file": "assets/Plagiarism-C2ZF-xkw.js",
     "name": "Plagiarism",
     "src": "resources/js/Pages/PublicationPolicy/Plagiarism.jsx",
     "isDynamicEntry": true,
@@ -864,7 +874,7 @@
     ]
   },
   "resources/js/Pages/ReviewerGuidelines.jsx": {
-    "file": "assets/ReviewerGuidelines-_xslWKiK.js",
+    "file": "assets/ReviewerGuidelines-Dx64lfp4.js",
     "name": "ReviewerGuidelines",
     "src": "resources/js/Pages/ReviewerGuidelines.jsx",
     "isDynamicEntry": true,
@@ -926,7 +936,7 @@
     ]
   },
   "resources/js/Pages/SubmissionGuidelines/CallForPapers.jsx": {
-    "file": "assets/CallForPapers-BAXN2N2h.js",
+    "file": "assets/CallForPapers-8TkJuL0H.js",
     "name": "CallForPapers",
     "src": "resources/js/Pages/SubmissionGuidelines/CallForPapers.jsx",
     "isDynamicEntry": true,
@@ -942,7 +952,7 @@
       "node_modules/sweetalert2/dist/sweetalert2.esm.all.js"
     ],
     "css": [
-      "assets/app-B8mRj2Ss.css"
+      "assets/app-2S7D6Lun.css"
     ]
   },
   "resources/js/Pages/SubmissionGuidelines/ImportantInfo.jsx": {
@@ -1035,7 +1045,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-cQCFrXuP.js",
+    "file": "assets/app-Buu3W68d.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
@@ -1115,7 +1125,7 @@
       "resources/js/Pages/TrackManuscript.jsx"
     ],
     "css": [
-      "assets/app-B8mRj2Ss.css"
+      "assets/app-2S7D6Lun.css"
     ]
   }
 }

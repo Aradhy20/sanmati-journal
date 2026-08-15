@@ -1,12 +1,32 @@
 import PageHeader from '../../Components/PageHeader';
 import MainLayout from '../../Layouts/MainLayout';
+import Seo from '../../Components/Seo';
 import { AlertTriangle, CheckCircle } from 'lucide-react';
 import { GridPattern } from '../../Components/Graphics';
 import { ScrollReveal, revealVariants } from '../../Components/ScrollReveal';
 
 export default function Plagiarism() {
+    const seoData = {
+        breadcrumb: [
+            { name: "Home", url: "/" },
+            { name: "Publication Policy", url: "/publication-policy/ethics" },
+            { name: "Plagiarism Policy", url: "/publication-policy/plagiarism" }
+        ],
+        schema: {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Plagiarism Policy & Similarity Screening | Sanmati Spectrum",
+            "description": "Zero tolerance plagiarism guidelines, similarity index thresholds under 10-20%, and anti-plagiarism verification procedures for Sanmati Spectrum."
+        }
+    };
+
     return (
         <MainLayout>
+            <Seo
+                title="Plagiarism Policy & Similarity Screening | Sanmati Journal"
+                description="Zero tolerance plagiarism guidelines, similarity index thresholds, and anti-plagiarism verification procedures for Sanmati Spectrum of Knowledge."
+                jsonLd={seoData}
+            />
             <div className="bg-warm-bg min-h-screen relative">
                 <div className="absolute top-0 right-0 opacity-10 pointer-events-none">
                     <GridPattern className="w-[600px] h-[600px]" />
