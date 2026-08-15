@@ -86,7 +86,7 @@
     "isDynamicEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app-CLDzEB2y.css",
+    "file": "assets/app-DoPrGHQU.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -740,7 +740,7 @@
     ]
   },
   "resources/js/Pages/Home.jsx": {
-    "file": "assets/Home-ux5Urg7B.js",
+    "file": "assets/Home-CRnnlPMZ.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.jsx",
     "isDynamicEntry": true,
@@ -763,7 +763,7 @@
       "resources/js/Components/HomeFAQ.jsx"
     ],
     "css": [
-      "assets/app-CLDzEB2y.css"
+      "assets/app-DoPrGHQU.css"
     ]
   },
   "resources/js/Pages/Institution/Profile.jsx": {
@@ -926,7 +926,7 @@
     ]
   },
   "resources/js/Pages/SubmissionGuidelines/CallForPapers.jsx": {
-    "file": "assets/CallForPapers-BUGRVj6u.js",
+    "file": "assets/CallForPapers-DExVPQoK.js",
     "name": "CallForPapers",
     "src": "resources/js/Pages/SubmissionGuidelines/CallForPapers.jsx",
     "isDynamicEntry": true,
@@ -942,7 +942,7 @@
       "node_modules/sweetalert2/dist/sweetalert2.esm.all.js"
     ],
     "css": [
-      "assets/app-CLDzEB2y.css"
+      "assets/app-DoPrGHQU.css"
     ]
   },
   "resources/js/Pages/SubmissionGuidelines/ImportantInfo.jsx": {
@@ -1035,7 +1035,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-GWx_YmY2.js",
+    "file": "assets/app-DktSZhJK.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
@@ -1115,7 +1115,7 @@
       "resources/js/Pages/TrackManuscript.jsx"
     ],
     "css": [
-      "assets/app-CLDzEB2y.css"
+      "assets/app-DoPrGHQU.css"
     ]
   }
 }

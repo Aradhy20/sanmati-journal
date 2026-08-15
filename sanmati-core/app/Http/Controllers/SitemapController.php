@@ -62,7 +62,11 @@ class SitemapController extends Controller
                 ['loc' => $baseUrl . '/academic-events/conferences',                   'priority' => '0.6', 'changefreq' => 'weekly',  'lastmod' => $static_updated],
                 ['loc' => $baseUrl . '/academic-events/workshop',                      'priority' => '0.6', 'changefreq' => 'weekly',  'lastmod' => $static_updated],
 
-                // Other
+                // Other Public Pages
+                ['loc' => $baseUrl . '/blog',                                          'priority' => '0.8', 'changefreq' => 'weekly',  'lastmod' => $static_updated],
+                ['loc' => $baseUrl . '/downloads',                                     'priority' => '0.8', 'changefreq' => 'monthly', 'lastmod' => $static_updated],
+                ['loc' => $baseUrl . '/publication-policy/copyright',                  'priority' => '0.7', 'changefreq' => 'monthly', 'lastmod' => $static_updated],
+                ['loc' => $baseUrl . '/reviewer-guidelines',                           'priority' => '0.7', 'changefreq' => 'monthly', 'lastmod' => $static_updated],
                 ['loc' => $baseUrl . '/book-publication',                              'priority' => '0.7', 'changefreq' => 'monthly', 'lastmod' => $static_updated],
                 ['loc' => $baseUrl . '/awards',                                        'priority' => '0.6', 'changefreq' => 'monthly', 'lastmod' => $static_updated],
                 ['loc' => $baseUrl . '/compliance',                                    'priority' => '0.5', 'changefreq' => 'yearly',  'lastmod' => $static_updated],
@@ -89,6 +93,23 @@ class SitemapController extends Controller
                 ];
             }
 
+            // Dynamic Blog Articles from BlogService
+            try {
+                $blogPosts = \App\Services\BlogService::getPosts();
+                foreach ($blogPosts as $post) {
+                    $urls[] = [
+                        'loc' => $baseUrl . '/blog/' . $post['slug'],
+                        'title' => $post['title'],
+                        'priority' => '0.8',
+                        'changefreq' => 'monthly',
+                        'lastmod' => $static_updated,
+                        'image' => !empty($post['image']) ? $baseUrl . $post['image'] : $baseUrl . '/logo.webp'
+                    ];
+                }
+            } catch (\Exception $e) {
+                // Ignore if service unavailable
+            }
+
             // Dynamic paper pages
             foreach ($papers as $paper) {
                 $urls[] = [
@@ -100,11 +121,18 @@ class SitemapController extends Controller
                 ];
             }
 
+            // De-duplicate URLs by loc
+            $uniqueUrls = [];
+            foreach ($urls as $url) {
+                $uniqueUrls[$url['loc']] = $url;
+            }
+
             // Generate XML with Image namespace
             $xml = '<?xml version="1.0" encoding="UTF-8"?>';
             $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">';
 
-            foreach ($urls as $url) {
+            foreach ($uniqueUrls as $url) {
+                $imageLoc = $url['image'] ?? 'https://sanmatijournal.in/logo.webp';
                 $xml .= '<url>';
                 $xml .= '<loc>' . htmlspecialchars($url['loc']) . '</loc>';
                 if (isset($url['lastmod'])) {
@@ -112,7 +140,7 @@ class SitemapController extends Controller
                 }
                 $xml .= '<changefreq>' . $url['changefreq'] . '</changefreq>';
                 $xml .= '<priority>' . $url['priority'] . '</priority>';
-                $xml .= '<image:image><image:loc>https://sanmatijournal.in/logo.webp</image:loc><image:title>' . htmlspecialchars($url['title'] ?? 'Sanmati Spectrum of Knowledge') . '</image:title></image:image>';
+                $xml .= '<image:image><image:loc>' . htmlspecialchars($imageLoc) . '</image:loc><image:title>' . htmlspecialchars($url['title'] ?? 'Sanmati Spectrum of Knowledge') . '</image:title></image:image>';
                 $xml .= '</url>';
             }
 

@@ -17,11 +17,69 @@
         <link rel="apple-touch-icon" href="/logo.webp">
 
         @php
-            $metaTitle = $meta['title'] ?? 'Sanmati Spectrum of Knowledge & Emerging Discourse (ISSN 3108-1819)';
-            $metaDescription = $meta['description'] ?? 'International peer-reviewed multidisciplinary research journal (ISSN 3108-1819). Publish research papers fast in India with CrossRef DOI indexing, open access, and COPE publication ethics.';
-            $metaKeywords = $meta['keywords'] ?? 'UGC Care Journal, Multidisciplinary Research Journal, Publish Research Paper in India, Peer Reviewed Journal, ISSN Journal 3108-1819, Open Access Journal, Academic Journal';
-            $metaImage = $meta['image'] ?? 'https://sanmatijournal.in/images/seo/sanmati-journal-og.webp';
-            $rawCanonical = $meta['canonical'] ?? url()->current();
+            $pageProps = $page['props'] ?? [];
+            $paper = $pageProps['paper'] ?? ($paper ?? null);
+            $post = $pageProps['post'] ?? ($post ?? null);
+            $customMeta = $pageProps['meta'] ?? ($meta ?? []);
+
+            $currentPath = trim(request()->path(), '/');
+
+            // Baseline Journal Metadata
+            $defaultTitle = 'Sanmati Spectrum of Knowledge & Emerging Discourse (ISSN 3108-1819)';
+            $defaultDesc = 'International peer-reviewed multidisciplinary research journal (ISSN 3108-1819). Publish research papers fast in India with CrossRef DOI indexing, open access, and COPE publication ethics.';
+            $defaultImage = 'https://sanmatijournal.in/images/seo/sanmati-journal-og.webp';
+
+            if ($paper) {
+                $metaTitle = ($paper->title ?? $defaultTitle) . ' | Sanmati Journal';
+                $metaDescription = \Illuminate\Support\Str::limit(strip_tags($paper->abstract ?? $paper->title ?? $defaultDesc), 160);
+                $metaKeywords = $paper->keywords ?? 'Research Paper, Academic Journal, ISSN 3108-1819';
+                $metaImage = $defaultImage;
+            } elseif ($post) {
+                $metaTitle = ($post['title'] ?? $defaultTitle) . ' | Sanmati Spectrum Blog';
+                $metaDescription = $post['excerpt'] ?? $defaultDesc;
+                $metaKeywords = 'Research Guide, Academic Publishing, UGC Guidelines, Citation Styles';
+                $metaImage = !empty($post['image']) ? url($post['image']) : $defaultImage;
+            } elseif (!empty($customMeta['title'])) {
+                $metaTitle = $customMeta['title'];
+                $metaDescription = $customMeta['description'] ?? $defaultDesc;
+                $metaKeywords = $customMeta['keywords'] ?? 'Academic Journal';
+                $metaImage = $customMeta['image'] ?? $defaultImage;
+            } else {
+                $routeTitles = [
+                    'about-journal' => ['About the Journal | Sanmati Spectrum', 'Comprehensive overview of Sanmati Spectrum of Knowledge & Emerging Discourse, an international peer-reviewed multidisciplinary research journal.'],
+                    'basic-info/about-journal' => ['About the Journal | Sanmati Spectrum', 'Comprehensive overview of Sanmati Spectrum of Knowledge & Emerging Discourse.'],
+                    'basic-info/vision-mission' => ['Vision & Mission | Sanmati Spectrum', 'Our vision to foster cross-disciplinary discourse and empirical inquiry across humanities, sciences, and law.'],
+                    'basic-info/objective-scope' => ['Objective & Scope | Sanmati Spectrum', 'Aims and scope covering multidisciplinary research in arts, sciences, commerce, technology, and jurisprudence.'],
+                    'basic-info/journal-info' => ['Journal Information | Sanmati Spectrum', 'Key journal metrics, frequency, peer review policy, and open access parameters (ISSN 3108-1819).'],
+                    'editorial-team/editors' => ['Editorial Leadership & Editors-in-Chief | Sanmati Spectrum', 'Distinguished academic editors and editorial leadership guiding Sanmati Spectrum.'],
+                    'editorial-team/editorial-board' => ['Editorial Board & Peer Reviewers | Sanmati Spectrum', 'Meet the international Editorial Board ensuring rigorous double-blind peer review.'],
+                    'editorial-team/advisory-board' => ['Advisory Board | Sanmati Spectrum', 'Eminent scholars and visionaries guiding the strategic governance of Sanmati Spectrum.'],
+                    'submission-guidelines' => ['Author Submission Guidelines | Sanmati Spectrum', 'Complete author guidelines for preparing and submitting manuscripts for double-blind peer review.'],
+                    'submission-guidelines/call-for-papers' => ['Call for Papers 2026 | Sanmati Spectrum', 'Call for original multidisciplinary research papers, review articles, and short communications.'],
+                    'submission-guidelines/review-process' => ['Peer Review Process | Sanmati Spectrum', 'Transparent double-blind peer review workflow ensuring scholarly rigor and ethics.'],
+                    'submission-guidelines/areas' => ['Research Areas & Disciplines | Sanmati Spectrum', 'Multidisciplinary research domains eligible for publication in Sanmati Spectrum.'],
+                    'publication-policy/ethics' => ['Publication Ethics & COPE Compliance | Sanmati Spectrum', 'Strict publication ethics and malpractice statements aligned with COPE guidelines.'],
+                    'publication-policy/plagiarism' => ['Plagiarism Policy | Sanmati Spectrum', 'Zero tolerance plagiarism guidelines, similarity index thresholds, and verification procedures.'],
+                    'publication-policy/copyright' => ['Copyright & Open Access Policy | Sanmati Spectrum', 'Creative Commons Attribution (CC-BY 4.0) open access license terms for published research.'],
+                    'reviewer-guidelines' => ['Reviewer Guidelines | Sanmati Spectrum', 'Standards and evaluation criteria for double-blind peer reviewers.'],
+                    'archive' => ['Research Archive & Published Issues | Sanmati Spectrum', 'Browse all published volumes, issues, and peer-reviewed articles of Sanmati Spectrum.'],
+                    'blog' => ['Academic Research Blog & Guides | Sanmati Spectrum', 'Guides on manuscript submission, UGC CARE ethics, APA/IEEE citations, and publishing in India.'],
+                    'downloads' => ['Author Toolkit & Document Downloads | Sanmati Spectrum', 'Download official manuscript templates, copyright assignment forms, and submission checklists.'],
+                    'contact' => ['Contact Editorial Directorate | Sanmati Spectrum', 'Get in touch with the editorial team and administrative secretariat of Sanmati Spectrum.']
+                ];
+
+                if (isset($routeTitles[$currentPath])) {
+                    $metaTitle = $routeTitles[$currentPath][0];
+                    $metaDescription = $routeTitles[$currentPath][1];
+                } else {
+                    $metaTitle = $defaultTitle;
+                    $metaDescription = $defaultDesc;
+                }
+                $metaKeywords = 'UGC Care Journal, Multidisciplinary Research Journal, Publish Research Paper in India, Peer Reviewed Journal, ISSN Journal 3108-1819, Open Access Journal, Academic Journal';
+                $metaImage = $defaultImage;
+            }
+
+            $rawCanonical = $customMeta['canonical'] ?? url()->current();
             $canonicalUrl = preg_replace('/^https?:\/\/[^\/]+/', 'https://sanmatijournal.in', $rawCanonical);
         @endphp
 
