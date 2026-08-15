@@ -59,7 +59,7 @@ const BOARD_MEMBERS = [
         city: "Moradabad",
         state: "Uttar Pradesh",
         country: "India",
-        image: "/dr kalpana jian.jpeg",
+        image: "/images/team/dr-kalpana-jain.jpeg",
         email: "Kalpnajain69@gmail.com",
         phone: "",
         profileUrl: "https://www.researchgate.net/profile/Dr-Jain-23",
@@ -465,7 +465,13 @@ export default function EditorialBoard() {
     };
 
     const boardJsonLd = {
-        schema: boardSchema,
+        schema: {
+            "@context": "https://schema.org",
+            "@type": "AboutPage",
+            "name": "Editorial Board & Peer Reviewers - Sanmati Spectrum of Knowledge",
+            "url": "https://sanmatijournal.in/editorial-team/editorial-board",
+            "description": "Distinguished academic leaders, professors, and peer reviewers ensuring rigorous double-blind peer review for Sanmati Spectrum Journal."
+        },
         breadcrumb: [
             { name: 'Home', url: '/' },
             { name: 'Editorial Team', url: '/editorial-team/editors' },
@@ -534,7 +540,7 @@ export default function EditorialBoard() {
                         className="lg:col-span-12 xl:col-span-5 relative group"
                     >
                         <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-[#E9E5DD] bg-slate-900">
-                            <img loading="lazy" src="/fistudy-assets/resources/about-journal-2.png" alt="Editorial Board Assembly" className="w-full h-full object-cover opacity-60" />
+                            <img loading="lazy" src="/images/library-bg.webp" alt="Editorial Board Assembly" className="w-full h-full object-cover opacity-60" />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                             <div className="absolute inset-x-0 bottom-0 p-6 text-center">
                                 <Quote className="w-8 h-8 text-primary mx-auto mb-2 opacity-60" />

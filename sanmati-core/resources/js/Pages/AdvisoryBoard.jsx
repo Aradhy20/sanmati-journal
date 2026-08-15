@@ -492,7 +492,7 @@ export default function AdvisoryBoard() {
                         className="lg:col-span-12 xl:col-span-5 relative group"
                     >
                         <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-[#E9E5DD] bg-slate-900">
-                            <img loading="lazy" src="/fistudy-assets/resources/about-journal-1.png" alt="Advisory Board Counsel" className="w-full h-full object-cover opacity-60" />
+                            <img loading="lazy" src="/images/library-bg.webp" alt="Advisory Board Counsel" className="w-full h-full object-cover opacity-60" />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                             <div className="absolute inset-x-0 bottom-0 p-6 text-center">
                                 <Quote className="w-8 h-8 text-primary mx-auto mb-2 opacity-60" />

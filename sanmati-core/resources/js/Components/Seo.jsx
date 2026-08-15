@@ -14,7 +14,7 @@ export default function Seo({
     const siteName = "Sanmati Spectrum of Knowledge & Emerging Discourse";
     const defaultDescription = "International peer-reviewed multidisciplinary research journal (ISSN 3108-1819). Publish research papers fast in India with CrossRef DOI indexing, open access, and COPE publication ethics.";
     const defaultKeywords = "UGC Care Journal, Multidisciplinary Research Journal, Publish Research Paper in India, Peer Reviewed Journal, ISSN Journal 3108-1819, Open Access Journal, Research Publication, Academic Journal, International Journal, Research Paper Publication";
-    const defaultImage = "/logo.webp";
+    const defaultImage = "/images/seo/sanmati-journal-og.webp";
     const siteUrl = "https://sanmatijournal.in";
 
     const { url } = usePage();
@@ -40,7 +40,7 @@ export default function Seo({
             "@type": "ContactPoint",
             "telephone": "+91-8979782949",
             "contactType": "editorial office",
-            "email": "sanmatispectrum@gmail.com",
+            "email": "sanmatijournal@gmail.com",
             "availableLanguage": ["English", "Hindi"]
         },
         "address": {

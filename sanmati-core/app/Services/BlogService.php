@@ -14,6 +14,7 @@ class BlogService
                 'readTime' => '7 min read',
                 'author' => 'Sanmati Editorial Directorate',
                 'date' => 'August 2026',
+                'image' => '/images/blog/how-to-choose-multidisciplinary-research-journal.webp',
                 'excerpt' => 'A comprehensive decision framework for academic authors on selecting multidisciplinary journals, verifying indexation, and checking publication ethics.'
             ],
             [
@@ -23,6 +24,7 @@ class BlogService
                 'readTime' => '6 min read',
                 'author' => 'Dr Namrata Jain',
                 'date' => 'August 2026',
+                'image' => '/images/blog/research-paper-submission-checklist-postgraduate-students.webp',
                 'excerpt' => 'A rigorous 12-point quality gate for PG researchers to ensure formatting, plagiarism checks, double-blind isolation, and citation credibility.'
             ],
             [
@@ -32,6 +34,7 @@ class BlogService
                 'readTime' => '8 min read',
                 'author' => 'Technical Editors',
                 'date' => 'August 2026',
+                'image' => '/images/blog/apa-7-ieee-citation-examples-indian-researchers.webp',
                 'excerpt' => 'Detailed formatting examples for citing Indian journals, books, digital DOIs, and online datasets in APA 7th edition and IEEE formats.'
             ],
             [
@@ -41,6 +44,7 @@ class BlogService
                 'readTime' => '6 min read',
                 'author' => 'Sanmati Editorial Directorate',
                 'date' => 'February 2026',
+                'image' => '/images/blog/how-to-publish-research-paper-in-india.webp',
                 'excerpt' => 'Step-by-step guide covering manuscript formatting, journal selection, UGC CARE parameters, plagiarism checks, and double-blind peer review.'
             ],
             [
@@ -50,6 +54,7 @@ class BlogService
                 'readTime' => '8 min read',
                 'author' => 'Dr Namrata Jain',
                 'date' => 'January 2026',
+                'image' => '/images/blog/ugc-care-journal-guidelines-and-ethics.webp',
                 'excerpt' => 'Understanding UGC CARE list parameters, COPE ethics compliance, and citation credibility for Indian academicians.'
             ],
             [
@@ -59,6 +64,7 @@ class BlogService
                 'readTime' => '5 min read',
                 'author' => 'Technical Editors',
                 'date' => 'January 2026',
+                'image' => '/images/blog/apa-7th-vs-ieee-citation-styles-guide.webp',
                 'excerpt' => 'Detailed reference examples for formatting in-text citations, journal articles, books, and digital DOIs accurately.'
             ],
             [
@@ -68,6 +74,7 @@ class BlogService
                 'readTime' => '7 min read',
                 'author' => 'Research Directorate',
                 'date' => 'December 2025',
+                'image' => '/images/blog/scopus-vs-web-of-science-indexing-metrics.webp',
                 'excerpt' => 'Comparative analysis of Impact Factors, h-index calculation, and citation tracking databases for scholars.'
             ]
         ];

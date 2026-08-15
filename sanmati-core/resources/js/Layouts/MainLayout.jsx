@@ -8,7 +8,7 @@ import { MessageCircle, ArrowUp } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import SmartSearchModal from '../Components/SmartSearchModal';
 
-export default function MainLayout({ children, title, description, keywords, jsonLd, aiSummary }) {
+export default function MainLayout({ children, title, description, keywords, image, jsonLd, aiSummary }) {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
 
@@ -41,7 +41,7 @@ export default function MainLayout({ children, title, description, keywords, jso
             {/* Scroll Progress Bar */}
             <motion.div style={{ scaleX }} className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 origin-left z-[110]" />
             
-            <Seo title={title} description={description} keywords={keywords} jsonLd={jsonLd} aiSummary={aiSummary} />
+            <Seo title={title} description={description} keywords={keywords} image={image} jsonLd={jsonLd} aiSummary={aiSummary} />
             
             <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-6 focus:py-3 focus:bg-blue-600 focus:text-white focus:rounded-xl focus:shadow-xl font-bold text-sm">
                 Skip to main content

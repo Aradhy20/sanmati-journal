@@ -311,6 +311,44 @@ export default function Archive({ issues }) {
                                         </div>
                                     </div>
 
+                                    {/* Optional Issue Cover Banner for Volume 1 */}
+                                    {String(issue.volume) === '1' && (
+                                        <div className="bg-gradient-to-r from-blue-900/5 via-slate-50 to-amber-500/5 border-b border-[#E9E5DD] px-6 py-4 flex flex-col sm:flex-row items-center gap-5">
+                                            <div className="w-20 sm:w-24 shrink-0 rounded-lg overflow-hidden border border-slate-200 shadow-sm bg-white aspect-[3/4]">
+                                                <picture>
+                                                    <source srcSet="/images/archive/vol1_official_cover.webp" type="image/webp" />
+                                                    <img
+                                                        src="/images/archive/vol1_official_cover.png"
+                                                        alt="Sanmati Spectrum Volume 1 Issue 1 (January–March 2026) Official Issue Cover"
+                                                        width="96"
+                                                        height="128"
+                                                        loading="lazy"
+                                                        className="w-full h-full object-cover"
+                                                    />
+                                                </picture>
+                                            </div>
+                                            <div className="flex-1 text-center sm:text-left space-y-1">
+                                                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-blue-100/80 text-blue-800 text-[10px] font-bold uppercase tracking-wider">
+                                                    <BookOpen className="w-3 h-3" /> Official Publication Issue
+                                                </div>
+                                                <h4 className="text-xs font-serif font-bold text-slate-900">
+                                                    Sanmati Spectrum of Knowledge &amp; Emerging Discourse — Vol 1 (Jan–Mar 2026)
+                                                </h4>
+                                                <p className="text-[11px] text-slate-500 font-medium">
+                                                    Inaugural multidisciplinary volume with CrossRef DOIs, ISSN 3108-1819, and full peer-reviewed articles.
+                                                </p>
+                                            </div>
+                                            <div className="shrink-0">
+                                                <a
+                                                    href="/download/issue/vol1-issue1"
+                                                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-primary hover:bg-primary-dark text-white text-xs font-bold transition-colors shadow-xs"
+                                                >
+                                                    <Download className="w-3.5 h-3.5" /> Download Issue
+                                                </a>
+                                            </div>
+                                        </div>
+                                    )}
+
                                     {/* Papers Grid */}
                                     <div className="p-6 bg-[#FFFDF8]/20">
                                         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">

@@ -27,7 +27,11 @@ export default function BlogShow({ post = null }) {
     };
 
     return (
-        <MainLayout title={`${articleData.title} | Sanmati Spectrum Blog`} description={articleData.title}>
+        <MainLayout
+            title={`${articleData.title} | Sanmati Spectrum Blog`}
+            description={articleData.title}
+            image={articleData.image}
+        >
             <div className="py-12 bg-white min-h-[85vh]">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
                     
@@ -51,6 +55,20 @@ export default function BlogShow({ post = null }) {
                             <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> {articleData.readTime}</span>
                         </div>
                     </div>
+
+                    {/* Featured Image */}
+                    {articleData.image && (
+                        <div className="rounded-2xl overflow-hidden border border-slate-200/80 aspect-[16/9] shadow-xs bg-slate-900">
+                            <img
+                                src={articleData.image}
+                                alt={articleData.title}
+                                width="800"
+                                height="450"
+                                fetchPriority="high"
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
+                    )}
 
                     {/* Article Body */}
                     <div

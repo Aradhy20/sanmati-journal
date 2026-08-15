@@ -120,9 +120,9 @@ export default function Footer() {
 
                         {/* Contact details */}
                         <div className="space-y-2.5">
-                            <a href="mailto:sanmatispectrum@gmail.com" className="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group">
+                            <a href="mailto:sanmatijournal@gmail.com" className="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group">
                                 <Mail className="w-4 h-4 text-blue-400 group-hover:text-blue-300 shrink-0" />
-                                sanmatispectrum@gmail.com
+                                sanmatijournal@gmail.com
                             </a>
                             <a href="tel:+918979782949" className="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group">
                                 <Phone className="w-4 h-4 text-blue-400 group-hover:text-blue-300 shrink-0" />

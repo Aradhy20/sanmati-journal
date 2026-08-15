@@ -20,7 +20,7 @@
             $metaTitle = $meta['title'] ?? 'Sanmati Spectrum of Knowledge & Emerging Discourse (ISSN 3108-1819)';
             $metaDescription = $meta['description'] ?? 'International peer-reviewed multidisciplinary research journal (ISSN 3108-1819). Publish research papers fast in India with CrossRef DOI indexing, open access, and COPE publication ethics.';
             $metaKeywords = $meta['keywords'] ?? 'UGC Care Journal, Multidisciplinary Research Journal, Publish Research Paper in India, Peer Reviewed Journal, ISSN Journal 3108-1819, Open Access Journal, Academic Journal';
-            $metaImage = $meta['image'] ?? 'https://sanmatijournal.in/logo.webp';
+            $metaImage = $meta['image'] ?? 'https://sanmatijournal.in/images/seo/sanmati-journal-og.webp';
             $rawCanonical = $meta['canonical'] ?? url()->current();
             $canonicalUrl = preg_replace('/^https?:\/\/[^\/]+/', 'https://sanmatijournal.in', $rawCanonical);
         @endphp
@@ -194,13 +194,13 @@
                     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
                     })(window,document,'script','dataLayer','GTM-K4FNSFHK');
-                    
+
                     // gtag.js
                     var gt = document.createElement('script');
                     gt.async = true;
                     gt.src = "https://www.googletagmanager.com/gtag/js?id=G-5HWBXKRHF4";
                     document.head.appendChild(gt);
-                    
+
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
                     gtag('js', new Date());

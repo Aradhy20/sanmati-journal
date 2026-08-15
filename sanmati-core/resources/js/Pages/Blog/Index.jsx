@@ -74,6 +74,21 @@ export default function BlogIndex({ posts = [] }) {
                                 className="bg-white border border-slate-200/80 rounded-3xl p-8 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
                             >
                                 <div className="space-y-4">
+                                    {/* Featured Image Thumbnail */}
+                                    {post.image && (
+                                        <Link href={`/blog/${post.slug}`} className="block overflow-hidden rounded-2xl border border-slate-100 aspect-[16/9] bg-slate-100 group">
+                                            <img
+                                                src={post.image}
+                                                alt={post.title}
+                                                width="800"
+                                                height="450"
+                                                loading="lazy"
+                                                decoding="async"
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                            />
+                                        </Link>
+                                    )}
+
                                     <div className="flex items-center justify-between gap-2">
                                         <span className="px-3 py-1 bg-blue-50 text-blue-700 font-bold text-xs uppercase tracking-wider rounded-lg border border-blue-100">
                                             {post.category}

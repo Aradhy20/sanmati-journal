@@ -28,27 +28,42 @@ function AnimatedCounter({ end, suffix = '', duration = 2000 }) {
     return <span ref={ref}>{count.toLocaleString()}{suffix}</span>;
 }
 
-/* ── Mesh/Grid Background ── */
+/* ── Scholarly Hero Background ── */
 function MeshBackground() {
     return (
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-            <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-blue-500/8 blur-[120px]" />
-            <div className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full bg-indigo-500/8 blur-[100px]" />
-            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-cyan-400/6 blur-[80px]" />
+            {/* Real Academic Hero Background Asset */}
+            <picture>
+                <source srcSet="/images/hero-bg.webp" type="image/webp" />
+                <img
+                    src="/images/hero-bg.png"
+                    alt=""
+                    fetchPriority="high"
+                    className="absolute inset-0 w-full h-full object-cover object-center opacity-15 mix-blend-multiply scale-105"
+                />
+            </picture>
+
+            {/* Ambient Academic Glows */}
+            <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-blue-500/10 blur-[130px]" />
+            <div className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full bg-indigo-500/10 blur-[110px]" />
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-cyan-400/8 blur-[90px]" />
+
+            {/* Subtle Academic Grid Texture */}
             <div
-                className="absolute inset-0 opacity-[0.018]"
+                className="absolute inset-0 opacity-[0.012]"
                 style={{
-                    backgroundImage: `linear-gradient(#2563EB 1px, transparent 1px), linear-gradient(90deg, #2563EB 1px, transparent 1px)`,
-                    backgroundSize: '64px 64px',
+                    backgroundImage: `linear-gradient(#1E3A8A 1px, transparent 1px), linear-gradient(90deg, #1E3A8A 1px, transparent 1px)`,
+                    backgroundSize: '48px 48px',
                 }}
             />
-            {[...Array(5)].map((_, i) => (
+
+            {[...Array(4)].map((_, i) => (
                 <motion.div
                     key={i}
-                    className="absolute w-1.5 h-1.5 rounded-full bg-blue-400/25"
-                    style={{ top: `${15 + i * 16}%`, left: `${8 + i * 14}%` }}
-                    animate={{ y: [0, -12, 0], opacity: [0.2, 0.5, 0.2] }}
-                    transition={{ duration: 3 + i * 0.5, repeat: Infinity, delay: i * 0.4 }}
+                    className="absolute w-1.5 h-1.5 rounded-full bg-blue-500/30"
+                    style={{ top: `${18 + i * 20}%`, left: `${10 + i * 22}%` }}
+                    animate={{ y: [0, -10, 0], opacity: [0.3, 0.6, 0.3] }}
+                    transition={{ duration: 3.5 + i * 0.5, repeat: Infinity, delay: i * 0.4 }}
                 />
             ))}
         </div>

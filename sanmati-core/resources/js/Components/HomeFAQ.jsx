@@ -21,7 +21,7 @@ const FAQS = [
     },
     {
         q: 'How do I submit my manuscript?',
-        a: 'Download our author template from the Submission Guidelines page, prepare your manuscript according to the formatting requirements, and submit it via the online portal or by email to sanmatispectrum@gmail.com.',
+        a: 'Download our author template from the Submission Guidelines page, prepare your manuscript according to the formatting requirements, and submit it via the online portal or by email to sanmatijournal@gmail.com.',
     },
     {
         q: 'Can I track the status of my submitted paper?',
@@ -124,7 +124,7 @@ export default function HomeFAQ() {
                             <div className="pt-2">
                                 <p className="text-sm text-slate-500 mb-3">Still have questions?</p>
                                 <a
-                                    href="mailto:sanmatispectrum@gmail.com"
+                                    href="mailto:sanmatijournal@gmail.com"
                                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm font-bold text-slate-700 hover:border-blue-300 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200"
                                 >
                                     Contact Editorial Team

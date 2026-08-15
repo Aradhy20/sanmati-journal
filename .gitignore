@@ -23,3 +23,11 @@ deploy*.zip
 # Compiled build (regenerated on deploy, but tracked for Hostinger direct pull)
 # /public/build
 .git_old_backup/
+
+# Storage framework caches
+/sanmati-core/storage/framework/views/*
+/sanmati-core/storage/framework/cache/*
+/sanmati-core/storage/framework/sessions/*
+!/sanmati-core/storage/framework/views/.gitignore
+!/sanmati-core/storage/framework/cache/.gitignore
+!/sanmati-core/storage/framework/sessions/.gitignore

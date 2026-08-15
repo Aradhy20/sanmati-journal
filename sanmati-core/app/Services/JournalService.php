@@ -174,9 +174,9 @@ class JournalService
     private function seedDefaultTestimonials()
     {
         Testimonial::insert([
-            ['name' => 'Dr. Amit Sharma', 'role' => 'Professor, IIT Delhi', 'text' => "Sanmati's book publications are of exceptional quality. The peer-review process is rigorous and the editorial team is highly responsive.", 'image_url' => '/fistudy-assets/team/team-1-2.jpg', 'stars' => 5],
-            ['name' => 'Prof. Ritu Verma', 'role' => 'Researcher, JNU', 'text' => "The multidisciplinary focus and premium hardcover quality make their publications stand out. I'd recommend to every academic author.", 'image_url' => '/fistudy-assets/team/team-2-1.jpg', 'stars' => 5],
-            ['name' => 'Dr. Pradeep Kumar', 'role' => 'Associate Professor, BHU', 'text' => "From manuscript to final book, the journey was smooth and professional. The global distribution is a huge plus for visibility.", 'image_url' => '/fistudy-assets/team/team-2-2.jpg', 'stars' => 5]
+            ['name' => 'Dr. Amit Sharma', 'role' => 'Professor, IIT Delhi', 'text' => "Sanmati's book publications are of exceptional quality. The peer-review process is rigorous and the editorial team is highly responsive.", 'image_url' => '/images/team/Parikshit Layek.webp', 'stars' => 5],
+            ['name' => 'Prof. Ritu Verma', 'role' => 'Researcher, JNU', 'text' => "The multidisciplinary focus and premium hardcover quality make their publications stand out. I'd recommend to every academic author.", 'image_url' => '/images/team/Dr_Smriti_kumari.webp', 'stars' => 5],
+            ['name' => 'Dr. Pradeep Kumar', 'role' => 'Associate Professor, BHU', 'text' => "From manuscript to final book, the journey was smooth and professional. The global distribution is a huge plus for visibility.", 'image_url' => '/images/team/Dr_Harish_chand.webp', 'stars' => 5]
         ]);
     }
 
