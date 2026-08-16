@@ -39,4 +39,12 @@ class ArticleRouteTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('Empirical Research in Modern Knowledge Systems', false);
     }
+
+    public function test_non_existent_article_redirects_to_archive_with_message()
+    {
+        $response = $this->get('/article/99999');
+
+        $response->assertRedirect(route('archive'));
+        $response->assertSessionHas('error');
+    }
 }
