@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Clock, User, ArrowLeft, Share2, Bookmark, BookOpen, CheckCircle2, FileText, SendHorizonal, Download } from 'lucide-react';
 import MainLayout from '../../Layouts/MainLayout';
@@ -63,6 +64,16 @@ export default function BlogShow({ post = null }) {
         { name: 'Research Blog', href: '/blog' },
         { name: articleData.title, href: '#' }
     ];
+
+    useEffect(() => {
+        if (typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'blog_view',
+                blog_slug: articleData.slug || 'how-to-publish-research-paper-in-india',
+                blog_category: articleData.category || 'Publishing Guide'
+            });
+        }
+    }, [articleData.slug]);
 
     return (
         <MainLayout

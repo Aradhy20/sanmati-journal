@@ -132,6 +132,29 @@ export default function Article({ paper }) {
         ]
     };
 
+    useEffect(() => {
+        if (typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'article_view',
+                article_id: paper.id,
+                article_title: paper.title,
+                journal_volume: volumeNum ? String(volumeNum) : undefined
+            });
+        }
+    }, [paper.id]);
+
+    const trackPaperDownload = () => {
+        if (typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'file_download',
+                file_name: paper.title,
+                file_type: 'pdf',
+                article_id: paper.id,
+                portal_source: 'article_page'
+            });
+        }
+    };
+
     return (
         <MainLayout
             title={`${paper.title} | Peer Reviewed Multidisciplinary Research Journal`}
@@ -261,6 +284,7 @@ export default function Article({ paper }) {
                                     </button>
                                     <a
                                         href={`/download/paper/${paper.id}`}
+                                        onClick={trackPaperDownload}
                                         className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl bg-blue-600 text-white font-bold text-xs uppercase tracking-wider hover:bg-blue-700 transition-colors shadow-md shadow-blue-600/25"
                                     >
                                         <Download className="w-3.5 h-3.5" />
@@ -347,6 +371,7 @@ export default function Article({ paper }) {
                             <div className="flex flex-wrap gap-3 pt-6 border-t border-slate-200">
                                 <a
                                     href={`/download/paper/${paper.id}`}
+                                    onClick={trackPaperDownload}
                                     className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-sm shadow-md shadow-blue-600/25 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200"
                                 >
                                     <Download className="w-4 h-4" />
@@ -418,6 +443,7 @@ export default function Article({ paper }) {
                                 </button>
                                 <a
                                     href={`/download/paper/${paper.id}`}
+                                    onClick={trackPaperDownload}
                                     className="flex items-center gap-2.5 w-full px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-bold text-slate-700 hover:bg-blue-50 hover:border-blue-200 hover:text-blue-700 transition-all"
                                 >
                                     <Download className="w-4 h-4 text-blue-500" />

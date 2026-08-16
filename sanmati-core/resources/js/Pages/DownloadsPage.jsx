@@ -19,6 +19,20 @@ export default function DownloadsPage() {
             category: "Submission Template"
         },
         {
+            title: "Sanmati Research Paper Pre-Submission Checklist",
+            type: "PDF Document (.pdf)",
+            size: "165 KB",
+            url: "/download/submission-checklist",
+            category: "Author Checklist"
+        },
+        {
+            title: "APA 7th & IEEE Academic Citation Style Guide",
+            type: "PDF Document (.pdf)",
+            size: "210 KB",
+            url: "/download/citation-guide",
+            category: "Reference Guide"
+        },
+        {
             title: "Sanmati Spectrum Copyright & Author Declaration Form",
             type: "PDF Document (.pdf)",
             size: "180 KB",
@@ -33,6 +47,17 @@ export default function DownloadsPage() {
             category: "Full Issue"
         }
     ];
+
+    const trackDownload = (item) => {
+        if (typeof window !== 'undefined' && window.dataLayer) {
+            window.dataLayer.push({
+                event: 'file_download',
+                file_name: item.title,
+                file_type: item.type,
+                portal_source: 'downloads_page'
+            });
+        }
+    };
 
     return (
         <MainLayout title="Author Toolkit & Document Downloads | Sanmati Spectrum Journal" description="Download official manuscript templates, copyright assignment forms, and submission checklists for Sanmati Spectrum of Knowledge.">
@@ -62,6 +87,7 @@ export default function DownloadsPage() {
                                     </div>
                                     <a
                                         href={item.url}
+                                        onClick={() => trackDownload(item)}
                                         className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs uppercase tracking-wider rounded-xl flex items-center gap-1.5 shrink-0 transition-colors shadow-md shadow-blue-600/20"
                                     >
                                         <Download className="w-4 h-4" /> Download File

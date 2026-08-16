@@ -404,7 +404,7 @@
     ]
   },
   "resources/js/Pages/Article.jsx": {
-    "file": "assets/Article-Cko2KXMm.js",
+    "file": "assets/Article-CwgQFxQm.js",
     "name": "Article",
     "src": "resources/js/Pages/Article.jsx",
     "isDynamicEntry": true,
@@ -573,7 +573,7 @@
     ]
   },
   "resources/js/Pages/Blog/Show.jsx": {
-    "file": "assets/Show-pfVhvbRb.js",
+    "file": "assets/Show-C9H34a_h.js",
     "name": "Show",
     "src": "resources/js/Pages/Blog/Show.jsx",
     "isDynamicEntry": true,
@@ -632,7 +632,7 @@
     ]
   },
   "resources/js/Pages/DownloadsPage.jsx": {
-    "file": "assets/DownloadsPage-BWHMLYkO.js",
+    "file": "assets/DownloadsPage-CAIQ02nH.js",
     "name": "DownloadsPage",
     "src": "resources/js/Pages/DownloadsPage.jsx",
     "isDynamicEntry": true,
@@ -750,7 +750,7 @@
     ]
   },
   "resources/js/Pages/Home.jsx": {
-    "file": "assets/Home-BdkKWNvp.js",
+    "file": "assets/Home-DFuLII8p.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.jsx",
     "isDynamicEntry": true,
@@ -936,7 +936,7 @@
     ]
   },
   "resources/js/Pages/SubmissionGuidelines/CallForPapers.jsx": {
-    "file": "assets/CallForPapers-DX8M2aDL.js",
+    "file": "assets/CallForPapers-CjmPVB_Z.js",
     "name": "CallForPapers",
     "src": "resources/js/Pages/SubmissionGuidelines/CallForPapers.jsx",
     "isDynamicEntry": true,
@@ -1045,7 +1045,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-BT8aoFAG.js",
+    "file": "assets/app-DL86H5jw.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
