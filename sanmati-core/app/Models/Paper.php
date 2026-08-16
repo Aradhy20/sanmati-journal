@@ -13,6 +13,7 @@ class Paper extends Model
 
 
     protected $fillable = [
+        'id',
         'issue_id',
         'title',
         'slug',

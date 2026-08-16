@@ -271,13 +271,14 @@ class JournalController extends Controller
                         '--class' => 'Database\\Seeders\\ArchivePapersSeeder',
                         '--force' => true,
                     ]);
-                } elseif (!\App\Models\Paper::where('id', 81)->exists()) {
-                    $vol1 = \App\Models\Issue::where('volume', '1')->where('number', '1')->first();
+                } elseif (!\Illuminate\Support\Facades\DB::table('papers')->where('id', 81)->exists()) {
+                    $vol1 = \Illuminate\Support\Facades\DB::table('issues')->where('volume', '1')->where('number', '1')->first();
                     if ($vol1) {
-                        \App\Models\Paper::create([
+                        \Illuminate\Support\Facades\DB::table('papers')->insert([
                             'id' => 81,
                             'issue_id' => $vol1->id,
                             'title' => 'Sanmati Spectrum of Knowledge & Emerging Discourse (January-March, 2026)',
+                            'slug' => 'sanmati-spectrum-of-knowledge-emerging-discourse-january-march-2026',
                             'authors' => 'Dr. Namrata Jain (President & Editor-in-Chief), Dr. Ratnesh Kumar Jain (Managing Editor)',
                             'abstract' => 'The January-March 2026 issue (Vol-1, Issue-1) of Sanmati Spectrum of Knowledge & Emerging Discourse — a national peer-reviewed multidisciplinary research journal in English & Hindi.',
                             'keywords' => 'Inaugural Issue, Complete Compilation, Multidisciplinary Research Journal',
@@ -285,9 +286,11 @@ class JournalController extends Controller
                             'doi' => 'https://doi.org/10.5281/zenodo.19710093',
                             'citations' => 15,
                             'category' => 'Complete Issue Book',
-                            'is_featured' => true,
+                            'is_featured' => 1,
                             'meta_title' => 'Inaugural Issue Vol-1 Issue-1 (Jan-Mar 2026) | Sanmati Journal',
                             'meta_description' => 'Official full issue compilation of Sanmati Spectrum of Knowledge & Emerging Discourse (January-March, 2026) in Hindi & English.',
+                            'created_at' => now(),
+                            'updated_at' => now(),
                         ]);
                     }
                 }
