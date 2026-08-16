@@ -25,6 +25,7 @@ class SitemapController extends Controller
             $urls = [
                 // Core
                 ['loc' => $baseUrl . '/',                                              'priority' => '1.0', 'changefreq' => 'daily',   'lastmod' => $static_updated],
+                ['loc' => $baseUrl . '/announcements/international-seminar-gen-z-2026','priority' => '0.9', 'changefreq' => 'daily',   'lastmod' => $static_updated],
                 ['loc' => $baseUrl . '/about-journal',                                 'priority' => '0.9', 'changefreq' => 'monthly', 'lastmod' => $static_updated],
                 ['loc' => $baseUrl . '/archive',                                       'priority' => '0.9', 'changefreq' => 'weekly',  'lastmod' => $static_updated],
                 ['loc' => $baseUrl . '/current-issue',                                 'priority' => '0.9', 'changefreq' => 'weekly',  'lastmod' => $static_updated],

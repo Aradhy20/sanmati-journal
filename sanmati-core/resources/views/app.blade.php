@@ -79,7 +79,9 @@
                     'downloads' => ['Author Toolkit & Document Downloads | Sanmati Spectrum', 'Download official manuscript templates, copyright assignment forms, and submission checklists.'],
                     'contact' => ['Contact Editorial Directorate | Sanmati Spectrum', 'Get in touch with the editorial team and administrative secretariat of Sanmati Spectrum.'],
                     'book-publication' => ['Academic Book & Monograph Publication | Sanmati Spectrum', 'Publish academic edited volumes, conference proceedings, and scholarly monographs with ISBN.'],
-                    'track-manuscript' => ['Track Manuscript Status | Sanmati Spectrum', 'Track real-time peer review status and editorial lifecycle of your submitted manuscript.']
+                    'track-manuscript' => ['Track Manuscript Status | Sanmati Spectrum', 'Track real-time peer review status and editorial lifecycle of your submitted manuscript.'],
+                    'announcements/international-seminar-gen-z-2026' => ['International Seminar on Gen Z, Education, Digital Culture & Innovation | Sanmati Journal', 'International seminar and research paper presentation on GEN Z: Education, Digital Culture, Innovation and Social Transformation organized by SERFI & Bhagwan Adinath College of Education on 05 September 2026.'],
+                    'announcements' => ['Official Academic Announcements & Conferences | Sanmati Spectrum', 'Official academic announcements, calls for papers, international seminars, and conference notifications from Sanmati Spectrum of Knowledge.']
                 ];
 
                 if (isset($routeTitles[$currentPath])) {

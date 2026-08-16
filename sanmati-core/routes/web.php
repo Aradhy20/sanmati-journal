@@ -32,6 +32,7 @@ Route::get('/robots.txt', function () {
         . "Disallow: /forgot-password\n"
         . "Disallow: /reset-password\n"
         . "Allow: /\n"
+        . "Allow: /announcements/\n"
         . "Allow: /archive\n"
         . "Allow: /article/\n"
         . "Allow: /download/\n"
@@ -53,6 +54,10 @@ Route::get('/feed', [\App\Http\Controllers\RssController::class, 'feed']);
 Route::post('/api/newsletter/subscribe', [\App\Http\Controllers\NewsletterController::class, 'subscribe'])->name('newsletter.subscribe')->middleware('throttle:5,1');
 Route::get('/api/newsletter/unsubscribe/{email}', [\App\Http\Controllers\NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe')->middleware('signed');
 Route::post('/api/submission/precheck', [\App\Http\Controllers\Api\AiPrecheckController::class, 'precheck'])->name('api.submission.precheck')->middleware('throttle:10,1');
+
+// Official Announcements & Conference Notice Board
+Route::get('/announcements/international-seminar-gen-z-2026', [\App\Http\Controllers\AnnouncementController::class, 'internationalSeminar2026'])->name('announcements.seminar2026');
+Route::get('/announcements', [\App\Http\Controllers\AnnouncementController::class, 'index'])->name('announcements.index');
 
 Route::redirect('/submit', '/submission-guidelines/call-for-papers', 301);
 Route::redirect('/editorial-team', '/editorial-team/editors', 301);

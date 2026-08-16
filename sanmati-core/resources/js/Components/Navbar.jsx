@@ -32,6 +32,7 @@ const NAV_ITEMS = [
     {
         name: 'Authors',
         dropdown: [
+            { name: 'Conference 2026',       href: '/announcements/international-seminar-gen-z-2026', icon: Award,        desc: 'International Seminar & Best Teacher Award' },
             { name: 'Call for Papers',       href: '/submission-guidelines/call-for-papers',    icon: SendHorizonal, desc: 'Submit your research now' },
             { name: 'Submission Guidelines', href: '/submission-guidelines',                      icon: FileText,      desc: 'Formatting & manuscript rules' },
             { name: 'Research Areas',        href: '/submission-guidelines/areas',                icon: FlaskConical,  desc: 'Disciplines we accept' },
@@ -241,12 +242,16 @@ export default function Navbar({ onOpenSearch }) {
                         </span>
                     </div>
                     <div className="flex items-center gap-4 ml-auto">
+                        <Link href="/announcements/international-seminar-gen-z-2026" className="hover:text-amber-300 transition-colors flex items-center gap-1 text-amber-400 font-semibold">
+                            <Sparkles className="w-3 h-3 text-amber-400" />
+                            Seminar 2026
+                        </Link>
                         <Link href="/blog" className="hover:text-white transition-colors flex items-center gap-1">
                             <BookOpen className="w-3 h-3 text-cyan-400" />
                             Research Blog
                         </Link>
                         <Link href="/downloads" className="hover:text-white transition-colors flex items-center gap-1">
-                            <Award className="w-3 h-3 text-amber-400" />
+                            <Award className="w-3 h-3 text-slate-400" />
                             Downloads
                         </Link>
                         <a href="mailto:sanmatijournal@gmail.com" className="hover:text-white transition-colors hidden sm:flex items-center gap-1">

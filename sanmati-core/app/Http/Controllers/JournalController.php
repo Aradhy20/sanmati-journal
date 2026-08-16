@@ -33,11 +33,12 @@ class JournalController extends Controller
         ->first();
 
         return Inertia::render('Home', [
-            'newsItems'     => $this->journalService->getActiveNews(),
+            'newsItems' => $this->journalService->getActiveNews(),
             'featuredPapers' => $this->journalService->getFeaturedPapers(),
-            'testimonials'  => $this->journalService->getActiveTestimonials(),
-            'currentIssue'  => $currentIssue,
-            'metrics'       => $this->journalService->getJournalStats(),
+            'testimonials' => $this->journalService->getActiveTestimonials(),
+            'currentIssue' => $currentIssue,
+            'metrics' => $this->journalService->getJournalStats(),
+            'featuredAnnouncement' => \App\Services\AnnouncementService::getConferenceAnnouncement(),
         ]);
     }
 
@@ -262,7 +263,7 @@ class JournalController extends Controller
     public function article($id)
     {
         $paper = \App\Models\Paper::with('issue')->findOrFail($id);
-        
+
         return Inertia::render('Article', [
             'paper' => $paper
         ])->withViewData([

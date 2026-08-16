@@ -133,13 +133,23 @@ export default function Seo({
             <script type="application/ld+json">
                 {JSON.stringify(websiteJsonLd)}
             </script>
-            <script type="application/ld+json">
-                {JSON.stringify(jsonLd?.schema || journalJsonLd)}
-            </script>
-            {breadcrumbJsonLd && (
-                <script type="application/ld+json">
-                    {JSON.stringify(breadcrumbJsonLd)}
-                </script>
+            {Array.isArray(jsonLd) ? (
+                jsonLd.map((schemaItem, idx) => (
+                    <script key={idx} type="application/ld+json">
+                        {JSON.stringify(schemaItem)}
+                    </script>
+                ))
+            ) : (
+                <>
+                    <script type="application/ld+json">
+                        {JSON.stringify(jsonLd?.schema || journalJsonLd)}
+                    </script>
+                    {breadcrumbJsonLd && (
+                        <script type="application/ld+json">
+                            {JSON.stringify(breadcrumbJsonLd)}
+                        </script>
+                    )}
+                </>
             )}
         </Head>
     );
