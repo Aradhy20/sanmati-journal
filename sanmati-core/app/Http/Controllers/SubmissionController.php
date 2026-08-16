@@ -154,12 +154,12 @@ class SubmissionController extends Controller
 
             if ($request->header('X-Inertia')) {
                 return redirect()->back()->withErrors([
-                    'submission' => 'An error occurred while saving your manuscript submission: ' . $e->getMessage()
+                    'submission' => 'An error occurred while saving your manuscript submission. Please try again or contact support.'
                 ])->withInput();
             }
 
             return response()->json([
-                'error' => 'An error occurred while processing your manuscript submission: ' . $e->getMessage()
+                'error' => 'An error occurred while processing your manuscript submission. Please try again.'
             ], 500);
         }
 
