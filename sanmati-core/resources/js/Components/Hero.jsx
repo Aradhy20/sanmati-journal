@@ -85,22 +85,6 @@ function AnimatedCounter({ end, suffix = '', duration = 2000 }) {
 function MeshBackground() {
     return (
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-            {/* Real Academic Hero Background Asset */}
-            <picture>
-                {/* Mobile: 480×480, 35KB — served on screens ≤768px */}
-                <source media="(max-width: 768px)" srcSet="/images/hero-bg-mobile.webp" type="image/webp" />
-                {/* Desktop: 1024×1024, 169KB */}
-                <source srcSet="/images/hero-bg.webp" type="image/webp" />
-                <img
-                    src="/images/hero-bg-mobile.webp"
-                    alt=""
-                    fetchPriority="high"
-                    width="480"
-                    height="480"
-                    className="absolute inset-0 w-full h-full object-cover object-center opacity-15 mix-blend-multiply scale-105"
-                />
-            </picture>
-
             {/* Ambient Academic Glows */}
             <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-blue-500/10 blur-[130px]" />
             <div className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full bg-indigo-500/10 blur-[110px]" />
@@ -108,7 +92,7 @@ function MeshBackground() {
 
             {/* Subtle Academic Grid Texture */}
             <div
-                className="absolute inset-0 opacity-[0.012]"
+                className="absolute inset-0 opacity-[0.015]"
                 style={{
                     backgroundImage: `linear-gradient(#1E3A8A 1px, transparent 1px), linear-gradient(90deg, #1E3A8A 1px, transparent 1px)`,
                     backgroundSize: '48px 48px',

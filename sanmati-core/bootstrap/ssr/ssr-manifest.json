@@ -22,19 +22,19 @@
     "/build/assets/Graphics-CM2sKpeB.js"
   ],
   "resources/js/Components/Hero.jsx": [
-    "/build/assets/Home-BRV2wMMB.js"
+    "/build/assets/Home-Bc8hNyBj.js"
   ],
   "resources/js/Components/HomeFAQ.jsx": [
     "/build/assets/HomeFAQ-CqXEqKUS.js"
   ],
   "resources/js/Components/LatestIssueShowcase.jsx": [
-    "/build/assets/Home-BRV2wMMB.js"
+    "/build/assets/Home-Bc8hNyBj.js"
   ],
   "resources/js/Components/LatestPapersSection.jsx": [
-    "/build/assets/Home-BRV2wMMB.js"
+    "/build/assets/Home-Bc8hNyBj.js"
   ],
   "resources/js/Components/LiveStats.jsx": [
-    "/build/assets/Home-BRV2wMMB.js"
+    "/build/assets/Home-Bc8hNyBj.js"
   ],
   "resources/js/Components/Navbar.jsx": [
     "/build/assets/MainLayout-DEtHcZHW.js"
@@ -43,7 +43,7 @@
     "/build/assets/NewsletterSection-MI_F-dYJ.js"
   ],
   "resources/js/Components/NoticeBoard.jsx": [
-    "/build/assets/Home-BRV2wMMB.js"
+    "/build/assets/Home-Bc8hNyBj.js"
   ],
   "resources/js/Components/PageHeader.jsx": [
     "/build/assets/PageHeader-CCKcOHLK.js"
@@ -76,7 +76,7 @@
     "/build/assets/Testimonials-DgJxm_ns.js"
   ],
   "resources/js/Components/TrustCredentials.jsx": [
-    "/build/assets/Home-BRV2wMMB.js"
+    "/build/assets/Home-Bc8hNyBj.js"
   ],
   "resources/js/Components/WhyPublishSection.jsx": [
     "/build/assets/WhyPublishSection-DVMbpkhg.js"
@@ -247,7 +247,7 @@
     "/build/assets/Photo-BZltghum.js"
   ],
   "resources/js/Pages/Home.jsx": [
-    "/build/assets/Home-BRV2wMMB.js"
+    "/build/assets/Home-Bc8hNyBj.js"
   ],
   "resources/js/Pages/Institution/Profile.jsx": [
     "/build/assets/Profile-D0jgIvMj.js"

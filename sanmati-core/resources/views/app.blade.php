@@ -13,7 +13,6 @@
         <link rel="manifest" href="/manifest.json">
         <meta name="theme-color" content="#8B1538">
         <link rel="icon" type="image/webp" href="/logo.webp">
-        <link rel="shortcut icon" href="/logo.jpg">
         <link rel="apple-touch-icon" href="/logo.webp">
 
         <!-- Google Search Console Verification -->
@@ -268,21 +267,7 @@
         {{-- PERFORMANCE: CRITICAL RESOURCE PRELOADS                      --}}
         {{-- ============================================================ --}}
 
-        {{-- Preload hero background image on homepage only.               --}}
-        {{-- The <picture> tag is inside a React component — the browser   --}}
-        {{-- preload scanner cannot discover it. This hint makes the       --}}
-        {{-- browser fetch the image in parallel with CSS/JS parsing.      --}}
-        @if($currentPath === '')
-        {{-- Mobile (≤768px): preload the 35KB variant; desktop: preload the full 169KB --}}
-        <link rel="preload" as="image" href="/images/hero-bg-mobile.webp" type="image/webp"
-              imagesrcset="/images/hero-bg-mobile.webp 480w, /images/hero-bg.webp 1024w"
-              imagesizes="100vw" fetchpriority="high">
-        @endif
-
-        {{-- Direct preload of Space Grotesk 700 latin WOFF2.             --}}
-        {{-- Skips the 2-RTT Google Fonts chain (fonts.googleapis.com CSS  --}}
-        {{-- → fonts.gstatic.com WOFF2). H1 is the LCP element and uses   --}}
-        {{-- this exact font weight. Only the latin subset is needed.      --}}
+        {{-- Direct preload of Space Grotesk 700 latin WOFF2 for instant H1 LCP paint --}}
         <link rel="preload" as="font" type="font/woff2" crossorigin
               href="https://fonts.gstatic.com/s/spacegrotesk/v22/V8mQoQDjQSkFtoMM3T6r8E7mF71Q-gOoraIAEj4PVnskPMBBTyJL.woff2">
 
@@ -308,34 +293,27 @@
             gtag('js', new Date());
             gtag('config', 'G-5HWBXKRHF4', { 'send_page_view': false });
 
-            // Deferred Non-blocking Loader for GTM & GA4 (Runs after paint / idle)
+            // Deferred Non-blocking Loader for GTM (GTM container executes GA4 without duplicate script fetch)
             (function() {
                 var loaded = false;
                 function loadAnalytics() {
                     if (loaded) return;
                     loaded = true;
 
-                    // GTM Container
                     var gtmScript = document.createElement('script');
                     gtmScript.async = true;
                     gtmScript.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-K4FNSFHK';
                     document.head.appendChild(gtmScript);
-
-                    // GA4 gtag
-                    var gtagScript = document.createElement('script');
-                    gtagScript.async = true;
-                    gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-5HWBXKRHF4';
-                    document.head.appendChild(gtagScript);
                 }
 
                 if ('requestIdleCallback' in window) {
-                    window.requestIdleCallback(function() { setTimeout(loadAnalytics, 1500); });
+                    window.requestIdleCallback(function() { setTimeout(loadAnalytics, 4000); });
                 } else {
-                    window.addEventListener('load', function() { setTimeout(loadAnalytics, 2000); });
+                    window.addEventListener('load', function() { setTimeout(loadAnalytics, 4000); });
                 }
 
-                // Trigger on first user interaction if before idle
-                ['scroll', 'keydown', 'touchstart', 'click'].forEach(function(e) {
+                // Trigger immediately on first user interaction
+                ['scroll', 'keydown', 'touchstart', 'click', 'mousemove'].forEach(function(e) {
                     window.addEventListener(e, loadAnalytics, { once: true, passive: true });
                 });
             })();
