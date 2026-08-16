@@ -22,19 +22,19 @@
     "/build/assets/Graphics-CM2sKpeB.js"
   ],
   "resources/js/Components/Hero.jsx": [
-    "/build/assets/Home-BYqWrwyk.js"
+    "/build/assets/Home-BrZ8sDd9.js"
   ],
   "resources/js/Components/HomeFAQ.jsx": [
     "/build/assets/HomeFAQ-DyX4q6Pv.js"
   ],
   "resources/js/Components/LatestIssueShowcase.jsx": [
-    "/build/assets/Home-BYqWrwyk.js"
+    "/build/assets/Home-BrZ8sDd9.js"
   ],
   "resources/js/Components/LatestPapersSection.jsx": [
-    "/build/assets/Home-BYqWrwyk.js"
+    "/build/assets/Home-BrZ8sDd9.js"
   ],
   "resources/js/Components/LiveStats.jsx": [
-    "/build/assets/Home-BYqWrwyk.js"
+    "/build/assets/Home-BrZ8sDd9.js"
   ],
   "resources/js/Components/Navbar.jsx": [
     "/build/assets/MainLayout-CUnfmzog.js"
@@ -73,7 +73,7 @@
     "/build/assets/Testimonials-mOjIKtC6.js"
   ],
   "resources/js/Components/TrustCredentials.jsx": [
-    "/build/assets/Home-BYqWrwyk.js"
+    "/build/assets/Home-BrZ8sDd9.js"
   ],
   "resources/js/Components/WhyPublishSection.jsx": [
     "/build/assets/WhyPublishSection-CU4_4Xnr.js"
@@ -241,7 +241,7 @@
     "/build/assets/Photo-BzJrpJ_r.js"
   ],
   "resources/js/Pages/Home.jsx": [
-    "/build/assets/Home-BYqWrwyk.js"
+    "/build/assets/Home-BrZ8sDd9.js"
   ],
   "resources/js/Pages/Institution/Profile.jsx": [
     "/build/assets/Profile-BYR8nLM8.js"

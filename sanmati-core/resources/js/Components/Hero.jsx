@@ -46,12 +46,30 @@ function injectHeroKeyframes() {
 function AnimatedCounter({ end, suffix = '', duration = 2000 }) {
     const [count, setCount] = useState(0);
     const ref = useRef(null);
-    const inView = useInView(ref, { once: true, margin: '-80px' });
+    const [inView, setInView] = useState(false);
+
+    useEffect(() => {
+        if (typeof IntersectionObserver === 'undefined' || !ref.current) {
+            setInView(true);
+            return;
+        }
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+                setInView(true);
+                observer.disconnect();
+            }
+        }, { rootMargin: '-40px' });
+
+        if (ref.current) {
+            observer.observe(ref.current);
+        }
+        return () => observer.disconnect();
+    }, []);
 
     useEffect(() => {
         if (!inView) return;
         let start = 0;
-        const step = end / (duration / 16);
+        const step = Math.max(1, end / (duration / 16));
         const timer = setInterval(() => {
             start += step;
             if (start >= end) { setCount(end); clearInterval(timer); }
