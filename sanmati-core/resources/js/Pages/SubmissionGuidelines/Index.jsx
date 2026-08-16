@@ -83,7 +83,52 @@ export default function SubmissionGuidelines() {
                 />
 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-24">
-                    <div className="max-w-6xl mx-auto mt-12">
+                    <div className="max-w-6xl mx-auto mt-8 space-y-10">
+
+                        {/* ─── AEO QUICK AUTHOR ANSWERS ─── */}
+                        <div className="bg-white border border-blue-100 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+                                <div>
+                                    <span className="px-3 py-1 bg-blue-50 text-blue-700 font-bold text-[10px] uppercase tracking-wider rounded-lg border border-blue-100">
+                                        Quick Author Summary
+                                    </span>
+                                    <h2 className="text-xl sm:text-2xl font-serif font-bold text-slate-900 mt-2">
+                                        Essential Submission Parameters & Timelines
+                                    </h2>
+                                </div>
+                                <div className="flex flex-wrap gap-2 shrink-0">
+                                    <Link
+                                        href="/submission-guidelines/call-for-papers"
+                                        className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl transition-colors shadow-xs"
+                                    >
+                                        Submit Paper Online
+                                    </Link>
+                                    <a
+                                        href="/download/author-guidelines-template"
+                                        className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-colors"
+                                    >
+                                        Download .docx Template
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-600 leading-relaxed font-medium">
+                                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1.5">
+                                    <h3 className="font-bold text-slate-900 text-sm">1. Formatting & Languages</h3>
+                                    <p>Submit in <strong>MS Word (.doc/.docx)</strong> format. Use <strong>Times New Roman</strong> for English or <strong>Mangal Unicode</strong> for Hindi. Follow standard APA 7 or IEEE referencing.</p>
+                                </div>
+                                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1.5">
+                                    <h3 className="font-bold text-slate-900 text-sm">2. Peer Review Timeline</h3>
+                                    <p>Submissions undergo double-blind peer review by 2+ external referees. Initial editorial screening takes 3–5 days; full peer review completes in <strong>15–30 days</strong>.</p>
+                                </div>
+                                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1.5">
+                                    <h3 className="font-bold text-slate-900 text-sm">3. Plagiarism & Ethics</h3>
+                                    <p>Strict zero-tolerance policy. Similarity index must be <strong>below 10%</strong> (excluding references). All accepted papers receive a permanent <strong>CrossRef DOI</strong>.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* ─── GUIDELINE HUBS GRID ─── */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             <DotPattern className="opacity-10" />
                             {sections.map((section, idx) => (
@@ -120,7 +165,7 @@ export default function SubmissionGuidelines() {
                         </div>
 
                         {/* Quick Call to Action */}
-                        <div className="mt-16 p-10 bg-dark text-white rounded-3xl shadow-2xl relative overflow-hidden">
+                        <div className="p-10 bg-dark text-white rounded-3xl shadow-2xl relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-64 h-64 bg-primary rounded-full -mr-32 -mt-32 opacity-20"></div>
                             <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
                                 <div className="max-w-2xl text-center md:text-left">
@@ -130,8 +175,11 @@ export default function SubmissionGuidelines() {
                                     </p>
                                 </div>
                                 <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
-                                    <a href="mailto:sanmatijournal@gmail.com" className="px-8 py-4 bg-primary text-white font-bold rounded-full hover:bg-primary transition-all flex items-center justify-center gap-2">
-                                        <Mail className="w-5 h-5" /> Submit via Email
+                                    <Link href="/submission-guidelines/call-for-papers" className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30">
+                                        Submit Online Portal <ArrowRight className="w-4 h-4" />
+                                    </Link>
+                                    <a href="mailto:sanmatijournal@gmail.com" className="px-6 py-4 bg-slate-800 text-slate-300 font-bold rounded-full hover:bg-slate-700 transition-all flex items-center justify-center gap-2">
+                                        <Mail className="w-4 h-4" /> Email Submission
                                     </a>
                                 </div>
                             </div>

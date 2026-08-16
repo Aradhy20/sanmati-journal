@@ -429,6 +429,23 @@ export default function CallForPapers() {
                                             {/* STEP 1: PAPER INFORMATION */}
                                             {step === 1 && (
                                                 <motion.div key="step1" initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -5 }} className="space-y-6">
+
+                                                    {/* Call for Papers Quick Info & Template Banner */}
+                                                    <div className="p-4 rounded-xl bg-blue-50/70 border border-blue-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                                                        <div>
+                                                            <p className="font-bold text-slate-900">Call for Papers 2026 — Multidisciplinary Submissions</p>
+                                                            <p className="text-slate-600 font-medium">Double-Blind Peer Review (15–30 Days) • CrossRef DOI • Open Access CC-BY 4.0</p>
+                                                        </div>
+                                                        <div className="flex gap-2 shrink-0">
+                                                            <a href="/download/author-guidelines-template" className="px-3 py-1.5 bg-white border border-blue-200 text-blue-700 font-bold rounded-lg hover:bg-blue-100/50 transition-colors">
+                                                                Word Template (.docx)
+                                                            </a>
+                                                            <a href="/download/submission-checklist" className="px-3 py-1.5 bg-white border border-blue-200 text-blue-700 font-bold rounded-lg hover:bg-blue-100/50 transition-colors">
+                                                                Checklist (.pdf)
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
                                                     <div className="border-b border-[#E9E5DD]/80 pb-4">
                                                         <span className="text-[10px] font-bold text-primary uppercase tracking-wider bg-primary/10 px-2.5 py-1 rounded-md">Step 1 of 4</span>
                                                         <h2 className="text-xl font-serif font-bold text-dark mt-2 mb-0.5">Paper & Author Metadata</h2>

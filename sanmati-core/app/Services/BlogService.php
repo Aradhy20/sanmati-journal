@@ -204,12 +204,141 @@ class BlogService
 
                 <p class="text-xs text-slate-400">Last Updated: August 2026</p>
             ';
+        } elseif ($slug === 'how-to-publish-research-paper-in-india') {
+            $content = '
+                <h3>1. Complete Step-by-Step Roadmap to Publish Research in India</h3>
+                <p>Publishing an academic research paper in India requires careful alignment with international academic standards and ethical publishing principles. Research authors must ensure their manuscript presents original empirical evidence, valid statistical analysis, and ethical citations.</p>
+
+                <h3>2. The 6-Stage Publishing Process</h3>
+                <ol>
+                    <li><strong>Manuscript Preparation:</strong> Format your paper using the <a href="/download/author-guidelines-template" class="text-blue-600 hover:underline">Official MS Word .docx template</a> with structured abstract, keywords, methodology, results, and references.</li>
+                    <li><strong>Plagiarism Screening:</strong> Screen similarity index using anti-plagiarism tools to ensure it remains below 10% (excluding bibliography).</li>
+                    <li><strong>Journal Selection:</strong> Choose a peer-reviewed multidisciplinary journal registered with an official ISSN (such as Sanmati Spectrum, ISSN 3108-1819) that assigns persistent CrossRef DOIs.</li>
+                    <li><strong>Online Submission:</strong> Submit through the <a href="/submission-guidelines/call-for-papers" class="text-blue-600 hover:underline">Manuscript Submission Portal</a> with complete author affiliations.</li>
+                    <li><strong>Double-Blind Peer Review:</strong> Undergo independent evaluation by 2+ subject experts within 15–30 days.</li>
+                    <li><strong>Production & Indexing:</strong> Receive formal acceptance, DOI assignment, and open-access publication under CC-BY 4.0.</li>
+                </ol>
+
+                <div class="my-6 p-5 bg-blue-50/70 border border-blue-100 rounded-2xl">
+                    <h4 class="font-bold text-slate-900 mb-2">Publish Your Manuscript with Sanmati Journal</h4>
+                    <p class="text-xs text-slate-600 mb-3">Sanmati Spectrum of Knowledge (ISSN 3108-1819) invites original research papers across all disciplines for fast-track peer review.</p>
+                    <div class="flex flex-wrap gap-3 text-xs font-bold">
+                        <a href="/submission-guidelines/call-for-papers" class="text-blue-600 hover:underline">Submit Manuscript Online</a>
+                        <span>•</span>
+                        <a href="/download/author-guidelines-template" class="text-blue-600 hover:underline">Download Word Template</a>
+                        <span>•</span>
+                        <a href="/archive" class="text-blue-600 hover:underline">Browse Published Archive</a>
+                    </div>
+                </div>
+
+                <p class="text-xs text-slate-400">Last Updated: August 2026</p>
+            ';
+        } elseif ($slug === 'ugc-care-journal-guidelines-and-ethics') {
+            $content = '
+                <h3>Understanding Academic Ethics & UGC CARE Parameters</h3>
+                <p>Academic research integrity in India is governed by rigorous ethical frameworks aligned with the Committee on Publication Ethics (COPE). Journals must exhibit full editorial transparency, verified board credentials, persistent identifier mapping, and strict peer review.</p>
+
+                <h3>Core Academic Quality Pillars</h3>
+                <ul>
+                    <li><strong>Editorial Board Verification:</strong> Distinguished editorial leadership with public institutional affiliations and academic profiles.</li>
+                    <li><strong>Double-Blind Peer Review:</strong> Rigorous evaluation safeguarding author and reviewer anonymity during the assessment lifecycle.</li>
+                    <li><strong>Plagiarism Zero Tolerance:</strong> Mandatory screening to protect original scholarship and eliminate duplicate submissions.</li>
+                    <li><strong>Open Access Rights:</strong> Full open-access dissemination under Creative Commons licenses enabling global academic reuse.</li>
+                </ul>
+
+                <div class="my-6 p-5 bg-slate-50 border border-slate-200 rounded-2xl">
+                    <h4 class="font-bold text-slate-900 mb-2">Sanmati Journal Ethics Compliance</h4>
+                    <p class="text-xs text-slate-600 mb-3">Sanmati Spectrum strictly adheres to COPE publication ethics and transparent double-blind peer review.</p>
+                    <div class="flex flex-wrap gap-3 text-xs font-bold">
+                        <a href="/publication-policy/ethics" class="text-blue-600 hover:underline">Publication Ethics Policy</a>
+                        <span>•</span>
+                        <a href="/editorial-team/editors" class="text-blue-600 hover:underline">Editorial Leadership</a>
+                        <span>•</span>
+                        <a href="/submission-guidelines/review-process" class="text-blue-600 hover:underline">Peer Review Workflow</a>
+                    </div>
+                </div>
+
+                <p class="text-xs text-slate-400">Last Updated: August 2026</p>
+            ';
+        } elseif ($slug === 'apa-7th-vs-ieee-citation-styles-guide') {
+            $content = '
+                <h3>APA 7th Edition vs IEEE: Choosing the Right Citation Style</h3>
+                <p>Formatting reference lists accurately ensures academic credibility and prevents accidental plagiarism. Humanities, social sciences, and management disciplines typically follow APA 7th Edition (Author-Date), whereas engineering, computing, and physical sciences use IEEE (Numbered).</p>
+
+                <h3>Comparison & Examples</h3>
+                <table class="min-w-full divide-y divide-slate-200 border my-4">
+                    <thead class="bg-slate-50">
+                        <tr>
+                            <th class="px-4 py-2 text-left text-xs font-bold text-slate-700 uppercase">Aspect</th>
+                            <th class="px-4 py-2 text-left text-xs font-bold text-slate-700 uppercase">APA 7th Edition</th>
+                            <th class="px-4 py-2 text-left text-xs font-bold text-slate-700 uppercase">IEEE Style</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-slate-200 text-xs font-medium text-slate-600">
+                        <tr>
+                            <td class="px-4 py-2 font-bold">In-Text Citation</td>
+                            <td class="px-4 py-2">(Sharma & Verma, 2026)</td>
+                            <td class="px-4 py-2">[1]</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 font-bold">Reference Ordering</td>
+                            <td class="px-4 py-2">Alphabetical by first author surname</td>
+                            <td class="px-4 py-2">Sequential by order of appearance</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 font-bold">Primary Fields</td>
+                            <td class="px-4 py-2">Social Sciences, Arts, Education, Management</td>
+                            <td class="px-4 py-2">Computer Science, Engineering, Applied Tech</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="my-6 p-5 bg-slate-50 border border-slate-200 rounded-2xl">
+                    <h4 class="font-bold text-slate-900 mb-2">Download Citation Toolkits</h4>
+                    <p class="text-xs text-slate-600 mb-3">Get comprehensive reference cheat sheets and format your paper accurately.</p>
+                    <div class="flex flex-wrap gap-3 text-xs font-bold">
+                        <a href="/download/citation-guide" class="text-blue-600 hover:underline">Download Citation Guide PDF</a>
+                        <span>•</span>
+                        <a href="/submission-guidelines" class="text-blue-600 hover:underline">Formatting Guidelines</a>
+                        <span>•</span>
+                        <a href="/submission-guidelines/call-for-papers" class="text-blue-600 hover:underline">Submit Paper</a>
+                    </div>
+                </div>
+
+                <p class="text-xs text-slate-400">Last Updated: August 2026</p>
+            ';
+        } elseif ($slug === 'scopus-vs-web-of-science-indexing-metrics') {
+            $content = '
+                <h3>Demystifying Academic Indexing: Metrics & Evaluation</h3>
+                <p>Scholars frequently encounter terms like CrossRef DOI, Google Scholar, Scopus, and Web of Science. Understanding what these indexing databases represent helps authors navigate academic dissemination and avoid predatory publishers.</p>
+
+                <h3>Key Indexing & Discovery Pillars</h3>
+                <ul>
+                    <li><strong>CrossRef DOI:</strong> The international registry assigning persistent Digital Object Identifiers to scholarly publications, guaranteeing permanent web resolution.</li>
+                    <li><strong>Google Scholar:</strong> Automated global academic search engine indexing citation metadata across all peer-reviewed journals.</li>
+                    <li><strong>Open Access Repositories:</strong> Global indexing networks maximizing researcher reach and citation impact.</li>
+                </ul>
+
+                <div class="my-6 p-5 bg-slate-50 border border-slate-200 rounded-2xl">
+                    <h4 class="font-bold text-slate-900 mb-2">Sanmati Journal Indexing Parameters</h4>
+                    <p class="text-xs text-slate-600 mb-3">All papers published in Sanmati Spectrum are assigned persistent CrossRef DOIs and indexed for global academic discovery.</p>
+                    <div class="flex flex-wrap gap-3 text-xs font-bold">
+                        <a href="/basic-info/indexing" class="text-blue-600 hover:underline">Indexing Information</a>
+                        <span>•</span>
+                        <a href="/archive" class="text-blue-600 hover:underline">View Published Volumes</a>
+                        <span>•</span>
+                        <a href="/submission-guidelines/call-for-papers" class="text-blue-600 hover:underline">Call for Papers</a>
+                    </div>
+                </div>
+
+                <p class="text-xs text-slate-400">Last Updated: August 2026</p>
+            ';
         } else {
-            // Fallback for historical pages
+            // Fallback
             $title = str_replace('-', ' ', $slug);
             $content = '
                 <h3>' . ucwords($title) . '</h3>
-                <p>This is a pre-existing publication guide archived in the Sanmati knowledge base. It provides historical reference for formatting academic manuscripts, submitting papers, and aligning research with global publishing standards.</p>
+                <p>This academic guide provides practical guidance on preparing manuscripts, structuring literature reviews, and submitting research to peer-reviewed journals.</p>
                 <div class="my-6 p-4 bg-slate-50 border border-slate-200 rounded-2xl">
                     <div class="flex flex-wrap gap-3 text-xs font-bold">
                         <a href="/submission-guidelines" class="text-blue-600 hover:underline">Submission Guidelines</a>
