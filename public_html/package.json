@@ -1,0 +1,9 @@
+{
+  "name": "sanmati-public-html",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sanmati Spectrum public web root",
+  "scripts": {
+    "build": "echo 'Assets are pre-compiled in public_html/build' && exit 0"
+  }
+}

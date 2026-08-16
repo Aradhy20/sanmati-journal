@@ -1,0 +1,9 @@
+{
+  "name": "sanmati-journal",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sanmati Spectrum of Knowledge and Emerging Discourse",
+  "scripts": {
+    "build": "cd sanmati-core && npm run build"
+  }
+}
