@@ -38,7 +38,7 @@ const BOARD_MEMBERS = [
         city: "Nalbari",
         state: "Assam",
         country: "India",
-        image: "/images/team/Prof. Prahlad joshi.webp",
+        image: "/images/team/Prof_Prahlad_Joshi.webp",
         email: "",
         phone: "",
         profileUrl: "",
@@ -101,7 +101,7 @@ const BOARD_MEMBERS = [
         city: "Hazaribagh",
         state: "Jharkhand",
         country: "India",
-        image: "/images/team/Amita kumari.jpeg",
+        image: "/images/team/Amita_Kumari.jpeg",
         email: "",
         phone: "",
         profileUrl: "",
@@ -122,7 +122,7 @@ const BOARD_MEMBERS = [
         city: "Hazaribagh",
         state: "Jharkhand",
         country: "India",
-        image: "/images/team/Parikshit Layek.jpeg",
+        image: "/images/team/Parikshit_Layek.jpeg",
         email: "",
         phone: "",
         profileUrl: "",
@@ -143,7 +143,7 @@ const BOARD_MEMBERS = [
         city: "Kharghar, Navi Mumbai",
         state: "Maharashtra",
         country: "India",
-        image: "/images/team/Vaishali Ranjeet vichare.jpeg",
+        image: "/images/team/Vaishali_Ranjeet_Vichare.jpeg",
         email: "",
         phone: "",
         profileUrl: "",
@@ -185,7 +185,7 @@ const BOARD_MEMBERS = [
         city: "Kashipur, Udham Singh Nagar",
         state: "Uttarakhand",
         country: "India",
-        image: "/images/team/Dr. Deepika Atreya.jpeg",
+        image: "/images/team/Dr_Deepika_Atreya.jpeg",
         email: "",
         phone: "",
         profileUrl: "",
@@ -243,12 +243,15 @@ const BoardMemberCard = ({ member, onSelect }) => {
                 <div className="w-16 h-16 shrink-0 rounded-full overflow-hidden border border-[#E9E5DD] relative bg-[#F7F4EC] flex items-center justify-center">
                     {member.image && !imgError ? (
                         <picture>
-                            <source srcSet={member.image.replace(/\.(jpeg|jpg|png)$/i, '.webp')} type="image/webp" />
-                            <img 
-                                src={member.image} 
-                                alt={member.name}
+                            <source srcSet={encodeURI(member.image.replace(/\.(jpeg|jpg|png)$/i, '.webp'))} type="image/webp" />
+                            <img
+                                src={encodeURI(member.image)}
+                                alt={`${member.name}, ${member.title}`}
+                                width="64"
+                                height="64"
                                 className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
                                 loading="lazy"
+                                decoding="async"
                                 onError={() => setImgError(true)}
                             />
                         </picture>

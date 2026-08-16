@@ -50,10 +50,12 @@ const BioModal = ({ member, isOpen, onClose }) => {
                                 <div className="md:w-2/5 md:shrink-0 relative bg-slate-900">
                                     <div className="md:absolute inset-0 aspect-square md:aspect-auto">
                                         <picture>
-                                            <source srcSet={member.image ? member.image.replace(/\.(jpeg|jpg|png)$/i, '.webp') : ''} type="image/webp" />
-                                            <img loading="lazy"
-                                                src={member.image}
-                                                alt={member.name}
+                                            <source srcSet={member.image ? encodeURI(member.image.replace(/\.(jpeg|jpg|png)$/i, '.webp')) : ''} type="image/webp" />
+                                            <img
+                                                loading="lazy"
+                                                decoding="async"
+                                                src={member.image ? encodeURI(member.image) : ''}
+                                                alt={`${member.name}, ${member.role}`}
                                                 className="w-full h-full object-cover object-top opacity-80"
                                             />
                                         </picture>
@@ -193,12 +195,15 @@ const ExecutiveMember = ({ member, index }) => {
                 <div className="p-6 pb-4 flex flex-col sm:flex-row gap-5 items-center sm:items-start relative z-10 border-b border-[#E9E5DD]/60 bg-[#F7F4EC]/30">
                     <div className="w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-full overflow-hidden border border-[#E9E5DD] relative bg-[#F7F4EC]">
                         <picture>
-                            <source srcSet={member.image ? member.image.replace(/\.(jpeg|jpg|png)$/i, '.webp') : ''} type="image/webp" />
+                            <source srcSet={member.image ? encodeURI(member.image.replace(/\.(jpeg|jpg|png)$/i, '.webp')) : ''} type="image/webp" />
                             <img
-                                src={member.image}
-                                alt={member.name}
+                                src={member.image ? encodeURI(member.image) : ''}
+                                alt={`${member.name}, ${member.role}`}
+                                width="96"
+                                height="96"
                                 className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-350"
                                 loading="lazy"
+                                decoding="async"
                             />
                         </picture>
                     </div>

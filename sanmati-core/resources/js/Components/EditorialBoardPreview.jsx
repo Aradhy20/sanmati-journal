@@ -26,8 +26,8 @@ export default function EditorialBoardPreview() {
             role: "Chief Board Member & Vice-Chancellor",
             org: "Kumar Bhaskar Varma Sanskrit & Ancient Studies Univ.",
             location: "Assam, India",
-            image: "/images/team/Prof. Prahlad joshi.webp",
-            webp: "/images/team/Prof. Prahlad joshi.webp",
+            image: "/images/team/Prof_Prahlad_Joshi.webp",
+            webp: "/images/team/Prof_Prahlad_Joshi.webp",
             area: "Sanskrit & Ancient Knowledge Systems"
         },
         {
@@ -77,7 +77,7 @@ export default function EditorialBoardPreview() {
                                         <source srcSet={item.webp} type="image/webp" />
                                         <img
                                             src={item.webp || item.image}
-                                            alt={item.name}
+                                            alt={`${item.name}, ${item.role}`}
                                             width="96"
                                             height="96"
                                             loading="lazy"

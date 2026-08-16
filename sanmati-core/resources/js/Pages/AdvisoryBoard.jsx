@@ -38,7 +38,7 @@ const ADVISORY_MEMBERS = [
         city: "Mandleshwar, Khargone",
         state: "Madhya Pradesh",
         country: "India",
-        image: "/images/team/Dr. Sarita.jpeg",
+        image: "/images/team/Dr_Sarita.jpeg",
         email: "",
         phone: "",
         profileUrl: "",
@@ -59,7 +59,7 @@ const ADVISORY_MEMBERS = [
         city: "Moradabad",
         state: "Uttar Pradesh",
         country: "India",
-        image: "/images/team/Dr. S. P. Subashini.jpeg",
+        image: "/images/team/Dr_SP_Subashini.jpeg",
         email: "",
         phone: "",
         profileUrl: "",
@@ -143,7 +143,7 @@ const ADVISORY_MEMBERS = [
         city: "Moradabad",
         state: "Uttar Pradesh",
         country: "India",
-        image: "/images/team/Dr. Vipin.jpeg",
+        image: "/images/team/Dr_Vipin.jpeg",
         email: "",
         phone: "",
         profileUrl: "",
@@ -158,33 +158,31 @@ const ADVISORY_MEMBERS = [
 ];
 
 const SkeletonCard = () => (
-    <div className="bg-white rounded-xl border border-[#E9E5DD] p-6 animate-pulse">
+    <div className="bg-[#FFFDF8] rounded-xl border border-[#E9E5DD] p-6 shadow-xs animate-pulse">
         <div className="flex items-center gap-4 mb-5">
-            <div className="w-16 h-16 rounded-full bg-slate-100 shrink-0" />
+            <div className="w-16 h-16 rounded-full bg-slate-200" />
             <div className="space-y-2 flex-1">
-                <div className="h-3 bg-slate-100 rounded w-16" />
-                <div className="h-4 bg-slate-100 rounded w-3/4" />
+                <div className="h-3 w-16 bg-slate-200 rounded" />
+                <div className="h-4 w-32 bg-slate-200 rounded" />
             </div>
         </div>
-        <div className="space-y-3 mb-5">
-            <div className="h-3 bg-slate-100 rounded w-5/6" />
-            <div className="h-3 bg-slate-100 rounded w-2/3" />
+        <div className="space-y-2">
+            <div className="h-3 w-full bg-slate-200 rounded" />
+            <div className="h-3 w-4/5 bg-slate-200 rounded" />
         </div>
-        <div className="h-8 bg-slate-100 rounded w-full" />
     </div>
 );
 
-const AdvisoryMemberCard = ({ member, onSelect }) => {
+const MemberCard = ({ member, onSelect, badgeClass = "bg-primary/10 text-primary" }) => {
     const [imgError, setImgError] = useState(false);
-    
+
     return (
-        <motion.div 
-            variants={fadeInUp}
+        <div
+            className="group bg-[#FFFDF8] rounded-xl border border-[#E9E5DD] p-6 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col justify-between cursor-pointer hover:border-primary/30 relative focus:outline-none focus:ring-2 focus:ring-primary/20"
             onClick={() => onSelect(member)}
-            className="bg-white rounded-xl border border-[#E9E5DD] p-6 flex flex-col hover:border-primary hover:shadow-card transition-all duration-200 group cursor-pointer h-full relative focus-within:ring-2 focus-within:ring-primary focus-within:outline-none"
-            tabIndex="0"
             role="button"
-            aria-label={`View academic profile of ${member.name}`}
+            tabIndex={0}
+            aria-label={`View academic profile of ${member.name}, ${member.title}`}
             onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
@@ -196,12 +194,15 @@ const AdvisoryMemberCard = ({ member, onSelect }) => {
                 <div className="w-16 h-16 shrink-0 rounded-full overflow-hidden border border-[#E9E5DD] relative bg-[#F7F4EC] flex items-center justify-center">
                     {member.image && !imgError ? (
                         <picture>
-                            <source srcSet={member.image.replace(/\.(jpeg|jpg|png)$/i, '.webp')} type="image/webp" />
-                            <img 
-                                src={member.image} 
-                                alt={member.name}
+                            <source srcSet={encodeURI(member.image.replace(/\.(jpeg|jpg|png)$/i, '.webp'))} type="image/webp" />
+                            <img
+                                src={encodeURI(member.image)}
+                                alt={`${member.name}, ${member.title}`}
+                                width="64"
+                                height="64"
                                 className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
                                 loading="lazy"
+                                decoding="async"
                                 onError={() => setImgError(true)}
                             />
                         </picture>
@@ -265,7 +266,7 @@ const AdvisoryMemberCard = ({ member, onSelect }) => {
                     Profile <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                 </span>
             </div>
-        </motion.div>
+        </div>
     );
 };
 

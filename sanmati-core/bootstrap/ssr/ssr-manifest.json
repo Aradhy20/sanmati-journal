@@ -13,7 +13,7 @@
     "/build/assets/ResetPassword-CbftewBx.js"
   ],
   "resources/js/Components/EditorialBoardPreview.jsx": [
-    "/build/assets/EditorialBoardPreview-omRD4uiV.js"
+    "/build/assets/EditorialBoardPreview-qi0xGgSW.js"
   ],
   "resources/js/Components/Footer.jsx": [
     "/build/assets/MainLayout-lqWCRA9V.js"
@@ -22,7 +22,7 @@
     "/build/assets/Graphics-CM2sKpeB.js"
   ],
   "resources/js/Components/Hero.jsx": [
-    "/build/assets/Home-CNe2k2KX.js"
+    "/build/assets/Home-B7AHf2yI.js"
   ],
   "resources/js/Components/HomeFAQ.jsx": [
     "/build/assets/HomeFAQ-CqXEqKUS.js"
@@ -43,7 +43,7 @@
     "/build/assets/NewsletterSection-MI_F-dYJ.js"
   ],
   "resources/js/Components/NoticeBoard.jsx": [
-    "/build/assets/Home-CNe2k2KX.js"
+    "/build/assets/Home-B7AHf2yI.js"
   ],
   "resources/js/Components/PageHeader.jsx": [
     "/build/assets/PageHeader-CCKcOHLK.js"
@@ -145,7 +145,7 @@
     "/build/assets/Testimonials-GwVsfowI.js"
   ],
   "resources/js/Pages/AdvisoryBoard.jsx": [
-    "/build/assets/AdvisoryBoard-CVVCPaka.js"
+    "/build/assets/AdvisoryBoard-jXbr9pd1.js"
   ],
   "resources/js/Pages/Announcements/Show.jsx": [
     "/build/assets/Show-DGoEDHY5.js"
@@ -226,13 +226,13 @@
     "/build/assets/SubmissionDetail-Ba4ua1Ch.js"
   ],
   "resources/js/Pages/EditorialBoard.jsx": [
-    "/build/assets/EditorialBoard-CelA_tgF.js"
+    "/build/assets/EditorialBoard-BNRoFptc.js"
   ],
   "resources/js/Pages/EditorialTeam.jsx": [
     "/build/assets/EditorialTeam-k5WHNR-Q.js"
   ],
   "resources/js/Pages/Editors.jsx": [
-    "/build/assets/Editors-D41muVhy.js"
+    "/build/assets/Editors-BzohLBg4.js"
   ],
   "resources/js/Pages/Error404.jsx": [
     "/build/assets/Error404-XOC8Dzrm.js"
@@ -247,7 +247,7 @@
     "/build/assets/Photo-BW2nwg3O.js"
   ],
   "resources/js/Pages/Home.jsx": [
-    "/build/assets/Home-CNe2k2KX.js"
+    "/build/assets/Home-B7AHf2yI.js"
   ],
   "resources/js/Pages/Institution/Profile.jsx": [
     "/build/assets/Profile-JkngbPjC.js"
