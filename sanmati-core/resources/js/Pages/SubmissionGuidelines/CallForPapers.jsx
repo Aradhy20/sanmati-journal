@@ -235,7 +235,8 @@ export default function CallForPapers() {
             },
             onError: (errs) => {
                 trackEvent('submission_failed');
-                const errorMessage = errs.error || 'Submission failed. Please check for input errors.';
+                const firstErrorMessage = errs.submission || errs.error || (typeof errs === 'object' ? Object.values(errs)[0] : null);
+                const errorMessage = firstErrorMessage || 'Submission failed. Please check for input errors.';
                 toast.error(errorMessage);
 
                 const step1Fields = ['title', 'abstract', 'keywords', 'article_type', 'author_name', 'author_email', 'country'];

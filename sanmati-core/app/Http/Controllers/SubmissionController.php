@@ -92,6 +92,16 @@ class SubmissionController extends Controller
         // Generate a human-readable unique tracking ID: SJ-XXXXXX
         $trackingId = 'SJ-' . strtoupper(substr(uniqid(), -6));
 
+        // Ensure pending database migrations are executed if needed
+        try {
+            if (!\Illuminate\Support\Facades\Schema::hasTable('submission_status_histories') ||
+                !\Illuminate\Support\Facades\Schema::hasColumn('submissions', 'country')) {
+                \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+            }
+        } catch (\Throwable $mE) {
+            \Illuminate\Support\Facades\Log::warning("Migration invocation check warning: " . $mE->getMessage());
+        }
+
         // Save submission record inside a database transaction with coordinated file cleanup
         \Illuminate\Support\Facades\DB::beginTransaction();
 
@@ -116,13 +126,17 @@ class SubmissionController extends Controller
                 'ai_precheck_results'     => $aiPrecheckData,
             ]);
 
-            \App\Models\SubmissionStatusHistory::create([
-                'submission_id' => $submission->id,
-                'from_status'   => null,
-                'to_status'     => 'submitted',
-                'changed_by'    => Auth::id(),
-                'note'          => 'Manuscript submitted successfully by author.',
-            ]);
+            try {
+                \App\Models\SubmissionStatusHistory::create([
+                    'submission_id' => $submission->id,
+                    'from_status'   => null,
+                    'to_status'     => 'submitted',
+                    'changed_by'    => Auth::id(),
+                    'note'          => 'Manuscript submitted successfully by author.',
+                ]);
+            } catch (\Throwable $th) {
+                \Illuminate\Support\Facades\Log::warning("Status history creation failed for [{$trackingId}]: " . $th->getMessage());
+            }
 
             \Illuminate\Support\Facades\DB::commit();
             \Illuminate\Support\Facades\Log::info("submission_created: Submission [{$trackingId}] created successfully for author [{$validated['author_name']}]");
