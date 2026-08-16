@@ -18,6 +18,9 @@ Route::get('/', [JournalController::class, 'index'])->name('home');
 
 Route::get('/api/search', [\App\Http\Controllers\SearchController::class, 'search'])->name('api.search');
 Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
+Route::get('/googleff1ae3461d28254d.html', function () {
+    return response('google-site-verification: googleff1ae3461d28254d.html', 200, ['Content-Type' => 'text/html']);
+});
 Route::get('/robots.txt', function () {
     $robots = "User-agent: *\n"
         . "Disallow: /admin/\n"
