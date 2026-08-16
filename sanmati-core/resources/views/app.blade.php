@@ -269,7 +269,7 @@
 
         {{-- Direct preload of Space Grotesk 700 latin WOFF2 for instant H1 LCP paint --}}
         <link rel="preload" as="font" type="font/woff2" crossorigin
-              href="https://fonts.gstatic.com/s/spacegrotesk/v22/V8mQoQDjQSkFtoMM3T6r8E7mF71Q-gOoraIAEj4PVnskPMBBTyJL.woff2">
+              href="https://fonts.gstatic.com/s/spacegrotesk/v22/V8mDoQDjQSkFtoMM3T6r8E7mPbF4C_k3HqU.woff2">
 
         {{-- Performance: DNS prefetch & preconnect for external domains --}}
         <link rel="dns-prefetch" href="//fonts.googleapis.com">

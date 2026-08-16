@@ -1,12 +1,12 @@
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import Seo from '../Components/Seo';
-import CustomCursor from '../Components/CustomCursor';
-import { Toaster } from 'react-hot-toast';
 import { MessageCircle, ArrowUp } from 'lucide-react';
 import { useState, useEffect, lazy, Suspense } from 'react';
 
+const CustomCursor = lazy(() => import('../Components/CustomCursor'));
 const SmartSearchModal = lazy(() => import('../Components/SmartSearchModal'));
+const Toaster = lazy(() => import('react-hot-toast').then(m => ({ default: m.Toaster })));
 
 export default function MainLayout({ children, title, description, keywords, image, jsonLd, aiSummary }) {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -53,12 +53,13 @@ export default function MainLayout({ children, title, description, keywords, ima
                 Skip to main content
             </a>
             
-            <Toaster position="top-center" toastOptions={{
-                duration: 5000,
-                style: { background: '#FFFFFF', color: '#0F172A', border: '1px solid #E2E8F0', fontSize: '13px' }
-            }} />
-            
-            <CustomCursor />
+            <Suspense fallback={null}>
+                <Toaster position="top-center" toastOptions={{
+                    duration: 5000,
+                    style: { background: '#FFFFFF', color: '#0F172A', border: '1px solid #E2E8F0', fontSize: '13px' }
+                }} />
+                <CustomCursor />
+            </Suspense>
             
             <header role="banner" className="overflow-x-visible">
                 <Navbar onOpenSearch={() => setIsSearchOpen(true)} />

@@ -2,12 +2,11 @@ import React, { Suspense, lazy } from 'react';
 import MainLayout from '../Layouts/MainLayout';
 import NoticeBoard from '../Components/NoticeBoard';
 import Hero from '../Components/Hero';
-import LiveStats from '../Components/LiveStats';
-import TrustCredentials from '../Components/TrustCredentials';
-import LatestIssueShowcase from '../Components/LatestIssueShowcase';
-import LatestPapersSection from '../Components/LatestPapersSection';
-
 // Code-split below-the-fold homepage components to minimize initial JS payload on mobile
+const LiveStats = lazy(() => import('../Components/LiveStats'));
+const TrustCredentials = lazy(() => import('../Components/TrustCredentials'));
+const LatestIssueShowcase = lazy(() => import('../Components/LatestIssueShowcase'));
+const LatestPapersSection = lazy(() => import('../Components/LatestPapersSection'));
 const WhyPublishSection = lazy(() => import('../Components/WhyPublishSection'));
 const ResearchAreasGrid = lazy(() => import('../Components/ResearchAreasGrid'));
 const SubmissionProcessTimeline = lazy(() => import('../Components/SubmissionProcessTimeline'));
@@ -33,26 +32,18 @@ export default function Home({
 
     return (
         <MainLayout title={seoTitle} description={seoDescription} keywords={seoKeywords}>
-            {/* 0. Prominent Academic Notice Board / Conference Announcement */}
+            {/* 0. Prominent Academic Notice Board / Conference Announcement (First Viewport) */}
             <NoticeBoard announcement={featuredAnnouncement} />
 
-            {/* 1. Hero Banner with Verified Badges */}
+            {/* 1. Hero Banner with Verified Badges (First Viewport) */}
             <Hero papers={displayPapers} currentIssue={currentIssue} metrics={metrics} />
 
-            {/* 2. Live Impact Statistics Counters */}
-            <LiveStats metrics={metrics} />
-
-            {/* 3. Verified Credentials Showcase (ISSN 3108-1819, CrossRef DOI, CC-BY 4.0, COPE Ethics) */}
-            <TrustCredentials />
-
-            {/* 4. Current Published Issue Showcase */}
-            <LatestIssueShowcase currentIssue={currentIssue} papers={displayPapers} />
-
-            {/* 5. Featured Research Papers Grid */}
-            <LatestPapersSection papers={displayPapers} />
-
-            {/* 6–12. Below-the-fold Interactive Sections (Lazy Loaded) */}
-            <Suspense fallback={<div className="py-12 text-center text-xs text-slate-400">Loading section details...</div>}>
+            {/* 2–13. Below-the-fold Interactive Sections (Lazy Loaded) */}
+            <Suspense fallback={<div className="py-8 text-center text-xs text-slate-400">Loading section details...</div>}>
+                <LiveStats metrics={metrics} />
+                <TrustCredentials />
+                <LatestIssueShowcase currentIssue={currentIssue} papers={displayPapers} />
+                <LatestPapersSection papers={displayPapers} />
                 <WhyPublishSection />
                 <ResearchAreasGrid />
                 <SubmissionProcessTimeline />

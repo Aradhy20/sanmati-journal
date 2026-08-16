@@ -734,3 +734,13 @@
   body { background: white !important; }
   .card-modern, .card-premium { box-shadow: none !important; border: 1px solid #e2e8f0 !important; }
 }
+
+/* ── Hero CSS Keyframes ── */
+@keyframes heroFloat {
+  0%, 100% { transform: translateY(0); opacity: 0.3; }
+  50%       { transform: translateY(-10px); opacity: 0.6; }
+}
+@keyframes heroSlideIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}

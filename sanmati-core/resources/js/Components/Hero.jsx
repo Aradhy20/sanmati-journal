@@ -23,25 +23,6 @@ const heroBadgeStyle = {
     animation: 'heroSlideIn 0.5s ease-out 1.0s both',
 };
 
-/* Keyframes injected once at module level via a <style> tag via useEffect */
-let _heroStyleInjected = false;
-function injectHeroKeyframes() {
-    if (_heroStyleInjected || typeof document === 'undefined') return;
-    _heroStyleInjected = true;
-    const s = document.createElement('style');
-    s.textContent = `
-        @keyframes heroFloat {
-            0%, 100% { transform: translateY(0); opacity: 0.3; }
-            50%       { transform: translateY(-10px); opacity: 0.6; }
-        }
-        @keyframes heroSlideIn {
-            from { opacity: 0; transform: translateX(20px); }
-            to   { opacity: 1; transform: translateX(0); }
-        }
-    `;
-    document.head.appendChild(s);
-}
-
 /* ── Animated Counter ── */
 function AnimatedCounter({ end, suffix = '', duration = 2000 }) {
     const [count, setCount] = useState(0);
@@ -111,7 +92,6 @@ function MeshBackground() {
 }
 
 export default function Hero({ papers = [], currentIssue = null, metrics = null }) {
-    useEffect(() => { injectHeroKeyframes(); }, []);
     const stats = [
         { label: 'Published Papers', value: metrics?.papers ?? 0, suffix: metrics?.papers > 0 ? '+' : '', icon: FileText, color: 'text-blue-600', bg: 'bg-blue-50' },
         { label: 'Authors & Scholars', value: metrics?.authors ?? 0, suffix: metrics?.authors > 0 ? '+' : '', icon: Users, color: 'text-indigo-600', bg: 'bg-indigo-50' },
