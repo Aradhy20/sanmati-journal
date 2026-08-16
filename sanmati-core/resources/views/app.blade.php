@@ -16,6 +16,9 @@
         <link rel="shortcut icon" href="/logo.jpg">
         <link rel="apple-touch-icon" href="/logo.webp">
 
+        <!-- Google Search Console Verification -->
+        <meta name="google-site-verification" content="AcQoP-TT7gCtztCxTWO9mxGKdn0OFkRlUIaFKcwzINo" />
+
         @php
             $pageProps = $page['props'] ?? [];
             $paper = $pageProps['paper'] ?? ($paper ?? null);
