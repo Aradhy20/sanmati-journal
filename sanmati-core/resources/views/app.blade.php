@@ -326,11 +326,54 @@
         @inertiaHead
     </head>
     <body class="font-sans antialiased min-h-screen flex flex-col bg-warm-bg">
-        <!-- Google Tag Manager (noscript) -->
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4FNSFHK"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-        <!-- End Google Tag Manager (noscript) -->
+        <div id="app" data-page="{{ json_encode($page) }}">
+            @if(trim(request()->path(), '/') === '')
+            <!-- Pre-rendered Critical Path for Instant Mobile FCP/LCP -->
+            <header class="bg-white border-b border-slate-200/80 sticky top-0 z-50">
+                <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <img src="/logo.webp" alt="Sanmati Spectrum Logo" width="36" height="36" class="w-9 h-9 object-contain" />
+                        <span class="font-serif font-bold text-slate-900 text-sm sm:text-base tracking-tight">Sanmati Spectrum</span>
+                    </div>
+                    <div class="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1.5 rounded-full border border-blue-200/60">ISSN: 3108-1819</div>
+                </div>
+            </header>
 
-        @inertia
+            <main>
+                <!-- Pre-rendered Notice Board Strip -->
+                <section class="bg-gradient-to-r from-amber-500/10 via-blue-500/10 to-indigo-500/10 border-b-2 border-blue-600/30 py-4 px-4">
+                    <div class="max-w-[1280px] mx-auto">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500 text-slate-900 text-xs font-bold uppercase tracking-wider">
+                            Important Notice
+                        </span>
+                        <p class="text-xs sm:text-sm font-bold text-slate-900 mt-2">
+                            अंतरराष्ट्रीय संगोष्ठी, शोध-पत्र वाचन एवं श्रेष्ठ शिक्षक सम्मान अवार्ड — 05 सितम्बर 2026 (Teachers' Day)
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Pre-rendered Hero Section with Exact H1 for Instant LCP Paint -->
+                <section class="relative min-h-[70vh] flex items-center py-16 sm:py-20 bg-gradient-to-br from-white via-slate-50 to-blue-50/30">
+                    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                        <div class="max-w-2xl space-y-6">
+                            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600/10 border border-blue-200 text-blue-700 text-xs font-bold">
+                                Now accepting submissions — Volume 2, Issue 3
+                            </div>
+                            <h1 class="text-4xl sm:text-5xl lg:text-[58px] font-heading font-bold text-slate-900 leading-[1.08] tracking-tight">
+                                Publish Research That
+                                <br />
+                                <span class="bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 bg-clip-text text-transparent">
+                                    Creates Global Impact
+                                </span>
+                            </h1>
+                            <p class="text-lg sm:text-xl text-slate-600 font-medium leading-relaxed">
+                                Join researchers, academicians, and professionals publishing high-quality multidisciplinary research through a transparent, rigorous peer-review process.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+            @endif
+        </div>
     </body>
 </html>
