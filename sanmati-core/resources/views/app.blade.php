@@ -30,9 +30,12 @@
             $defaultImage = 'https://sanmatijournal.in/images/seo/sanmati-journal-og.webp';
 
             if ($paper) {
-                $metaTitle = ($paper->title ?? $defaultTitle) . ' | Sanmati Journal';
-                $metaDescription = \Illuminate\Support\Str::limit(strip_tags($paper->abstract ?? $paper->title ?? $defaultDesc), 160);
-                $metaKeywords = $paper->keywords ?? 'Research Paper, Academic Journal, ISSN 3108-1819';
+                $pTitle = data_get($paper, 'title', $defaultTitle);
+                $pAbstract = data_get($paper, 'abstract', $pTitle);
+                $pKeywords = data_get($paper, 'keywords', 'Research Paper, Academic Journal, ISSN 3108-1819');
+                $metaTitle = $pTitle . ' | Sanmati Journal';
+                $metaDescription = \Illuminate\Support\Str::limit(strip_tags($pAbstract ?: $defaultDesc), 160);
+                $metaKeywords = $pKeywords;
                 $metaImage = $defaultImage;
             } elseif ($post) {
                 $metaTitle = ($post['title'] ?? $defaultTitle) . ' | Sanmati Spectrum Blog';
@@ -116,24 +119,37 @@
 
         <!-- Google Scholar Academic Citation Metadata -->
         @if(isset($paper))
-            <meta name="citation_title" content="{{ $paper->title }}">
-            @foreach(preg_split('/[,&|]| and /i', $paper->authors) as $authorName)
-                @if(trim($authorName))
-                    <meta name="citation_author" content="{{ trim($authorName) }}">
-                @endif
-            @endforeach
+            @php
+                $gsTitle = data_get($paper, 'title', '');
+                $gsAuthors = data_get($paper, 'authors', '');
+                $gsCreated = data_get($paper, 'created_at');
+                $gsDate = is_string($gsCreated) ? date('Y/m/d', strtotime($gsCreated)) : ($gsCreated instanceof \DateTimeInterface ? $gsCreated->format('Y/m/d') : date('Y/m/d'));
+                $gsId = data_get($paper, 'id', '');
+                $gsDoi = data_get($paper, 'doi', '');
+                $gsKeywords = data_get($paper, 'keywords', '');
+            @endphp
+            <meta name="citation_title" content="{{ $gsTitle }}">
+            @if($gsAuthors)
+                @foreach(preg_split('/[,&|]| and /i', $gsAuthors) as $authorName)
+                    @if(trim($authorName))
+                        <meta name="citation_author" content="{{ trim($authorName) }}">
+                    @endif
+                @endforeach
+            @endif
             <meta name="citation_journal_title" content="Sanmati Spectrum of Knowledge & Emerging Discourse">
             <meta name="citation_issn" content="3108-1819">
-            <meta name="citation_publication_date" content="{{ $paper->created_at ? $paper->created_at->format('Y/m/d') : date('Y/m/d') }}">
-            <meta name="citation_pdf_url" content="https://sanmatijournal.in/download/paper/{{ $paper->id }}">
-            @if(!empty($paper->doi))
-                <meta name="citation_doi" content="{{ $paper->doi }}">
+            <meta name="citation_publication_date" content="{{ $gsDate }}">
+            <meta name="citation_pdf_url" content="https://sanmatijournal.in/download/paper/{{ $gsId }}">
+            @if(!empty($gsDoi))
+                <meta name="citation_doi" content="{{ $gsDoi }}">
             @endif
-            @if(!empty($paper->keywords))
-                <meta name="citation_keywords" content="{{ $paper->keywords }}">
+            @if(!empty($gsKeywords))
+                <meta name="citation_keywords" content="{{ $gsKeywords }}">
             @endif
-            <meta name="DC.title" content="{{ $paper->title }}">
-            <meta name="DC.creator" content="{{ $paper->authors }}">
+            <meta name="DC.title" content="{{ $gsTitle }}">
+            @if($gsAuthors)
+                <meta name="DC.creator" content="{{ $gsAuthors }}">
+            @endif
             <meta name="DC.publisher" content="Sanmati Spectrum of Knowledge & Emerging Discourse">
         @endif
 
@@ -201,15 +217,23 @@
         </script>
 
         @if(isset($paper))
+        @php
+            $pTitle = data_get($paper, 'title', '');
+            $pAbstract = data_get($paper, 'abstract', '');
+            $pId = data_get($paper, 'id', '');
+            $pDoi = data_get($paper, 'doi', '');
+            $pCreated = data_get($paper, 'created_at');
+            $pDateStr = is_string($pCreated) ? $pCreated : ($pCreated instanceof \DateTimeInterface ? $pCreated->format('c') : now()->format('c'));
+        @endphp
         <script type="application/ld+json" nonce="{{ Vite::cspNonce() }}">
         {
             "@context": "https://schema.org",
             "@type": "ScholarlyArticle",
-            "headline": {!! json_encode($paper->title) !!},
-            "name": {!! json_encode($paper->title) !!},
-            "abstract": {!! json_encode($paper->abstract ?? '') !!},
-            "description": {!! json_encode(\Illuminate\Support\Str::limit(strip_tags($paper->abstract ?? $paper->title), 160)) !!},
-            "datePublished": {!! json_encode($paper->created_at ? $paper->created_at->toISOString() : now()->toISOString()) !!},
+            "headline": {!! json_encode($pTitle) !!},
+            "name": {!! json_encode($pTitle) !!},
+            "abstract": {!! json_encode($pAbstract ?: '') !!},
+            "description": {!! json_encode(\Illuminate\Support\Str::limit(strip_tags($pAbstract ?: $pTitle), 160)) !!},
+            "datePublished": {!! json_encode($pDateStr) !!},
             "inLanguage": ["en", "hi"],
             "isAccessibleForFree": true,
             "license": "https://creativecommons.org/licenses/by/4.0/",
@@ -218,10 +242,10 @@
                 "name": "Sanmati Spectrum of Knowledge & Emerging Discourse",
                 "issn": "3108-1819"
             },
-            @if(!empty($paper->doi))
-            "sameAs": {!! json_encode($paper->doi) !!},
+            @if(!empty($pDoi))
+            "sameAs": {!! json_encode($pDoi) !!},
             @endif
-            "url": {!! json_encode("https://sanmatijournal.in/article/" . $paper->id) !!},
+            "url": {!! json_encode("https://sanmatijournal.in/article/" . $pId) !!},
             "publisher": {
                 "@type": "Organization",
                 "name": "Sanmati Spectrum of Knowledge & Emerging Discourse",

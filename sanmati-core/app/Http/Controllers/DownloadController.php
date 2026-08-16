@@ -40,10 +40,28 @@ class DownloadController extends Controller
         ]);
     }
 
+    private function getTemplatePath(string $filename): ?string
+    {
+        $candidates = [
+            storage_path("app/templates/{$filename}"),
+            storage_path("app/private/templates/{$filename}"),
+            public_path("templates/{$filename}"),
+            base_path("../public_html/templates/{$filename}"),
+        ];
+
+        foreach ($candidates as $path) {
+            if (file_exists($path)) {
+                return $path;
+            }
+        }
+
+        return null;
+    }
+
     public function downloadGuidelinesTemplate()
     {
-        $path = storage_path('app/templates/Sanmati_Manuscript_Template.docx');
-        if (!file_exists($path)) {
+        $path = $this->getTemplatePath('Sanmati_Manuscript_Template.docx');
+        if (!$path) {
             abort(404, 'Guidelines template file is missing on the server.');
         }
         return response()->download($path, 'Sanmati_Manuscript_Template.docx', [
@@ -53,8 +71,8 @@ class DownloadController extends Controller
 
     public function downloadCopyrightForm()
     {
-        $path = storage_path('app/templates/Sanmati_Copyright_Declaration_Form.pdf');
-        if (!file_exists($path)) {
+        $path = $this->getTemplatePath('Sanmati_Copyright_Declaration_Form.pdf');
+        if (!$path) {
             abort(404, 'Copyright declaration form is missing on the server.');
         }
         return response()->download($path, 'Sanmati_Copyright_Declaration_Form.pdf', [
@@ -64,19 +82,27 @@ class DownloadController extends Controller
 
     public function downloadVol1Issue1()
     {
-        $path = public_path('pdfs/Sanmati_Spectrum_Vol1_Jan_Mar_2026.pdf');
-        if (!file_exists($path)) {
-            abort(404, 'Vol 1 Issue 1 compilation file is missing.');
+        $candidates = [
+            public_path('pdfs/Sanmati_Spectrum_Vol1_Jan_Mar_2026.pdf'),
+            base_path('../public_html/pdfs/Sanmati_Spectrum_Vol1_Jan_Mar_2026.pdf'),
+            storage_path('app/public/pdfs/Sanmati_Spectrum_Vol1_Jan_Mar_2026.pdf'),
+        ];
+
+        foreach ($candidates as $path) {
+            if (file_exists($path)) {
+                return response()->download($path, 'Sanmati_Spectrum_Vol1_Jan_Mar_2026.pdf', [
+                    'Content-Type' => 'application/pdf',
+                ]);
+            }
         }
-        return response()->download($path, 'Sanmati_Spectrum_Vol1_Jan_Mar_2026.pdf', [
-            'Content-Type' => 'application/pdf',
-        ]);
+
+        abort(404, 'Vol 1 Issue 1 compilation file is missing.');
     }
 
     public function downloadSubmissionChecklist()
     {
-        $path = storage_path('app/templates/Sanmati_Submission_Checklist.pdf');
-        if (!file_exists($path)) {
+        $path = $this->getTemplatePath('Sanmati_Submission_Checklist.pdf');
+        if (!$path) {
             abort(404, 'Submission checklist file is missing on the server.');
         }
         return response()->download($path, 'Sanmati_Submission_Checklist.pdf', [
@@ -86,8 +112,8 @@ class DownloadController extends Controller
 
     public function downloadCitationGuide()
     {
-        $path = storage_path('app/templates/Sanmati_Citation_Guide.pdf');
-        if (!file_exists($path)) {
+        $path = $this->getTemplatePath('Sanmati_Citation_Guide.pdf');
+        if (!$path) {
             abort(404, 'Citation guide file is missing on the server.');
         }
         return response()->download($path, 'Sanmati_Citation_Guide.pdf', [
