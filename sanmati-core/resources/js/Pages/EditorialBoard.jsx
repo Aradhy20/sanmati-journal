@@ -38,7 +38,7 @@ const BOARD_MEMBERS = [
         city: "Nalbari",
         state: "Assam",
         country: "India",
-        image: "/images/team/Prof. Prahlad joshi.jpeg",
+        image: "/images/team/Prof. Prahlad joshi.webp",
         email: "",
         phone: "",
         profileUrl: "",

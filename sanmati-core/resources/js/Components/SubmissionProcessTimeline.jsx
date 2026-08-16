@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { Link } from '@inertiajs/react';
 import {
     SendHorizonal, FileText, Search, MessageSquare,
@@ -58,25 +57,37 @@ const STEPS = [
         step: '05',
         icon: Edit3,
         title: 'Revision & Decision',
-        desc: 'Authors receive detailed reviewer comments. Revisions may be requested before the final editorial decision is communicated.',
+        desc: 'Authors address reviewer feedback and submit revised drafts. The Editor-in-Chief makes the final decision on publication.',
         link: '/submission-guidelines/important-info',
-        linkText: 'Author Guide',
+        linkText: 'Key Info',
         color: 'text-amber-600',
-        bg: 'bg-amber-500',
+        bg: 'bg-amber-600',
         light: 'bg-amber-50',
         border: 'border-amber-200',
     },
     {
         step: '06',
-        icon: Printer,
-        title: 'Publication & DOI',
-        desc: 'Accepted papers are typeset, assigned a permanent CrossRef DOI, and published in the next available issue with full open access.',
-        link: '/archive',
-        linkText: 'View Archive',
+        icon: CheckCircle2,
+        title: 'Acceptance & Proofreading',
+        desc: 'Accepted manuscripts receive professional layout editing, reference verification, author galley proof review, and CrossRef DOI assignment.',
+        link: '/submission-guidelines/publication-charges',
+        linkText: 'APC Details',
         color: 'text-emerald-600',
         bg: 'bg-emerald-600',
         light: 'bg-emerald-50',
         border: 'border-emerald-200',
+    },
+    {
+        step: '07',
+        icon: Printer,
+        title: 'Publication & DOI',
+        desc: 'The finalized article is published online with an assigned CrossRef DOI, full open access (CC-BY 4.0), and submitted to indexing databases.',
+        link: '/basic-info/indexing',
+        linkText: 'Indexing Details',
+        color: 'text-teal-600',
+        bg: 'bg-teal-600',
+        light: 'bg-teal-50',
+        border: 'border-teal-200',
     },
 ];
 
@@ -86,90 +97,71 @@ export default function SubmissionProcessTimeline() {
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-60px' }}
-                    transition={{ duration: 0.5 }}
-                    className="text-center mb-14"
-                >
+                <div className="text-center mb-16">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-[11px] font-bold uppercase tracking-widest mb-4">
-                        Publication Journey
+                        Step-by-Step Workflow
                     </span>
-                    <h2 id="process-heading" className="text-3xl sm:text-4xl font-heading font-bold text-slate-900 mb-3">
-                        From Submission to<br />
-                        <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Publication</span>
+                    <h2 id="process-heading" className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-slate-900 mb-4">
+                        From Submission to
+                        <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"> Global Publication</span>
                     </h2>
-                    <p className="text-slate-500 text-base max-w-xl mx-auto">
-                        A transparent, structured 6-step journey designed to ensure every published paper meets high standards of quality and integrity.
+                    <p className="text-slate-500 text-lg max-w-2xl mx-auto leading-relaxed">
+                        A transparent, 7-stage publication lifecycle designed to maintain rigorous academic standards while respecting author timelines.
                     </p>
-                </motion.div>
+                </div>
 
-                {/* Steps */}
+                {/* Steps List */}
                 <div className="relative">
-                    {/* Vertical connector line */}
-                    <div className="absolute left-8 top-8 bottom-8 w-px bg-gradient-to-b from-blue-600 via-indigo-400 to-emerald-500 hidden lg:block" aria-hidden="true" />
+                    {/* Connecting line for desktop */}
+                    <div className="hidden lg:block absolute top-12 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-200 via-indigo-200 to-teal-200 z-0" />
 
-                    <div className="space-y-6">
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-7 gap-4 relative z-10">
                         {STEPS.map((s, i) => {
                             const Icon = s.icon;
                             return (
-                                <motion.div
+                                <div
                                     key={i}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true, margin: '-40px' }}
-                                    transition={{ duration: 0.45, delay: i * 0.06 }}
-                                    className="relative flex flex-col lg:flex-row gap-5 group"
+                                    className="flex flex-col bg-white border border-slate-200/80 rounded-2xl p-4 hover:border-blue-300 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 group"
                                 >
-                                    {/* Step number bubble */}
-                                    <div className="flex-shrink-0 flex items-start gap-5">
-                                        <div className={`relative z-10 w-16 h-16 rounded-2xl ${s.bg} flex items-center justify-center shadow-lg shrink-0 group-hover:scale-105 transition-transform duration-300`}>
-                                            <Icon className="w-7 h-7 text-white" />
+                                    {/* Step number badge */}
+                                    <div className="flex items-center justify-between mb-3">
+                                        <span className={`w-8 h-8 rounded-xl ${s.bg} text-white text-xs font-bold font-mono flex items-center justify-center shadow-sm`}>
+                                            {s.step}
+                                        </span>
+                                        <div className={`w-8 h-8 rounded-xl ${s.light} ${s.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-200`}>
+                                            <Icon className="w-4 h-4" />
                                         </div>
                                     </div>
 
-                                    {/* Content */}
-                                    <div className={`flex-1 p-6 bg-white border ${s.border} rounded-2xl ${s.light} hover:shadow-md hover:-translate-y-0.5 transition-all duration-300`}>
-                                        <div className="flex items-start justify-between gap-4 mb-3">
-                                            <div>
-                                                <span className={`text-[10px] font-bold uppercase tracking-widest ${s.color} mb-1 block`}>Step {s.step}</span>
-                                                <h3 className="text-lg font-heading font-bold text-slate-900">{s.title}</h3>
-                                            </div>
-                                            <CheckCircle2 className={`w-5 h-5 ${s.color} shrink-0 mt-1 opacity-40`} />
-                                        </div>
-                                        <p className="text-sm text-slate-600 leading-relaxed mb-4">{s.desc}</p>
-                                        <Link
-                                            href={s.link}
-                                            className={`inline-flex items-center gap-1.5 text-xs font-bold ${s.color} uppercase tracking-wide hover:underline group/link`}
-                                        >
-                                            {s.linkText}
-                                            <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 transition-transform" />
-                                        </Link>
-                                    </div>
-                                </motion.div>
+                                    <h3 className="text-sm font-heading font-bold text-slate-900 mb-1.5 leading-snug">{s.title}</h3>
+                                    <p className="text-xs text-slate-500 leading-relaxed flex-grow mb-3">{s.desc}</p>
+
+                                    <Link
+                                        href={s.link}
+                                        className={`inline-flex items-center gap-1 text-[11px] font-bold ${s.color} hover:underline mt-auto`}
+                                    >
+                                        {s.linkText}
+                                        <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                                    </Link>
+                                </div>
                             );
                         })}
                     </div>
                 </div>
 
-                {/* CTA */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                    className="mt-12 text-center"
-                >
+                {/* Bottom CTA Banner */}
+                <div className="mt-12 p-6 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl shadow-blue-600/20">
+                    <div>
+                        <div className="text-lg font-heading font-bold">Ready to publish your research?</div>
+                        <div className="text-sm text-blue-100 mt-0.5">Submit your manuscript today — peer review takes 15–30 days.</div>
+                    </div>
                     <Link
                         href="/submission-guidelines/call-for-papers"
-                        className="inline-flex items-center gap-2.5 px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-lg shadow-blue-600/30 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 group"
+                        className="shrink-0 px-6 py-3 rounded-xl bg-white text-blue-700 font-bold text-sm hover:bg-blue-50 transition-colors shadow-sm"
                     >
-                        <SendHorizonal className="w-4 h-4" />
-                        Start Your Submission Now
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                        Submit Manuscript
                     </Link>
-                </motion.div>
+                </div>
             </div>
         </section>
     );

@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { ShieldCheck, Award, Globe, Scale, Zap, FileText } from 'lucide-react';
 
 const CREDENTIALS = [
@@ -62,32 +61,21 @@ export default function TrustCredentials() {
     return (
         <section className="py-14 lg:py-18 bg-white border-b border-slate-200/60" aria-labelledby="trust-heading">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-
-                <motion.div
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-60px' }}
-                    transition={{ duration: 0.5 }}
-                    className="text-center mb-10"
-                >
+                <div className="text-center mb-10">
                     <h2 id="trust-heading" className="text-2xl sm:text-3xl font-heading font-bold text-slate-900 mb-2">
                         Verified Journal Credentials
                     </h2>
                     <p className="text-slate-500 text-sm max-w-lg mx-auto">
                         Every credential listed below is real, verifiable, and maintained to international academic standards.
                     </p>
-                </motion.div>
+                </div>
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
                     {CREDENTIALS.map((cred, i) => {
                         const Icon = cred.icon;
                         return (
-                            <motion.div
+                            <div
                                 key={i}
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true, margin: '-40px' }}
-                                transition={{ duration: 0.4, delay: i * 0.06 }}
                                 className={`group p-4 rounded-2xl border ${cred.border} ${cred.bg} hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 text-center`}
                             >
                                 <div className={`inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white/80 ${cred.color} mb-3 group-hover:scale-110 transition-transform duration-200 shadow-sm`}>
@@ -96,7 +84,7 @@ export default function TrustCredentials() {
                                 <div className={`text-sm font-heading font-bold ${cred.color} mb-0.5`}>{cred.value}</div>
                                 <div className="text-xs font-bold text-slate-700 mb-1">{cred.label}</div>
                                 <div className="text-[10px] text-slate-500 leading-snug">{cred.note}</div>
-                            </motion.div>
+                            </div>
                         );
                     })}
                 </div>

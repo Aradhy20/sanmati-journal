@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import { Mail, CheckCircle2, Sparkles, ArrowRight } from 'lucide-react';
 
 export default function NewsletterSection() {
@@ -35,23 +34,11 @@ export default function NewsletterSection() {
                 <div className="max-w-2xl mx-auto text-center">
 
                     {/* Icon */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
-                        className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-600/20 border border-blue-500/30 mb-6"
-                    >
+                    <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-600/20 border border-blue-500/30 mb-6">
                         <Mail className="w-7 h-7 text-blue-400" />
-                    </motion.div>
+                    </div>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.1 }}
-                        className="space-y-4 mb-8"
-                    >
+                    <div className="space-y-4 mb-8">
                         <h2 id="newsletter-heading" className="text-3xl sm:text-4xl font-heading font-bold text-white">
                             Stay Updated with
                             <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent"> Latest Research</span>
@@ -59,15 +46,10 @@ export default function NewsletterSection() {
                         <p className="text-slate-400 text-base leading-relaxed">
                             Subscribe to our newsletter and get notified when new issues are published, call for papers are opened, and research highlights are released.
                         </p>
-                    </motion.div>
+                    </div>
 
                     {/* Form */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
-                    >
+                    <div>
                         {status === 'success' ? (
                             <div className="flex flex-col items-center gap-3 py-6">
                                 <div className="w-14 h-14 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
@@ -111,16 +93,10 @@ export default function NewsletterSection() {
                         <p className="text-slate-500 text-xs mt-4">
                             No spam. Unsubscribe anytime. We respect your privacy.
                         </p>
-                    </motion.div>
+                    </div>
 
                     {/* Stats row */}
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.35 }}
-                        className="flex flex-wrap items-center justify-center gap-8 mt-10 pt-8 border-t border-white/10"
-                    >
+                    <div className="flex flex-wrap items-center justify-center gap-8 mt-10 pt-8 border-t border-white/10">
                         {[
                             { label: 'Subscribers', value: '500+' },
                             { label: 'Issues Published', value: '4+' },
@@ -131,7 +107,7 @@ export default function NewsletterSection() {
                                 <div className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">{item.label}</div>
                             </div>
                         ))}
-                    </motion.div>
+                    </div>
 
                 </div>
             </div>

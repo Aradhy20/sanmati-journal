@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, HelpCircle } from 'lucide-react';
 
 const FAQS = [
@@ -37,17 +36,11 @@ const FAQS = [
     },
 ];
 
-function FAQItem({ faq, index }) {
+function FAQItem({ faq }) {
     const [open, setOpen] = useState(false);
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-30px' }}
-            transition={{ duration: 0.4, delay: index * 0.04 }}
-            className="border border-slate-200 rounded-2xl overflow-hidden bg-white hover:border-blue-200 transition-colors duration-200"
-        >
+        <div className="border border-slate-200 rounded-2xl overflow-hidden bg-white hover:border-blue-200 transition-colors duration-200">
             <button
                 onClick={() => setOpen(p => !p)}
                 className={`w-full flex items-center justify-between gap-4 px-6 py-5 text-left transition-colors duration-200 ${open ? 'bg-blue-50' : 'hover:bg-slate-50'}`}
@@ -56,30 +49,22 @@ function FAQItem({ faq, index }) {
                 <span className={`text-sm font-bold leading-snug ${open ? 'text-blue-700' : 'text-slate-800'}`}>
                     {faq.q}
                 </span>
-                <motion.span
-                    animate={{ rotate: open ? 180 : 0 }}
-                    transition={{ duration: 0.22 }}
-                    className={`shrink-0 w-6 h-6 flex items-center justify-center rounded-full ${open ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-500'} transition-colors duration-200`}
+                <span
+                    className={`shrink-0 w-6 h-6 flex items-center justify-center rounded-full transition-all duration-200 ${
+                        open ? 'bg-blue-600 text-white rotate-180' : 'bg-slate-100 text-slate-500'
+                    }`}
                 >
                     <ChevronDown className="w-3.5 h-3.5" />
-                </motion.span>
+                </span>
             </button>
-            <AnimatePresence initial={false}>
-                {open && (
-                    <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25, ease: 'easeInOut' }}
-                        className="overflow-hidden"
-                    >
-                        <div className="px-6 pb-5 pt-2 text-sm text-slate-600 leading-relaxed border-t border-slate-100">
-                            {faq.a}
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </motion.div>
+            {open && (
+                <div className="overflow-hidden animate-in fade-in slide-in-from-top-1 duration-200">
+                    <div className="px-6 pb-5 pt-2 text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+                        {faq.a}
+                    </div>
+                </div>
+            )}
+        </div>
     );
 }
 
@@ -104,13 +89,7 @@ export default function HomeFAQ() {
 
                     {/* Left: Header */}
                     <div className="lg:col-span-4 lg:sticky lg:top-24">
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5 }}
-                            className="space-y-5"
-                        >
+                        <div className="space-y-5">
                             <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center">
                                 <HelpCircle className="w-6 h-6 text-blue-600" />
                             </div>
@@ -130,13 +109,13 @@ export default function HomeFAQ() {
                                     Contact Editorial Team
                                 </a>
                             </div>
-                        </motion.div>
+                        </div>
                     </div>
 
                     {/* Right: FAQ accordion */}
                     <div className="lg:col-span-8 space-y-3">
                         {FAQS.map((faq, i) => (
-                            <FAQItem key={i} faq={faq} index={i} />
+                            <FAQItem key={i} faq={faq} />
                         ))}
                     </div>
 

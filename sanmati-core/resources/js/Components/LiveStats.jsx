@@ -1,25 +1,37 @@
-import { useRef } from 'react';
-import { useInView } from 'framer-motion';
-import { motion } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
 import { FileText, Users, Globe, Clock, BookOpen, Award } from 'lucide-react';
-import { useState, useEffect } from 'react';
 
 function Counter({ end, suffix = '', prefix = '', duration = 2000 }) {
     const [count, setCount] = useState(0);
+    const [started, setStarted] = useState(false);
     const ref = useRef(null);
-    const inView = useInView(ref, { once: true, margin: '-60px' });
 
     useEffect(() => {
-        if (!inView) return;
+        if (!ref.current || typeof IntersectionObserver === 'undefined') {
+            setStarted(true);
+            return;
+        }
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+                setStarted(true);
+                observer.disconnect();
+            }
+        }, { rootMargin: '-40px' });
+        observer.observe(ref.current);
+        return () => observer.disconnect();
+    }, []);
+
+    useEffect(() => {
+        if (!started) return;
         let start = 0;
-        const step = end / (duration / 16);
+        const step = Math.max(1, end / (duration / 16));
         const timer = setInterval(() => {
             start += step;
             if (start >= end) { setCount(end); clearInterval(timer); }
             else setCount(Math.floor(start));
         }, 16);
         return () => clearInterval(timer);
-    }, [inView, end, duration]);
+    }, [started, end, duration]);
 
     return <span ref={ref}>{prefix}{count.toLocaleString()}{suffix}</span>;
 }
@@ -81,18 +93,12 @@ export default function LiveStats({ metrics = null }) {
             text: 'text-amber-600',
         },
     ];
+
     return (
         <section className="py-16 lg:py-20 bg-gradient-to-b from-white to-slate-50 border-b border-slate-200/60" aria-labelledby="stats-heading">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-
                 {/* Section header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-60px' }}
-                    transition={{ duration: 0.5 }}
-                    className="text-center mb-12"
-                >
+                <div className="text-center mb-12">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-[11px] font-bold uppercase tracking-widest mb-4">
                         Live Platform Stats
                     </span>
@@ -102,19 +108,15 @@ export default function LiveStats({ metrics = null }) {
                     <p className="text-slate-500 text-base max-w-xl mx-auto">
                         Real-time numbers reflecting our commitment to accelerating global research and knowledge dissemination.
                     </p>
-                </motion.div>
+                </div>
 
                 {/* Stats grid */}
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                     {STATS.map((stat, i) => {
                         const Icon = stat.icon;
                         return (
-                            <motion.div
+                            <div
                                 key={i}
-                                initial={{ opacity: 0, y: 24 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, margin: '-40px' }}
-                                transition={{ duration: 0.5, delay: i * 0.07 }}
                                 className="group p-5 bg-white border border-slate-100 rounded-2xl hover:border-slate-200 hover:shadow-lg hover:shadow-slate-100/80 hover:-translate-y-1 transition-all duration-300 text-center"
                             >
                                 <div className={`inline-flex items-center justify-center w-12 h-12 rounded-2xl ${stat.bg} ${stat.text} mb-4 group-hover:scale-110 transition-transform duration-300`}>
@@ -125,7 +127,7 @@ export default function LiveStats({ metrics = null }) {
                                 </div>
                                 <div className="text-sm font-bold text-slate-800 mb-1">{stat.label}</div>
                                 <div className="text-[11px] text-slate-400 leading-snug">{stat.desc}</div>
-                            </motion.div>
+                            </div>
                         );
                     })}
                 </div>

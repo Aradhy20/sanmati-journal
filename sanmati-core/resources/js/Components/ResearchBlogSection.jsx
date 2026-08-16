@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { BookOpen, ArrowRight, Clock, User, Tag, Sparkles } from 'lucide-react';
 import { Link } from '@inertiajs/react';
 
@@ -61,42 +60,45 @@ export default function ResearchBlogSection() {
                     </Link>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {articles.map((item, idx) => (
-                        <motion.div
+                        <div
                             key={idx}
-                            initial={{ opacity: 0, y: 15 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.4, delay: idx * 0.08 }}
-                            className="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+                            className="bg-white border border-slate-200/80 rounded-2xl p-6 hover:border-indigo-300 hover:shadow-xl hover:shadow-indigo-900/5 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
                         >
                             <div>
                                 <div className="flex items-center justify-between gap-2 mb-3">
-                                    <span className="px-2.5 py-0.5 bg-blue-50 text-blue-700 font-bold text-[10px] uppercase tracking-wider rounded-md">
-                                        {item.category}
+                                    <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded-md">
+                                        <Tag className="w-2.5 h-2.5" /> {item.category}
                                     </span>
-                                    <span className="text-[10px] text-slate-400 font-medium flex items-center gap-1">
+                                    <span className="flex items-center gap-1 text-[11px] text-slate-400 font-medium">
                                         <Clock className="w-3 h-3" /> {item.readTime}
                                     </span>
                                 </div>
 
-                                <h3 className="text-base font-bold text-slate-900 hover:text-blue-600 transition-colors mb-2 leading-snug line-clamp-2">
-                                    {item.title}
+                                <h3 className="text-base font-serif font-bold text-slate-900 leading-snug group-hover:text-blue-600 transition-colors mb-2.5">
+                                    <Link href={item.url}>
+                                        {item.title}
+                                    </Link>
                                 </h3>
 
-                                <p className="text-xs text-slate-500 font-medium leading-relaxed line-clamp-3 mb-6">
+                                <p className="text-xs text-slate-500 leading-relaxed line-clamp-3 mb-6">
                                     {item.desc}
                                 </p>
                             </div>
 
-                            <Link
-                                href={item.url}
-                                className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-700 pt-3 border-t border-slate-100"
-                            >
-                                Read Guide <ArrowRight className="w-3.5 h-3.5" />
-                            </Link>
-                        </motion.div>
+                            <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span className="flex items-center gap-1 text-[11px] font-medium text-slate-500">
+                                    <User className="w-3 h-3 text-slate-400" /> {item.author}
+                                </span>
+                                <Link
+                                    href={item.url}
+                                    className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 group-hover:text-blue-700"
+                                >
+                                    Read <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                                </Link>
+                            </div>
+                        </div>
                     ))}
                 </div>
             </div>

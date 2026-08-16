@@ -1,5 +1,4 @@
 import { Link } from '@inertiajs/react';
-import { motion } from 'framer-motion';
 import {
     BookOpen, Mail, Phone, MapPin, ExternalLink,
     Globe, Shield, Award, FileText, ChevronRight,

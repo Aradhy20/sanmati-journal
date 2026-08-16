@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { Link } from '@inertiajs/react';
 import {
     FlaskConical, Cpu, Scale, BookOpen, Users, Globe,
@@ -27,13 +26,7 @@ export default function ResearchAreasGrid() {
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-60px' }}
-                    transition={{ duration: 0.5 }}
-                    className="text-center mb-12"
-                >
+                <div className="text-center mb-12">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-[11px] font-bold uppercase tracking-widest mb-4">
                         Research Domains
                     </span>
@@ -44,50 +37,44 @@ export default function ResearchAreasGrid() {
                     <p className="text-slate-500 text-base max-w-xl mx-auto">
                         We welcome research from 20+ disciplines. If your field is not listed, contact us — we consider all areas of scholarly inquiry.
                     </p>
-                </motion.div>
+                </div>
 
                 {/* Grid */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
                     {AREAS.map((area, i) => {
                         const Icon = area.icon;
                         return (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true, margin: '-30px' }}
-                                transition={{ duration: 0.35, delay: i * 0.04 }}
-                            >
+                            <div key={i}>
                                 <Link
                                     href={area.href}
-                                    className={`group flex flex-col items-center text-center p-5 rounded-2xl border ${area.border} ${area.bg} hover:shadow-lg hover:-translate-y-1 transition-all duration-300 block`}
+                                    className={`group flex flex-col items-center text-center p-4 rounded-2xl bg-white border ${area.border} hover:border-slate-300 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 block h-full`}
                                 >
-                                    <div className={`w-12 h-12 rounded-2xl bg-white/80 flex items-center justify-center ${area.color} mb-3 group-hover:scale-110 transition-transform duration-300 shadow-sm`}>
-                                        <Icon className="w-6 h-6" />
+                                    <div className={`w-11 h-11 rounded-xl ${area.bg} ${area.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-200`}>
+                                        <Icon className="w-5 h-5" />
                                     </div>
-                                    <h3 className={`text-xs font-bold leading-snug ${area.color} group-hover:underline`}>{area.name}</h3>
+                                    <div className="text-xs font-heading font-bold text-slate-800 group-hover:text-blue-700 transition-colors leading-snug mb-1">
+                                        {area.name}
+                                    </div>
+                                    <div className="text-[10px] text-slate-400 mt-auto flex items-center gap-0.5 group-hover:text-blue-600 transition-colors">
+                                        Submit paper
+                                        <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                                    </div>
                                 </Link>
-                            </motion.div>
+                            </div>
                         );
                     })}
                 </div>
 
-                {/* CTA */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                    className="mt-10 text-center"
-                >
+                {/* Bottom CTA */}
+                <div className="mt-10 text-center">
                     <Link
                         href="/submission-guidelines/areas"
-                        className="inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-700 border border-blue-200 hover:border-blue-400 bg-blue-50 hover:bg-blue-100 px-6 py-3 rounded-xl transition-all duration-200 group"
+                        className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors"
                     >
-                        View All Research Areas
-                        <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                        View all research areas & scope details
+                        <ChevronRight className="w-4 h-4" />
                     </Link>
-                </motion.div>
+                </div>
             </div>
         </section>
     );

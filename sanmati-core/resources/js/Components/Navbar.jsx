@@ -6,7 +6,6 @@ import {
     GraduationCap, FlaskConical, Scale, Briefcase, Landmark,
     Atom, BookMarked, SendHorizonal
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 /* ─── Navigation Data ─────────────────────────────────────── */
 const NAV_ITEMS = [
@@ -58,13 +57,7 @@ const NAV_ITEMS = [
 /* ─── Dropdown Menu ───────────────────────────────────────── */
 function DropdownMenu({ items }) {
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 8, scale: 0.97 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 8, scale: 0.97 }}
-            transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 bg-white/95 backdrop-blur-xl border border-slate-200/80 rounded-2xl shadow-2xl shadow-slate-900/10 overflow-hidden z-50 ring-1 ring-slate-900/5"
-        >
+        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 bg-white/95 backdrop-blur-xl border border-slate-200/80 rounded-2xl shadow-2xl shadow-slate-900/10 overflow-hidden z-50 ring-1 ring-slate-900/5 transition-all duration-150 animate-in fade-in zoom-in-95">
             {/* Top accent line */}
             <div className="h-0.5 w-full bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500" />
             <div className="p-2">
@@ -87,7 +80,7 @@ function DropdownMenu({ items }) {
                     );
                 })}
             </div>
-        </motion.div>
+        </div>
     );
 }
 
@@ -123,148 +116,191 @@ function MobileNavItem({ item, isActive, closeMenu }) {
                 aria-expanded={open}
             >
                 {item.name}
-                <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                <span className={`transition-transform duration-200 ${open ? 'rotate-180' : ''}`}>
                     <ChevronDown className="w-4 h-4 opacity-60" />
-                </motion.span>
+                </span>
             </button>
-            <AnimatePresence>
-                {open && (
-                    <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.22 }}
-                        className="overflow-hidden"
-                    >
-                        <div className="pl-4 pr-2 py-1.5 space-y-0.5">
-                            {item.dropdown.map((sub, i) => {
-                                const Icon = sub.icon;
-                                return (
-                                    <Link
-                                        key={i}
-                                        href={sub.href}
-                                        onClick={closeMenu}
-                                        className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
-                                    >
-                                        <Icon className="w-4 h-4 text-blue-500 shrink-0" />
-                                        {sub.name}
-                                    </Link>
-                                );
-                            })}
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            {open && (
+                <div className="overflow-hidden transition-all duration-200">
+                    <div className="pl-4 pr-2 py-1.5 space-y-0.5">
+                        {item.dropdown.map((sub, i) => {
+                            const Icon = sub.icon;
+                            return (
+                                <Link
+                                    key={i}
+                                    href={sub.href}
+                                    onClick={closeMenu}
+                                    className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                                >
+                                    <Icon className="w-4 h-4 text-blue-500 shrink-0" />
+                                    {sub.name}
+                                </Link>
+                            );
+                        })}
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
 
-/* ─── Main Navbar ─────────────────────────────────────────── */
+/* ─── Main Navbar Component ───────────────────────────────── */
 export default function Navbar({ onOpenSearch }) {
     const { url } = usePage();
-    const [mobileOpen, setMobileOpen] = useState(false);
-    const [activeDropdown, setActiveDropdown] = useState(null);
-    const [scrolled, setScrolled] = useState(false);
-    const [userMenuOpen, setUserMenuOpen] = useState(false);
-    const navRef = useRef(null);
-    const timeoutRef = useRef(null);
-
     const { auth } = usePage().props;
     const user = auth?.user;
 
-    const isActive = useCallback((href) => {
-        if (href === '/') return url === '/';
-        return url.startsWith(href);
-    }, [url]);
+    const [scrolled, setScrolled] = useState(false);
+    const [activeDropdown, setActiveDropdown] = useState(null);
+    const [mobileOpen, setMobileOpen] = useState(false);
+    const [userMenuOpen, setUserMenuOpen] = useState(false);
 
+    const dropdownTimeoutRef = useRef(null);
+    const navRef = useRef(null);
+
+    /* ── Scroll detection for compact header ── */
     useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 16);
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 20);
+        };
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    /* ── Click outside to close menus ── */
     useEffect(() => {
-        const handleKey = (e) => { if (e.key === 'Escape') { setMobileOpen(false); setActiveDropdown(null); } };
-        const handleClick = (e) => {
+        const handleClickOutside = (e) => {
             if (navRef.current && !navRef.current.contains(e.target)) {
                 setActiveDropdown(null);
                 setUserMenuOpen(false);
             }
         };
-        document.addEventListener('keydown', handleKey);
-        document.addEventListener('mousedown', handleClick);
-        return () => { document.removeEventListener('keydown', handleKey); document.removeEventListener('mousedown', handleClick); };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
-    // Prevent body scroll when mobile menu open
+    /* ── Close mobile menu on route change ── */
     useEffect(() => {
-        document.body.style.overflow = mobileOpen ? 'hidden' : '';
-        return () => { document.body.style.overflow = ''; };
-    }, [mobileOpen]);
+        setMobileOpen(false);
+        setActiveDropdown(null);
+        setUserMenuOpen(false);
+    }, [url]);
 
-    const openDropdown = (name) => {
-        clearTimeout(timeoutRef.current);
+    /* ── Keyboard shortcut: ⌘K or Ctrl+K for search ── */
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                onOpenSearch?.();
+            }
+            if (e.key === 'Escape') {
+                setActiveDropdown(null);
+                setUserMenuOpen(false);
+                setMobileOpen(false);
+            }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [onOpenSearch]);
+
+    /* ── Dropdown hover handlers with slight debounce ── */
+    const handleMouseEnter = useCallback((name) => {
+        clearTimeout(dropdownTimeoutRef.current);
         setActiveDropdown(name);
-    };
-    const closeDropdown = () => {
-        timeoutRef.current = setTimeout(() => setActiveDropdown(null), 120);
-    };
+    }, []);
+
+    const handleMouseLeave = useCallback(() => {
+        dropdownTimeoutRef.current = setTimeout(() => {
+            setActiveDropdown(null);
+        }, 150);
+    }, []);
+
+    const isActive = (href) => url === href || url.startsWith(href + '/');
 
     const getDashboardLink = () => {
         if (!user) return '/login';
-        const role = user.role;
-        if (role === 'admin') return '/admin/dashboard';
-        if (role === 'editor') return '/editor/dashboard';
-        if (role === 'reviewer') return '/reviewer/dashboard';
-        return '/author/dashboard';
+        if (user.role === 'admin') return '/admin/dashboard';
+        if (user.role === 'editor') return '/editor/dashboard';
+        if (user.role === 'reviewer') return '/reviewer/dashboard';
+        return '/dashboard';
     };
 
     return (
         <>
-            {/* ── Announcement Bar ── */}
-            <div className="bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-600 text-white text-center py-2 px-4 text-xs font-bold tracking-wide">
-                <span className="opacity-90">📢 Call for Papers — Volume 2, Issue 3 is now open.</span>{' '}
-                <Link href="/submission-guidelines/call-for-papers" className="underline underline-offset-2 hover:no-underline ml-1 font-bold">
-                    Submit Your Research →
-                </Link>
+            {/* ── Top Utility Bar ── */}
+            <div className="bg-slate-900 text-slate-300 text-[11px] font-medium border-b border-slate-800">
+                <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-1.5 flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                        <span className="hidden sm:inline-flex items-center gap-1.5 text-blue-400 font-semibold">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                            ISSN: 3108-1819 (Online)
+                        </span>
+                        <span className="hidden md:inline-flex items-center gap-1 text-slate-400">
+                            <Shield className="w-3 h-3 text-indigo-400" />
+                            Peer-Reviewed Multidisciplinary Journal
+                        </span>
+                    </div>
+                    <div className="flex items-center gap-4 ml-auto">
+                        <Link href="/blog" className="hover:text-white transition-colors flex items-center gap-1">
+                            <BookOpen className="w-3 h-3 text-cyan-400" />
+                            Research Blog
+                        </Link>
+                        <Link href="/downloads" className="hover:text-white transition-colors flex items-center gap-1">
+                            <Award className="w-3 h-3 text-amber-400" />
+                            Downloads
+                        </Link>
+                        <a href="mailto:sanmatijournal@gmail.com" className="hover:text-white transition-colors hidden sm:flex items-center gap-1">
+                            <Mail className="w-3 h-3 text-blue-400" />
+                            sanmatijournal@gmail.com
+                        </a>
+                    </div>
+                </div>
             </div>
 
-            {/* ── Main Header ── */}
+            {/* ── Main Sticky Header ── */}
             <header
                 ref={navRef}
-                className={`sticky top-0 z-[100] w-full transition-all duration-300 ${
+                className={`sticky top-0 z-40 transition-all duration-200 ${
                     scrolled
-                        ? 'bg-white/95 backdrop-blur-xl shadow-sm border-b border-slate-200/70'
-                        : 'bg-white border-b border-slate-200/50'
+                        ? 'bg-white/95 backdrop-blur-md shadow-md shadow-slate-900/5 py-2.5'
+                        : 'bg-white py-3.5 border-b border-slate-100'
                 }`}
             >
-                <nav className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
-                    <div className="flex items-center justify-between h-16 lg:h-[68px]">
+                <nav className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main Navigation">
+                    <div className="flex items-center justify-between gap-4">
 
-                        {/* ── Logo ── */}
-                        <Link href="/" className="flex items-center gap-3 group shrink-0" aria-label="Sanmati Journal home">
-                            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
-                                <BookOpen className="w-5 h-5 text-white" />
-                            </div>
-                            <div className="hidden sm:block">
-                                <div className="text-base font-heading font-bold text-slate-900 leading-tight">Sanmati Spectrum</div>
-                                <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">of Knowledge</div>
+                        {/* ── Brand Logo ── */}
+                        <Link href="/" className="flex items-center gap-3 group shrink-0">
+                            <img
+                                src="/logo.webp"
+                                alt="Sanmati Spectrum Logo"
+                                width="44"
+                                height="44"
+                                className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl object-contain shadow-sm border border-slate-100 group-hover:scale-105 transition-transform duration-200"
+                            />
+                            <div className="flex flex-col">
+                                <span className="text-base sm:text-lg font-heading font-bold text-slate-900 leading-none tracking-tight group-hover:text-blue-600 transition-colors">
+                                    Sanmati Spectrum
+                                </span>
+                                <span className="text-[10px] text-slate-500 font-semibold tracking-wider uppercase mt-0.5">
+                                    Knowledge & Emerging Discourse
+                                </span>
                             </div>
                         </Link>
 
-                        {/* ── Desktop Nav ── */}
+                        {/* ── Desktop Navigation Links ── */}
                         <div className="hidden lg:flex items-center gap-1">
                             {NAV_ITEMS.map((item) => (
                                 <div
                                     key={item.name}
                                     className="relative"
-                                    onMouseEnter={() => item.dropdown && openDropdown(item.name)}
-                                    onMouseLeave={() => item.dropdown && closeDropdown()}
+                                    onMouseEnter={() => item.dropdown && handleMouseEnter(item.name)}
+                                    onMouseLeave={handleMouseLeave}
                                 >
-                                    {item.href ? (
+                                    {!item.dropdown ? (
                                         <Link
                                             href={item.href}
-                                            className={`flex items-center gap-1 px-3.5 py-2 rounded-xl text-sm font-bold transition-all duration-150 ${
+                                            className={`px-3.5 py-2 rounded-xl text-sm font-bold transition-all duration-150 ${
                                                 isActive(item.href)
                                                     ? 'bg-blue-50 text-blue-700'
                                                     : 'text-slate-700 hover:text-slate-900 hover:bg-slate-100'
@@ -283,20 +319,15 @@ export default function Navbar({ onOpenSearch }) {
                                             aria-expanded={activeDropdown === item.name}
                                         >
                                             {item.name}
-                                            <motion.span
-                                                animate={{ rotate: activeDropdown === item.name ? 180 : 0 }}
-                                                transition={{ duration: 0.2 }}
-                                            >
+                                            <span className={`transition-transform duration-200 ${activeDropdown === item.name ? 'rotate-180' : ''}`}>
                                                 <ChevronDown className="w-3.5 h-3.5 opacity-60" />
-                                            </motion.span>
+                                            </span>
                                         </button>
                                     )}
 
-                                    <AnimatePresence>
-                                        {activeDropdown === item.name && item.dropdown && (
-                                            <DropdownMenu items={item.dropdown} />
-                                        )}
-                                    </AnimatePresence>
+                                    {activeDropdown === item.name && item.dropdown && (
+                                        <DropdownMenu items={item.dropdown} />
+                                    )}
                                 </div>
                             ))}
                         </div>
@@ -316,7 +347,7 @@ export default function Navbar({ onOpenSearch }) {
 
                             {/* Auth buttons */}
                             {user ? (
-                                <div className="relative" ref={null}>
+                                <div className="relative">
                                     <button
                                         onClick={() => setUserMenuOpen(p => !p)}
                                         className="flex items-center gap-2 px-3 py-2 rounded-xl bg-blue-50 border border-blue-100 text-sm font-bold text-blue-700 hover:bg-blue-100 transition-all"
@@ -325,34 +356,27 @@ export default function Navbar({ onOpenSearch }) {
                                             {user.name?.charAt(0)?.toUpperCase()}
                                         </span>
                                         <span className="hidden sm:inline max-w-24 truncate">{user.name?.split(' ')[0]}</span>
-                                        <ChevronDown className="w-3.5 h-3.5 opacity-60" />
+                                        <ChevronDown className={`w-3.5 h-3.5 opacity-60 transition-transform duration-200 ${userMenuOpen ? 'rotate-180' : ''}`} />
                                     </button>
-                                    <AnimatePresence>
-                                        {userMenuOpen && (
-                                            <motion.div
-                                                initial={{ opacity: 0, y: 8, scale: 0.97 }}
-                                                animate={{ opacity: 1, y: 0, scale: 1 }}
-                                                exit={{ opacity: 0, y: 8, scale: 0.97 }}
-                                                className="absolute right-0 top-full mt-2 w-52 bg-white border border-slate-200 rounded-2xl shadow-2xl p-2 z-50"
+                                    {userMenuOpen && (
+                                        <div className="absolute right-0 top-full mt-2 w-52 bg-white border border-slate-200 rounded-2xl shadow-2xl p-2 z-50 animate-in fade-in zoom-in-95">
+                                            <Link href={getDashboardLink()} className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-bold text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                                                <GraduationCap className="w-4 h-4 text-blue-500" /> Dashboard
+                                            </Link>
+                                            <Link href="/settings" className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-bold text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                                                <Award className="w-4 h-4 text-blue-500" /> Profile Settings
+                                            </Link>
+                                            <div className="my-1 border-t border-slate-100" />
+                                            <Link
+                                                href="/logout"
+                                                method="post"
+                                                as="button"
+                                                className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-bold text-red-600 hover:bg-red-50 transition-colors w-full text-left"
                                             >
-                                                <Link href={getDashboardLink()} className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-bold text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
-                                                    <GraduationCap className="w-4 h-4 text-blue-500" /> Dashboard
-                                                </Link>
-                                                <Link href="/settings" className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-bold text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
-                                                    <Award className="w-4 h-4 text-blue-500" /> Profile Settings
-                                                </Link>
-                                                <div className="my-1 border-t border-slate-100" />
-                                                <Link
-                                                    href="/logout"
-                                                    method="post"
-                                                    as="button"
-                                                    className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-bold text-red-600 hover:bg-red-50 transition-colors w-full text-left"
-                                                >
-                                                    <X className="w-4 h-4" /> Sign Out
-                                                </Link>
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
+                                                <X className="w-4 h-4" /> Sign Out
+                                            </Link>
+                                        </div>
+                                    )}
                                 </div>
                             ) : (
                                 <div className="hidden sm:flex items-center gap-2">
@@ -379,12 +403,7 @@ export default function Navbar({ onOpenSearch }) {
                                 aria-expanded={mobileOpen}
                                 aria-controls="mobile-menu"
                             >
-                                <AnimatePresence mode="wait">
-                                    {mobileOpen
-                                        ? <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}><X className="w-5 h-5" /></motion.span>
-                                        : <motion.span key="m" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}><Menu className="w-5 h-5" /></motion.span>
-                                    }
-                                </AnimatePresence>
+                                {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
                             </button>
                         </div>
                     </div>
@@ -392,94 +411,84 @@ export default function Navbar({ onOpenSearch }) {
             </header>
 
             {/* ── Mobile Drawer ── */}
-            <AnimatePresence>
-                {mobileOpen && (
-                    <>
-                        {/* Backdrop */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="fixed inset-0 z-[90] bg-slate-900/50 backdrop-blur-sm lg:hidden"
-                            onClick={() => setMobileOpen(false)}
-                            aria-hidden="true"
-                        />
-                        {/* Drawer */}
-                        <motion.div
-                            id="mobile-menu"
-                            role="dialog"
-                            aria-modal="true"
-                            aria-label="Mobile navigation"
-                            initial={{ x: '100%' }}
-                            animate={{ x: 0 }}
-                            exit={{ x: '100%' }}
-                            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                            className="fixed top-0 right-0 bottom-0 z-[95] w-80 max-w-[90vw] bg-white shadow-2xl lg:hidden flex flex-col overflow-hidden"
-                        >
-                            {/* Drawer header */}
-                            <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100">
-                                <div>
-                                    <div className="text-sm font-heading font-bold text-slate-900">Sanmati Spectrum</div>
-                                    <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">ISSN 3108-1819</div>
-                                </div>
-                                <button
+            {mobileOpen && (
+                <>
+                    {/* Backdrop */}
+                    <div
+                        className="fixed inset-0 z-[90] bg-slate-900/50 backdrop-blur-sm lg:hidden transition-opacity duration-200"
+                        onClick={() => setMobileOpen(false)}
+                        aria-hidden="true"
+                    />
+                    {/* Drawer */}
+                    <div
+                        id="mobile-menu"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label="Mobile navigation"
+                        className="fixed top-0 right-0 bottom-0 z-[95] w-80 max-w-[90vw] bg-white shadow-2xl lg:hidden flex flex-col overflow-hidden transition-transform duration-300 ease-out"
+                    >
+                        {/* Drawer header */}
+                        <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100">
+                            <div>
+                                <div className="text-sm font-heading font-bold text-slate-900">Sanmati Spectrum</div>
+                                <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">ISSN 3108-1819</div>
+                            </div>
+                            <button
+                                onClick={() => setMobileOpen(false)}
+                                className="w-8 h-8 flex items-center justify-center rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors"
+                                aria-label="Close menu"
+                            >
+                                <X className="w-4 h-4" />
+                            </button>
+                        </div>
+
+                        {/* Drawer body */}
+                        <div className="flex-1 overflow-y-auto p-4 space-y-1">
+                            {NAV_ITEMS.map(item => (
+                                <MobileNavItem key={item.name} item={item} isActive={isActive} closeMenu={() => setMobileOpen(false)} />
+                            ))}
+                        </div>
+
+                        {/* Drawer footer CTAs */}
+                        <div className="p-4 border-t border-slate-100 space-y-2.5">
+                            {user ? (
+                                <Link
+                                    href={getDashboardLink()}
                                     onClick={() => setMobileOpen(false)}
-                                    className="w-8 h-8 flex items-center justify-center rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors"
-                                    aria-label="Close menu"
+                                    className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-blue-600 text-white text-sm font-bold hover:bg-blue-700 transition-colors"
                                 >
-                                    <X className="w-4 h-4" />
-                                </button>
-                            </div>
-
-                            {/* Drawer body */}
-                            <div className="flex-1 overflow-y-auto p-4 space-y-1">
-                                {NAV_ITEMS.map(item => (
-                                    <MobileNavItem key={item.name} item={item} isActive={isActive} closeMenu={() => setMobileOpen(false)} />
-                                ))}
-                            </div>
-
-                            {/* Drawer footer CTAs */}
-                            <div className="p-4 border-t border-slate-100 space-y-2.5">
-                                {user ? (
+                                    <GraduationCap className="w-4 h-4" /> Go to Dashboard
+                                </Link>
+                            ) : (
+                                <>
                                     <Link
-                                        href={getDashboardLink()}
+                                        href="/submission-guidelines/call-for-papers"
                                         onClick={() => setMobileOpen(false)}
                                         className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-blue-600 text-white text-sm font-bold hover:bg-blue-700 transition-colors"
                                     >
-                                        <GraduationCap className="w-4 h-4" /> Go to Dashboard
+                                        <SendHorizonal className="w-4 h-4" /> Submit Paper
                                     </Link>
-                                ) : (
-                                    <>
-                                        <Link
-                                            href="/submission-guidelines/call-for-papers"
-                                            onClick={() => setMobileOpen(false)}
-                                            className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-blue-600 text-white text-sm font-bold hover:bg-blue-700 transition-colors"
-                                        >
-                                            <SendHorizonal className="w-4 h-4" /> Submit Paper
-                                        </Link>
-                                        <Link
-                                            href="/login"
-                                            onClick={() => setMobileOpen(false)}
-                                            className="flex items-center justify-center gap-2 w-full py-3 rounded-xl border border-slate-200 text-slate-700 text-sm font-bold hover:bg-slate-50 transition-colors"
-                                        >
-                                            Sign In to Dashboard
-                                        </Link>
-                                    </>
-                                )}
-                                <div className="flex items-center justify-center gap-4 pt-1">
-                                    <a href="tel:+918979782949" className="flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-blue-600 transition-colors">
-                                        <Phone className="w-3.5 h-3.5" /> +91 89797 82949
-                                    </a>
-                                    <button onClick={onOpenSearch} className="flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-blue-600 transition-colors">
-                                        <Search className="w-3.5 h-3.5" /> Search
-                                    </button>
-                                </div>
+                                    <Link
+                                        href="/login"
+                                        onClick={() => setMobileOpen(false)}
+                                        className="flex items-center justify-center gap-2 w-full py-3 rounded-xl border border-slate-200 text-slate-700 text-sm font-bold hover:bg-slate-50 transition-colors"
+                                    >
+                                        Sign In to Dashboard
+                                    </Link>
+                                </>
+                            )}
+                            <div className="flex items-center justify-center gap-4 pt-1">
+                                <a href="tel:+918979782949" className="flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-blue-600 transition-colors">
+                                    <Phone className="w-3.5 h-3.5" /> +91 89797 82949
+                                </a>
+                                <button onClick={onOpenSearch} className="flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-blue-600 transition-colors">
+                                    <Search className="w-3.5 h-3.5" /> Search
+                                </button>
                             </div>
-                        </motion.div>
-                    </>
-                )}
-            </AnimatePresence>
+                        </div>
+                    </div>
+                </>
+            )}
         </>
     );
 }

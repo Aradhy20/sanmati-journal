@@ -1,4 +1,3 @@
-import { motion, AnimatePresence } from 'framer-motion';
 import { Quote, ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { ScrollReveal } from './ScrollReveal';
@@ -61,32 +60,23 @@ const Testimonials = ({ testimonials: dbTestimonials = [] }) => {
                 </ScrollReveal>
 
                 <div className="max-w-3xl mx-auto relative px-12">
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={current}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            transition={{ duration: 0.4 }}
-                            className="text-center"
-                        >
-                            <p className="text-base md:text-lg font-serif italic leading-relaxed mb-6 text-slate-600">
-                                &ldquo;{testimonials[current].quote}&rdquo;
-                            </p>
+                    <div className="text-center transition-all duration-300">
+                        <p className="text-base md:text-lg font-serif italic leading-relaxed mb-6 text-slate-600">
+                            &ldquo;{testimonials[current].quote}&rdquo;
+                        </p>
 
-                            <div className="flex flex-col items-center">
-                                <div className="w-14 h-14 rounded-full border border-[#E9E5DD] p-0.5 mb-3 overflow-hidden bg-white">
-                                    <img loading="lazy"
-                                        src={testimonials[current].image}
-                                        alt={testimonials[current].name}
-                                        className="object-cover rounded-full w-full h-full"
-                                    />
-                                </div>
-                                <h3 className="text-sm font-bold text-dark mb-0.5">{testimonials[current].name}</h3>
-                                <p className="text-primary font-bold text-[10px] uppercase tracking-wider">{testimonials[current].role}</p>
+                        <div className="flex flex-col items-center">
+                            <div className="w-14 h-14 rounded-full border border-[#E9E5DD] p-0.5 mb-3 overflow-hidden bg-white">
+                                <img loading="lazy"
+                                    src={testimonials[current].image}
+                                    alt={testimonials[current].name}
+                                    className="object-cover rounded-full w-full h-full"
+                                />
                             </div>
-                        </motion.div>
-                    </AnimatePresence>
+                            <h3 className="text-sm font-bold text-dark mb-0.5">{testimonials[current].name}</h3>
+                            <p className="text-primary font-bold text-[10px] uppercase tracking-wider">{testimonials[current].role}</p>
+                        </div>
+                    </div>
 
                     {/* Navigation Buttons */}
                     <button

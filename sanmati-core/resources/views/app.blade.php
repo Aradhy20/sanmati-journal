@@ -293,36 +293,50 @@
         {{-- Fonts: Space Grotesk (Headings) & Inter (Body) loaded asynchronously --}}
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap">
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+        <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
         <noscript>
-            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
         </noscript>
 
-
-        <!-- Delayed initialization for third party trackers -->
+        <!-- Initialize Google Tag Manager / GA4 DataLayer early so queued events are never lost -->
         <script nonce="{{ Vite::cspNonce() }}">
-            window.addEventListener('load', function() {
-                setTimeout(function() {
-                    // GTM
-                    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                    })(window,document,'script','dataLayer','GTM-K4FNSFHK');
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){window.dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-5HWBXKRHF4', { 'send_page_view': false });
 
-                    // gtag.js
-                    var gt = document.createElement('script');
-                    gt.async = true;
-                    gt.src = "https://www.googletagmanager.com/gtag/js?id=G-5HWBXKRHF4";
-                    document.head.appendChild(gt);
+            // Deferred Non-blocking Loader for GTM & GA4 (Runs after paint / idle)
+            (function() {
+                var loaded = false;
+                function loadAnalytics() {
+                    if (loaded) return;
+                    loaded = true;
 
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('config', 'G-5HWBXKRHF4');
-                }, 3500); // Execute fully after 3.5s of page idle
-            });
+                    // GTM Container
+                    var gtmScript = document.createElement('script');
+                    gtmScript.async = true;
+                    gtmScript.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-K4FNSFHK';
+                    document.head.appendChild(gtmScript);
+
+                    // GA4 gtag
+                    var gtagScript = document.createElement('script');
+                    gtagScript.async = true;
+                    gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-5HWBXKRHF4';
+                    document.head.appendChild(gtagScript);
+                }
+
+                if ('requestIdleCallback' in window) {
+                    window.requestIdleCallback(function() { setTimeout(loadAnalytics, 1500); });
+                } else {
+                    window.addEventListener('load', function() { setTimeout(loadAnalytics, 2000); });
+                }
+
+                // Trigger on first user interaction if before idle
+                ['scroll', 'keydown', 'touchstart', 'click'].forEach(function(e) {
+                    window.addEventListener(e, loadAnalytics, { once: true, passive: true });
+                });
+            })();
         </script>
 
         <!-- Scripts -->

@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { Link } from '@inertiajs/react';
 import {
     Zap, Globe, Shield, Clock, Award, Users,
@@ -86,13 +85,7 @@ export default function WhyPublishSection() {
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-60px' }}
-                    transition={{ duration: 0.5 }}
-                    className="text-center mb-14"
-                >
+                <div className="text-center mb-14">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-[11px] font-bold uppercase tracking-widest mb-4">
                         Why Choose Us
                     </span>
@@ -103,19 +96,15 @@ export default function WhyPublishSection() {
                     <p className="text-slate-500 text-lg max-w-2xl mx-auto leading-relaxed">
                         We offer researchers a credible, transparent, and fast publication pathway with international recognition and permanent DOI citation support.
                     </p>
-                </motion.div>
+                </div>
 
                 {/* Benefits grid */}
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
                     {BENEFITS.map((b, i) => {
                         const Icon = b.icon;
                         return (
-                            <motion.div
+                            <div
                                 key={i}
-                                initial={{ opacity: 0, y: 24 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, margin: '-40px' }}
-                                transition={{ duration: 0.45, delay: (i % 4) * 0.07 }}
                                 className="group relative p-6 bg-white border border-slate-100 rounded-2xl hover:border-slate-200 hover:shadow-xl hover:shadow-slate-100/80 hover:-translate-y-1 transition-all duration-300"
                             >
                                 {/* Icon */}
@@ -133,19 +122,13 @@ export default function WhyPublishSection() {
                                     Learn more
                                     <ChevronRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 transition-transform" />
                                 </Link>
-                            </motion.div>
+                            </div>
                         );
                     })}
                 </div>
 
                 {/* CTA row */}
-                <motion.div
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                    className="mt-12 text-center"
-                >
+                <div className="mt-12 text-center">
                     <Link
                         href="/submission-guidelines/call-for-papers"
                         className="inline-flex items-center gap-2.5 px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-lg shadow-blue-600/30 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 group"
@@ -153,7 +136,7 @@ export default function WhyPublishSection() {
                         Start Your Submission
                         <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                     </Link>
-                </motion.div>
+                </div>
             </div>
         </section>
     );

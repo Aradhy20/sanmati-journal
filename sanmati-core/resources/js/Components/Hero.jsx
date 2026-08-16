@@ -92,9 +92,11 @@ function MeshBackground() {
                 {/* Desktop: 1024×1024, 169KB */}
                 <source srcSet="/images/hero-bg.webp" type="image/webp" />
                 <img
-                    src="/images/hero-bg.webp"
+                    src="/images/hero-bg-mobile.webp"
                     alt=""
                     fetchPriority="high"
+                    width="480"
+                    height="480"
                     className="absolute inset-0 w-full h-full object-cover object-center opacity-15 mix-blend-multiply scale-105"
                 />
             </picture>
