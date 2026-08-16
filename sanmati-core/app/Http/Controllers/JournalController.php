@@ -262,7 +262,23 @@ class JournalController extends Controller
 
     public function article($id)
     {
-        $paper = \App\Models\Paper::with('issue')->findOrFail($id);
+        $paper = \App\Models\Paper::with('issue')->find($id);
+
+        if (!$paper && \App\Models\Paper::count() === 0) {
+            try {
+                \Illuminate\Support\Facades\Artisan::call('db:seed', [
+                    '--class' => 'Database\\Seeders\\ArchivePapersSeeder',
+                    '--force' => true,
+                ]);
+                $paper = \App\Models\Paper::with('issue')->find($id);
+            } catch (\Throwable $e) {
+                \Illuminate\Support\Facades\Log::error("Failed to auto-seed papers in article route: " . $e->getMessage());
+            }
+        }
+
+        if (!$paper) {
+            abort(404);
+        }
 
         return Inertia::render('Article', [
             'paper' => $paper

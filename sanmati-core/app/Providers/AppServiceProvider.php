@@ -31,8 +31,15 @@ class AppServiceProvider extends ServiceProvider
                 !\Illuminate\Support\Facades\Schema::hasColumn('submissions', 'country')) {
                 \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
             }
+
+            if (\Illuminate\Support\Facades\Schema::hasTable('papers') && \App\Models\Paper::count() === 0) {
+                \Illuminate\Support\Facades\Artisan::call('db:seed', [
+                    '--class' => 'Database\\Seeders\\ArchivePapersSeeder',
+                    '--force' => true,
+                ]);
+            }
         } catch (\Throwable $e) {
-            \Illuminate\Support\Facades\Log::error("Auto-migration in AppServiceProvider failed: " . $e->getMessage());
+            \Illuminate\Support\Facades\Log::error("Auto-migration/seeding in AppServiceProvider failed: " . $e->getMessage());
         }
     }
 }

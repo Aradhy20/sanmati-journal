@@ -18,14 +18,25 @@ class ArchivePapersSeeder extends Seeder
         Issue::truncate();
         Schema::enableForeignKeyConstraints();
 
-        // Load papers from JSON
-        $jsonPath = base_path('../papers.json');
-        if (!file_exists($jsonPath)) {
-            if ($this->command) {
-                $this->command->error("papers.json not found at: {$jsonPath}");
-            } else {
-                \Illuminate\Support\Facades\Log::error("papers.json not found at: {$jsonPath}");
+        // Load papers from JSON with robust fallback path resolution
+        $possiblePaths = [
+            resource_path('data/papers.json'),
+            base_path('papers.json'),
+            base_path('../papers.json'),
+            base_path('../../papers.json'),
+            dirname(base_path()) . '/papers.json',
+        ];
+
+        $jsonPath = null;
+        foreach ($possiblePaths as $candidate) {
+            if (file_exists($candidate)) {
+                $jsonPath = $candidate;
+                break;
             }
+        }
+
+        if (!$jsonPath) {
+            \Illuminate\Support\Facades\Log::error("ArchivePapersSeeder: papers.json not found in any standard path");
             return;
         }
 
