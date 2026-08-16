@@ -140,16 +140,14 @@ export default function Seo({
                     </script>
                 ))
             ) : (
-                <>
-                    <script type="application/ld+json">
-                        {JSON.stringify(jsonLd?.schema || journalJsonLd)}
-                    </script>
-                    {breadcrumbJsonLd && (
-                        <script type="application/ld+json">
-                            {JSON.stringify(breadcrumbJsonLd)}
-                        </script>
-                    )}
-                </>
+                <script type="application/ld+json">
+                    {JSON.stringify(jsonLd?.schema || journalJsonLd)}
+                </script>
+            )}
+            {!Array.isArray(jsonLd) && breadcrumbJsonLd && (
+                <script type="application/ld+json">
+                    {JSON.stringify(breadcrumbJsonLd)}
+                </script>
             )}
         </Head>
     );
