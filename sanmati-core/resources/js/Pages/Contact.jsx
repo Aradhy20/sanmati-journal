@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { useForm } from '@inertiajs/react';
-import { Mail, Phone, MapPin, Send, MessageSquare, Clock } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Clock, Building2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import PageHeader from '../Components/PageHeader';
 import MainLayout from '../Layouts/MainLayout';
 import { motion } from 'framer-motion';
-import Seo from '../Components/Seo';
 import FloatInput from '../Components/ui/FloatInput';
 
 const fadeInUp = {
@@ -20,9 +19,9 @@ export default function Contact() {
         schema: {
             "@context": "https://schema.org",
             "@type": "ContactPage",
-            "name": "Contact Editorial Office - Sanmati Journal",
+            "name": "Contact Editorial & Foundation Office - Sanmati Journal",
             "url": "https://sanmatijournal.in/contact",
-            "description": "Contact Sanmati Spectrum of Knowledge editorial board and registry office for manuscript submissions and inquiries."
+            "description": "Contact Sanmati Spectrum of Knowledge editorial board and Sanmati Education & Research Foundation of India secretariat office for manuscript submissions and inquiries."
         },
         breadcrumb: [
             { name: 'Home', url: '/' },
@@ -32,26 +31,52 @@ export default function Contact() {
 
     return (
         <MainLayout
-            title="Contact Editorial Office | Sanmati Journal"
-            description="Contact Sanmati Spectrum of Knowledge Editorial Office in TMU Campus, Moradabad (UP), India. Email: sanmatijournal@gmail.com, Phone: +91-8979782949."
-            keywords="contact sanmati journal, editorial office contact, journal helpline, paper submission inquiry, Moradabad journal office"
+            title="Contact Editorial & Foundation Office | Sanmati Journal"
+            description="Contact Sanmati Spectrum of Knowledge and Sanmati Education & Research Foundation of India in TMU Campus, Moradabad (UP), India. Email: sanmatijournal@gmail.com, Phone: +91 9870713912, +91 7999525735."
+            keywords="contact sanmati journal, editorial office contact, foundation contact, Dr Namrata Jain, Dr Ratnesh Jain, journal helpline, paper submission inquiry, Moradabad journal office"
             jsonLd={jsonLd}
         >
 
             <PageHeader
                 title="Contact Us"
                 breadcrumb="Contact"
-                subtitle="Reach out to our Editorial Office"
+                subtitle="Reach out to our Editorial Directorate & Foundation Secretariat"
             />
 
             {/* ─── CONTACT INFO CARDS (Direct Access) ─── */}
             <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 text-[#2E2E2E]">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
                     {[
-                        { icon: MapPin, title: "Registry Office", desc: "B-002 Faculty Block TMU Campus, Delhi Road Moradabad (U.P) 244001", bg: "bg-white", iconColor: "text-primary" },
-                        { icon: Phone, title: "Strategic Liaison", desc: "+91 7999525735\n+91 8979782949", bg: "bg-white", iconColor: "text-secondary", link: "tel:+917999525735" },
-                        { icon: Mail, title: "Editorial Contacts", desc: "General & Submission Queries:\nsanmatijournal@gmail.com", bg: "bg-white", iconColor: "text-primary", link: "mailto:sanmatijournal@gmail.com" },
-                        { icon: Clock, title: "Operational Hours", desc: "Mon - Fri\n10:00 AM - 6:00 PM (IST)", bg: "bg-[#F7F4EC]/40", iconColor: "text-slate-400" },
+                        { 
+                            icon: MapPin, 
+                            title: "Registered Secretariat", 
+                            desc: "B-002, Faculty Block\nTMU Campus, Teerthanker Mahaveer University\nMoradabad, UP, India — 244001", 
+                            bg: "bg-white", 
+                            iconColor: "text-primary" 
+                        },
+                        { 
+                            icon: Phone, 
+                            title: "Official Helplines", 
+                            desc: "+91 9870713912 (President)\n+91 7999525735 (Secretary)", 
+                            bg: "bg-white", 
+                            iconColor: "text-secondary", 
+                            link: "tel:+919870713912" 
+                        },
+                        { 
+                            icon: Mail, 
+                            title: "Official Communications", 
+                            desc: "Editorial: sanmatijournal@gmail.com\nFoundation: foundationsanmati@gmail.com", 
+                            bg: "bg-white", 
+                            iconColor: "text-primary", 
+                            link: "mailto:sanmatijournal@gmail.com" 
+                        },
+                        { 
+                            icon: Clock, 
+                            title: "Operational Hours", 
+                            desc: "Mon - Sat\n10:00 AM - 6:00 PM (IST)", 
+                            bg: "bg-[#F7F4EC]/40", 
+                            iconColor: "text-slate-400" 
+                        },
                     ].map((item, i) => {
                         const CardContent = () => (
                             <>
@@ -125,10 +150,10 @@ export default function Contact() {
                                 className="w-full h-full object-cover min-h-[380px] opacity-70"
                             />
                             <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-white via-white/80 to-transparent border-t border-[#E9E5DD]/20">
-                                <span className="text-[9px] font-bold uppercase tracking-wider text-primary mb-1 block">Editorial Directorate</span>
+                                <span className="text-[9px] font-bold uppercase tracking-wider text-primary mb-1 block">Editorial & Foundation Directorate</span>
                                 <h3 className="text-base font-serif font-bold text-dark mb-2">Office of the Secretariat</h3>
                                 <p className="text-[11px] text-slate-500 font-medium leading-relaxed italic mb-4">
-                                    "Rigorous academic dialogue begins with clear, dedicated correspondence. Our support team responds to peer-review tracking and registration questions daily."
+                                    "Rigorous academic dialogue begins with clear, dedicated correspondence. Our support team responds to peer-review tracking and foundation registration inquiries daily."
                                 </p>
                                 <div className="flex items-center gap-3">
                                     <div className="w-8 h-8 rounded-full border border-[#E9E5DD] overflow-hidden bg-white">
@@ -136,7 +161,7 @@ export default function Contact() {
                                     </div>
                                     <div>
                                         <p className="text-dark font-bold text-xs leading-none mb-1">Dr Namrata Jain</p>
-                                        <p className="text-slate-400 text-[8px] uppercase font-bold tracking-wider leading-none">Editor-in-Chief</p>
+                                        <p className="text-slate-400 text-[8px] uppercase font-bold tracking-wider leading-none">President & Editor-in-Chief</p>
                                     </div>
                                 </div>
                             </div>
@@ -151,10 +176,10 @@ export default function Contact() {
                                     Inquiry Channel
                                 </span>
                                 <h2 className="text-xl font-serif font-bold text-dark mb-2">
-                                    Start a Scholarly Inquiry
+                                    Start a Scholarly or Foundation Inquiry
                                 </h2>
                                 <p className="text-xs text-slate-500 font-medium max-w-md leading-relaxed">
-                                    For manuscript submissions, peer-review tracking status, or journal permissions, send a message to the registrar.
+                                    For manuscript submissions, peer-review tracking status, foundation memberships, or academic collaborations, send a direct message.
                                 </p>
                             </div>
 
@@ -261,6 +286,7 @@ function ContactForm() {
                     >
                         <option>General Inquiry</option>
                         <option>Submission Query</option>
+                        <option>Foundation / Collaboration</option>
                         <option>Payment Issue</option>
                         <option>Technical Support</option>
                     </select>

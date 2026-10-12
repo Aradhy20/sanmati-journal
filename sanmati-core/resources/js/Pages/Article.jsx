@@ -7,7 +7,7 @@ import CitationGenerator from '../Components/ui/CitationGenerator';
 import {
     Calendar, Download, ArrowLeft, Tag, AlignLeft, Users,
     Quote, ChevronRight, Mail, Twitter, Linkedin, Clock, Copy, Check, MessageCircle,
-    BookOpen, Globe, Award, ExternalLink, Share2, FileText
+    BookOpen, Globe, Award, ExternalLink, Share2, FileText, Bookmark, ArrowRight
 } from 'lucide-react';
 
 /* ── Reading Progress ── */
@@ -72,8 +72,11 @@ function SharePanel({ paper, url }) {
 }
 
 /* ── Main Article Page ── */
-export default function Article({ paper }) {
+export default function Article({ paper, relatedPapers = [] }) {
     const [citationModalOpen, setCitationModalOpen] = useState(false);
+
+    const volumeNum = paper.issue?.volume?.volume_number || paper.issue?.volume || null;
+    const issueNum = paper.issue?.number || paper.issue?.issue_number || null;
 
     const pubDate = paper.issue?.year
         ? `${paper.issue.month_range ? paper.issue.month_range + ' ' : ''}${paper.issue.year}`
@@ -81,18 +84,17 @@ export default function Article({ paper }) {
 
     const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://sanmatijournal.in';
     const articleUrl = `${baseUrl}/article/${paper.id}`;
-    const pdfUrl = `${baseUrl}/download/paper/${paper.id}`;
+    const pdfUrl = paper.file_url ? `${baseUrl}/download/paper/${paper.id}` : null;
 
     const keywords = paper.keywords ? paper.keywords.split(',').map(k => k.trim()).filter(Boolean) : [];
-    const readingMinutes = paper.abstract ? Math.max(1, Math.ceil(paper.abstract.split(' ').length / 200)) : 5;
+    const readingMinutes = paper.abstract ? Math.max(1, Math.ceil(paper.abstract.split(' ').length / 200)) : 4;
     const pageRange = paper.page_numbers ? paper.page_numbers.split('-').map(p => p.trim()) : [];
     const firstPage = pageRange[0] || null;
     const lastPage = pageRange[1] || null;
-    const volumeNum = paper.issue?.volume?.volume_number || paper.issue?.volume || null;
-    const issueNum = paper.issue?.issue_number || null;
 
     const cleanDoi = (paper.doi || '').replace(/^https?:\/\/(dx\.)?doi\.org\//i, '');
     const doiUrl = cleanDoi ? `https://doi.org/${cleanDoi}` : null;
+    const isZenodo = cleanDoi.toLowerCase().includes('zenodo');
 
     const jsonLd = {
         schema: {
@@ -100,9 +102,13 @@ export default function Article({ paper }) {
             "@type": "ScholarlyArticle",
             "headline": paper.title,
             "name": paper.title,
-            "abstract": paper.abstract,
-            "description": paper.meta_description || (paper.abstract || '').substring(0, 160),
-            "author": paper.authors.split(',').map(name => ({ "@type": "Person", "name": name.trim() })),
+            ...(paper.abstract ? {
+                "abstract": paper.abstract,
+                "description": paper.meta_description || paper.abstract.substring(0, 160)
+            } : {
+                "description": paper.meta_description || paper.title
+            }),
+            "author": (paper.authors || '').split(',').map(name => ({ "@type": "Person", "name": name.trim() })),
             "datePublished": paper.issue?.year ? String(paper.issue.year) : new Date(paper.created_at).toISOString().split('T')[0],
             "inLanguage": ["en", "hi"],
             "isAccessibleForFree": true,
@@ -112,12 +118,19 @@ export default function Article({ paper }) {
                 "name": "Sanmati Spectrum of Knowledge & Emerging Discourse",
                 "issn": "3108-1819"
             },
-            "volumeNumber": volumeNum ? String(volumeNum) : undefined,
-            "issueNumber": issueNum ? String(issueNum) : undefined,
-            "pageStart": firstPage || undefined,
-            "pageEnd": lastPage || undefined,
-            "identifier": cleanDoi ? { "@type": "PropertyValue", "propertyID": "DOI", "value": cleanDoi } : undefined,
+            ...(volumeNum ? { "volumeNumber": String(volumeNum) } : {}),
+            ...(issueNum ? { "issueNumber": String(issueNum) } : {}),
+            ...(firstPage ? { "pageStart": firstPage } : {}),
+            ...(lastPage ? { "pageEnd": lastPage } : {}),
+            ...(cleanDoi ? { "identifier": { "@type": "PropertyValue", "propertyID": "DOI", "value": cleanDoi } } : {}),
             "url": articleUrl,
+            ...(pdfUrl ? {
+                "encoding": {
+                    "@type": "MediaObject",
+                    "contentUrl": pdfUrl,
+                    "encodingFormat": "application/pdf"
+                }
+            } : {}),
             "publisher": {
                 "@type": "Organization",
                 "name": "Sanmati Spectrum of Knowledge & Emerging Discourse",
@@ -128,6 +141,9 @@ export default function Article({ paper }) {
         breadcrumb: [
             { name: 'Home', url: '/' },
             { name: 'Archive', url: '/archive' },
+            ...(volumeNum && issueNum ? [
+                { name: `Vol. ${volumeNum}, Issue ${issueNum}`, url: `/issue/${volumeNum}/${issueNum}` }
+            ] : []),
             { name: 'Article', url: `/article/${paper.id}` },
         ]
     };
@@ -138,7 +154,8 @@ export default function Article({ paper }) {
                 event: 'article_view',
                 article_id: paper.id,
                 article_title: paper.title,
-                journal_volume: volumeNum ? String(volumeNum) : undefined
+                journal_volume: volumeNum ? String(volumeNum) : undefined,
+                journal_issue: issueNum ? String(issueNum) : undefined
             });
         }
     }, [paper.id]);
@@ -157,11 +174,11 @@ export default function Article({ paper }) {
 
     return (
         <MainLayout
-            title={`${paper.title} | Peer Reviewed Multidisciplinary Research Journal`}
-            description={`${paper.meta_description || (paper.abstract || '').substring(0, 150)}... Published in Sanmati peer reviewed multidisciplinary ISSN journal (ISSN 3108-1819).`}
+            title={`${paper.title} | Sanmati Journal`}
+            description={`${paper.meta_description || (paper.abstract || paper.title).substring(0, 150)}... Published in Sanmati Spectrum of Knowledge (ISSN 3108-1819).`}
             keywords={`${keywords.join(', ')}, UGC Care Journal, Multidisciplinary Research Journal, Publish Research Paper in India, Peer Reviewed Journal, ISSN Journal`}
             jsonLd={jsonLd}
-            aiSummary={paper.abstract}
+            aiSummary={paper.abstract || undefined}
         >
             <ReadingProgress />
 
@@ -171,7 +188,7 @@ export default function Article({ paper }) {
                 <meta name="citation_publication_date" content={pubDate} />
                 <meta name="citation_journal_title"    content="Sanmati Spectrum of Knowledge & Emerging Discourse" />
                 <meta name="citation_issn"             content="3108-1819" />
-                <meta name="citation_pdf_url"          content={pdfUrl} />
+                {pdfUrl && <meta name="citation_pdf_url" content={pdfUrl} />}
                 {volumeNum && <meta name="citation_volume" content={String(volumeNum)} />}
                 {issueNum  && <meta name="citation_issue"  content={String(issueNum)} />}
                 {firstPage && <meta name="citation_firstpage" content={firstPage} />}
@@ -181,7 +198,7 @@ export default function Article({ paper }) {
                 <meta name="DC.creator"   content={paper.authors} />
                 <meta name="DC.date"      content={pubDate} />
                 <meta name="DC.publisher" content="Sanmati Spectrum of Knowledge & Emerging Discourse" />
-                <meta name="DC.format"    content="application/pdf" />
+                {pdfUrl && <meta name="DC.format" content="application/pdf" />}
                 <meta name="DC.language"  content="en" />
                 {cleanDoi && <meta name="DC.identifier" content={`https://doi.org/${cleanDoi}`} />}
             </Head>
@@ -190,17 +207,33 @@ export default function Article({ paper }) {
             <div className="bg-gradient-to-b from-slate-50 to-white border-b border-slate-200/60 pt-8 pb-0">
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                     {/* Breadcrumb */}
-                    <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-5">
+                    <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-5 flex-wrap">
                         <Link href="/" className="hover:text-blue-600 transition-colors">Home</Link>
-                        <ChevronRight className="w-3 h-3" />
+                        <ChevronRight className="w-3 h-3 shrink-0" />
                         <Link href="/archive" className="hover:text-blue-600 transition-colors">Archive</Link>
-                        <ChevronRight className="w-3 h-3" />
-                        <span className="text-blue-600 font-bold truncate max-w-[200px]">Article</span>
+                        {volumeNum && issueNum && (
+                            <>
+                                <ChevronRight className="w-3 h-3 shrink-0" />
+                                <Link href={`/issue/${volumeNum}/${issueNum}`} className="hover:text-blue-600 transition-colors">
+                                    Vol. {volumeNum}, Issue {issueNum}
+                                </Link>
+                            </>
+                        )}
+                        <ChevronRight className="w-3 h-3 shrink-0" />
+                        <span className="text-blue-600 font-bold truncate max-w-[220px]">Article</span>
                     </nav>
-                    <Link href="/archive" className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-blue-600 mb-6 group transition-colors">
-                        <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
-                        Back to Archive
-                    </Link>
+
+                    {volumeNum && issueNum ? (
+                        <Link href={`/issue/${volumeNum}/${issueNum}`} className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-blue-600 mb-6 group transition-colors">
+                            <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
+                            Back to Volume {volumeNum}, Issue {issueNum}
+                        </Link>
+                    ) : (
+                        <Link href="/archive" className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-blue-600 mb-6 group transition-colors">
+                            <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
+                            Back to Archive
+                        </Link>
+                    )}
                 </div>
             </div>
 
@@ -212,7 +245,7 @@ export default function Article({ paper }) {
                         {/* ── Main column ── */}
                         <article className="lg:col-span-8 space-y-8">
 
-                            {/* Category badges */}
+                            {/* Category & Issue badges */}
                             <motion.div
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -227,13 +260,16 @@ export default function Article({ paper }) {
                                 </span>
                                 {cleanDoi && (
                                     <span className="px-3 py-1 text-[10px] font-bold tracking-wider uppercase bg-indigo-50 text-indigo-700 border border-indigo-200 rounded-lg">
-                                        CrossRef DOI
+                                        {isZenodo ? 'Zenodo DOI' : 'CrossRef DOI'}
                                     </span>
                                 )}
-                                {paper.issue && (
-                                    <span className="px-3 py-1 text-[10px] font-bold tracking-wider uppercase bg-slate-100 text-slate-600 border border-slate-200 rounded-lg">
-                                        Vol. {paper.issue.volume?.volume_number ?? paper.issue.volume}, Issue {paper.issue.issue_number}
-                                    </span>
+                                {volumeNum && issueNum && (
+                                    <Link
+                                        href={`/issue/${volumeNum}/${issueNum}`}
+                                        className="px-3 py-1 text-[10px] font-bold tracking-wider uppercase bg-slate-100 text-slate-700 border border-slate-200 rounded-lg hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200 transition-colors"
+                                    >
+                                        Vol. {volumeNum}, Issue {issueNum}
+                                    </Link>
                                 )}
                             </motion.div>
 
@@ -282,29 +318,67 @@ export default function Article({ paper }) {
                                         <Quote className="w-3.5 h-3.5" />
                                         Cite
                                     </button>
-                                    <a
-                                        href={`/download/paper/${paper.id}`}
-                                        onClick={trackPaperDownload}
-                                        className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl bg-blue-600 text-white font-bold text-xs uppercase tracking-wider hover:bg-blue-700 transition-colors shadow-md shadow-blue-600/25"
-                                    >
-                                        <Download className="w-3.5 h-3.5" />
-                                        Download PDF
-                                    </a>
+                                    {paper.file_url ? (
+                                        <a
+                                            href={`/download/paper/${paper.id}`}
+                                            onClick={trackPaperDownload}
+                                            className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl bg-blue-600 text-white font-bold text-xs uppercase tracking-wider hover:bg-blue-700 transition-colors shadow-md shadow-blue-600/25"
+                                        >
+                                            <Download className="w-3.5 h-3.5" />
+                                            Download PDF
+                                        </a>
+                                    ) : doiUrl ? (
+                                        <a
+                                            href={doiUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl bg-indigo-600 text-white font-bold text-xs uppercase tracking-wider hover:bg-indigo-700 transition-colors shadow-md shadow-indigo-600/25"
+                                        >
+                                            <ExternalLink className="w-3.5 h-3.5" />
+                                            View via DOI
+                                        </a>
+                                    ) : null}
                                 </div>
                             </div>
 
-                            {/* Abstract */}
-                            <section aria-labelledby="abstract-heading">
-                                <h2 id="abstract-heading" className="flex items-center gap-2 text-lg font-heading font-bold text-slate-900 mb-4">
-                                    <span className="w-8 h-8 rounded-xl bg-blue-50 flex items-center justify-center">
-                                        <AlignLeft className="w-4 h-4 text-blue-600" />
-                                    </span>
-                                    Abstract
-                                </h2>
-                                <div className="text-sm text-slate-700 leading-[1.85] bg-blue-50/40 border border-blue-100 rounded-2xl p-6 font-medium">
-                                    {paper.abstract}
-                                </div>
-                            </section>
+                            {/* Abstract or Scholarly Notice */}
+                            {paper.abstract ? (
+                                <section aria-labelledby="abstract-heading">
+                                    <h2 id="abstract-heading" className="flex items-center gap-2 text-lg font-heading font-bold text-slate-900 mb-4">
+                                        <span className="w-8 h-8 rounded-xl bg-blue-50 flex items-center justify-center">
+                                            <AlignLeft className="w-4 h-4 text-blue-600" />
+                                        </span>
+                                        Abstract
+                                    </h2>
+                                    <div className="text-sm text-slate-700 leading-[1.85] bg-blue-50/40 border border-blue-100 rounded-2xl p-6 font-medium">
+                                        {paper.abstract}
+                                    </div>
+                                </section>
+                            ) : (
+                                <section aria-labelledby="scholarly-record-heading" className="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+                                    <h2 id="scholarly-record-heading" className="flex items-center gap-2 text-base font-heading font-bold text-slate-900 mb-2">
+                                        <span className="w-8 h-8 rounded-xl bg-indigo-50 flex items-center justify-center">
+                                            <FileText className="w-4 h-4 text-indigo-600" />
+                                        </span>
+                                        Scholarly Publication Record
+                                    </h2>
+                                    <p className="text-xs text-slate-600 leading-relaxed mb-4">
+                                        This article is an officially published and verified scholarly record in Sanmati Spectrum of Knowledge &amp; Emerging Discourse.
+                                        Full bibliographic citation, catalog entry, and persistent digital object identifier are registered below.
+                                    </p>
+                                    {doiUrl && (
+                                        <a
+                                            href={doiUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-colors shadow-sm"
+                                        >
+                                            <ExternalLink className="w-3.5 h-3.5" />
+                                            Access Official Record on DOI Repository
+                                        </a>
+                                    )}
+                                </section>
+                            )}
 
                             {/* Keywords */}
                             {keywords.length > 0 && (
@@ -325,20 +399,20 @@ export default function Article({ paper }) {
                                 </section>
                             )}
 
-                            {/* DOI */}
+                            {/* DOI Section */}
                             {doiUrl && (
                                 <section aria-labelledby="doi-heading" className="p-5 rounded-2xl bg-indigo-50 border border-indigo-100">
                                     <h2 id="doi-heading" className="text-[10px] font-bold uppercase tracking-widest text-indigo-400 mb-2">
-                                        CrossRef Digital Object Identifier
+                                        {isZenodo ? 'Digital Object Identifier (Zenodo)' : 'Digital Object Identifier (CrossRef)'}
                                     </h2>
                                     <a
                                         href={doiUrl}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-1.5 text-sm font-mono font-bold text-indigo-700 hover:text-indigo-900 hover:underline"
+                                        className="inline-flex items-center gap-1.5 text-sm font-mono font-bold text-indigo-700 hover:text-indigo-900 hover:underline break-all"
                                     >
                                         {doiUrl}
-                                        <ExternalLink className="w-3.5 h-3.5" />
+                                        <ExternalLink className="w-3.5 h-3.5 shrink-0" />
                                     </a>
                                 </section>
                             )}
@@ -353,10 +427,10 @@ export default function Article({ paper }) {
                                         {[
                                             { label: 'Journal',  value: 'Sanmati Spectrum' },
                                             { label: 'ISSN',     value: '3108-1819' },
-                                            { label: 'Volume',   value: paper.issue.volume?.volume_number ?? paper.issue.volume },
-                                            { label: 'Issue',    value: paper.issue.issue_number },
+                                            { label: 'Volume',   value: volumeNum },
+                                            { label: 'Issue',    value: issueNum },
                                             paper.page_numbers ? { label: 'Pages', value: paper.page_numbers } : null,
-                                            { label: 'Access',   value: 'Open Access' },
+                                            { label: 'Access',   value: 'Open Access (CC-BY)' },
                                         ].filter(Boolean).map(({ label, value }) => (
                                             <div key={label}>
                                                 <div className="text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-0.5">{label}</div>
@@ -367,23 +441,83 @@ export default function Article({ paper }) {
                                 </section>
                             )}
 
+                            {/* Related Papers in Same Issue */}
+                            {relatedPapers && relatedPapers.length > 0 && (
+                                <section aria-labelledby="related-heading" className="pt-4 border-t border-slate-200">
+                                    <div className="flex items-center justify-between mb-4">
+                                        <h2 id="related-heading" className="text-base font-heading font-bold text-slate-900 flex items-center gap-2">
+                                            <BookOpen className="w-4 h-4 text-blue-600" />
+                                            Other Articles in this Issue
+                                        </h2>
+                                        {volumeNum && issueNum && (
+                                            <Link
+                                                href={`/issue/${volumeNum}/${issueNum}`}
+                                                className="text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1"
+                                            >
+                                                View all articles
+                                                <ArrowRight className="w-3 h-3" />
+                                            </Link>
+                                        )}
+                                    </div>
+                                    <div className="space-y-3">
+                                        {relatedPapers.map(rel => (
+                                            <Link
+                                                key={rel.id}
+                                                href={`/article/${rel.id}`}
+                                                className="block p-4 rounded-xl border border-slate-200 hover:border-blue-300 hover:bg-blue-50/30 transition-all group"
+                                            >
+                                                <div className="text-xs font-bold text-slate-800 group-hover:text-blue-600 line-clamp-2 transition-colors">
+                                                    {rel.title}
+                                                </div>
+                                                <div className="text-[11px] text-slate-500 mt-1 line-clamp-1">
+                                                    {rel.authors}
+                                                </div>
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </section>
+                            )}
+
                             {/* Bottom CTAs */}
                             <div className="flex flex-wrap gap-3 pt-6 border-t border-slate-200">
-                                <a
-                                    href={`/download/paper/${paper.id}`}
-                                    onClick={trackPaperDownload}
-                                    className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-sm shadow-md shadow-blue-600/25 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200"
-                                >
-                                    <Download className="w-4 h-4" />
-                                    Download Full Paper (PDF)
-                                </a>
-                                <Link
-                                    href="/archive"
-                                    className="inline-flex items-center gap-2 px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-sm transition-all duration-200"
-                                >
-                                    <BookOpen className="w-4 h-4 text-blue-600" />
-                                    Browse More Articles
-                                </Link>
+                                {paper.file_url && (
+                                    <a
+                                        href={`/download/paper/${paper.id}`}
+                                        onClick={trackPaperDownload}
+                                        className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-sm shadow-md shadow-blue-600/25 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200"
+                                    >
+                                        <Download className="w-4 h-4" />
+                                        Download Full Paper (PDF)
+                                    </a>
+                                )}
+                                {doiUrl && (
+                                    <a
+                                        href={doiUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold text-sm shadow-md shadow-indigo-600/25 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200"
+                                    >
+                                        <ExternalLink className="w-4 h-4" />
+                                        Official DOI Record
+                                    </a>
+                                )}
+                                {volumeNum && issueNum ? (
+                                    <Link
+                                        href={`/issue/${volumeNum}/${issueNum}`}
+                                        className="inline-flex items-center gap-2 px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-sm transition-all duration-200"
+                                    >
+                                        <BookOpen className="w-4 h-4 text-blue-600" />
+                                        View Issue {issueNum}
+                                    </Link>
+                                ) : (
+                                    <Link
+                                        href="/archive"
+                                        className="inline-flex items-center gap-2 px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-sm transition-all duration-200"
+                                    >
+                                        <BookOpen className="w-4 h-4 text-blue-600" />
+                                        Browse Archive
+                                    </Link>
+                                )}
                             </div>
                         </article>
 
@@ -398,14 +532,14 @@ export default function Article({ paper }) {
                                     </div>
                                     <div>
                                         <div className="text-xs font-bold text-slate-900 leading-tight">Sanmati Spectrum</div>
-                                        <div className="text-[10px] text-slate-400 font-medium">of Knowledge & Emerging Discourse</div>
+                                        <div className="text-[10px] text-slate-400 font-medium">of Knowledge &amp; Emerging Discourse</div>
                                     </div>
                                 </div>
                                 <div className="space-y-2.5 text-xs">
                                     {[
                                         { icon: Award, label: 'ISSN', value: '3108-1819' },
                                         { icon: Globe, label: 'Access', value: 'Open Access (CC-BY 4.0)' },
-                                        { icon: FileText, label: 'DOI Provider', value: 'CrossRef' },
+                                        { icon: FileText, label: 'DOI Provider', value: isZenodo ? 'Zenodo' : 'CrossRef' },
                                     ].map(({ icon: Icon, label, value }) => (
                                         <div key={label} className="flex items-center gap-2">
                                             <Icon className="w-3.5 h-3.5 text-blue-500 shrink-0" />
@@ -420,7 +554,7 @@ export default function Article({ paper }) {
                             <div className="p-5 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white space-y-4">
                                 <h3 className="text-sm font-heading font-bold leading-snug">Publish Your Research With Us</h3>
                                 <p className="text-blue-100 text-xs leading-relaxed">
-                                    Submit your manuscript for peer review. Get a CrossRef DOI and global open access publication.
+                                    Submit your manuscript for peer review. Get a registered DOI and global open access publication.
                                 </p>
                                 <Link
                                     href="/submission-guidelines/call-for-papers"
@@ -441,14 +575,16 @@ export default function Article({ paper }) {
                                     <Quote className="w-4 h-4 text-blue-500" />
                                     Generate Citation
                                 </button>
-                                <a
-                                    href={`/download/paper/${paper.id}`}
-                                    onClick={trackPaperDownload}
-                                    className="flex items-center gap-2.5 w-full px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-bold text-slate-700 hover:bg-blue-50 hover:border-blue-200 hover:text-blue-700 transition-all"
-                                >
-                                    <Download className="w-4 h-4 text-blue-500" />
-                                    Download PDF
-                                </a>
+                                {paper.file_url && (
+                                    <a
+                                        href={`/download/paper/${paper.id}`}
+                                        onClick={trackPaperDownload}
+                                        className="flex items-center gap-2.5 w-full px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-bold text-slate-700 hover:bg-blue-50 hover:border-blue-200 hover:text-blue-700 transition-all"
+                                    >
+                                        <Download className="w-4 h-4 text-blue-500" />
+                                        Download PDF
+                                    </a>
+                                )}
                                 {doiUrl && (
                                     <a
                                         href={doiUrl}
@@ -459,6 +595,15 @@ export default function Article({ paper }) {
                                         <ExternalLink className="w-4 h-4 text-blue-500" />
                                         View DOI Page
                                     </a>
+                                )}
+                                {volumeNum && issueNum && (
+                                    <Link
+                                        href={`/issue/${volumeNum}/${issueNum}`}
+                                        className="flex items-center gap-2.5 w-full px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-bold text-slate-700 hover:bg-blue-50 hover:border-blue-200 hover:text-blue-700 transition-all"
+                                    >
+                                        <BookOpen className="w-4 h-4 text-blue-500" />
+                                        View Complete Issue
+                                    </Link>
                                 )}
                             </div>
 

@@ -56,7 +56,7 @@
                     'basic-info/objective-scope' => ['Objective & Scope | Sanmati Spectrum', 'Aims and scope covering multidisciplinary research in arts, sciences, commerce, technology, and jurisprudence.'],
                     'basic-info/journal-info' => ['Journal Information | Sanmati Spectrum', 'Key journal metrics, frequency, peer review policy, and open access parameters (ISSN 3108-1819).'],
                     'basic-info/indexing' => ['Journal Indexing & CrossRef Registry | Sanmati Spectrum', 'Official indexing parameters, CrossRef DOI integration, and Google Scholar citation indexing (ISSN 3108-1819).'],
-                    'about-foundation' => ['About Sanmati Educational & Welfare Foundation | Sanmati Spectrum', 'Educational foundation backing Sanmati Spectrum of Knowledge and academic discourse in India.'],
+                    'about-foundation' => ['Sanmati Education & Research Foundation of India | Sanmati Journal', 'Sanmati Education & Research Foundation of India promotes education, research and knowledge dissemination through academic and research initiatives.'],
                     'editorial-team/editors' => ['Editorial Leadership & Editors-in-Chief | Sanmati Spectrum', 'Distinguished academic editors and editorial leadership guiding Sanmati Spectrum.'],
                     'editorial-team/editorial-board' => ['Editorial Board & Peer Reviewers | Sanmati Spectrum', 'Meet the international Editorial Board ensuring rigorous double-blind peer review.'],
                     'editorial-team/advisory-board' => ['Advisory Board | Sanmati Spectrum', 'Eminent scholars and visionaries guiding the strategic governance of Sanmati Spectrum.'],
@@ -143,9 +143,17 @@
             <meta name="citation_journal_title" content="Sanmati Spectrum of Knowledge & Emerging Discourse">
             <meta name="citation_issn" content="3108-1819">
             <meta name="citation_publication_date" content="{{ $gsDate }}">
-            <meta name="citation_pdf_url" content="https://sanmatijournal.in/download/paper/{{ $gsId }}">
+            @if(!empty(data_get($paper, 'file_url')) || !empty(data_get($paper, 'file_path')) || (data_get($paper, 'issue.volume') !== null && (int)data_get($paper, 'issue.volume') < 3))
+                <meta name="citation_pdf_url" content="https://sanmatijournal.in/download/paper/{{ $gsId }}">
+            @endif
+            @if(!empty(data_get($paper, 'issue.volume')))
+                <meta name="citation_volume" content="{{ data_get($paper, 'issue.volume') }}">
+            @endif
+            @if(!empty(data_get($paper, 'issue.number')))
+                <meta name="citation_issue" content="{{ data_get($paper, 'issue.number') }}">
+            @endif
             @if(!empty($gsDoi))
-                <meta name="citation_doi" content="{{ $gsDoi }}">
+                <meta name="citation_doi" content="{{ preg_replace('/^https?:\/\/(dx\.)?doi\.org\//i', '', $gsDoi) }}">
             @endif
             @if(!empty($gsKeywords))
                 <meta name="citation_keywords" content="{{ $gsKeywords }}">
@@ -187,7 +195,7 @@
                         "@type": "ContactPoint",
                         "contactType": "editorial",
                         "email": "sanmatijournal@gmail.com",
-                        "telephone": "+91-8979782949",
+                        "telephone": "+91-9870713912",
                         "availableLanguage": ["English", "Hindi"]
                     }
                 },

@@ -132,13 +132,25 @@ export default function LatestIssueShowcase({ currentIssue, papers = [] }) {
                                         <Sparkles className="w-3 h-3 text-indigo-600" />
                                         AI Summary
                                     </button>
-                                    <Link
-                                        href={`/download/paper/${paper.id}`}
-                                        className="p-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-100 text-slate-600 transition-colors"
-                                        title="Download PDF"
-                                    >
-                                        <Download className="w-3.5 h-3.5" />
-                                    </Link>
+                                    {paper.file_url ? (
+                                        <a
+                                            href={`/download/paper/${paper.id}`}
+                                            className="p-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-100 text-slate-600 transition-colors"
+                                            title="Download PDF"
+                                        >
+                                            <Download className="w-3.5 h-3.5" />
+                                        </a>
+                                    ) : paper.doi ? (
+                                        <a
+                                            href={paper.doi.startsWith('http') ? paper.doi : `https://doi.org/${paper.doi}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="p-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-100 text-indigo-600 transition-colors"
+                                            title="View DOI Record"
+                                        >
+                                            <ExternalLink className="w-3.5 h-3.5" />
+                                        </a>
+                                    ) : null}
                                 </div>
                             </div>
                         </div>

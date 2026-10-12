@@ -34,6 +34,9 @@ export default function Archive({ issues }) {
         '1-1': 'January – March',
         '2-1': 'April – June',
         '2-2': 'April – June',
+        '3-1': 'July – September',
+        '3-2': 'October – December',
+        '3-3': 'October – December',
     };
 
     const researchIssues = useMemo(() => {
@@ -66,6 +69,7 @@ export default function Archive({ issues }) {
         });
         if (vols['1']) vols['1'].label = 'Volume 1 (Jan–Mar 2026)';
         if (vols['2']) vols['2'].label = 'Volume 2 (Apr–Jun 2026)';
+        if (vols['3']) vols['3'].label = 'Volume 3 (Jul–Dec 2026)';
         return Object.values(vols).sort((a, b) => b.val.localeCompare(a.val));
     }, [researchIssues]);
 
@@ -296,18 +300,28 @@ export default function Archive({ issues }) {
                                 >
                                     {/* Volume Card Header */}
                                     <div className="bg-[#F7F4EC] border-b border-[#E9E5DD] px-6 py-4 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
-                                        <div className="flex items-center gap-3">
+                                        <Link 
+                                            href={`/issue/${issue.volume}/${issue.number}`}
+                                            className="flex items-center gap-3 group hover:opacity-85 transition-opacity"
+                                        >
                                             <span className="px-3 py-1 bg-primary text-white text-[9px] font-bold uppercase tracking-wider rounded">
                                                 Volume {issue.volume}
                                             </span>
-                                            <h3 className="text-sm font-serif font-bold text-dark">
+                                            <h3 className="text-sm font-serif font-bold text-dark group-hover:text-primary transition-colors">
                                                 {issue.month_range ? `${issue.month_range} ` : ''}{issue.year}
                                             </h3>
-                                        </div>
+                                        </Link>
                                         <div className="flex items-center gap-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
                                             <span>Issue {issue.number}</span>
                                             <span className="w-1 h-1 rounded-full bg-slate-300" />
                                             <span>{issue.papers?.length || 0} Papers</span>
+                                            <span className="w-1 h-1 rounded-full bg-slate-300" />
+                                            <Link
+                                                href={`/issue/${issue.volume}/${issue.number}`}
+                                                className="text-primary hover:underline font-bold text-[10px] normal-case tracking-normal inline-flex items-center gap-1"
+                                            >
+                                                View Issue Page &rarr;
+                                            </Link>
                                         </div>
                                     </div>
 
@@ -370,12 +384,12 @@ export default function Archive({ issues }) {
 
                                                     <Link 
                                                         href={`/article/${paper.id}`}
-                                                        className="block font-serif font-bold text-sm text-dark hover:text-primary transition-colors leading-snug mb-2 line-clamp-3"
+                                                        className="block font-serif font-bold text-sm text-dark hover:text-primary transition-colors leading-snug mb-2 line-clamp-3 break-words"
                                                     >
                                                         {paper.title}
                                                     </Link>
 
-                                                    <p className="text-slate-500 text-[11px] font-medium leading-relaxed mb-4 flex-grow line-clamp-2">
+                                                    <p className="text-slate-500 text-[11px] font-medium leading-relaxed mb-4 flex-grow line-clamp-2 break-words">
                                                         {paper.authors}
                                                     </p>
 
@@ -397,19 +411,30 @@ export default function Archive({ issues }) {
                                                     </div>
 
                                                     {/* Actions */}
-                                                    <div className="grid grid-cols-3 gap-2 pt-3 border-t border-[#E9E5DD]/60 mt-auto">
+                                                    <div className={`grid ${paper.file_url || paper.doi ? 'grid-cols-3' : 'grid-cols-2'} gap-2 pt-3 border-t border-[#E9E5DD]/60 mt-auto`}>
                                                         <Link
                                                             href={`/article/${paper.id}`}
                                                             className="flex items-center justify-center gap-1 py-1.5 bg-[#F7F4EC] hover:bg-slate-100 text-dark border border-[#E9E5DD] font-bold rounded text-[9px] uppercase tracking-wider transition-colors"
                                                         >
                                                             <BookOpen className="w-3 h-3" /> View
                                                         </Link>
-                                                        <a
-                                                            href={`/download/paper/${paper.id}`}
-                                                            className="flex items-center justify-center gap-1 py-1.5 bg-primary hover:bg-primary-dark text-white font-bold rounded text-[9px] uppercase tracking-wider transition-colors"
-                                                        >
-                                                            <Download className="w-3 h-3" /> PDF
-                                                        </a>
+                                                        {paper.file_url ? (
+                                                            <a
+                                                                href={`/download/paper/${paper.id}`}
+                                                                className="flex items-center justify-center gap-1 py-1.5 bg-primary hover:bg-primary-dark text-white font-bold rounded text-[9px] uppercase tracking-wider transition-colors"
+                                                            >
+                                                                <Download className="w-3 h-3" /> PDF
+                                                            </a>
+                                                        ) : paper.doi ? (
+                                                            <a
+                                                                href={paper.doi.startsWith('http') ? paper.doi : `https://doi.org/${paper.doi}`}
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                className="flex items-center justify-center gap-1 py-1.5 bg-white hover:bg-slate-50 text-primary border border-primary/30 font-bold rounded text-[9px] uppercase tracking-wider transition-colors"
+                                                            >
+                                                                <ExternalLink className="w-3 h-3" /> DOI
+                                                            </a>
+                                                        ) : null}
                                                         <button
                                                             onClick={() => setCitationPaper(paper)}
                                                             className="flex items-center justify-center gap-1 py-1.5 bg-white hover:bg-slate-50 text-dark border border-[#E9E5DD] font-bold rounded text-[9px] uppercase tracking-wider transition-colors"

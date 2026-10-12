@@ -110,6 +110,22 @@ class SitemapController extends Controller
                 // Ignore if service unavailable
             }
 
+            // Programmatic Issue Pages
+            try {
+                $issues = \App\Models\Issue::all();
+                foreach ($issues as $issue) {
+                    $urls[] = [
+                        'loc' => $baseUrl . '/issue/' . $issue->volume . '/' . $issue->number,
+                        'title' => 'Volume ' . $issue->volume . ', Issue ' . $issue->number . ' | Sanmati Spectrum Journal',
+                        'priority' => '0.8',
+                        'changefreq' => 'monthly',
+                        'lastmod' => $static_updated,
+                    ];
+                }
+            } catch (\Exception $e) {
+                // Ignore if issues unavailable
+            }
+
             // Dynamic paper pages
             foreach ($papers as $paper) {
                 $urls[] = [

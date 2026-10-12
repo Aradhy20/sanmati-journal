@@ -228,10 +228,10 @@ export default function AboutJournal() {
                             </div>
                             
                             <div className="p-5 bg-[#F7F4EC]/50 rounded-lg border border-[#E9E5DD]">
-                                <span className="text-[9px] font-bold uppercase tracking-wider text-secondary block mb-2">Official Publisher Address</span>
-                                <h4 className="text-xs font-bold text-dark mb-1">Sanmati Publication</h4>
+                                <span className="text-[9px] font-bold uppercase tracking-wider text-secondary block mb-2">Official Publisher & Origin</span>
+                                <h4 className="text-xs font-bold text-dark mb-1">Sanmati Education & Research Foundation of India</h4>
                                 <p className="text-[11px] text-slate-500 leading-relaxed font-medium">
-                                    Moradabad – 244001, Bharat (India)
+                                    B-002, Faculty Block, TMU Campus, Moradabad – 244001, Bharat (India)
                                 </p>
                             </div>
                         </div>

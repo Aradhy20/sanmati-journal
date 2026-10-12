@@ -17,7 +17,7 @@ const NAV_ITEMS = [
             { name: 'Objective & Scope', href: '/basic-info/objective-scope', icon: Globe,       desc: 'Research domains we cover' },
             { name: 'Journal Info',      href: '/basic-info/journal-info',    icon: FileText,    desc: 'ISSN, frequency, language & details' },
             { name: 'Indexing',          href: '/basic-info/indexing',        icon: Award,       desc: 'CrossRef, Google Scholar & more' },
-            { name: 'About Foundation',  href: '/about-foundation',           icon: Landmark,    desc: 'Sanmati Publication Trust' },
+            { name: 'About Foundation',  href: '/about-foundation',           icon: Landmark,    desc: 'Sanmati Education & Research Foundation' },
         ],
     },
     {
@@ -483,8 +483,8 @@ export default function Navbar({ onOpenSearch }) {
                                 </>
                             )}
                             <div className="flex items-center justify-center gap-4 pt-1">
-                                <a href="tel:+918979782949" className="flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-blue-600 transition-colors">
-                                    <Phone className="w-3.5 h-3.5" /> +91 89797 82949
+                                <a href="tel:+919870713912" className="flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-blue-600 transition-colors">
+                                    <Phone className="w-3.5 h-3.5" /> +91 98707 13912
                                 </a>
                                 <button onClick={onOpenSearch} className="flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-blue-600 transition-colors">
                                     <Search className="w-3.5 h-3.5" /> Search

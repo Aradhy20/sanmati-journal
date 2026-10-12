@@ -24,11 +24,12 @@ export default function Seo({
     const finalImage = image ? (image.startsWith('http') ? image : `${siteUrl}${image}`) : `${siteUrl}${defaultImage}`;
     const canonicalUrl = `${siteUrl}${url.split('?')[0]}`;
 
-    // 1. Organization Schema
+    // 1. Organization (Publisher) Schema
     const organizationJsonLd = {
         "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Sanmati Spectrum of Knowledge & Emerging Discourse",
+        "@type": "EducationalOrganization",
+        "name": "Sanmati Education & Research Foundation of India",
+        "alternateName": "Sanmati Education and Research Foundation of India",
         "url": siteUrl,
         "logo": {
             "@type": "ImageObject",
@@ -38,14 +39,14 @@ export default function Seo({
         },
         "contactPoint": {
             "@type": "ContactPoint",
-            "telephone": "+91-8979782949",
-            "contactType": "editorial office",
+            "telephone": "+91-9870713912",
+            "contactType": "editorial & foundation office",
             "email": "sanmatijournal@gmail.com",
             "availableLanguage": ["English", "Hindi"]
         },
         "address": {
             "@type": "PostalAddress",
-            "streetAddress": "Saket Colony",
+            "streetAddress": "B-002, Faculty Block, TMU Campus, Teerthanker Mahaveer University",
             "addressLocality": "Moradabad",
             "addressRegion": "Uttar Pradesh",
             "postalCode": "244001",

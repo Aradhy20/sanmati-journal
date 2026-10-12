@@ -25,10 +25,13 @@ class JournalController extends Controller
 
     public function index()
     {
-        $currentIssue = Issue::with(['papers' => function ($q) {
+        $currentIssue = Issue::where('is_current', true)->with(['papers' => function ($q) {
+            $q->select('id', 'issue_id', 'title', 'authors', 'doi', 'category');
+        }])->first()
+        ?? Issue::with(['papers' => function ($q) {
             $q->select('id', 'issue_id', 'title', 'authors', 'doi', 'category');
         }])
-        ->orderBy('year', 'desc')
+        ->orderBy('volume', 'desc')
         ->orderBy('number', 'desc')
         ->first();
 
@@ -209,26 +212,99 @@ class JournalController extends Controller
     {
         return Inertia::render('Archive', [
             'issues' => Issue::with('papers')
-                ->orderBy('year', 'desc')
+                ->orderBy('volume', 'desc')
                 ->orderBy('number', 'desc')
-                ->paginate(12)
+                ->get()
         ]);
     }
 
     public function currentIssue()
     {
-        $latestIssue = Issue::with('papers')
-            ->orderBy('year', 'desc')
+        $issue = Issue::where('is_current', true)->with('papers')->first()
+            ?? Issue::orderBy('volume', 'desc')->orderBy('number', 'desc')->first();
+
+        if (!$issue) {
+            $issue = Issue::create([
+                'volume' => 2,
+                'number' => 2,
+                'year' => 2026,
+                'title' => 'Volume 2, Issue 2',
+                'month_range' => 'April-June',
+                'is_current' => true,
+            ]);
+        }
+
+        $allIssues = Issue::orderBy('volume', 'desc')
             ->orderBy('number', 'desc')
+            ->get();
+
+        $currentIndex = $allIssues->search(fn ($i) => (string)$i->id === (string)$issue->id);
+        $nextIssue = ($currentIndex !== false && $currentIndex > 0) ? $allIssues->get($currentIndex - 1) : null;
+        $prevIssue = ($currentIndex !== false && $currentIndex < $allIssues->count() - 1) ? $allIssues->get($currentIndex + 1) : null;
+
+        $metaTitle = "Current Issue: Volume {$issue->volume}, Issue {$issue->number} ({$issue->month_range} {$issue->year}) | Sanmati Journal";
+        $metaDescription = "Read verified peer-reviewed multidisciplinary research articles published in Volume {$issue->volume}, Issue {$issue->number} of Sanmati Spectrum of Knowledge (ISSN 3108-1819).";
+
+        return Inertia::render('Issue', [
+            'issue' => $issue,
+            'prevIssue' => $prevIssue,
+            'nextIssue' => $nextIssue,
+            'isCurrentIssue' => true,
+        ])->withViewData([
+            'meta' => [
+                'title' => $metaTitle,
+                'description' => $metaDescription,
+                'keywords' => "Current Issue, Volume {$issue->volume}, Issue {$issue->number}, Sanmati Journal, Research Articles, CrossRef DOI, ISSN 3108-1819",
+                'image' => 'https://sanmatijournal.in/logo.webp',
+                'canonical' => "https://sanmatijournal.in/current-issue",
+            ]
+        ]);
+    }
+
+    public function issue($volume, $number)
+    {
+        $issue = Issue::with('papers')
+            ->where('volume', $volume)
+            ->where('number', $number)
             ->first();
 
-        return Inertia::render('Archive', [
-            'issues' => Issue::with('papers')
-                ->orderBy('year', 'desc')
-                ->orderBy('number', 'desc')
-                ->paginate(12),
-            'currentIssueOnly' => $latestIssue
+        if (!$issue) {
+            return redirect()->route('archive')->with('error', "Volume {$volume}, Issue {$number} was not found.");
+        }
+
+        $allIssues = Issue::orderBy('volume', 'desc')
+            ->orderBy('number', 'desc')
+            ->get();
+
+        $currentIndex = $allIssues->search(fn ($i) => (string)$i->id === (string)$issue->id);
+        $nextIssue = ($currentIndex !== false && $currentIndex > 0) ? $allIssues->get($currentIndex - 1) : null;
+        $prevIssue = ($currentIndex !== false && $currentIndex < $allIssues->count() - 1) ? $allIssues->get($currentIndex + 1) : null;
+
+        $metaTitle = "Volume {$issue->volume}, Issue {$issue->number} ({$issue->month_range} {$issue->year}) | Sanmati Journal";
+        $metaDescription = "Read verified peer-reviewed multidisciplinary research articles published in Volume {$issue->volume}, Issue {$issue->number} of Sanmati Spectrum of Knowledge (ISSN 3108-1819).";
+
+        return Inertia::render('Issue', [
+            'issue' => $issue,
+            'prevIssue' => $prevIssue,
+            'nextIssue' => $nextIssue,
+        ])->withViewData([
+            'meta' => [
+                'title' => $metaTitle,
+                'description' => $metaDescription,
+                'keywords' => "Volume {$issue->volume}, Issue {$issue->number}, Sanmati Journal, Research Articles, CrossRef DOI, ISSN 3108-1819",
+                'image' => 'https://sanmatijournal.in/logo.webp',
+                'canonical' => "https://sanmatijournal.in/issue/{$issue->volume}/{$issue->number}",
+            ]
         ]);
+    }
+
+    public function issueById($id)
+    {
+        $issue = Issue::find($id);
+        if ($issue) {
+            return redirect()->route('issue.show', ['volume' => $issue->volume, 'number' => $issue->number]);
+        }
+        return redirect()->route('archive')->with('error', 'The requested issue was not found.');
     }
 
     public function gallery()
@@ -304,8 +380,14 @@ class JournalController extends Controller
             return redirect()->route('archive')->with('error', "The requested article (#{$id}) was not found. Please browse published issues below.");
         }
 
+        $relatedPapers = \App\Models\Paper::where('issue_id', $paper->issue_id)
+            ->where('id', '!=', $paper->id)
+            ->limit(3)
+            ->get(['id', 'title', 'authors', 'doi', 'category', 'file_url']);
+
         return Inertia::render('Article', [
-            'paper' => $paper
+            'paper' => $paper,
+            'relatedPapers' => $relatedPapers,
         ])->withViewData([
             'paper' => $paper,
             'meta' => [

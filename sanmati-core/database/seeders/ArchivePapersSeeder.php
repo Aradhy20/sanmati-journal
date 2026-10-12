@@ -73,6 +73,27 @@ class ArchivePapersSeeder extends Seeder
                 'month_range' => 'April – June',
                 'is_current' => true, // Latest issue as current
             ],
+            'VOLUMN 3 ISSUE 1' => [
+                'volume' => '3',
+                'number' => '1',
+                'year' => 2026,
+                'month_range' => 'July – September',
+                'is_current' => false,
+            ],
+            'VOLUMN 3 ISSUE 2' => [
+                'volume' => '3',
+                'number' => '2',
+                'year' => 2026,
+                'month_range' => 'October – December',
+                'is_current' => false,
+            ],
+            'VOLUMN 3 ISSUE 3' => [
+                'volume' => '3',
+                'number' => '3',
+                'year' => 2026,
+                'month_range' => 'October – December',
+                'is_current' => false,
+            ],
         ];
 
         $vol1IssueId = null;
@@ -98,12 +119,13 @@ class ArchivePapersSeeder extends Seeder
                 $vol1IssueId = $issue->id;
             }
 
+            $isVol3 = ($config['volume'] === '3');
             $papersCount = 0;
             foreach ($jsonData[$sheetName] as $paperData) {
                 // Key names might have trailing spaces like 'Title ' or 'DOI number '
-                $title = $paperData['Title'] ?? $paperData['Title '] ?? '';
-                $authors = $paperData['Name'] ?? $paperData['Name '] ?? '';
-                $doi = $paperData['DOI number'] ?? $paperData['DOI number '] ?? '';
+                $title = trim($paperData['Title'] ?? $paperData['Title '] ?? '');
+                $authors = trim($paperData['Name'] ?? $paperData['Name '] ?? '');
+                $doi = trim($paperData['DOI number'] ?? $paperData['DOI number '] ?? '');
 
                 if (empty($title)) {
                     continue;
@@ -114,11 +136,11 @@ class ArchivePapersSeeder extends Seeder
                     'issue_id' => $issue->id,
                     'title' => $title,
                     'authors' => $authors,
-                    'abstract' => "Abstract for the paper titled: '{$title}'. Details of research methodology, findings, and analysis are discussed inside.",
-                    'keywords' => 'Research Paper, Academic Article, Multidisciplinary Study',
-                    'file_url' => $doi, // Store DOI link as file_url so download redirects to it
+                    'abstract' => $isVol3 ? null : "Abstract for the paper titled: '{$title}'. Details of research methodology, findings, and analysis are discussed inside.",
+                    'keywords' => $isVol3 ? null : 'Research Paper, Academic Article, Multidisciplinary Study',
+                    'file_url' => $isVol3 ? null : $doi,
                     'doi' => $doi,
-                    'citations' => rand(2, 12), // Placeholder citation counts for future scalability
+                    'citations' => $isVol3 ? 0 : rand(2, 12),
                     'category' => 'Research Article',
                     'is_featured' => false,
                     'meta_title' => "{$title} | Sanmati Journal",

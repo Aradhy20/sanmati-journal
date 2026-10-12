@@ -17,8 +17,8 @@ const INFO_ROWS = [
     { label: 'Access Type',               value: 'Open Access (Free to Read)', icon: Shield, highlight: false },
     { label: 'DOI',                       value: 'CrossRef DOI assigned to every article', icon: Award, highlight: false },
     { label: 'Peer Review',               value: 'Double-Blind Peer Review', icon: GraduationCap, highlight: false },
-    { label: 'Publisher',                 value: "B-002 ‘Sanmati’ Faculty Block, TMU Campus, Delhi Road Moradabad", icon: MapPin, highlight: false },
-    { label: 'President & Editor-in-Chief', value: 'Dr Namrata Jain', icon: Users, highlight: false },
+    { label: 'Publisher',                 value: "Sanmati Education & Research Foundation of India (B-002, Faculty Block, TMU Campus, Moradabad)", icon: MapPin, highlight: false },
+    { label: 'President & Editor-in-Chief', value: 'Dr. Namrata Jain', icon: Users, highlight: false },
     { label: 'Contact Email',             value: 'sanmatijournal@gmail.com', icon: Mail, highlight: false, link: 'mailto:sanmatijournal@gmail.com' },
 ];
 

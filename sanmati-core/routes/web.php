@@ -34,6 +34,8 @@ Route::get('/robots.txt', function () {
         . "Allow: /\n"
         . "Allow: /announcements/\n"
         . "Allow: /archive\n"
+        . "Allow: /issue/\n"
+        . "Allow: /current-issue\n"
         . "Allow: /article/\n"
         . "Allow: /download/\n"
         . "Allow: /submission-guidelines/\n"
@@ -72,6 +74,8 @@ Route::get('/gallery/photo', [JournalController::class, 'galleryPhoto'])->name('
 Route::get('/media-news', [JournalController::class, 'galleryNews'])->name('gallery.news');
 Route::get('/archive', [JournalController::class, 'archive'])->name('archive');
 Route::get('/current-issue', [JournalController::class, 'currentIssue'])->name('current-issue');
+Route::get('/issue/{volume}/{number}', [JournalController::class, 'issue'])->name('issue.show');
+Route::get('/issue/{id}', [JournalController::class, 'issueById'])->name('issue.id');
 Route::get('/about-foundation', [JournalController::class, 'aboutFoundation'])->name('about-foundation');
 Route::get('/article/{id}', [JournalController::class, 'article'])->name('article.show');
 Route::get('/download/paper/{id}', [\App\Http\Controllers\DownloadController::class, 'paper'])->name('paper.download');

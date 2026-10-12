@@ -123,13 +123,24 @@ export default function Footer() {
                                 <Mail className="w-4 h-4 text-blue-400 group-hover:text-blue-300 shrink-0" />
                                 sanmatijournal@gmail.com
                             </a>
-                            <a href="tel:+918979782949" className="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group">
-                                <Phone className="w-4 h-4 text-blue-400 group-hover:text-blue-300 shrink-0" />
-                                +91 89797 82949
-                            </a>
+                            <div className="flex flex-col gap-1 text-sm text-slate-400">
+                                <a href="tel:+919870713912" className="flex items-center gap-2.5 hover:text-white transition-colors group">
+                                    <Phone className="w-4 h-4 text-blue-400 group-hover:text-blue-300 shrink-0" />
+                                    +91 98707 13912
+                                </a>
+                                <a href="tel:+917999525735" className="flex items-center gap-2.5 hover:text-white transition-colors pl-6.5 text-xs text-slate-400 group">
+                                    +91 79995 25735
+                                </a>
+                            </div>
                             <div className="flex items-start gap-2.5 text-sm text-slate-400">
                                 <MapPin className="w-4 h-4 text-blue-400 mt-0.5 shrink-0" />
-                                <span>Saket Colony, Moradabad, Uttar Pradesh — 244001, India</span>
+                                <span>B-002, Faculty Block, TMU Campus, Moradabad, UP, India</span>
+                            </div>
+                            <div className="pt-2 text-xs text-slate-400">
+                                Published by{' '}
+                                <Link href="/about-foundation" className="text-blue-400 hover:text-blue-300 font-semibold underline underline-offset-2">
+                                    Sanmati Education & Research Foundation of India
+                                </Link>
                             </div>
                         </div>
 
