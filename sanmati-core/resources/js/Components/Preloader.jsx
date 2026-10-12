@@ -30,7 +30,7 @@ const Preloader = () => {
                             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                             className="w-20 h-20 rounded-2xl bg-primary/10 border border-white/5 flex items-center justify-center relative z-10 overflow-hidden"
                         >
-                            <img src="/logo.jpg" alt="Logo" className="w-12 h-12 object-contain" />
+                            <img src="/logo-sm.webp" alt="Logo" width="48" height="48" className="w-12 h-12 object-contain" />
                         </motion.div>
 
                         {/* Subtle Border Glow */}

@@ -21,6 +21,19 @@ class Issue extends Model
         'is_current',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saved(function () {
+            \Illuminate\Support\Facades\Cache::forget('archive_issues_list');
+        });
+
+        static::deleted(function () {
+            \Illuminate\Support\Facades\Cache::forget('archive_issues_list');
+        });
+    }
+
     public function papers()
     {
         return $this->hasMany(Paper::class);

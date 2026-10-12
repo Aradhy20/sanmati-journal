@@ -1,0 +1,134 @@
+[
+  {
+    "name": "Home",
+    "preset": "desktop",
+    "score": 97,
+    "fcp": "0.8 s",
+    "lcp": "1.0 s",
+    "tbt": "0 ms",
+    "cls": "0",
+    "si": "1.2 s",
+    "ttfb": "Root document took 450 ms"
+  },
+  {
+    "name": "Home",
+    "preset": "mobile",
+    "score": 92,
+    "fcp": "2.4 s",
+    "lcp": "2.8 s",
+    "tbt": "90 ms",
+    "cls": "0",
+    "si": "2.4 s",
+    "ttfb": "Root document took 230 ms"
+  },
+  {
+    "name": "Archive",
+    "preset": "desktop",
+    "score": 94,
+    "fcp": "0.8 s",
+    "lcp": "1.2 s",
+    "tbt": "20 ms",
+    "cls": "0",
+    "si": "1.9 s",
+    "ttfb": "Root document took 540 ms"
+  },
+  {
+    "name": "Archive",
+    "preset": "mobile",
+    "score": 76,
+    "fcp": "2.9 s",
+    "lcp": "4.2 s",
+    "tbt": "120 ms",
+    "cls": "0",
+    "si": "5.1 s",
+    "ttfb": "Root document took 230 ms"
+  },
+  {
+    "name": "Issue 3.1",
+    "preset": "desktop",
+    "score": 96,
+    "fcp": "0.8 s",
+    "lcp": "1.1 s",
+    "tbt": "0 ms",
+    "cls": "0",
+    "si": "1.4 s",
+    "ttfb": "Root document took 310 ms"
+  },
+  {
+    "name": "Issue 3.1",
+    "preset": "mobile",
+    "score": 80,
+    "fcp": "2.7 s",
+    "lcp": "4.0 s",
+    "tbt": "70 ms",
+    "cls": "0",
+    "si": "4.9 s",
+    "ttfb": "Root document took 290 ms"
+  },
+  {
+    "name": "Issue 3.2",
+    "preset": "desktop",
+    "score": 98,
+    "fcp": "0.7 s",
+    "lcp": "1.0 s",
+    "tbt": "0 ms",
+    "cls": "0",
+    "si": "1.1 s",
+    "ttfb": "Root document took 210 ms"
+  },
+  {
+    "name": "Issue 3.2",
+    "preset": "mobile",
+    "score": 79,
+    "fcp": "2.7 s",
+    "lcp": "4.0 s",
+    "tbt": "130 ms",
+    "cls": "0",
+    "si": "4.8 s",
+    "ttfb": "Root document took 300 ms"
+  },
+  {
+    "name": "Issue 3.3",
+    "preset": "desktop",
+    "score": 97,
+    "fcp": "0.7 s",
+    "lcp": "1.1 s",
+    "tbt": "0 ms",
+    "cls": "0",
+    "si": "1.0 s",
+    "ttfb": "Root document took 170 ms"
+  },
+  {
+    "name": "Issue 3.3",
+    "preset": "mobile",
+    "score": 80,
+    "fcp": "2.7 s",
+    "lcp": "3.9 s",
+    "tbt": "100 ms",
+    "cls": "0",
+    "si": "4.9 s",
+    "ttfb": "Root document took 340 ms"
+  },
+  {
+    "name": "Article 160",
+    "preset": "desktop",
+    "score": 97,
+    "fcp": "0.7 s",
+    "lcp": "1.0 s",
+    "tbt": "0 ms",
+    "cls": "0",
+    "si": "1.3 s",
+    "ttfb": "Root document took 200 ms"
+  },
+  {
+    "name": "Article 160",
+    "preset": "mobile",
+    "score": 79,
+    "fcp": "2.8 s",
+    "lcp": "4.0 s",
+    "tbt": "90 ms",
+    "cls": "0",
+    "si": "4.9 s",
+    "ttfb": "Root document took 280 ms"
+  }
+]

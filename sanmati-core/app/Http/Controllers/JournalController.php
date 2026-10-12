@@ -210,18 +210,28 @@ class JournalController extends Controller
 
     public function archive()
     {
+        $issues = Cache::remember('archive_issues_list', 1800, function () {
+            return Issue::with(['papers' => function ($q) {
+                $q->select('id', 'issue_id', 'title', 'authors', 'keywords', 'category', 'doi', 'citations', 'file_url');
+            }])
+            ->orderBy('volume', 'desc')
+            ->orderBy('number', 'desc')
+            ->get();
+        });
+
         return Inertia::render('Archive', [
-            'issues' => Issue::with('papers')
-                ->orderBy('volume', 'desc')
-                ->orderBy('number', 'desc')
-                ->get()
+            'issues' => $issues
         ]);
     }
 
     public function currentIssue()
     {
-        $issue = Issue::where('is_current', true)->with('papers')->first()
-            ?? Issue::orderBy('volume', 'desc')->orderBy('number', 'desc')->first();
+        $issue = Issue::where('is_current', true)->with(['papers' => function ($q) {
+            $q->select('id', 'issue_id', 'title', 'authors', 'keywords', 'category', 'doi', 'citations', 'file_url');
+        }])->first()
+            ?? Issue::orderBy('volume', 'desc')->orderBy('number', 'desc')->with(['papers' => function ($q) {
+                $q->select('id', 'issue_id', 'title', 'authors', 'keywords', 'category', 'doi', 'citations', 'file_url');
+            }])->first();
 
         if (!$issue) {
             $issue = Issue::create([
@@ -263,10 +273,12 @@ class JournalController extends Controller
 
     public function issue($volume, $number)
     {
-        $issue = Issue::with('papers')
-            ->where('volume', $volume)
-            ->where('number', $number)
-            ->first();
+        $issue = Issue::with(['papers' => function ($q) {
+            $q->select('id', 'issue_id', 'title', 'authors', 'keywords', 'category', 'doi', 'citations', 'file_url');
+        }])
+        ->where('volume', $volume)
+        ->where('number', $number)
+        ->first();
 
         if (!$issue) {
             return redirect()->route('archive')->with('error', "Volume {$volume}, Issue {$number} was not found.");

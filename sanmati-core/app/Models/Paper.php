@@ -38,6 +38,14 @@ class Paper extends Model
                 $paper->slug = static::generateUniqueSlug($paper->title);
             }
         });
+
+        static::saved(function () {
+            \Illuminate\Support\Facades\Cache::forget('archive_issues_list');
+        });
+
+        static::deleted(function () {
+            \Illuminate\Support\Facades\Cache::forget('archive_issues_list');
+        });
     }
 
     public static function generateUniqueSlug($title)

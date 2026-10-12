@@ -275,9 +275,11 @@
         {{-- PERFORMANCE: CRITICAL RESOURCE PRELOADS                      --}}
         {{-- ============================================================ --}}
 
-        {{-- Direct preload of Space Grotesk 700 latin WOFF2 for instant H1 LCP paint --}}
+        {{-- Direct preload of Space Grotesk 700 and Inter latin WOFF2 for instant LCP text paint --}}
         <link rel="preload" as="font" type="font/woff2" crossorigin
               href="https://fonts.gstatic.com/s/spacegrotesk/v22/V8mDoQDjQSkFtoMM3T6r8E7mPbF4C_k3HqU.woff2">
+        <link rel="preload" as="font" type="font/woff2" crossorigin
+              href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2">
 
         {{-- Performance: DNS prefetch & preconnect for external domains --}}
         <link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -285,14 +287,10 @@
         <link rel="dns-prefetch" href="//www.googletagmanager.com">
         <link rel="dns-prefetch" href="//www.google-analytics.com">
 
-        {{-- Fonts: Space Grotesk (Headings) & Inter (Body) loaded asynchronously --}}
+        {{-- Fonts: Space Grotesk (Headings) & Inter (Body) --}}
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap">
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-        <noscript>
-            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
-        </noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap">
 
         <!-- Initialize Google Tag Manager / GA4 DataLayer early so queued events are never lost -->
         <script nonce="{{ Vite::cspNonce() }}">

@@ -8,8 +8,8 @@ export default function EditorialBoardPreview() {
             role: "Editor-in-Chief",
             org: "Sanmati Spectrum Editorial Directorate",
             location: "India",
-            image: "/images/team/dr-kalpana-jain.webp",
-            webp: "/images/team/dr-kalpana-jain.webp",
+            image: "/images/team/dr-kalpana-jain-thumb.webp",
+            webp: "/images/team/dr-kalpana-jain-thumb.webp",
             area: "Interdisciplinary Research & Publication Ethics"
         },
         {
@@ -17,8 +17,8 @@ export default function EditorialBoardPreview() {
             role: "Co-Editor-in-Chief",
             org: "Sanmati Spectrum Directorate",
             location: "India",
-            image: "/images/team/sir.webp",
-            webp: "/images/team/sir.webp",
+            image: "/images/team/sir-thumb.webp",
+            webp: "/images/team/sir-thumb.webp",
             area: "Journal Governance & Technology"
         },
         {
@@ -26,8 +26,8 @@ export default function EditorialBoardPreview() {
             role: "Chief Board Member & Vice-Chancellor",
             org: "Kumar Bhaskar Varma Sanskrit & Ancient Studies Univ.",
             location: "Assam, India",
-            image: "/images/team/Prof. Prahlad joshi.webp",
-            webp: "/images/team/Prof. Prahlad joshi.webp",
+            image: "/images/team/Prof_Prahlad_Joshi_thumb.webp",
+            webp: "/images/team/Prof_Prahlad_Joshi_thumb.webp",
             area: "Sanskrit & Ancient Knowledge Systems"
         },
         {
@@ -35,8 +35,8 @@ export default function EditorialBoardPreview() {
             role: "Editorial Board Member",
             org: "Faculty of Humanities & Social Sciences",
             location: "India",
-            image: "/images/team/Dr_Smriti_kumari.webp",
-            webp: "/images/team/Dr_Smriti_kumari.webp",
+            image: "/images/team/Dr_Smriti_kumari_thumb.webp",
+            webp: "/images/team/Dr_Smriti_kumari_thumb.webp",
             area: "Humanities & Social Sciences"
         }
     ];

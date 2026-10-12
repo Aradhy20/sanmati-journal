@@ -277,10 +277,11 @@ export default function Navbar({ onOpenSearch }) {
                         {/* ── Brand Logo ── */}
                         <Link href="/" className="flex items-center gap-3 group shrink-0">
                             <img
-                                src="/logo.webp"
+                                src="/logo-sm.webp"
                                 alt="Sanmati Spectrum Logo"
                                 width="44"
                                 height="44"
+                                decoding="async"
                                 className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl object-contain shadow-sm border border-slate-100 group-hover:scale-105 transition-transform duration-200"
                             />
                             <div className="flex flex-col">

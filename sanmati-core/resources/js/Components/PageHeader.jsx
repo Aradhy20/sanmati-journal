@@ -35,12 +35,7 @@ const PageHeader = ({ title, breadcrumb, subtitle }) => {
             </div>
 
             <div className="max-w-7xl mx-auto px-6 relative z-10">
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                    className="text-center"
-                >
+                <div className="text-center">
                     {/* Refined Breadcrumb */}
                     <nav className="flex items-center justify-center gap-3 text-[10px] font-black uppercase tracking-[0.3em] mb-6">
                         <Link href="/" className="text-muted hover:text-secondary transition-colors">Portal</Link>
@@ -67,7 +62,7 @@ const PageHeader = ({ title, breadcrumb, subtitle }) => {
                             </p>
                         </div>
                     )}
-                </motion.div>
+                </div>
             </div>
         </section>
     );

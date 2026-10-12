@@ -292,11 +292,9 @@ export default function Archive({ issues }) {
                     {filteredIssues.length > 0 ? (
                         <div className="space-y-10">
                             {filteredIssues.map((issue) => (
-                                <motion.div
+                                <div
                                     key={issue.id}
-                                    initial={{ opacity: 0, y: 15 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.5 }}
+                                    style={{ contentVisibility: 'auto', containIntrinsicSize: '1px 650px' }}
                                     className="bg-white rounded-xl border border-[#E9E5DD] overflow-hidden"
                                 >
                                     {/* Volume Card Header */}
@@ -370,6 +368,7 @@ export default function Archive({ issues }) {
                                             {issue.papers.map((paper, index) => (
                                                 <div 
                                                     key={paper.id} 
+                                                    style={{ contain: 'content' }}
                                                     className="bg-white rounded-xl p-5 border border-[#E9E5DD] hover:border-primary hover:shadow-card transition-all duration-200 flex flex-col h-full relative"
                                                 >
                                                     <div className="flex items-center justify-between gap-2 mb-3">
@@ -447,7 +446,7 @@ export default function Archive({ issues }) {
                                             ))}
                                         </div>
                                     </div>
-                                </motion.div>
+                                </div>
                             ))}
                         </div>
                     ) : (

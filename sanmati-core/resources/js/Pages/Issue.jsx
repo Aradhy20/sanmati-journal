@@ -181,11 +181,7 @@ export default function Issue({ issue, prevIssue, nextIssue }) {
                     </div>
 
                     {/* Issue Metadata Hero Banner */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="bg-white rounded-2xl border border-[#E9E5DD] p-6 lg:p-8 mb-10 shadow-sm"
-                    >
+                    <div className="bg-white rounded-2xl border border-[#E9E5DD] p-6 lg:p-8 mb-10 shadow-sm">
                         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
                             <div className="space-y-3 max-w-3xl">
                                 <div className="flex flex-wrap items-center gap-2">
@@ -247,7 +243,7 @@ export default function Issue({ issue, prevIssue, nextIssue }) {
                                 </div>
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
 
                     {/* Articles List */}
                     {filteredPapers.length > 0 ? (
@@ -267,11 +263,9 @@ export default function Issue({ issue, prevIssue, nextIssue }) {
                                     const doiUrl = cleanDoi ? `https://doi.org/${cleanDoi}` : null;
 
                                     return (
-                                        <motion.div
+                                        <div
                                             key={paper.id}
-                                            initial={{ opacity: 0, y: 15 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{ delay: Math.min(index * 0.03, 0.4) }}
+                                            style={{ contain: 'content', contentVisibility: 'auto', containIntrinsicSize: '1px 220px' }}
                                             className="bg-white rounded-xl p-5 border border-[#E9E5DD] hover:border-primary hover:shadow-card transition-all duration-200 flex flex-col h-full"
                                         >
                                             <div className="flex items-center justify-between gap-2 mb-3">
@@ -353,7 +347,7 @@ export default function Issue({ issue, prevIssue, nextIssue }) {
                                                     <Quote className="w-3.5 h-3.5" /> Cite
                                                 </button>
                                             </div>
-                                        </motion.div>
+                                        </div>
                                     );
                                 })}
                             </div>

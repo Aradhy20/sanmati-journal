@@ -274,14 +274,9 @@ export default function Article({ paper, relatedPapers = [] }) {
                             </motion.div>
 
                             {/* Title */}
-                            <motion.h1
-                                initial={{ opacity: 0, y: 15 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5, delay: 0.05 }}
-                                className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-slate-900 leading-tight tracking-tight"
-                            >
+                            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-slate-900 leading-tight tracking-tight">
                                 {paper.title}
-                            </motion.h1>
+                            </h1>
 
                             {/* Meta row */}
                             <motion.div
