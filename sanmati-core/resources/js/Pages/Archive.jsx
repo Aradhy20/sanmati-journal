@@ -10,7 +10,8 @@ import {
     Layers, 
     ShieldCheck, 
     Quote, 
-    Eye
+    Eye,
+    ExternalLink
 } from 'lucide-react';
 import { Link, Head } from '@inertiajs/react';
 import MainLayout from '../Layouts/MainLayout';
