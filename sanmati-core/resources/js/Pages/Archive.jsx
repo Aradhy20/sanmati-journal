@@ -69,7 +69,7 @@ export default function Archive({ issues }) {
         });
         if (vols['1']) vols['1'].label = 'Volume 1 (Jan–Mar 2026)';
         if (vols['2']) vols['2'].label = 'Volume 2 (Apr–Jun 2026)';
-        if (vols['3']) vols['3'].label = 'Volume 3 (Jul–Dec 2026)';
+        if (vols['3']) vols['3'].label = 'Volume 3 (Jul–Sep & Oct–Dec 2026)';
         return Object.values(vols).sort((a, b) => b.val.localeCompare(a.val));
     }, [researchIssues]);
 
