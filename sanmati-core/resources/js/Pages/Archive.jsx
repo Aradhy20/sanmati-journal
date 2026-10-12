@@ -36,8 +36,8 @@ export default function Archive({ issues }) {
         '2-1': 'April – June',
         '2-2': 'April – June',
         '3-1': 'July – September',
-        '3-2': 'October – December',
-        '3-3': 'October – December',
+        '3-2': 'July – September',
+        '3-3': 'July – September',
     };
 
     const researchIssues = useMemo(() => {
@@ -70,7 +70,7 @@ export default function Archive({ issues }) {
         });
         if (vols['1']) vols['1'].label = 'Volume 1 (Jan–Mar 2026)';
         if (vols['2']) vols['2'].label = 'Volume 2 (Apr–Jun 2026)';
-        if (vols['3']) vols['3'].label = 'Volume 3 (Jul–Sep & Oct–Dec 2026)';
+        if (vols['3']) vols['3'].label = 'Volume 3 (Jul–Sep 2026)';
         return Object.values(vols).sort((a, b) => b.val.localeCompare(a.val));
     }, [researchIssues]);
 

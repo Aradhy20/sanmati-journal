@@ -84,14 +84,14 @@ class ArchivePapersSeeder extends Seeder
                 'volume' => '3',
                 'number' => '2',
                 'year' => 2026,
-                'month_range' => 'October – December',
+                'month_range' => 'July – September',
                 'is_current' => false,
             ],
             'VOLUMN 3 ISSUE 3' => [
                 'volume' => '3',
                 'number' => '3',
                 'year' => 2026,
-                'month_range' => 'October – December',
+                'month_range' => 'July – September',
                 'is_current' => false,
             ],
         ];
