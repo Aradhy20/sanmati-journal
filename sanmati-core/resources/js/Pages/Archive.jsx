@@ -145,31 +145,14 @@ export default function Archive({ issues }) {
         }).filter(issue => issue.papers && issue.papers.length > 0);
     }, [researchIssues, searchQuery, selectedVolume, selectedAuthor, selectedCategory]);
 
-    const scholarlySchema = useMemo(() => {
-        return researchIssues.flatMap(issue => 
-            (issue.papers || []).map(paper => ({
-                "@context": "https://schema.org",
-                "@type": "ScholarlyArticle",
-                "headline": paper.title,
-                "author": (paper.authors || "").split(/,|\b&|\band\b/i).map(name => ({
-                    "@type": "Person",
-                    "name": name.trim()
-                })),
-                "url": paper.doi || `https://sanmatijournal.in/article/${paper.id}`,
-                "publisher": {
-                    "@type": "Organization",
-                    "name": "Sanmati Spectrum Journal",
-                    "logo": "https://sanmatijournal.in/logo.jpg"
-                },
-                "issueNumber": issue.number,
-                "volumeNumber": issue.volume,
-                "datePublished": String(issue.year)
-            }))
-        );
-    }, [researchIssues]);
-
     const seoData = {
-        schema: scholarlySchema.length > 0 ? scholarlySchema : undefined,
+        schema: {
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "name": "Sanmati Journal Research Archive",
+            "description": "Browse published volumes and peer-reviewed research papers of Sanmati Spectrum of Knowledge (ISSN 3108-1819).",
+            "url": "https://sanmatijournal.in/archive"
+        },
         breadcrumb: [
             { name: 'Home', url: '/' },
             { name: 'Archive', url: '/archive' }
