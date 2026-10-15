@@ -211,16 +211,52 @@ class JournalController extends Controller
     public function archive()
     {
         $issues = Cache::remember('archive_issues_list', 1800, function () {
-            return Issue::with(['papers' => function ($q) {
-                $q->select('id', 'issue_id', 'title', 'authors', 'keywords', 'category', 'doi', 'citations', 'file_url');
-            }])
-            ->orderBy('volume', 'desc')
-            ->orderBy('number', 'desc')
-            ->get();
+            return Issue::where('is_special_issue', false)
+                ->with(['papers' => function ($q) {
+                    $q->select('id', 'issue_id', 'title', 'authors', 'keywords', 'category', 'doi', 'citations', 'file_url');
+                }])
+                ->orderBy('volume', 'desc')
+                ->orderBy('number', 'desc')
+                ->get();
+        });
+
+        $specialIssue = Cache::remember('archive_special_issue', 1800, function () {
+            return Issue::where('is_special_issue', true)
+                ->with(['papers' => function ($q) {
+                    $q->select('id', 'issue_id', 'title', 'authors', 'keywords', 'category', 'doi', 'citations', 'file_url');
+                }])
+                ->first();
         });
 
         return Inertia::render('Archive', [
-            'issues' => $issues
+            'issues' => $issues,
+            'specialIssue' => $specialIssue,
+        ]);
+    }
+
+    public function specialIssue()
+    {
+        $specialIssue = Issue::where('is_special_issue', true)->with(['papers' => function ($q) {
+            $q->select('id', 'issue_id', 'title', 'slug', 'authors', 'keywords', 'category', 'doi', 'citations', 'file_url');
+        }])->first();
+
+        $papers = $specialIssue ? $specialIssue->papers : collect();
+
+        $metaTitle = "Special Issue | Sanmati Spectrum of Knowledge & Emerging Discourse (ISSN 3108-1819)";
+        $metaDescription = "Explore 31 verified peer-reviewed research publications in the dedicated Special Issue of Sanmati Spectrum of Knowledge & Emerging Discourse with persistent Zenodo DOIs.";
+
+        return Inertia::render('SpecialIssue', [
+            'issue' => $specialIssue,
+            'papers' => $papers,
+            'totalCount' => $papers->count(),
+        ])->withViewData([
+            'meta' => [
+                'title' => $metaTitle,
+                'description' => $metaDescription,
+                'keywords' => "Special Issue, Artificial Intelligence, Emerging Technologies, Sanmati Journal, Multidisciplinary Research, Zenodo DOI, ISSN 3108-1819",
+                'image' => 'https://sanmatijournal.in/logo.webp',
+                'canonical' => "https://sanmatijournal.in/special-issue",
+            ]
         ]);
     }
 
@@ -229,7 +265,7 @@ class JournalController extends Controller
         $issue = Issue::where('is_current', true)->with(['papers' => function ($q) {
             $q->select('id', 'issue_id', 'title', 'authors', 'keywords', 'category', 'doi', 'citations', 'file_url');
         }])->first()
-            ?? Issue::orderBy('volume', 'desc')->orderBy('number', 'desc')->with(['papers' => function ($q) {
+            ?? Issue::where('is_special_issue', false)->orderBy('volume', 'desc')->orderBy('number', 'desc')->with(['papers' => function ($q) {
                 $q->select('id', 'issue_id', 'title', 'authors', 'keywords', 'category', 'doi', 'citations', 'file_url');
             }])->first();
 
@@ -244,7 +280,8 @@ class JournalController extends Controller
             ]);
         }
 
-        $allIssues = Issue::orderBy('volume', 'desc')
+        $allIssues = Issue::where('is_special_issue', false)
+            ->orderBy('volume', 'desc')
             ->orderBy('number', 'desc')
             ->get();
 

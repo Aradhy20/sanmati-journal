@@ -34,6 +34,7 @@ Route::get('/robots.txt', function () {
         . "Allow: /\n"
         . "Allow: /announcements/\n"
         . "Allow: /archive\n"
+        . "Allow: /special-issue\n"
         . "Allow: /issue/\n"
         . "Allow: /current-issue\n"
         . "Allow: /article/\n"
@@ -73,6 +74,7 @@ Route::get('/gallery-view', [JournalController::class, 'gallery'])->name('galler
 Route::get('/gallery/photo', [JournalController::class, 'galleryPhoto'])->name('gallery.photo');
 Route::get('/media-news', [JournalController::class, 'galleryNews'])->name('gallery.news');
 Route::get('/archive', [JournalController::class, 'archive'])->name('archive');
+Route::get('/special-issue', [JournalController::class, 'specialIssue'])->name('special-issue');
 Route::get('/current-issue', [JournalController::class, 'currentIssue'])->name('current-issue');
 Route::get('/issue/{volume}/{number}', [JournalController::class, 'issue'])->name('issue.show');
 Route::get('/issue/{id}', [JournalController::class, 'issueById'])->name('issue.id');

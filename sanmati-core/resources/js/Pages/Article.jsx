@@ -77,10 +77,11 @@ export default function Article({ paper, relatedPapers = [] }) {
 
     const volumeNum = paper.issue?.volume?.volume_number || paper.issue?.volume || null;
     const issueNum = paper.issue?.number || paper.issue?.issue_number || null;
+    const isSpecialIssue = Boolean(paper.issue?.is_special_issue || paper.category === 'Special Issue Article' || (!volumeNum && !issueNum && paper.doi));
 
     const pubDate = paper.issue?.year
         ? `${paper.issue.month_range ? paper.issue.month_range + ' ' : ''}${paper.issue.year}`
-        : new Date(paper.created_at).toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
+        : (isSpecialIssue ? null : new Date(paper.created_at).toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' }));
 
     const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://sanmatijournal.in';
     const articleUrl = `${baseUrl}/article/${paper.id}`;
@@ -140,10 +141,14 @@ export default function Article({ paper, relatedPapers = [] }) {
         },
         breadcrumb: [
             { name: 'Home', url: '/' },
-            { name: 'Archive', url: '/archive' },
-            ...(volumeNum && issueNum ? [
-                { name: `Vol. ${volumeNum}, Issue ${issueNum}`, url: `/issue/${volumeNum}/${issueNum}` }
-            ] : []),
+            ...(isSpecialIssue ? [
+                { name: 'Special Issue', url: '/special-issue' },
+            ] : [
+                { name: 'Archive', url: '/archive' },
+                ...(volumeNum && issueNum ? [
+                    { name: `Vol. ${volumeNum}, Issue ${issueNum}`, url: `/issue/${volumeNum}/${issueNum}` }
+                ] : [])
+            ]),
             { name: 'Article', url: `/article/${paper.id}` },
         ]
     };
@@ -185,7 +190,7 @@ export default function Article({ paper, relatedPapers = [] }) {
             <Head>
                 <meta name="citation_title"            content={paper.title} />
                 <meta name="citation_author"           content={paper.authors} />
-                <meta name="citation_publication_date" content={pubDate} />
+                {pubDate && <meta name="citation_publication_date" content={pubDate} />}
                 <meta name="citation_journal_title"    content="Sanmati Spectrum of Knowledge & Emerging Discourse" />
                 <meta name="citation_issn"             content="3108-1819" />
                 {pdfUrl && <meta name="citation_pdf_url" content={pdfUrl} />}
@@ -196,7 +201,7 @@ export default function Article({ paper, relatedPapers = [] }) {
                 {cleanDoi  && <meta name="citation_doi" content={cleanDoi} />}
                 <meta name="DC.title"     content={paper.title} />
                 <meta name="DC.creator"   content={paper.authors} />
-                <meta name="DC.date"      content={pubDate} />
+                {pubDate && <meta name="DC.date"      content={pubDate} />}
                 <meta name="DC.publisher" content="Sanmati Spectrum of Knowledge & Emerging Discourse" />
                 {pdfUrl && <meta name="DC.format" content="application/pdf" />}
                 <meta name="DC.language"  content="en" />
@@ -210,20 +215,34 @@ export default function Article({ paper, relatedPapers = [] }) {
                     <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-5 flex-wrap">
                         <Link href="/" className="hover:text-blue-600 transition-colors">Home</Link>
                         <ChevronRight className="w-3 h-3 shrink-0" />
-                        <Link href="/archive" className="hover:text-blue-600 transition-colors">Archive</Link>
-                        {volumeNum && issueNum && (
+                        {isSpecialIssue ? (
                             <>
+                                <Link href="/special-issue" className="hover:text-blue-600 transition-colors">Special Issue</Link>
                                 <ChevronRight className="w-3 h-3 shrink-0" />
-                                <Link href={`/issue/${volumeNum}/${issueNum}`} className="hover:text-blue-600 transition-colors">
-                                    Vol. {volumeNum}, Issue {issueNum}
-                                </Link>
+                            </>
+                        ) : (
+                            <>
+                                <Link href="/archive" className="hover:text-blue-600 transition-colors">Archive</Link>
+                                {volumeNum && issueNum && (
+                                    <>
+                                        <ChevronRight className="w-3 h-3 shrink-0" />
+                                        <Link href={`/issue/${volumeNum}/${issueNum}`} className="hover:text-blue-600 transition-colors">
+                                            Vol. {volumeNum}, Issue {issueNum}
+                                        </Link>
+                                    </>
+                                )}
+                                <ChevronRight className="w-3 h-3 shrink-0" />
                             </>
                         )}
-                        <ChevronRight className="w-3 h-3 shrink-0" />
                         <span className="text-blue-600 font-bold truncate max-w-[220px]">Article</span>
                     </nav>
 
-                    {volumeNum && issueNum ? (
+                    {isSpecialIssue ? (
+                        <Link href="/special-issue" className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-blue-600 mb-6 group transition-colors">
+                            <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
+                            Back to Special Issue
+                        </Link>
+                    ) : volumeNum && issueNum ? (
                         <Link href={`/issue/${volumeNum}/${issueNum}`} className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-blue-600 mb-6 group transition-colors">
                             <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
                             Back to Volume {volumeNum}, Issue {issueNum}
@@ -252,6 +271,11 @@ export default function Article({ paper, relatedPapers = [] }) {
                                 transition={{ duration: 0.4 }}
                                 className="flex flex-wrap items-center gap-2"
                             >
+                                {isSpecialIssue && (
+                                    <span className="px-3 py-1 text-[10px] font-bold tracking-wider uppercase bg-amber-50 text-amber-800 border border-amber-200 rounded-lg">
+                                        Special Issue
+                                    </span>
+                                )}
                                 <span className="px-3 py-1 text-[10px] font-bold tracking-wider uppercase bg-blue-50 text-blue-700 border border-blue-200 rounded-lg">
                                     {paper.category || 'Research Article'}
                                 </span>
@@ -263,18 +287,26 @@ export default function Article({ paper, relatedPapers = [] }) {
                                         {isZenodo ? 'Zenodo DOI' : 'CrossRef DOI'}
                                     </span>
                                 )}
-                                {volumeNum && issueNum && (
+                                {isSpecialIssue ? (
+                                    <Link
+                                        href="/special-issue"
+                                        className="px-3 py-1 text-[10px] font-bold tracking-wider uppercase bg-amber-50 text-amber-800 border border-amber-200 rounded-lg hover:bg-amber-100 transition-colors inline-flex items-center gap-1"
+                                    >
+                                        <Sparkles className="w-3 h-3 text-amber-600" />
+                                        Special Issue (October 2026)
+                                    </Link>
+                                ) : volumeNum && issueNum ? (
                                     <Link
                                         href={`/issue/${volumeNum}/${issueNum}`}
                                         className="px-3 py-1 text-[10px] font-bold tracking-wider uppercase bg-slate-100 text-slate-700 border border-slate-200 rounded-lg hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200 transition-colors"
                                     >
                                         Vol. {volumeNum}, Issue {issueNum}
                                     </Link>
-                                )}
+                                ) : null}
                             </motion.div>
 
                             {/* Title */}
-                            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-slate-900 leading-tight tracking-tight">
+                            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-slate-900 leading-tight tracking-tight break-words">
                                 {paper.title}
                             </h1>
 
@@ -303,7 +335,7 @@ export default function Article({ paper, relatedPapers = [] }) {
                             </motion.div>
 
                             {/* Action bar */}
-                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-200">
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200">
                                 <SharePanel paper={paper} url={articleUrl} />
                                 <div className="flex gap-2.5 w-full sm:w-auto">
                                     <button
@@ -345,12 +377,12 @@ export default function Article({ paper, relatedPapers = [] }) {
                                         </span>
                                         Abstract
                                     </h2>
-                                    <div className="text-sm text-slate-700 leading-[1.85] bg-blue-50/40 border border-blue-100 rounded-2xl p-6 font-medium">
+                                    <div className="text-sm text-slate-700 leading-[1.85] bg-blue-50/40 border border-blue-100 rounded-2xl p-4 sm:p-6 font-medium break-words">
                                         {paper.abstract}
                                     </div>
                                 </section>
                             ) : (
-                                <section aria-labelledby="scholarly-record-heading" className="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+                                <section aria-labelledby="scholarly-record-heading" className="p-4 sm:p-6 rounded-2xl bg-slate-50 border border-slate-200">
                                     <h2 id="scholarly-record-heading" className="flex items-center gap-2 text-base font-heading font-bold text-slate-900 mb-2">
                                         <span className="w-8 h-8 rounded-xl bg-indigo-50 flex items-center justify-center">
                                             <FileText className="w-4 h-4 text-indigo-600" />
@@ -422,10 +454,10 @@ export default function Article({ paper, relatedPapers = [] }) {
                                         {[
                                             { label: 'Journal',  value: 'Sanmati Spectrum' },
                                             { label: 'ISSN',     value: '3108-1819' },
-                                            { label: 'Volume',   value: volumeNum },
-                                            { label: 'Issue',    value: issueNum },
+                                            isSpecialIssue ? { label: 'Issue', value: 'Special Issue' } : (volumeNum ? { label: 'Volume', value: volumeNum } : null),
+                                            isSpecialIssue ? null : (issueNum ? { label: 'Issue', value: issueNum } : null),
                                             paper.page_numbers ? { label: 'Pages', value: paper.page_numbers } : null,
-                                            { label: 'Access',   value: 'Open Access (CC-BY)' },
+                                            { label: 'Access',   value: 'Open Access (CC-BY 4.0)' },
                                         ].filter(Boolean).map(({ label, value }) => (
                                             <div key={label}>
                                                 <div className="text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-0.5">{label}</div>
@@ -442,9 +474,17 @@ export default function Article({ paper, relatedPapers = [] }) {
                                     <div className="flex items-center justify-between mb-4">
                                         <h2 id="related-heading" className="text-base font-heading font-bold text-slate-900 flex items-center gap-2">
                                             <BookOpen className="w-4 h-4 text-blue-600" />
-                                            Other Articles in this Issue
+                                            {isSpecialIssue ? 'Other Articles in Special Issue' : 'Other Articles in this Issue'}
                                         </h2>
-                                        {volumeNum && issueNum && (
+                                        {isSpecialIssue ? (
+                                            <Link
+                                                href="/special-issue"
+                                                className="text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1"
+                                            >
+                                                View Special Issue
+                                                <ArrowRight className="w-3 h-3" />
+                                            </Link>
+                                        ) : volumeNum && issueNum ? (
                                             <Link
                                                 href={`/issue/${volumeNum}/${issueNum}`}
                                                 className="text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1"
@@ -452,7 +492,7 @@ export default function Article({ paper, relatedPapers = [] }) {
                                                 View all articles
                                                 <ArrowRight className="w-3 h-3" />
                                             </Link>
-                                        )}
+                                        ) : null}
                                     </div>
                                     <div className="space-y-3">
                                         {relatedPapers.map(rel => (
@@ -496,7 +536,15 @@ export default function Article({ paper, relatedPapers = [] }) {
                                         Official DOI Record
                                     </a>
                                 )}
-                                {volumeNum && issueNum ? (
+                                {isSpecialIssue ? (
+                                    <Link
+                                        href="/special-issue"
+                                        className="inline-flex items-center gap-2 px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-sm transition-all duration-200"
+                                    >
+                                        <BookOpen className="w-4 h-4 text-blue-600" />
+                                        View Special Issue
+                                    </Link>
+                                ) : volumeNum && issueNum ? (
                                     <Link
                                         href={`/issue/${volumeNum}/${issueNum}`}
                                         className="inline-flex items-center gap-2 px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-sm transition-all duration-200"
@@ -591,7 +639,15 @@ export default function Article({ paper, relatedPapers = [] }) {
                                         View DOI Page
                                     </a>
                                 )}
-                                {volumeNum && issueNum && (
+                                {isSpecialIssue ? (
+                                    <Link
+                                        href="/special-issue"
+                                        className="flex items-center gap-2.5 w-full px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-bold text-slate-700 hover:bg-blue-50 hover:border-blue-200 hover:text-blue-700 transition-all"
+                                    >
+                                        <BookOpen className="w-4 h-4 text-blue-500" />
+                                        View Special Issue
+                                    </Link>
+                                ) : volumeNum && issueNum ? (
                                     <Link
                                         href={`/issue/${volumeNum}/${issueNum}`}
                                         className="flex items-center gap-2.5 w-full px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-bold text-slate-700 hover:bg-blue-50 hover:border-blue-200 hover:text-blue-700 transition-all"
@@ -599,7 +655,7 @@ export default function Article({ paper, relatedPapers = [] }) {
                                         <BookOpen className="w-4 h-4 text-blue-500" />
                                         View Complete Issue
                                     </Link>
-                                )}
+                                ) : null}
                             </div>
 
                         </aside>

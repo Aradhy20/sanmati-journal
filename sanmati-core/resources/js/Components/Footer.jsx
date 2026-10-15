@@ -11,6 +11,8 @@ const COLS = [
         title: 'Journal',
         links: [
             { name: 'About Journal',     href: '/basic-info/about-journal' },
+            { name: 'Special Issue',     href: '/special-issue' },
+            { name: 'Archive',           href: '/archive' },
             { name: 'Vision & Mission',  href: '/basic-info/vision-mission' },
             { name: 'Journal Info',      href: '/basic-info/journal-info' },
             { name: 'Indexing',          href: '/basic-info/indexing' },
@@ -78,16 +80,17 @@ export default function Footer() {
                             <h2 className="text-2xl font-heading font-bold text-white">Ready to Publish Your Research?</h2>
                             <p className="text-slate-400 text-sm mt-1">Submit your manuscript today and reach researchers worldwide.</p>
                         </div>
-                        <div className="flex flex-wrap gap-3 justify-center">
+                        <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto justify-center">
                             <Link
                                 href="/submission-guidelines/call-for-papers"
-                                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold hover:-translate-y-0.5 transition-all duration-200 shadow-lg shadow-blue-600/30"
+                                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold hover:-translate-y-0.5 transition-all duration-200 shadow-lg shadow-blue-600/30 text-center"
                             >
-                                Submit Your Paper <ArrowRight className="w-4 h-4" />
+                                <span>Submit Your Paper</span>
+                                <ArrowRight className="w-4 h-4 shrink-0" />
                             </Link>
                             <a
                                 href="/download/author-guidelines-template"
-                                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-slate-600 text-slate-300 hover:border-slate-400 hover:text-white text-sm font-bold hover:-translate-y-0.5 transition-all duration-200"
+                                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-xl border border-slate-600 text-slate-300 hover:border-slate-400 hover:text-white text-sm font-bold hover:-translate-y-0.5 transition-all duration-200 text-center"
                             >
                                 Download Template
                             </a>
@@ -199,9 +202,9 @@ export default function Footer() {
             {/* ── Bottom Bar ── */}
             <div className="border-t border-slate-800">
                 <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-5">
-                    <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 text-center sm:text-left">
                         <p>© {year} Sanmati Spectrum of Knowledge & Emerging Discourse. All rights reserved.</p>
-                        <div className="flex items-center gap-4">
+                        <div className="flex items-center justify-center flex-wrap gap-4">
                             <Link href="/publication-policy/ethics" className="hover:text-slate-300 transition-colors">Privacy Policy</Link>
                             <Link href="/compliance" className="hover:text-slate-300 transition-colors">Terms of Use</Link>
                             <Link href="/sitemap.xml" className="hover:text-slate-300 transition-colors">Sitemap</Link>

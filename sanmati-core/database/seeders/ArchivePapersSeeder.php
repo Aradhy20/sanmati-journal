@@ -176,5 +176,50 @@ class ArchivePapersSeeder extends Seeder
                 $this->command->info("Seeded compilation paper in Vol 1 Issue 1.");
             }
         }
+
+        // Seed Special Issue if present in JSON
+        if (isset($jsonData['SPECIAL ISSUE'])) {
+            $specialIssue = Issue::create([
+                'volume' => null,
+                'number' => null,
+                'year' => 2026,
+                'month_range' => 'October',
+                'status' => 'active',
+                'is_current' => false,
+                'is_special_issue' => true,
+                'title' => 'Special Issue',
+            ]);
+
+            $siCount = 0;
+            foreach ($jsonData['SPECIAL ISSUE'] as $paperData) {
+                $title = trim($paperData['Title'] ?? $paperData['Title '] ?? '');
+                $authors = trim($paperData['Name'] ?? $paperData['Name '] ?? '');
+                $doi = trim($paperData['DOI number'] ?? $paperData['DOI number link'] ?? $paperData['DOI number '] ?? '');
+
+                if (empty($title) || empty($doi)) {
+                    continue;
+                }
+
+                Paper::create([
+                    'issue_id' => $specialIssue->id,
+                    'title' => $title,
+                    'authors' => $authors,
+                    'abstract' => null,
+                    'keywords' => null,
+                    'file_url' => null,
+                    'doi' => $doi,
+                    'citations' => 0,
+                    'category' => 'Special Issue Article',
+                    'is_featured' => false,
+                    'meta_title' => "{$title} | Sanmati Journal",
+                    'meta_description' => mb_substr("Research article by {$authors} published in Sanmati Spectrum of Knowledge & Emerging Discourse (Special Issue).", 0, 160),
+                ]);
+                $siCount++;
+            }
+
+            if ($this->command) {
+                $this->command->info("Created Special Issue with {$siCount} papers.");
+            }
+        }
     }
 }

@@ -14,30 +14,30 @@ const PageHeader = ({ title, breadcrumb, subtitle }) => {
 
             {/* Decorative Intellectual Aura */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-                <div className="absolute -top-24 -right-24 w-96 h-96 bg-secondary/10 rounded-full blur-[100px]" />
-                <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-primary/10 rounded-full blur-[100px]" />
+                <div className="absolute top-0 right-0 w-72 sm:w-96 h-72 sm:h-96 bg-secondary/10 rounded-full blur-[90px] translate-x-1/4 -translate-y-1/4" />
+                <div className="absolute bottom-0 left-0 w-64 sm:w-80 h-64 sm:h-80 bg-primary/10 rounded-full blur-[90px] -translate-x-1/4 translate-y-1/4" />
                 
                 {/* Floating Abstract Shapes */}
                 <motion.div 
                     animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
                     transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute top-1/4 right-1/4 opacity-20"
+                    className="absolute top-1/4 right-1/4 opacity-20 hidden sm:block"
                 >
                     <div className="w-12 h-12 border border-secondary/30 rounded-full" />
                 </motion.div>
                 <motion.div 
                     animate={{ y: [0, 20, 0], rotate: [0, -5, 0] }}
                     transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                    className="absolute bottom-1/4 left-1/4 opacity-20"
+                    className="absolute bottom-1/4 left-1/4 opacity-20 hidden sm:block"
                 >
                     <div className="w-20 h-20 border border-primary/20 rounded-lg rotate-45" />
                 </motion.div>
             </div>
 
-            <div className="max-w-7xl mx-auto px-6 relative z-10">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
                 <div className="text-center">
                     {/* Refined Breadcrumb */}
-                    <nav className="flex items-center justify-center gap-3 text-[10px] font-black uppercase tracking-[0.3em] mb-6">
+                    <nav className="flex items-center justify-center gap-2 sm:gap-3 text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] sm:tracking-[0.3em] mb-4 sm:mb-6 flex-wrap">
                         <Link href="/" className="text-muted hover:text-secondary transition-colors">Portal</Link>
                         <span className="w-1 h-1 rounded-full bg-primary/20" />
                         {breadcrumb && (
@@ -50,14 +50,14 @@ const PageHeader = ({ title, breadcrumb, subtitle }) => {
                     </nav>
 
                     {/* Monumental Title */}
-                    <h1 className="text-3xl md:text-4xl lg:text-5xl md:text-5xl lg:text-6xl font-serif font-bold text-dark mb-4 tracking-tight">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-dark mb-3 sm:mb-4 tracking-tight break-words">
                         {title}
                     </h1>
 
                     {subtitle && (
-                        <div className="flex flex-col items-center gap-4">
+                        <div className="flex flex-col items-center gap-3 sm:gap-4">
                             <span className="h-px w-12 bg-secondary/40" />
-                            <p className="text-lg md:text-xl text-muted font-medium max-w-2xl italic leading-relaxed">
+                            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted font-medium max-w-2xl italic leading-relaxed break-words">
                                 {subtitle}
                             </p>
                         </div>

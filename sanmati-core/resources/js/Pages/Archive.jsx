@@ -11,7 +11,9 @@ import {
     ShieldCheck, 
     Quote, 
     Eye,
-    ExternalLink
+    ExternalLink,
+    Sparkles,
+    ArrowRight
 } from 'lucide-react';
 import { Link, Head } from '@inertiajs/react';
 import MainLayout from '../Layouts/MainLayout';
@@ -20,7 +22,7 @@ import Seo from '../Components/Seo';
 import Modal from '../Components/ui/Modal';
 import CitationGenerator from '../Components/ui/CitationGenerator';
 
-export default function Archive({ issues }) {
+export default function Archive({ issues, specialIssue }) {
     const dbIssues = Array.isArray(issues) ? issues : (issues?.data || []);
 
     // State
@@ -41,23 +43,35 @@ export default function Archive({ issues }) {
     };
 
     const researchIssues = useMemo(() => {
-        return [...dbIssues]
-            .map(issue => ({
-                ...issue,
-                month_range: MONTH_RANGE_OVERRIDES[`${issue.volume}-${issue.number}`] || issue.month_range,
-                papers: (issue.papers || []).filter(p => p.category !== 'Complete Issue Book'),
-            }))
-            .sort((a, b) => {
-                const volA = parseInt(a.volume) || 0;
-                const volB = parseInt(b.volume) || 0;
-                if (volA !== volB) {
-                    return volB - volA;
-                }
-                const numA = parseInt(a.number) || 0;
-                const numB = parseInt(b.number) || 0;
-                return numB - numA;
+        const list = [...dbIssues].map(issue => ({
+            ...issue,
+            month_range: MONTH_RANGE_OVERRIDES[`${issue.volume}-${issue.number}`] || issue.month_range,
+            papers: (issue.papers || []).filter(p => p.category !== 'Complete Issue Book'),
+        }));
+
+        if (specialIssue) {
+            list.unshift({
+                ...specialIssue,
+                volume: 'special',
+                month_range: specialIssue.month_range || 'October',
+                year: specialIssue.year || 2026,
+                papers: (specialIssue.papers || []).filter(p => p.category !== 'Complete Issue Book'),
             });
-    }, [dbIssues]);
+        }
+
+        return list.sort((a, b) => {
+            if (a.is_special_issue) return -1;
+            if (b.is_special_issue) return 1;
+            const volA = parseInt(a.volume) || 0;
+            const volB = parseInt(b.volume) || 0;
+            if (volA !== volB) {
+                return volB - volA;
+            }
+            const numA = parseInt(a.number) || 0;
+            const numB = parseInt(b.number) || 0;
+            return numB - numA;
+        });
+    }, [dbIssues, specialIssue]);
 
     // Volume options
     const volumeOptions = useMemo(() => {
@@ -65,13 +79,22 @@ export default function Archive({ issues }) {
         researchIssues.forEach(issue => {
             const vol = String(issue.volume);
             if (!vols[vol]) {
-                vols[vol] = { val: vol, label: `Volume ${vol}` };
+                vols[vol] = { 
+                    val: vol, 
+                    label: issue.is_special_issue
+                        ? `Special Issue (${issue.month_range || 'October'} ${issue.year || 2026})`
+                        : `Volume ${vol}` 
+                };
             }
         });
         if (vols['1']) vols['1'].label = 'Volume 1 (Jan–Mar 2026)';
         if (vols['2']) vols['2'].label = 'Volume 2 (Apr–Jun 2026)';
         if (vols['3']) vols['3'].label = 'Volume 3 (Jul–Sep 2026)';
-        return Object.values(vols).sort((a, b) => b.val.localeCompare(a.val));
+        return Object.values(vols).sort((a, b) => {
+            if (a.val === 'special') return -1;
+            if (b.val === 'special') return 1;
+            return b.val.localeCompare(a.val);
+        });
     }, [researchIssues]);
 
     // Unique authors
@@ -190,7 +213,7 @@ export default function Archive({ issues }) {
                     </div>
 
                     {/* Statistics Cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
                         {[
                             { label: "Total Volumes", value: stats.volumes, icon: <Layers className="w-5 h-5 text-primary" /> },
                             { label: "Total Issues", value: stats.issues, icon: <Calendar className="w-5 h-5 text-primary" /> },
@@ -212,6 +235,34 @@ export default function Archive({ issues }) {
                                 </div>
                             </motion.div>
                         ))}
+                    </div>
+
+                    {/* Dedicated Special Issue Callout Banner */}
+                    <div className="mb-10 bg-gradient-to-br from-slate-900 via-indigo-950 to-blue-950 rounded-2xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden border border-indigo-800/40">
+                        <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
+                        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                            <div className="space-y-2 max-w-2xl">
+                                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 text-xs font-bold uppercase tracking-wider">
+                                    <Sparkles className="w-3.5 h-3.5 text-indigo-300" />
+                                    Special Publication
+                                </div>
+                                <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white tracking-tight">
+                                    Special Issue: Dedicated Research Collection
+                                </h3>
+                                <p className="text-sm text-slate-300 leading-relaxed">
+                                    Explore 31 peer-reviewed research papers published in our dedicated Special Issue with individual official Zenodo DOI records.
+                                </p>
+                            </div>
+                            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
+                                <Link
+                                    href="/special-issue"
+                                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-lg shadow-blue-600/30 hover:-translate-y-0.5 transition-all text-center"
+                                >
+                                    <span>Browse Special Issue (31 Articles)</span>
+                                    <ArrowRight className="w-4 h-4" />
+                                </Link>
+                            </div>
+                        </div>
                     </div>
 
                     {/* Filter & Live Search Toolbar */}
@@ -281,28 +332,42 @@ export default function Archive({ issues }) {
                                     className="bg-white rounded-xl border border-[#E9E5DD] overflow-hidden"
                                 >
                                     {/* Volume Card Header */}
-                                    <div className="bg-[#F7F4EC] border-b border-[#E9E5DD] px-6 py-4 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
-                                        <Link 
-                                            href={`/issue/${issue.volume}/${issue.number}`}
-                                            className="flex items-center gap-3 group hover:opacity-85 transition-opacity"
-                                        >
-                                            <span className="px-3 py-1 bg-primary text-white text-[9px] font-bold uppercase tracking-wider rounded">
-                                                Volume {issue.volume}
-                                            </span>
-                                            <h3 className="text-sm font-serif font-bold text-dark group-hover:text-primary transition-colors">
-                                                {issue.month_range ? `${issue.month_range} ` : ''}{issue.year}
-                                            </h3>
-                                        </Link>
+                                    <div className="bg-[#F7F4EC] border-b border-[#E9E5DD] px-4 sm:px-6 py-3.5 sm:py-4 flex flex-col sm:flex-row justify-between sm:items-center gap-3 sm:gap-4">
+                                        {issue.is_special_issue ? (
+                                            <Link 
+                                                href="/special-issue"
+                                                className="flex items-center gap-3 group hover:opacity-85 transition-opacity"
+                                            >
+                                                <span className="px-3 py-1 bg-amber-600 text-white text-[9px] font-bold uppercase tracking-wider rounded inline-flex items-center gap-1">
+                                                    <Sparkles className="w-3 h-3" /> Special Issue
+                                                </span>
+                                                <h3 className="text-sm font-serif font-bold text-dark group-hover:text-primary transition-colors">
+                                                    Special Issue: Dedicated Research Collection ({issue.month_range} {issue.year})
+                                                </h3>
+                                            </Link>
+                                        ) : (
+                                            <Link 
+                                                href={`/issue/${issue.volume}/${issue.number}`}
+                                                className="flex items-center gap-3 group hover:opacity-85 transition-opacity"
+                                            >
+                                                <span className="px-3 py-1 bg-primary text-white text-[9px] font-bold uppercase tracking-wider rounded">
+                                                    Volume {issue.volume}
+                                                </span>
+                                                <h3 className="text-sm font-serif font-bold text-dark group-hover:text-primary transition-colors">
+                                                    {issue.month_range ? `${issue.month_range} ` : ''}{issue.year}
+                                                </h3>
+                                            </Link>
+                                        )}
                                         <div className="flex items-center gap-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
-                                            <span>Issue {issue.number}</span>
+                                            <span>{issue.is_special_issue ? `${issue.month_range} ${issue.year}` : `Issue ${issue.number}`}</span>
                                             <span className="w-1 h-1 rounded-full bg-slate-300" />
                                             <span>{issue.papers?.length || 0} Papers</span>
                                             <span className="w-1 h-1 rounded-full bg-slate-300" />
                                             <Link
-                                                href={`/issue/${issue.volume}/${issue.number}`}
+                                                href={issue.is_special_issue ? "/special-issue" : `/issue/${issue.volume}/${issue.number}`}
                                                 className="text-primary hover:underline font-bold text-[10px] normal-case tracking-normal inline-flex items-center gap-1"
                                             >
-                                                View Issue Page &rarr;
+                                                {issue.is_special_issue ? "View Special Issue Page →" : "View Issue Page →"}
                                             </Link>
                                         </div>
                                     </div>
@@ -346,7 +411,7 @@ export default function Archive({ issues }) {
                                     )}
 
                                     {/* Papers Grid */}
-                                    <div className="p-6 bg-[#FFFDF8]/20">
+                                    <div className="p-3 sm:p-6 bg-[#FFFDF8]/20">
                                         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
                                             {issue.papers.map((paper, index) => (
                                                 <div 

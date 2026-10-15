@@ -19,6 +19,9 @@ class Issue extends Model
         'month_range',
         'status',
         'is_current',
+        'is_special_issue',
+        'title',
+        'description',
     ];
 
     protected static function boot()

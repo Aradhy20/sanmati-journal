@@ -84,21 +84,21 @@ export default function MainLayout({ children, title, description, keywords, ima
                 href="https://wa.me/918979782949"
                 target="_blank"
                 rel="noreferrer noopener"
-                className="fixed bottom-6 right-6 lg:bottom-10 lg:right-10 w-12 h-12 bg-[#25D366] text-white rounded-full shadow-lg shadow-green-500/30 flex items-center justify-center z-[60] border-2 border-white/30 hover:scale-105 active:scale-95 transition-transform duration-200 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2"
+                className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 lg:bottom-10 lg:right-10 w-11 h-11 sm:w-12 sm:h-12 bg-[#25D366] text-white rounded-full shadow-lg shadow-green-500/30 flex items-center justify-center z-[60] border-2 border-white/30 hover:scale-105 active:scale-95 transition-transform duration-200 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2"
                 aria-label="Chat with us on WhatsApp"
             >
-                <MessageCircle className="w-6 h-6" />
+                <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
             </a>
 
             {/* Scroll to Top Button */}
             <button
                 onClick={scrollToTop}
-                className={`fixed bottom-20 right-6 lg:bottom-24 lg:right-10 w-10 h-10 bg-white border border-slate-200 text-slate-600 rounded-full shadow-md flex items-center justify-center z-[60] focus:outline-none hover:bg-blue-50 hover:border-blue-200 hover:text-blue-600 hover:-translate-y-0.5 active:scale-95 transition-all duration-200 ${
+                className={`fixed bottom-16 right-4 sm:bottom-20 sm:right-6 lg:bottom-24 lg:right-10 w-9 h-9 sm:w-10 sm:h-10 bg-white border border-slate-200 text-slate-600 rounded-full shadow-md flex items-center justify-center z-[60] focus:outline-none hover:bg-blue-50 hover:border-blue-200 hover:text-blue-600 hover:-translate-y-0.5 active:scale-95 transition-all duration-200 ${
                     isScrolled ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-4 pointer-events-none'
                 }`}
                 aria-label="Scroll to top of page"
             >
-                <ArrowUp className="w-4.5 h-4.5" />
+                <ArrowUp className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
             </button>
         </div>
     );

@@ -22,18 +22,18 @@ function Countdown({ targetDate }) {
     }, [targetDate]);
 
     return (
-        <div className="flex items-center gap-3" aria-label="Countdown timer">
+        <div className="flex items-center justify-center gap-2 sm:gap-3 flex-wrap" aria-label="Countdown timer">
             {[
                 { value: timeLeft.days, label: 'Days' },
                 { value: timeLeft.hours, label: 'Hrs' },
                 { value: timeLeft.mins, label: 'Min' },
                 { value: timeLeft.secs, label: 'Sec' },
             ].map(({ value, label }) => (
-                <div key={label} className="flex flex-col items-center min-w-[52px]">
-                    <div className="text-2xl font-heading font-bold text-white bg-white/15 backdrop-blur-sm border border-white/20 rounded-xl px-3 py-2 min-w-[52px] text-center tabular-nums">
+                <div key={label} className="flex flex-col items-center min-w-[44px] sm:min-w-[52px]">
+                    <div className="text-xl sm:text-2xl font-heading font-bold text-white bg-white/15 backdrop-blur-sm border border-white/20 rounded-xl px-2.5 sm:px-3 py-1.5 sm:py-2 min-w-[44px] sm:min-w-[52px] text-center tabular-nums">
                         {String(value).padStart(2, '0')}
                     </div>
-                    <span className="text-[10px] font-bold text-blue-200 uppercase tracking-widest mt-1">{label}</span>
+                    <span className="text-[9px] sm:text-[10px] font-bold text-blue-200 uppercase tracking-widest mt-1">{label}</span>
                 </div>
             ))}
         </div>
@@ -47,22 +47,22 @@ export default function CallForPapersBanner() {
     deadline.setDate(28);
 
     return (
-        <section className="py-12 relative overflow-hidden" aria-label="Call for papers">
+        <section className="py-8 sm:py-12 relative overflow-hidden" aria-label="Call for papers">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-700 p-8 lg:p-12">
+                <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-700 p-5 sm:p-8 lg:p-12">
                     {/* Background decorations */}
                     <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-white/5 blur-3xl pointer-events-none" />
                     <div className="absolute bottom-0 left-1/3 w-64 h-64 rounded-full bg-cyan-400/10 blur-2xl pointer-events-none" />
 
-                    <div className="relative z-10 grid lg:grid-cols-12 gap-8 items-center">
+                    <div className="relative z-10 grid lg:grid-cols-12 gap-6 sm:gap-8 items-center">
                         {/* Text */}
-                        <div className="lg:col-span-7 space-y-4">
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 border border-white/25 text-white text-xs font-bold uppercase tracking-wider">
-                                <CalendarDays className="w-3.5 h-3.5 text-cyan-300" />
-                                Call for Papers — Volume 2, Issue 3
+                        <div className="lg:col-span-7 space-y-3.5 sm:space-y-4 min-w-0">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 border border-white/25 text-white text-[11px] sm:text-xs font-bold uppercase tracking-wider max-w-full">
+                                <CalendarDays className="w-3.5 h-3.5 text-cyan-300 shrink-0" />
+                                <span className="truncate">Call for Papers — Volume 2, Issue 3</span>
                             </div>
 
-                            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-white leading-tight">
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-heading font-bold text-white leading-tight break-words">
                                 Submissions Open for the Upcoming Scholarly Issue
                             </h2>
 

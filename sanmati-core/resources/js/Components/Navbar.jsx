@@ -13,6 +13,7 @@ const NAV_ITEMS = [
         name: 'Journal',
         dropdown: [
             { name: 'About Journal',     href: '/basic-info/about-journal',   icon: BookOpen,    desc: 'Mission, scope & publication history' },
+            { name: 'Special Issue',     href: '/special-issue',              icon: Sparkles,    desc: 'Dedicated 31-article research collection' },
             { name: 'Vision & Mission',  href: '/basic-info/vision-mission',  icon: Sparkles,    desc: 'Our academic goals and values' },
             { name: 'Objective & Scope', href: '/basic-info/objective-scope', icon: Globe,       desc: 'Research domains we cover' },
             { name: 'Journal Info',      href: '/basic-info/journal-info',    icon: FileText,    desc: 'ISSN, frequency, language & details' },
@@ -51,6 +52,7 @@ const NAV_ITEMS = [
             { name: 'Compliance',         href: '/compliance',                      icon: Award,         desc: 'Legal & regulatory compliance' },
         ],
     },
+    { name: 'Special Issue', href: '/special-issue' },
     { name: 'Archive', href: '/archive' },
     { name: 'Contact', href: '/contact' },
 ];
@@ -230,8 +232,8 @@ export default function Navbar({ onOpenSearch }) {
         <>
             {/* ── Top Utility Bar ── */}
             <div className="bg-slate-900 text-slate-300 text-[11px] font-medium border-b border-slate-800">
-                <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-1.5 flex items-center justify-between">
-                    <div className="flex items-center gap-4">
+                <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-1.5 flex items-center justify-between overflow-hidden">
+                    <div className="flex items-center gap-3 sm:gap-4 shrink-0">
                         <span className="hidden sm:inline-flex items-center gap-1.5 text-blue-400 font-semibold">
                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                             ISSN: 3108-1819 (Online)
@@ -241,22 +243,22 @@ export default function Navbar({ onOpenSearch }) {
                             Peer-Reviewed Multidisciplinary Journal
                         </span>
                     </div>
-                    <div className="flex items-center gap-4 ml-auto">
-                        <Link href="/announcements/international-seminar-gen-z-2026" className="hover:text-amber-300 transition-colors flex items-center gap-1 text-amber-400 font-semibold">
+                    <div className="flex items-center gap-2.5 sm:gap-4 ml-auto text-[10px] sm:text-[11px] overflow-x-auto scrollbar-none py-0.5">
+                        <Link href="/announcements/international-seminar-gen-z-2026" className="hover:text-amber-300 transition-colors flex items-center gap-1 text-amber-400 font-semibold shrink-0">
                             <Sparkles className="w-3 h-3 text-amber-400" />
-                            Seminar 2026
+                            <span>Seminar 2026</span>
                         </Link>
-                        <Link href="/blog" className="hover:text-white transition-colors flex items-center gap-1">
+                        <Link href="/blog" className="hover:text-white transition-colors flex items-center gap-1 shrink-0">
                             <BookOpen className="w-3 h-3 text-cyan-400" />
-                            Research Blog
+                            <span>Research Blog</span>
                         </Link>
-                        <Link href="/downloads" className="hover:text-white transition-colors flex items-center gap-1">
+                        <Link href="/downloads" className="hover:text-white transition-colors hidden xs:flex items-center gap-1 shrink-0">
                             <Award className="w-3 h-3 text-slate-400" />
-                            Downloads
+                            <span>Downloads</span>
                         </Link>
-                        <a href="mailto:sanmatijournal@gmail.com" className="hover:text-white transition-colors hidden sm:flex items-center gap-1">
+                        <a href="mailto:sanmatijournal@gmail.com" className="hover:text-white transition-colors hidden sm:flex items-center gap-1 shrink-0">
                             <Mail className="w-3 h-3 text-blue-400" />
-                            sanmatijournal@gmail.com
+                            <span>sanmatijournal@gmail.com</span>
                         </a>
                     </div>
                 </div>
@@ -272,30 +274,30 @@ export default function Navbar({ onOpenSearch }) {
                 }`}
             >
                 <nav className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main Navigation">
-                    <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center justify-between gap-2 sm:gap-4">
 
                         {/* ── Brand Logo ── */}
-                        <Link href="/" className="flex items-center gap-3 group shrink-0">
+                        <Link href="/" className="flex items-center gap-2 sm:gap-3 group min-w-0 flex-1 max-w-[calc(100%-85px)] sm:max-w-none">
                             <img
                                 src="/logo-sm.webp"
                                 alt="Sanmati Spectrum Logo"
                                 width="44"
                                 height="44"
                                 decoding="async"
-                                className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl object-contain shadow-sm border border-slate-100 group-hover:scale-105 transition-transform duration-200"
+                                className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl object-contain shadow-sm border border-slate-100 group-hover:scale-105 transition-transform duration-200 shrink-0"
                             />
-                            <div className="flex flex-col">
-                                <span className="text-base sm:text-lg font-heading font-bold text-slate-900 leading-none tracking-tight group-hover:text-blue-600 transition-colors">
+                            <div className="flex flex-col min-w-0">
+                                <span className="text-sm sm:text-base lg:text-lg font-heading font-bold text-slate-900 leading-tight tracking-tight group-hover:text-blue-600 transition-colors truncate">
                                     Sanmati Spectrum
                                 </span>
-                                <span className="text-[10px] text-slate-500 font-semibold tracking-wider uppercase mt-0.5">
+                                <span className="text-[9px] sm:text-[10px] text-slate-500 font-semibold tracking-wider uppercase mt-0.5 truncate hidden min-[360px]:block">
                                     Knowledge & Emerging Discourse
                                 </span>
                             </div>
                         </Link>
 
                         {/* ── Desktop Navigation Links ── */}
-                        <div className="hidden lg:flex items-center gap-1">
+                        <div className="hidden xl:flex items-center gap-1">
                             {NAV_ITEMS.map((item) => (
                                 <div
                                     key={item.name}
@@ -339,11 +341,11 @@ export default function Navbar({ onOpenSearch }) {
                         </div>
 
                         {/* ── Right Actions ── */}
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
                             {/* Search */}
                             <button
                                 onClick={onOpenSearch}
-                                className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-bold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all duration-150"
+                                className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2 rounded-xl text-sm font-bold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all duration-150"
                                 aria-label="Open search"
                             >
                                 <Search className="w-4.5 h-4.5" />
@@ -356,7 +358,7 @@ export default function Navbar({ onOpenSearch }) {
                                 <div className="relative">
                                     <button
                                         onClick={() => setUserMenuOpen(p => !p)}
-                                        className="flex items-center gap-2 px-3 py-2 rounded-xl bg-blue-50 border border-blue-100 text-sm font-bold text-blue-700 hover:bg-blue-100 transition-all"
+                                        className="flex items-center gap-2 px-2.5 sm:px-3 py-2 rounded-xl bg-blue-50 border border-blue-100 text-xs sm:text-sm font-bold text-blue-700 hover:bg-blue-100 transition-all"
                                     >
                                         <span className="w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center">
                                             {user.name?.charAt(0)?.toUpperCase()}
@@ -388,13 +390,13 @@ export default function Navbar({ onOpenSearch }) {
                                 <div className="hidden sm:flex items-center gap-2">
                                     <Link
                                         href="/login"
-                                        className="px-4 py-2 rounded-xl text-sm font-bold text-slate-700 hover:bg-slate-100 transition-colors"
+                                        className="px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-700 hover:bg-slate-100 transition-colors"
                                     >
                                         Sign In
                                     </Link>
                                     <Link
                                         href="/submission-guidelines/call-for-papers"
-                                        className="px-4 py-2 rounded-xl text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-sm shadow-blue-600/30 hover:-translate-y-0.5 transition-all duration-200"
+                                        className="px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-sm shadow-blue-600/30 hover:-translate-y-0.5 transition-all duration-200"
                                     >
                                         Submit Paper
                                     </Link>
@@ -404,7 +406,7 @@ export default function Navbar({ onOpenSearch }) {
                             {/* Mobile menu toggle */}
                             <button
                                 onClick={() => setMobileOpen(p => !p)}
-                                className="lg:hidden flex items-center justify-center w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+                                className="xl:hidden flex items-center justify-center w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
                                 aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
                                 aria-expanded={mobileOpen}
                                 aria-controls="mobile-menu"
@@ -421,7 +423,7 @@ export default function Navbar({ onOpenSearch }) {
                 <>
                     {/* Backdrop */}
                     <div
-                        className="fixed inset-0 z-[90] bg-slate-900/50 backdrop-blur-sm lg:hidden transition-opacity duration-200"
+                        className="fixed inset-0 z-[90] bg-slate-900/50 backdrop-blur-sm xl:hidden transition-opacity duration-200"
                         onClick={() => setMobileOpen(false)}
                         aria-hidden="true"
                     />
@@ -431,7 +433,7 @@ export default function Navbar({ onOpenSearch }) {
                         role="dialog"
                         aria-modal="true"
                         aria-label="Mobile navigation"
-                        className="fixed top-0 right-0 bottom-0 z-[95] w-80 max-w-[90vw] bg-white shadow-2xl lg:hidden flex flex-col overflow-hidden transition-transform duration-300 ease-out"
+                        className="fixed top-0 right-0 bottom-0 z-[95] w-80 max-w-[90vw] bg-white shadow-2xl xl:hidden flex flex-col overflow-hidden transition-transform duration-300 ease-out"
                     >
                         {/* Drawer header */}
                         <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100">

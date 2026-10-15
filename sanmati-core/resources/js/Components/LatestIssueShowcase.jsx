@@ -65,6 +65,13 @@ export default function LatestIssueShowcase({ currentIssue, papers = [] }) {
 
                     <div className="mt-6 md:mt-0 flex flex-wrap gap-3">
                         <Link
+                            href="/special-issue"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-indigo-200 hover:border-indigo-300 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs shadow-sm transition-all"
+                        >
+                            <Sparkles className="w-4 h-4 text-indigo-600" />
+                            Special Issue (31 Articles)
+                        </Link>
+                        <Link
                             href="/downloads"
                             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-300 hover:border-slate-400 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs shadow-sm transition-all"
                         >

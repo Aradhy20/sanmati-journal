@@ -58,8 +58,10 @@ const CustomCursor = () => {
         };
     }, [isVisible]);
 
+    if (!isVisible) return null;
+
     return (
-        <div className={`fixed top-0 left-0 pointer-events-none z-[9999] hidden lg:block transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+        <div className="fixed top-0 left-0 pointer-events-none z-[9999] hidden lg:block transition-opacity duration-300 opacity-100">
             {/* The Outer Ring */}
             <div
                 ref={cursorRef}

@@ -6,35 +6,53 @@ import toast from 'react-hot-toast';
 export default function CitationGenerator({ paper }) {
     const [activeFormat, setActiveFormat] = useState('apa');
 
+    const isSpecialIssue = Boolean(paper.issue?.is_special_issue || paper.category === 'Special Issue Article' || (!paper.issue?.volume && !paper.issue?.number && paper.doi));
+
     // Helper functions to generate citation strings
     const generateAPA = () => {
-        // e.g., Smith, J., & Doe, J. (2024). Title of paper. Sanmati Journal, Volume(Issue).
+        if (isSpecialIssue) {
+            return `${paper.authors}. ${paper.title}. Sanmati Spectrum of Knowledge & Emerging Discourse (Special Issue). ${paper.doi || ''}`.trim();
+        }
         const year = paper.issue?.year || new Date().getFullYear();
         const volumeStr = paper.issue?.volume ? `, ${paper.issue.volume}` : '';
         const numberStr = paper.issue?.number ? `(${paper.issue.number})` : '';
-        return `${paper.authors} (${year}). ${paper.title}. Sanmati Journal${volumeStr}${numberStr}.`;
+        return `${paper.authors} (${year}). ${paper.title}. Sanmati Spectrum of Knowledge & Emerging Discourse${volumeStr}${numberStr}. ${paper.doi || ''}`.trim();
     };
 
     const generateMLA = () => {
-        // e.g., Smith, J., and J. Doe. "Title of paper." Sanmati Journal, vol. X, no. X, 2024.
+        if (isSpecialIssue) {
+            return `${paper.authors}. "${paper.title}." Sanmati Spectrum of Knowledge & Emerging Discourse, Special Issue.${paper.doi ? ' ' + paper.doi : ''}`.trim();
+        }
         const year = paper.issue?.year || new Date().getFullYear();
         const volumeStr = paper.issue?.volume ? `, vol. ${paper.issue.volume}` : '';
         const numberStr = paper.issue?.number ? `, no. ${paper.issue.number}` : '';
-        return `${paper.authors}. "${paper.title}." Sanmati Journal${volumeStr}${numberStr}, ${year}.`;
+        return `${paper.authors}. "${paper.title}." Sanmati Spectrum of Knowledge & Emerging Discourse${volumeStr}${numberStr}, ${year}.${paper.doi ? ' ' + paper.doi : ''}`.trim();
     };
 
     const generateBibTeX = () => {
-        const year = paper.issue?.year || new Date().getFullYear();
-        const authorStr = paper.authors.replace(/,/g, ' and'); // rough approximation for BibTeX format
-        const citationKey = `${paper.authors.split(' ')[0].replace(/[^a-zA-Z]/g, '')}${year}`;
+        const year = paper.issue?.year || (isSpecialIssue ? '' : new Date().getFullYear());
+        const authorStr = paper.authors.replace(/,/g, ' and');
+        const cleanAuthor = paper.authors.split(' ')[0].replace(/[^a-zA-Z]/g, '') || 'author';
+        const citationKey = `${cleanAuthor}${year || 'special'}`;
         
+        if (isSpecialIssue) {
+            return `@article{${citationKey},
+    title = {${paper.title}},
+    author = {${authorStr}},
+    journal = {Sanmati Spectrum of Knowledge & Emerging Discourse},
+    note = {Special Issue},
+    doi = {${paper.doi || ''}}
+}`;
+        }
+
         return `@article{${citationKey},
     title = {${paper.title}},
     author = {${authorStr}},
-    journal = {Sanmati Journal},
+    journal = {Sanmati Spectrum of Knowledge & Emerging Discourse},
     year = {${year}},
     volume = {${paper.issue?.volume || ''}},
-    number = {${paper.issue?.number || ''}}
+    number = {${paper.issue?.number || ''}},
+    doi = {${paper.doi || ''}}
 }`;
     };
 

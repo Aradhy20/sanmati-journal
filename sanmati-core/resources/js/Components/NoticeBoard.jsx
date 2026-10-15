@@ -84,16 +84,16 @@ export default function NoticeBoard({ announcement: customAnnouncement = null })
 
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
                 {/* Header Strip with Controls */}
-                <div className="flex items-center justify-between gap-3 mb-3">
-                    <div className="flex items-center gap-2 flex-wrap">
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500 text-slate-900 text-xs font-bold uppercase tracking-wider shadow-xs">
-                            <Bell className="w-3.5 h-3.5 animate-bounce" /> Important Notice
+                <div className="flex items-center justify-between gap-2 sm:gap-3 mb-3">
+                    <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-amber-500 text-slate-900 text-[11px] sm:text-xs font-bold uppercase tracking-wider shadow-xs">
+                            <Bell className="w-3.5 h-3.5 animate-bounce shrink-0" /> Important Notice
                         </span>
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[11px] font-bold">
-                            <Award className="w-3 h-3 text-blue-600" /> International Seminar & Award 2026
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] sm:text-[11px] font-bold">
+                            <Award className="w-3 h-3 text-blue-600 shrink-0" /> International Seminar & Award 2026
                         </span>
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold">
-                            <Globe className="w-3 h-3 text-emerald-600" /> Hybrid Mode
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] sm:text-[11px] font-bold">
+                            <Globe className="w-3 h-3 text-emerald-600 shrink-0" /> Hybrid Mode
                         </span>
                     </div>
 
@@ -119,17 +119,17 @@ export default function NoticeBoard({ announcement: customAnnouncement = null })
                 </div>
 
                 {/* Main Content Area */}
-                <div className="grid lg:grid-cols-12 gap-5 items-center">
+                <div className="grid lg:grid-cols-12 gap-4 sm:gap-5 items-center">
                     {/* Left & Center: Titles & Key Information */}
-                    <div className="lg:col-span-8 space-y-2.5">
+                    <div className="lg:col-span-8 space-y-2.5 min-w-0">
                         <div className="space-y-1">
-                            <p className="text-xs font-bold text-slate-600 uppercase tracking-wide">
+                            <p className="text-xs font-bold text-slate-600 uppercase tracking-wide break-words">
                                 {announcement.organizers.map(o => o.name).join(' एवं ')}
                             </p>
-                            <h2 className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-slate-900 leading-tight">
+                            <h2 className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-slate-900 leading-tight break-words">
                                 {announcement.title}
                             </h2>
-                            <div className="text-xs sm:text-sm font-semibold text-blue-800">
+                            <div className="text-xs sm:text-sm font-semibold text-blue-800 break-words">
                                 <span>Theme: </span>
                                 <span className="font-bold text-blue-900">{announcement.theme}</span>
                                 <span className="block text-slate-700 font-medium text-xs mt-0.5">

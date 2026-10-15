@@ -1,0 +1,15 @@
+import{jsxs as $,jsx as l}from"react/jsx-runtime";import{useState as y}from"react";import{Copy as C}from"lucide-react";import h from"react-hot-toast";function E({paper:e}){var m,d,b;const[a,v]=y("apa"),n=!!((m=e.issue)!=null&&m.is_special_issue||e.category==="Special Issue Article"||!((d=e.issue)!=null&&d.volume)&&!((b=e.issue)!=null&&b.number)&&e.doi),S=()=>{var o,s,i;if(n)return`${e.authors}. ${e.title}. Sanmati Spectrum of Knowledge & Emerging Discourse (Special Issue). ${e.doi||""}`.trim();const t=((o=e.issue)==null?void 0:o.year)||new Date().getFullYear(),r=(s=e.issue)!=null&&s.volume?`, ${e.issue.volume}`:"",u=(i=e.issue)!=null&&i.number?`(${e.issue.number})`:"";return`${e.authors} (${t}). ${e.title}. Sanmati Spectrum of Knowledge & Emerging Discourse${r}${u}. ${e.doi||""}`.trim()},x=()=>{var o,s,i;if(n)return`${e.authors}. "${e.title}." Sanmati Spectrum of Knowledge & Emerging Discourse, Special Issue.${e.doi?" "+e.doi:""}`.trim();const t=((o=e.issue)==null?void 0:o.year)||new Date().getFullYear(),r=(s=e.issue)!=null&&s.volume?`, vol. ${e.issue.volume}`:"",u=(i=e.issue)!=null&&i.number?`, no. ${e.issue.number}`:"";return`${e.authors}. "${e.title}." Sanmati Spectrum of Knowledge & Emerging Discourse${r}${u}, ${t}.${e.doi?" "+e.doi:""}`.trim()},f=()=>{var s,i,g;const t=((s=e.issue)==null?void 0:s.year)||(n?"":new Date().getFullYear()),r=e.authors.replace(/,/g," and"),o=`${e.authors.split(" ")[0].replace(/[^a-zA-Z]/g,"")||"author"}${t||"special"}`;return n?`@article{${o},
+    title = {${e.title}},
+    author = {${r}},
+    journal = {Sanmati Spectrum of Knowledge & Emerging Discourse},
+    note = {Special Issue},
+    doi = {${e.doi||""}}
+}`:`@article{${o},
+    title = {${e.title}},
+    author = {${r}},
+    journal = {Sanmati Spectrum of Knowledge & Emerging Discourse},
+    year = {${t}},
+    volume = {${((i=e.issue)==null?void 0:i.volume)||""}},
+    number = {${((g=e.issue)==null?void 0:g.number)||""}},
+    doi = {${e.doi||""}}
+}`},c={apa:S(),mla:x(),bibtex:f()},w=()=>{navigator.clipboard.writeText(c[a]).then(()=>h.success("Citation copied to clipboard!")).catch(()=>h.error("Failed to copy."))};return $("div",{className:"bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden",children:[l("div",{className:"flex border-b border-slate-200 bg-white",children:["apa","mla","bibtex"].map(t=>l("button",{onClick:()=>v(t),className:`flex-1 py-3 text-xs font-bold uppercase tracking-widest transition-colors ${a===t?"text-blue-600 border-b-2 border-blue-600 bg-blue-50/50":"text-slate-500 hover:text-slate-800 hover:bg-slate-50"}`,children:t},t))}),$("div",{className:"p-6 relative",children:[l("div",{className:"absolute top-6 right-6",children:l("button",{onClick:w,className:"p-2 text-slate-400 hover:text-blue-600 bg-slate-100 hover:bg-blue-50 rounded-lg transition-all",title:"Copy to Clipboard","aria-label":"Copy citation to clipboard",children:l(C,{className:"w-5 h-5"})})}),l("pre",{className:"text-slate-800 font-serif leading-relaxed text-sm pr-12 whitespace-pre-wrap break-words",children:c[a]})]})]})}export{E as C};

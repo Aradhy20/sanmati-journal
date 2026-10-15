@@ -28,6 +28,7 @@ class SitemapController extends Controller
                 ['loc' => $baseUrl . '/announcements/international-seminar-gen-z-2026','priority' => '0.9', 'changefreq' => 'daily',   'lastmod' => $static_updated],
                 ['loc' => $baseUrl . '/about-journal',                                 'priority' => '0.9', 'changefreq' => 'monthly', 'lastmod' => $static_updated],
                 ['loc' => $baseUrl . '/archive',                                       'priority' => '0.9', 'changefreq' => 'weekly',  'lastmod' => $static_updated],
+                ['loc' => $baseUrl . '/special-issue',                                 'priority' => '0.9', 'changefreq' => 'weekly',  'lastmod' => $static_updated],
                 ['loc' => $baseUrl . '/current-issue',                                 'priority' => '0.9', 'changefreq' => 'weekly',  'lastmod' => $static_updated],
                 ['loc' => $baseUrl . '/contact',                                       'priority' => '0.8', 'changefreq' => 'monthly', 'lastmod' => $static_updated],
                 ['loc' => $baseUrl . '/submission-guidelines/call-for-papers',         'priority' => '0.9', 'changefreq' => 'weekly',  'lastmod' => $static_updated],
@@ -112,7 +113,7 @@ class SitemapController extends Controller
 
             // Programmatic Issue Pages
             try {
-                $issues = \App\Models\Issue::all();
+                $issues = \App\Models\Issue::where('is_special_issue', false)->whereNotNull('volume')->whereNotNull('number')->get();
                 foreach ($issues as $issue) {
                     $urls[] = [
                         'loc' => $baseUrl . '/issue/' . $issue->volume . '/' . $issue->number,
