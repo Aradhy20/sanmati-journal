@@ -72,6 +72,19 @@ class AppServiceProvider extends ServiceProvider
                     if ($v3IssuesCount < 3 || $v3PapersCount < 79) {
                         $this->importVolume3();
                     }
+
+                    // Check and automatically import Special Issue if missing or count < 31 on production/shared hosting
+                    if (!\Illuminate\Support\Facades\Schema::hasColumn('issues', 'is_special_issue')) {
+                        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+                    }
+
+                    $specialIssue = \App\Models\Issue::where('is_special_issue', true)->first();
+                    $specialPapersCount = $specialIssue ? \App\Models\Paper::where('issue_id', $specialIssue->id)->count() : 0;
+                    if (!$specialIssue || $specialPapersCount < 31 || $specialIssue->month_range !== 'October' || $specialIssue->year !== 2026) {
+                        $this->importSpecialIssue();
+                        \Illuminate\Support\Facades\Cache::forget('archive_issues_list');
+                        \Illuminate\Support\Facades\Cache::forget('archive_special_issue');
+                    }
                 }
             }
         } catch (\Throwable $e) {
@@ -178,6 +191,97 @@ class AppServiceProvider extends ServiceProvider
                     'meta_description' => mb_substr("Research article by {$authors} published in Sanmati Spectrum of Knowledge & Emerging Discourse, Vol. 3, Issue {$config['number']}.", 0, 160),
                 ]);
             }
+        }
+    }
+
+    /**
+     * Resilient auto-import for Special Issue (October 2026) and 31 papers on production environments.
+     */
+    protected function importSpecialIssue(): void
+    {
+        $possiblePaths = [
+            resource_path('data/papers.json'),
+            base_path('papers.json'),
+            dirname(base_path()) . '/papers.json',
+        ];
+
+        $jsonPath = null;
+        foreach ($possiblePaths as $candidate) {
+            if (file_exists($candidate)) {
+                $jsonPath = $candidate;
+                break;
+            }
+        }
+
+        if (!$jsonPath) {
+            return;
+        }
+
+        $jsonData = json_decode(file_get_contents($jsonPath), true);
+        if (!$jsonData || !isset($jsonData['SPECIAL ISSUE'])) {
+            return;
+        }
+
+        $specialIssue = \App\Models\Issue::firstOrCreate(
+            ['is_special_issue' => true],
+            [
+                'title' => 'Special Issue',
+                'volume' => null,
+                'number' => null,
+                'year' => 2026,
+                'month_range' => 'October',
+                'status' => 'active',
+                'is_current' => false,
+            ]
+        );
+
+        if ($specialIssue->month_range !== 'October' || $specialIssue->year !== 2026) {
+            $specialIssue->update(['month_range' => 'October', 'year' => 2026]);
+        }
+
+        foreach ($jsonData['SPECIAL ISSUE'] as $paperData) {
+            $title = trim($paperData['Title'] ?? $paperData['Title '] ?? '');
+            $authors = trim($paperData['Name'] ?? $paperData['Name '] ?? '');
+            $doi = trim($paperData['DOI number'] ?? $paperData['DOI number link'] ?? $paperData['DOI number '] ?? '');
+
+            if (empty($title) || empty($doi)) {
+                continue;
+            }
+
+            $existing = \App\Models\Paper::where('doi', $doi)->first();
+            if ($existing) {
+                if ($existing->issue_id !== $specialIssue->id) {
+                    $existing->update(['issue_id' => $specialIssue->id]);
+                }
+                continue;
+            }
+
+            $baseSlug = \Illuminate\Support\Str::slug($title);
+            if (empty($baseSlug)) {
+                $baseSlug = 'special-issue-paper-' . substr(md5($title . $doi), 0, 8);
+            }
+            $slug = $baseSlug;
+            $counter = 1;
+            while (\App\Models\Paper::where('slug', $slug)->exists()) {
+                $slug = "{$baseSlug}-{$counter}";
+                $counter++;
+            }
+
+            \App\Models\Paper::create([
+                'issue_id' => $specialIssue->id,
+                'title' => $title,
+                'slug' => $slug,
+                'authors' => $authors,
+                'abstract' => null,
+                'keywords' => null,
+                'file_url' => null,
+                'doi' => $doi,
+                'citations' => 0,
+                'category' => 'Special Issue Article',
+                'is_featured' => false,
+                'meta_title' => "{$title} | Sanmati Journal",
+                'meta_description' => mb_substr("Research paper by {$authors} published in Special Issue (October 2026) of Sanmati Spectrum of Knowledge & Emerging Discourse.", 0, 160),
+            ]);
         }
     }
 }
