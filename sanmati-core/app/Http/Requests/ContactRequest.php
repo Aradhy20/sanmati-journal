@@ -19,6 +19,7 @@ class ContactRequest extends FormRequest
             'email' => 'required|email|max:255',
             'subject' => 'required|string|max:255',
             'message' => 'required|string|max:5000',
+            'website' => 'max:0', // Honeypot: must be empty for human submissions
         ];
     }
 

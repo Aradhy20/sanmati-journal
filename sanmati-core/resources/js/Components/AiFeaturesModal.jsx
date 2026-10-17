@@ -12,8 +12,9 @@ export default function AiFeaturesModal({ isOpen, onClose, paper }) {
     const paperTitle = paper.title || 'Research Paper';
     const rawDoi = paper.doi || '10.5281/zenodo.sanmati';
     const doi = rawDoi.replace(/^https?:\/\/(dx\.)?doi\.org\//i, '');
-    const volume = paper.issue?.volume?.volume_number || '1';
-    const issueNum = paper.issue?.issue_number || '1';
+    const volume = paper.issue?.volume ?? '2';
+    const issueNum = paper.issue?.number ?? '2';
+    const year = paper.issue?.year ?? (paper.created_at ? new Date(paper.created_at).getFullYear() : '2026');
     const pages = paper.page_numbers || '1-10';
 
     const citations = {

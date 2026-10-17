@@ -26,23 +26,36 @@ class JournalService
     }
 
     /**
-     * Fetch featured papers, gracefully falling back to latest if none are featured.
+     * Fetch featured research papers, strictly excluding issue compilation books.
+     * Selects up to $limit individual research articles with full issue relations.
      */
-    public function getFeaturedPapers(int $limit = 3)
+    public function getFeaturedPapers(int $limit = 6)
     {
-        $selectFields = ['id', 'title', 'authors', 'doi', 'citations', 'category', 'is_featured', 'created_at'];
+        $selectFields = ['id', 'issue_id', 'title', 'slug', 'authors', 'abstract', 'doi', 'citations', 'category', 'is_featured', 'file_url', 'created_at'];
 
+        // 1. Fetch explicitly featured research articles (excluding Complete Issue Book)
         $featured = Paper::select($selectFields)
+            ->with(['issue:id,volume,number,year,month_range,is_special_issue'])
+            ->where('category', '!=', 'Complete Issue Book')
             ->where('is_featured', true)
-            ->orderBy('created_at', 'desc')
+            ->orderBy('id', 'desc')
             ->take($limit)
             ->get();
 
-        if ($featured->isEmpty()) {
-            return Paper::select($selectFields)
-                ->orderBy('created_at', 'desc')
-                ->take($limit)
+        // 2. If fewer than $limit, supplement with latest published individual research papers
+        if ($featured->count() < $limit) {
+            $existingIds = $featured->pluck('id')->toArray();
+            $needed = $limit - $featured->count();
+
+            $additional = Paper::select($selectFields)
+                ->with(['issue:id,volume,number,year,month_range,is_special_issue'])
+                ->where('category', '!=', 'Complete Issue Book')
+                ->whereNotIn('id', $existingIds)
+                ->orderBy('id', 'desc')
+                ->take($needed)
                 ->get();
+
+            $featured = $featured->concat($additional);
         }
 
         return $featured;

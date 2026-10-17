@@ -518,14 +518,14 @@ class BlogService
 
                 <h3>1. APA 7th Edition Examples</h3>
                 <ul>
-                    <li><strong>Journal Article with DOI:</strong> Jain, N., & Jain, R. K. (2026). Indian Knowledge Systems: Global Dimensions. <em>Sanmati Spectrum of Knowledge</em>, 2(1), 12-25. https://doi.org/10.5281/zenodo.12345</li>
+                    <li><strong>Journal Article with DOI (Hypothetical Teaching Example):</strong> Jain, N., & Jain, R. K. (2026). Indian Knowledge Systems: Global Dimensions. <em>Sanmati Spectrum of Knowledge</em>, 2(1), 12-25. https://doi.org/10.xxxx/zenodo.example <em>(illustrative placeholder — insert assigned CrossRef/Zenodo DOI)</em></li>
                     <li><strong>Book:</strong> Jain, N. (2026). <em>Samkalin Sahitya aur Stri Vimarsh</em>. JTS Publications.</li>
                     <li><strong>Edited Book Chapter:</strong> Kumar, A. (2025). Multidisciplinary pedagogies in India. In R. K. Jain (Ed.), <em>Higher Education Transformations</em> (pp. 45–60). Academic Press.</li>
                 </ul>
 
                 <h3>2. IEEE Citation Examples</h3>
                 <ul>
-                    <li><strong>Journal Article with DOI:</strong> [1] N. Jain and R. K. Jain, "Indian Knowledge Systems: Global Dimensions," <em>Sanmati Spectrum of Knowledge</em>, vol. 2, no. 1, pp. 12-25, Jan. 2026, doi: 10.5281/zenodo.12345.</li>
+                    <li><strong>Journal Article with DOI (Hypothetical Teaching Example):</strong> [1] N. Jain and R. K. Jain, "Indian Knowledge Systems: Global Dimensions," <em>Sanmati Spectrum of Knowledge</em>, vol. 2, no. 1, pp. 12-25, Jan. 2026, doi: 10.xxxx/zenodo.example. <em>[Illustrative template — replace with article DOI]</em></li>
                     <li><strong>Conference Proceeding:</strong> [2] A. Kumar, "Data Security in Cloud Infrastructure," in <em>Proc. National Conference on Emerging Discourse</em>, 2025, pp. 45-49.</li>
                     <li><strong>Standard/Dataset:</strong> [3] IEEE Standard for Local and Metropolitan Area Networks, IEEE Std 802.11-2020, 2020.</li>
                 </ul>

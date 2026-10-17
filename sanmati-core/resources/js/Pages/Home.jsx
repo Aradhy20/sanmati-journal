@@ -42,7 +42,7 @@ export default function Home({
             <Suspense fallback={<div className="py-8 text-center text-xs text-slate-400">Loading section details...</div>}>
                 <LiveStats metrics={metrics} />
                 <TrustCredentials />
-                <LatestIssueShowcase currentIssue={currentIssue} papers={displayPapers} />
+                <LatestIssueShowcase currentIssue={currentIssue} papers={currentIssue?.papers || []} />
                 <LatestPapersSection papers={displayPapers} />
                 <WhyPublishSection />
                 <ResearchAreasGrid />

@@ -1,7 +1,7 @@
 {
   "node_modules/laravel-vite-plugin/inertia-helpers/index.js": [],
   "resources/js/Components/AiFeaturesModal.jsx": [
-    "/build/assets/AiFeaturesModal-BBt6iJ5O.js"
+    "/build/assets/AiFeaturesModal-0vQ37d5N.js"
   ],
   "resources/js/Components/CallForPapersBanner.jsx": [
     "/build/assets/CallForPapersBanner-BdryMqeT.js"
@@ -22,16 +22,16 @@
     "/build/assets/Graphics-CM2sKpeB.js"
   ],
   "resources/js/Components/Hero.jsx": [
-    "/build/assets/Home-DEzHVrJX.js"
+    "/build/assets/Home-CweQ0xay.js"
   ],
   "resources/js/Components/HomeFAQ.jsx": [
     "/build/assets/HomeFAQ-CqXEqKUS.js"
   ],
   "resources/js/Components/LatestIssueShowcase.jsx": [
-    "/build/assets/LatestIssueShowcase-LPhWEk68.js"
+    "/build/assets/LatestIssueShowcase-uLGubw8N.js"
   ],
   "resources/js/Components/LatestPapersSection.jsx": [
-    "/build/assets/LatestPapersSection-j5vtunn1.js"
+    "/build/assets/LatestPapersSection-BmsbTEj1.js"
   ],
   "resources/js/Components/LiveStats.jsx": [
     "/build/assets/LiveStats-BEa4ybL0.js"
@@ -43,7 +43,7 @@
     "/build/assets/NewsletterSection-MI_F-dYJ.js"
   ],
   "resources/js/Components/NoticeBoard.jsx": [
-    "/build/assets/Home-DEzHVrJX.js"
+    "/build/assets/Home-CweQ0xay.js"
   ],
   "resources/js/Components/PageHeader.jsx": [
     "/build/assets/PageHeader-BDIqBKhc.js"
@@ -88,7 +88,7 @@
     "/build/assets/CallForPapers-BcXJRDty.js"
   ],
   "resources/js/Components/ui/FloatInput.jsx": [
-    "/build/assets/Contact-CUgD0erk.js"
+    "/build/assets/Contact-DDCtMitu.js"
   ],
   "resources/js/Components/ui/Modal.jsx": [
     "/build/assets/Modal-ixputjUt.js"
@@ -214,7 +214,7 @@
     "/build/assets/Compliance-DRaegAiu.js"
   ],
   "resources/js/Pages/Contact.jsx": [
-    "/build/assets/Contact-CUgD0erk.js"
+    "/build/assets/Contact-DDCtMitu.js"
   ],
   "resources/js/Pages/DownloadsPage.jsx": [
     "/build/assets/DownloadsPage-ECsnwDCm.js"
@@ -247,7 +247,7 @@
     "/build/assets/Photo-D6bRPs3y.js"
   ],
   "resources/js/Pages/Home.jsx": [
-    "/build/assets/Home-DEzHVrJX.js"
+    "/build/assets/Home-CweQ0xay.js"
   ],
   "resources/js/Pages/Institution/Profile.jsx": [
     "/build/assets/Profile-CJF8_GJV.js"
@@ -280,7 +280,7 @@
     "/build/assets/ReviewerGuidelines-DLJ67Cw6.js"
   ],
   "resources/js/Pages/SearchPage.jsx": [
-    "/build/assets/SearchPage-CtMXMljD.js"
+    "/build/assets/SearchPage-DMPER8AW.js"
   ],
   "resources/js/Pages/Settings/Index.jsx": [
     "/build/assets/Index-2JH90aWS.js"

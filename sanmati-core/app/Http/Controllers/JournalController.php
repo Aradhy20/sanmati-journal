@@ -25,19 +25,25 @@ class JournalController extends Controller
 
     public function index()
     {
-        $currentIssue = Issue::where('is_current', true)->with(['papers' => function ($q) {
-            $q->select('id', 'issue_id', 'title', 'authors', 'doi', 'category');
-        }])->first()
-        ?? Issue::with(['papers' => function ($q) {
-            $q->select('id', 'issue_id', 'title', 'authors', 'doi', 'category');
-        }])
-        ->orderBy('volume', 'desc')
-        ->orderBy('number', 'desc')
-        ->first();
+        $currentIssue = Issue::where('is_current', true)
+            ->where('is_special_issue', false)
+            ->with(['papers' => function ($q) {
+                $q->where('category', '!=', 'Complete Issue Book')
+                  ->select('id', 'issue_id', 'title', 'slug', 'authors', 'abstract', 'doi', 'citations', 'category', 'file_url');
+            }])
+            ->first()
+            ?? Issue::where('is_special_issue', false)
+            ->with(['papers' => function ($q) {
+                $q->where('category', '!=', 'Complete Issue Book')
+                  ->select('id', 'issue_id', 'title', 'slug', 'authors', 'abstract', 'doi', 'citations', 'category', 'file_url');
+            }])
+            ->orderBy('volume', 'desc')
+            ->orderBy('number', 'desc')
+            ->first();
 
         return Inertia::render('Home', [
             'newsItems' => $this->journalService->getActiveNews(),
-            'featuredPapers' => $this->journalService->getFeaturedPapers(),
+            'featuredPapers' => $this->journalService->getFeaturedPapers(6),
             'testimonials' => $this->journalService->getActiveTestimonials(),
             'currentIssue' => $currentIssue,
             'metrics' => $this->journalService->getJournalStats(),
@@ -451,6 +457,11 @@ class JournalController extends Controller
 
     public function contactStore(ContactRequest $request)
     {
+        // Honeypot spam protection: bots fill hidden fields, humans don't
+        if ($request->filled('website')) {
+            return Redirect::back()->with('success', 'Your inquiry has been submitted successfully.');
+        }
+
         $validated = $request->validated();
 
         Enquiry::create([

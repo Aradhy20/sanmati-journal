@@ -167,7 +167,7 @@ class ArchivePapersSeeder extends Seeder
                 'doi' => 'https://doi.org/10.5281/zenodo.19710093',
                 'citations' => 15,
                 'category' => 'Complete Issue Book',
-                'is_featured' => true,
+                'is_featured' => false,
                 'meta_title' => 'Inaugural Issue Vol-1 Issue-1 (Jan-Mar 2026) | Sanmati Journal',
                 'meta_description' => 'Official full issue compilation of Sanmati Spectrum of Knowledge & Emerging Discourse (January-March, 2026) in Hindi & English.',
             ]);

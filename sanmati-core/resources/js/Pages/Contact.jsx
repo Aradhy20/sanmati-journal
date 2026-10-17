@@ -201,6 +201,7 @@ function ContactForm() {
         email: '',
         subject: 'General Inquiry',
         message: '',
+        website: '',
     });
 
     const handleSubmit = (e) => {
@@ -234,6 +235,17 @@ function ContactForm() {
 
     return (
         <form className="space-y-5" onSubmit={handleSubmit}>
+            {/* Honeypot field for bot spam protection */}
+            <div className="hidden" aria-hidden="true" style={{ display: 'none' }}>
+                <input
+                    type="text"
+                    name="website"
+                    tabIndex="-1"
+                    autoComplete="off"
+                    value={data.website}
+                    onChange={e => setData('website', e.target.value)}
+                />
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <FloatInput
                     id="firstName"
